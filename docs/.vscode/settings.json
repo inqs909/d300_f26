@@ -1,0 +1,11 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "/home/inqs/Downloads/data300_chinook_lab_package/data300_chinook_lab.sqlite",
+            "name": "chinook"
+        }
+    ]
+}

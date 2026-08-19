@@ -1,0 +1,170 @@
+---
+title: "Course Syllabus"
+format: html
+editor: source
+---
+
+## Data 300: Introduction to Data Management
+
+### Course Information
+
+**Term:** Fall 2026
+
+**Instructor:** Isaac Quintanilla Salinas
+
+**Contact:** isaac.qs\@csuci.edu
+
+**Office Location:** Marin 2326
+
+**Office Hours:**
+
+**Lecture:** Monday and Wednesday 4:30-5:45 PM in Gateway 2501
+
+
+### Course Description
+
+Exposure to several data acquisition, storage, and management techniques using appropriate computer software. Topics include query languages, relational databases, API access, data scraping, unstructured data sources, data security, and large data systems.
+
+### Learning Outcomes
+
+1. Use programming tools to construct a data set from separate databases.
+2. Write programs to scrape webpages to construct a data set for analysis.
+3. Differentiate between structured, unstructured, and semistructured data sources.
+4. Explain how to access data from a website's application program interface.
+5. Describe the security and ethical implications of utilizing sensitive data sources.
+
+
+### Software and Tools
+
+Throughout this course, students will use the following software and programming environments:
+
+#### Choose One IDE
+
+-  **Positron (Recommended)** provides free and open source tools for your data analysis in R and/or Python. [You may download positron here.](http://positron.posit.co/download.html)
+
+-  **VS Code** provides tools for software development as well as data analysis. [You may download VS Code here.](https://code.visualstudio.com/)
+
+- **VS Codium** is the freely-licensed version of VS Code. [You may download VS Codium here.](https://vscodium.com/) 
+
+
+#### Databases
+
+- **SQLite** — primary relational database system (file-based)
+- **MongoDB** — primary document-based NoSQL database
+
+
+## Weekly Schedule
+
+The following outline may be subject to change.
+
+| Week          | Topic                                   |
+|:--------------|:----------------------------------------|
+| **1** (8/24)  | Intro to Course/Project/Computing       |
+| **2** (8/31)  | Introduction to Data Systems            |
+| **3** (9/7)   | **Holiday**/Data Modeling   |
+| **4** (9/14)  | SQL Fundamentals                        |
+| **5** (9/21)  | SQL Fundamentals                        |
+| **6** (9/28)  | Advanced SQL Fundamentals               |
+| **7** (10/5)  | SQL for Analytics                       |
+| **8** (10/12) | Indexing and Query Optimization         |
+| **9** (10/19) | NoSQL Fundamentals                      |      
+| **10** (10/26)| Document Modeling                       |
+| **11** (11/2) | Key-Value & Column-Family Stores        |
+| **12** (11/9) | ETL Workflows and File Formats          |
+| **13** (11/16)| Databases in R and Python               |
+| **14** (11/23)| Using APIs for Data Acquisition         |
+| **15** (11/30)| Working with Sensitive Data             |
+
+
+### Course Grading
+
+| Category                  | Percentage |
+|:--------------------------|:-----------|
+| Video Assignments         | 25%        |
+| Weekly Reports            | 25%        |
+| In-class Assignments      | 25%        |
+| Final Report              | 25%        |
+
+At the end of the quarter, course grades will be assigned according to the following scale:
+
+| Percentagae | Grade |
+|:------------|:------|
+| 90 - 100    | A     |
+| 80 - <90    | B     |
+| 70 - <80    | C     |
+| 60 - <70    | D     |
+| <60         | F     |
+
+### Course Assignments
+
+#### Course Project
+
+Working in a group of up to 2 students, you will explore a Database Management System (DBMS) that was not used in the course. The goal is to apply the database concepts and skills developed throughout the semester to a new database environment and to evaluate how the selected system compares with the tools used in class. 
+
+#### Weekly Reports
+
+Weekly reports are progress reports submitted to the instructor to keep track of your progress in completeing the course project. Each week, you will submit what you accomplished in the previous week, any challenges you faced, how you overcame those challenges, and your goal for next week (SMART goal). These will be weekly assignments. Three progress reports will be dropped at the end of the semester. Progress Reports are due every Friday at 11:59 PM. There will be no make ups for progress reports. 
+
+#### Video Assignments
+
+Videos are used to teach data management concepts related to the course. Students are expected to watch at least one video a week. The videos are implemented using PlayPosit. The 3 lowest video assignments will be dropped. Video assignments will be due every Sunday at 11:59 PM.
+
+#### In-Class Assignments
+
+In-class assignments are designed for you to practice different fundamentals related to data management. You are expected to complete the assignments every week and submit them every Sunday at 11:59 PM. The three lowest assignments will be dropped.
+
+
+
+### Generative Artificial Intelligence Policy
+
+The use of generative artificial intelligence (AI) in an ethical manner is permitted for this course.
+
+#### Permitted Uses
+
+You may use AI for:
+
+- Obtain clarification 
+
+- Brainstorming ideas, examples, outlines, and strategies
+
+- Generating questions for practice or exploration
+
+- Identifying keywords or phrasing to match professional goals
+
+#### Prohibited Uses
+
+You may not:
+
+- Submit AI-generated work 
+
+- Use AI to complete assignments, quizzes, exams, or other assessments meant to reflect your own work
+
+Any AI-generated work will receive a 0 in the class. Severe cases will be reported to Academic Misconduct.
+
+**You may not upload any course material to any AI platforms such as, but not limited to, ChatGPT, Claude, Github Copilot, Meta AI, or Google Gemini. Exceptions are allowed for [DASS](https://www.csuci.edu/dass/)-approved services.**
+
+
+
+## University Policies
+
+### Syllabus Policies and Assistance
+
+CSUCI’s [Syllabus Policies and Assistance Website](https://www.csuci.edu/studentsupport/syllabus.htm) provides important details about academic policies, campus expectations, and student support services that are all highly applicable to your success as a student both in and outside of the classroom. Ensure that you review this site on a regular basis to stay informed about the policies and resources that support your success, as campus resources or policies may change semester to semester.
+
+### Academic Honesty
+
+Conduct yourself with honesty and integrity. Do not submit others' work as your own. Foassignments and quizzes that allow you to work with a group, only put your name on what the group submits if you genuinely contributed to the work. Work completely independently on exams, using only the materials that are indicated as allowed. Failure to observe academic honesty results in substantial penalties that can include failing the course.
+
+### CSUCI Basic Need
+
+Please use the link to the Basic Needs Program on the [Syllabus Policies and Assistance website](go.csuci.edu/syllabuspolicies) for information on emergency food, housing accommodations, toiletries, and connections to critical resources. 
+
+
+### CSUCI Disability Statement
+
+If you are a student with a disability requesting reasonable accommodations in this course, you need to contact Disability Accommodations and Support Services (DASS) located on the second floor of Arroyo Hall, via email accommodations\@csuci.edu or call 805-437-3331. [All requests for reasonable accommodations require registration with DASS in advance of need](https://www.csuci.edu/dass/students/apply-for-services.htm). Faculty, students and DASS will work together regarding classroom accommodations. You are encouraged to discuss approved.
+
+### Disruption
+
+1.  **If I Am Out:** I will communicate via email and will hold classes asynchronously.
+2.  **If You Are Out:** Contact me as soon as possible to talk about your options. Reasonable accommodations will be provided for a brief absence. With proper documentation, extended accommodations will be provided.

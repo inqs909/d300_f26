@@ -1,0 +1,26 @@
+---
+title: "Welcome to Advanced Research Investigation!"
+---
+
+
+::: {.callout-note collapse="true" icon="false"}
+
+### Quarto Template for HW
+
+```
+quarto use template inqs909/qs_hw
+```
+
+:::
+
+::: {.callout-note collapse="true" icon="false"}
+### **Discord Server**
+
+Will post if class creates one.
+:::
+
+::: {.callout-note collapse="true" icon="false"}
+### **Introduction to Statistics Book**
+
+<https://openintro-ims.netlify.app/>
+:::
