@@ -87,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -204,7 +204,28 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1787173204965" data-listing-reading-time-sort="5" data-listing-word-count-sort="924">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./lectures/1a.html" class="no-external">Data 300</a>
+</h3>
+</div>
+<div class="metadata">
+<a href="./lectures/1a.html" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1787175654066" data-listing-reading-time-sort="10" data-listing-word-count-sort="1855">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./lectures/1b.html" class="no-external">Computational Setup</a>
+</h3>
+</div>
+<div class="metadata">
+<a href="./lectures/1b.html" class="no-external">
+</a>
+</div>
+</div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div></main> <!-- /main -->

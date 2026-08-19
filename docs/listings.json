@@ -1,6 +1,9 @@
 [
   {
     "listing": "/lectures.html",
-    "items": []
+    "items": [
+      "/lectures/1a.html",
+      "/lectures/1b.html"
+    ]
   }
 ]

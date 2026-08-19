@@ -18,7 +18,7 @@
     "href": "syllabus.html#weekly-schedule",
     "title": "Syllabus",
     "section": "Weekly Schedule",
-    "text": "Weekly Schedule\nThe following outline may be subject to change.\n\n\n\nWeek\nTopic\n\n\n\n\n1 (8/24)\nIntro to Course/Project/Computing\n\n\n2 (8/31)\nIntroduction to Data Systems\n\n\n3 (9/7)\nHoliday/Data Modeling\n\n\n4 (9/14)\nSQL Fundamentals\n\n\n5 (9/21)\nSQL Fundamentals\n\n\n6 (9/28)\nAdvanced SQL Fundamentals\n\n\n7 (10/5)\nSQL for Analytics\n\n\n8 (10/12)\nIndexing and Query Optimization\n\n\n9 (10/19)\nNoSQL Fundamentals\n\n\n10 (10/26)\nDocument Modeling\n\n\n11 (11/2)\nKey-Value & Column-Family Stores\n\n\n12 (11/9)\nETL Workflows and File Formats\n\n\n13 (11/16)\nDatabases in R and Python\n\n\n14 (11/23)\nUsing APIs for Data Acquisition\n\n\n15 (11/30)\nWorking with Sensitive Data\n\n\n\n\nCourse Grading\n\n\n\nCategory\nPercentage\n\n\n\n\nVideo Assignments\n25%\n\n\nWeekly Reports\n25%\n\n\nIn-class Assignments\n25%\n\n\nFinal Report\n25%\n\n\n\nAt the end of the quarter, course grades will be assigned according to the following scale:\n\n\n\nPercentagae\nGrade\n\n\n\n\n90 - 100\nA\n\n\n80 - &lt;90\nB\n\n\n70 - &lt;80\nC\n\n\n60 - &lt;70\nD\n\n\n&lt;60\nF\n\n\n\n\n\nCourse Assignments\n\nCourse Project\nWorking in a group of up to 2 students, you will explore a Database Management System (DBMS) that was not used in the course. The goal is to apply the database concepts and skills developed throughout the semester to a new database environment and to evaluate how the selected system compares with the tools used in class.\n\n\nWeekly Reports\nWeekly reports are progress reports submitted to the instructor to keep track of your progress in completeing the course project. Each week, you will submit what you accomplished in the previous week, any challenges you faced, how you overcame those challenges, and your goal for next week (SMART goal). These will be weekly assignments. Three progress reports will be dropped at the end of the semester. Progress Reports are due every Friday at 11:59 PM. There will be no make ups for progress reports.\n\n\nVideo Assignments\nVideos are used to teach data management concepts related to the course. Students are expected to watch at least one video a week. The videos are implemented using PlayPosit. The 3 lowest video assignments will be dropped. Video assignments will be due every Sunday at 11:59 PM.\n\n\nIn-Class Assignments\nIn-class assignments are designed for you to practice different fundamentals related to data management. You are expected to complete the assignments every week and submit them every Sunday at 11:59 PM. The three lowest assignments will be dropped.\n\n\n\nGenerative Artificial Intelligence Policy\nThe use of generative artificial intelligence (AI) in an ethical manner is permitted for this course.\n\nPermitted Uses\nYou may use AI for:\n\nObtain clarification\nBrainstorming ideas, examples, outlines, and strategies\nGenerating questions for practice or exploration\nIdentifying keywords or phrasing to match professional goals\n\n\n\nProhibited Uses\nYou may not:\n\nSubmit AI-generated work\nUse AI to complete assignments, quizzes, exams, or other assessments meant to reflect your own work\n\nAny AI-generated work will receive a 0 in the class. Severe cases will be reported to Academic Misconduct.\nYou may not upload any course material to any AI platforms such as, but not limited to, ChatGPT, Claude, Github Copilot, Meta AI, or Google Gemini. Exceptions are allowed for DASS-approved services."
+    "text": "Weekly Schedule\nThe following outline may be subject to change.\n\n\n\nWeek\nTopic\n\n\n\n\n1 (8/24)\nIntro to Course/Project/Computing\n\n\n2 (8/31)\nIntroduction to Data Systems\n\n\n3 (9/7)\nHoliday/Data Modeling\n\n\n4 (9/14)\nSQL Fundamentals\n\n\n5 (9/21)\nSQL Fundamentals\n\n\n6 (9/28)\nAdvanced SQL Fundamentals\n\n\n7 (10/5)\nSQL for Analytics\n\n\n8 (10/12)\nIndexing and Query Optimization\n\n\n9 (10/19)\nNoSQL Fundamentals\n\n\n10 (10/26)\nDocument Modeling\n\n\n11 (11/2)\nKey-Value & Column-Family Stores\n\n\n12 (11/9)\nETL Workflows and File Formats\n\n\n13 (11/16)\nDatabases in R and Python\n\n\n14 (11/23)\nUsing APIs for Data Acquisition\n\n\n15 (11/30)\nWorking with Sensitive Data\n\n\n\n\nCourse Grading\n\n\n\nCategory\nPercentage\n\n\n\n\nVideo Assignments\n25%\n\n\nWeekly Reports\n25%\n\n\nIn-class Assignments\n25%\n\n\nFinal Report\n25%\n\n\n\nAt the end of the quarter, course grades will be assigned according to the following scale:\n\n\n\nPercentagae\nGrade\n\n\n\n\n90 - 100\nA\n\n\n80 - &lt;90\nB\n\n\n70 - &lt;80\nC\n\n\n60 - &lt;70\nD\n\n\n&lt;60\nF\n\n\n\n\n\nCourse Assignments\n\nCourse Project\nWorking in a group of up to 2 students, you will explore a Database Management System (DBMS) that was not used in the course. The goal is to apply the database concepts and skills developed throughout the semester to a new database environment and to evaluate how the selected system compares with the tools used in class.\n\n\nWeekly Reports\nWeekly reports are progress reports submitted to the instructor to keep track of your progress in completeing the course project. Each week, you will submit what you accomplished in the previous week, any challenges you faced, how you overcame those challenges, and your goal for next week (SMART goal). These will be weekly assignments. Three progress reports will be dropped at the end of the semester. Progress Reports are due every Saturday at 11:59 PM. There will be no make ups for progress reports.\n\n\nVideo Assignments\nVideos are used to teach data management concepts related to the course. Students are expected to watch at least one video a week. The videos are implemented using PlayPosit. The 3 lowest video assignments will be dropped. Video assignments will be due every Sunday at 11:59 PM.\n\n\nIn-Class Assignments\nIn-class assignments are designed for you to practice different fundamentals related to data management. You are expected to complete the assignments every week and submit them every Sunday at 11:59 PM. The three lowest assignments will be dropped.\n\n\n\nGenerative Artificial Intelligence Policy\nThe use of generative artificial intelligence (AI) in an ethical manner is permitted for this course.\n\nPermitted Uses\nYou may use AI for:\n\nObtain clarification\nBrainstorming ideas, examples, outlines, and strategies\nGenerating questions for practice or exploration\nIdentifying keywords or phrasing to match professional goals\n\n\n\nProhibited Uses\nYou may not:\n\nSubmit AI-generated work\nUse AI to complete assignments, quizzes, exams, or other assessments meant to reflect your own work\n\nAny AI-generated work will receive a 0 in the class. Severe cases will be reported to Academic Misconduct.\nYou may not upload any course material to any AI platforms such as, but not limited to, ChatGPT, Claude, Github Copilot, Meta AI, or Google Gemini. Exceptions are allowed for DASS-approved services."
   },
   {
     "objectID": "syllabus.html#university-policies",
@@ -26,6 +26,188 @@
     "title": "Syllabus",
     "section": "University Policies",
     "text": "University Policies\n\nSyllabus Policies and Assistance\nCSUCI’s Syllabus Policies and Assistance Website provides important details about academic policies, campus expectations, and student support services that are all highly applicable to your success as a student both in and outside of the classroom. Ensure that you review this site on a regular basis to stay informed about the policies and resources that support your success, as campus resources or policies may change semester to semester.\n\n\nAcademic Honesty\nConduct yourself with honesty and integrity. Do not submit others’ work as your own. Foassignments and quizzes that allow you to work with a group, only put your name on what the group submits if you genuinely contributed to the work. Work completely independently on exams, using only the materials that are indicated as allowed. Failure to observe academic honesty results in substantial penalties that can include failing the course.\n\n\nCSUCI Basic Need\nPlease use the link to the Basic Needs Program on the Syllabus Policies and Assistance website for information on emergency food, housing accommodations, toiletries, and connections to critical resources.\n\n\nCSUCI Disability Statement\nIf you are a student with a disability requesting reasonable accommodations in this course, you need to contact Disability Accommodations and Support Services (DASS) located on the second floor of Arroyo Hall, via email accommodations@csuci.edu or call 805-437-3331. All requests for reasonable accommodations require registration with DASS in advance of need. Faculty, students and DASS will work together regarding classroom accommodations. You are encouraged to discuss approved.\n\n\nDisruption\n\nIf I Am Out: I will communicate via email and will hold classes asynchronously.\nIf You Are Out: Contact me as soon as possible to talk about your options. Reasonable accommodations will be provided for a brief absence. With proper documentation, extended accommodations will be provided."
+  },
+  {
+    "objectID": "lectures/1a.html#introductions-1",
+    "href": "lectures/1a.html#introductions-1",
+    "title": "Data 300",
+    "section": "Introductions",
+    "text": "Introductions\n\nSan Bernardino, CA\nCSU Monterey Bay\n\nBS Biology\n\nSan Diego State University\n\nMaster’s in Public Health\n\nUC Riverside\n\nPhD in Applied Statistics"
+  },
+  {
+    "objectID": "lectures/1a.html#introductions-2",
+    "href": "lectures/1a.html#introductions-2",
+    "title": "Data 300",
+    "section": "Introductions",
+    "text": "Introductions\n\nName\nYear\nMajor\nFun Fact\nCareer Goal"
+  },
+  {
+    "objectID": "lectures/1a.html#class-setup-1",
+    "href": "lectures/1a.html#class-setup-1",
+    "title": "Data 300",
+    "section": "Class Setup",
+    "text": "Class Setup\n\nHomework Assignments\nVideo Assignments\nProgress Reports\nFinal Write Up"
+  },
+  {
+    "objectID": "lectures/1a.html#syllabus",
+    "href": "lectures/1a.html#syllabus",
+    "title": "Data 300",
+    "section": "Syllabus",
+    "text": "Syllabus\nd300.inqs.info/syllabus"
+  },
+  {
+    "objectID": "lectures/1a.html#tools",
+    "href": "lectures/1a.html#tools",
+    "title": "Data 300",
+    "section": "Tools",
+    "text": "Tools\n\nPython\nuv\nQuarto"
+  },
+  {
+    "objectID": "lectures/1a.html#ide",
+    "href": "lectures/1a.html#ide",
+    "title": "Data 300",
+    "section": "IDE",
+    "text": "IDE\n\nPositron\nVS Code\nVS Codium"
+  },
+  {
+    "objectID": "lectures/1a.html#the-final-project",
+    "href": "lectures/1a.html#the-final-project",
+    "title": "Data 300",
+    "section": "The Final Project",
+    "text": "The Final Project\nThe final project is designed for you to demonstrate your understanding of machine learning."
+  },
+  {
+    "objectID": "lectures/1a.html#you-may",
+    "href": "lectures/1a.html#you-may",
+    "title": "Data 300",
+    "section": "You may …",
+    "text": "You may …\nBuild a machine learning model related to any data you are interested in predicting the outcome."
+  },
+  {
+    "objectID": "lectures/1a.html#you-may-1",
+    "href": "lectures/1a.html#you-may-1",
+    "title": "Data 300",
+    "section": "You may …",
+    "text": "You may …\nUse existing machine learning models for classification, transcription or any other purpose."
+  },
+  {
+    "objectID": "lectures/1a.html#you-may-2",
+    "href": "lectures/1a.html#you-may-2",
+    "title": "Data 300",
+    "section": "You may …",
+    "text": "You may …\nExplore advance topics related to machine learning."
+  },
+  {
+    "objectID": "lectures/1a.html#for-each-project",
+    "href": "lectures/1a.html#for-each-project",
+    "title": "Data 300",
+    "section": "For each project",
+    "text": "For each project\nYou will need to describe\n\nThe model used\nType of input data\nOutput of interest\nA working example\nModel Diagnostics"
+  },
+  {
+    "objectID": "lectures/1a.html#final-poster-presentation-and-report",
+    "href": "lectures/1a.html#final-poster-presentation-and-report",
+    "title": "Data 300",
+    "section": "Final Poster Presentation and Report",
+    "text": "Final Poster Presentation and Report\nYou will demonstrate your results during a poster presentation on December 8, 2026.\nYou written report will be due by the end week 15.\nMore information will be provided on a later date."
+  },
+  {
+    "objectID": "lectures/1a.html#use-of-generative-ai-policy",
+    "href": "lectures/1a.html#use-of-generative-ai-policy",
+    "title": "Data 300",
+    "section": "Use of Generative AI Policy",
+    "text": "Use of Generative AI Policy\nThe use of generative artificial intelligence (AI) to complete any part or all of an assignment/exam is strictly prohibited in this class. This includes, but not limited to, ChatGPT, Claude, Meta AI, and Google Gemini.\n\nYou may use AI to enhance you understanding of the material.\n\n\nYou may not use AI to complete assignments.\n\n\nYou may not upload any course material to any AI platforms such as ChatGPT, Claude, Meta AI, and Google Gemini. Exceptions are allowed for DASS-approved services."
+  },
+  {
+    "objectID": "lectures/1a.html#use-of-ai",
+    "href": "lectures/1a.html#use-of-ai",
+    "title": "Data 300",
+    "section": "Use of AI",
+    "text": "Use of AI\nThere are consequences when you use of AI:\n\nEducational Mislearning\nTrusting AI\nStolen Work\nPrivacy Concerns\nEnvironmental Impacts\nWorking Exploitation"
+  },
+  {
+    "objectID": "lectures/1a.html#educational-mislearning",
+    "href": "lectures/1a.html#educational-mislearning",
+    "title": "Data 300",
+    "section": "Educational Mislearning",
+    "text": "Educational Mislearning\nThe purpose of this class, and college, is for you to learn about critical thinking skills and perseverance. Using AI will only teach you how to get an answer, which may or may not be correct.\n\nYou will not develop the skills needed to problem solve a challenge. Additionally, developing grit is essential to become successful in college and life. There is no easy way out and AI is an illusion to your success in life.\n\n\nTo learn something, it requires hours of work! If not years!"
+  },
+  {
+    "objectID": "lectures/1a.html#trusting-ai",
+    "href": "lectures/1a.html#trusting-ai",
+    "title": "Data 300",
+    "section": "Trusting AI",
+    "text": "Trusting AI\nWhen using AI, you must acknowledge its limitations:\n\nResponses provided may be incorrect\nResponses may not be fair\nCompanies may manipulate responses and/or terms of service for their benefit\nCompanies may not have your best interst in mind\n\n\nYou should always proceed with caution utilizing these tools!"
+  },
+  {
+    "objectID": "lectures/1a.html#stolen-work",
+    "href": "lectures/1a.html#stolen-work",
+    "title": "Data 300",
+    "section": "Stolen Work",
+    "text": "Stolen Work\n\nAdditionally, all these individuals are not receiving any royalties for the work to be used in creating generative AI models.\n\n\nInside Higher Ed and The New Yorker highlight individual’s concern of their work being used to train AI models."
+  },
+  {
+    "objectID": "lectures/1a.html#privacy-concerns",
+    "href": "lectures/1a.html#privacy-concerns",
+    "title": "Data 300",
+    "section": "Privacy Concerns",
+    "text": "Privacy Concerns\nThe use of generative AI raises concerns of what data is being harvested from us, possibly without informed consent or knowledge of impacts.\n\nWhen you use any large language models, you do not know what information is being harvested from you.\n\n\nDo you want to upload your thoughts and ideas to a company that can monetize, and possibly exploit you.\n\n\nDoes your Professors consent with you uploading their assignments to large language models?\n\n\nStanford provided a report highlighting the risks of our personal data use in large language models."
+  },
+  {
+    "objectID": "lectures/1a.html#environmental-impact",
+    "href": "lectures/1a.html#environmental-impact",
+    "title": "Data 300",
+    "section": "Environmental Impact",
+    "text": "Environmental Impact\nIn order to run these large language models, companies need to use a large amounts of energy. This is because large servers are needed to both train and execute a model.\n\nThe LA Times reports the potential impact that running AI models in California.\n\n\nAdditionally, Time reports that a ChatGPT query uses ten times more energy than a Google search query, and global AI demands can consume of 1 trillion gallons of water by 2027.\n\n\nThere are also environmental justice questions about where these data centers are constructed."
+  },
+  {
+    "objectID": "lectures/1a.html#worker-exploitation",
+    "href": "lectures/1a.html#worker-exploitation",
+    "title": "Data 300",
+    "section": "Worker Exploitation",
+    "text": "Worker Exploitation\nThe Washington Post and Time (Article 1 and Article 2) reported that AI companies utilize “digital sweatshops” to classify data points for model training.\n\nThere is a human cost from the Global South, both financially and mentally, to develop the AI models for users in the United States and Europe.\n\n\nWe must be conscious consumers and demand more from these companies to provide safe working conditions and livable wages."
+  },
+  {
+    "objectID": "lectures/1a.html#is-using-ai-bad",
+    "href": "lectures/1a.html#is-using-ai-bad",
+    "title": "Data 300",
+    "section": "Is Using AI Bad?",
+    "text": "Is Using AI Bad?\n\nYes/No/I don’t know"
+  },
+  {
+    "objectID": "lectures/1a.html#privacy-concerns-links",
+    "href": "lectures/1a.html#privacy-concerns-links",
+    "title": "Data 300",
+    "section": "Privacy Concerns Links",
+    "text": "Privacy Concerns Links\n\nOpenAI Says It’s Scanning Users’ ChatGPT Conversations and Reporting Content to the Police\nPrivacy in an AI Era: How Do We Protect Our Personal Information?"
+  },
+  {
+    "objectID": "lectures/1a.html#labor-violations-links",
+    "href": "lectures/1a.html#labor-violations-links",
+    "title": "Data 300",
+    "section": "Labor Violations Links",
+    "text": "Labor Violations Links\n\nThe Emotional Labor Behind AI Intimacy\nHow thousands of ‘overworked, underpaid’ humans train Google’s AI to seem smart"
+  },
+  {
+    "objectID": "lectures/1a.html#affecting-communities-links",
+    "href": "lectures/1a.html#affecting-communities-links",
+    "title": "Data 300",
+    "section": "Affecting Communities Links",
+    "text": "Affecting Communities Links\n\nAI surveillance and data colonialism shape African conflicts\nAfrican workers are taking on Meta and the world should pay attention\n‘It’s destroyed me completely’: Kenyan moderators decry toll of training of AI models\nThe AI Industry Is Traumatizing Desperate Contractors in the Developing World for Pennies\nChatGPT advises women to ask for lower salaries, study finds\nThe Impact of the Use of AI on People with Disabilities"
+  },
+  {
+    "objectID": "lectures/1a.html#ideas-and-learning-links",
+    "href": "lectures/1a.html#ideas-and-learning-links",
+    "title": "Data 300",
+    "section": "Ideas and Learning Links",
+    "text": "Ideas and Learning Links\n\nStudent’s Right to Refuse AI\nAI is homogenizing your thoughts\nThe Incuriosity Engine\nNew Junior Developers Can’t Actually Code"
+  },
+  {
+    "objectID": "lectures/1a.html#environmental-costs",
+    "href": "lectures/1a.html#environmental-costs",
+    "title": "Data 300",
+    "section": "Environmental Costs",
+    "text": "Environmental Costs\n\n‘I can’t drink the water’ - life next to a US data centre"
   },
   {
     "objectID": "index.html",
@@ -39,6 +221,279 @@
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "No matching items"
+    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "lectures/1b.html#sql-and-relational-databases",
+    "href": "lectures/1b.html#sql-and-relational-databases",
+    "title": "Computational Setup",
+    "section": "SQL and Relational Databases",
+    "text": "SQL and Relational Databases\nSQL (Structured Query Language) is a language used to work with relational databases.\nWith SQL, we can:\n\nRetrieve data from tables\nFilter and sort records\nSummarize data\nCombine related tables\nCreate and modify database objects\nManage data stored in a relational database\n\n\n\n\n\n\n\nTip\n\n\nFor this course, we will use SQLite as our primary relational database management system (DBMS)."
+  },
+  {
+    "objectID": "lectures/1b.html#what-is-sqlite",
+    "href": "lectures/1b.html#what-is-sqlite",
+    "title": "Computational Setup",
+    "section": "What is SQLite?",
+    "text": "What is SQLite?\nSQLite is a lightweight relational database management system.\nUnlike many database systems, SQLite does not require a separate database server. A complete database can be stored in a single file, such as:\nchinook.db\nThis makes SQLite useful for:\n\nLearning SQL\nSmall and medium-sized applications\nLocal data storage\nPrototyping\nReproducible data projects\n\nSQLite"
+  },
+  {
+    "objectID": "lectures/1b.html#install-sqlite",
+    "href": "lectures/1b.html#install-sqlite",
+    "title": "Computational Setup",
+    "section": "Install SQLite",
+    "text": "Install SQLite\nFirst, check whether SQLite is already available on your computer.\nOpen a terminal and run:\nsqlite3 --version\nIf a version number appears, SQLite is installed and available from your terminal.\n\n\n\n\n\n\nNote\n\n\nThe exact version number may differ across computers. What matters for this course is that the sqlite3 command runs successfully."
+  },
+  {
+    "objectID": "lectures/1b.html#install-sqlite-on-windows",
+    "href": "lectures/1b.html#install-sqlite-on-windows",
+    "title": "Computational Setup",
+    "section": "Install SQLite on Windows",
+    "text": "Install SQLite on Windows\nDownload the command-line tools from the official SQLite download page:\nSQLite Download Page\nLook for the command-line tools package for your version of Windows.\nAfter downloading:\n\nExtract the files to a folder, such as C:\\sqlite.\nAdd that folder to your Windows PATH.\nOpen a new terminal.\nRun:\n\nsqlite3 --version"
+  },
+  {
+    "objectID": "lectures/1b.html#install-sqlite-on-macos",
+    "href": "lectures/1b.html#install-sqlite-on-macos",
+    "title": "Computational Setup",
+    "section": "Install SQLite on macOS",
+    "text": "Install SQLite on macOS\nMany macOS systems already include SQLite.\nCheck first:\nsqlite3 --version\nIf you use Homebrew and want to install or update SQLite, you can run:\nbrew install sqlite\nThen verify:\nsqlite3 --version"
+  },
+  {
+    "objectID": "lectures/1b.html#install-sqlite-on-linux",
+    "href": "lectures/1b.html#install-sqlite-on-linux",
+    "title": "Computational Setup",
+    "section": "Install SQLite on Linux",
+    "text": "Install SQLite on Linux\nOn Ubuntu or Debian-based systems:\nsudo apt update\nsudo apt install sqlite3\nOn Fedora:\nsudo dnf install sqlite\nThen verify:\nsqlite3 --version"
+  },
+  {
+    "objectID": "lectures/1b.html#install-positron",
+    "href": "lectures/1b.html#install-positron",
+    "title": "Computational Setup",
+    "section": "Install Positron",
+    "text": "Install Positron\nPositron is a data science IDE built on Code OSS. We can use it as an editor for SQL files and extend it with database tools.\nDownload Positron\nFor this course, we will use Positron or VS Code to:\n\nOrganize database project files\nWrite .sql scripts\nConnect to SQLite databases\nRun SQL queries\nView query results"
+  },
+  {
+    "objectID": "lectures/1b.html#install-vs-code",
+    "href": "lectures/1b.html#install-vs-code",
+    "title": "Computational Setup",
+    "section": "Install VS Code",
+    "text": "Install VS Code\nVisual Studio Code is a general-purpose code editor that supports database workflows through extensions.\nDownload VS Code\nRecommended extensions for this course:\n\nSQLTools\nSQLTools SQLite\nQuarto"
+  },
+  {
+    "objectID": "lectures/1b.html#install-sqltools",
+    "href": "lectures/1b.html#install-sqltools",
+    "title": "Computational Setup",
+    "section": "Install SQLTools",
+    "text": "Install SQLTools\nIn VS Code or Positron, open the Extensions panel.\nSearch for and install:\n\nSQLTools (mtxr.sqltools)\nSQLTools SQLite (mtxr.sqltools-driver-sqlite)\n\nSQLTools provides the database connection interface. The SQLite driver allows SQLTools to connect specifically to SQLite database files.\nSQLTools Documentation\n\n\n\n\n\n\nNote\n\n\nPositron supports VS Code-compatible extensions. Extension availability can depend on the extension catalog configured in Positron."
+  },
+  {
+    "objectID": "lectures/1b.html#workspaces",
+    "href": "lectures/1b.html#workspaces",
+    "title": "Computational Setup",
+    "section": "Workspaces",
+    "text": "Workspaces\nA workspace is a project folder containing the files needed for a data-management project.\nA good workflow is:\n\nCreate one folder for the course.\nCreate a data folder for database files.\nCreate a sql folder for saved SQL scripts.\nOpen the course folder in Positron or VS Code.\nConnect SQLTools to the SQLite database file.\nSave your SQL work in .sql files."
+  },
+  {
+    "objectID": "lectures/1b.html#course-project-files",
+    "href": "lectures/1b.html#course-project-files",
+    "title": "Computational Setup",
+    "section": "Course Project Files",
+    "text": "Course Project Files\nA simple course folder might look like:\ndata-management-course/\n├── data/\n│   └── chinook.db\n├── sql/\n│   ├── practice.sql\n│   └── queries.sql\n├── notes/\n└── assignments/\n\n\n\n\n\n\nTip\n\n\nKeeping your database and SQL scripts in the same project folder makes your work easier to organize, reproduce, and submit."
+  },
+  {
+    "objectID": "lectures/1b.html#the-chinook-example-database",
+    "href": "lectures/1b.html#the-chinook-example-database",
+    "title": "Computational Setup",
+    "section": "The Chinook Example Database",
+    "text": "The Chinook Example Database\nFor examples in this course, we will use the Chinook sample database.\nChinook represents a digital media store and contains related tables for:\n\nCustomers\nEmployees\nInvoices\nInvoice items\nTracks\nAlbums\nArtists\nGenres\nPlaylists\n\nChinook Database"
+  },
+  {
+    "objectID": "lectures/1b.html#download-chinook-for-sqlite",
+    "href": "lectures/1b.html#download-chinook-for-sqlite",
+    "title": "Computational Setup",
+    "section": "Download Chinook for SQLite",
+    "text": "Download Chinook for SQLite\nDownload the SQLite version of the Chinook database from the project releases:\nChinook Releases\nThe SQLite database file is named similar to:\nChinook_Sqlite.sqlite\nFor this course, you may rename it:\nchinook.db\nPlace it in your project’s data folder."
+  },
+  {
+    "objectID": "lectures/1b.html#open-chinook-from-the-terminal",
+    "href": "lectures/1b.html#open-chinook-from-the-terminal",
+    "title": "Computational Setup",
+    "section": "Open Chinook from the Terminal",
+    "text": "Open Chinook from the Terminal\nFrom your course project folder, run:\nsqlite3 data/chinook.db\nIf the database opens successfully, you should see a SQLite prompt similar to:\nsqlite&gt;"
+  },
+  {
+    "objectID": "lectures/1b.html#useful-sqlite-commands",
+    "href": "lectures/1b.html#useful-sqlite-commands",
+    "title": "Computational Setup",
+    "section": "Useful SQLite Commands",
+    "text": "Useful SQLite Commands\nSQLite includes special dot commands for working with the database shell.\nTry:\n.tables\nThis displays the tables in the database.\nTo inspect the structure of the Customer table:\n.schema Customer\nTo exit SQLite:\n.quit\n\n\n\n\n\n\nWarning\n\n\nSQLite dot commands such as .tables and .schema are commands for the SQLite shell. They are not SQL statements and should not be included inside SQLTools query scripts."
+  },
+  {
+    "objectID": "lectures/1b.html#create-a-sqlite-connection",
+    "href": "lectures/1b.html#create-a-sqlite-connection",
+    "title": "Computational Setup",
+    "section": "Create a SQLite Connection",
+    "text": "Create a SQLite Connection\nIn VS Code or Positron:\n\nOpen the Command Palette.\nSearch for SQLTools: Add New Connection.\nSelect SQLite as the database driver.\nChoose the Chinook database file in your data folder.\nGive the connection a name, such as Chinook.\nTest and save the connection.\n\nYou can now use SQLTools to browse tables and run SQL statements."
+  },
+  {
+    "objectID": "lectures/1b.html#create-a-sql-file",
+    "href": "lectures/1b.html#create-a-sql-file",
+    "title": "Computational Setup",
+    "section": "Create a SQL File",
+    "text": "Create a SQL File\nInside the sql folder, create a file named:\npractice.sql\nUse this file to save your SQL statements.\nA SQL statement usually ends with a semicolon:\nSELECT *\nFROM Customer;"
+  },
+  {
+    "objectID": "lectures/1b.html#view-data-from-a-table",
+    "href": "lectures/1b.html#view-data-from-a-table",
+    "title": "Computational Setup",
+    "section": "View Data from a Table",
+    "text": "View Data from a Table\nThe SELECT statement retrieves data from a database table.\nSELECT *\nFROM Customer;\n* means to return all columns.\nQuestions to consider:\n\nWhat does each row represent?\nWhat does each column represent?\nWhich column appears to uniquely identify a customer?"
+  },
+  {
+    "objectID": "lectures/1b.html#select-specific-columns",
+    "href": "lectures/1b.html#select-specific-columns",
+    "title": "Computational Setup",
+    "section": "Select Specific Columns",
+    "text": "Select Specific Columns\nUsually, we only select the columns needed for an analysis.\nSELECT CustomerId,\n       FirstName,\n       LastName,\n       Country\nFROM Customer;\nThis makes the query output easier to read and reduces unnecessary data retrieval."
+  },
+  {
+    "objectID": "lectures/1b.html#limit-query-results",
+    "href": "lectures/1b.html#limit-query-results",
+    "title": "Computational Setup",
+    "section": "Limit Query Results",
+    "text": "Limit Query Results\nUse LIMIT when you only want to inspect a small number of rows.\nSELECT CustomerId,\n       FirstName,\n       LastName,\n       Country\nFROM Customer\nLIMIT 10;\nThis is useful when exploring a table for the first time."
+  },
+  {
+    "objectID": "lectures/1b.html#filter-rows-with-where",
+    "href": "lectures/1b.html#filter-rows-with-where",
+    "title": "Computational Setup",
+    "section": "Filter Rows with WHERE",
+    "text": "Filter Rows with WHERE\nUse WHERE to keep rows that meet a condition.\nSELECT CustomerId,\n       FirstName,\n       LastName,\n       Country\nFROM Customer\nWHERE Country = 'USA';\nThis returns only customers whose country is the United States."
+  },
+  {
+    "objectID": "lectures/1b.html#comparison-operators",
+    "href": "lectures/1b.html#comparison-operators",
+    "title": "Computational Setup",
+    "section": "Comparison Operators",
+    "text": "Comparison Operators\nSQL uses comparison operators to define conditions.\n\n\n\nOperator\nDescription\n\n\n\n\n&gt;\nGreater than\n\n\n&lt;\nLess than\n\n\n&gt;=\nGreater than or equal\n\n\n&lt;=\nLess than or equal\n\n\n=\nEqual\n\n\n&lt;&gt; or !=\nNot equal\n\n\n\nExample:\nSELECT InvoiceId,\n       CustomerId,\n       InvoiceDate,\n       Total\nFROM Invoice\nWHERE Total &gt; 10;"
+  },
+  {
+    "objectID": "lectures/1b.html#sort-results",
+    "href": "lectures/1b.html#sort-results",
+    "title": "Computational Setup",
+    "section": "Sort Results",
+    "text": "Sort Results\nUse ORDER BY to sort query results.\nSELECT InvoiceId,\n       CustomerId,\n       InvoiceDate,\n       Total\nFROM Invoice\nORDER BY Total DESC;\nDESC sorts from largest to smallest.\nASC sorts from smallest to largest and is the default."
+  },
+  {
+    "objectID": "lectures/1b.html#tables-rows-and-columns",
+    "href": "lectures/1b.html#tables-rows-and-columns",
+    "title": "Computational Setup",
+    "section": "Tables, Rows, and Columns",
+    "text": "Tables, Rows, and Columns\nA relational database stores data in tables.\nFor the Chinook database:\n\nA table represents an entity or relationship, such as Customer or Invoice.\nA row represents one record.\nA column represents an attribute of that record.\n\nFor example, in the Customer table:\nCustomerId | FirstName | LastName | Country | Email\nEach row represents one customer."
+  },
+  {
+    "objectID": "lectures/1b.html#primary-keys",
+    "href": "lectures/1b.html#primary-keys",
+    "title": "Computational Setup",
+    "section": "Primary Keys",
+    "text": "Primary Keys\nA primary key uniquely identifies each row in a table.\nIn Chinook, CustomerId is the primary key of the Customer table.\nSELECT CustomerId,\n       FirstName,\n       LastName\nFROM Customer\nLIMIT 10;\nA well-designed primary key should uniquely identify each record."
+  },
+  {
+    "objectID": "lectures/1b.html#foreign-keys",
+    "href": "lectures/1b.html#foreign-keys",
+    "title": "Computational Setup",
+    "section": "Foreign Keys",
+    "text": "Foreign Keys\nA foreign key connects a row in one table to a related row in another table.\nFor example, the Invoice table contains CustomerId.\nSELECT InvoiceId,\n       CustomerId,\n       InvoiceDate,\n       Total\nFROM Invoice\nLIMIT 10;\nCustomerId connects each invoice to the customer who made the purchase."
+  },
+  {
+    "objectID": "lectures/1b.html#inspect-a-table-structure",
+    "href": "lectures/1b.html#inspect-a-table-structure",
+    "title": "Computational Setup",
+    "section": "Inspect a Table Structure",
+    "text": "Inspect a Table Structure\nSQLite’s PRAGMA table_info() command can display information about a table’s columns.\nPRAGMA table_info(Customer);\nTry the same command for another table:\nPRAGMA table_info(Invoice);\nLook for:\n\nColumn names\nData types\nPrimary-key indicators\nWhether columns allow missing values"
+  },
+  {
+    "objectID": "lectures/1b.html#view-database-tables-with-sql",
+    "href": "lectures/1b.html#view-database-tables-with-sql",
+    "title": "Computational Setup",
+    "section": "View Database Tables with SQL",
+    "text": "View Database Tables with SQL\nSQLite stores database metadata in a system table named sqlite_master.\nSELECT name,\n       type\nFROM sqlite_master\nWHERE type = 'table'\nORDER BY name;\nThis is a SQL-based way to inspect which tables exist in the database."
+  },
+  {
+    "objectID": "lectures/1b.html#count-rows",
+    "href": "lectures/1b.html#count-rows",
+    "title": "Computational Setup",
+    "section": "Count Rows",
+    "text": "Count Rows\nUse COUNT() to count records.\nHow many customers are in the database?\nSELECT COUNT(*) AS number_of_customers\nFROM Customer;\nThe alias number_of_customers gives the result column a meaningful name."
+  },
+  {
+    "objectID": "lectures/1b.html#aggregate-functions",
+    "href": "lectures/1b.html#aggregate-functions",
+    "title": "Computational Setup",
+    "section": "Aggregate Functions",
+    "text": "Aggregate Functions\nCommon SQL aggregate functions include:\n\n\n\nFunction\nPurpose\n\n\n\n\nCOUNT()\nCount rows or values\n\n\nSUM()\nAdd values\n\n\nAVG()\nCalculate a mean\n\n\nMIN()\nFind the minimum\n\n\nMAX()\nFind the maximum\n\n\n\nExample:\nSELECT COUNT(*) AS number_of_invoices,\n       AVG(Total) AS average_invoice,\n       MIN(Total) AS smallest_invoice,\n       MAX(Total) AS largest_invoice\nFROM Invoice;"
+  },
+  {
+    "objectID": "lectures/1b.html#group-by",
+    "href": "lectures/1b.html#group-by",
+    "title": "Computational Setup",
+    "section": "GROUP BY",
+    "text": "GROUP BY\nUse GROUP BY to calculate summaries for categories.\nHow many customers are from each country?\nSELECT Country,\n       COUNT(*) AS number_of_customers\nFROM Customer\nGROUP BY Country\nORDER BY number_of_customers DESC;\nThis is a common data-management task: turning row-level records into summarized information."
+  },
+  {
+    "objectID": "lectures/1b.html#why-multiple-tables",
+    "href": "lectures/1b.html#why-multiple-tables",
+    "title": "Computational Setup",
+    "section": "Why Multiple Tables?",
+    "text": "Why Multiple Tables?\nRelational databases usually separate information into multiple related tables rather than storing everything in one large table.\nIn Chinook:\nArtist -&gt; Album -&gt; Track\nThis design reduces repeated information and allows related records to be managed separately."
+  },
+  {
+    "objectID": "lectures/1b.html#join-two-tables",
+    "href": "lectures/1b.html#join-two-tables",
+    "title": "Computational Setup",
+    "section": "Join Two Tables",
+    "text": "Join Two Tables\nA JOIN combines related rows from different tables.\nSELECT Album.Title AS Album,\n       Artist.Name AS Artist\nFROM Album\nJOIN Artist\n  ON Album.ArtistId = Artist.ArtistId\nORDER BY Artist.Name, Album.Title;\nThe ON clause explains how the tables are related."
+  },
+  {
+    "objectID": "lectures/1b.html#join-tracks-to-genres",
+    "href": "lectures/1b.html#join-tracks-to-genres",
+    "title": "Computational Setup",
+    "section": "Join Tracks to Genres",
+    "text": "Join Tracks to Genres\nSELECT Track.Name AS Track,\n       Genre.Name AS Genre,\n       Track.UnitPrice\nFROM Track\nJOIN Genre\n  ON Track.GenreId = Genre.GenreId\nLIMIT 20;\nThis allows us to retrieve descriptive information stored in separate tables."
+  },
+  {
+    "objectID": "lectures/1b.html#summarize-across-related-tables",
+    "href": "lectures/1b.html#summarize-across-related-tables",
+    "title": "Computational Setup",
+    "section": "Summarize Across Related Tables",
+    "text": "Summarize Across Related Tables\nWhich genres contain the most tracks?\nSELECT Genre.Name AS Genre,\n       COUNT(Track.TrackId) AS number_of_tracks\nFROM Genre\nJOIN Track\n  ON Genre.GenreId = Track.GenreId\nGROUP BY Genre.GenreId, Genre.Name\nORDER BY number_of_tracks DESC;\nThis query combines:\n\nJOIN\nCOUNT()\nGROUP BY\nORDER BY"
+  },
+  {
+    "objectID": "lectures/1b.html#chinook-practice-questions",
+    "href": "lectures/1b.html#chinook-practice-questions",
+    "title": "Computational Setup",
+    "section": "Chinook Practice Questions",
+    "text": "Chinook Practice Questions\nUse SQLTools and the Chinook database to answer the following questions.\n\nHow many tracks are in the Track table?\nWhich 10 tracks have the highest UnitPrice?\nHow many customers are from each country?\nWhat are the names of all artists in alphabetical order?\nWhich albums belong to the artist named AC/DC?\nWhich genres contain the largest number of tracks?\nWhich customers have invoices with totals greater than $15?\n\n\n\n\n\n\n\nTip\n\n\nSave your answers in a .sql file instead of typing one-time queries that are immediately lost. Saved SQL scripts create a reproducible record of your work."
+  },
+  {
+    "objectID": "lectures/1b.html#data-management-workflow",
+    "href": "lectures/1b.html#data-management-workflow",
+    "title": "Computational Setup",
+    "section": "Data Management Workflow",
+    "text": "Data Management Workflow\nFor database work in this course:\n\nOpen the course folder in Positron or VS Code.\nConnect SQLTools to data/chinook.db.\nOpen or create a .sql file.\nWrite a SQL query.\nRun the query and inspect the results.\nRevise the query if necessary.\nSave the SQL file.\n\nThis workflow separates the database from the commands used to analyze it."
+  },
+  {
+    "objectID": "lectures/1b.html#important-file-types",
+    "href": "lectures/1b.html#important-file-types",
+    "title": "Computational Setup",
+    "section": "Important File Types",
+    "text": "Important File Types\nYou will commonly work with:\n\n\n\nFile Type\nPurpose\n\n\n\n\n.db / .sqlite\nSQLite database file\n\n\n.sql\nSaved SQL statements or database scripts\n\n\n.qmd\nQuarto document for notes, lectures, or reports\n\n\n.csv\nText-based tabular data that may be imported or exported\n\n\n\n\n\n\n\n\n\nWarning\n\n\nDo not edit a .db or .sqlite file as if it were a text file. Use SQLite, SQLTools, or another database client to interact with it."
+  },
+  {
+    "objectID": "lectures/1b.html#database-and-sql-resources",
+    "href": "lectures/1b.html#database-and-sql-resources",
+    "title": "Computational Setup",
+    "section": "Database and SQL Resources",
+    "text": "Database and SQL Resources\n\nSQLite Documentation\nSQLite Command-Line Shell\nSQLTools Documentation\nSQLTools SQLite Driver\nChinook Database\nPositron Extensions\n\n\n\n\n\n\n\nNote\n\n\nThe examples in this lecture use SQLite syntax and the Chinook sample database. Later database systems may use slightly different SQL syntax or connection procedures."
   }
 ]
