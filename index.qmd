@@ -1,5 +1,5 @@
 ---
-title: "Welcome to Advanced Research Investigation!"
+title: "Welcome to Introduction to Data Management!"
 ---
 
 
@@ -19,8 +19,3 @@ quarto use template inqs909/qs_hw
 Will post if class creates one.
 :::
 
-::: {.callout-note collapse="true" icon="false"}
-### **Introduction to Statistics Book**
-
-<https://openintro-ims.netlify.app/>
-:::
