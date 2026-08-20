@@ -60,7 +60,7 @@
     "href": "lectures/1a.html#tools",
     "title": "Data 300",
     "section": "Tools",
-    "text": "Tools\n\nPython\nuv\nQuarto"
+    "text": "Tools\nSQLite MongoDB"
   },
   {
     "objectID": "lectures/1a.html#ide",
@@ -70,46 +70,46 @@
     "text": "IDE\n\nPositron\nVS Code\nVS Codium"
   },
   {
-    "objectID": "lectures/1a.html#the-final-project",
-    "href": "lectures/1a.html#the-final-project",
+    "objectID": "lectures/1a.html#project-overview",
+    "href": "lectures/1a.html#project-overview",
     "title": "Data 300",
-    "section": "The Final Project",
-    "text": "The Final Project\nThe final project is designed for you to demonstrate your understanding of machine learning."
+    "section": "Project Overview",
+    "text": "Project Overview\nFor this project, you will explore a Database Management System (DBMS)\n\nSelect a new DBMS\nCreate or import a database\nRun database operations\nCompare it with the DBMS used in class\nSubmit a written report"
   },
   {
-    "objectID": "lectures/1a.html#you-may",
-    "href": "lectures/1a.html#you-may",
+    "objectID": "lectures/1a.html#project-premiss",
+    "href": "lectures/1a.html#project-premiss",
     "title": "Data 300",
-    "section": "You may …",
-    "text": "You may …\nBuild a machine learning model related to any data you are interested in predicting the outcome."
+    "section": "Project Premiss",
+    "text": "Project Premiss\nImagine that you work for a company that currently relies on SQLite to store, manage, and access its data. As the organization grows, its data needs have changed, and management is considering whether the current database system is still the best option.\nYou have been tasked with researching and evaluating a new DBMS that was not used in this course. Your goal is to determine whether this proposed system could provide advantages over the company’s current DBMS."
   },
   {
-    "objectID": "lectures/1a.html#you-may-1",
-    "href": "lectures/1a.html#you-may-1",
+    "objectID": "lectures/1a.html#project-goal",
+    "href": "lectures/1a.html#project-goal",
     "title": "Data 300",
-    "section": "You may …",
-    "text": "You may …\nUse existing machine learning models for classification, transcription or any other purpose."
+    "section": "Project Goal",
+    "text": "Project Goal\nThe goal of this project is to apply database concepts from class to a new database system."
   },
   {
-    "objectID": "lectures/1a.html#you-may-2",
-    "href": "lectures/1a.html#you-may-2",
+    "objectID": "lectures/1a.html#possible-dbms-options",
+    "href": "lectures/1a.html#possible-dbms-options",
     "title": "Data 300",
-    "section": "You may …",
-    "text": "You may …\nExplore advance topics related to machine learning."
+    "section": "Possible DBMS Options",
+    "text": "Possible DBMS Options\nExamples include:\n\nPostgreSQL\nMySQL or MariaDB\nDuckDB\nRedis Open Source\n\nDo not buy any subscription access a DBMS"
   },
   {
-    "objectID": "lectures/1a.html#for-each-project",
-    "href": "lectures/1a.html#for-each-project",
+    "objectID": "lectures/1a.html#project-parameters",
+    "href": "lectures/1a.html#project-parameters",
     "title": "Data 300",
-    "section": "For each project",
-    "text": "For each project\nYou will need to describe\n\nThe model used\nType of input data\nOutput of interest\nA working example\nModel Diagnostics"
+    "section": "Project Parameters",
+    "text": "Project Parameters\n\nUp to 2 people per group\nDeadline December 5th, 2026 @ 11:59 PM\nPage Limit 10 pages (15 for groups)\nAll code must be in an Appendix (not included in page count)\nCite all claims from reputable sources"
   },
   {
-    "objectID": "lectures/1a.html#final-poster-presentation-and-report",
-    "href": "lectures/1a.html#final-poster-presentation-and-report",
+    "objectID": "lectures/1a.html#project-extensions",
+    "href": "lectures/1a.html#project-extensions",
     "title": "Data 300",
-    "section": "Final Poster Presentation and Report",
-    "text": "Final Poster Presentation and Report\nYou will demonstrate your results during a poster presentation on December 8, 2026.\nYou written report will be due by the end week 15.\nMore information will be provided on a later date."
+    "section": "Project Extensions",
+    "text": "Project Extensions\nFor those that need an extension in completing your final report, you may obtain up 7 days extension for every time you meet with the Writing and Multiliteracy Center to work on your report.\n\n1 Meeting = 24 hour extension\nEach meeting must be 1 week apart minimum"
   },
   {
     "objectID": "lectures/1a.html#use-of-generative-ai-policy",
@@ -228,63 +228,42 @@
     "href": "lectures/1b.html#sql-and-relational-databases",
     "title": "Computational Setup",
     "section": "SQL and Relational Databases",
-    "text": "SQL and Relational Databases\nSQL (Structured Query Language) is a language used to work with relational databases.\nWith SQL, we can:\n\nRetrieve data from tables\nFilter and sort records\nSummarize data\nCombine related tables\nCreate and modify database objects\nManage data stored in a relational database\n\n\n\n\n\n\n\nTip\n\n\nFor this course, we will use SQLite as our primary relational database management system (DBMS)."
+    "text": "SQL and Relational Databases\n\n\nSQL (Structured Query Language) is a language used to work with relational databases.\n\nWith SQL, we can:\n\nRetrieve data from tables\nClean and summarize data\nManage data stored in a relational database"
   },
   {
     "objectID": "lectures/1b.html#what-is-sqlite",
     "href": "lectures/1b.html#what-is-sqlite",
     "title": "Computational Setup",
     "section": "What is SQLite?",
-    "text": "What is SQLite?\nSQLite is a lightweight relational database management system.\nUnlike many database systems, SQLite does not require a separate database server. A complete database can be stored in a single file, such as:\nchinook.db\nThis makes SQLite useful for:\n\nLearning SQL\nSmall and medium-sized applications\nLocal data storage\nPrototyping\nReproducible data projects\n\nSQLite"
-  },
-  {
-    "objectID": "lectures/1b.html#install-sqlite",
-    "href": "lectures/1b.html#install-sqlite",
-    "title": "Computational Setup",
-    "section": "Install SQLite",
-    "text": "Install SQLite\nFirst, check whether SQLite is already available on your computer.\nOpen a terminal and run:\nsqlite3 --version\nIf a version number appears, SQLite is installed and available from your terminal.\n\n\n\n\n\n\nNote\n\n\nThe exact version number may differ across computers. What matters for this course is that the sqlite3 command runs successfully."
-  },
-  {
-    "objectID": "lectures/1b.html#install-sqlite-on-windows",
-    "href": "lectures/1b.html#install-sqlite-on-windows",
-    "title": "Computational Setup",
-    "section": "Install SQLite on Windows",
-    "text": "Install SQLite on Windows\nDownload the command-line tools from the official SQLite download page:\nSQLite Download Page\nLook for the command-line tools package for your version of Windows.\nAfter downloading:\n\nExtract the files to a folder, such as C:\\sqlite.\nAdd that folder to your Windows PATH.\nOpen a new terminal.\nRun:\n\nsqlite3 --version"
-  },
-  {
-    "objectID": "lectures/1b.html#install-sqlite-on-macos",
-    "href": "lectures/1b.html#install-sqlite-on-macos",
-    "title": "Computational Setup",
-    "section": "Install SQLite on macOS",
-    "text": "Install SQLite on macOS\nMany macOS systems already include SQLite.\nCheck first:\nsqlite3 --version\nIf you use Homebrew and want to install or update SQLite, you can run:\nbrew install sqlite\nThen verify:\nsqlite3 --version"
-  },
-  {
-    "objectID": "lectures/1b.html#install-sqlite-on-linux",
-    "href": "lectures/1b.html#install-sqlite-on-linux",
-    "title": "Computational Setup",
-    "section": "Install SQLite on Linux",
-    "text": "Install SQLite on Linux\nOn Ubuntu or Debian-based systems:\nsudo apt update\nsudo apt install sqlite3\nOn Fedora:\nsudo dnf install sqlite\nThen verify:\nsqlite3 --version"
+    "text": "What is SQLite?\n\n\nSQLite is a lightweight relational database management system. Unlike many database systems, SQLite does not require a separate database server. A complete database can be stored in a single file, such as:\nchinook.db\n\nThis makes SQLite useful for:\n\nLearning SQL\nSmall and medium-sized applications\nLocal data storage\nPrototyping\nReproducible data projects\n\n\nSQLite"
   },
   {
     "objectID": "lectures/1b.html#install-positron",
     "href": "lectures/1b.html#install-positron",
     "title": "Computational Setup",
     "section": "Install Positron",
-    "text": "Install Positron\nPositron is a data science IDE built on Code OSS. We can use it as an editor for SQL files and extend it with database tools.\nDownload Positron\nFor this course, we will use Positron or VS Code to:\n\nOrganize database project files\nWrite .sql scripts\nConnect to SQLite databases\nRun SQL queries\nView query results"
+    "text": "Install Positron\n\n\nPositron is a data science IDE built on Code OSS. We can use it as an editor for SQL files and extend it with database tools.\nDownload Positron\n\n\nOrganize database project files\nWrite .sql scripts\nConnect to SQLite databases\nRun SQL queries\nView query results"
   },
   {
     "objectID": "lectures/1b.html#install-vs-code",
     "href": "lectures/1b.html#install-vs-code",
     "title": "Computational Setup",
     "section": "Install VS Code",
-    "text": "Install VS Code\nVisual Studio Code is a general-purpose code editor that supports database workflows through extensions.\nDownload VS Code\nRecommended extensions for this course:\n\nSQLTools\nSQLTools SQLite\nQuarto"
+    "text": "Install VS Code\nVisual Studio Code is a general-purpose code editor that supports database workflows through extensions.\nDownload VS Code"
+  },
+  {
+    "objectID": "lectures/1b.html#install-vscodium",
+    "href": "lectures/1b.html#install-vscodium",
+    "title": "Computational Setup",
+    "section": "Install VSCodium",
+    "text": "Install VSCodium\nVSCodium is an open-source build of VS Code with Microsoft telemetry disabled.\nVSCodium"
   },
   {
     "objectID": "lectures/1b.html#install-sqltools",
     "href": "lectures/1b.html#install-sqltools",
     "title": "Computational Setup",
     "section": "Install SQLTools",
-    "text": "Install SQLTools\nIn VS Code or Positron, open the Extensions panel.\nSearch for and install:\n\nSQLTools (mtxr.sqltools)\nSQLTools SQLite (mtxr.sqltools-driver-sqlite)\n\nSQLTools provides the database connection interface. The SQLite driver allows SQLTools to connect specifically to SQLite database files.\nSQLTools Documentation\n\n\n\n\n\n\nNote\n\n\nPositron supports VS Code-compatible extensions. Extension availability can depend on the extension catalog configured in Positron."
+    "text": "Install SQLTools\nIn Positron, VS Code or VS Codium, open the Extensions panel.\nSearch for and install:\n\nSQLTools (mtxr.sqltools)\nSQLTools SQLite (mtxr.sqltools-driver-sqlite)\n\nSQLTools provides the database connection interface. The SQLite driver allows SQLTools to connect specifically to SQLite database files.\nSQLTools Documentation"
   },
   {
     "objectID": "lectures/1b.html#workspaces",
@@ -298,7 +277,7 @@
     "href": "lectures/1b.html#course-project-files",
     "title": "Computational Setup",
     "section": "Course Project Files",
-    "text": "Course Project Files\nA simple course folder might look like:\ndata-management-course/\n├── data/\n│   └── chinook.db\n├── sql/\n│   ├── practice.sql\n│   └── queries.sql\n├── notes/\n└── assignments/\n\n\n\n\n\n\nTip\n\n\nKeeping your database and SQL scripts in the same project folder makes your work easier to organize, reproduce, and submit."
+    "text": "Course Project Files\nA simple course folder might look like:\ndata-management-course/\n├── data/\n│   └── chinook.db\n├── sql/\n│   ├── practice.sql\n│   └── queries.sql\n├── notes/\n└── assignments/"
   },
   {
     "objectID": "lectures/1b.html#the-chinook-example-database",
@@ -326,7 +305,14 @@
     "href": "lectures/1b.html#useful-sqlite-commands",
     "title": "Computational Setup",
     "section": "Useful SQLite Commands",
-    "text": "Useful SQLite Commands\nSQLite includes special dot commands for working with the database shell.\nTry:\n.tables\nThis displays the tables in the database.\nTo inspect the structure of the Customer table:\n.schema Customer\nTo exit SQLite:\n.quit\n\n\n\n\n\n\nWarning\n\n\nSQLite dot commands such as .tables and .schema are commands for the SQLite shell. They are not SQL statements and should not be included inside SQLTools query scripts."
+    "text": "Useful SQLite Commands\nSQLite includes special dot commands for working with the database shell.\nTry:\n.tables\nThis displays the tables in the database.\nTo inspect the structure of the Customer table:\n.schema Customer\nTo exit SQLite:\n.quit"
+  },
+  {
+    "objectID": "lectures/1b.html#sqlite-commands",
+    "href": "lectures/1b.html#sqlite-commands",
+    "title": "Computational Setup",
+    "section": "SQLite Commands",
+    "text": "SQLite Commands\n\n\n\n\n\n\nWarning\n\n\nSQLite dot commands such as .tables and .schema are commands for the SQLite shell. They are not SQL statements and should not be included inside SQLTools query scripts."
   },
   {
     "objectID": "lectures/1b.html#create-a-sqlite-connection",
@@ -347,7 +333,7 @@
     "href": "lectures/1b.html#view-data-from-a-table",
     "title": "Computational Setup",
     "section": "View Data from a Table",
-    "text": "View Data from a Table\nThe SELECT statement retrieves data from a database table.\nSELECT *\nFROM Customer;\n* means to return all columns.\nQuestions to consider:\n\nWhat does each row represent?\nWhat does each column represent?\nWhich column appears to uniquely identify a customer?"
+    "text": "View Data from a Table\nThe SELECT statement retrieves data from a database table.\nSELECT *\nFROM Customer;\n* means to return all columns."
   },
   {
     "objectID": "lectures/1b.html#select-specific-columns",
@@ -361,139 +347,6 @@
     "href": "lectures/1b.html#limit-query-results",
     "title": "Computational Setup",
     "section": "Limit Query Results",
-    "text": "Limit Query Results\nUse LIMIT when you only want to inspect a small number of rows.\nSELECT CustomerId,\n       FirstName,\n       LastName,\n       Country\nFROM Customer\nLIMIT 10;\nThis is useful when exploring a table for the first time."
-  },
-  {
-    "objectID": "lectures/1b.html#filter-rows-with-where",
-    "href": "lectures/1b.html#filter-rows-with-where",
-    "title": "Computational Setup",
-    "section": "Filter Rows with WHERE",
-    "text": "Filter Rows with WHERE\nUse WHERE to keep rows that meet a condition.\nSELECT CustomerId,\n       FirstName,\n       LastName,\n       Country\nFROM Customer\nWHERE Country = 'USA';\nThis returns only customers whose country is the United States."
-  },
-  {
-    "objectID": "lectures/1b.html#comparison-operators",
-    "href": "lectures/1b.html#comparison-operators",
-    "title": "Computational Setup",
-    "section": "Comparison Operators",
-    "text": "Comparison Operators\nSQL uses comparison operators to define conditions.\n\n\n\nOperator\nDescription\n\n\n\n\n&gt;\nGreater than\n\n\n&lt;\nLess than\n\n\n&gt;=\nGreater than or equal\n\n\n&lt;=\nLess than or equal\n\n\n=\nEqual\n\n\n&lt;&gt; or !=\nNot equal\n\n\n\nExample:\nSELECT InvoiceId,\n       CustomerId,\n       InvoiceDate,\n       Total\nFROM Invoice\nWHERE Total &gt; 10;"
-  },
-  {
-    "objectID": "lectures/1b.html#sort-results",
-    "href": "lectures/1b.html#sort-results",
-    "title": "Computational Setup",
-    "section": "Sort Results",
-    "text": "Sort Results\nUse ORDER BY to sort query results.\nSELECT InvoiceId,\n       CustomerId,\n       InvoiceDate,\n       Total\nFROM Invoice\nORDER BY Total DESC;\nDESC sorts from largest to smallest.\nASC sorts from smallest to largest and is the default."
-  },
-  {
-    "objectID": "lectures/1b.html#tables-rows-and-columns",
-    "href": "lectures/1b.html#tables-rows-and-columns",
-    "title": "Computational Setup",
-    "section": "Tables, Rows, and Columns",
-    "text": "Tables, Rows, and Columns\nA relational database stores data in tables.\nFor the Chinook database:\n\nA table represents an entity or relationship, such as Customer or Invoice.\nA row represents one record.\nA column represents an attribute of that record.\n\nFor example, in the Customer table:\nCustomerId | FirstName | LastName | Country | Email\nEach row represents one customer."
-  },
-  {
-    "objectID": "lectures/1b.html#primary-keys",
-    "href": "lectures/1b.html#primary-keys",
-    "title": "Computational Setup",
-    "section": "Primary Keys",
-    "text": "Primary Keys\nA primary key uniquely identifies each row in a table.\nIn Chinook, CustomerId is the primary key of the Customer table.\nSELECT CustomerId,\n       FirstName,\n       LastName\nFROM Customer\nLIMIT 10;\nA well-designed primary key should uniquely identify each record."
-  },
-  {
-    "objectID": "lectures/1b.html#foreign-keys",
-    "href": "lectures/1b.html#foreign-keys",
-    "title": "Computational Setup",
-    "section": "Foreign Keys",
-    "text": "Foreign Keys\nA foreign key connects a row in one table to a related row in another table.\nFor example, the Invoice table contains CustomerId.\nSELECT InvoiceId,\n       CustomerId,\n       InvoiceDate,\n       Total\nFROM Invoice\nLIMIT 10;\nCustomerId connects each invoice to the customer who made the purchase."
-  },
-  {
-    "objectID": "lectures/1b.html#inspect-a-table-structure",
-    "href": "lectures/1b.html#inspect-a-table-structure",
-    "title": "Computational Setup",
-    "section": "Inspect a Table Structure",
-    "text": "Inspect a Table Structure\nSQLite’s PRAGMA table_info() command can display information about a table’s columns.\nPRAGMA table_info(Customer);\nTry the same command for another table:\nPRAGMA table_info(Invoice);\nLook for:\n\nColumn names\nData types\nPrimary-key indicators\nWhether columns allow missing values"
-  },
-  {
-    "objectID": "lectures/1b.html#view-database-tables-with-sql",
-    "href": "lectures/1b.html#view-database-tables-with-sql",
-    "title": "Computational Setup",
-    "section": "View Database Tables with SQL",
-    "text": "View Database Tables with SQL\nSQLite stores database metadata in a system table named sqlite_master.\nSELECT name,\n       type\nFROM sqlite_master\nWHERE type = 'table'\nORDER BY name;\nThis is a SQL-based way to inspect which tables exist in the database."
-  },
-  {
-    "objectID": "lectures/1b.html#count-rows",
-    "href": "lectures/1b.html#count-rows",
-    "title": "Computational Setup",
-    "section": "Count Rows",
-    "text": "Count Rows\nUse COUNT() to count records.\nHow many customers are in the database?\nSELECT COUNT(*) AS number_of_customers\nFROM Customer;\nThe alias number_of_customers gives the result column a meaningful name."
-  },
-  {
-    "objectID": "lectures/1b.html#aggregate-functions",
-    "href": "lectures/1b.html#aggregate-functions",
-    "title": "Computational Setup",
-    "section": "Aggregate Functions",
-    "text": "Aggregate Functions\nCommon SQL aggregate functions include:\n\n\n\nFunction\nPurpose\n\n\n\n\nCOUNT()\nCount rows or values\n\n\nSUM()\nAdd values\n\n\nAVG()\nCalculate a mean\n\n\nMIN()\nFind the minimum\n\n\nMAX()\nFind the maximum\n\n\n\nExample:\nSELECT COUNT(*) AS number_of_invoices,\n       AVG(Total) AS average_invoice,\n       MIN(Total) AS smallest_invoice,\n       MAX(Total) AS largest_invoice\nFROM Invoice;"
-  },
-  {
-    "objectID": "lectures/1b.html#group-by",
-    "href": "lectures/1b.html#group-by",
-    "title": "Computational Setup",
-    "section": "GROUP BY",
-    "text": "GROUP BY\nUse GROUP BY to calculate summaries for categories.\nHow many customers are from each country?\nSELECT Country,\n       COUNT(*) AS number_of_customers\nFROM Customer\nGROUP BY Country\nORDER BY number_of_customers DESC;\nThis is a common data-management task: turning row-level records into summarized information."
-  },
-  {
-    "objectID": "lectures/1b.html#why-multiple-tables",
-    "href": "lectures/1b.html#why-multiple-tables",
-    "title": "Computational Setup",
-    "section": "Why Multiple Tables?",
-    "text": "Why Multiple Tables?\nRelational databases usually separate information into multiple related tables rather than storing everything in one large table.\nIn Chinook:\nArtist -&gt; Album -&gt; Track\nThis design reduces repeated information and allows related records to be managed separately."
-  },
-  {
-    "objectID": "lectures/1b.html#join-two-tables",
-    "href": "lectures/1b.html#join-two-tables",
-    "title": "Computational Setup",
-    "section": "Join Two Tables",
-    "text": "Join Two Tables\nA JOIN combines related rows from different tables.\nSELECT Album.Title AS Album,\n       Artist.Name AS Artist\nFROM Album\nJOIN Artist\n  ON Album.ArtistId = Artist.ArtistId\nORDER BY Artist.Name, Album.Title;\nThe ON clause explains how the tables are related."
-  },
-  {
-    "objectID": "lectures/1b.html#join-tracks-to-genres",
-    "href": "lectures/1b.html#join-tracks-to-genres",
-    "title": "Computational Setup",
-    "section": "Join Tracks to Genres",
-    "text": "Join Tracks to Genres\nSELECT Track.Name AS Track,\n       Genre.Name AS Genre,\n       Track.UnitPrice\nFROM Track\nJOIN Genre\n  ON Track.GenreId = Genre.GenreId\nLIMIT 20;\nThis allows us to retrieve descriptive information stored in separate tables."
-  },
-  {
-    "objectID": "lectures/1b.html#summarize-across-related-tables",
-    "href": "lectures/1b.html#summarize-across-related-tables",
-    "title": "Computational Setup",
-    "section": "Summarize Across Related Tables",
-    "text": "Summarize Across Related Tables\nWhich genres contain the most tracks?\nSELECT Genre.Name AS Genre,\n       COUNT(Track.TrackId) AS number_of_tracks\nFROM Genre\nJOIN Track\n  ON Genre.GenreId = Track.GenreId\nGROUP BY Genre.GenreId, Genre.Name\nORDER BY number_of_tracks DESC;\nThis query combines:\n\nJOIN\nCOUNT()\nGROUP BY\nORDER BY"
-  },
-  {
-    "objectID": "lectures/1b.html#chinook-practice-questions",
-    "href": "lectures/1b.html#chinook-practice-questions",
-    "title": "Computational Setup",
-    "section": "Chinook Practice Questions",
-    "text": "Chinook Practice Questions\nUse SQLTools and the Chinook database to answer the following questions.\n\nHow many tracks are in the Track table?\nWhich 10 tracks have the highest UnitPrice?\nHow many customers are from each country?\nWhat are the names of all artists in alphabetical order?\nWhich albums belong to the artist named AC/DC?\nWhich genres contain the largest number of tracks?\nWhich customers have invoices with totals greater than $15?\n\n\n\n\n\n\n\nTip\n\n\nSave your answers in a .sql file instead of typing one-time queries that are immediately lost. Saved SQL scripts create a reproducible record of your work."
-  },
-  {
-    "objectID": "lectures/1b.html#data-management-workflow",
-    "href": "lectures/1b.html#data-management-workflow",
-    "title": "Computational Setup",
-    "section": "Data Management Workflow",
-    "text": "Data Management Workflow\nFor database work in this course:\n\nOpen the course folder in Positron or VS Code.\nConnect SQLTools to data/chinook.db.\nOpen or create a .sql file.\nWrite a SQL query.\nRun the query and inspect the results.\nRevise the query if necessary.\nSave the SQL file.\n\nThis workflow separates the database from the commands used to analyze it."
-  },
-  {
-    "objectID": "lectures/1b.html#important-file-types",
-    "href": "lectures/1b.html#important-file-types",
-    "title": "Computational Setup",
-    "section": "Important File Types",
-    "text": "Important File Types\nYou will commonly work with:\n\n\n\nFile Type\nPurpose\n\n\n\n\n.db / .sqlite\nSQLite database file\n\n\n.sql\nSaved SQL statements or database scripts\n\n\n.qmd\nQuarto document for notes, lectures, or reports\n\n\n.csv\nText-based tabular data that may be imported or exported\n\n\n\n\n\n\n\n\n\nWarning\n\n\nDo not edit a .db or .sqlite file as if it were a text file. Use SQLite, SQLTools, or another database client to interact with it."
-  },
-  {
-    "objectID": "lectures/1b.html#database-and-sql-resources",
-    "href": "lectures/1b.html#database-and-sql-resources",
-    "title": "Computational Setup",
-    "section": "Database and SQL Resources",
-    "text": "Database and SQL Resources\n\nSQLite Documentation\nSQLite Command-Line Shell\nSQLTools Documentation\nSQLTools SQLite Driver\nChinook Database\nPositron Extensions\n\n\n\n\n\n\n\nNote\n\n\nThe examples in this lecture use SQLite syntax and the Chinook sample database. Later database systems may use slightly different SQL syntax or connection procedures."
+    "text": "Limit Query Results\nUse LIMIT when you only want to inspect a small number of rows.\nSELECT CustomerId,\n       FirstName,\n       LastName,\n       Country\nFROM Customer\nLIMIT 10;"
   }
 ]

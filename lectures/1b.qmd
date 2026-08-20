@@ -25,30 +25,43 @@ editor: source
 
 ## SQL and Relational Databases
 
+::: {.columns}
+
+::: {.column}
+
 **SQL (Structured Query Language)** is a language used to work with relational databases.
+
+
+:::
+
+::: {.column}
 
 With SQL, we can:
 
 - Retrieve data from tables
-- Filter and sort records
-- Summarize data
-- Combine related tables
-- Create and modify database objects
+- Clean and summarize data
 - Manage data stored in a relational database
 
-::: callout-tip
-For this course, we will use **SQLite** as our primary relational database management system (DBMS).
+:::
+
 :::
 
 ## What is SQLite?
 
-SQLite is a lightweight relational database management system.
 
-Unlike many database systems, SQLite does not require a separate database server. A complete database can be stored in a single file, such as:
+::: {.columns}
+
+::: {.column}
+
+SQLite is a lightweight relational database management system. Unlike many database systems, SQLite does not require a separate database server. A complete database can be stored in a single file, such as:
 
 ```text
 chinook.db
 ```
+
+:::
+
+::: {.column}
 
 This makes SQLite useful for:
 
@@ -58,16 +71,30 @@ This makes SQLite useful for:
 - Prototyping
 - Reproducible data projects
 
+:::
+
+:::
+
+
 [SQLite](https://www.sqlite.org/)
 
 
 ## Install Positron
 
+
+::: {.columns}
+
+::: {.column}
+
 Positron is a data science IDE built on Code OSS. We can use it as an editor for SQL files and extend it with database tools.
 
 [Download Positron](https://positron.posit.co/download.html)
 
-For this course, we will use Positron or VS Code to:
+
+:::
+
+::: {.column}
+
 
 - Organize database project files
 - Write `.sql` scripts
@@ -75,21 +102,27 @@ For this course, we will use Positron or VS Code to:
 - Run SQL queries
 - View query results
 
+:::
+
+:::
+
+
 ## Install VS Code
 
 Visual Studio Code is a general-purpose code editor that supports database workflows through extensions.
 
 [Download VS Code](https://code.visualstudio.com/)
 
-Recommended extensions for this course:
+## Install VSCodium
 
-- **SQLTools**
-- **SQLTools SQLite**
-- **Quarto**
+VSCodium is an open-source build of VS Code with Microsoft telemetry disabled.
+
+[VSCodium](https://vscodium.com/)
+
 
 ## Install SQLTools
 
-In VS Code or Positron, open the **Extensions** panel.
+In Positron, VS Code or VS Codium, open the **Extensions** panel.
 
 Search for and install:
 
@@ -98,11 +131,7 @@ Search for and install:
 
 SQLTools provides the database connection interface. The SQLite driver allows SQLTools to connect specifically to SQLite database files.
 
-[SQLTools Documentation](https://vscode-sqltools.mteixeira.dev/)
-
-::: callout-note
-Positron supports VS Code-compatible extensions. Extension availability can depend on the extension catalog configured in Positron.
-:::
+[SQLTools Documentation](https://vscode-sqltools.mteixeira.dev/en/home)
 
 # Course Workspace
 
@@ -134,9 +163,6 @@ data-management-course/
 └── assignments/
 ```
 
-::: callout-tip
-Keeping your database and SQL scripts in the same project folder makes your work easier to organize, reproduce, and submit.
-:::
 
 # Chinook Database
 
@@ -216,6 +242,8 @@ To exit SQLite:
 .quit
 ```
 
+## SQLite Commands
+
 ::: callout-warning
 SQLite dot commands such as `.tables` and `.schema` are commands for the SQLite shell. They are not SQL statements and should not be included inside SQLTools query scripts.
 :::
@@ -265,11 +293,6 @@ FROM Customer;
 
 `*` means to return all columns.
 
-Questions to consider:
-
-- What does each row represent?
-- What does each column represent?
-- Which column appears to uniquely identify a customer?
 
 ## Select Specific Columns
 
@@ -298,329 +321,5 @@ FROM Customer
 LIMIT 10;
 ```
 
-This is useful when exploring a table for the first time.
 
-## Filter Rows with WHERE
 
-Use `WHERE` to keep rows that meet a condition.
-
-```sql
-SELECT CustomerId,
-       FirstName,
-       LastName,
-       Country
-FROM Customer
-WHERE Country = 'USA';
-```
-
-This returns only customers whose country is the United States.
-
-## Comparison Operators
-
-SQL uses comparison operators to define conditions.
-
-| Operator | Description |
-|----------|-------------|
-| `>` | Greater than |
-| `<` | Less than |
-| `>=` | Greater than or equal |
-| `<=` | Less than or equal |
-| `=` | Equal |
-| `<>` or `!=` | Not equal |
-
-Example:
-
-```sql
-SELECT InvoiceId,
-       CustomerId,
-       InvoiceDate,
-       Total
-FROM Invoice
-WHERE Total > 10;
-```
-
-## Sort Results
-
-Use `ORDER BY` to sort query results.
-
-```sql
-SELECT InvoiceId,
-       CustomerId,
-       InvoiceDate,
-       Total
-FROM Invoice
-ORDER BY Total DESC;
-```
-
-`DESC` sorts from largest to smallest.
-
-`ASC` sorts from smallest to largest and is the default.
-
-# Data Management Concepts
-
-## Tables, Rows, and Columns
-
-A relational database stores data in tables.
-
-For the Chinook database:
-
-- A **table** represents an entity or relationship, such as `Customer` or `Invoice`.
-- A **row** represents one record.
-- A **column** represents an attribute of that record.
-
-For example, in the `Customer` table:
-
-```text
-CustomerId | FirstName | LastName | Country | Email
-```
-
-Each row represents one customer.
-
-## Primary Keys
-
-A **primary key** uniquely identifies each row in a table.
-
-In Chinook, `CustomerId` is the primary key of the `Customer` table.
-
-```sql
-SELECT CustomerId,
-       FirstName,
-       LastName
-FROM Customer
-LIMIT 10;
-```
-
-A well-designed primary key should uniquely identify each record.
-
-## Foreign Keys
-
-A **foreign key** connects a row in one table to a related row in another table.
-
-For example, the `Invoice` table contains `CustomerId`.
-
-```sql
-SELECT InvoiceId,
-       CustomerId,
-       InvoiceDate,
-       Total
-FROM Invoice
-LIMIT 10;
-```
-
-`CustomerId` connects each invoice to the customer who made the purchase.
-
-## Inspect a Table Structure
-
-SQLite's `PRAGMA table_info()` command can display information about a table's columns.
-
-```sql
-PRAGMA table_info(Customer);
-```
-
-Try the same command for another table:
-
-```sql
-PRAGMA table_info(Invoice);
-```
-
-Look for:
-
-- Column names
-- Data types
-- Primary-key indicators
-- Whether columns allow missing values
-
-## View Database Tables with SQL
-
-SQLite stores database metadata in a system table named `sqlite_master`.
-
-```sql
-SELECT name,
-       type
-FROM sqlite_master
-WHERE type = 'table'
-ORDER BY name;
-```
-
-This is a SQL-based way to inspect which tables exist in the database.
-
-# Summarizing Data
-
-## Count Rows
-
-Use `COUNT()` to count records.
-
-How many customers are in the database?
-
-```sql
-SELECT COUNT(*) AS number_of_customers
-FROM Customer;
-```
-
-The alias `number_of_customers` gives the result column a meaningful name.
-
-## Aggregate Functions
-
-Common SQL aggregate functions include:
-
-| Function | Purpose |
-|----------|---------|
-| `COUNT()` | Count rows or values |
-| `SUM()` | Add values |
-| `AVG()` | Calculate a mean |
-| `MIN()` | Find the minimum |
-| `MAX()` | Find the maximum |
-
-Example:
-
-```sql
-SELECT COUNT(*) AS number_of_invoices,
-       AVG(Total) AS average_invoice,
-       MIN(Total) AS smallest_invoice,
-       MAX(Total) AS largest_invoice
-FROM Invoice;
-```
-
-## GROUP BY
-
-Use `GROUP BY` to calculate summaries for categories.
-
-How many customers are from each country?
-
-```sql
-SELECT Country,
-       COUNT(*) AS number_of_customers
-FROM Customer
-GROUP BY Country
-ORDER BY number_of_customers DESC;
-```
-
-This is a common data-management task: turning row-level records into summarized information.
-
-# Relating Tables
-
-## Why Multiple Tables?
-
-Relational databases usually separate information into multiple related tables rather than storing everything in one large table.
-
-In Chinook:
-
-```text
-Artist -> Album -> Track
-```
-
-This design reduces repeated information and allows related records to be managed separately.
-
-## Join Two Tables
-
-A `JOIN` combines related rows from different tables.
-
-```sql
-SELECT Album.Title AS Album,
-       Artist.Name AS Artist
-FROM Album
-JOIN Artist
-  ON Album.ArtistId = Artist.ArtistId
-ORDER BY Artist.Name, Album.Title;
-```
-
-The `ON` clause explains how the tables are related.
-
-## Join Tracks to Genres
-
-```sql
-SELECT Track.Name AS Track,
-       Genre.Name AS Genre,
-       Track.UnitPrice
-FROM Track
-JOIN Genre
-  ON Track.GenreId = Genre.GenreId
-LIMIT 20;
-```
-
-This allows us to retrieve descriptive information stored in separate tables.
-
-## Summarize Across Related Tables
-
-Which genres contain the most tracks?
-
-```sql
-SELECT Genre.Name AS Genre,
-       COUNT(Track.TrackId) AS number_of_tracks
-FROM Genre
-JOIN Track
-  ON Genre.GenreId = Track.GenreId
-GROUP BY Genre.GenreId, Genre.Name
-ORDER BY number_of_tracks DESC;
-```
-
-This query combines:
-
-- `JOIN`
-- `COUNT()`
-- `GROUP BY`
-- `ORDER BY`
-
-# Practice
-
-## Chinook Practice Questions
-
-Use SQLTools and the Chinook database to answer the following questions.
-
-1. How many tracks are in the `Track` table?
-2. Which 10 tracks have the highest `UnitPrice`?
-3. How many customers are from each country?
-4. What are the names of all artists in alphabetical order?
-5. Which albums belong to the artist named `AC/DC`?
-6. Which genres contain the largest number of tracks?
-7. Which customers have invoices with totals greater than $15?
-
-::: callout-tip
-Save your answers in a `.sql` file instead of typing one-time queries that are immediately lost. Saved SQL scripts create a reproducible record of your work.
-:::
-
-# Recommended Workflow
-
-## Data Management Workflow
-
-For database work in this course:
-
-1. Open the course folder in Positron or VS Code.
-2. Connect SQLTools to `data/chinook.db`.
-3. Open or create a `.sql` file.
-4. Write a SQL query.
-5. Run the query and inspect the results.
-6. Revise the query if necessary.
-7. Save the SQL file.
-
-This workflow separates the **database** from the **commands used to analyze it**.
-
-## Important File Types
-
-You will commonly work with:
-
-| File Type | Purpose |
-|-----------|---------|
-| `.db` / `.sqlite` | SQLite database file |
-| `.sql` | Saved SQL statements or database scripts |
-| `.qmd` | Quarto document for notes, lectures, or reports |
-| `.csv` | Text-based tabular data that may be imported or exported |
-
-::: callout-warning
-Do not edit a `.db` or `.sqlite` file as if it were a text file. Use SQLite, SQLTools, or another database client to interact with it.
-:::
-
-# Resources
-
-## Database and SQL Resources
-
-- [SQLite Documentation](https://www.sqlite.org/docs.html)
-- [SQLite Command-Line Shell](https://www.sqlite.org/cli.html)
-- [SQLTools Documentation](https://vscode-sqltools.mteixeira.dev/)
-- [SQLTools SQLite Driver](https://vscode-sqltools.mteixeira.dev/en/drivers/sq-lite.html)
-- [Chinook Database](https://github.com/lerocha/chinook-database)
-- [Positron Extensions](https://positron.posit.co/extensions.html)
-
-::: callout-note
-The examples in this lecture use SQLite syntax and the Chinook sample database. Later database systems may use slightly different SQL syntax or connection procedures.
-:::
