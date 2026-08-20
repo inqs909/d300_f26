@@ -68,6 +68,10 @@ editor: source
 
 [d300.inqs.info/syllabus](https://www.inqs.info/d300_f26/syllabus)
 
+## Course Website
+
+[d300.inqs.info](https://d300.inqs.info/)
+
 ## Tools
 
 [SQLite](https://sqlite.org/index.html)
