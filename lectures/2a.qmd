@@ -1,0 +1,338 @@
+---
+title: "Introduction"
+subtitle: "Data Systems"
+format:
+  revealjs:
+    scrollable: true
+    navigation-mode: vertical
+    theme: [default, styles.scss]
+    controls-layout: bottom-right
+    controls-tutorial: true
+    incremental: false 
+    
+revealjs-plugins:
+  - pointer
+  - verticator
+  
+filters: 
+  - code-fullscreen
+  - reveal-auto-agenda
+
+editor: source
+---
+
+
+::: notes
+Welcome everyone to the Introduction to Data Systems. Today, we will cover how data is structured, where it is stored, and how it moves through systems.
+Here is our roadmap for the session. We will move from the nature of data itself to the storage mechanisms and finally to the movement of data.
+:::
+
+# Data Systems
+
+## What is a Data System?
+
+A data system is a collection of interconnected components used to collect, store, process, and analyze data.
+
+* **Input**: Raw data (logs, transactions, sensor readings).
+* **Process**: Transformation and cleaning.
+* **Storage**: Databases or Data Lakes.
+* **Output**: Insights, reports, or machine learning models.
+
+::: notes
+Think of a data system like a water treatment plant. You have raw water (input), a filtration system (processing), a reservoir (storage), and tap water for consumption (output).
+:::
+
+## Data Types: The Big Picture
+
+Data is categorized based on how much "organization" it has before it enters a system.
+
+* **Structured**: Highly organized (e.g., Excel, SQL).
+* **Semi-structured**: Organized but flexible (e.g., JSON, XML).
+* **Unstructured**: No predefined model (e.g., Video, PDF, Audio).
+
+::: notes
+Understanding the format of your data determines what kind of database you need and how much work you have to do to clean it.
+:::
+
+## Structured Data
+
+
+* Tabular (rows and columns).
+* Highly organized.
+* Easily searchable.
+* **Examples**: 
+    * Customer names and addresses.
+    * Transaction amounts and dates.
+    * Inventory counts.
+
+::: notes
+Structured data is the most common form of data handled by traditional businesses. It fits perfectly into spreadsheets and relational databases.
+:::
+
+## Semi-Structured Data
+
+
+* Does not reside in a rigid grid.
+* Contains tags or markers to separate data elements.
+* Flexible schema (can change easily).
+* **Examples**:
+    * **JSON**: Used in web APIs.
+    * **XML**: Used in configuration files.
+    * **CSV**: Simple comma-separated values.
+
+::: notes
+Semi-structured data is the "middle ground." It has some hierarchy and markers, but you can add new fields without rebuilding the whole table.
+:::
+
+## Unstructured Data
+
+* No internal structure or predefined model.
+* Makes up the vast majority of data generated today.
+* Requires specialized tools (AI/ML) to extract meaning.
+* **Examples**:
+    * Emails (the text part).
+    * Images and Videos.
+    * Social media posts.
+
+::: notes
+Think of a photo. A computer just sees a bunch of pixels. It doesn't know it's a "cat" until an unstructured data processing tool (like an AI model) analyzes it.
+:::
+
+## Visualizing Data Hierarchy
+
+```{mermaid}
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%
+graph TD
+    A[Data Types] --> B[Structured]
+    A --> C[Semi-Structured]
+    A --> D[Unstructured]
+    B --> B1[Tables/SQL]
+    C --> C1[JSON/XML]
+    D --> D1[Media/Text]
+```
+
+
+  
+::: notes
+This diagram shows the hierarchy. As you move from top to bottom, the level of inherent organization decreases.
+:::
+
+## Activity 1: Identify the Type
+
+**Identify whether the following are Structured, Semi-Structured, or Unstructured:**
+
+1. A `.mp4` video file from a security camera.
+2. A `.json` file containing a user's profile settings.
+3. A SQL table containing 1,000,000 rows of sales transactions.
+4. A collection of scanned handwritten notes.
+5. An XML file used for configuration.
+
+::: notes
+Take 2 minutes to think about these. (Answers: 1. Unstructured, 2. Semi-structured, 3. Structured, 4. Unstructured, 5. Semi-structured).
+:::
+
+# Databases
+
+## Relational Databases (RDBMS)
+
+The traditional way of storing structured data.
+
+* **Core Concept**: Data is organized into tables.
+* **Schema**: Rigid and predefined (must define columns before inserting data).
+* **Relationships**: Tables are linked via "Keys" (Primary and Foreign keys).
+* **Example**: PostgreSQL, MySQL, Oracle.
+
+::: notes
+In a relational database, if you want to add a "Phone Number" column, you have to update the entire table structure first. This is called a "schema change."
+:::
+
+## Relational Properties: ACID
+
+To ensure data integrity, RDBMS follow **ACID** properties:
+
+1. **Atomicity**: "All or nothing" transactions.
+2. **Consistency**: Data follows all rules (no broken links).
+3. **Isolation**: Transactions don't interfere with each other.
+4. **Durability**: Once saved, it stays saved (even if power fails).
+
+::: notes
+ACID is critical for banking. If you transfer \$10, the money must leave your account AND arrive in the other account. It cannot do one without the other.
+:::
+
+## Non-Relational Databases (NoSQL)
+
+Designed for modern, high-scale, and flexible data.
+
+* **Core Concept**: Data is stored as documents, key-value pairs, or graphs.
+* **Schema**: Dynamic/Flexible (no predefined structure required).
+* **Scalability**: Designed to scale "out" (adding more servers).
+* **Example**: MongoDB (Document), Redis (Key-Value), Neo4j (Graph).
+
+::: notes
+NoSQL is the response to the "Big Data" explosion. When you have massive amounts of unstructured or semi-structured data, relational databases can struggle to scale.
+:::
+
+## NoSQL Types
+
+| Type | Best For | Example |
+|---|---|---|
+| **Document** | Semi-structured data | MongoDB |
+| **Key-Value** | Fast caching/Session data | Redis |
+| **Graph** | Complex relationships | Neo4j |
+| **Column-Family**| Massive scale/Analytical | Cassandra |
+
+::: notes
+Different NoSQL types are specialized for different tasks. A graph database is perfect for a social network where you need to track "friend of a friend" connections.
+:::
+
+## Relational vs. Non-Relational
+
+| Feature | Relational (SQL) | Non-Relational (NoSQL) |
+|---|---|---|
+| **Schema** | Rigid / Predefined | Flexible / Dynamic |
+| **Structure** | Tables (Rows/Cols) | Documents/Graphs/Key-Value |
+| **Scaling** | Vertical (Bigger Server) | Horizontal (More Servers) |
+| **Data Integrity**| Very High (ACID) | Varies (BASE) |
+
+::: notes
+If your data structure is predictable and consistency is paramount (like finance), go SQL. If your data is changing fast and you need massive scale, go NoSQL.
+:::
+
+## Choosing Your Database
+
+
+```{mermaid}
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%
+graph TD
+    Start[Start Decision] --> Schema{Fixed Schema?}
+    Schema -- Yes --> Relational[Relational / SQL]
+    Schema -- No --> Scale{Need massive scale?}
+    Scale -- Yes --> NoSQL[Non-Relational / NoSQL]
+    Scale -- No --> Semi[Semi-Structured / Document]
+```
+
+
+::: notes
+A decision tree: If Schema is fixed $\rightarrow$ Relational. If Schema is NOT fixed $\rightarrow$ Check scale. If massive scale $\rightarrow$ NoSQL. If not massive scale $\rightarrow$ Document store.
+:::
+
+## Activity 2: The Architect's Dilemma
+
+**Scenario:** You are building a new social media app like Instagram.
+
+**Requirements:**
+
+* You need to store user profiles (Name, Email, Password).
+* You need to store millions of high-resolution images.
+* You need to store a "Follower" graph (who follows whom).
+
+**Task:**
+Which database type (Relational or NoSQL) would you use for each requirement? Why?
+
+::: notes
+This is a real-world scenario. Most big apps use a "Hybrid" approach. For example, SQL for user accounts and a NoSQL/Graph database for the social connections.
+:::
+
+# Data Pipelines
+
+## Data Pipelines
+
+Data doesn't just sit there; it moves.
+
+**Definition:** A sequence of data processing steps where a set of data is passed through a series of transformations.
+
+**Goal:** To move data from a source (where it's created) to a destination (where it's used).
+
+::: notes
+A pipeline is like a conveyor belt in a factory. Raw materials go in one end, and finished products come out the other.
+:::
+
+## ETL vs. ELT
+
+The two main ways to move data:
+
+
+::: {.columns}
+
+::: {.column}
+
+**ETL**
+
+(Extract, Transform, Load)
+
+1. Extract from source.
+2. Transform in a staging area (cleaning/filtering).
+3. Load into the target database.
+
+
+:::
+
+::: {.column}
+
+**ELT** 
+
+(Extract, Load, Transform)
+
+1. Extract from source.
+2. Load directly into the target (Data Lake).
+3. Transform inside the target database using its own power.
+
+
+:::
+
+:::
+
+
+
+
+::: notes
+ETL was the standard for decades. ELT is becoming more popular because modern cloud warehouses (like Snowflake) are incredibly powerful at processing data once it's inside.
+:::
+
+## The Data Pipeline Workflow
+
+```{mermaid}
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%
+graph LR
+    Source[Source Systems] --> Ext[Extraction]
+    Ext --> Trans[Transformation]
+    Trans --> Load[Loading/Storage]
+    Load --> Anal[Analytics/BI]
+```
+
+
+::: notes
+This shows the journey from the moment a user clicks a button on a website to the moment a CEO sees a chart on their dashboard. A linear flow: Source $\rightarrow$ Extraction $\rightarrow$ Transformation $\rightarrow$ Loading $\rightarrow$ Analytics.
+:::
+
+## Data Pipeline Components
+
+1. **Source**: Where data originates (App logs, DBs, APIs).
+2. **Ingestion**: The process of pulling data from the source.
+3. **Processing/Transformation**: Cleaning, aggregating, or renaming fields.
+4. **Storage**: The final destination (Data Warehouse or Data Lake).
+5. **Orchestration**: The "brain" that schedules and monitors the steps.
+
+::: notes
+Orchestration is very important. If the "Extraction" step fails, the "Transformation" step shouldn't try to run on old or broken data.
+:::
+
+
+
+
+## Activity 3: Pipeline Mapping
+
+**Scenario:** A weather station collects temperature data every minute, sends it to a server, cleans the data (removes errors), and stores it for a yearly report.
+
+**Task:**
+
+Draw (on paper or digitally) a simple diagram of this pipeline. Label your:
+1. Source
+2. Extraction
+3. Transformation
+4. Loading
+5. Destination
+
+::: notes
+This helps you visualize the flow. If the sensor sends a temperature of 999 degrees (an error), that's where your "Transformation" step fixes the data.
+:::
