@@ -126,10 +126,11 @@ Examples include:
 
 ## Project Extensions
 
-For those that need an extension in completing your final report, you may obtain up 7 days extension for every time you meet with the [Writing and Multiliteracy Center](https://www.csuci.edu/wmc/) to work on your report.
+For those that need an extension in completing your final report, you may obtain up 7 days extension for every appointment you meet with the [Writing and Multiliteracy Center](https://www.csuci.edu/wmc/) to work on your report.
 
 - 1 Meeting = 24 hour extension
 - Each meeting must be 1 week apart minimum
+- No double dipping between Data 300 and Math 398
 
 # Generative AI
 
