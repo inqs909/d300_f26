@@ -19,6 +19,8 @@ filters:
   - reveal-auto-agenda
 
 editor: source
+
+order: 2
 ---
 
 # Installation

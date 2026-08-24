@@ -19,6 +19,8 @@ filters:
   - reveal-auto-agenda
 
 editor: source
+
+order: 1
 ---
 
 
@@ -136,7 +138,7 @@ For those that need an extension in completing your final report, you may obtain
 
 ## Use of Generative AI Policy
 
-The use of generative artificial intelligence (AI) to complete any part or all of an assignment/exam is strictly prohibited in this class. This includes, but not limited to, ChatGPT, Claude, Meta AI, and Google Gemini.
+The use of generative artificial intelligence (AI) to complete an assignment is strictly prohibited in this class. This includes, but not limited to, ChatGPT, Claude, Meta AI, and Google Gemini.
 
 ::: fragment
 
@@ -166,7 +168,7 @@ There are consequences when you use of AI:
 - Stolen Work
 - Privacy Concerns
 - Environmental Impacts
-- Working Exploitation
+- Worker Exploitation
 
 
 
@@ -284,6 +286,8 @@ Yes/No/I don't know
 
 - [The Emotional Labor Behind AI Intimacy](https://data-workers.org/michael/)
 - [How thousands of ‘overworked, underpaid' humans train Google’s AI to seem smart](https://www.theguardian.com/technology/2025/sep/11/google-gemini-ai-training-humans)
+- [Humans in the loop - India](https://www.imdb.com/title/tt33581992/)
+- [Humans in the loop - Kenya](https://csu-ci.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991078749770702901&context=L&vid=01CALS_UCI:JSBL&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=any,contains,Humans%20in%20the%20loop&offset=0)
 
 ## Affecting Communities Links
 

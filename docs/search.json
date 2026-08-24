@@ -28,6 +28,342 @@
     "text": "University Policies\n\nSyllabus Policies and Assistance\nCSUCI’s Syllabus Policies and Assistance Website provides important details about academic policies, campus expectations, and student support services that are all highly applicable to your success as a student both in and outside of the classroom. Ensure that you review this site on a regular basis to stay informed about the policies and resources that support your success, as campus resources or policies may change semester to semester.\n\n\nAcademic Honesty\nConduct yourself with honesty and integrity. Do not submit others’ work as your own. Foassignments and quizzes that allow you to work with a group, only put your name on what the group submits if you genuinely contributed to the work. Work completely independently on exams, using only the materials that are indicated as allowed. Failure to observe academic honesty results in substantial penalties that can include failing the course.\n\n\nCSUCI Basic Need\nPlease use the link to the Basic Needs Program on the Syllabus Policies and Assistance website for information on emergency food, housing accommodations, toiletries, and connections to critical resources.\n\n\nCSUCI Disability Statement\nIf you are a student with a disability requesting reasonable accommodations in this course, you need to contact Disability Accommodations and Support Services (DASS) located on the second floor of Arroyo Hall, via email accommodations@csuci.edu or call 805-437-3331. All requests for reasonable accommodations require registration with DASS in advance of need. Faculty, students and DASS will work together regarding classroom accommodations. You are encouraged to discuss approved.\n\n\nDisruption\n\nIf I Am Out: I will communicate via email and will hold classes asynchronously.\nIf You Are Out: Contact me as soon as possible to talk about your options. Reasonable accommodations will be provided for a brief absence. With proper documentation, extended accommodations will be provided."
   },
   {
+    "objectID": "lectures/2a.html#what-is-a-data-system",
+    "href": "lectures/2a.html#what-is-a-data-system",
+    "title": "Data Systems",
+    "section": "What is a Data System?",
+    "text": "What is a Data System?\nA data system is a collection of interconnected components used to collect, store, process, and analyze data.\n\nInput: Raw data (logs, transactions, sensor readings).\nProcess: Transformation and cleaning.\nStorage: Databases or Data Lakes.\nOutput: Insights, reports, or machine learning models.\n\n\nThink of a data system like a water treatment plant. You have raw water (input), a filtration system (processing), a reservoir (storage), and tap water for consumption (output)."
+  },
+  {
+    "objectID": "lectures/2a.html#data-types-the-big-picture",
+    "href": "lectures/2a.html#data-types-the-big-picture",
+    "title": "Data Systems",
+    "section": "Data Types: The Big Picture",
+    "text": "Data Types: The Big Picture\nData is categorized based on how much “organization” it has before it enters a system.\n\nStructured: Highly organized (e.g., Excel, SQL).\nSemi-structured: Organized but flexible (e.g., JSON, XML).\nUnstructured: No predefined model (e.g., Video, PDF, Audio).\n\n\nUnderstanding the format of your data determines what kind of database you need and how much work you have to do to clean it."
+  },
+  {
+    "objectID": "lectures/2a.html#structured-data",
+    "href": "lectures/2a.html#structured-data",
+    "title": "Data Systems",
+    "section": "Structured Data",
+    "text": "Structured Data\n\nTabular (rows and columns).\nHighly organized.\nEasily searchable.\nExamples:\n\nCustomer names and addresses.\nTransaction amounts and dates.\nInventory counts.\n\n\n\nStructured data is the most common form of data handled by traditional businesses. It fits perfectly into spreadsheets and relational databases."
+  },
+  {
+    "objectID": "lectures/2a.html#semi-structured-data",
+    "href": "lectures/2a.html#semi-structured-data",
+    "title": "Data Systems",
+    "section": "Semi-Structured Data",
+    "text": "Semi-Structured Data\n\nDoes not reside in a rigid grid.\nContains tags or markers to separate data elements.\nFlexible schema (can change easily).\nExamples:\n\nJSON: Used in web APIs.\nXML: Used in configuration files.\nCSV: Simple comma-separated values.\n\n\n\nSemi-structured data is the “middle ground.” It has some hierarchy and markers, but you can add new fields without rebuilding the whole table."
+  },
+  {
+    "objectID": "lectures/2a.html#unstructured-data",
+    "href": "lectures/2a.html#unstructured-data",
+    "title": "Data Systems",
+    "section": "Unstructured Data",
+    "text": "Unstructured Data\n\nNo internal structure or predefined model.\nMakes up the vast majority of data generated today.\nRequires specialized tools (AI/ML) to extract meaning.\nExamples:\n\nEmails (the text part).\nImages and Videos.\nSocial media posts.\n\n\n\nThink of a photo. A computer just sees a bunch of pixels. It doesn’t know it’s a “cat” until an unstructured data processing tool (like an AI model) analyzes it."
+  },
+  {
+    "objectID": "lectures/2a.html#visualizing-data-hierarchy",
+    "href": "lectures/2a.html#visualizing-data-hierarchy",
+    "title": "Data Systems",
+    "section": "Visualizing Data Hierarchy",
+    "text": "Visualizing Data Hierarchy\n\n\n\n\n\n%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%\ngraph TD\n    A[Data Types] --&gt; B[Structured]\n    A --&gt; C[Semi-Structured]\n    A --&gt; D[Unstructured]\n    B --&gt; B1[Tables/SQL]\n    C --&gt; C1[JSON/XML]\n    D --&gt; D1[Media/Text]\n\n\n\n\n\n\n\nThis diagram shows the hierarchy. As you move from top to bottom, the level of inherent organization decreases."
+  },
+  {
+    "objectID": "lectures/2a.html#activity-1-identify-the-type",
+    "href": "lectures/2a.html#activity-1-identify-the-type",
+    "title": "Data Systems",
+    "section": "Activity 1: Identify the Type",
+    "text": "Activity 1: Identify the Type\nIdentify whether the following are Structured, Semi-Structured, or Unstructured:\n\nA .mp4 video file from a security camera.\nA .json file containing a user’s profile settings.\nA SQL table containing 1,000,000 rows of sales transactions.\nA collection of scanned handwritten notes.\nAn XML file used for configuration.\n\n\nTake 2 minutes to think about these. (Answers: 1. Unstructured, 2. Semi-structured, 3. Structured, 4. Unstructured, 5. Semi-structured)."
+  },
+  {
+    "objectID": "lectures/2a.html#relational-databases-rdbms",
+    "href": "lectures/2a.html#relational-databases-rdbms",
+    "title": "Data Systems",
+    "section": "Relational Databases (RDBMS)",
+    "text": "Relational Databases (RDBMS)\nThe traditional way of storing structured data.\n\nCore Concept: Data is organized into tables.\nSchema: Rigid and predefined (must define columns before inserting data).\nRelationships: Tables are linked via “Keys” (Primary and Foreign keys).\nExample: PostgreSQL, MySQL, Oracle.\n\n\nIn a relational database, if you want to add a “Phone Number” column, you have to update the entire table structure first. This is called a “schema change.”"
+  },
+  {
+    "objectID": "lectures/2a.html#relational-properties-acid",
+    "href": "lectures/2a.html#relational-properties-acid",
+    "title": "Data Systems",
+    "section": "Relational Properties: ACID",
+    "text": "Relational Properties: ACID\nTo ensure data integrity, RDBMS follow ACID properties:\n\nAtomicity: “All or nothing” transactions.\nConsistency: Data follows all rules (no broken links).\nIsolation: Transactions don’t interfere with each other.\nDurability: Once saved, it stays saved (even if power fails).\n\n\nACID is critical for banking. If you transfer $10, the money must leave your account AND arrive in the other account. It cannot do one without the other."
+  },
+  {
+    "objectID": "lectures/2a.html#non-relational-databases-nosql",
+    "href": "lectures/2a.html#non-relational-databases-nosql",
+    "title": "Data Systems",
+    "section": "Non-Relational Databases (NoSQL)",
+    "text": "Non-Relational Databases (NoSQL)\nDesigned for modern, high-scale, and flexible data.\n\nCore Concept: Data is stored as documents, key-value pairs, or graphs.\nSchema: Dynamic/Flexible (no predefined structure required).\nScalability: Designed to scale “out” (adding more servers).\nExample: MongoDB (Document), Redis (Key-Value), Neo4j (Graph).\n\n\nNoSQL is the response to the “Big Data” explosion. When you have massive amounts of unstructured or semi-structured data, relational databases can struggle to scale."
+  },
+  {
+    "objectID": "lectures/2a.html#nosql-types",
+    "href": "lectures/2a.html#nosql-types",
+    "title": "Data Systems",
+    "section": "NoSQL Types",
+    "text": "NoSQL Types\n\n\n\nType\nBest For\nExample\n\n\n\n\nDocument\nSemi-structured data\nMongoDB\n\n\nKey-Value\nFast caching/Session data\nRedis\n\n\nGraph\nComplex relationships\nNeo4j\n\n\nColumn-Family\nMassive scale/Analytical\nCassandra\n\n\n\n\nDifferent NoSQL types are specialized for different tasks. A graph database is perfect for a social network where you need to track “friend of a friend” connections."
+  },
+  {
+    "objectID": "lectures/2a.html#relational-vs.-non-relational",
+    "href": "lectures/2a.html#relational-vs.-non-relational",
+    "title": "Data Systems",
+    "section": "Relational vs. Non-Relational",
+    "text": "Relational vs. Non-Relational\n\n\n\nFeature\nRelational (SQL)\nNon-Relational (NoSQL)\n\n\n\n\nSchema\nRigid / Predefined\nFlexible / Dynamic\n\n\nStructure\nTables (Rows/Cols)\nDocuments/Graphs/Key-Value\n\n\nScaling\nVertical (Bigger Server)\nHorizontal (More Servers)\n\n\nData Integrity\nVery High (ACID)\nVaries (BASE)\n\n\n\n\nIf your data structure is predictable and consistency is paramount (like finance), go SQL. If your data is changing fast and you need massive scale, go NoSQL."
+  },
+  {
+    "objectID": "lectures/2a.html#choosing-your-database",
+    "href": "lectures/2a.html#choosing-your-database",
+    "title": "Data Systems",
+    "section": "Choosing Your Database",
+    "text": "Choosing Your Database\n\n\n\n\n\n%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%\ngraph TD\n    Start[Start Decision] --&gt; Schema{Fixed Schema?}\n    Schema -- Yes --&gt; Relational[Relational / SQL]\n    Schema -- No --&gt; Scale{Need massive scale?}\n    Scale -- Yes --&gt; NoSQL[Non-Relational / NoSQL]\n    Scale -- No --&gt; Semi[Semi-Structured / Document]\n\n\n\n\n\n\n\nA decision tree: If Schema is fixed \\(\\rightarrow\\) Relational. If Schema is NOT fixed \\(\\rightarrow\\) Check scale. If massive scale \\(\\rightarrow\\) NoSQL. If not massive scale \\(\\rightarrow\\) Document store."
+  },
+  {
+    "objectID": "lectures/2a.html#activity-2-the-architects-dilemma",
+    "href": "lectures/2a.html#activity-2-the-architects-dilemma",
+    "title": "Data Systems",
+    "section": "Activity 2: The Architect’s Dilemma",
+    "text": "Activity 2: The Architect’s Dilemma\nScenario: You are building a new social media app like Instagram.\nRequirements:\n\nYou need to store user profiles (Name, Email, Password).\nYou need to store millions of high-resolution images.\nYou need to store a “Follower” graph (who follows whom).\n\nTask: Which database type (Relational or NoSQL) would you use for each requirement? Why?\n\nThis is a real-world scenario. Most big apps use a “Hybrid” approach. For example, SQL for user accounts and a NoSQL/Graph database for the social connections."
+  },
+  {
+    "objectID": "lectures/2a.html#data-pipelines-1",
+    "href": "lectures/2a.html#data-pipelines-1",
+    "title": "Data Systems",
+    "section": "Data Pipelines",
+    "text": "Data Pipelines\nData doesn’t just sit there; it moves.\nDefinition: A sequence of data processing steps where a set of data is passed through a series of transformations.\nGoal: To move data from a source (where it’s created) to a destination (where it’s used).\n\nA pipeline is like a conveyor belt in a factory. Raw materials go in one end, and finished products come out the other."
+  },
+  {
+    "objectID": "lectures/2a.html#etl-vs.-elt",
+    "href": "lectures/2a.html#etl-vs.-elt",
+    "title": "Data Systems",
+    "section": "ETL vs. ELT",
+    "text": "ETL vs. ELT\nThe two main ways to move data:\n\n\nETL\n(Extract, Transform, Load)\n\nExtract from source.\nTransform in a staging area (cleaning/filtering).\nLoad into the target database.\n\n\nELT\n(Extract, Load, Transform)\n\nExtract from source.\nLoad directly into the target (Data Lake).\nTransform inside the target database using its own power.\n\n\n\nETL was the standard for decades. ELT is becoming more popular because modern cloud warehouses (like Snowflake) are incredibly powerful at processing data once it’s inside."
+  },
+  {
+    "objectID": "lectures/2a.html#the-data-pipeline-workflow",
+    "href": "lectures/2a.html#the-data-pipeline-workflow",
+    "title": "Data Systems",
+    "section": "The Data Pipeline Workflow",
+    "text": "The Data Pipeline Workflow\n\n\n\n\n\n%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%\ngraph LR\n    Source[Source Systems] --&gt; Ext[Extraction]\n    Ext --&gt; Trans[Transformation]\n    Trans --&gt; Load[Loading/Storage]\n    Load --&gt; Anal[Analytics/BI]\n\n\n\n\n\n\n\nThis shows the journey from the moment a user clicks a button on a website to the moment a CEO sees a chart on their dashboard. A linear flow: Source \\(\\rightarrow\\) Extraction \\(\\rightarrow\\) Transformation \\(\\rightarrow\\) Loading \\(\\rightarrow\\) Analytics."
+  },
+  {
+    "objectID": "lectures/2a.html#data-pipeline-components",
+    "href": "lectures/2a.html#data-pipeline-components",
+    "title": "Data Systems",
+    "section": "Data Pipeline Components",
+    "text": "Data Pipeline Components\n\nSource: Where data originates (App logs, DBs, APIs).\nIngestion: The process of pulling data from the source.\nProcessing/Transformation: Cleaning, aggregating, or renaming fields.\nStorage: The final destination (Data Warehouse or Data Lake).\nOrchestration: The “brain” that schedules and monitors the steps.\n\n\nOrchestration is very important. If the “Extraction” step fails, the “Transformation” step shouldn’t try to run on old or broken data."
+  },
+  {
+    "objectID": "lectures/2a.html#activity-3-pipeline-mapping",
+    "href": "lectures/2a.html#activity-3-pipeline-mapping",
+    "title": "Data Systems",
+    "section": "Activity 3: Pipeline Mapping",
+    "text": "Activity 3: Pipeline Mapping\nScenario: A weather station collects temperature data every minute, sends it to a server, cleans the data (removes errors), and stores it for a yearly report.\nTask:\nDraw (on paper or digitally) a simple diagram of this pipeline. Label your: 1. Source 2. Extraction 3. Transformation 4. Loading 5. Destination\n\nThis helps you visualize the flow. If the sensor sends a temperature of 999 degrees (an error), that’s where your “Transformation” step fixes the data."
+  },
+  {
+    "objectID": "lectures/1a.html#introductions-1",
+    "href": "lectures/1a.html#introductions-1",
+    "title": "Data 300",
+    "section": "Introductions",
+    "text": "Introductions\n\nSan Bernardino, CA\nCSU Monterey Bay\n\nBS Biology\n\nSan Diego State University\n\nMaster’s in Public Health\n\nUC Riverside\n\nPhD in Applied Statistics"
+  },
+  {
+    "objectID": "lectures/1a.html#introductions-2",
+    "href": "lectures/1a.html#introductions-2",
+    "title": "Data 300",
+    "section": "Introductions",
+    "text": "Introductions\n\nName\nYear\nMajor\nFun Fact\nCareer Goal"
+  },
+  {
+    "objectID": "lectures/1a.html#class-setup-1",
+    "href": "lectures/1a.html#class-setup-1",
+    "title": "Data 300",
+    "section": "Class Setup",
+    "text": "Class Setup\n\nHomework Assignments\nVideo Assignments\nProgress Reports\nFinal Write Up"
+  },
+  {
+    "objectID": "lectures/1a.html#syllabus",
+    "href": "lectures/1a.html#syllabus",
+    "title": "Data 300",
+    "section": "Syllabus",
+    "text": "Syllabus\nd300.inqs.info/syllabus"
+  },
+  {
+    "objectID": "lectures/1a.html#course-website",
+    "href": "lectures/1a.html#course-website",
+    "title": "Data 300",
+    "section": "Course Website",
+    "text": "Course Website\nd300.inqs.info"
+  },
+  {
+    "objectID": "lectures/1a.html#tools",
+    "href": "lectures/1a.html#tools",
+    "title": "Data 300",
+    "section": "Tools",
+    "text": "Tools\nSQLite MongoDB"
+  },
+  {
+    "objectID": "lectures/1a.html#ide",
+    "href": "lectures/1a.html#ide",
+    "title": "Data 300",
+    "section": "IDE",
+    "text": "IDE\n\nPositron\nVS Code\nVS Codium"
+  },
+  {
+    "objectID": "lectures/1a.html#project-overview",
+    "href": "lectures/1a.html#project-overview",
+    "title": "Data 300",
+    "section": "Project Overview",
+    "text": "Project Overview\nFor this project, you will explore a Database Management System (DBMS)\n\nSelect a new DBMS\nCreate or import a database\nRun database operations\nCompare it with the DBMS used in class\nSubmit a written report"
+  },
+  {
+    "objectID": "lectures/1a.html#project-premiss",
+    "href": "lectures/1a.html#project-premiss",
+    "title": "Data 300",
+    "section": "Project Premiss",
+    "text": "Project Premiss\nImagine that you work for a company that currently relies on SQLite to store, manage, and access its data. As the organization grows, its data needs have changed, and management is considering whether the current database system is still the best option.\nYou have been tasked with researching and evaluating a new DBMS that was not used in this course. Your goal is to determine whether this proposed system could provide advantages over the company’s current DBMS."
+  },
+  {
+    "objectID": "lectures/1a.html#project-goal",
+    "href": "lectures/1a.html#project-goal",
+    "title": "Data 300",
+    "section": "Project Goal",
+    "text": "Project Goal\nThe goal of this project is to apply database concepts from class to a new database system."
+  },
+  {
+    "objectID": "lectures/1a.html#possible-dbms-options",
+    "href": "lectures/1a.html#possible-dbms-options",
+    "title": "Data 300",
+    "section": "Possible DBMS Options",
+    "text": "Possible DBMS Options\nExamples include:\n\nPostgreSQL\nMySQL or MariaDB\nDuckDB\nRedis Open Source\n\nDo not buy any subscription access a DBMS"
+  },
+  {
+    "objectID": "lectures/1a.html#project-parameters",
+    "href": "lectures/1a.html#project-parameters",
+    "title": "Data 300",
+    "section": "Project Parameters",
+    "text": "Project Parameters\n\nUp to 2 people per group\nDeadline December 5th, 2026 @ 11:59 PM\nPage Limit 10 pages (15 for groups)\nAll code must be in an Appendix (not included in page count)\nCite all claims from reputable sources"
+  },
+  {
+    "objectID": "lectures/1a.html#project-extensions",
+    "href": "lectures/1a.html#project-extensions",
+    "title": "Data 300",
+    "section": "Project Extensions",
+    "text": "Project Extensions\nFor those that need an extension in completing your final report, you may obtain up 7 days extension for every appointment you meet with the Writing and Multiliteracy Center to work on your report.\n\n1 Meeting = 24 hour extension\nEach meeting must be 1 week apart minimum\nNo double dipping between Data 300 and Math 398"
+  },
+  {
+    "objectID": "lectures/1a.html#use-of-generative-ai-policy",
+    "href": "lectures/1a.html#use-of-generative-ai-policy",
+    "title": "Data 300",
+    "section": "Use of Generative AI Policy",
+    "text": "Use of Generative AI Policy\nThe use of generative artificial intelligence (AI) to complete an assignment is strictly prohibited in this class. This includes, but not limited to, ChatGPT, Claude, Meta AI, and Google Gemini.\n\nYou may use AI to enhance you understanding of the material.\n\n\nYou may not use AI to complete assignments.\n\n\nYou may not upload any course material to any AI platforms such as ChatGPT, Claude, Meta AI, and Google Gemini. Exceptions are allowed for DASS-approved services."
+  },
+  {
+    "objectID": "lectures/1a.html#use-of-ai",
+    "href": "lectures/1a.html#use-of-ai",
+    "title": "Data 300",
+    "section": "Use of AI",
+    "text": "Use of AI\nThere are consequences when you use of AI:\n\nEducational Mislearning\nTrusting AI\nStolen Work\nPrivacy Concerns\nEnvironmental Impacts\nWorker Exploitation"
+  },
+  {
+    "objectID": "lectures/1a.html#educational-mislearning",
+    "href": "lectures/1a.html#educational-mislearning",
+    "title": "Data 300",
+    "section": "Educational Mislearning",
+    "text": "Educational Mislearning\nThe purpose of this class, and college, is for you to learn about critical thinking skills and perseverance. Using AI will only teach you how to get an answer, which may or may not be correct.\n\nYou will not develop the skills needed to problem solve a challenge. Additionally, developing grit is essential to become successful in college and life. There is no easy way out and AI is an illusion to your success in life.\n\n\nTo learn something, it requires hours of work! If not years!"
+  },
+  {
+    "objectID": "lectures/1a.html#trusting-ai",
+    "href": "lectures/1a.html#trusting-ai",
+    "title": "Data 300",
+    "section": "Trusting AI",
+    "text": "Trusting AI\nWhen using AI, you must acknowledge its limitations:\n\nResponses provided may be incorrect\nResponses may not be fair\nCompanies may manipulate responses and/or terms of service for their benefit\nCompanies may not have your best interst in mind\n\n\nYou should always proceed with caution utilizing these tools!"
+  },
+  {
+    "objectID": "lectures/1a.html#stolen-work",
+    "href": "lectures/1a.html#stolen-work",
+    "title": "Data 300",
+    "section": "Stolen Work",
+    "text": "Stolen Work\n\nAdditionally, all these individuals are not receiving any royalties for the work to be used in creating generative AI models.\n\n\nInside Higher Ed and The New Yorker highlight individual’s concern of their work being used to train AI models."
+  },
+  {
+    "objectID": "lectures/1a.html#privacy-concerns",
+    "href": "lectures/1a.html#privacy-concerns",
+    "title": "Data 300",
+    "section": "Privacy Concerns",
+    "text": "Privacy Concerns\nThe use of generative AI raises concerns of what data is being harvested from us, possibly without informed consent or knowledge of impacts.\n\nWhen you use any large language models, you do not know what information is being harvested from you.\n\n\nDo you want to upload your thoughts and ideas to a company that can monetize, and possibly exploit you.\n\n\nDoes your Professors consent with you uploading their assignments to large language models?\n\n\nStanford provided a report highlighting the risks of our personal data use in large language models."
+  },
+  {
+    "objectID": "lectures/1a.html#environmental-impact",
+    "href": "lectures/1a.html#environmental-impact",
+    "title": "Data 300",
+    "section": "Environmental Impact",
+    "text": "Environmental Impact\nIn order to run these large language models, companies need to use a large amounts of energy. This is because large servers are needed to both train and execute a model.\n\nThe LA Times reports the potential impact that running AI models in California.\n\n\nAdditionally, Time reports that a ChatGPT query uses ten times more energy than a Google search query, and global AI demands can consume of 1 trillion gallons of water by 2027.\n\n\nThere are also environmental justice questions about where these data centers are constructed."
+  },
+  {
+    "objectID": "lectures/1a.html#worker-exploitation",
+    "href": "lectures/1a.html#worker-exploitation",
+    "title": "Data 300",
+    "section": "Worker Exploitation",
+    "text": "Worker Exploitation\nThe Washington Post and Time (Article 1 and Article 2) reported that AI companies utilize “digital sweatshops” to classify data points for model training.\n\nThere is a human cost from the Global South, both financially and mentally, to develop the AI models for users in the United States and Europe.\n\n\nWe must be conscious consumers and demand more from these companies to provide safe working conditions and livable wages."
+  },
+  {
+    "objectID": "lectures/1a.html#is-using-ai-bad",
+    "href": "lectures/1a.html#is-using-ai-bad",
+    "title": "Data 300",
+    "section": "Is Using AI Bad?",
+    "text": "Is Using AI Bad?\n\nYes/No/I don’t know"
+  },
+  {
+    "objectID": "lectures/1a.html#privacy-concerns-links",
+    "href": "lectures/1a.html#privacy-concerns-links",
+    "title": "Data 300",
+    "section": "Privacy Concerns Links",
+    "text": "Privacy Concerns Links\n\nOpenAI Says It’s Scanning Users’ ChatGPT Conversations and Reporting Content to the Police\nPrivacy in an AI Era: How Do We Protect Our Personal Information?"
+  },
+  {
+    "objectID": "lectures/1a.html#labor-violations-links",
+    "href": "lectures/1a.html#labor-violations-links",
+    "title": "Data 300",
+    "section": "Labor Violations Links",
+    "text": "Labor Violations Links\n\nThe Emotional Labor Behind AI Intimacy\nHow thousands of ‘overworked, underpaid’ humans train Google’s AI to seem smart\nHumans in the loop - India\nHumans in the loop - Kenya"
+  },
+  {
+    "objectID": "lectures/1a.html#affecting-communities-links",
+    "href": "lectures/1a.html#affecting-communities-links",
+    "title": "Data 300",
+    "section": "Affecting Communities Links",
+    "text": "Affecting Communities Links\n\nAI surveillance and data colonialism shape African conflicts\nAfrican workers are taking on Meta and the world should pay attention\n‘It’s destroyed me completely’: Kenyan moderators decry toll of training of AI models\nThe AI Industry Is Traumatizing Desperate Contractors in the Developing World for Pennies\nChatGPT advises women to ask for lower salaries, study finds\nThe Impact of the Use of AI on People with Disabilities"
+  },
+  {
+    "objectID": "lectures/1a.html#ideas-and-learning-links",
+    "href": "lectures/1a.html#ideas-and-learning-links",
+    "title": "Data 300",
+    "section": "Ideas and Learning Links",
+    "text": "Ideas and Learning Links\n\nStudent’s Right to Refuse AI\nAI is homogenizing your thoughts\nThe Incuriosity Engine\nNew Junior Developers Can’t Actually Code"
+  },
+  {
+    "objectID": "lectures/1a.html#environmental-costs",
+    "href": "lectures/1a.html#environmental-costs",
+    "title": "Data 300",
+    "section": "Environmental Costs",
+    "text": "Environmental Costs\n\n‘I can’t drink the water’ - life next to a US data centre"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to Introduction to Data Management!",
+    "section": "",
+    "text": "NoteQuarto Template for HW\n\n\n\n\n\nquarto use template inqs909/qs_hw\n\n\n\n\n\n\n\n\n\nNoteDiscord Server\n\n\n\n\n\nWill post if class creates one."
+  },
+  {
+    "objectID": "lectures.html",
+    "href": "lectures.html",
+    "title": "Lectures",
+    "section": "",
+    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "lectures/1b.html#sql-and-relational-databases",
     "href": "lectures/1b.html#sql-and-relational-databases",
     "title": "Computational Setup",
@@ -154,339 +490,206 @@
     "text": "Limit Query Results\nUse LIMIT when you only want to inspect a small number of rows.\nSELECT CustomerId,\n       FirstName,\n       LastName,\n       Country\nFROM Customer\nLIMIT 10;"
   },
   {
-    "objectID": "lectures.html",
-    "href": "lectures.html",
-    "title": "Lectures",
-    "section": "",
-    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nIntroduction\n\n\n\n\n\n\n\n\nNo matching items"
+    "objectID": "lectures/3a.html#data-modeling-1",
+    "href": "lectures/3a.html#data-modeling-1",
+    "title": "Data Modeling",
+    "section": "Data Modeling",
+    "text": "Data Modeling\nData modeling is the process of describing how data is organized, connected, and constrained before building a database.\n\nWelcome students and frame data modeling as the planning step before implementation. Emphasize that a good model reduces confusion, duplication, and future redesign."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to Introduction to Data Management!",
-    "section": "",
-    "text": "NoteQuarto Template for HW\n\n\n\n\n\nquarto use template inqs909/qs_hw\n\n\n\n\n\n\n\n\n\nNoteDiscord Server\n\n\n\n\n\nWill post if class creates one."
+    "objectID": "lectures/3a.html#why-data-modeling-matters",
+    "href": "lectures/3a.html#why-data-modeling-matters",
+    "title": "Data Modeling",
+    "section": "Why Data Modeling Matters",
+    "text": "Why Data Modeling Matters\nA data model helps teams agree on:\n\nWhat data must be stored\nHow different concepts relate\nWhich rules protect data quality\nHow the database supports real questions\n\n\nAsk students to imagine building a database without a plan. Use examples like duplicate customer records, missing orders, or unclear relationships between students and courses."
   },
   {
-    "objectID": "lectures/1a.html#introductions-1",
-    "href": "lectures/1a.html#introductions-1",
-    "title": "Data 300",
-    "section": "Introductions",
-    "text": "Introductions\n\nSan Bernardino, CA\nCSU Monterey Bay\n\nBS Biology\n\nSan Diego State University\n\nMaster’s in Public Health\n\nUC Riverside\n\nPhD in Applied Statistics"
+    "objectID": "lectures/3a.html#from-real-world-to-database",
+    "href": "lectures/3a.html#from-real-world-to-database",
+    "title": "Data Modeling",
+    "section": "From Real World to Database",
+    "text": "From Real World to Database\nData modeling translates real-world objects and processes into database structures.\n\n\n\n\n\nflowchart LR\n  A[Real-world process] --&gt; B[Conceptual model]\n  B --&gt; C[Logical model]\n  C --&gt; D[Physical database]\n\n  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px\n  classDef orange fill:#E69F00,color:#000000,stroke:#111111,stroke-width:2px\n  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px\n  classDef purple fill:#CC79A7,color:#000000,stroke:#111111,stroke-width:2px\n\n  class A blue\n  class B orange\n  class C green\n  class D purple\n\n\n\n\n\n\n\nExplain that models become more detailed over time. Conceptual models focus on ideas, logical models focus on structure, and physical models focus on implementation details."
   },
   {
-    "objectID": "lectures/1a.html#introductions-2",
-    "href": "lectures/1a.html#introductions-2",
-    "title": "Data 300",
-    "section": "Introductions",
-    "text": "Introductions\n\nName\nYear\nMajor\nFun Fact\nCareer Goal"
+    "objectID": "lectures/3a.html#three-levels-of-data-models",
+    "href": "lectures/3a.html#three-levels-of-data-models",
+    "title": "Data Modeling",
+    "section": "Three Levels of Data Models",
+    "text": "Three Levels of Data Models\nConceptual model:\n\nBig-picture view\nMain entities and relationships\n\nLogical model:\n\nTables, fields, keys, and constraints\n\nPhysical model:\n\nSpecific DBMS details, indexes, data types, and storage choices\n\n\nUse this slide to separate planning from implementation. Students often jump straight to tables, but conceptual thinking helps them understand the domain first."
   },
   {
-    "objectID": "lectures/1a.html#class-setup-1",
-    "href": "lectures/1a.html#class-setup-1",
-    "title": "Data 300",
-    "section": "Class Setup",
-    "text": "Class Setup\n\nHomework Assignments\nVideo Assignments\nProgress Reports\nFinal Write Up"
+    "objectID": "lectures/3a.html#entity-relationship-diagrams",
+    "href": "lectures/3a.html#entity-relationship-diagrams",
+    "title": "Data Modeling",
+    "section": "Entity-Relationship Diagrams",
+    "text": "Entity-Relationship Diagrams\nAn Entity-Relationship diagram, or ER diagram, visually represents:\n\nEntities\nAttributes\nRelationships\nCardinality rules\n\n\nDefine ER diagrams as a communication tool. They help non-programmers and technical users discuss the structure of a database before writing SQL."
   },
   {
-    "objectID": "lectures/1a.html#syllabus",
-    "href": "lectures/1a.html#syllabus",
-    "title": "Data 300",
-    "section": "Syllabus",
-    "text": "Syllabus\nd300.inqs.info/syllabus"
+    "objectID": "lectures/3a.html#entities",
+    "href": "lectures/3a.html#entities",
+    "title": "Data Modeling",
+    "section": "Entities",
+    "text": "Entities\nAn entity is a thing about which we want to store data.\nExamples:\n\nStudent\nCourse\nInstructor\nEnrollment\nProduct\nOrder\n\n\nEmphasize that entities often become tables in a relational database. Ask students to name entities from a familiar system such as a library, store, or university."
   },
   {
-    "objectID": "lectures/1a.html#course-website",
-    "href": "lectures/1a.html#course-website",
-    "title": "Data 300",
-    "section": "Course Website",
-    "text": "Course Website\nd300.inqs.info"
+    "objectID": "lectures/3a.html#attributes",
+    "href": "lectures/3a.html#attributes",
+    "title": "Data Modeling",
+    "section": "Attributes",
+    "text": "Attributes\nAn attribute is a fact or property stored about an entity.\nFor a Student entity, attributes might include:\n\nstudent_id\nfirst_name\nlast_name\nemail\nmajor\n\n\nPoint out that attributes often become columns. Encourage students to distinguish attributes from entities. For example, a student’s name is usually an attribute, while student is the entity."
   },
   {
-    "objectID": "lectures/1a.html#tools",
-    "href": "lectures/1a.html#tools",
-    "title": "Data 300",
-    "section": "Tools",
-    "text": "Tools\nSQLite MongoDB"
+    "objectID": "lectures/3a.html#activity-identify-entities-and-attributes",
+    "href": "lectures/3a.html#activity-identify-entities-and-attributes",
+    "title": "Data Modeling",
+    "section": "Activity: Identify Entities and Attributes",
+    "text": "Activity: Identify Entities and Attributes\nScenario: A college wants to track students, courses, instructors, departments, and course enrollments.\nList:\n\nAt least 3 entities\nAt least 2 attributes per entity\n\n\nGive students 8 to 10 minutes. Walk around and check whether they are mixing up entities and attributes. Bring the class back by asking for one example entity and its attributes."
   },
   {
-    "objectID": "lectures/1a.html#ide",
-    "href": "lectures/1a.html#ide",
-    "title": "Data 300",
-    "section": "IDE",
-    "text": "IDE\n\nPositron\nVS Code\nVS Codium"
+    "objectID": "lectures/3a.html#relationships",
+    "href": "lectures/3a.html#relationships",
+    "title": "Data Modeling",
+    "section": "Relationships",
+    "text": "Relationships\nA relationship describes how entities are connected.\nExamples:\n\nA student enrolls in a course\nAn instructor teaches a course\nA department offers many courses\nAn order contains products\n\n\nExplain that relationships are usually verbs or actions connecting nouns. Encourage students to write relationships as short sentences."
   },
   {
-    "objectID": "lectures/1a.html#project-overview",
-    "href": "lectures/1a.html#project-overview",
-    "title": "Data 300",
-    "section": "Project Overview",
-    "text": "Project Overview\nFor this project, you will explore a Database Management System (DBMS)\n\nSelect a new DBMS\nCreate or import a database\nRun database operations\nCompare it with the DBMS used in class\nSubmit a written report"
+    "objectID": "lectures/3a.html#cardinality",
+    "href": "lectures/3a.html#cardinality",
+    "title": "Data Modeling",
+    "section": "Cardinality",
+    "text": "Cardinality\nCardinality describes how many records can participate in a relationship.\nCommon types:\n\nOne-to-one\nOne-to-many\nMany-to-many\n\n\nIntroduce cardinality as the rules of participation. Use practical wording: one student can enroll in many courses; one course can have many students."
   },
   {
-    "objectID": "lectures/1a.html#project-premiss",
-    "href": "lectures/1a.html#project-premiss",
-    "title": "Data 300",
-    "section": "Project Premiss",
-    "text": "Project Premiss\nImagine that you work for a company that currently relies on SQLite to store, manage, and access its data. As the organization grows, its data needs have changed, and management is considering whether the current database system is still the best option.\nYou have been tasked with researching and evaluating a new DBMS that was not used in this course. Your goal is to determine whether this proposed system could provide advantages over the company’s current DBMS."
+    "objectID": "lectures/3a.html#one-to-one-relationship",
+    "href": "lectures/3a.html#one-to-one-relationship",
+    "title": "Data Modeling",
+    "section": "One-to-One Relationship",
+    "text": "One-to-One Relationship\nA one-to-one relationship means one record in Entity A is associated with one record in Entity B.\n\n\n\n\n\nerDiagram\n  PERSON ||--|| PASSPORT : has\n  PERSON {\n    int person_id\n    string full_name\n  }\n  PASSPORT {\n    int passport_id\n    string passport_number\n  }\n\n\n\n\n\n\n\nExplain that one-to-one relationships are less common than one-to-many. Ask students why person and passport might be separated, such as security or optional details."
   },
   {
-    "objectID": "lectures/1a.html#project-goal",
-    "href": "lectures/1a.html#project-goal",
-    "title": "Data 300",
-    "section": "Project Goal",
-    "text": "Project Goal\nThe goal of this project is to apply database concepts from class to a new database system."
+    "objectID": "lectures/3a.html#one-to-many-relationship",
+    "href": "lectures/3a.html#one-to-many-relationship",
+    "title": "Data Modeling",
+    "section": "One-to-Many Relationship",
+    "text": "One-to-Many Relationship\nA one-to-many relationship means one record in Entity A can be associated with many records in Entity B.\n\n\n\n\n\nerDiagram\n  DEPARTMENT ||--o{ COURSE : offers\n  DEPARTMENT {\n    int department_id\n    string department_name\n  }\n  COURSE {\n    int course_id\n    string course_name\n  }\n\n\n\n\n\n\n\nState that one-to-many is very common in relational databases. The many side often contains a foreign key pointing back to the one side."
   },
   {
-    "objectID": "lectures/1a.html#possible-dbms-options",
-    "href": "lectures/1a.html#possible-dbms-options",
-    "title": "Data 300",
-    "section": "Possible DBMS Options",
-    "text": "Possible DBMS Options\nExamples include:\n\nPostgreSQL\nMySQL or MariaDB\nDuckDB\nRedis Open Source\n\nDo not buy any subscription access a DBMS"
+    "objectID": "lectures/3a.html#many-to-many-relationship",
+    "href": "lectures/3a.html#many-to-many-relationship",
+    "title": "Data Modeling",
+    "section": "Many-to-Many Relationship",
+    "text": "Many-to-Many Relationship\nA many-to-many relationship means many records in Entity A can connect to many records in Entity B.\nExample:\n\nMany students can enroll in many courses\nMany products can appear in many orders\n\n\nExplain that many-to-many relationships cannot usually be implemented directly as two tables in a relational database. They need an associative table."
   },
   {
-    "objectID": "lectures/1a.html#project-parameters",
-    "href": "lectures/1a.html#project-parameters",
-    "title": "Data 300",
-    "section": "Project Parameters",
-    "text": "Project Parameters\n\nUp to 2 people per group\nDeadline December 5th, 2026 @ 11:59 PM\nPage Limit 10 pages (15 for groups)\nAll code must be in an Appendix (not included in page count)\nCite all claims from reputable sources"
+    "objectID": "lectures/3a.html#activity-draw-cardinality",
+    "href": "lectures/3a.html#activity-draw-cardinality",
+    "title": "Data Modeling",
+    "section": "Activity: Draw Cardinality",
+    "text": "Activity: Draw Cardinality\nFor each statement, decide the cardinality:\n\nA department has many instructors.\nA student has one university ID card.\nA student enrolls in many courses, and a course has many students.\nA customer places many orders.\n\nThen sketch a simple ER diagram for each.\n\nGive students 10 minutes. Encourage them to label relationships clearly. Afterward, review each statement and ask students how they knew the cardinality."
   },
   {
-    "objectID": "lectures/1a.html#project-extensions",
-    "href": "lectures/1a.html#project-extensions",
-    "title": "Data 300",
-    "section": "Project Extensions",
-    "text": "Project Extensions\nFor those that need an extension in completing your final report, you may obtain up 7 days extension for every appointment you meet with the Writing and Multiliteracy Center to work on your report.\n\n1 Meeting = 24 hour extension\nEach meeting must be 1 week apart minimum\nNo double dipping between Data 300 and Math 398"
+    "objectID": "lectures/3a.html#resolving-many-to-many-relationships",
+    "href": "lectures/3a.html#resolving-many-to-many-relationships",
+    "title": "Data Modeling",
+    "section": "Resolving Many-to-Many Relationships",
+    "text": "Resolving Many-to-Many Relationships\nMany-to-many relationships are usually resolved with a bridge table, also called an associative table.\n\n\n\n\n\nflowchart LR\n  S[Student] --&gt; E[Enrollment]\n  E --&gt; C[Course]\n\n  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px\n  classDef orange fill:#E69F00,color:#000000,stroke:#111111,stroke-width:2px\n  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px\n\n  class S blue\n  class E orange\n  class C green\n\n\n\n\n\n\n\nExplain that Enrollment stores the connection between a student and a course. It can also store relationship-specific attributes such as enrollment date or grade."
   },
   {
-    "objectID": "lectures/1a.html#use-of-generative-ai-policy",
-    "href": "lectures/1a.html#use-of-generative-ai-policy",
-    "title": "Data 300",
-    "section": "Use of Generative AI Policy",
-    "text": "Use of Generative AI Policy\nThe use of generative artificial intelligence (AI) to complete any part or all of an assignment/exam is strictly prohibited in this class. This includes, but not limited to, ChatGPT, Claude, Meta AI, and Google Gemini.\n\nYou may use AI to enhance you understanding of the material.\n\n\nYou may not use AI to complete assignments.\n\n\nYou may not upload any course material to any AI platforms such as ChatGPT, Claude, Meta AI, and Google Gemini. Exceptions are allowed for DASS-approved services."
+    "objectID": "lectures/3a.html#example-er-diagram-course-enrollment",
+    "href": "lectures/3a.html#example-er-diagram-course-enrollment",
+    "title": "Data Modeling",
+    "section": "Example ER Diagram: Course Enrollment",
+    "text": "Example ER Diagram: Course Enrollment\n\n\n\n\n\nerDiagram\n  DEPARTMENT ||--o{ COURSE : offers\n  INSTRUCTOR ||--o{ COURSE : teaches\n  STUDENT ||--o{ ENROLLMENT : completes\n  COURSE ||--o{ ENROLLMENT : includes\n\n  DEPARTMENT {\n    int department_id\n    string department_name\n  }\n  INSTRUCTOR {\n    int instructor_id\n    string full_name\n  }\n  STUDENT {\n    int student_id\n    string full_name\n  }\n  COURSE {\n    int course_id\n    string course_name\n  }\n  ENROLLMENT {\n    int enrollment_id\n    date enrolled_on\n    string final_grade\n  }\n\n\n\n\n\n\n\nWalk through the diagram one relationship at a time. Ask students which table resolves the many-to-many relationship between students and courses."
   },
   {
-    "objectID": "lectures/1a.html#use-of-ai",
-    "href": "lectures/1a.html#use-of-ai",
-    "title": "Data 300",
-    "section": "Use of AI",
-    "text": "Use of AI\nThere are consequences when you use of AI:\n\nEducational Mislearning\nTrusting AI\nStolen Work\nPrivacy Concerns\nEnvironmental Impacts\nWorking Exploitation"
+    "objectID": "lectures/3a.html#keys-in-relational-databases",
+    "href": "lectures/3a.html#keys-in-relational-databases",
+    "title": "Data Modeling",
+    "section": "Keys in Relational Databases",
+    "text": "Keys in Relational Databases\nKeys help identify records and connect tables.\nImportant key types:\n\nPrimary key\nForeign key\nComposite key\nCandidate key\n\n\nTransition from diagrams to implementation. Explain that keys are what make relationships enforceable in a relational database."
   },
   {
-    "objectID": "lectures/1a.html#educational-mislearning",
-    "href": "lectures/1a.html#educational-mislearning",
-    "title": "Data 300",
-    "section": "Educational Mislearning",
-    "text": "Educational Mislearning\nThe purpose of this class, and college, is for you to learn about critical thinking skills and perseverance. Using AI will only teach you how to get an answer, which may or may not be correct.\n\nYou will not develop the skills needed to problem solve a challenge. Additionally, developing grit is essential to become successful in college and life. There is no easy way out and AI is an illusion to your success in life.\n\n\nTo learn something, it requires hours of work! If not years!"
+    "objectID": "lectures/3a.html#primary-keys",
+    "href": "lectures/3a.html#primary-keys",
+    "title": "Data Modeling",
+    "section": "Primary Keys",
+    "text": "Primary Keys\nA primary key uniquely identifies each row in a table.\nA good primary key should be:\n\nUnique\nNot missing\nStable over time\nSimple to reference\n\n\nExplain that primary keys prevent ambiguity. Mention that IDs are often used because names and emails can change or repeat."
   },
   {
-    "objectID": "lectures/1a.html#trusting-ai",
-    "href": "lectures/1a.html#trusting-ai",
-    "title": "Data 300",
-    "section": "Trusting AI",
-    "text": "Trusting AI\nWhen using AI, you must acknowledge its limitations:\n\nResponses provided may be incorrect\nResponses may not be fair\nCompanies may manipulate responses and/or terms of service for their benefit\nCompanies may not have your best interst in mind\n\n\nYou should always proceed with caution utilizing these tools!"
+    "objectID": "lectures/3a.html#primary-key-example",
+    "href": "lectures/3a.html#primary-key-example",
+    "title": "Data Modeling",
+    "section": "Primary Key Example",
+    "text": "Primary Key Example\n\n\n\nstudent_id\nfirst_name\nlast_name\nemail\n\n\n\n\n101\nAna\nRivera\nana@example.edu\n\n\n102\nJamal\nLee\njamal@example.edu\n\n\n103\nMei\nChen\nmei@example.edu\n\n\n\nstudent_id is the primary key because it uniquely identifies each student.\n\nAsk students why first name or last name alone would not work as a primary key. Then ask whether email is always a safe choice."
   },
   {
-    "objectID": "lectures/1a.html#stolen-work",
-    "href": "lectures/1a.html#stolen-work",
-    "title": "Data 300",
-    "section": "Stolen Work",
-    "text": "Stolen Work\n\nAdditionally, all these individuals are not receiving any royalties for the work to be used in creating generative AI models.\n\n\nInside Higher Ed and The New Yorker highlight individual’s concern of their work being used to train AI models."
+    "objectID": "lectures/3a.html#foreign-keys",
+    "href": "lectures/3a.html#foreign-keys",
+    "title": "Data Modeling",
+    "section": "Foreign Keys",
+    "text": "Foreign Keys\nA foreign key is a field in one table that refers to the primary key in another table.\nForeign keys are used to:\n\nConnect related tables\nEnforce valid relationships\nPrevent orphan records\n\n\nUse the phrase parent table and child table if helpful. Explain that a foreign key makes sure a course references a real department or an enrollment references a real student."
   },
   {
-    "objectID": "lectures/1a.html#privacy-concerns",
-    "href": "lectures/1a.html#privacy-concerns",
-    "title": "Data 300",
-    "section": "Privacy Concerns",
-    "text": "Privacy Concerns\nThe use of generative AI raises concerns of what data is being harvested from us, possibly without informed consent or knowledge of impacts.\n\nWhen you use any large language models, you do not know what information is being harvested from you.\n\n\nDo you want to upload your thoughts and ideas to a company that can monetize, and possibly exploit you.\n\n\nDoes your Professors consent with you uploading their assignments to large language models?\n\n\nStanford provided a report highlighting the risks of our personal data use in large language models."
+    "objectID": "lectures/3a.html#primary-and-foreign-keys-together",
+    "href": "lectures/3a.html#primary-and-foreign-keys-together",
+    "title": "Data Modeling",
+    "section": "Primary and Foreign Keys Together",
+    "text": "Primary and Foreign Keys Together\n\n\n\n\n\nflowchart LR\n  D[Department table\\ndepartment_id is primary key] --&gt; C[Course table\\ndepartment_id is foreign key]\n\n  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px\n  classDef orange fill:#E69F00,color:#000000,stroke:#111111,stroke-width:2px\n\n  class D blue\n  class C orange\n\n\n\n\n\n\n\nPoint out that the same value can be a primary key in one table and a foreign key in another. The role depends on the table where the column appears."
   },
   {
-    "objectID": "lectures/1a.html#environmental-impact",
-    "href": "lectures/1a.html#environmental-impact",
-    "title": "Data 300",
-    "section": "Environmental Impact",
-    "text": "Environmental Impact\nIn order to run these large language models, companies need to use a large amounts of energy. This is because large servers are needed to both train and execute a model.\n\nThe LA Times reports the potential impact that running AI models in California.\n\n\nAdditionally, Time reports that a ChatGPT query uses ten times more energy than a Google search query, and global AI demands can consume of 1 trillion gallons of water by 2027.\n\n\nThere are also environmental justice questions about where these data centers are constructed."
+    "objectID": "lectures/3a.html#activity-find-the-keys",
+    "href": "lectures/3a.html#activity-find-the-keys",
+    "title": "Data Modeling",
+    "section": "Activity: Find the Keys",
+    "text": "Activity: Find the Keys\nGiven these tables, identify the primary keys and foreign keys.\nStudent(student_id, first_name, last_name)\nCourse(course_id, course_name, department_id)\nEnrollment(enrollment_id, student_id, course_id, enrolled_on)\nQuestions:\n\nWhich fields uniquely identify rows?\nWhich fields connect tables?\nWhich table resolves a many-to-many relationship?\n\n\nGive students 8 minutes. Ask them to mark primary keys with PK and foreign keys with FK. Review that Enrollment connects Student and Course."
   },
   {
-    "objectID": "lectures/1a.html#worker-exploitation",
-    "href": "lectures/1a.html#worker-exploitation",
-    "title": "Data 300",
-    "section": "Worker Exploitation",
-    "text": "Worker Exploitation\nThe Washington Post and Time (Article 1 and Article 2) reported that AI companies utilize “digital sweatshops” to classify data points for model training.\n\nThere is a human cost from the Global South, both financially and mentally, to develop the AI models for users in the United States and Europe.\n\n\nWe must be conscious consumers and demand more from these companies to provide safe working conditions and livable wages."
+    "objectID": "lectures/3a.html#composite-keys",
+    "href": "lectures/3a.html#composite-keys",
+    "title": "Data Modeling",
+    "section": "Composite Keys",
+    "text": "Composite Keys\nA composite key uses two or more columns together to uniquely identify a row.\nExample:\nEnrollment(student_id, course_id, term)\nTogether, these fields can identify one student’s enrollment in one course during one term.\n\nExplain that composite keys are useful when no single field is enough. Also mention that some designers still add a separate enrollment_id for convenience."
   },
   {
-    "objectID": "lectures/1a.html#is-using-ai-bad",
-    "href": "lectures/1a.html#is-using-ai-bad",
-    "title": "Data 300",
-    "section": "Is Using AI Bad?",
-    "text": "Is Using AI Bad?\n\nYes/No/I don’t know"
+    "objectID": "lectures/3a.html#why-normalization",
+    "href": "lectures/3a.html#why-normalization",
+    "title": "Data Modeling",
+    "section": "Why Normalization?",
+    "text": "Why Normalization?\nNormalization organizes data to reduce:\n\nRepetition\nUpdate problems\nInsert problems\nDelete problems\nConfusing dependencies\n\n\nTransition to data quality. Explain that normalization helps prevent the same fact from being stored in multiple places."
   },
   {
-    "objectID": "lectures/1a.html#privacy-concerns-links",
-    "href": "lectures/1a.html#privacy-concerns-links",
-    "title": "Data 300",
-    "section": "Privacy Concerns Links",
-    "text": "Privacy Concerns Links\n\nOpenAI Says It’s Scanning Users’ ChatGPT Conversations and Reporting Content to the Police\nPrivacy in an AI Era: How Do We Protect Our Personal Information?"
+    "objectID": "lectures/3a.html#unnormalized-data-example",
+    "href": "lectures/3a.html#unnormalized-data-example",
+    "title": "Data Modeling",
+    "section": "Unnormalized Data Example",
+    "text": "Unnormalized Data Example\n\n\n\n\n\n\n\n\n\n\n\nstudent_id\nstudent_name\ncourse_1\ncourse_2\ninstructor_1\ninstructor_2\n\n\n\n\n101\nAna Rivera\nDatabase Systems\nStatistics\nDr. Kim\nDr. Patel\n\n\n102\nJamal Lee\nDatabase Systems\nProgramming\nDr. Kim\nDr. Gomez\n\n\n\nProblems:\n\nRepeating course columns\nHard to add a third course\nInstructor data is mixed with student data\n\n\nAsk students what happens if a student takes four courses. Then ask what happens if Dr. Kim’s name changes. This motivates normalization."
   },
   {
-    "objectID": "lectures/1a.html#labor-violations-links",
-    "href": "lectures/1a.html#labor-violations-links",
-    "title": "Data 300",
-    "section": "Labor Violations Links",
-    "text": "Labor Violations Links\n\nThe Emotional Labor Behind AI Intimacy\nHow thousands of ‘overworked, underpaid’ humans train Google’s AI to seem smart"
+    "objectID": "lectures/3a.html#first-normal-form",
+    "href": "lectures/3a.html#first-normal-form",
+    "title": "Data Modeling",
+    "section": "26. First Normal Form",
+    "text": "26. First Normal Form\nA table is in first normal form when:\n\nEach cell stores a single value\nThere are no repeating groups\nEach row can be uniquely identified\n\n\n\n\n\n\nflowchart LR\n  A[Repeating course columns] --&gt; B[One course per row]\n  B --&gt; C[Student table plus enrollment table]\n\n  classDef red fill:#D55E00,color:#FFFFFF,stroke:#111111,stroke-width:2px\n  classDef yellow fill:#F0E442,color:#000000,stroke:#111111,stroke-width:2px\n  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px\n\n  class A red\n  class B yellow\n  class C green\n\n\n\n\n\n\n\nExplain that 1NF removes repeated columns and multi-value cells. The goal is to make data row-based rather than column-repeated."
   },
   {
-    "objectID": "lectures/1a.html#affecting-communities-links",
-    "href": "lectures/1a.html#affecting-communities-links",
-    "title": "Data 300",
-    "section": "Affecting Communities Links",
-    "text": "Affecting Communities Links\n\nAI surveillance and data colonialism shape African conflicts\nAfrican workers are taking on Meta and the world should pay attention\n‘It’s destroyed me completely’: Kenyan moderators decry toll of training of AI models\nThe AI Industry Is Traumatizing Desperate Contractors in the Developing World for Pennies\nChatGPT advises women to ask for lower salaries, study finds\nThe Impact of the Use of AI on People with Disabilities"
+    "objectID": "lectures/3a.html#second-normal-form",
+    "href": "lectures/3a.html#second-normal-form",
+    "title": "Data Modeling",
+    "section": "Second Normal Form",
+    "text": "Second Normal Form\nA table is in second normal form when:\n\nIt is already in first normal form\nEvery non-key attribute depends on the entire primary key\n\nThis mainly matters when a table has a composite key.\n\nDefine partial dependency in plain language. If a field depends on only part of a composite key, it probably belongs in another table."
   },
   {
-    "objectID": "lectures/1a.html#ideas-and-learning-links",
-    "href": "lectures/1a.html#ideas-and-learning-links",
-    "title": "Data 300",
-    "section": "Ideas and Learning Links",
-    "text": "Ideas and Learning Links\n\nStudent’s Right to Refuse AI\nAI is homogenizing your thoughts\nThe Incuriosity Engine\nNew Junior Developers Can’t Actually Code"
+    "objectID": "lectures/3a.html#third-normal-form",
+    "href": "lectures/3a.html#third-normal-form",
+    "title": "Data Modeling",
+    "section": "Third Normal Form",
+    "text": "Third Normal Form\nA table is in third normal form when:\n\nIt is already in second normal form\nNon-key fields do not depend on other non-key fields\n\nExample problem:\nstudent_id, student_name, department_id, department_name\ndepartment_name depends on department_id, not directly on student_id.\n\nExplain transitive dependency as an indirect dependency. If department name depends on department ID, store department information in a Department table."
   },
   {
-    "objectID": "lectures/1a.html#environmental-costs",
-    "href": "lectures/1a.html#environmental-costs",
-    "title": "Data 300",
-    "section": "Environmental Costs",
-    "text": "Environmental Costs\n\n‘I can’t drink the water’ - life next to a US data centre"
-  },
-  {
-    "objectID": "lectures/2a.html#what-is-a-data-system",
-    "href": "lectures/2a.html#what-is-a-data-system",
-    "title": "Introduction",
-    "section": "What is a Data System?",
-    "text": "What is a Data System?\nA data system is a collection of interconnected components used to collect, store, process, and analyze data.\n\nInput: Raw data (logs, transactions, sensor readings).\nProcess: Transformation and cleaning.\nStorage: Databases or Data Lakes.\nOutput: Insights, reports, or machine learning models.\n\n\nThink of a data system like a water treatment plant. You have raw water (input), a filtration system (processing), a reservoir (storage), and tap water for consumption (output)."
-  },
-  {
-    "objectID": "lectures/2a.html#data-types-the-big-picture",
-    "href": "lectures/2a.html#data-types-the-big-picture",
-    "title": "Introduction",
-    "section": "Data Types: The Big Picture",
-    "text": "Data Types: The Big Picture\nData is categorized based on how much “organization” it has before it enters a system.\n\nStructured: Highly organized (e.g., Excel, SQL).\nSemi-structured: Organized but flexible (e.g., JSON, XML).\nUnstructured: No predefined model (e.g., Video, PDF, Audio).\n\n\nUnderstanding the format of your data determines what kind of database you need and how much work you have to do to clean it."
-  },
-  {
-    "objectID": "lectures/2a.html#structured-data",
-    "href": "lectures/2a.html#structured-data",
-    "title": "Introduction",
-    "section": "Structured Data",
-    "text": "Structured Data\n\nTabular (rows and columns).\nHighly organized.\nEasily searchable.\nExamples:\n\nCustomer names and addresses.\nTransaction amounts and dates.\nInventory counts.\n\n\n\nStructured data is the most common form of data handled by traditional businesses. It fits perfectly into spreadsheets and relational databases."
-  },
-  {
-    "objectID": "lectures/2a.html#semi-structured-data",
-    "href": "lectures/2a.html#semi-structured-data",
-    "title": "Introduction",
-    "section": "Semi-Structured Data",
-    "text": "Semi-Structured Data\n\nDoes not reside in a rigid grid.\nContains tags or markers to separate data elements.\nFlexible schema (can change easily).\nExamples:\n\nJSON: Used in web APIs.\nXML: Used in configuration files.\nCSV: Simple comma-separated values.\n\n\n\nSemi-structured data is the “middle ground.” It has some hierarchy and markers, but you can add new fields without rebuilding the whole table."
-  },
-  {
-    "objectID": "lectures/2a.html#unstructured-data",
-    "href": "lectures/2a.html#unstructured-data",
-    "title": "Introduction",
-    "section": "Unstructured Data",
-    "text": "Unstructured Data\n\nNo internal structure or predefined model.\nMakes up the vast majority of data generated today.\nRequires specialized tools (AI/ML) to extract meaning.\nExamples:\n\nEmails (the text part).\nImages and Videos.\nSocial media posts.\n\n\n\nThink of a photo. A computer just sees a bunch of pixels. It doesn’t know it’s a “cat” until an unstructured data processing tool (like an AI model) analyzes it."
-  },
-  {
-    "objectID": "lectures/2a.html#visualizing-data-hierarchy",
-    "href": "lectures/2a.html#visualizing-data-hierarchy",
-    "title": "Introduction",
-    "section": "Visualizing Data Hierarchy",
-    "text": "Visualizing Data Hierarchy\n\n\n\n\n\n%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%\ngraph TD\n    A[Data Types] --&gt; B[Structured]\n    A --&gt; C[Semi-Structured]\n    A --&gt; D[Unstructured]\n    B --&gt; B1[Tables/SQL]\n    C --&gt; C1[JSON/XML]\n    D --&gt; D1[Media/Text]\n\n\n\n\n\n\n\nThis diagram shows the hierarchy. As you move from top to bottom, the level of inherent organization decreases."
-  },
-  {
-    "objectID": "lectures/2a.html#activity-1-identify-the-type",
-    "href": "lectures/2a.html#activity-1-identify-the-type",
-    "title": "Introduction",
-    "section": "Activity 1: Identify the Type",
-    "text": "Activity 1: Identify the Type\nIdentify whether the following are Structured, Semi-Structured, or Unstructured:\n\nA .mp4 video file from a security camera.\nA .json file containing a user’s profile settings.\nA SQL table containing 1,000,000 rows of sales transactions.\nA collection of scanned handwritten notes.\nAn XML file used for configuration.\n\n\nTake 2 minutes to think about these. (Answers: 1. Unstructured, 2. Semi-structured, 3. Structured, 4. Unstructured, 5. Semi-structured)."
-  },
-  {
-    "objectID": "lectures/2a.html#relational-databases-rdbms",
-    "href": "lectures/2a.html#relational-databases-rdbms",
-    "title": "Introduction",
-    "section": "Relational Databases (RDBMS)",
-    "text": "Relational Databases (RDBMS)\nThe traditional way of storing structured data.\n\nCore Concept: Data is organized into tables.\nSchema: Rigid and predefined (must define columns before inserting data).\nRelationships: Tables are linked via “Keys” (Primary and Foreign keys).\nExample: PostgreSQL, MySQL, Oracle.\n\n\nIn a relational database, if you want to add a “Phone Number” column, you have to update the entire table structure first. This is called a “schema change.”"
-  },
-  {
-    "objectID": "lectures/2a.html#relational-properties-acid",
-    "href": "lectures/2a.html#relational-properties-acid",
-    "title": "Introduction",
-    "section": "Relational Properties: ACID",
-    "text": "Relational Properties: ACID\nTo ensure data integrity, RDBMS follow ACID properties:\n\nAtomicity: “All or nothing” transactions.\nConsistency: Data follows all rules (no broken links).\nIsolation: Transactions don’t interfere with each other.\nDurability: Once saved, it stays saved (even if power fails).\n\n\nACID is critical for banking. If you transfer $10, the money must leave your account AND arrive in the other account. It cannot do one without the other."
-  },
-  {
-    "objectID": "lectures/2a.html#non-relational-databases-nosql",
-    "href": "lectures/2a.html#non-relational-databases-nosql",
-    "title": "Introduction",
-    "section": "Non-Relational Databases (NoSQL)",
-    "text": "Non-Relational Databases (NoSQL)\nDesigned for modern, high-scale, and flexible data.\n\nCore Concept: Data is stored as documents, key-value pairs, or graphs.\nSchema: Dynamic/Flexible (no predefined structure required).\nScalability: Designed to scale “out” (adding more servers).\nExample: MongoDB (Document), Redis (Key-Value), Neo4j (Graph).\n\n\nNoSQL is the response to the “Big Data” explosion. When you have massive amounts of unstructured or semi-structured data, relational databases can struggle to scale."
-  },
-  {
-    "objectID": "lectures/2a.html#nosql-types",
-    "href": "lectures/2a.html#nosql-types",
-    "title": "Introduction",
-    "section": "NoSQL Types",
-    "text": "NoSQL Types\n\n\n\nType\nBest For\nExample\n\n\n\n\nDocument\nSemi-structured data\nMongoDB\n\n\nKey-Value\nFast caching/Session data\nRedis\n\n\nGraph\nComplex relationships\nNeo4j\n\n\nColumn-Family\nMassive scale/Analytical\nCassandra\n\n\n\n\nDifferent NoSQL types are specialized for different tasks. A graph database is perfect for a social network where you need to track “friend of a friend” connections."
-  },
-  {
-    "objectID": "lectures/2a.html#relational-vs.-non-relational",
-    "href": "lectures/2a.html#relational-vs.-non-relational",
-    "title": "Introduction",
-    "section": "Relational vs. Non-Relational",
-    "text": "Relational vs. Non-Relational\n\n\n\nFeature\nRelational (SQL)\nNon-Relational (NoSQL)\n\n\n\n\nSchema\nRigid / Predefined\nFlexible / Dynamic\n\n\nStructure\nTables (Rows/Cols)\nDocuments/Graphs/Key-Value\n\n\nScaling\nVertical (Bigger Server)\nHorizontal (More Servers)\n\n\nData Integrity\nVery High (ACID)\nVaries (BASE)\n\n\n\n\nIf your data structure is predictable and consistency is paramount (like finance), go SQL. If your data is changing fast and you need massive scale, go NoSQL."
-  },
-  {
-    "objectID": "lectures/2a.html#choosing-your-database",
-    "href": "lectures/2a.html#choosing-your-database",
-    "title": "Introduction",
-    "section": "Choosing Your Database",
-    "text": "Choosing Your Database\n\n\n\n\n\n%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%\ngraph TD\n    Start[Start Decision] --&gt; Schema{Fixed Schema?}\n    Schema -- Yes --&gt; Relational[Relational / SQL]\n    Schema -- No --&gt; Scale{Need massive scale?}\n    Scale -- Yes --&gt; NoSQL[Non-Relational / NoSQL]\n    Scale -- No --&gt; Semi[Semi-Structured / Document]\n\n\n\n\n\n\n\nA decision tree: If Schema is fixed \\(\\rightarrow\\) Relational. If Schema is NOT fixed \\(\\rightarrow\\) Check scale. If massive scale \\(\\rightarrow\\) NoSQL. If not massive scale \\(\\rightarrow\\) Document store."
-  },
-  {
-    "objectID": "lectures/2a.html#activity-2-the-architects-dilemma",
-    "href": "lectures/2a.html#activity-2-the-architects-dilemma",
-    "title": "Introduction",
-    "section": "Activity 2: The Architect’s Dilemma",
-    "text": "Activity 2: The Architect’s Dilemma\nScenario: You are building a new social media app like Instagram.\nRequirements:\n\nYou need to store user profiles (Name, Email, Password).\nYou need to store millions of high-resolution images.\nYou need to store a “Follower” graph (who follows whom).\n\nTask: Which database type (Relational or NoSQL) would you use for each requirement? Why?\n\nThis is a real-world scenario. Most big apps use a “Hybrid” approach. For example, SQL for user accounts and a NoSQL/Graph database for the social connections."
-  },
-  {
-    "objectID": "lectures/2a.html#data-pipelines-1",
-    "href": "lectures/2a.html#data-pipelines-1",
-    "title": "Introduction",
-    "section": "Data Pipelines",
-    "text": "Data Pipelines\nData doesn’t just sit there; it moves.\nDefinition: A sequence of data processing steps where a set of data is passed through a series of transformations.\nGoal: To move data from a source (where it’s created) to a destination (where it’s used).\n\nA pipeline is like a conveyor belt in a factory. Raw materials go in one end, and finished products come out the other."
-  },
-  {
-    "objectID": "lectures/2a.html#etl-vs.-elt",
-    "href": "lectures/2a.html#etl-vs.-elt",
-    "title": "Introduction",
-    "section": "ETL vs. ELT",
-    "text": "ETL vs. ELT\nThe two main ways to move data:\n\n\nETL\n(Extract, Transform, Load)\n\nExtract from source.\nTransform in a staging area (cleaning/filtering).\nLoad into the target database.\n\n\nELT\n(Extract, Load, Transform)\n\nExtract from source.\nLoad directly into the target (Data Lake).\nTransform inside the target database using its own power.\n\n\n\nETL was the standard for decades. ELT is becoming more popular because modern cloud warehouses (like Snowflake) are incredibly powerful at processing data once it’s inside."
-  },
-  {
-    "objectID": "lectures/2a.html#the-data-pipeline-workflow",
-    "href": "lectures/2a.html#the-data-pipeline-workflow",
-    "title": "Introduction",
-    "section": "The Data Pipeline Workflow",
-    "text": "The Data Pipeline Workflow\n\n\n\n\n\n%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%\ngraph LR\n    Source[Source Systems] --&gt; Ext[Extraction]\n    Ext --&gt; Trans[Transformation]\n    Trans --&gt; Load[Loading/Storage]\n    Load --&gt; Anal[Analytics/BI]\n\n\n\n\n\n\n\nThis shows the journey from the moment a user clicks a button on a website to the moment a CEO sees a chart on their dashboard. A linear flow: Source \\(\\rightarrow\\) Extraction \\(\\rightarrow\\) Transformation \\(\\rightarrow\\) Loading \\(\\rightarrow\\) Analytics."
-  },
-  {
-    "objectID": "lectures/2a.html#data-pipeline-components",
-    "href": "lectures/2a.html#data-pipeline-components",
-    "title": "Introduction",
-    "section": "Data Pipeline Components",
-    "text": "Data Pipeline Components\n\nSource: Where data originates (App logs, DBs, APIs).\nIngestion: The process of pulling data from the source.\nProcessing/Transformation: Cleaning, aggregating, or renaming fields.\nStorage: The final destination (Data Warehouse or Data Lake).\nOrchestration: The “brain” that schedules and monitors the steps.\n\n\nOrchestration is very important. If the “Extraction” step fails, the “Transformation” step shouldn’t try to run on old or broken data."
-  },
-  {
-    "objectID": "lectures/2a.html#activity-3-pipeline-mapping",
-    "href": "lectures/2a.html#activity-3-pipeline-mapping",
-    "title": "Introduction",
-    "section": "Activity 3: Pipeline Mapping",
-    "text": "Activity 3: Pipeline Mapping\nScenario: A weather station collects temperature data every minute, sends it to a server, cleans the data (removes errors), and stores it for a yearly report.\nTask:\nDraw (on paper or digitally) a simple diagram of this pipeline. Label your: 1. Source 2. Extraction 3. Transformation 4. Loading 5. Destination\n\nThis helps you visualize the flow. If the sensor sends a temperature of 999 degrees (an error), that’s where your “Transformation” step fixes the data."
+    "objectID": "lectures/3a.html#activity-normalize-a-table",
+    "href": "lectures/3a.html#activity-normalize-a-table",
+    "title": "Data Modeling",
+    "section": "Activity: Normalize a Table",
+    "text": "Activity: Normalize a Table\nStart with this table:\n\n\n\n\n\n\n\n\n\n\nstudent_id\nstudent_name\ncourse_id\ncourse_name\ninstructor_name\n\n\n\n\n101\nAna Rivera\nC101\nDatabases\nDr. Kim\n\n\n102\nJamal Lee\nC101\nDatabases\nDr. Kim\n\n\n101\nAna Rivera\nC202\nStatistics\nDr. Patel\n\n\n\nTask:\n\nIdentify repeated facts\nSplit the data into normalized tables\nAdd primary and foreign keys\n\n\nGive students 15 minutes. A possible solution includes Student, Course, Instructor, and Enrollment tables. Encourage students to explain why each table exists."
   }
 ]

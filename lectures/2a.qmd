@@ -1,6 +1,5 @@
 ---
-title: "Introduction"
-subtitle: "Data Systems"
+title: "Data Systems"
 format:
   revealjs:
     scrollable: true
@@ -19,6 +18,8 @@ filters:
   - reveal-auto-agenda
 
 editor: source
+
+order: 3
 ---
 
 

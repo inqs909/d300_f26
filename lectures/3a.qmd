@@ -1,0 +1,562 @@
+---
+title: "Data Modeling"
+format:
+  revealjs:
+    scrollable: true
+    navigation-mode: vertical
+    theme: [default, styles.scss]
+    controls-layout: bottom-right
+    controls-tutorial: true
+    incremental: false 
+    
+revealjs-plugins:
+  - pointer
+  - verticator
+  
+filters: 
+  - code-fullscreen
+  - reveal-auto-agenda
+
+editor: source
+
+order: 4
+---
+
+# Data Modeling
+
+## Data Modeling
+
+Data modeling is the process of describing how data is organized, connected, and constrained before building a database.
+
+
+::: {.notes}
+Welcome students and frame data modeling as the planning step before implementation. Emphasize that a good model reduces confusion, duplication, and future redesign.
+:::
+
+
+## Why Data Modeling Matters
+
+A data model helps teams agree on:
+
+- What data must be stored
+- How different concepts relate
+- Which rules protect data quality
+- How the database supports real questions
+
+::: {.notes}
+Ask students to imagine building a database without a plan. Use examples like duplicate customer records, missing orders, or unclear relationships between students and courses.
+:::
+
+
+## From Real World to Database
+
+Data modeling translates real-world objects and processes into database structures.
+
+```{mermaid}
+
+flowchart LR
+  A[Real-world process] --> B[Conceptual model]
+  B --> C[Logical model]
+  C --> D[Physical database]
+
+  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef orange fill:#E69F00,color:#000000,stroke:#111111,stroke-width:2px
+  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px
+  classDef purple fill:#CC79A7,color:#000000,stroke:#111111,stroke-width:2px
+
+  class A blue
+  class B orange
+  class C green
+  class D purple
+```
+
+::: {.notes}
+Explain that models become more detailed over time. Conceptual models focus on ideas, logical models focus on structure, and physical models focus on implementation details.
+:::
+
+
+## Three Levels of Data Models
+
+Conceptual model:
+
+- Big-picture view
+- Main entities and relationships
+
+Logical model:
+
+- Tables, fields, keys, and constraints
+
+Physical model:
+
+- Specific DBMS details, indexes, data types, and storage choices
+
+::: {.notes}
+Use this slide to separate planning from implementation. Students often jump straight to tables, but conceptual thinking helps them understand the domain first.
+:::
+
+
+## Entity-Relationship Diagrams
+
+An Entity-Relationship diagram, or ER diagram, visually represents:
+
+- Entities
+- Attributes
+- Relationships
+- Cardinality rules
+
+::: {.notes}
+Define ER diagrams as a communication tool. They help non-programmers and technical users discuss the structure of a database before writing SQL.
+:::
+
+
+## Entities
+
+An entity is a thing about which we want to store data.
+
+Examples:
+
+- Student
+- Course
+- Instructor
+- Enrollment
+- Product
+- Order
+
+::: {.notes}
+Emphasize that entities often become tables in a relational database. Ask students to name entities from a familiar system such as a library, store, or university.
+:::
+
+## Attributes
+
+An attribute is a fact or property stored about an entity.
+
+For a `Student` entity, attributes might include:
+
+- `student_id`
+- `first_name`
+- `last_name`
+- `email`
+- `major`
+
+::: {.notes}
+Point out that attributes often become columns. Encourage students to distinguish attributes from entities. For example, a student's name is usually an attribute, while student is the entity.
+:::
+
+
+## Activity: Identify Entities and Attributes
+
+Scenario: A college wants to track students, courses, instructors, departments, and course enrollments.
+
+List:
+
+- At least 3 entities
+- At least 2 attributes per entity
+
+::: {.notes}
+Give students 8 to 10 minutes. Walk around and check whether they are mixing up entities and attributes. Bring the class back by asking for one example entity and its attributes.
+:::
+
+## Relationships
+
+A relationship describes how entities are connected.
+
+Examples:
+
+- A student enrolls in a course
+- An instructor teaches a course
+- A department offers many courses
+- An order contains products
+
+::: {.notes}
+Explain that relationships are usually verbs or actions connecting nouns. Encourage students to write relationships as short sentences.
+:::
+
+
+## Cardinality
+
+Cardinality describes how many records can participate in a relationship.
+
+Common types:
+
+- One-to-one
+- One-to-many
+- Many-to-many
+
+::: {.notes}
+Introduce cardinality as the rules of participation. Use practical wording: one student can enroll in many courses; one course can have many students.
+:::
+
+
+## One-to-One Relationship
+
+A one-to-one relationship means one record in Entity A is associated with one record in Entity B.
+
+```{mermaid}
+
+erDiagram
+  PERSON ||--|| PASSPORT : has
+  PERSON {
+    int person_id
+    string full_name
+  }
+  PASSPORT {
+    int passport_id
+    string passport_number
+  }
+```
+
+::: {.notes}
+Explain that one-to-one relationships are less common than one-to-many. Ask students why person and passport might be separated, such as security or optional details.
+:::
+
+
+## One-to-Many Relationship
+
+A one-to-many relationship means one record in Entity A can be associated with many records in Entity B.
+
+```{mermaid}
+
+erDiagram
+  DEPARTMENT ||--o{ COURSE : offers
+  DEPARTMENT {
+    int department_id
+    string department_name
+  }
+  COURSE {
+    int course_id
+    string course_name
+  }
+```
+
+::: {.notes}
+State that one-to-many is very common in relational databases. The many side often contains a foreign key pointing back to the one side.
+:::
+
+
+## Many-to-Many Relationship
+
+A many-to-many relationship means many records in Entity A can connect to many records in Entity B.
+
+Example:
+
+- Many students can enroll in many courses
+- Many products can appear in many orders
+
+::: {.notes}
+Explain that many-to-many relationships cannot usually be implemented directly as two tables in a relational database. They need an associative table.
+:::
+
+---
+
+## Activity: Draw Cardinality
+
+For each statement, decide the cardinality:
+
+1. A department has many instructors.
+2. A student has one university ID card.
+3. A student enrolls in many courses, and a course has many students.
+4. A customer places many orders.
+
+Then sketch a simple ER diagram for each.
+
+::: {.notes}
+Give students 10 minutes. Encourage them to label relationships clearly. Afterward, review each statement and ask students how they knew the cardinality.
+:::
+
+
+## Resolving Many-to-Many Relationships
+
+Many-to-many relationships are usually resolved with a bridge table, also called an associative table.
+
+```{mermaid}
+
+flowchart LR
+  S[Student] --> E[Enrollment]
+  E --> C[Course]
+
+  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef orange fill:#E69F00,color:#000000,stroke:#111111,stroke-width:2px
+  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px
+
+  class S blue
+  class E orange
+  class C green
+```
+
+::: {.notes}
+Explain that Enrollment stores the connection between a student and a course. It can also store relationship-specific attributes such as enrollment date or grade.
+:::
+
+
+
+## Example ER Diagram: Course Enrollment
+
+```{mermaid}
+
+erDiagram
+  DEPARTMENT ||--o{ COURSE : offers
+  INSTRUCTOR ||--o{ COURSE : teaches
+  STUDENT ||--o{ ENROLLMENT : completes
+  COURSE ||--o{ ENROLLMENT : includes
+
+  DEPARTMENT {
+    int department_id
+    string department_name
+  }
+  INSTRUCTOR {
+    int instructor_id
+    string full_name
+  }
+  STUDENT {
+    int student_id
+    string full_name
+  }
+  COURSE {
+    int course_id
+    string course_name
+  }
+  ENROLLMENT {
+    int enrollment_id
+    date enrolled_on
+    string final_grade
+  }
+```
+
+::: {.notes}
+Walk through the diagram one relationship at a time. Ask students which table resolves the many-to-many relationship between students and courses.
+:::
+
+# Keys
+
+## Keys in Relational Databases
+
+Keys help identify records and connect tables.
+
+Important key types:
+
+- Primary key
+- Foreign key
+- Composite key
+- Candidate key
+
+::: {.notes}
+Transition from diagrams to implementation. Explain that keys are what make relationships enforceable in a relational database.
+:::
+
+
+## Primary Keys
+
+A primary key uniquely identifies each row in a table.
+
+A good primary key should be:
+
+- Unique
+- Not missing
+- Stable over time
+- Simple to reference
+
+::: {.notes}
+Explain that primary keys prevent ambiguity. Mention that IDs are often used because names and emails can change or repeat.
+:::
+
+---
+
+## Primary Key Example
+
+| student_id | first_name | last_name | email |
+|---:|---|---|---|
+| 101 | Ana | Rivera | ana@example.edu |
+| 102 | Jamal | Lee | jamal@example.edu |
+| 103 | Mei | Chen | mei@example.edu |
+
+`student_id` is the primary key because it uniquely identifies each student.
+
+::: {.notes}
+Ask students why first name or last name alone would not work as a primary key. Then ask whether email is always a safe choice.
+:::
+
+
+## Foreign Keys
+
+A foreign key is a field in one table that refers to the primary key in another table.
+
+Foreign keys are used to:
+
+- Connect related tables
+- Enforce valid relationships
+- Prevent orphan records
+
+::: {.notes}
+Use the phrase parent table and child table if helpful. Explain that a foreign key makes sure a course references a real department or an enrollment references a real student.
+:::
+
+
+## Primary and Foreign Keys Together
+
+```{mermaid}
+
+flowchart LR
+  D[Department table\ndepartment_id is primary key] --> C[Course table\ndepartment_id is foreign key]
+
+  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef orange fill:#E69F00,color:#000000,stroke:#111111,stroke-width:2px
+
+  class D blue
+  class C orange
+```
+
+::: {.notes}
+Point out that the same value can be a primary key in one table and a foreign key in another. The role depends on the table where the column appears.
+:::
+
+
+## Activity: Find the Keys
+
+Given these tables, identify the primary keys and foreign keys.
+
+`Student(student_id, first_name, last_name)`
+
+`Course(course_id, course_name, department_id)`
+
+`Enrollment(enrollment_id, student_id, course_id, enrolled_on)`
+
+Questions:
+
+- Which fields uniquely identify rows?
+- Which fields connect tables?
+- Which table resolves a many-to-many relationship?
+
+::: {.notes}
+Give students 8 minutes. Ask them to mark primary keys with PK and foreign keys with FK. Review that Enrollment connects Student and Course.
+:::
+
+
+## Composite Keys
+
+A composite key uses two or more columns together to uniquely identify a row.
+
+Example:
+
+`Enrollment(student_id, course_id, term)`
+
+Together, these fields can identify one student's enrollment in one course during one term.
+
+::: {.notes}
+Explain that composite keys are useful when no single field is enough. Also mention that some designers still add a separate enrollment_id for convenience.
+:::
+
+# Normalization
+
+## Why Normalization?
+
+Normalization organizes data to reduce:
+
+- Repetition
+- Update problems
+- Insert problems
+- Delete problems
+- Confusing dependencies
+
+::: {.notes}
+Transition to data quality. Explain that normalization helps prevent the same fact from being stored in multiple places.
+:::
+
+
+## Unnormalized Data Example
+
+| student_id | student_name | course_1 | course_2 | instructor_1 | instructor_2 |
+|---:|---|---|---|---|---|
+| 101 | Ana Rivera | Database Systems | Statistics | Dr. Kim | Dr. Patel |
+| 102 | Jamal Lee | Database Systems | Programming | Dr. Kim | Dr. Gomez |
+
+Problems:
+
+- Repeating course columns
+- Hard to add a third course
+- Instructor data is mixed with student data
+
+::: {.notes}
+Ask students what happens if a student takes four courses. Then ask what happens if Dr. Kim's name changes. This motivates normalization.
+:::
+
+
+## 26. First Normal Form
+
+A table is in first normal form when:
+
+- Each cell stores a single value
+- There are no repeating groups
+- Each row can be uniquely identified
+
+```{mermaid}
+
+flowchart LR
+  A[Repeating course columns] --> B[One course per row]
+  B --> C[Student table plus enrollment table]
+
+  classDef red fill:#D55E00,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef yellow fill:#F0E442,color:#000000,stroke:#111111,stroke-width:2px
+  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px
+
+  class A red
+  class B yellow
+  class C green
+```
+
+::: {.notes}
+Explain that 1NF removes repeated columns and multi-value cells. The goal is to make data row-based rather than column-repeated.
+:::
+
+
+## Second Normal Form
+
+A table is in second normal form when:
+
+- It is already in first normal form
+- Every non-key attribute depends on the entire primary key
+
+This mainly matters when a table has a composite key.
+
+::: {.notes}
+Define partial dependency in plain language. If a field depends on only part of a composite key, it probably belongs in another table.
+:::
+
+## Third Normal Form
+
+A table is in third normal form when:
+
+- It is already in second normal form
+- Non-key fields do not depend on other non-key fields
+
+Example problem:
+
+`student_id, student_name, department_id, department_name`
+
+`department_name` depends on `department_id`, not directly on `student_id`.
+
+::: {.notes}
+Explain transitive dependency as an indirect dependency. If department name depends on department ID, store department information in a Department table.
+:::
+
+
+## Activity: Normalize a Table
+
+Start with this table:
+
+| student_id | student_name | course_id | course_name | instructor_name |
+|---:|---|---|---|---|
+| 101 | Ana Rivera | C101 | Databases | Dr. Kim |
+| 102 | Jamal Lee | C101 | Databases | Dr. Kim |
+| 101 | Ana Rivera | C202 | Statistics | Dr. Patel |
+
+Task:
+
+- Identify repeated facts
+- Split the data into normalized tables
+- Add primary and foreign keys
+
+::: {.notes}
+Give students 15 minutes. A possible solution includes Student, Course, Instructor, and Enrollment tables. Encourage students to explain why each table exists.
+:::
+
+

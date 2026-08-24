@@ -13,7 +13,7 @@
 <link href="../site_libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
-  <title>Data 300 – Data Systems</title>
+  <title>Data 300 – Data Modeling</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -142,186 +142,91 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Data Systems</h1>
+  <h1 class="title">Data Modeling</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section class="slide level2">
+<section>
+<section id="data-modeling" class="title-slide slide level1 agenda-slide center">
+<h1>Data Modeling</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-active">
+<p>Data Modeling</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Keys</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Normalization</p>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="data-modeling-1" class="slide level2">
+<h2>Data Modeling</h2>
+<p>Data modeling is the process of describing how data is organized, connected, and constrained before building a database.</p>
+<aside class="notes">
+<p>Welcome students and frame data modeling as the planning step before implementation. Emphasize that a good model reduces confusion, duplication, and future redesign.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-data-modeling-matters" class="slide level2">
+<h2>Why Data Modeling Matters</h2>
+<p>A data model helps teams agree on:</p>
+<ul>
+<li>What data must be stored</li>
+<li>How different concepts relate</li>
+<li>Which rules protect data quality</li>
+<li>How the database supports real questions</li>
+</ul>
+<aside class="notes">
+<p>Ask students to imagine building a database without a plan. Use examples like duplicate customer records, missing orders, or unclear relationships between students and courses.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="from-real-world-to-database" class="slide level2">
+<h2>From Real World to Database</h2>
+<p>Data modeling translates real-world objects and processes into database structures.</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Real-world process] --&gt; B[Conceptual model]
+  B --&gt; C[Logical model]
+  C --&gt; D[Physical database]
 
-<aside class="notes">
-<p>Welcome everyone to the Introduction to Data Systems. Today, we will cover how data is structured, where it is stored, and how it moves through systems. Here is our roadmap for the session. We will move from the nature of data itself to the storage mechanisms and finally to the movement of data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section>
-<section id="data-systems" class="title-slide slide level1 agenda-slide center">
-<h1>Data Systems</h1>
-<div class="agenda">
-<ul>
-<li><div class="agenda-active">
-<p>Data Systems</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Databases</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Data Pipelines</p>
-</div></li>
-</ul>
-</div>
-</section>
-<section id="what-is-a-data-system" class="slide level2">
-<h2>What is a Data System?</h2>
-<p>A data system is a collection of interconnected components used to collect, store, process, and analyze data.</p>
-<ul>
-<li><strong>Input</strong>: Raw data (logs, transactions, sensor readings).</li>
-<li><strong>Process</strong>: Transformation and cleaning.</li>
-<li><strong>Storage</strong>: Databases or Data Lakes.</li>
-<li><strong>Output</strong>: Insights, reports, or machine learning models.</li>
-</ul>
-<aside class="notes">
-<p>Think of a data system like a water treatment plant. You have raw water (input), a filtration system (processing), a reservoir (storage), and tap water for consumption (output).</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="data-types-the-big-picture" class="slide level2">
-<h2>Data Types: The Big Picture</h2>
-<p>Data is categorized based on how much “organization” it has before it enters a system.</p>
-<ul>
-<li><strong>Structured</strong>: Highly organized (e.g., Excel, SQL).</li>
-<li><strong>Semi-structured</strong>: Organized but flexible (e.g., JSON, XML).</li>
-<li><strong>Unstructured</strong>: No predefined model (e.g., Video, PDF, Audio).</li>
-</ul>
-<aside class="notes">
-<p>Understanding the format of your data determines what kind of database you need and how much work you have to do to clean it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="structured-data" class="slide level2">
-<h2>Structured Data</h2>
-<ul>
-<li>Tabular (rows and columns).</li>
-<li>Highly organized.</li>
-<li>Easily searchable.</li>
-<li><strong>Examples</strong>:
-<ul>
-<li>Customer names and addresses.</li>
-<li>Transaction amounts and dates.</li>
-<li>Inventory counts.</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>Structured data is the most common form of data handled by traditional businesses. It fits perfectly into spreadsheets and relational databases.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="semi-structured-data" class="slide level2">
-<h2>Semi-Structured Data</h2>
-<ul>
-<li>Does not reside in a rigid grid.</li>
-<li>Contains tags or markers to separate data elements.</li>
-<li>Flexible schema (can change easily).</li>
-<li><strong>Examples</strong>:
-<ul>
-<li><strong>JSON</strong>: Used in web APIs.</li>
-<li><strong>XML</strong>: Used in configuration files.</li>
-<li><strong>CSV</strong>: Simple comma-separated values.</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>Semi-structured data is the “middle ground.” It has some hierarchy and markers, but you can add new fields without rebuilding the whole table.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="unstructured-data" class="slide level2">
-<h2>Unstructured Data</h2>
-<ul>
-<li>No internal structure or predefined model.</li>
-<li>Makes up the vast majority of data generated today.</li>
-<li>Requires specialized tools (AI/ML) to extract meaning.</li>
-<li><strong>Examples</strong>:
-<ul>
-<li>Emails (the text part).</li>
-<li>Images and Videos.</li>
-<li>Social media posts.</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>Think of a photo. A computer just sees a bunch of pixels. It doesn’t know it’s a “cat” until an unstructured data processing tool (like an AI model) analyzes it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="visualizing-data-hierarchy" class="slide level2">
-<h2>Visualizing Data Hierarchy</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%
-graph TD
-    A[Data Types] --&gt; B[Structured]
-    A --&gt; C[Semi-Structured]
-    A --&gt; D[Unstructured]
-    B --&gt; B1[Tables/SQL]
-    C --&gt; C1[JSON/XML]
-    D --&gt; D1[Media/Text]
+  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef orange fill:#E69F00,color:#000000,stroke:#111111,stroke-width:2px
+  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px
+  classDef purple fill:#CC79A7,color:#000000,stroke:#111111,stroke-width:2px
+
+  class A blue
+  class B orange
+  class C green
+  class D purple
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -329,7 +234,7 @@ graph TD
 </div>
 </div>
 <aside class="notes">
-<p>This diagram shows the hierarchy. As you move from top to bottom, the level of inherent organization decreases.</p>
+<p>Explain that models become more detailed over time. Conceptual models focus on ideas, logical models focus on structure, and physical models focus on implementation details.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -342,18 +247,381 @@ graph TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="activity-1-identify-the-type" class="slide level2 scrollable">
-<h2>Activity 1: Identify the Type</h2>
-<p><strong>Identify whether the following are Structured, Semi-Structured, or Unstructured:</strong></p>
-<ol type="1">
-<li>A <code>.mp4</code> video file from a security camera.</li>
-<li>A <code>.json</code> file containing a user’s profile settings.</li>
-<li>A SQL table containing 1,000,000 rows of sales transactions.</li>
-<li>A collection of scanned handwritten notes.</li>
-<li>An XML file used for configuration.</li>
-</ol>
+<section id="three-levels-of-data-models" class="slide level2">
+<h2>Three Levels of Data Models</h2>
+<p>Conceptual model:</p>
+<ul>
+<li>Big-picture view</li>
+<li>Main entities and relationships</li>
+</ul>
+<p>Logical model:</p>
+<ul>
+<li>Tables, fields, keys, and constraints</li>
+</ul>
+<p>Physical model:</p>
+<ul>
+<li>Specific DBMS details, indexes, data types, and storage choices</li>
+</ul>
 <aside class="notes">
-<p>Take 2 minutes to think about these. (Answers: 1. Unstructured, 2. Semi-structured, 3. Structured, 4. Unstructured, 5. Semi-structured).</p>
+<p>Use this slide to separate planning from implementation. Students often jump straight to tables, but conceptual thinking helps them understand the domain first.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="entity-relationship-diagrams" class="slide level2">
+<h2>Entity-Relationship Diagrams</h2>
+<p>An Entity-Relationship diagram, or ER diagram, visually represents:</p>
+<ul>
+<li>Entities</li>
+<li>Attributes</li>
+<li>Relationships</li>
+<li>Cardinality rules</li>
+</ul>
+<aside class="notes">
+<p>Define ER diagrams as a communication tool. They help non-programmers and technical users discuss the structure of a database before writing SQL.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="entities" class="slide level2">
+<h2>Entities</h2>
+<p>An entity is a thing about which we want to store data.</p>
+<p>Examples:</p>
+<ul>
+<li>Student</li>
+<li>Course</li>
+<li>Instructor</li>
+<li>Enrollment</li>
+<li>Product</li>
+<li>Order</li>
+</ul>
+<aside class="notes">
+<p>Emphasize that entities often become tables in a relational database. Ask students to name entities from a familiar system such as a library, store, or university.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="attributes" class="slide level2">
+<h2>Attributes</h2>
+<p>An attribute is a fact or property stored about an entity.</p>
+<p>For a <code>Student</code> entity, attributes might include:</p>
+<ul>
+<li><code>student_id</code></li>
+<li><code>first_name</code></li>
+<li><code>last_name</code></li>
+<li><code>email</code></li>
+<li><code>major</code></li>
+</ul>
+<aside class="notes">
+<p>Point out that attributes often become columns. Encourage students to distinguish attributes from entities. For example, a student’s name is usually an attribute, while student is the entity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-identify-entities-and-attributes" class="slide level2">
+<h2>Activity: Identify Entities and Attributes</h2>
+<p>Scenario: A college wants to track students, courses, instructors, departments, and course enrollments.</p>
+<p>List:</p>
+<ul>
+<li>At least 3 entities</li>
+<li>At least 2 attributes per entity</li>
+</ul>
+<aside class="notes">
+<p>Give students 8 to 10 minutes. Walk around and check whether they are mixing up entities and attributes. Bring the class back by asking for one example entity and its attributes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="relationships" class="slide level2">
+<h2>Relationships</h2>
+<p>A relationship describes how entities are connected.</p>
+<p>Examples:</p>
+<ul>
+<li>A student enrolls in a course</li>
+<li>An instructor teaches a course</li>
+<li>A department offers many courses</li>
+<li>An order contains products</li>
+</ul>
+<aside class="notes">
+<p>Explain that relationships are usually verbs or actions connecting nouns. Encourage students to write relationships as short sentences.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cardinality" class="slide level2">
+<h2>Cardinality</h2>
+<p>Cardinality describes how many records can participate in a relationship.</p>
+<p>Common types:</p>
+<ul>
+<li>One-to-one</li>
+<li>One-to-many</li>
+<li>Many-to-many</li>
+</ul>
+<aside class="notes">
+<p>Introduce cardinality as the rules of participation. Use practical wording: one student can enroll in many courses; one course can have many students.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="one-to-one-relationship" class="slide level2">
+<h2>One-to-One Relationship</h2>
+<p>A one-to-one relationship means one record in Entity A is associated with one record in Entity B.</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">erDiagram
+  PERSON ||--|| PASSPORT : has
+  PERSON {
+    int person_id
+    string full_name
+  }
+  PASSPORT {
+    int passport_id
+    string passport_number
+  }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Explain that one-to-one relationships are less common than one-to-many. Ask students why person and passport might be separated, such as security or optional details.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="one-to-many-relationship" class="slide level2">
+<h2>One-to-Many Relationship</h2>
+<p>A one-to-many relationship means one record in Entity A can be associated with many records in Entity B.</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">erDiagram
+  DEPARTMENT ||--o{ COURSE : offers
+  DEPARTMENT {
+    int department_id
+    string department_name
+  }
+  COURSE {
+    int course_id
+    string course_name
+  }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>State that one-to-many is very common in relational databases. The many side often contains a foreign key pointing back to the one side.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="many-to-many-relationship" class="slide level2">
+<h2>Many-to-Many Relationship</h2>
+<p>A many-to-many relationship means many records in Entity A can connect to many records in Entity B.</p>
+<p>Example:</p>
+<ul>
+<li>Many students can enroll in many courses</li>
+<li>Many products can appear in many orders</li>
+</ul>
+<aside class="notes">
+<p>Explain that many-to-many relationships cannot usually be implemented directly as two tables in a relational database. They need an associative table.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-draw-cardinality" class="slide level2 scrollable">
+<h2>Activity: Draw Cardinality</h2>
+<p>For each statement, decide the cardinality:</p>
+<ol type="1">
+<li>A department has many instructors.</li>
+<li>A student has one university ID card.</li>
+<li>A student enrolls in many courses, and a course has many students.</li>
+<li>A customer places many orders.</li>
+</ol>
+<p>Then sketch a simple ER diagram for each.</p>
+<aside class="notes">
+<p>Give students 10 minutes. Encourage them to label relationships clearly. Afterward, review each statement and ask students how they knew the cardinality.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="resolving-many-to-many-relationships" class="slide level2">
+<h2>Resolving Many-to-Many Relationships</h2>
+<p>Many-to-many relationships are usually resolved with a bridge table, also called an associative table.</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  S[Student] --&gt; E[Enrollment]
+  E --&gt; C[Course]
+
+  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef orange fill:#E69F00,color:#000000,stroke:#111111,stroke-width:2px
+  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px
+
+  class S blue
+  class E orange
+  class C green
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Explain that Enrollment stores the connection between a student and a course. It can also store relationship-specific attributes such as enrollment date or grade.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-er-diagram-course-enrollment" class="slide level2">
+<h2>Example ER Diagram: Course Enrollment</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">erDiagram
+  DEPARTMENT ||--o{ COURSE : offers
+  INSTRUCTOR ||--o{ COURSE : teaches
+  STUDENT ||--o{ ENROLLMENT : completes
+  COURSE ||--o{ ENROLLMENT : includes
+
+  DEPARTMENT {
+    int department_id
+    string department_name
+  }
+  INSTRUCTOR {
+    int instructor_id
+    string full_name
+  }
+  STUDENT {
+    int student_id
+    string full_name
+  }
+  COURSE {
+    int course_id
+    string course_name
+  }
+  ENROLLMENT {
+    int enrollment_id
+    date enrolled_on
+    string final_grade
+  }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Walk through the diagram one relationship at a time. Ask students which table resolves the many-to-many relationship between students and courses.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -367,33 +635,34 @@ graph TD
       }</style></aside>
 </section></section>
 <section>
-<section id="databases" class="title-slide slide level1 agenda-slide center">
-<h1>Databases</h1>
+<section id="keys" class="title-slide slide level1 agenda-slide center">
+<h1>Keys</h1>
 <div class="agenda">
 <ul>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>Data Systems</p>
+<p>Data Modeling</p>
 </div></li>
 <li><div class="agenda-active">
-<p>Databases</p>
+<p>Keys</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>Data Pipelines</p>
+<p>Normalization</p>
 </div></li>
 </ul>
 </div>
 </section>
-<section id="relational-databases-rdbms" class="slide level2">
-<h2>Relational Databases (RDBMS)</h2>
-<p>The traditional way of storing structured data.</p>
+<section id="keys-in-relational-databases" class="slide level2">
+<h2>Keys in Relational Databases</h2>
+<p>Keys help identify records and connect tables.</p>
+<p>Important key types:</p>
 <ul>
-<li><strong>Core Concept</strong>: Data is organized into tables.</li>
-<li><strong>Schema</strong>: Rigid and predefined (must define columns before inserting data).</li>
-<li><strong>Relationships</strong>: Tables are linked via “Keys” (Primary and Foreign keys).</li>
-<li><strong>Example</strong>: PostgreSQL, MySQL, Oracle.</li>
+<li>Primary key</li>
+<li>Foreign key</li>
+<li>Composite key</li>
+<li>Candidate key</li>
 </ul>
 <aside class="notes">
-<p>In a relational database, if you want to add a “Phone Number” column, you have to update the entire table structure first. This is called a “schema change.”</p>
+<p>Transition from diagrams to implementation. Explain that keys are what make relationships enforceable in a relational database.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -406,40 +675,18 @@ graph TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="relational-properties-acid" class="slide level2 scrollable">
-<h2>Relational Properties: ACID</h2>
-<p>To ensure data integrity, RDBMS follow <strong>ACID</strong> properties:</p>
-<ol type="1">
-<li><strong>Atomicity</strong>: “All or nothing” transactions.</li>
-<li><strong>Consistency</strong>: Data follows all rules (no broken links).</li>
-<li><strong>Isolation</strong>: Transactions don’t interfere with each other.</li>
-<li><strong>Durability</strong>: Once saved, it stays saved (even if power fails).</li>
-</ol>
-<aside class="notes">
-<p>ACID is critical for banking. If you transfer $10, the money must leave your account AND arrive in the other account. It cannot do one without the other.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="non-relational-databases-nosql" class="slide level2">
-<h2>Non-Relational Databases (NoSQL)</h2>
-<p>Designed for modern, high-scale, and flexible data.</p>
+<section id="primary-keys" class="slide level2">
+<h2>Primary Keys</h2>
+<p>A primary key uniquely identifies each row in a table.</p>
+<p>A good primary key should be:</p>
 <ul>
-<li><strong>Core Concept</strong>: Data is stored as documents, key-value pairs, or graphs.</li>
-<li><strong>Schema</strong>: Dynamic/Flexible (no predefined structure required).</li>
-<li><strong>Scalability</strong>: Designed to scale “out” (adding more servers).</li>
-<li><strong>Example</strong>: MongoDB (Document), Redis (Key-Value), Neo4j (Graph).</li>
+<li>Unique</li>
+<li>Not missing</li>
+<li>Stable over time</li>
+<li>Simple to reference</li>
 </ul>
 <aside class="notes">
-<p>NoSQL is the response to the “Big Data” explosion. When you have massive amounts of unstructured or semi-structured data, relational databases can struggle to scale.</p>
+<p>Explain that primary keys prevent ambiguity. Mention that IDs are often used because names and emails can change or repeat.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -452,41 +699,41 @@ graph TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="nosql-types" class="slide level2">
-<h2>NoSQL Types</h2>
+<section id="primary-key-example" class="slide level2">
+<h2>Primary Key Example</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th>Type</th>
-<th>Best For</th>
-<th>Example</th>
+<th style="text-align: right;">student_id</th>
+<th>first_name</th>
+<th>last_name</th>
+<th>email</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Document</strong></td>
-<td>Semi-structured data</td>
-<td>MongoDB</td>
+<td style="text-align: right;">101</td>
+<td>Ana</td>
+<td>Rivera</td>
+<td>ana@example.edu</td>
 </tr>
 <tr class="even">
-<td><strong>Key-Value</strong></td>
-<td>Fast caching/Session data</td>
-<td>Redis</td>
+<td style="text-align: right;">102</td>
+<td>Jamal</td>
+<td>Lee</td>
+<td>jamal@example.edu</td>
 </tr>
 <tr class="odd">
-<td><strong>Graph</strong></td>
-<td>Complex relationships</td>
-<td>Neo4j</td>
-</tr>
-<tr class="even">
-<td><strong>Column-Family</strong></td>
-<td>Massive scale/Analytical</td>
-<td>Cassandra</td>
+<td style="text-align: right;">103</td>
+<td>Mei</td>
+<td>Chen</td>
+<td>mei@example.edu</td>
 </tr>
 </tbody>
 </table>
+<p><code>student_id</code> is the primary key because it uniquely identifies each student.</p>
 <aside class="notes">
-<p>Different NoSQL types are specialized for different tasks. A graph database is perfect for a social network where you need to track “friend of a friend” connections.</p>
+<p>Ask students why first name or last name alone would not work as a primary key. Then ask whether email is always a safe choice.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -499,41 +746,17 @@ graph TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="relational-vs.-non-relational" class="slide level2">
-<h2>Relational vs.&nbsp;Non-Relational</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Feature</th>
-<th>Relational (SQL)</th>
-<th>Non-Relational (NoSQL)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Schema</strong></td>
-<td>Rigid / Predefined</td>
-<td>Flexible / Dynamic</td>
-</tr>
-<tr class="even">
-<td><strong>Structure</strong></td>
-<td>Tables (Rows/Cols)</td>
-<td>Documents/Graphs/Key-Value</td>
-</tr>
-<tr class="odd">
-<td><strong>Scaling</strong></td>
-<td>Vertical (Bigger Server)</td>
-<td>Horizontal (More Servers)</td>
-</tr>
-<tr class="even">
-<td><strong>Data Integrity</strong></td>
-<td>Very High (ACID)</td>
-<td>Varies (BASE)</td>
-</tr>
-</tbody>
-</table>
+<section id="foreign-keys" class="slide level2">
+<h2>Foreign Keys</h2>
+<p>A foreign key is a field in one table that refers to the primary key in another table.</p>
+<p>Foreign keys are used to:</p>
+<ul>
+<li>Connect related tables</li>
+<li>Enforce valid relationships</li>
+<li>Prevent orphan records</li>
+</ul>
 <aside class="notes">
-<p>If your data structure is predictable and consistency is paramount (like finance), go SQL. If your data is changing fast and you need massive scale, go NoSQL.</p>
+<p>Use the phrase parent table and child table if helpful. Explain that a foreign key makes sure a course references a real department or an enrollment references a real student.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -546,20 +769,21 @@ graph TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="choosing-your-database" class="slide level2">
-<h2>Choosing Your Database</h2>
+<section id="primary-and-foreign-keys-together" class="slide level2">
+<h2>Primary and Foreign Keys Together</h2>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%
-graph TD
-    Start[Start Decision] --&gt; Schema{Fixed Schema?}
-    Schema -- Yes --&gt; Relational[Relational / SQL]
-    Schema -- No --&gt; Scale{Need massive scale?}
-    Scale -- Yes --&gt; NoSQL[Non-Relational / NoSQL]
-    Scale -- No --&gt; Semi[Semi-Structured / Document]
+<pre class="mermaid mermaid-js">flowchart LR
+  D[Department table\ndepartment_id is primary key] --&gt; C[Course table\ndepartment_id is foreign key]
+
+  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef orange fill:#E69F00,color:#000000,stroke:#111111,stroke-width:2px
+
+  class D blue
+  class C orange
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -567,7 +791,7 @@ graph TD
 </div>
 </div>
 <aside class="notes">
-<p>A decision tree: If Schema is fixed <span class="math inline">\(\rightarrow\)</span> Relational. If Schema is NOT fixed <span class="math inline">\(\rightarrow\)</span> Check scale. If massive scale <span class="math inline">\(\rightarrow\)</span> NoSQL. If not massive scale <span class="math inline">\(\rightarrow\)</span> Document store.</p>
+<p>Point out that the same value can be a primary key in one table and a foreign key in another. The role depends on the table where the column appears.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -580,18 +804,40 @@ graph TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="activity-2-the-architects-dilemma" class="slide level2">
-<h2>Activity 2: The Architect’s Dilemma</h2>
-<p><strong>Scenario:</strong> You are building a new social media app like Instagram.</p>
-<p><strong>Requirements:</strong></p>
+<section id="activity-find-the-keys" class="slide level2">
+<h2>Activity: Find the Keys</h2>
+<p>Given these tables, identify the primary keys and foreign keys.</p>
+<p><code>Student(student_id, first_name, last_name)</code></p>
+<p><code>Course(course_id, course_name, department_id)</code></p>
+<p><code>Enrollment(enrollment_id, student_id, course_id, enrolled_on)</code></p>
+<p>Questions:</p>
 <ul>
-<li>You need to store user profiles (Name, Email, Password).</li>
-<li>You need to store millions of high-resolution images.</li>
-<li>You need to store a “Follower” graph (who follows whom).</li>
+<li>Which fields uniquely identify rows?</li>
+<li>Which fields connect tables?</li>
+<li>Which table resolves a many-to-many relationship?</li>
 </ul>
-<p><strong>Task:</strong> Which database type (Relational or NoSQL) would you use for each requirement? Why?</p>
 <aside class="notes">
-<p>This is a real-world scenario. Most big apps use a “Hybrid” approach. For example, SQL for user accounts and a NoSQL/Graph database for the social connections.</p>
+<p>Give students 8 minutes. Ask them to mark primary keys with PK and foreign keys with FK. Review that Enrollment connects Student and Course.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="composite-keys" class="slide level2">
+<h2>Composite Keys</h2>
+<p>A composite key uses two or more columns together to uniquely identify a row.</p>
+<p>Example:</p>
+<p><code>Enrollment(student_id, course_id, term)</code></p>
+<p>Together, these fields can identify one student’s enrollment in one course during one term.</p>
+<aside class="notes">
+<p>Explain that composite keys are useful when no single field is enough. Also mention that some designers still add a separate enrollment_id for convenience.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -605,29 +851,34 @@ graph TD
       }</style></aside>
 </section></section>
 <section>
-<section id="data-pipelines" class="title-slide slide level1 agenda-slide center">
-<h1>Data Pipelines</h1>
+<section id="normalization" class="title-slide slide level1 agenda-slide center">
+<h1>Normalization</h1>
 <div class="agenda">
 <ul>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>Data Systems</p>
+<p>Data Modeling</p>
 </div></li>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>Databases</p>
+<p>Keys</p>
 </div></li>
 <li><div class="agenda-active">
-<p>Data Pipelines</p>
+<p>Normalization</p>
 </div></li>
 </ul>
 </div>
 </section>
-<section id="data-pipelines-1" class="slide level2">
-<h2>Data Pipelines</h2>
-<p>Data doesn’t just sit there; it moves.</p>
-<p><strong>Definition:</strong> A sequence of data processing steps where a set of data is passed through a series of transformations.</p>
-<p><strong>Goal:</strong> To move data from a source (where it’s created) to a destination (where it’s used).</p>
+<section id="why-normalization" class="slide level2">
+<h2>Why Normalization?</h2>
+<p>Normalization organizes data to reduce:</p>
+<ul>
+<li>Repetition</li>
+<li>Update problems</li>
+<li>Insert problems</li>
+<li>Delete problems</li>
+<li>Confusing dependencies</li>
+</ul>
 <aside class="notes">
-<p>A pipeline is like a conveyor belt in a factory. Raw materials go in one end, and finished products come out the other.</p>
+<p>Transition to data quality. Explain that normalization helps prevent the same fact from being stored in multiple places.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -640,29 +891,54 @@ graph TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="etl-vs.-elt" class="slide level2 scrollable">
-<h2>ETL vs.&nbsp;ELT</h2>
-<p>The two main ways to move data:</p>
-<div class="columns">
-<div class="column">
-<p><strong>ETL</strong></p>
-<p>(Extract, Transform, Load)</p>
-<ol type="1">
-<li>Extract from source.</li>
-<li>Transform in a staging area (cleaning/filtering).</li>
-<li>Load into the target database.</li>
-</ol>
-</div><div class="column">
-<p><strong>ELT</strong></p>
-<p>(Extract, Load, Transform)</p>
-<ol type="1">
-<li>Extract from source.</li>
-<li>Load directly into the target (Data Lake).</li>
-<li>Transform inside the target database using its own power.</li>
-</ol>
-</div></div>
+<section id="unnormalized-data-example" class="slide level2">
+<h2>Unnormalized Data Example</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">student_id</th>
+<th>student_name</th>
+<th>course_1</th>
+<th>course_2</th>
+<th>instructor_1</th>
+<th>instructor_2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">101</td>
+<td>Ana Rivera</td>
+<td>Database Systems</td>
+<td>Statistics</td>
+<td>Dr.&nbsp;Kim</td>
+<td>Dr.&nbsp;Patel</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">102</td>
+<td>Jamal Lee</td>
+<td>Database Systems</td>
+<td>Programming</td>
+<td>Dr.&nbsp;Kim</td>
+<td>Dr.&nbsp;Gomez</td>
+</tr>
+</tbody>
+</table>
+<p>Problems:</p>
+<ul>
+<li>Repeating course columns</li>
+<li>Hard to add a third course</li>
+<li>Instructor data is mixed with student data</li>
+</ul>
 <aside class="notes">
-<p>ETL was the standard for decades. ELT is becoming more popular because modern cloud warehouses (like Snowflake) are incredibly powerful at processing data once it’s inside.</p>
+<p>Ask students what happens if a student takes four courses. Then ask what happens if Dr.&nbsp;Kim’s name changes. This motivates normalization.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -675,19 +951,30 @@ graph TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-data-pipeline-workflow" class="slide level2">
-<h2>The Data Pipeline Workflow</h2>
+<section id="first-normal-form" class="slide level2">
+<h2>26. First Normal Form</h2>
+<p>A table is in first normal form when:</p>
+<ul>
+<li>Each cell stores a single value</li>
+<li>There are no repeating groups</li>
+<li>Each row can be uniquely identified</li>
+</ul>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%
-graph LR
-    Source[Source Systems] --&gt; Ext[Extraction]
-    Ext --&gt; Trans[Transformation]
-    Trans --&gt; Load[Loading/Storage]
-    Load --&gt; Anal[Analytics/BI]
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Repeating course columns] --&gt; B[One course per row]
+  B --&gt; C[Student table plus enrollment table]
+
+  classDef red fill:#D55E00,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef yellow fill:#F0E442,color:#000000,stroke:#111111,stroke-width:2px
+  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px
+
+  class A red
+  class B yellow
+  class C green
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -695,7 +982,7 @@ graph LR
 </div>
 </div>
 <aside class="notes">
-<p>This shows the journey from the moment a user clicks a button on a website to the moment a CEO sees a chart on their dashboard. A linear flow: Source <span class="math inline">\(\rightarrow\)</span> Extraction <span class="math inline">\(\rightarrow\)</span> Transformation <span class="math inline">\(\rightarrow\)</span> Loading <span class="math inline">\(\rightarrow\)</span> Analytics.</p>
+<p>Explain that 1NF removes repeated columns and multi-value cells. The goal is to make data row-based rather than column-repeated.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -708,17 +995,16 @@ graph LR
           display:block!important;
       }</style></aside>
 </section>
-<section id="data-pipeline-components" class="slide level2 scrollable">
-<h2>Data Pipeline Components</h2>
-<ol type="1">
-<li><strong>Source</strong>: Where data originates (App logs, DBs, APIs).</li>
-<li><strong>Ingestion</strong>: The process of pulling data from the source.</li>
-<li><strong>Processing/Transformation</strong>: Cleaning, aggregating, or renaming fields.</li>
-<li><strong>Storage</strong>: The final destination (Data Warehouse or Data Lake).</li>
-<li><strong>Orchestration</strong>: The “brain” that schedules and monitors the steps.</li>
-</ol>
+<section id="second-normal-form" class="slide level2">
+<h2>Second Normal Form</h2>
+<p>A table is in second normal form when:</p>
+<ul>
+<li>It is already in first normal form</li>
+<li>Every non-key attribute depends on the entire primary key</li>
+</ul>
+<p>This mainly matters when a table has a composite key.</p>
 <aside class="notes">
-<p>Orchestration is very important. If the “Extraction” step fails, the “Transformation” step shouldn’t try to run on old or broken data.</p>
+<p>Define partial dependency in plain language. If a field depends on only part of a composite key, it probably belongs in another table.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -731,13 +1017,82 @@ graph LR
           display:block!important;
       }</style></aside>
 </section>
-<section id="activity-3-pipeline-mapping" class="slide level2">
-<h2>Activity 3: Pipeline Mapping</h2>
-<p><strong>Scenario:</strong> A weather station collects temperature data every minute, sends it to a server, cleans the data (removes errors), and stores it for a yearly report.</p>
-<p><strong>Task:</strong></p>
-<p>Draw (on paper or digitally) a simple diagram of this pipeline. Label your: 1. Source 2. Extraction 3. Transformation 4. Loading 5. Destination</p>
+<section id="third-normal-form" class="slide level2">
+<h2>Third Normal Form</h2>
+<p>A table is in third normal form when:</p>
+<ul>
+<li>It is already in second normal form</li>
+<li>Non-key fields do not depend on other non-key fields</li>
+</ul>
+<p>Example problem:</p>
+<p><code>student_id, student_name, department_id, department_name</code></p>
+<p><code>department_name</code> depends on <code>department_id</code>, not directly on <code>student_id</code>.</p>
 <aside class="notes">
-<p>This helps you visualize the flow. If the sensor sends a temperature of 999 degrees (an error), that’s where your “Transformation” step fixes the data.</p>
+<p>Explain transitive dependency as an indirect dependency. If department name depends on department ID, store department information in a Department table.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-normalize-a-table" class="slide level2">
+<h2>Activity: Normalize a Table</h2>
+<p>Start with this table:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">student_id</th>
+<th>student_name</th>
+<th>course_id</th>
+<th>course_name</th>
+<th>instructor_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">101</td>
+<td>Ana Rivera</td>
+<td>C101</td>
+<td>Databases</td>
+<td>Dr.&nbsp;Kim</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">102</td>
+<td>Jamal Lee</td>
+<td>C101</td>
+<td>Databases</td>
+<td>Dr.&nbsp;Kim</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">101</td>
+<td>Ana Rivera</td>
+<td>C202</td>
+<td>Statistics</td>
+<td>Dr.&nbsp;Patel</td>
+</tr>
+</tbody>
+</table>
+<p>Task:</p>
+<ul>
+<li>Identify repeated facts</li>
+<li>Split the data into normalized tables</li>
+<li>Add primary and foreign keys</li>
+</ul>
+<aside class="notes">
+<p>Give students 15 minutes. A possible solution includes Student, Course, Instructor, and Enrollment tables. Encourage students to explain why each table exists.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
