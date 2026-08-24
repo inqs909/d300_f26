@@ -76,8 +76,8 @@ order: 1
 
 ## Tools
 
-[SQLite](https://sqlite.org/index.html)
-[MongoDB](https://www.mongodb.com/)
+- [SQLite](https://sqlite.org/index.html)
+- [MongoDB](https://www.mongodb.com/)
 
 ## IDE
 
