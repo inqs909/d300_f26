@@ -1,0 +1,123 @@
+---
+title: "Designing a Data System"
+format: html
+editor: source
+---
+
+## Overview
+
+In this assignment, you will act as a data systems analyst for **CampusLearn**, a new online learning platform. Your team must identify the types of data the platform generates, select appropriate storage technologies, and design a data pipeline that supports a weekly instructor dashboard.
+
+Working in a group of 2-3 members. Submit one completed assignment per team.
+
+## Scenario
+
+CampusLearn collects the following data:
+
+1. **Student accounts and enrollments:** student ID, name, email, course ID, enrollment date, and enrollment status.
+2. **Activity events:** JSON records created whenever a student opens a lesson, submits a quiz, or clicks a course link.
+3. **Lecture recordings:** video files uploaded by instructors.
+4. **Course connections:** relationships among courses, including prerequisites, corequisites, and recommended next courses.
+5. **Login sessions:** a session ID and expiration time that must be retrieved very quickly.
+
+Each week, CampusLearn must create an instructor dashboard showing student participation, completed activities, and students who may need assistance. Data arrives continuously, but the dashboard is refreshed every Monday morning.
+
+## Part 1: Classify the data
+
+For each data source, classify it as **structured**, **semi-structured**, or **unstructured**. Briefly justify each classification using a characteristic from the lecture.
+
+| Data source | Classification | Justification |
+|---|---|---|
+| Student accounts and enrollments |  |  |
+| JSON activity events |  |  |
+| Lecture recordings |  |  |
+| Course connections |  |  |
+| Login sessions |  |  |
+
+Then answer the following question in 2–3 sentences:
+
+**Why does the data type matter when deciding how the data should be stored or processed?**
+
+
+## Part 3: Select storage technologies
+
+Recommend a storage approach for each requirement. Choose from the technologies discussed in the lecture:
+
+- Relational database
+- Document database
+- Key-value database
+- Graph database
+- Column-family database
+- Data lake
+
+You may recommend more than one technology when needed, but explain the role of each one.
+
+| Requirement | Recommended storage approach | Evidence-based justification |
+|---|---|---|
+| Student accounts and enrollments |  | Consider schema, relationships, and integrity. |
+| JSON activity events |  | Consider schema flexibility and scale. |
+| Lecture recordings |  | Consider the data's lack of a predefined model. |
+| Course prerequisites and recommendations |  | Consider complex relationships. |
+| Login sessions |  | Consider fast retrieval by a unique key. |
+
+### ACID checkpoint
+
+A student enrolls in a course with one remaining seat. The system must add the enrollment and reduce the number of available seats from one to zero.
+
+1. Which ACID property ensures that both changes succeed together or neither change occurs?
+2. Explain why this property matters in this situation.
+
+
+
+## Part 4: Design the dashboard pipeline
+
+CampusLearn needs a reliable pipeline to refresh the instructor dashboard every Monday at 6:00 a.m.
+
+### Step A: Choose ETL or ELT
+
+Choose **ETL** or **ELT** for the dashboard workflow. In 3–5 sentences, defend your choice. Your response must state where transformation occurs and identify one advantage of your chosen workflow for this scenario.
+
+### Step B: Map the pipeline
+
+Complete the following pipeline plan. Include at least **two source systems** and at least **three specific transformations**.
+
+| Pipeline component | Your design |
+|---|---|
+| Source(s) |  |
+| Ingestion/extraction |  |
+| Processing/transformation |  |
+| Loading/storage destination |  |
+| Output |  |
+| Orchestration |  |
+
+Your transformations might address missing values, duplicate events, invalid timestamps, inconsistent field names, or weekly participation totals.
+
+### Step C: Represent the data flow
+
+Draw the pipeline using the boxes below, either on paper or with a digital diagram. Add details to each box and add another source box if needed.
+
+```{mermaid}
+#| fig-alt: "A data pipeline template connecting source systems to ingestion, transformation, storage, and an instructor dashboard."
+flowchart LR
+    A[Source systems] --> B[Ingestion]
+    B --> C[Transformation]
+    C --> D[Storage]
+    D --> E[Instructor dashboard]
+```
+
+### Step D: Plan for a failure
+
+Suppose the activity-event extraction fails at 5:30 a.m. on Monday. In 2–3 sentences, explain what the orchestration component should do. Address both the failed task and the downstream dashboard refresh.
+
+## Part 5: Final recommendation
+
+Write a 4–6 sentence recommendation to the CampusLearn project manager. Summarize:
+
+- why the system should use more than one storage technology;
+- which technology is most important for data integrity;
+- whether the dashboard pipeline should use ETL or ELT; and
+- one tradeoff or limitation of your design.
+
+## Submission
+
+Only submit one HTML document per group in CANVAS. 

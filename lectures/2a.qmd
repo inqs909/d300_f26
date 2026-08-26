@@ -85,6 +85,27 @@ Structured data is the most common form of data handled by traditional businesse
 Semi-structured data is the "middle ground." It has some hierarchy and markers, but you can add new fields without rebuilding the whole table.
 :::
 
+## JSON Example
+
+```json
+{
+  "customers": [
+    {
+      "customer_id": 101,
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "city": "Phoenix"
+    },
+    {
+      "customer_id": 102,
+      "name": "Brian Smith",
+      "email": "brian@example.com",
+      "phone": "555-123-4567"
+    }
+  ]
+}
+```
+
 ## Unstructured Data
 
 * No internal structure or predefined model.

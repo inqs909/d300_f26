@@ -1,0 +1,85 @@
+---
+title: "Project"
+date: 9/7/26
+editor: source
+format: 
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: true
+    code-tools: true
+    code-line-numbers: true
+    embed-resources: true
+draft: false
+---
+
+## Description
+
+Imagine that you work for a company that currently relies on SQLite to store, manage, and access its data. As the organization grows, its data needs have changed, and management is considering whether the current database system is still the best option.
+
+You have been tasked with researching and evaluating a new DBMS that was not used in this course. Your goal is to determine whether this proposed system could provide advantages over the company's current DBMS.
+
+For this project, you will explore a Database Management System (DBMS) 
+
+- Select a new DBMS
+- Create or import a database
+- Run database operations
+- Compare it with the DBMS used in class
+- Submit a written report
+
+## Potential DBMS
+
+- MySQL Community Edition
+- PostgreSQL
+- MariaDB Commuinity Server
+- DuckDB
+- Neo4j Community Edition
+
+I recommend searching job posts and see what kind of DBMS they require. You may also see what other data science professionals recommend in learning. You may also create a data pipeline for a topic of interest.
+
+
+## Report
+
+Create a final report demonstrating what you have accomplished during the semester. The report should highlight the following components (similar to the presentation):
+
+- DBMS chosen.
+- Executive summary of findings and recommendation 
+- Appendix
+    - Code (Add this to the Appendix)
+    - If possible, but not necessary, provide a link to your data (via google drive, dropbox, github, ...)
+    - Other technical components
+
+### Report Guidelines
+
+- 3 Components: 
+    - Executive Summary
+        - Max 1 Page
+    - Report
+        - A minimum of 10 pages (15 pages for groups)
+        - Double-spaced
+        - 1 inch margins
+        - Incorporate images/diagrams (include alternative text on images)
+        - Shows examples of using the DBMS
+        - Compares to class DBMS
+    - Appendix
+        - No page limit
+        - Must create a table of contents
+        - Must include citations from reputable sources
+
+
+## Rubric
+
+
+| Criteria | Exemplary — 5 | Excellent — 4 | Proficient — 3 | Developing — 2 | Beginning — 1 |
+|---|---|---|---|---|---|
+| **DBMS Research and Justification** | Provides a clear, thorough, and well-supported explanation of the proposed DBMS, including major features, intended use cases, and why it is a strong candidate. | Provides a clear explanation of the proposed DBMS and gives reasonable justification for its selection. | Provides a basic description of the DBMS, but justification is limited or lacks supporting detail. | Provides minimal or unclear information about the DBMS and gives little justification for its selection. | Does not provide meaningful research or justification for the selected DBMS. |
+| **Database Implementation and Demonstration** | Successfully creates or imports a database and demonstrates at least five meaningful and correctly executed database operations. Examples are well documented and clearly explained. | Successfully creates or imports a database and demonstrates the required operations with only minor issues. Explanations are generally clear. | Demonstrates some database operations, but examples may be incomplete, overly simple, or contain errors. | Provides limited evidence that the DBMS was successfully implemented or used. | Does not provide a functional database demonstration. |
+| **Comparison of Current and Proposed DBMS** | Provides a detailed, balanced comparison that examines multiple relevant factors such as usability, data organization, performance, scalability, features, and integration. | Provides a clear comparison covering several important differences between the two DBMS options. | Provides a basic comparison, but analysis is limited or focuses primarily on surface-level differences. | Provides an incomplete or unclear comparison with little meaningful analysis. | Does not compare SQLite/MongoDB and proposed DBMS. |
+| **Communication, Organization, and Documentation** | Report is professional, logically organized, concise, and easy to follow. Technical concepts, code, results, data sources, and references are clearly documented. | Report is well organized and understandable, with appropriate documentation and only minor communication issues. | Report is understandable but has organizational, writing, formatting, or documentation problems that reduce clarity. | Report is difficult to follow and contains substantial problems with organization, writing, or documentation. | Report is missing or does not provide sufficient documentation to evaluate the project. |
+| **Executive Summary** | Provides a clear, concise, and well-organized summary of the report. Effectively communicates the purpose, key findings, major conclusions, and recommendations. The summary is written for a non-technical or managerial audience and allows the reader to understand the main points of the report without reading the full document. | Provides a clear and organized summary of the report that includes the purpose, key findings, conclusions, and recommendations. Most information is concise and appropriate for the intended audience, with only minor omissions or unnecessary details. | Provides an adequate summary of the report and communicates most of the main points. Some key findings, conclusions, or recommendations may be missing or lack clarity. The summary may include too much technical detail or insufficient context for the intended audience. | Provides a limited or poorly organized summary of the report. Important findings, conclusions, or recommendations are missing or unclear. The writing may be overly technical, lengthy, or difficult for the intended audience to understand. | Executive summary is incomplete, inaccurate, or missing. It does not adequately communicate the purpose, major findings, conclusions, or recommendations of the report. |
+
+
+## Deadline And Extensions
+
+The report will be due on **December 4, 2026 at 11:59 PM**. 
+For your report, you may receive a 24-hour extension beyond the due date for evey time you attend the writing and multiliteracy center. Each appointment must be one week apart.

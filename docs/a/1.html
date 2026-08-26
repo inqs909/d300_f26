@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Syllabus – Data 300</title>
+<title>Designing a Data System – Data 300</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,23 +29,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-35c42aae7640b4d17b8a2be482defcc2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-35c42aae7640b4d17b8a2be482defcc2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,6 +73,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -84,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Data 300</span>
     </a>
   </div>
@@ -95,15 +98,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./syllabus.html" aria-current="page"> 
+    <a class="nav-link" href="../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./lectures.html"> 
+    <a class="nav-link" href="../lectures.html"> 
 <span class="menu-text">Lectures</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./project_report.html"> 
+    <a class="nav-link" href="../project_report.html"> 
 <span class="menu-text">Project</span></a>
   </li>  
 </ul>
@@ -122,27 +125,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-300-introduction-to-data-management" id="toc-data-300-introduction-to-data-management" class="nav-link active" data-scroll-target="#data-300-introduction-to-data-management">Data 300: Introduction to Data Management</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">Scenario</a></li>
+  <li><a href="#part-1-classify-the-data" id="toc-part-1-classify-the-data" class="nav-link" data-scroll-target="#part-1-classify-the-data">Part 1: Classify the data</a></li>
+  <li><a href="#part-3-select-storage-technologies" id="toc-part-3-select-storage-technologies" class="nav-link" data-scroll-target="#part-3-select-storage-technologies">Part 3: Select storage technologies</a>
   <ul class="collapse">
-  <li><a href="#course-information" id="toc-course-information" class="nav-link" data-scroll-target="#course-information">Course Information</a></li>
-  <li><a href="#course-description" id="toc-course-description" class="nav-link" data-scroll-target="#course-description">Course Description</a></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
-  <li><a href="#software-and-tools" id="toc-software-and-tools" class="nav-link" data-scroll-target="#software-and-tools">Software and Tools</a></li>
+  <li><a href="#acid-checkpoint" id="toc-acid-checkpoint" class="nav-link" data-scroll-target="#acid-checkpoint">ACID checkpoint</a></li>
   </ul></li>
-  <li><a href="#weekly-schedule" id="toc-weekly-schedule" class="nav-link" data-scroll-target="#weekly-schedule">Weekly Schedule</a>
+  <li><a href="#part-4-design-the-dashboard-pipeline" id="toc-part-4-design-the-dashboard-pipeline" class="nav-link" data-scroll-target="#part-4-design-the-dashboard-pipeline">Part 4: Design the dashboard pipeline</a>
   <ul class="collapse">
-  <li><a href="#course-grading" id="toc-course-grading" class="nav-link" data-scroll-target="#course-grading">Course Grading</a></li>
-  <li><a href="#course-assignments" id="toc-course-assignments" class="nav-link" data-scroll-target="#course-assignments">Course Assignments</a></li>
-  <li><a href="#generative-artificial-intelligence-policy" id="toc-generative-artificial-intelligence-policy" class="nav-link" data-scroll-target="#generative-artificial-intelligence-policy">Generative Artificial Intelligence Policy</a></li>
+  <li><a href="#step-a-choose-etl-or-elt" id="toc-step-a-choose-etl-or-elt" class="nav-link" data-scroll-target="#step-a-choose-etl-or-elt">Step A: Choose ETL or ELT</a></li>
+  <li><a href="#step-b-map-the-pipeline" id="toc-step-b-map-the-pipeline" class="nav-link" data-scroll-target="#step-b-map-the-pipeline">Step B: Map the pipeline</a></li>
+  <li><a href="#step-c-represent-the-data-flow" id="toc-step-c-represent-the-data-flow" class="nav-link" data-scroll-target="#step-c-represent-the-data-flow">Step C: Represent the data flow</a></li>
+  <li><a href="#step-d-plan-for-a-failure" id="toc-step-d-plan-for-a-failure" class="nav-link" data-scroll-target="#step-d-plan-for-a-failure">Step D: Plan for a failure</a></li>
   </ul></li>
-  <li><a href="#university-policies" id="toc-university-policies" class="nav-link" data-scroll-target="#university-policies">University Policies</a>
-  <ul class="collapse">
-  <li><a href="#syllabus-policies-and-assistance" id="toc-syllabus-policies-and-assistance" class="nav-link" data-scroll-target="#syllabus-policies-and-assistance">Syllabus Policies and Assistance</a></li>
-  <li><a href="#academic-honesty" id="toc-academic-honesty" class="nav-link" data-scroll-target="#academic-honesty">Academic Honesty</a></li>
-  <li><a href="#csuci-basic-need" id="toc-csuci-basic-need" class="nav-link" data-scroll-target="#csuci-basic-need">CSUCI Basic Need</a></li>
-  <li><a href="#csuci-disability-statement" id="toc-csuci-disability-statement" class="nav-link" data-scroll-target="#csuci-disability-statement">CSUCI Disability Statement</a></li>
-  <li><a href="#disruption" id="toc-disruption" class="nav-link" data-scroll-target="#disruption">Disruption</a></li>
-  </ul></li>
+  <li><a href="#part-5-final-recommendation" id="toc-part-5-final-recommendation" class="nav-link" data-scroll-target="#part-5-final-recommendation">Part 5: Final recommendation</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
   </ul>
 </nav>
     </div>
@@ -151,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Syllabus</h1>
+<h1 class="title">Designing a Data System</h1>
 </div>
 
 
@@ -168,255 +166,214 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="data-300-introduction-to-data-management" class="level2">
-<h2 class="anchored" data-anchor-id="data-300-introduction-to-data-management">Data 300: Introduction to Data Management</h2>
-<section id="course-information" class="level3">
-<h3 class="anchored" data-anchor-id="course-information">Course Information</h3>
-<p><strong>Term:</strong> Fall 2026</p>
-<p><strong>Instructor:</strong> Isaac Quintanilla Salinas</p>
-<p><strong>Contact:</strong> isaac.qs@csuci.edu</p>
-<p><strong>Office Location:</strong> Marin 2326</p>
-<p><strong>Office Hours:</strong> MW 1-3 PM</p>
-<p><strong>Lecture:</strong> Monday and Wednesday 3-4:30 PM in Gateway 2501</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>In this assignment, you will act as a data systems analyst for <strong>CampusLearn</strong>, a new online learning platform. Your team must identify the types of data the platform generates, select appropriate storage technologies, and design a data pipeline that supports a weekly instructor dashboard.</p>
+<p>Working in a group of 2-3 members. Submit one completed assignment per team.</p>
 </section>
-<section id="course-description" class="level3">
-<h3 class="anchored" data-anchor-id="course-description">Course Description</h3>
-<p>Exposure to several data acquisition, storage, and management techniques using appropriate computer software. Topics include query languages, relational databases, API access, data scraping, unstructured data sources, data security, and large data systems.</p>
-</section>
-<section id="learning-outcomes" class="level3">
-<h3 class="anchored" data-anchor-id="learning-outcomes">Learning Outcomes</h3>
+<section id="scenario" class="level2">
+<h2 class="anchored" data-anchor-id="scenario">Scenario</h2>
+<p>CampusLearn collects the following data:</p>
 <ol type="1">
-<li>Use programming tools to construct a data set from separate databases.</li>
-<li>Write programs to scrape webpages to construct a data set for analysis.</li>
-<li>Differentiate between structured, unstructured, and semistructured data sources.</li>
-<li>Explain how to access data from a website’s application program interface.</li>
-<li>Describe the security and ethical implications of utilizing sensitive data sources.</li>
+<li><strong>Student accounts and enrollments:</strong> student ID, name, email, course ID, enrollment date, and enrollment status.</li>
+<li><strong>Activity events:</strong> JSON records created whenever a student opens a lesson, submits a quiz, or clicks a course link.</li>
+<li><strong>Lecture recordings:</strong> video files uploaded by instructors.</li>
+<li><strong>Course connections:</strong> relationships among courses, including prerequisites, corequisites, and recommended next courses.</li>
+<li><strong>Login sessions:</strong> a session ID and expiration time that must be retrieved very quickly.</li>
+</ol>
+<p>Each week, CampusLearn must create an instructor dashboard showing student participation, completed activities, and students who may need assistance. Data arrives continuously, but the dashboard is refreshed every Monday morning.</p>
+</section>
+<section id="part-1-classify-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-classify-the-data">Part 1: Classify the data</h2>
+<p>For each data source, classify it as <strong>structured</strong>, <strong>semi-structured</strong>, or <strong>unstructured</strong>. Briefly justify each classification using a characteristic from the lecture.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Data source</th>
+<th>Classification</th>
+<th>Justification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Student accounts and enrollments</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>JSON activity events</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Lecture recordings</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Course connections</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Login sessions</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Then answer the following question in 2–3 sentences:</p>
+<p><strong>Why does the data type matter when deciding how the data should be stored or processed?</strong></p>
+</section>
+<section id="part-3-select-storage-technologies" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-select-storage-technologies">Part 3: Select storage technologies</h2>
+<p>Recommend a storage approach for each requirement. Choose from the technologies discussed in the lecture:</p>
+<ul>
+<li>Relational database</li>
+<li>Document database</li>
+<li>Key-value database</li>
+<li>Graph database</li>
+<li>Column-family database</li>
+<li>Data lake</li>
+</ul>
+<p>You may recommend more than one technology when needed, but explain the role of each one.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Requirement</th>
+<th>Recommended storage approach</th>
+<th>Evidence-based justification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Student accounts and enrollments</td>
+<td></td>
+<td>Consider schema, relationships, and integrity.</td>
+</tr>
+<tr class="even">
+<td>JSON activity events</td>
+<td></td>
+<td>Consider schema flexibility and scale.</td>
+</tr>
+<tr class="odd">
+<td>Lecture recordings</td>
+<td></td>
+<td>Consider the data’s lack of a predefined model.</td>
+</tr>
+<tr class="even">
+<td>Course prerequisites and recommendations</td>
+<td></td>
+<td>Consider complex relationships.</td>
+</tr>
+<tr class="odd">
+<td>Login sessions</td>
+<td></td>
+<td>Consider fast retrieval by a unique key.</td>
+</tr>
+</tbody>
+</table>
+<section id="acid-checkpoint" class="level3">
+<h3 class="anchored" data-anchor-id="acid-checkpoint">ACID checkpoint</h3>
+<p>A student enrolls in a course with one remaining seat. The system must add the enrollment and reduce the number of available seats from one to zero.</p>
+<ol type="1">
+<li>Which ACID property ensures that both changes succeed together or neither change occurs?</li>
+<li>Explain why this property matters in this situation.</li>
 </ol>
 </section>
-<section id="software-and-tools" class="level3">
-<h3 class="anchored" data-anchor-id="software-and-tools">Software and Tools</h3>
-<p>Throughout this course, students will use the following software and programming environments:</p>
-<section id="choose-one-ide" class="level4">
-<h4 class="anchored" data-anchor-id="choose-one-ide">Choose One IDE</h4>
-<ul>
-<li><p><strong>Positron (Recommended)</strong> provides free and open source tools for your data analysis in R and/or Python. <a href="http://positron.posit.co/download.html">You may download positron here.</a></p></li>
-<li><p><strong>VS Code</strong> provides tools for software development as well as data analysis. <a href="https://code.visualstudio.com/">You may download VS Code here.</a></p></li>
-<li><p><strong>VS Codium</strong> is the freely-licensed version of VS Code. <a href="https://vscodium.com/">You may download VS Codium here.</a></p></li>
-</ul>
 </section>
-<section id="databases" class="level4">
-<h4 class="anchored" data-anchor-id="databases">Databases</h4>
-<ul>
-<li><strong>SQLite</strong> — primary relational database system (file-based)</li>
-<li><strong>MongoDB</strong> — primary document-based NoSQL database</li>
-</ul>
+<section id="part-4-design-the-dashboard-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-design-the-dashboard-pipeline">Part 4: Design the dashboard pipeline</h2>
+<p>CampusLearn needs a reliable pipeline to refresh the instructor dashboard every Monday at 6:00 a.m.</p>
+<section id="step-a-choose-etl-or-elt" class="level3">
+<h3 class="anchored" data-anchor-id="step-a-choose-etl-or-elt">Step A: Choose ETL or ELT</h3>
+<p>Choose <strong>ETL</strong> or <strong>ELT</strong> for the dashboard workflow. In 3–5 sentences, defend your choice. Your response must state where transformation occurs and identify one advantage of your chosen workflow for this scenario.</p>
 </section>
-</section>
-</section>
-<section id="weekly-schedule" class="level2">
-<h2 class="anchored" data-anchor-id="weekly-schedule">Weekly Schedule</h2>
-<p>The following outline may be subject to change.</p>
+<section id="step-b-map-the-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="step-b-map-the-pipeline">Step B: Map the pipeline</h3>
+<p>Complete the following pipeline plan. Include at least <strong>two source systems</strong> and at least <strong>three specific transformations</strong>.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Week</th>
-<th style="text-align: left;">Topic</th>
+<th>Pipeline component</th>
+<th>Your design</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>1</strong> (8/24)</td>
-<td style="text-align: left;">Intro to Course/Project/Computing</td>
+<td>Source(s)</td>
+<td></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>2</strong> (8/31)</td>
-<td style="text-align: left;">Introduction to Data Systems</td>
+<td>Ingestion/extraction</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>3</strong> (9/7)</td>
-<td style="text-align: left;"><strong>Holiday</strong>/Data Modeling</td>
+<td>Processing/transformation</td>
+<td></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>4</strong> (9/14)</td>
-<td style="text-align: left;">SQL Fundamentals</td>
+<td>Loading/storage destination</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>5</strong> (9/21)</td>
-<td style="text-align: left;">SQL Fundamentals</td>
+<td>Output</td>
+<td></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>6</strong> (9/28)</td>
-<td style="text-align: left;">Advanced SQL Fundamentals</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>7</strong> (10/5)</td>
-<td style="text-align: left;">SQL for Analytics</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>8</strong> (10/12)</td>
-<td style="text-align: left;">Indexing and Query Optimization</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>9</strong> (10/19)</td>
-<td style="text-align: left;">NoSQL Fundamentals</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>10</strong> (10/26)</td>
-<td style="text-align: left;">Document Modeling</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>11</strong> (11/2)</td>
-<td style="text-align: left;">Key-Value &amp; Column-Family Stores</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>12</strong> (11/9)</td>
-<td style="text-align: left;">ETL Workflows and File Formats</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>13</strong> (11/16)</td>
-<td style="text-align: left;">Databases in R and Python</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>14</strong> (11/23)</td>
-<td style="text-align: left;">Using APIs for Data Acquisition</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>15</strong> (11/30)</td>
-<td style="text-align: left;">Working with Sensitive Data</td>
+<td>Orchestration</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<section id="course-grading" class="level3">
-<h3 class="anchored" data-anchor-id="course-grading">Course Grading</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Category</th>
-<th style="text-align: left;">Percentage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Video Assignments</td>
-<td style="text-align: left;">25%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Weekly Reports</td>
-<td style="text-align: left;">25%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">In-class Assignments</td>
-<td style="text-align: left;">25%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Final Report</td>
-<td style="text-align: left;">25%</td>
-</tr>
-</tbody>
-</table>
-<p>At the end of the quarter, course grades will be assigned according to the following scale:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Percentagae</th>
-<th style="text-align: left;">Grade</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">90 - 100</td>
-<td style="text-align: left;">A</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">80 - &lt;90</td>
-<td style="text-align: left;">B</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">70 - &lt;80</td>
-<td style="text-align: left;">C</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">60 - &lt;70</td>
-<td style="text-align: left;">D</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">&lt;60</td>
-<td style="text-align: left;">F</td>
-</tr>
-</tbody>
-</table>
+<p>Your transformations might address missing values, duplicate events, invalid timestamps, inconsistent field names, or weekly participation totals.</p>
 </section>
-<section id="course-assignments" class="level3">
-<h3 class="anchored" data-anchor-id="course-assignments">Course Assignments</h3>
-<section id="course-project" class="level4">
-<h4 class="anchored" data-anchor-id="course-project">Course Project</h4>
-<p>Working in a group of up to 2 students, you will explore a Database Management System (DBMS) that was not used in the course. The goal is to apply the database concepts and skills developed throughout the semester to a new database environment and to evaluate how the selected system compares with the tools used in class.</p>
+<section id="step-c-represent-the-data-flow" class="level3">
+<h3 class="anchored" data-anchor-id="step-c-represent-the-data-flow">Step C: Represent the data flow</h3>
+<p>Draw the pipeline using the boxes below, either on paper or with a digital diagram. Add details to each box and add another source box if needed.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">#| fig-alt: "A data pipeline template connecting source systems to ingestion, transformation, storage, and an instructor dashboard."
+flowchart LR
+    A[Source systems] --&gt; B[Ingestion]
+    B --&gt; C[Transformation]
+    C --&gt; D[Storage]
+    D --&gt; E[Instructor dashboard]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
-<section id="weekly-reports" class="level4">
-<h4 class="anchored" data-anchor-id="weekly-reports">Weekly Reports</h4>
-<p>Weekly reports are progress reports submitted to the instructor to keep track of your progress in completeing the course project. Each week, you will submit what you accomplished in the previous week, any challenges you faced, how you overcame those challenges, and your goal for next week (SMART goal). These will be weekly assignments. Three progress reports will be dropped at the end of the semester. Progress Reports are due every Saturday at 11:59 PM. There will be no make ups for progress reports.</p>
-</section>
-<section id="video-assignments" class="level4">
-<h4 class="anchored" data-anchor-id="video-assignments">Video Assignments</h4>
-<p>Videos are used to teach data management concepts related to the course. Students are expected to watch at least one video a week. The videos are implemented using PlayPosit. The 3 lowest video assignments will be dropped. Video assignments will be due every Sunday at 11:59 PM.</p>
-</section>
-<section id="in-class-assignments" class="level4">
-<h4 class="anchored" data-anchor-id="in-class-assignments">In-Class Assignments</h4>
-<p>In-class assignments are designed for you to practice different fundamentals related to data management. You are expected to complete the assignments every week and submit them every Sunday at 11:59 PM. The three lowest assignments will be dropped.</p>
+<section id="step-d-plan-for-a-failure" class="level3">
+<h3 class="anchored" data-anchor-id="step-d-plan-for-a-failure">Step D: Plan for a failure</h3>
+<p>Suppose the activity-event extraction fails at 5:30 a.m. on Monday. In 2–3 sentences, explain what the orchestration component should do. Address both the failed task and the downstream dashboard refresh.</p>
 </section>
 </section>
-<section id="generative-artificial-intelligence-policy" class="level3">
-<h3 class="anchored" data-anchor-id="generative-artificial-intelligence-policy">Generative Artificial Intelligence Policy</h3>
-<p>The use of generative artificial intelligence (AI) in an ethical manner is permitted for this course.</p>
-<section id="permitted-uses" class="level4">
-<h4 class="anchored" data-anchor-id="permitted-uses">Permitted Uses</h4>
-<p>You may use AI for:</p>
+<section id="part-5-final-recommendation" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-final-recommendation">Part 5: Final recommendation</h2>
+<p>Write a 4–6 sentence recommendation to the CampusLearn project manager. Summarize:</p>
 <ul>
-<li><p>Obtain clarification</p></li>
-<li><p>Brainstorming ideas, examples, outlines, and strategies</p></li>
-<li><p>Generating questions for practice or exploration</p></li>
-<li><p>Identifying keywords or phrasing to match professional goals</p></li>
+<li>why the system should use more than one storage technology;</li>
+<li>which technology is most important for data integrity;</li>
+<li>whether the dashboard pipeline should use ETL or ELT; and</li>
+<li>one tradeoff or limitation of your design.</li>
 </ul>
 </section>
-<section id="prohibited-uses" class="level4">
-<h4 class="anchored" data-anchor-id="prohibited-uses">Prohibited Uses</h4>
-<p>You may not:</p>
-<ul>
-<li><p>Submit AI-generated work</p></li>
-<li><p>Use AI to complete assignments, quizzes, exams, or other assessments meant to reflect your own work</p></li>
-</ul>
-<p>Any AI-generated work will receive a 0 in the class. Severe cases will be reported to Academic Misconduct.</p>
-<p><strong>You may not upload any course material to any AI platforms such as, but not limited to, ChatGPT, Claude, Github Copilot, Meta AI, or Google Gemini. Exceptions are allowed for <a href="https://www.csuci.edu/dass/">DASS</a>-approved services.</strong></p>
-</section>
-</section>
-</section>
-<section id="university-policies" class="level2">
-<h2 class="anchored" data-anchor-id="university-policies">University Policies</h2>
-<section id="syllabus-policies-and-assistance" class="level3">
-<h3 class="anchored" data-anchor-id="syllabus-policies-and-assistance">Syllabus Policies and Assistance</h3>
-<p>CSUCI’s <a href="https://www.csuci.edu/studentsupport/syllabus.htm">Syllabus Policies and Assistance Website</a> provides important details about academic policies, campus expectations, and student support services that are all highly applicable to your success as a student both in and outside of the classroom. Ensure that you review this site on a regular basis to stay informed about the policies and resources that support your success, as campus resources or policies may change semester to semester.</p>
-</section>
-<section id="academic-honesty" class="level3">
-<h3 class="anchored" data-anchor-id="academic-honesty">Academic Honesty</h3>
-<p>Conduct yourself with honesty and integrity. Do not submit others’ work as your own. Foassignments and quizzes that allow you to work with a group, only put your name on what the group submits if you genuinely contributed to the work. Work completely independently on exams, using only the materials that are indicated as allowed. Failure to observe academic honesty results in substantial penalties that can include failing the course.</p>
-</section>
-<section id="csuci-basic-need" class="level3">
-<h3 class="anchored" data-anchor-id="csuci-basic-need">CSUCI Basic Need</h3>
-<p>Please use the link to the Basic Needs Program on the <a href="go.csuci.edu/syllabuspolicies">Syllabus Policies and Assistance website</a> for information on emergency food, housing accommodations, toiletries, and connections to critical resources.</p>
-</section>
-<section id="csuci-disability-statement" class="level3">
-<h3 class="anchored" data-anchor-id="csuci-disability-statement">CSUCI Disability Statement</h3>
-<p>If you are a student with a disability requesting reasonable accommodations in this course, you need to contact Disability Accommodations and Support Services (DASS) located on the second floor of Arroyo Hall, via email accommodations@csuci.edu or call 805-437-3331. <a href="https://www.csuci.edu/dass/students/apply-for-services.htm">All requests for reasonable accommodations require registration with DASS in advance of need</a>. Faculty, students and DASS will work together regarding classroom accommodations. You are encouraged to discuss approved.</p>
-</section>
-<section id="disruption" class="level3">
-<h3 class="anchored" data-anchor-id="disruption">Disruption</h3>
-<ol type="1">
-<li><strong>If I Am Out:</strong> I will communicate via email and will hold classes asynchronously.</li>
-<li><strong>If You Are Out:</strong> Contact me as soon as possible to talk about your options. Reasonable accommodations will be provided for a brief absence. With proper documentation, extended accommodations will be provided.</li>
-</ol>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Only submit one HTML document per group in CANVAS.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
