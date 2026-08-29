@@ -2,14 +2,7 @@
 title: "Project"
 date: 9/7/26
 editor: source
-format: 
-  html:
-    toc: true
-    toc-depth: 2
-    code-fold: true
-    code-tools: true
-    code-line-numbers: true
-    embed-resources: true
+format: html
 draft: false
 ---
 

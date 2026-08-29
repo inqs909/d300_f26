@@ -73,9 +73,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -128,10 +125,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">Scenario</a></li>
   <li><a href="#part-1-classify-the-data" id="toc-part-1-classify-the-data" class="nav-link" data-scroll-target="#part-1-classify-the-data">Part 1: Classify the data</a></li>
-  <li><a href="#part-3-select-storage-technologies" id="toc-part-3-select-storage-technologies" class="nav-link" data-scroll-target="#part-3-select-storage-technologies">Part 3: Select storage technologies</a>
-  <ul class="collapse">
-  <li><a href="#acid-checkpoint" id="toc-acid-checkpoint" class="nav-link" data-scroll-target="#acid-checkpoint">ACID checkpoint</a></li>
-  </ul></li>
+  <li><a href="#part-3-select-storage-technologies" id="toc-part-3-select-storage-technologies" class="nav-link" data-scroll-target="#part-3-select-storage-technologies">Part 3: Select storage technologies</a></li>
   <li><a href="#part-4-design-the-dashboard-pipeline" id="toc-part-4-design-the-dashboard-pipeline" class="nav-link" data-scroll-target="#part-4-design-the-dashboard-pipeline">Part 4: Design the dashboard pipeline</a>
   <ul class="collapse">
   <li><a href="#step-a-choose-etl-or-elt" id="toc-step-a-choose-etl-or-elt" class="nav-link" data-scroll-target="#step-a-choose-etl-or-elt">Step A: Choose ETL or ELT</a></li>
@@ -278,14 +272,6 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<section id="acid-checkpoint" class="level3">
-<h3 class="anchored" data-anchor-id="acid-checkpoint">ACID checkpoint</h3>
-<p>A student enrolls in a course with one remaining seat. The system must add the enrollment and reduce the number of available seats from one to zero.</p>
-<ol type="1">
-<li>Which ACID property ensures that both changes succeed together or neither change occurs?</li>
-<li>Explain why this property matters in this situation.</li>
-</ol>
-</section>
 </section>
 <section id="part-4-design-the-dashboard-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-design-the-dashboard-pipeline">Part 4: Design the dashboard pipeline</h2>
@@ -336,23 +322,6 @@ ul.task-list li input[type="checkbox"] {
 <section id="step-c-represent-the-data-flow" class="level3">
 <h3 class="anchored" data-anchor-id="step-c-represent-the-data-flow">Step C: Represent the data flow</h3>
 <p>Draw the pipeline using the boxes below, either on paper or with a digital diagram. Add details to each box and add another source box if needed.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">#| fig-alt: "A data pipeline template connecting source systems to ingestion, transformation, storage, and an instructor dashboard."
-flowchart LR
-    A[Source systems] --&gt; B[Ingestion]
-    B --&gt; C[Transformation]
-    C --&gt; D[Storage]
-    D --&gt; E[Instructor dashboard]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
 </section>
 <section id="step-d-plan-for-a-failure" class="level3">
 <h3 class="anchored" data-anchor-id="step-d-plan-for-a-failure">Step D: Plan for a failure</h3>

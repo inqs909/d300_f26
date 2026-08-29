@@ -60,13 +60,6 @@ You may recommend more than one technology when needed, but explain the role of 
 | Course prerequisites and recommendations |  | Consider complex relationships. |
 | Login sessions |  | Consider fast retrieval by a unique key. |
 
-### ACID checkpoint
-
-A student enrolls in a course with one remaining seat. The system must add the enrollment and reduce the number of available seats from one to zero.
-
-1. Which ACID property ensures that both changes succeed together or neither change occurs?
-2. Explain why this property matters in this situation.
-
 
 
 ## Part 4: Design the dashboard pipeline
@@ -96,14 +89,6 @@ Your transformations might address missing values, duplicate events, invalid tim
 
 Draw the pipeline using the boxes below, either on paper or with a digital diagram. Add details to each box and add another source box if needed.
 
-```{mermaid}
-#| fig-alt: "A data pipeline template connecting source systems to ingestion, transformation, storage, and an instructor dashboard."
-flowchart LR
-    A[Source systems] --> B[Ingestion]
-    B --> C[Transformation]
-    C --> D[Storage]
-    D --> E[Instructor dashboard]
-```
 
 ### Step D: Plan for a failure
 
