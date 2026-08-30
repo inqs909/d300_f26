@@ -13,7 +13,7 @@
 <link href="../site_libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
-  <title>Data 300 – Data Systems</title>
+  <title>Data 300 – Computational Setup</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -199,641 +199,216 @@
       margin-right: 0; 
     }
   </style>
-  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Data Systems</h1>
+  <h1 class="title">Computational Setup</h1>
+  <p class="subtitle">SQLite and DB Browser for SQLite</p>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section class="slide level2">
-
-<aside class="notes">
-<p>Welcome everyone to the Introduction to Data Systems. Today, we will cover how data is structured, where it is stored, and how it moves through systems. Here is our roadmap for the session. We will move from the nature of data itself to the storage mechanisms and finally to the movement of data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section>
-<section id="data-systems" class="title-slide slide level1 agenda-slide center">
-<h1>Data Systems</h1>
+<section id="installation" class="title-slide slide level1 agenda-slide center">
+<h1>Installation</h1>
 <div class="agenda">
 <ul>
 <li><div class="agenda-active">
-<p>Data Systems</p>
+<p>Installation</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>Databases</p>
+<p>Chinook Database</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>Data Pipelines</p>
-</div></li>
-</ul>
-</div>
-</section>
-<section id="what-is-a-data-system" class="slide level2">
-<h2>What is a Data System?</h2>
-<p>A data system is a collection of interconnected components used to collect, store, process, and analyze data.</p>
-<ul>
-<li><strong>Input</strong>: Raw data (logs, transactions, sensor readings).</li>
-<li><strong>Process</strong>: Transformation and cleaning.</li>
-<li><strong>Storage</strong>: Databases or Data Lakes.</li>
-<li><strong>Output</strong>: Insights, reports, or machine learning models.</li>
-</ul>
-<aside class="notes">
-<p>Think of a data system like a water treatment plant. You have raw water (input), a filtration system (processing), a reservoir (storage), and tap water for consumption (output).</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="data-types-the-big-picture" class="slide level2">
-<h2>Data Types: The Big Picture</h2>
-<p>Data is categorized based on how much “organization” it has before it enters a system.</p>
-<ul>
-<li><strong>Structured</strong>: Highly organized (e.g., Excel, SQL).</li>
-<li><strong>Semi-structured</strong>: Organized but flexible (e.g., JSON, XML).</li>
-<li><strong>Unstructured</strong>: No predefined model (e.g., Video, PDF, Audio).</li>
-</ul>
-<aside class="notes">
-<p>Understanding the format of your data determines what kind of database you need and how much work you have to do to clean it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="structured-data" class="slide level2">
-<h2>Structured Data</h2>
-<ul>
-<li>Tabular (rows and columns).</li>
-<li>Highly organized.</li>
-<li>Easily searchable.</li>
-<li><strong>Examples</strong>:
-<ul>
-<li>Customer names and addresses.</li>
-<li>Transaction amounts and dates.</li>
-<li>Inventory counts.</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>Structured data is the most common form of data handled by traditional businesses. It fits perfectly into spreadsheets and relational databases.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="semi-structured-data" class="slide level2">
-<h2>Semi-Structured Data</h2>
-<ul>
-<li>Does not reside in a rigid grid.</li>
-<li>Contains tags or markers to separate data elements.</li>
-<li>Flexible schema (can change easily).</li>
-<li><strong>Examples</strong>:
-<ul>
-<li><strong>JSON</strong>: Used in web APIs.</li>
-<li><strong>XML</strong>: Used in configuration files.</li>
-<li><strong>CSV</strong>: Simple comma-separated values.</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>Semi-structured data is the “middle ground.” It has some hierarchy and markers, but you can add new fields without rebuilding the whole table.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="json-example" class="slide level2">
-<h2>JSON Example</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a aria-label="1"></a><span class="fu">{</span></span>
-<span id="cb1-2"><a aria-label="2"></a>  <span class="dt">"customers"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-3"><a aria-label="3"></a>    <span class="fu">{</span></span>
-<span id="cb1-4"><a aria-label="4"></a>      <span class="dt">"customer_id"</span><span class="fu">:</span> <span class="dv">101</span><span class="fu">,</span></span>
-<span id="cb1-5"><a aria-label="5"></a>      <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Alice Johnson"</span><span class="fu">,</span></span>
-<span id="cb1-6"><a aria-label="6"></a>      <span class="dt">"email"</span><span class="fu">:</span> <span class="st">"alice@example.com"</span><span class="fu">,</span></span>
-<span id="cb1-7"><a aria-label="7"></a>      <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"Phoenix"</span></span>
-<span id="cb1-8"><a aria-label="8"></a>    <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb1-9"><a aria-label="9"></a>    <span class="fu">{</span></span>
-<span id="cb1-10"><a aria-label="10"></a>      <span class="dt">"customer_id"</span><span class="fu">:</span> <span class="dv">102</span><span class="fu">,</span></span>
-<span id="cb1-11"><a aria-label="11"></a>      <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Brian Smith"</span><span class="fu">,</span></span>
-<span id="cb1-12"><a aria-label="12"></a>      <span class="dt">"email"</span><span class="fu">:</span> <span class="st">"brian@example.com"</span><span class="fu">,</span></span>
-<span id="cb1-13"><a aria-label="13"></a>      <span class="dt">"phone"</span><span class="fu">:</span> <span class="st">"555-123-4567"</span></span>
-<span id="cb1-14"><a aria-label="14"></a>    <span class="fu">}</span></span>
-<span id="cb1-15"><a aria-label="15"></a>  <span class="ot">]</span></span>
-<span id="cb1-16"><a aria-label="16"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="unstructured-data" class="slide level2">
-<h2>Unstructured Data</h2>
-<ul>
-<li>No internal structure or predefined model.</li>
-<li>Makes up the vast majority of data generated today.</li>
-<li>Requires specialized tools (AI/ML) to extract meaning.</li>
-<li><strong>Examples</strong>:
-<ul>
-<li>Emails (the text part).</li>
-<li>Images and Videos.</li>
-<li>Social media posts.</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>Think of a photo. A computer just sees a bunch of pixels. It doesn’t know it’s a “cat” until an unstructured data processing tool (like an AI model) analyzes it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="visualizing-data-hierarchy" class="slide level2">
-<h2>Visualizing Data Hierarchy</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%
-graph TD
-    A[Data Types] --&gt; B[Structured]
-    A --&gt; C[Semi-Structured]
-    A --&gt; D[Unstructured]
-    B --&gt; B1[Tables/SQL]
-    C --&gt; C1[JSON/XML]
-    D --&gt; D1[Media/Text]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>This diagram shows the hierarchy. As you move from top to bottom, the level of inherent organization decreases.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="activity-1-identify-the-type" class="slide level2 scrollable">
-<h2>Activity 1: Identify the Type</h2>
-<p><strong>Identify whether the following are Structured, Semi-Structured, or Unstructured:</strong></p>
-<ol type="1">
-<li>A <code>.mp4</code> video file from a security camera.</li>
-<li>A <code>.json</code> file containing a user’s profile settings.</li>
-<li>A SQL table containing 1,000,000 rows of sales transactions.</li>
-<li>A collection of scanned handwritten notes.</li>
-<li>An XML file used for configuration.</li>
-</ol>
-<aside class="notes">
-<p>Take 2 minutes to think about these. (Answers: 1. Unstructured, 2. Semi-structured, 3. Structured, 4. Unstructured, 5. Semi-structured).</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="databases" class="title-slide slide level1 agenda-slide center">
-<h1>Databases</h1>
-<div class="agenda">
-<ul>
-<li><div class="agenda-inactive agenda-pre-active">
-<p>Data Systems</p>
-</div></li>
-<li><div class="agenda-active">
-<p>Databases</p>
+<p>Open the Database in DB Browser</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>Data Pipelines</p>
+<p>First SQL Queries</p>
 </div></li>
 </ul>
 </div>
 </section>
-<section id="relational-databases-rdbms" class="slide level2">
-<h2>Relational Databases (RDBMS)</h2>
-<p>The traditional way of storing structured data.</p>
-<ul>
-<li><strong>Core Concept</strong>: Data is organized into tables.</li>
-<li><strong>Schema</strong>: Rigid and predefined (must define columns before inserting data).</li>
-<li><strong>Relationships</strong>: Tables are linked via “Keys” (Primary and Foreign keys).</li>
-<li><strong>Example</strong>: PostgreSQL, MySQL, Oracle.</li>
-</ul>
-<aside class="notes">
-<p>In a relational database, if you want to add a “Phone Number” column, you have to update the entire table structure first. This is called a “schema change.”</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="relational-properties-acid" class="slide level2 scrollable">
-<h2>Relational Properties: ACID</h2>
-<p>To ensure data integrity, RDBMS follow <strong>ACID</strong> properties:</p>
-<ol type="1">
-<li><strong>Atomicity</strong>: “All or nothing” transactions.</li>
-<li><strong>Consistency</strong>: Data follows all rules (no broken links).</li>
-<li><strong>Isolation</strong>: Transactions don’t interfere with each other.</li>
-<li><strong>Durability</strong>: Once saved, it stays saved (even if power fails).</li>
-</ol>
-<aside class="notes">
-<p>ACID is critical for banking. If you transfer $10, the money must leave your account AND arrive in the other account. It cannot do one without the other.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="non-relational-databases-nosql" class="slide level2">
-<h2>Non-Relational Databases (NoSQL)</h2>
-<p>Designed for modern, high-scale, and flexible data.</p>
-<ul>
-<li><strong>Core Concept</strong>: Data is stored as documents, key-value pairs, or graphs.</li>
-<li><strong>Schema</strong>: Dynamic/Flexible (no predefined structure required).</li>
-<li><strong>Scalability</strong>: Designed to scale “out” (adding more servers).</li>
-<li><strong>Example</strong>: MongoDB (Document), Redis (Key-Value), Neo4j (Graph).</li>
-</ul>
-<aside class="notes">
-<p>NoSQL is the response to the “Big Data” explosion. When you have massive amounts of unstructured or semi-structured data, relational databases can struggle to scale.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="nosql-types" class="slide level2">
-<h2>NoSQL Types</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>Best For</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Document</strong></td>
-<td>Semi-structured data</td>
-<td>MongoDB</td>
-</tr>
-<tr class="even">
-<td><strong>Key-Value</strong></td>
-<td>Fast caching/Session data</td>
-<td>Redis</td>
-</tr>
-<tr class="odd">
-<td><strong>Graph</strong></td>
-<td>Complex relationships</td>
-<td>Neo4j</td>
-</tr>
-<tr class="even">
-<td><strong>Column-Family</strong></td>
-<td>Massive scale/Analytical</td>
-<td>Cassandra</td>
-</tr>
-</tbody>
-</table>
-<aside class="notes">
-<p>Different NoSQL types are specialized for different tasks. A graph database is perfect for a social network where you need to track “friend of a friend” connections.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="relational-vs.-non-relational" class="slide level2">
-<h2>Relational vs.&nbsp;Non-Relational</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Feature</th>
-<th>Relational (SQL)</th>
-<th>Non-Relational (NoSQL)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Schema</strong></td>
-<td>Rigid / Predefined</td>
-<td>Flexible / Dynamic</td>
-</tr>
-<tr class="even">
-<td><strong>Structure</strong></td>
-<td>Tables (Rows/Cols)</td>
-<td>Documents/Graphs/Key-Value</td>
-</tr>
-<tr class="odd">
-<td><strong>Scaling</strong></td>
-<td>Vertical (Bigger Server)</td>
-<td>Horizontal (More Servers)</td>
-</tr>
-<tr class="even">
-<td><strong>Data Integrity</strong></td>
-<td>Very High (ACID)</td>
-<td>Varies (BASE)</td>
-</tr>
-</tbody>
-</table>
-<aside class="notes">
-<p>If your data structure is predictable and consistency is paramount (like finance), go SQL. If your data is changing fast and you need massive scale, go NoSQL.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="choosing-your-database" class="slide level2">
-<h2>Choosing Your Database</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%
-graph TD
-    Start[Start Decision] --&gt; Schema{Fixed Schema?}
-    Schema -- Yes --&gt; Relational[Relational / SQL]
-    Schema -- No --&gt; Scale{Need massive scale?}
-    Scale -- Yes --&gt; NoSQL[Non-Relational / NoSQL]
-    Scale -- No --&gt; Semi[Semi-Structured / Document]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>A decision tree: If Schema is fixed <span class="math inline">\(\rightarrow\)</span> Relational. If Schema is NOT fixed <span class="math inline">\(\rightarrow\)</span> Check scale. If massive scale <span class="math inline">\(\rightarrow\)</span> NoSQL. If not massive scale <span class="math inline">\(\rightarrow\)</span> Document store.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="activity-2-the-architects-dilemma" class="slide level2">
-<h2>Activity 2: The Architect’s Dilemma</h2>
-<p><strong>Scenario:</strong> You are building a new social media app like Instagram.</p>
-<p><strong>Requirements:</strong></p>
-<ul>
-<li>You need to store user profiles (Name, Email, Password).</li>
-<li>You need to store millions of high-resolution images.</li>
-<li>You need to store a “Follower” graph (who follows whom).</li>
-</ul>
-<p><strong>Task:</strong> Which database type (Relational or NoSQL) would you use for each requirement? Why?</p>
-<aside class="notes">
-<p>This is a real-world scenario. Most big apps use a “Hybrid” approach. For example, SQL for user accounts and a NoSQL/Graph database for the social connections.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="data-pipelines" class="title-slide slide level1 agenda-slide center">
-<h1>Data Pipelines</h1>
-<div class="agenda">
-<ul>
-<li><div class="agenda-inactive agenda-pre-active">
-<p>Data Systems</p>
-</div></li>
-<li><div class="agenda-inactive agenda-pre-active">
-<p>Databases</p>
-</div></li>
-<li><div class="agenda-active">
-<p>Data Pipelines</p>
-</div></li>
-</ul>
-</div>
-</section>
-<section id="data-pipelines-1" class="slide level2">
-<h2>Data Pipelines</h2>
-<p>Data doesn’t just sit there; it moves.</p>
-<p><strong>Definition:</strong> A sequence of data processing steps where a set of data is passed through a series of transformations.</p>
-<p><strong>Goal:</strong> To move data from a source (where it’s created) to a destination (where it’s used).</p>
-<aside class="notes">
-<p>A pipeline is like a conveyor belt in a factory. Raw materials go in one end, and finished products come out the other.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="etl-vs.-elt" class="slide level2 scrollable">
-<h2>ETL vs.&nbsp;ELT</h2>
-<p>The two main ways to move data:</p>
+<section id="what-is-sqlite" class="slide level2">
+<h2>What is SQLite?</h2>
 <div class="columns">
 <div class="column">
-<p><strong>ETL</strong></p>
-<p>(Extract, Transform, Load)</p>
-<ol type="1">
-<li>Extract from source.</li>
-<li>Transform in a staging area (cleaning/filtering).</li>
-<li>Load into the target database.</li>
-</ol>
+<p>SQLite is a lightweight relational database management system. Unlike many database systems, SQLite does not require a separate database server. A complete database can be stored in a single file, such as:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a aria-label="1"></a>chinook.db</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
-<p><strong>ELT</strong></p>
-<p>(Extract, Load, Transform)</p>
-<ol type="1">
-<li>Extract from source.</li>
-<li>Load directly into the target (Data Lake).</li>
-<li>Transform inside the target database using its own power.</li>
-</ol>
+<p>This makes SQLite useful for:</p>
+<ul>
+<li>Learning SQL</li>
+<li>Small and medium-sized applications</li>
+<li>Local data storage</li>
+<li>Prototyping</li>
+<li>Reproducible data projects</li>
+</ul>
 </div></div>
-<aside class="notes">
-<p>ETL was the standard for decades. ELT is becoming more popular because modern cloud warehouses (like Snowflake) are incredibly powerful at processing data once it’s inside.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<p><a href="https://www.sqlite.org/">SQLite</a></p>
 </section>
-<section id="the-data-pipeline-workflow" class="slide level2">
-<h2>The Data Pipeline Workflow</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#811331', 'edgeLabelBackground':'#ffffff', 'primaryTextColor': '#ffffff', 'lineColor': '#000000' }}}%%
-graph LR
-    Source[Source Systems] --&gt; Ext[Extraction]
-    Ext --&gt; Trans[Transformation]
-    Trans --&gt; Load[Loading/Storage]
-    Load --&gt; Anal[Analytics/BI]
-</pre>
+<section id="install-db-browser-for-sqlite" class="slide level2">
+<h2>Install DB Browser for SQLite</h2>
+<p>DB Browser for SQLite is a free, open-source graphical application for working with SQLite database files.</p>
+<p>Use it to:</p>
+<ul>
+<li>Open a SQLite database without a server</li>
+<li>Browse tables and records</li>
+<li>Examine a table’s structure</li>
+<li>Write and run SQL statements</li>
+<li>Save SQL scripts and export query results</li>
+</ul>
+<p><a href="https://sqlitebrowser.org/dl/">Download DB Browser for SQLite</a></p>
+<p>After installation, launch <strong>DB Browser for SQLite</strong> as a separate application.</p>
+</section></section>
+<section>
+<section id="chinook-database" class="title-slide slide level1 agenda-slide center">
+<h1>Chinook Database</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Installation</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Chinook Database</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Open the Database in DB Browser</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>First SQL Queries</p>
+</div></li>
+</ul>
 </div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>This shows the journey from the moment a user clicks a button on a website to the moment a CEO sees a chart on their dashboard. A linear flow: Source <span class="math inline">\(\rightarrow\)</span> Extraction <span class="math inline">\(\rightarrow\)</span> Transformation <span class="math inline">\(\rightarrow\)</span> Loading <span class="math inline">\(\rightarrow\)</span> Analytics.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-<section id="data-pipeline-components" class="slide level2 scrollable">
-<h2>Data Pipeline Components</h2>
+<section id="the-chinook-example-database" class="slide level2">
+<h2>The Chinook Example Database</h2>
+<p>For examples in this course, we will use the <strong>Chinook</strong> sample database.</p>
+<p>Chinook represents a digital media store and contains related tables for:</p>
+<ul>
+<li>Customers</li>
+<li>Employees</li>
+<li>Invoices</li>
+<li>Invoice items</li>
+<li>Tracks</li>
+<li>Albums</li>
+<li>Artists</li>
+<li>Genres</li>
+<li>Playlists</li>
+</ul>
+<p><a href="https://github.com/lerocha/chinook-database">Chinook Database</a></p>
+</section>
+<section id="download-chinook-for-sqlite" class="slide level2">
+<h2>Download Chinook for SQLite</h2>
+<p>Download the SQLite version of the Chinook database from the project releases:</p>
+<p><a href="https://github.com/lerocha/chinook-database/releases">Chinook Releases</a></p>
+<p>The SQLite database file is named similar to:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a aria-label="1"></a>Chinook_Sqlite.sqlite</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section></section>
+<section>
+<section id="open-the-database-in-db-browser" class="title-slide slide level1 agenda-slide center">
+<h1>Open the Database in DB Browser</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Installation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Chinook Database</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Open the Database in DB Browser</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>First SQL Queries</p>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="open-the-chinook-database" class="slide level2 scrollable">
+<h2>Open the Chinook Database</h2>
+<p>In DB Browser for SQLite:</p>
 <ol type="1">
-<li><strong>Source</strong>: Where data originates (App logs, DBs, APIs).</li>
-<li><strong>Ingestion</strong>: The process of pulling data from the source.</li>
-<li><strong>Processing/Transformation</strong>: Cleaning, aggregating, or renaming fields.</li>
-<li><strong>Storage</strong>: The final destination (Data Warehouse or Data Lake).</li>
-<li><strong>Orchestration</strong>: The “brain” that schedules and monitors the steps.</li>
+<li>Select <strong>Open Database</strong> from the toolbar.</li>
+<li>Navigate to the course project folder.</li>
+<li>Open <code>chinook.sqlite</code>.</li>
+<li>Confirm that the <strong>Database Structure</strong> tab lists tables such as <code>Customer</code>, <code>Album</code>, and <code>Track</code>.</li>
 </ol>
-<aside class="notes">
-<p>Orchestration is very important. If the “Extraction” step fails, the “Transformation” step shouldn’t try to run on old or broken data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<p>DB Browser opens the database file directly, so you do not need to create or save a connection profile.</p>
 </section>
-<section id="activity-3-pipeline-mapping" class="slide level2">
-<h2>Activity 3: Pipeline Mapping</h2>
-<p><strong>Scenario:</strong> A weather station collects temperature data every minute, sends it to a server, cleans the data (removes errors), and stores it for a yearly report.</p>
-<p><strong>Task:</strong></p>
-<p>Draw (on paper or digitally) a simple diagram of this pipeline. Label your: 1. Source 2. Extraction 3. Transformation 4. Loading 5. Destination</p>
-<aside class="notes">
-<p>This helps you visualize the flow. If the sensor sends a temperature of 999 degrees (an error), that’s where your “Transformation” step fixes the data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="explore-the-database" class="slide level2">
+<h2>Explore the Database</h2>
+<p>Use the main tabs in DB Browser:</p>
+<ul>
+<li><strong>Database Structure</strong>: View tables, columns, data types, indexes, and relationships.</li>
+<li><strong>Browse Data</strong>: Select a table and inspect its records.</li>
+<li><strong>Execute SQL</strong>: Write and run SQL statements.</li>
+</ul>
+<p>To inspect customer records without writing a query, open <strong>Browse Data</strong> and select <code>Customer</code> from the <strong>Table</strong> menu.</p>
+</section>
+<section id="write-and-save-a-sql-script" class="slide level2 scrollable">
+<h2>Write and Save a SQL Script</h2>
+<ol type="1">
+<li>Open the <strong>Execute SQL</strong> tab.</li>
+<li>Enter a SQL statement in the SQL editor.</li>
+<li>Select <strong>Execute all</strong> (the play button) to run it.</li>
+<li>Save the script as:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a aria-label="1"></a>sql/practice.sql</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use <strong>Open SQL file</strong> when you want to continue working with a saved script.</p>
+<p>A SQL statement usually ends with a semicolon:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb4-2"><a aria-label="2"></a><span class="kw">FROM</span> Customer;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section></section>
+<section>
+<section id="first-sql-queries" class="title-slide slide level1 agenda-slide center">
+<h1>First SQL Queries</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Installation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Chinook Database</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Open the Database in DB Browser</p>
+</div></li>
+<li><div class="agenda-active">
+<p>First SQL Queries</p>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="view-data-from-a-table" class="slide level2">
+<h2>View Data from a Table</h2>
+<p>The <code>SELECT</code> statement retrieves data from a database table.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb5-2"><a aria-label="2"></a><span class="kw">FROM</span> Customer;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>*</code> means to return all columns.</p>
+</section>
+<section id="select-specific-columns" class="slide level2">
+<h2>Select Specific Columns</h2>
+<p>Usually, we only select the columns needed for an analysis.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-label="1"></a><span class="kw">SELECT</span> CustomerId,</span>
+<span id="cb6-2"><a aria-label="2"></a>       FirstName,</span>
+<span id="cb6-3"><a aria-label="3"></a>       LastName,</span>
+<span id="cb6-4"><a aria-label="4"></a>       Country</span>
+<span id="cb6-5"><a aria-label="5"></a><span class="kw">FROM</span> Customer;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This makes the query output easier to read and reduces unnecessary data retrieval.</p>
+</section>
+<section id="limit-query-results" class="slide level2">
+<h2>Limit Query Results</h2>
+<p>Use <code>LIMIT</code> when you only want to inspect a small number of rows.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-label="1"></a><span class="kw">SELECT</span> CustomerId,</span>
+<span id="cb7-2"><a aria-label="2"></a>       FirstName,</span>
+<span id="cb7-3"><a aria-label="3"></a>       LastName,</span>
+<span id="cb7-4"><a aria-label="4"></a>       Country</span>
+<span id="cb7-5"><a aria-label="5"></a><span class="kw">FROM</span> Customer</span>
+<span id="cb7-6"><a aria-label="6"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section></section>
