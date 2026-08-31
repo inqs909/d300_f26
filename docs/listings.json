@@ -1,5 +1,12 @@
 [
   {
+    "listing": "/index.html",
+    "items": [
+      "/posts/1.html",
+      "/posts/2.html"
+    ]
+  },
+  {
     "listing": "/lectures.html",
     "items": [
       "/lectures/1a.html",
@@ -7,12 +14,6 @@
       "/lectures/2a.html",
       "/lectures/2b.html",
       "/lectures/3a.html"
-    ]
-  },
-  {
-    "listing": "/index.html",
-    "items": [
-      "/posts/1.html"
     ]
   }
 ]

@@ -70,7 +70,7 @@ Use it to:
 - Write and run SQL statements
 - Save SQL scripts and export query results
 
-[Download DB Browser for SQLite](https://sqlitebrowser.org/dl/)
+[Download DB Browser for SQLite](https://sqlitebrowser.org/)
 
 After installation, launch **DB Browser for SQLite** as a separate application. 
 
