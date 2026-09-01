@@ -17,7 +17,9 @@ website:
   repo-url: https://github.com/inqs909/d300_f26
   title: "Data 300"
   site-url: www.inqs.info/d300_f26
+  favicon: img/logo.png
   navbar:
+    logo: img/logo.png
     right:
       - syllabus.qmd
       - lectures.qmd
