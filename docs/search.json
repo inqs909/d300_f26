@@ -837,7 +837,7 @@
     "href": "lectures/2b.html#activity-3-pipeline-mapping",
     "title": "Data Systems",
     "section": "Activity 3: Pipeline Mapping",
-    "text": "Activity 3: Pipeline Mapping\nScenario: A weather station collects temperature data every minute, sends it to a server, cleans the data (removes errors), and stores it for a yearly report.\nTask:\nDraw (on paper or digitally) a simple diagram of this pipeline. Label your: 1. Source 2. Extraction 3. Transformation 4. Loading 5. Destination\n\nThis helps you visualize the flow. If the sensor sends a temperature of 999 degrees (an error), that’s where your “Transformation” step fixes the data."
+    "text": "Activity 3: Pipeline Mapping\nScenario: A weather station collects temperature data every minute, sends it to a server, cleans the data (removes errors), and stores it for a yearly report.\nTask:\nDraw (on paper or digitally) a simple diagram of this pipeline. Label your:\n\nSource\nExtraction\nTransformation\nLoading\nDestination\n\n\nThis helps you visualize the flow. If the sensor sends a temperature of 999 degrees (an error), that’s where your “Transformation” step fixes the data."
   },
   {
     "objectID": "posts/1.html",

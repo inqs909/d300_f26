@@ -215,22 +215,6 @@
 </div>
 
 </section>
-<section class="slide level2">
-
-<aside class="notes">
-<p>Welcome everyone to the Introduction to Data Systems. Today, we will cover how data is structured, where it is stored, and how it moves through systems. Here is our roadmap for the session. We will move from the nature of data itself to the storage mechanisms and finally to the movement of data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section>
 <section id="data-systems" class="title-slide slide level1 agenda-slide center">
 <h1>Data Systems</h1>
@@ -817,11 +801,18 @@ graph LR
           display:block!important;
       }</style></aside>
 </section>
-<section id="activity-3-pipeline-mapping" class="slide level2">
+<section id="activity-3-pipeline-mapping" class="slide level2 scrollable">
 <h2>Activity 3: Pipeline Mapping</h2>
 <p><strong>Scenario:</strong> A weather station collects temperature data every minute, sends it to a server, cleans the data (removes errors), and stores it for a yearly report.</p>
 <p><strong>Task:</strong></p>
-<p>Draw (on paper or digitally) a simple diagram of this pipeline. Label your: 1. Source 2. Extraction 3. Transformation 4. Loading 5. Destination</p>
+<p>Draw (on paper or digitally) a simple diagram of this pipeline. Label your:</p>
+<ol type="1">
+<li>Source</li>
+<li>Extraction</li>
+<li>Transformation</li>
+<li>Loading</li>
+<li>Destination</li>
+</ol>
 <aside class="notes">
 <p>This helps you visualize the flow. If the sensor sends a temperature of 999 degrees (an error), that’s where your “Transformation” step fixes the data.</p>
 <style type="text/css">

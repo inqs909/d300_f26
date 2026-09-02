@@ -22,12 +22,6 @@ editor: source
 order: 3
 ---
 
-
-::: notes
-Welcome everyone to the Introduction to Data Systems. Today, we will cover how data is structured, where it is stored, and how it moves through systems.
-Here is our roadmap for the session. We will move from the nature of data itself to the storage mechanisms and finally to the movement of data.
-:::
-
 # Data Systems
 
 ## What is a Data System?
@@ -349,6 +343,7 @@ Orchestration is very important. If the "Extraction" step fails, the "Transforma
 **Task:**
 
 Draw (on paper or digitally) a simple diagram of this pipeline. Label your:
+
 1. Source
 2. Extraction
 3. Transformation
