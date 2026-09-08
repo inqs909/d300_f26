@@ -21,7 +21,6 @@ website:
   navbar:
     logo: img/logo.png
     right:
-      - syllabus.qmd
       - lectures.qmd
       - project_report.qmd
 

@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>www.inqs.info/d300_f26/syllabus.html</loc>
-    <lastmod>2026-08-29T17:51:03.574Z</lastmod>
-  </url>
-  <url>
-    <loc>www.inqs.info/d300_f26/posts/2.html</loc>
-    <lastmod>2026-08-31T21:21:37.938Z</lastmod>
-  </url>
-  <url>
-    <loc>www.inqs.info/d300_f26/lectures/3a.html</loc>
-    <lastmod>2026-08-21T06:00:30.663Z</lastmod>
-  </url>
-  <url>
-    <loc>www.inqs.info/d300_f26/lectures/2a.html</loc>
-    <lastmod>2026-08-31T21:22:27.690Z</lastmod>
-  </url>
-  <url>
-    <loc>www.inqs.info/d300_f26/lectures/1a.html</loc>
-    <lastmod>2026-08-24T21:50:49.382Z</lastmod>
-  </url>
-  <url>
-    <loc>www.inqs.info/d300_f26/index.html</loc>
-    <lastmod>2026-08-24T21:39:44.988Z</lastmod>
-  </url>
-  <url>
-    <loc>www.inqs.info/d300_f26/a/1.html</loc>
-    <lastmod>2026-08-28T23:07:21.333Z</lastmod>
-  </url>
-  <url>
-    <loc>www.inqs.info/d300_f26/lectures.html</loc>
-    <lastmod>2026-08-24T16:46:00.684Z</lastmod>
-  </url>
-  <url>
-    <loc>www.inqs.info/d300_f26/lectures/1b.html</loc>
-    <lastmod>2026-08-21T05:55:31.848Z</lastmod>
-  </url>
-  <url>
-    <loc>www.inqs.info/d300_f26/lectures/2b.html</loc>
-    <lastmod>2026-09-02T21:11:33.984Z</lastmod>
+    <loc>www.inqs.info/d300_f26/project_report.html</loc>
+    <lastmod>2026-08-26T20:21:41.392Z</lastmod>
   </url>
   <url>
     <loc>www.inqs.info/d300_f26/posts/1.html</loc>
     <lastmod>2026-08-31T21:50:50.084Z</lastmod>
   </url>
   <url>
-    <loc>www.inqs.info/d300_f26/project_report.html</loc>
-    <lastmod>2026-08-26T20:21:41.392Z</lastmod>
+    <loc>www.inqs.info/d300_f26/lectures/2b.html</loc>
+    <lastmod>2026-09-02T21:11:33.984Z</lastmod>
+  </url>
+  <url>
+    <loc>www.inqs.info/d300_f26/lectures/1b.html</loc>
+    <lastmod>2026-08-21T05:55:31.848Z</lastmod>
+  </url>
+  <url>
+    <loc>www.inqs.info/d300_f26/lectures.html</loc>
+    <lastmod>2026-08-24T16:46:00.684Z</lastmod>
+  </url>
+  <url>
+    <loc>www.inqs.info/d300_f26/a/1.html</loc>
+    <lastmod>2026-08-28T23:07:21.333Z</lastmod>
+  </url>
+  <url>
+    <loc>www.inqs.info/d300_f26/index.html</loc>
+    <lastmod>2026-08-24T21:39:44.988Z</lastmod>
+  </url>
+  <url>
+    <loc>www.inqs.info/d300_f26/lectures/1a.html</loc>
+    <lastmod>2026-08-24T21:50:49.382Z</lastmod>
+  </url>
+  <url>
+    <loc>www.inqs.info/d300_f26/lectures/2a.html</loc>
+    <lastmod>2026-08-31T21:22:27.690Z</lastmod>
+  </url>
+  <url>
+    <loc>www.inqs.info/d300_f26/lectures/3a.html</loc>
+    <lastmod>2026-09-07T05:35:03.108Z</lastmod>
+  </url>
+  <url>
+    <loc>www.inqs.info/d300_f26/posts/2.html</loc>
+    <lastmod>2026-08-31T21:21:37.938Z</lastmod>
   </url>
 </urlset>
