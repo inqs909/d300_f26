@@ -38,6 +38,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-7d1171aa6a9b23b714c9c3ad0a2c5787.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -250,19 +316,37 @@
 </section>
 <section id="three-levels-of-data-models" class="slide level2">
 <h2>Three Levels of Data Models</h2>
-<p>Conceptual model:</p>
-<ul>
-<li>Big-picture view</li>
-<li>Main entities and relationships</li>
-</ul>
-<p>Logical model:</p>
-<ul>
-<li>Tables, fields, keys, and constraints</li>
-</ul>
-<p>Physical model:</p>
-<ul>
-<li>Specific DBMS details, indexes, data types, and storage choices</li>
-</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th>Main question</th>
+<th>Typical output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Conceptual</td>
+<td>What does the organization need to track?</td>
+<td>Entities and relationships</td>
+</tr>
+<tr class="even">
+<td>Logical</td>
+<td>How should the data be structured?</td>
+<td>Tables, columns, keys, and constraints</td>
+</tr>
+<tr class="odd">
+<td>Physical</td>
+<td>How will the DBMS store and access it?</td>
+<td>Data types, indexes, and storage choices</td>
+</tr>
+</tbody>
+</table>
 <aside class="notes">
 <p>Use this slide to separate planning from implementation. Students often jump straight to tables, but conceptual thinking helps them understand the domain first.</p>
 <style type="text/css">
@@ -287,7 +371,7 @@
 <li>Cardinality rules</li>
 </ul>
 <aside class="notes">
-<p>Define ER diagrams as a communication tool. They help non-programmers and technical users discuss the structure of a database before writing SQL.</p>
+<p>Define ER diagrams as a communication tool. They help non-programmers and technical users discuss the structure of a database before creating tables.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -354,7 +438,8 @@
 <section id="activity-identify-entities-and-attributes" class="slide level2">
 <h2>Activity: Identify Entities and Attributes</h2>
 <p>Scenario: A college wants to track students, courses, instructors, departments, and course enrollments.</p>
-<p>List:</p>
+<p><strong>Time:</strong> 8 minutes<br>
+<strong>Deliverable:</strong> A labeled list containing:</p>
 <ul>
 <li>At least 3 entities</li>
 <li>At least 2 attributes per entity</li>
@@ -527,7 +612,7 @@
 <li>A student enrolls in many courses, and a course has many students.</li>
 <li>A customer places many orders.</li>
 </ol>
-<p>Then sketch a simple ER diagram for each.</p>
+<p>Then sketch a simple ER diagram for each. Label each relationship with a verb.</p>
 <aside class="notes">
 <p>Give students 10 minutes. Encourage them to label relationships clearly. Afterward, review each statement and ask students how they knew the cardinality.</p>
 <style type="text/css">
@@ -655,13 +740,42 @@
 <section id="keys-in-relational-databases" class="slide level2">
 <h2>Keys in Relational Databases</h2>
 <p>Keys help identify records and connect tables.</p>
-<p>Important key types:</p>
-<ul>
-<li>Primary key</li>
-<li>Foreign key</li>
-<li>Composite key</li>
-<li>Candidate key</li>
-</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Key type</th>
+<th>Purpose</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Primary key</td>
+<td>Uniquely identifies a row</td>
+<td><code>student_id</code> in <code>Student</code></td>
+</tr>
+<tr class="even">
+<td>Foreign key</td>
+<td>References a row in another table</td>
+<td><code>student_id</code> in <code>Enrollment</code></td>
+</tr>
+<tr class="odd">
+<td>Composite key</td>
+<td>Uses multiple columns for uniqueness</td>
+<td><code>(student_id, course_id, term)</code></td>
+</tr>
+<tr class="even">
+<td>Candidate key</td>
+<td>Could serve as the primary key</td>
+<td>A verified, unique email address</td>
+</tr>
+</tbody>
+</table>
 <aside class="notes">
 <p>Transition from diagrams to implementation. Explain that keys are what make relationships enforceable in a relational database.</p>
 <style type="text/css">
@@ -868,18 +982,42 @@
 </ul>
 </div>
 </section>
-<section id="why-normalization" class="slide level2">
-<h2>Why Normalization?</h2>
-<p>Normalization organizes data to reduce:</p>
-<ul>
-<li>Repetition</li>
-<li>Update problems</li>
-<li>Insert problems</li>
-<li>Delete problems</li>
-<li>Confusing dependencies</li>
-</ul>
+<section id="why-normalize-data" class="slide level2">
+<h2>Why Normalize Data?</h2>
+<p>Normalization stores each fact in the table where it belongs.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Example</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Repeated data</td>
+<td>A customer’s name appears on every order line</td>
+<td>Updates can disagree</td>
+</tr>
+<tr class="even">
+<td>Insert anomaly</td>
+<td>A product cannot be recorded until someone orders it</td>
+<td>Valid facts cannot be stored</td>
+</tr>
+<tr class="odd">
+<td>Delete anomaly</td>
+<td>Deleting the final order removes the only product record</td>
+<td>Valid facts disappear</td>
+</tr>
+</tbody>
+</table>
 <aside class="notes">
-<p>Transition to data quality. Explain that normalization helps prevent the same fact from being stored in multiple places.</p>
+<p>Connect each anomaly to a business consequence. A normalized design reduces these risks by storing customer facts once, product facts once, and transactions separately.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -892,54 +1030,41 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="unnormalized-data-example" class="slide level2">
-<h2>Unnormalized Data Example</h2>
+<section id="normal-forms-at-a-glance" class="slide level2">
+<h2>Normal Forms at a Glance</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 21%">
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 15%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">student_id</th>
-<th>student_name</th>
-<th>course_1</th>
-<th>course_2</th>
-<th>instructor_1</th>
-<th>instructor_2</th>
+<th>Normal form</th>
+<th>Requirement</th>
+<th>Question to ask</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">101</td>
-<td>Ana Rivera</td>
-<td>Database Systems</td>
-<td>Statistics</td>
-<td>Dr.&nbsp;Kim</td>
-<td>Dr.&nbsp;Patel</td>
+<td>1NF</td>
+<td>Atomic values and no repeating groups</td>
+<td>Does each cell contain one value?</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">102</td>
-<td>Jamal Lee</td>
-<td>Database Systems</td>
-<td>Programming</td>
-<td>Dr.&nbsp;Kim</td>
-<td>Dr.&nbsp;Gomez</td>
+<td>2NF</td>
+<td>1NF plus no partial dependencies</td>
+<td>Does each non-key field depend on the whole key?</td>
+</tr>
+<tr class="odd">
+<td>3NF</td>
+<td>2NF plus no transitive dependencies</td>
+<td>Does a non-key field depend on another non-key field?</td>
 </tr>
 </tbody>
 </table>
-<p>Problems:</p>
-<ul>
-<li>Repeating course columns</li>
-<li>Hard to add a third course</li>
-<li>Instructor data is mixed with student data</li>
-</ul>
 <aside class="notes">
-<p>Ask students what happens if a student takes four courses. Then ask what happens if Dr.&nbsp;Kim’s name changes. This motivates normalization.</p>
+<p>Emphasize that normalization is cumulative. A table must satisfy 1NF before it can satisfy 2NF, and it must satisfy 2NF before it can satisfy 3NF.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -953,12 +1078,13 @@
       }</style></aside>
 </section>
 <section id="first-normal-form" class="slide level2">
-<h2>26. First Normal Form</h2>
-<p>A table is in first normal form when:</p>
+<h2>First Normal Form</h2>
+<p>A table satisfies first normal form when:</p>
 <ul>
-<li>Each cell stores a single value</li>
-<li>There are no repeating groups</li>
-<li>Each row can be uniquely identified</li>
+<li>Each cell contains one value</li>
+<li>Each column describes one type of fact</li>
+<li>Each row has a unique identifier</li>
+<li>Repeating column groups do not appear</li>
 </ul>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
@@ -966,8 +1092,8 @@
 <p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-  A[Repeating course columns] --&gt; B[One course per row]
-  B --&gt; C[Student table plus enrollment table]
+  A[Product 1 and Product 2 columns] --&gt; B[One product per row]
+  B --&gt; C[Composite row key]
 
   classDef red fill:#D55E00,color:#FFFFFF,stroke:#111111,stroke-width:2px
   classDef yellow fill:#F0E442,color:#000000,stroke:#111111,stroke-width:2px
@@ -983,7 +1109,7 @@
 </div>
 </div>
 <aside class="notes">
-<p>Explain that 1NF removes repeated columns and multi-value cells. The goal is to make data row-based rather than column-repeated.</p>
+<p>Explain that 1NF changes repeated columns or lists into separate rows. In the working example, each row represents one product on one order, identified by the combination of order_id and product_id.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -996,16 +1122,18 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="second-normal-form" class="slide level2">
-<h2>Second Normal Form</h2>
-<p>A table is in second normal form when:</p>
+<section id="order-dataset-normalization" class="slide level2">
+<h2>Order Dataset Normalization</h2>
+<p>An online store records customers, orders, products, and quantities.</p>
+<p><strong>Business rules</strong></p>
 <ul>
-<li>It is already in first normal form</li>
-<li>Every non-key attribute depends on the entire primary key</li>
+<li>One customer can place many orders</li>
+<li>One order can contain many products</li>
+<li>A product can appear on many orders</li>
+<li>Quantity describes one product on one order</li>
 </ul>
-<p>This mainly matters when a table has a composite key.</p>
 <aside class="notes">
-<p>Define partial dependency in plain language. If a field depends on only part of a composite key, it probably belongs in another table.</p>
+<p>Use the business rules to identify likely entities. Customer, Order, and Product are entities. Order Item represents the many-to-many relationship between orders and products.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1018,18 +1146,35 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="third-normal-form" class="slide level2">
-<h2>Third Normal Form</h2>
-<p>A table is in third normal form when:</p>
-<ul>
-<li>It is already in second normal form</li>
-<li>Non-key fields do not depend on other non-key fields</li>
-</ul>
-<p>Example problem:</p>
-<p><code>student_id, student_name, department_id, department_name</code></p>
-<p><code>department_name</code> depends on <code>department_id</code>, not directly on <code>student_id</code>.</p>
+<section id="normalization-process" class="slide level2">
+<h2>Normalization Process</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Unnormalized dataset] --&gt; B[1NF: one value per cell]
+  B --&gt; C[2NF: remove partial dependencies]
+  C --&gt; D[3NF: remove transitive dependencies]
+
+  classDef red fill:#D55E00,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef yellow fill:#F0E442,color:#000000,stroke:#111111,stroke-width:2px
+  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px
+
+  class A red
+  class B yellow
+  class C blue
+  class D green
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <aside class="notes">
-<p>Explain transitive dependency as an indirect dependency. If department name depends on department ID, store department information in a Department table.</p>
+<p>Preview the four versions of the same data. Each step solves a different dependency problem while preserving the original facts.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1042,58 +1187,865 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="activity-normalize-a-table" class="slide level2">
-<h2>Activity: Normalize a Table</h2>
-<p>Start with this table:</p>
-<table class="caption-top">
+<section id="unnormalized-dataset" class="slide level2 smaller">
+<h2>Unnormalized Dataset</h2>
+<table class="caption-top" style="width:100%;">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 18%">
+<col style="width: 30%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">student_id</th>
-<th>student_name</th>
-<th>course_id</th>
-<th>course_name</th>
-<th>instructor_name</th>
+<th style="text-align: right;">order_id</th>
+<th>order_date</th>
+<th>customer</th>
+<th>products</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">101</td>
-<td>Ana Rivera</td>
-<td>C101</td>
-<td>Databases</td>
-<td>Dr.&nbsp;Kim</td>
+<td style="text-align: right;">1001</td>
+<td>2026-09-01</td>
+<td>C01, Ana Rivera</td>
+<td>P10, USB-C Hub, 29.99, qty 1 and P20, Wireless Mouse, 24.50, qty 2</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">102</td>
-<td>Jamal Lee</td>
-<td>C101</td>
-<td>Databases</td>
-<td>Dr.&nbsp;Kim</td>
+<td style="text-align: right;">1002</td>
+<td>2026-09-02</td>
+<td>C02, Jamal Lee</td>
+<td>P10, USB-C Hub, 29.99, qty 1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">101</td>
-<td>Ana Rivera</td>
-<td>C202</td>
-<td>Statistics</td>
-<td>Dr.&nbsp;Patel</td>
+<td style="text-align: right;">1003</td>
+<td>2026-09-03</td>
+<td>C01, Ana Rivera</td>
+<td>P30, Laptop Stand, 39.00, qty 1 and P20, Wireless Mouse, 24.50, qty 1</td>
 </tr>
 </tbody>
 </table>
-<p>Task:</p>
+<p><strong>Problems:</strong> <code>customer</code> contains two values, and <code>products</code> contains a list of repeating product groups.</p>
+<aside class="notes">
+<p>Ask students to count how many values appear in the customer and products cells. Point out that searching, sorting, or updating one product would require parsing a list inside a cell.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-1-dataset-in-1nf" class="slide level2 smaller">
+<h2>Step 1: Dataset in 1NF</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">order_id</th>
+<th>order_date</th>
+<th>customer_id</th>
+<th>customer_name</th>
+<th>product_id</th>
+<th>product_name</th>
+<th style="text-align: right;">unit_price</th>
+<th style="text-align: right;">quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1001</td>
+<td>2026-09-01</td>
+<td>C01</td>
+<td>Ana Rivera</td>
+<td>P10</td>
+<td>USB-C Hub</td>
+<td style="text-align: right;">29.99</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1001</td>
+<td>2026-09-01</td>
+<td>C01</td>
+<td>Ana Rivera</td>
+<td>P20</td>
+<td>Wireless Mouse</td>
+<td style="text-align: right;">24.50</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1002</td>
+<td>2026-09-02</td>
+<td>C02</td>
+<td>Jamal Lee</td>
+<td>P10</td>
+<td>USB-C Hub</td>
+<td style="text-align: right;">29.99</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1003</td>
+<td>2026-09-03</td>
+<td>C01</td>
+<td>Ana Rivera</td>
+<td>P30</td>
+<td>Laptop Stand</td>
+<td style="text-align: right;">39.00</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1003</td>
+<td>2026-09-03</td>
+<td>C01</td>
+<td>Ana Rivera</td>
+<td>P20</td>
+<td>Wireless Mouse</td>
+<td style="text-align: right;">24.50</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>Composite primary key: <code>(order_id, product_id)</code></p>
+<aside class="notes">
+<p>The conversion separates customer details into individual columns and creates one row per product on an order. Every cell now contains one value. The combination of order_id and product_id identifies each row.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="dependencies-in-the-1nf-table" class="slide level2">
+<h2>Dependencies in the 1NF Table</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a aria-label="1"></a>order_id                  -&gt; order_date, customer_id</span>
+<span id="cb1-2"><a aria-label="2"></a>customer_id               -&gt; customer_name</span>
+<span id="cb1-3"><a aria-label="3"></a>product_id                -&gt; product_name, unit_price</span>
+<span id="cb1-4"><a aria-label="4"></a>(order_id, product_id)    -&gt; quantity</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>quantity</code> depends on the complete key. Several other fields depend on only part of the key.</p>
+<aside class="notes">
+<p>Read each line as “determines.” One order_id determines its date and customer. One product_id determines its name and current unit price. The full order-product key determines quantity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="partial-dependencies-in-the-1nf-table" class="slide level2">
+<h2>Partial Dependencies in the 1NF Table</h2>
+<p>The key is <code>(order_id, product_id)</code>.</p>
 <ul>
-<li>Identify repeated facts</li>
-<li>Split the data into normalized tables</li>
-<li>Add primary and foreign keys</li>
+<li><code>order_date</code>, <code>customer_id</code>, and <code>customer_name</code> depend on <code>order_id</code></li>
+<li><code>product_name</code> and <code>unit_price</code> depend on <code>product_id</code></li>
+<li><code>quantity</code> depends on both key columns</li>
+</ul>
+<p>Separating order facts and product facts removes the partial dependencies.</p>
+<aside class="notes">
+<p>Define a partial dependency as dependence on one part of a composite key. Ask which field genuinely describes the relationship between an order and a product. The answer is quantity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-2-orders-table-in-2nf" class="slide level2">
+<h2>Step 2: Orders Table in 2NF</h2>
+<p><strong>Orders_2NF</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">order_id (PK)</th>
+<th>order_date</th>
+<th>customer_id</th>
+<th>customer_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1001</td>
+<td>2026-09-01</td>
+<td>C01</td>
+<td>Ana Rivera</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1002</td>
+<td>2026-09-02</td>
+<td>C02</td>
+<td>Jamal Lee</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1003</td>
+<td>2026-09-03</td>
+<td>C01</td>
+<td>Ana Rivera</td>
+</tr>
+</tbody>
+</table>
+<p>All fields depend on the complete primary key, <code>order_id</code>.</p>
+<aside class="notes">
+<p>The order fields no longer repeat for every product. This table satisfies 2NF because it has a single-column key, so partial dependency cannot occur. Customer name still repeats, which becomes the focus of 3NF.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-2-products-table-in-2nf" class="slide level2">
+<h2>Step 2: Products Table in 2NF</h2>
+<p><strong>Products</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>product_id (PK)</th>
+<th>product_name</th>
+<th style="text-align: right;">unit_price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>P10</td>
+<td>USB-C Hub</td>
+<td style="text-align: right;">29.99</td>
+</tr>
+<tr class="even">
+<td>P20</td>
+<td>Wireless Mouse</td>
+<td style="text-align: right;">24.50</td>
+</tr>
+<tr class="odd">
+<td>P30</td>
+<td>Laptop Stand</td>
+<td style="text-align: right;">39.00</td>
+</tr>
+</tbody>
+</table>
+<p>Each product name and price now appears once.</p>
+<aside class="notes">
+<p>Product name and unit price depend on product_id, so they move to Products. State that this example treats unit_price as the product’s current price. A system that preserves sale prices could store that price with each order item.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-2-order-items-table-in-2nf" class="slide level2">
+<h2>Step 2: Order Items Table in 2NF</h2>
+<p><strong>Order_Items</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">order_id (PK, FK)</th>
+<th>product_id (PK, FK)</th>
+<th style="text-align: right;">quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1001</td>
+<td>P10</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1001</td>
+<td>P20</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1002</td>
+<td>P10</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1003</td>
+<td>P30</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1003</td>
+<td>P20</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>The composite primary key is <code>(order_id, product_id)</code>.</p>
+<aside class="notes">
+<p>Order_Items keeps the fact that depends on the full composite key: quantity. The two columns in the key also serve as foreign keys that connect each row to an order and a product.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transitive-dependency-in-the-2nf-design" class="slide level2">
+<h2>Transitive Dependency in the 2NF Design</h2>
+<p>Inside <code>Orders_2NF</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a aria-label="1"></a>order_id -&gt; customer_id -&gt; customer_name</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>customer_name</code> depends on <code>customer_id</code>, a non-key field.</p>
+<p>Moving customer details into a separate table removes this transitive dependency.</p>
+<aside class="notes">
+<p>Explain transitive dependency as an indirect path. order_id identifies customer_id, and customer_id identifies customer_name. Customer name belongs in a table where customer_id serves as the key.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-3-customers-table-in-3nf" class="slide level2">
+<h2>Step 3: Customers Table in 3NF</h2>
+<p><strong>Customers</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>customer_id (PK)</th>
+<th>customer_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C01</td>
+<td>Ana Rivera</td>
+</tr>
+<tr class="even">
+<td>C02</td>
+<td>Jamal Lee</td>
+</tr>
+</tbody>
+</table>
+<p>The table stores each customer name once.</p>
+<aside class="notes">
+<p>The new Customers table removes customer_name from Orders. If Ana changes her name, the database now requires one update rather than an update to every order.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-3-orders-table-in-3nf" class="slide level2">
+<h2>Step 3: Orders Table in 3NF</h2>
+<p><strong>Orders</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">order_id (PK)</th>
+<th>order_date</th>
+<th>customer_id (FK)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1001</td>
+<td>2026-09-01</td>
+<td>C01</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1002</td>
+<td>2026-09-02</td>
+<td>C02</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1003</td>
+<td>2026-09-03</td>
+<td>C01</td>
+</tr>
+</tbody>
+</table>
+<p>Every non-key field depends directly on <code>order_id</code>.</p>
+<aside class="notes">
+<p>Orders retains customer_id because it records which customer placed the order. The foreign key connects the order to the descriptive customer information without repeating the customer name.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="remaining-tables-in-3nf" class="slide level2 smaller">
+<h2>Remaining Tables in 3NF</h2>
+<p><strong>Products</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>product_id (PK)</th>
+<th>product_name</th>
+<th style="text-align: right;">unit_price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>P10</td>
+<td>USB-C Hub</td>
+<td style="text-align: right;">29.99</td>
+</tr>
+<tr class="even">
+<td>P20</td>
+<td>Wireless Mouse</td>
+<td style="text-align: right;">24.50</td>
+</tr>
+<tr class="odd">
+<td>P30</td>
+<td>Laptop Stand</td>
+<td style="text-align: right;">39.00</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Order_Items</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">order_id (PK, FK)</th>
+<th>product_id (PK, FK)</th>
+<th style="text-align: right;">quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1001</td>
+<td>P10</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1001</td>
+<td>P20</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1002</td>
+<td>P10</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1003</td>
+<td>P30</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1003</td>
+<td>P20</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Products and Order_Items did not change between 2NF and 3NF because they contained no transitive dependencies. Review how the two foreign keys in Order_Items connect the many-to-many relationship.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="complete-3nf-schema" class="slide level2">
+<h2>Complete 3NF Schema</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">erDiagram
+  CUSTOMERS ||--o{ ORDERS : places
+  ORDERS ||--|{ ORDER_ITEMS : contains
+  PRODUCTS ||--o{ ORDER_ITEMS : appears_in
+
+  CUSTOMERS {
+    text customer_id PK
+    text customer_name
+  }
+  ORDERS {
+    int order_id PK
+    text order_date
+    text customer_id FK
+  }
+  PRODUCTS {
+    text product_id PK
+    text product_name
+    real unit_price
+  }
+  ORDER_ITEMS {
+    int order_id PK, FK
+    text product_id PK, FK
+    int quantity
+  }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Walk through the foreign keys. Orders connects to Customers. Order_Items connects to Orders and Products. Each descriptive fact has one home.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="dataset-changes-across-the-normal-forms" class="slide level2">
+<h2>Dataset Changes Across the Normal Forms</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>Structure</th>
+<th>Main improvement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unnormalized</td>
+<td>One table with lists inside cells</td>
+<td>Starting point</td>
+</tr>
+<tr class="even">
+<td>1NF</td>
+<td>One flat table with one product per row</td>
+<td>Atomic values</td>
+</tr>
+<tr class="odd">
+<td>2NF</td>
+<td>Orders, Products, and Order_Items</td>
+<td>No partial dependencies</td>
+</tr>
+<tr class="even">
+<td>3NF</td>
+<td>Customers, Orders, Products, and Order_Items</td>
+<td>No transitive dependencies</td>
+</tr>
+</tbody>
+</table>
+<p>The five order-item facts remain present at every stage.</p>
+<aside class="notes">
+<p>Normalization changes how the database stores the facts. The final design still represents the five original order-product combinations, but customer, order, and product descriptions no longer repeat unnecessarily.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="checking-the-3nf-conversion" class="slide level2">
+<h2>Checking the 3NF Conversion</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Check</th>
+<th style="text-align: right;">Expected result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unique customers in 1NF</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>Rows in Customers</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td>Unique orders in 1NF</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td>Rows in Orders</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td>Unique products in 1NF</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td>Rows in Products</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td>Order-product rows in 1NF and Order_Items</td>
+<td style="text-align: right;">5 in each</td>
+</tr>
+</tbody>
+</table>
+<p>Matching counts help confirm that the split preserved every entity and relationship.</p>
+<aside class="notes">
+<p>Ask students to verify each count by looking back at the 1NF table. Explain that matching order-product rows gives a simple classroom check for a lossless split.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="benefits-of-the-3nf-design" class="slide level2">
+<h2>Benefits of the 3NF Design</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Earlier problem</th>
+<th>Improvement in 3NF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ana’s name repeats on several rows</td>
+<td>Customers stores it once</td>
+</tr>
+<tr class="even">
+<td>Product details repeat across orders</td>
+<td>Products stores them once</td>
+</tr>
+<tr class="odd">
+<td>Deleting an order could remove product details</td>
+<td>Products remains independent</td>
+</tr>
+<tr class="even">
+<td>A product needs an order before it can be recorded</td>
+<td>Products accepts it independently</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Connect these improvements to update, delete, and insert anomalies. Ask students which final table contains each type of fact.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="normalization-depends-on-business-rules" class="slide level2">
+<h2>Normalization Depends on Business Rules</h2>
+<p>The example assumes that:</p>
+<ul>
+<li>Each product ID has one current price</li>
+<li>One product appears at most once per order</li>
+<li>Each order belongs to one customer</li>
+</ul>
+<p>Different rules can require a different schema. For example, storing the sale price in <code>Order_Items</code> would preserve historical prices.</p>
+<aside class="notes">
+<p>Functional dependencies come from business rules. Designers should confirm these assumptions with domain experts before finalizing the schema.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-normalize-student-enrollment-data" class="slide level2 scrollable">
+<h2>Activity: Normalize Student Enrollment Data</h2>
+<h3 id="unnormalized-dataset-1">Unnormalized Dataset</h3>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>student_id</th>
+<th>student_name</th>
+<th>email</th>
+<th>major</th>
+<th>courses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S101</td>
+<td>Ana Rivera</td>
+<td>ana@college.edu</td>
+<td>M01, Data Science</td>
+<td>C101, Databases, Dr.&nbsp;Kim, A; C202, Statistics, Dr.&nbsp;Patel, B+</td>
+</tr>
+<tr class="even">
+<td>S102</td>
+<td>Jamal Lee</td>
+<td>jamal@college.edu</td>
+<td>M02, Computer Science</td>
+<td>C101, Databases, Dr.&nbsp;Kim, B</td>
+</tr>
+<tr class="odd">
+<td>S103</td>
+<td>Mei Chen</td>
+<td>mei@college.edu</td>
+<td>M01, Data Science</td>
+<td>C202, Statistics, Dr.&nbsp;Patel, A; C303, Programming, Dr.&nbsp;Gomez, A-</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>major</code> and <code>courses</code> columns contain multiple values. Therefore, the dataset does not satisfy first normal form.</p>
+<h3 id="instructions">Instructions</h3>
+<h4 id="part-1-convert-the-dataset-to-1nf">Part 1: Convert the Dataset to 1NF</h4>
+<ul>
+<li>Store only one value in each cell.</li>
+<li>Create one row for each student-course combination.</li>
+<li>Separate the values currently stored in the <code>major</code> and <code>courses</code> columns.</li>
+<li>Use <code>(student_id, course_id)</code> as the composite primary key.</li>
+</ul>
+<h4 id="part-2-convert-the-dataset-to-2nf">Part 2: Convert the Dataset to 2NF</h4>
+<p>Use the following functional dependencies:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a aria-label="1"></a>student_id                -&gt; student_name, email, major_id, major_name</span>
+<span id="cb3-2"><a aria-label="2"></a>course_id                 -&gt; course_name, instructor_name</span>
+<span id="cb3-3"><a aria-label="3"></a>(student_id, course_id)   -&gt; grade</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Identify fields that depend on only <code>student_id</code>.</li>
+<li>Identify fields that depend on only <code>course_id</code>.</li>
+<li>Identify fields that depend on the complete composite key.</li>
+<li>Split the 1NF table into appropriate 2NF tables.</li>
+</ul>
+<h4 id="part-3-convert-the-dataset-to-3nf">Part 3: Convert the Dataset to 3NF</h4>
+<p>Consider the following transitive dependency:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a aria-label="1"></a>student_id -&gt; major_id -&gt; major_name</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Identify the non-key field that determines another non-key field.</li>
+<li>Create a separate table for majors.</li>
+<li>Update the student table so that it references the new major table.</li>
+</ul>
+<h4 id="part-4-identify-the-keys">Part 4: Identify the Keys</h4>
+<p>For every table in your final 3NF design:</p>
+<ul>
+<li>Label each primary key with <code>PK</code>.</li>
+<li>Label each foreign key with <code>FK</code>.</li>
+<li>Identify any composite primary keys.</li>
+<li>Draw the relationships between the tables.</li>
+</ul>
+<h3 id="submission-requirements">Submission Requirements</h3>
+<p>Submit the following:</p>
+<ol type="1">
+<li>The dataset converted to 1NF.</li>
+<li>The tables created for 2NF.</li>
+<li>The final tables in 3NF.</li>
+<li>Primary-key and foreign-key labels.</li>
+<li>One or two sentences explaining why each table was separated.</li>
+</ol>
+<aside class="notes">
+<p>Give students 15 to 20 minutes. Remind them that 1NF removes multi-value cells, 2NF removes partial dependencies, and 3NF removes transitive dependencies.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key Takeaways</h2>
+<ul>
+<li>ER diagrams make entities and relationship rules visible</li>
+<li>Primary keys identify rows, while foreign keys connect tables</li>
+<li>1NF removes repeating groups and multi-value cells</li>
+<li>2NF removes partial dependencies from composite keys</li>
+<li>3NF removes dependencies between non-key fields</li>
+<li>Row and key checks help confirm that normalization preserved the data</li>
 </ul>
 <aside class="notes">
-<p>Give students 15 minutes. A possible solution includes Student, Course, Instructor, and Enrollment tables. Encourage students to explain why each table exists.</p>
+<p>Close by connecting the three lesson sections. A strong database design starts with a model, makes relationships enforceable with keys, and stores each fact in the table determined by its key.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1168,7 +2120,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',

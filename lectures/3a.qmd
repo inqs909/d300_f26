@@ -7,6 +7,8 @@ format:
     theme: [default, styles.scss]
     controls-layout: bottom-right
     controls-tutorial: true
+    progress: true
+    slide-number: c/t
     incremental: false 
     
 revealjs-plugins:
@@ -32,7 +34,6 @@ Data modeling is the process of describing how data is organized, connected, and
 ::: {.notes}
 Welcome students and frame data modeling as the planning step before implementation. Emphasize that a good model reduces confusion, duplication, and future redesign.
 :::
-
 
 ## Why Data Modeling Matters
 
@@ -77,18 +78,11 @@ Explain that models become more detailed over time. Conceptual models focus on i
 
 ## Three Levels of Data Models
 
-Conceptual model:
-
-- Big-picture view
-- Main entities and relationships
-
-Logical model:
-
-- Tables, fields, keys, and constraints
-
-Physical model:
-
-- Specific DBMS details, indexes, data types, and storage choices
+| Level | Main question | Typical output |
+|---|---|---|
+| Conceptual | What does the organization need to track? | Entities and relationships |
+| Logical | How should the data be structured? | Tables, columns, keys, and constraints |
+| Physical | How will the DBMS store and access it? | Data types, indexes, and storage choices |
 
 ::: {.notes}
 Use this slide to separate planning from implementation. Students often jump straight to tables, but conceptual thinking helps them understand the domain first.
@@ -105,7 +99,7 @@ An Entity-Relationship diagram, or ER diagram, visually represents:
 - Cardinality rules
 
 ::: {.notes}
-Define ER diagrams as a communication tool. They help non-programmers and technical users discuss the structure of a database before writing SQL.
+Define ER diagrams as a communication tool. They help non-programmers and technical users discuss the structure of a database before creating tables.
 :::
 
 
@@ -147,7 +141,8 @@ Point out that attributes often become columns. Encourage students to distinguis
 
 Scenario: A college wants to track students, courses, instructors, departments, and course enrollments.
 
-List:
+**Time:** 8 minutes  
+**Deliverable:** A labeled list containing:
 
 - At least 3 entities
 - At least 2 attributes per entity
@@ -257,7 +252,7 @@ For each statement, decide the cardinality:
 3. A student enrolls in many courses, and a course has many students.
 4. A customer places many orders.
 
-Then sketch a simple ER diagram for each.
+Then sketch a simple ER diagram for each. Label each relationship with a verb.
 
 ::: {.notes}
 Give students 10 minutes. Encourage them to label relationships clearly. Afterward, review each statement and ask students how they knew the cardinality.
@@ -332,12 +327,12 @@ Walk through the diagram one relationship at a time. Ask students which table re
 
 Keys help identify records and connect tables.
 
-Important key types:
-
-- Primary key
-- Foreign key
-- Composite key
-- Candidate key
+| Key type | Purpose | Example |
+|---|---|---|
+| Primary key | Uniquely identifies a row | `student_id` in `Student` |
+| Foreign key | References a row in another table | `student_id` in `Enrollment` |
+| Composite key | Uses multiple columns for uniqueness | `(student_id, course_id, term)` |
+| Candidate key | Could serve as the primary key | A verified, unique email address |
 
 ::: {.notes}
 Transition from diagrams to implementation. Explain that keys are what make relationships enforceable in a relational database.
@@ -447,52 +442,48 @@ Explain that composite keys are useful when no single field is enough. Also ment
 
 # Normalization
 
-## Why Normalization?
+## Why Normalize Data?
 
-Normalization organizes data to reduce:
+Normalization stores each fact in the table where it belongs.
 
-- Repetition
-- Update problems
-- Insert problems
-- Delete problems
-- Confusing dependencies
+| Problem | Example | Risk |
+|---|---|---|
+| Repeated data | A customer's name appears on every order line | Updates can disagree |
+| Insert anomaly | A product cannot be recorded until someone orders it | Valid facts cannot be stored |
+| Delete anomaly | Deleting the final order removes the only product record | Valid facts disappear |
 
 ::: {.notes}
-Transition to data quality. Explain that normalization helps prevent the same fact from being stored in multiple places.
+Connect each anomaly to a business consequence. A normalized design reduces these risks by storing customer facts once, product facts once, and transactions separately.
 :::
 
 
-## Unnormalized Data Example
+## Normal Forms at a Glance
 
-| student_id | student_name | course_1 | course_2 | instructor_1 | instructor_2 |
-|---:|---|---|---|---|---|
-| 101 | Ana Rivera | Database Systems | Statistics | Dr. Kim | Dr. Patel |
-| 102 | Jamal Lee | Database Systems | Programming | Dr. Kim | Dr. Gomez |
-
-Problems:
-
-- Repeating course columns
-- Hard to add a third course
-- Instructor data is mixed with student data
+| Normal form | Requirement | Question to ask |
+|---|---|---|
+| 1NF | Atomic values and no repeating groups | Does each cell contain one value? |
+| 2NF | 1NF plus no partial dependencies | Does each non-key field depend on the whole key? |
+| 3NF | 2NF plus no transitive dependencies | Does a non-key field depend on another non-key field? |
 
 ::: {.notes}
-Ask students what happens if a student takes four courses. Then ask what happens if Dr. Kim's name changes. This motivates normalization.
+Emphasize that normalization is cumulative. A table must satisfy 1NF before it can satisfy 2NF, and it must satisfy 2NF before it can satisfy 3NF.
 :::
 
 
-## 26. First Normal Form
+## First Normal Form
 
-A table is in first normal form when:
+A table satisfies first normal form when:
 
-- Each cell stores a single value
-- There are no repeating groups
-- Each row can be uniquely identified
+- Each cell contains one value
+- Each column describes one type of fact
+- Each row has a unique identifier
+- Repeating column groups do not appear
 
 ```{mermaid}
 
 flowchart LR
-  A[Repeating course columns] --> B[One course per row]
-  B --> C[Student table plus enrollment table]
+  A[Product 1 and Product 2 columns] --> B[One product per row]
+  B --> C[Composite row key]
 
   classDef red fill:#D55E00,color:#FFFFFF,stroke:#111111,stroke-width:2px
   classDef yellow fill:#F0E442,color:#000000,stroke:#111111,stroke-width:2px
@@ -504,59 +495,414 @@ flowchart LR
 ```
 
 ::: {.notes}
-Explain that 1NF removes repeated columns and multi-value cells. The goal is to make data row-based rather than column-repeated.
+Explain that 1NF changes repeated columns or lists into separate rows. In the working example, each row represents one product on one order, identified by the combination of order_id and product_id.
 :::
 
 
-## Second Normal Form
+## Order Dataset Normalization
 
-A table is in second normal form when:
+An online store records customers, orders, products, and quantities.
 
-- It is already in first normal form
-- Every non-key attribute depends on the entire primary key
+**Business rules**
 
-This mainly matters when a table has a composite key.
+- One customer can place many orders
+- One order can contain many products
+- A product can appear on many orders
+- Quantity describes one product on one order
 
 ::: {.notes}
-Define partial dependency in plain language. If a field depends on only part of a composite key, it probably belongs in another table.
+Use the business rules to identify likely entities. Customer, Order, and Product are entities. Order Item represents the many-to-many relationship between orders and products.
 :::
 
-## Third Normal Form
 
-A table is in third normal form when:
+## Normalization Process
 
-- It is already in second normal form
-- Non-key fields do not depend on other non-key fields
+```{mermaid}
 
-Example problem:
+flowchart LR
+  A[Unnormalized dataset] --> B[1NF: one value per cell]
+  B --> C[2NF: remove partial dependencies]
+  C --> D[3NF: remove transitive dependencies]
 
-`student_id, student_name, department_id, department_name`
+  classDef red fill:#D55E00,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef yellow fill:#F0E442,color:#000000,stroke:#111111,stroke-width:2px
+  classDef blue fill:#0072B2,color:#FFFFFF,stroke:#111111,stroke-width:2px
+  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px
 
-`department_name` depends on `department_id`, not directly on `student_id`.
+  class A red
+  class B yellow
+  class C blue
+  class D green
+```
 
 ::: {.notes}
-Explain transitive dependency as an indirect dependency. If department name depends on department ID, store department information in a Department table.
+Preview the four versions of the same data. Each step solves a different dependency problem while preserving the original facts.
 :::
 
 
-## Activity: Normalize a Table
+## Unnormalized Dataset {.smaller}
 
-Start with this table:
+| order_id | order_date | customer | products |
+|---:|---|---|---|
+| 1001 | 2026-09-01 | C01, Ana Rivera | P10, USB-C Hub, 29.99, qty 1 and P20, Wireless Mouse, 24.50, qty 2 |
+| 1002 | 2026-09-02 | C02, Jamal Lee | P10, USB-C Hub, 29.99, qty 1 |
+| 1003 | 2026-09-03 | C01, Ana Rivera | P30, Laptop Stand, 39.00, qty 1 and P20, Wireless Mouse, 24.50, qty 1 |
 
-| student_id | student_name | course_id | course_name | instructor_name |
-|---:|---|---|---|---|
-| 101 | Ana Rivera | C101 | Databases | Dr. Kim |
-| 102 | Jamal Lee | C101 | Databases | Dr. Kim |
-| 101 | Ana Rivera | C202 | Statistics | Dr. Patel |
-
-Task:
-
-- Identify repeated facts
-- Split the data into normalized tables
-- Add primary and foreign keys
+**Problems:** `customer` contains two values, and `products` contains a list of repeating product groups.
 
 ::: {.notes}
-Give students 15 minutes. A possible solution includes Student, Course, Instructor, and Enrollment tables. Encourage students to explain why each table exists.
+Ask students to count how many values appear in the customer and products cells. Point out that searching, sorting, or updating one product would require parsing a list inside a cell.
 :::
 
 
+## Step 1: Dataset in 1NF {.smaller}
+
+| order_id | order_date | customer_id | customer_name | product_id | product_name | unit_price | quantity |
+|---:|---|---|---|---|---|---:|---:|
+| 1001 | 2026-09-01 | C01 | Ana Rivera | P10 | USB-C Hub | 29.99 | 1 |
+| 1001 | 2026-09-01 | C01 | Ana Rivera | P20 | Wireless Mouse | 24.50 | 2 |
+| 1002 | 2026-09-02 | C02 | Jamal Lee | P10 | USB-C Hub | 29.99 | 1 |
+| 1003 | 2026-09-03 | C01 | Ana Rivera | P30 | Laptop Stand | 39.00 | 1 |
+| 1003 | 2026-09-03 | C01 | Ana Rivera | P20 | Wireless Mouse | 24.50 | 1 |
+
+Composite primary key: `(order_id, product_id)`
+
+::: {.notes}
+The conversion separates customer details into individual columns and creates one row per product on an order. Every cell now contains one value. The combination of order_id and product_id identifies each row.
+:::
+
+
+## Dependencies in the 1NF Table
+
+```text
+order_id                  -> order_date, customer_id
+customer_id               -> customer_name
+product_id                -> product_name, unit_price
+(order_id, product_id)    -> quantity
+```
+
+`quantity` depends on the complete key. Several other fields depend on only part of the key.
+
+::: {.notes}
+Read each line as "determines." One order_id determines its date and customer. One product_id determines its name and current unit price. The full order-product key determines quantity.
+:::
+
+
+## Partial Dependencies in the 1NF Table
+
+The key is `(order_id, product_id)`.
+
+- `order_date`, `customer_id`, and `customer_name` depend on `order_id`
+- `product_name` and `unit_price` depend on `product_id`
+- `quantity` depends on both key columns
+
+Separating order facts and product facts removes the partial dependencies.
+
+::: {.notes}
+Define a partial dependency as dependence on one part of a composite key. Ask which field genuinely describes the relationship between an order and a product. The answer is quantity.
+:::
+
+
+## Step 2: Orders Table in 2NF
+
+**Orders_2NF**
+
+| order_id (PK) | order_date | customer_id | customer_name |
+|---:|---|---|---|
+| 1001 | 2026-09-01 | C01 | Ana Rivera |
+| 1002 | 2026-09-02 | C02 | Jamal Lee |
+| 1003 | 2026-09-03 | C01 | Ana Rivera |
+
+All fields depend on the complete primary key, `order_id`.
+
+::: {.notes}
+The order fields no longer repeat for every product. This table satisfies 2NF because it has a single-column key, so partial dependency cannot occur. Customer name still repeats, which becomes the focus of 3NF.
+:::
+
+
+## Step 2: Products Table in 2NF
+
+**Products**
+
+| product_id (PK) | product_name | unit_price |
+|---|---|---:|
+| P10 | USB-C Hub | 29.99 |
+| P20 | Wireless Mouse | 24.50 |
+| P30 | Laptop Stand | 39.00 |
+
+Each product name and price now appears once.
+
+::: {.notes}
+Product name and unit price depend on product_id, so they move to Products. State that this example treats unit_price as the product's current price. A system that preserves sale prices could store that price with each order item.
+:::
+
+
+## Step 2: Order Items Table in 2NF
+
+**Order_Items**
+
+| order_id (PK, FK) | product_id (PK, FK) | quantity |
+|---:|---|---:|
+| 1001 | P10 | 1 |
+| 1001 | P20 | 2 |
+| 1002 | P10 | 1 |
+| 1003 | P30 | 1 |
+| 1003 | P20 | 1 |
+
+The composite primary key is `(order_id, product_id)`.
+
+::: {.notes}
+Order_Items keeps the fact that depends on the full composite key: quantity. The two columns in the key also serve as foreign keys that connect each row to an order and a product.
+:::
+
+
+## Transitive Dependency in the 2NF Design
+
+Inside `Orders_2NF`:
+
+```text
+order_id -> customer_id -> customer_name
+```
+
+`customer_name` depends on `customer_id`, a non-key field.
+
+Moving customer details into a separate table removes this transitive dependency.
+
+::: {.notes}
+Explain transitive dependency as an indirect path. order_id identifies customer_id, and customer_id identifies customer_name. Customer name belongs in a table where customer_id serves as the key.
+:::
+
+
+## Step 3: Customers Table in 3NF
+
+**Customers**
+
+| customer_id (PK) | customer_name |
+|---|---|
+| C01 | Ana Rivera |
+| C02 | Jamal Lee |
+
+The table stores each customer name once.
+
+::: {.notes}
+The new Customers table removes customer_name from Orders. If Ana changes her name, the database now requires one update rather than an update to every order.
+:::
+
+
+## Step 3: Orders Table in 3NF
+
+**Orders**
+
+| order_id (PK) | order_date | customer_id (FK) |
+|---:|---|---|
+| 1001 | 2026-09-01 | C01 |
+| 1002 | 2026-09-02 | C02 |
+| 1003 | 2026-09-03 | C01 |
+
+Every non-key field depends directly on `order_id`.
+
+::: {.notes}
+Orders retains customer_id because it records which customer placed the order. The foreign key connects the order to the descriptive customer information without repeating the customer name.
+:::
+
+
+## Remaining Tables in 3NF {.smaller}
+
+**Products**
+
+| product_id (PK) | product_name | unit_price |
+|---|---|---:|
+| P10 | USB-C Hub | 29.99 |
+| P20 | Wireless Mouse | 24.50 |
+| P30 | Laptop Stand | 39.00 |
+
+**Order_Items**
+
+| order_id (PK, FK) | product_id (PK, FK) | quantity |
+|---:|---|---:|
+| 1001 | P10 | 1 |
+| 1001 | P20 | 2 |
+| 1002 | P10 | 1 |
+| 1003 | P30 | 1 |
+| 1003 | P20 | 1 |
+
+::: {.notes}
+Products and Order_Items did not change between 2NF and 3NF because they contained no transitive dependencies. Review how the two foreign keys in Order_Items connect the many-to-many relationship.
+:::
+
+
+## Complete 3NF Schema
+
+```{mermaid}
+
+erDiagram
+  CUSTOMERS ||--o{ ORDERS : places
+  ORDERS ||--|{ ORDER_ITEMS : contains
+  PRODUCTS ||--o{ ORDER_ITEMS : appears_in
+
+  CUSTOMERS {
+    text customer_id PK
+    text customer_name
+  }
+  ORDERS {
+    int order_id PK
+    text order_date
+    text customer_id FK
+  }
+  PRODUCTS {
+    text product_id PK
+    text product_name
+    real unit_price
+  }
+  ORDER_ITEMS {
+    int order_id PK, FK
+    text product_id PK, FK
+    int quantity
+  }
+```
+
+::: {.notes}
+Walk through the foreign keys. Orders connects to Customers. Order_Items connects to Orders and Products. Each descriptive fact has one home.
+:::
+
+
+## Dataset Changes Across the Normal Forms
+
+| Stage | Structure | Main improvement |
+|---|---|---|
+| Unnormalized | One table with lists inside cells | Starting point |
+| 1NF | One flat table with one product per row | Atomic values |
+| 2NF | Orders, Products, and Order_Items | No partial dependencies |
+| 3NF | Customers, Orders, Products, and Order_Items | No transitive dependencies |
+
+The five order-item facts remain present at every stage.
+
+::: {.notes}
+Normalization changes how the database stores the facts. The final design still represents the five original order-product combinations, but customer, order, and product descriptions no longer repeat unnecessarily.
+:::
+
+
+## Checking the 3NF Conversion
+
+| Check | Expected result |
+|---|---:|
+| Unique customers in 1NF | 2 |
+| Rows in Customers | 2 |
+| Unique orders in 1NF | 3 |
+| Rows in Orders | 3 |
+| Unique products in 1NF | 3 |
+| Rows in Products | 3 |
+| Order-product rows in 1NF and Order_Items | 5 in each |
+
+Matching counts help confirm that the split preserved every entity and relationship.
+
+::: {.notes}
+Ask students to verify each count by looking back at the 1NF table. Explain that matching order-product rows gives a simple classroom check for a lossless split.
+:::
+
+
+## Benefits of the 3NF Design
+
+| Earlier problem | Improvement in 3NF |
+|---|---|
+| Ana's name repeats on several rows | Customers stores it once |
+| Product details repeat across orders | Products stores them once |
+| Deleting an order could remove product details | Products remains independent |
+| A product needs an order before it can be recorded | Products accepts it independently |
+
+::: {.notes}
+Connect these improvements to update, delete, and insert anomalies. Ask students which final table contains each type of fact.
+:::
+
+
+## Normalization Depends on Business Rules
+
+The example assumes that:
+
+- Each product ID has one current price
+- One product appears at most once per order
+- Each order belongs to one customer
+
+Different rules can require a different schema. For example, storing the sale price in `Order_Items` would preserve historical prices.
+
+::: {.notes}
+Functional dependencies come from business rules. Designers should confirm these assumptions with domain experts before finalizing the schema.
+:::
+
+
+## Activity: Normalize Student Enrollment Data
+
+
+### Unnormalized Dataset
+
+| student_id | student_name | email | major | courses |
+|---|---|---|---|---|
+| S101 | Ana Rivera | ana@college.edu | M01, Data Science | C101, Databases, Dr. Kim, A; C202, Statistics, Dr. Patel, B+ |
+| S102 | Jamal Lee | jamal@college.edu | M02, Computer Science | C101, Databases, Dr. Kim, B |
+| S103 | Mei Chen | mei@college.edu | M01, Data Science | C202, Statistics, Dr. Patel, A; C303, Programming, Dr. Gomez, A- |
+
+The `major` and `courses` columns contain multiple values. Therefore, the dataset does not satisfy first normal form.
+
+### Instructions
+
+#### Part 1: Convert the Dataset to 1NF
+
+- Store only one value in each cell.
+- Create one row for each student-course combination.
+- Separate the values currently stored in the `major` and `courses` columns.
+- Use `(student_id, course_id)` as the composite primary key.
+
+#### Part 2: Convert the Dataset to 2NF
+
+Use the following functional dependencies:
+
+```text
+student_id                -> student_name, email, major_id, major_name
+course_id                 -> course_name, instructor_name
+(student_id, course_id)   -> grade
+```
+
+- Identify fields that depend on only `student_id`.
+- Identify fields that depend on only `course_id`.
+- Identify fields that depend on the complete composite key.
+- Split the 1NF table into appropriate 2NF tables.
+
+#### Part 3: Convert the Dataset to 3NF
+
+Consider the following transitive dependency:
+
+```text
+student_id -> major_id -> major_name
+```
+
+- Identify the non-key field that determines another non-key field.
+- Create a separate table for majors.
+- Update the student table so that it references the new major table.
+
+#### Part 4: Identify the Keys
+
+For every table in your final 3NF design:
+
+- Label each primary key with `PK`.
+- Label each foreign key with `FK`.
+- Identify any composite primary keys.
+- Draw the relationships between the tables.
+
+
+::: {.notes}
+Give students 15 to 20 minutes. Remind them that 1NF removes multi-value cells, 2NF removes partial dependencies, and 3NF removes transitive dependencies.
+:::
+
+
+## Key Takeaways
+
+- ER diagrams make entities and relationship rules visible
+- Primary keys identify rows, while foreign keys connect tables
+- 1NF removes repeating groups and multi-value cells
+- 2NF removes partial dependencies from composite keys
+- 3NF removes dependencies between non-key fields
+- Row and key checks help confirm that normalization preserved the data
+
+::: {.notes}
+Close by connecting the three lesson sections. A strong database design starts with a model, makes relationships enforceable with keys, and stores each fact in the table determined by its key.
+:::
