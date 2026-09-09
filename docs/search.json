@@ -812,69 +812,6 @@
     "text": "Composite Keys\nA composite key uses two or more columns together to uniquely identify a row.\nExample:\nEnrollment(student_id, course_id, term)\nTogether, these fields can identify one student’s enrollment in one course during one term.\n\nExplain that composite keys are useful when no single field is enough. Also mention that some designers still add a separate enrollment_id for convenience."
   },
   {
-    "objectID": "lectures/3a.html#why-normalization",
-    "href": "lectures/3a.html#why-normalization",
-    "title": "Data Modeling",
-    "section": "Why Normalization?",
-    "text": "Why Normalization?\nNormalization organizes data to reduce:\n\nRepetition\nUpdate problems\nInsert problems\nDelete problems\nConfusing dependencies\n\n\nTransition to data quality. Explain that normalization helps prevent the same fact from being stored in multiple places."
-  },
-  {
-    "objectID": "lectures/3a.html#unnormalized-data-example",
-    "href": "lectures/3a.html#unnormalized-data-example",
-    "title": "Data Modeling",
-    "section": "Unnormalized Data Example",
-    "text": "Unnormalized Data Example\n\n\n\n\n\n\n\n\n\n\n\nstudent_id\nstudent_name\ncourse_1\ncourse_2\ninstructor_1\ninstructor_2\n\n\n\n\n101\nAna Rivera\nDatabase Systems\nStatistics\nDr. Kim\nDr. Patel\n\n\n102\nJamal Lee\nDatabase Systems\nProgramming\nDr. Kim\nDr. Gomez\n\n\n\nProblems:\n\nRepeating course columns\nHard to add a third course\nInstructor data is mixed with student data\n\n\nAsk students what happens if a student takes four courses. Then ask what happens if Dr. Kim’s name changes. This motivates normalization."
-  },
-  {
-    "objectID": "lectures/3a.html#first-normal-form",
-    "href": "lectures/3a.html#first-normal-form",
-    "title": "Data Modeling",
-    "section": "First Normal Form",
-    "text": "First Normal Form\nA table satisfies first normal form when:\n\nEach cell contains one value\nEach column describes one type of fact\nEach row has a unique identifier\nRepeating column groups do not appear\n\n\n\n\n\n\nflowchart LR\n  A[Product 1 and Product 2 columns] --&gt; B[One product per row]\n  B --&gt; C[Composite row key]\n\n  classDef red fill:#D55E00,color:#FFFFFF,stroke:#111111,stroke-width:2px\n  classDef yellow fill:#F0E442,color:#000000,stroke:#111111,stroke-width:2px\n  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px\n\n  class A red\n  class B yellow\n  class C green\n\n\n\n\n\n\n\nExplain that 1NF changes repeated columns or lists into separate rows. In the working example, each row represents one product on one order, identified by the combination of order_id and product_id."
-  },
-  {
-    "objectID": "lectures/3a.html#second-normal-form",
-    "href": "lectures/3a.html#second-normal-form",
-    "title": "Data Modeling",
-    "section": "Second Normal Form",
-    "text": "Second Normal Form\nA table is in second normal form when:\n\nIt is already in first normal form\nEvery non-key attribute depends on the entire primary key\n\nThis mainly matters when a table has a composite key.\n\nDefine partial dependency in plain language. If a field depends on only part of a composite key, it probably belongs in another table."
-  },
-  {
-    "objectID": "lectures/3a.html#third-normal-form",
-    "href": "lectures/3a.html#third-normal-form",
-    "title": "Data Modeling",
-    "section": "Third Normal Form",
-    "text": "Third Normal Form\nA table is in third normal form when:\n\nIt is already in second normal form\nNon-key fields do not depend on other non-key fields\n\nExample problem:\nstudent_id, student_name, department_id, department_name\ndepartment_name depends on department_id, not directly on student_id.\n\nExplain transitive dependency as an indirect dependency. If department name depends on department ID, store department information in a Department table."
-  },
-  {
-    "objectID": "lectures/3a.html#activity-normalize-a-table",
-    "href": "lectures/3a.html#activity-normalize-a-table",
-    "title": "Data Modeling",
-    "section": "Activity: Normalize a Table",
-    "text": "Activity: Normalize a Table\nStart with this table:\n\n\n\n\n\n\n\n\n\n\nstudent_id\nstudent_name\ncourse_id\ncourse_name\ninstructor_name\n\n\n\n\n101\nAna Rivera\nC101\nDatabases\nDr. Kim\n\n\n102\nJamal Lee\nC101\nDatabases\nDr. Kim\n\n\n101\nAna Rivera\nC202\nStatistics\nDr. Patel\n\n\n\nTask:\n\nIdentify repeated facts\nSplit the data into normalized tables\nAdd primary and foreign keys\n\n\nGive students 15 minutes. A possible solution includes Student, Course, Instructor, and Enrollment tables. Encourage students to explain why each table exists."
-  },
-  {
-    "objectID": "posts/2.html",
-    "href": "posts/2.html",
-    "title": "Week 2",
-    "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
-  },
-  {
-    "objectID": "posts/2.html#resources",
-    "href": "posts/2.html#resources",
-    "title": "Week 2",
-    "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
-  },
-  {
-    "objectID": "lectures/3a.html#learning-objectives",
-    "href": "lectures/3a.html#learning-objectives",
-    "title": "Data Modeling",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this lesson, you should be able to:\n\nIdentify entities, attributes, and relationships in a scenario\nAssign primary and foreign keys to relational tables\nInterpret one-to-one, one-to-many, and many-to-many relationships\nConvert a flat dataset into tables that satisfy third normal form\n\n\nPreview the lesson’s progression. The class first models a system, then adds keys, and finally improves one dataset through 1NF, 2NF, and 3NF."
-  },
-  {
     "objectID": "lectures/3a.html#why-normalize-data",
     "href": "lectures/3a.html#why-normalize-data",
     "title": "Data Modeling",
@@ -889,151 +826,11 @@
     "text": "Normal Forms at a Glance\n\n\n\n\n\n\n\n\nNormal form\nRequirement\nQuestion to ask\n\n\n\n\n1NF\nAtomic values and no repeating groups\nDoes each cell contain one value?\n\n\n2NF\n1NF plus no partial dependencies\nDoes each non-key field depend on the whole key?\n\n\n3NF\n2NF plus no transitive dependencies\nDoes a non-key field depend on another non-key field?\n\n\n\n\nEmphasize that normalization is cumulative. A table must satisfy 1NF before it can satisfy 2NF, and it must satisfy 2NF before it can satisfy 3NF."
   },
   {
-    "objectID": "lectures/3a.html#working-example-order-data",
-    "href": "lectures/3a.html#working-example-order-data",
+    "objectID": "lectures/3a.html#first-normal-form",
+    "href": "lectures/3a.html#first-normal-form",
     "title": "Data Modeling",
-    "section": "Working Example: Order Data",
-    "text": "Working Example: Order Data\nAn online store exported one row for each product on an order.\nBusiness rules\n\nOne customer can place many orders\nOne order can contain many products\nA product can appear on many orders\nQuantity describes a specific product on a specific order\n\n\nUse these rules to identify likely entities before looking at SQL. Customer, Order, and Product are entities. Order Item represents the many-to-many relationship between orders and products."
-  },
-  {
-    "objectID": "lectures/3a.html#source-dataset-in-1nf",
-    "href": "lectures/3a.html#source-dataset-in-1nf",
-    "title": "Data Modeling",
-    "section": "Source Dataset in 1NF",
-    "text": "Source Dataset in 1NF\n\n\n\n\n\n\n\n\n\n\n\n\n\norder_id\norder_date\ncustomer_id\ncustomer_name\nproduct_id\nproduct_name\nunit_price\nquantity\n\n\n\n\n1001\n2026-09-01\nC01\nAna Rivera\nP10\nUSB-C Hub\n29.99\n1\n\n\n1001\n2026-09-01\nC01\nAna Rivera\nP20\nWireless Mouse\n24.50\n2\n\n\n1002\n2026-09-02\nC02\nJamal Lee\nP10\nUSB-C Hub\n29.99\n1\n\n\n1003\n2026-09-03\nC01\nAna Rivera\nP30\nLaptop Stand\n39.00\n1\n\n\n1003\n2026-09-03\nC01\nAna Rivera\nP20\nWireless Mouse\n24.50\n1\n\n\n\nNatural composite key: (order_id, product_id)\nThe SQL example also includes customer_email, another repeated customer attribute.\n\nThis table satisfies 1NF because every value is atomic and each order-product combination identifies one row. It still repeats customer, order, and product facts. Mention that the full SQL example also includes customer_email."
-  },
-  {
-    "objectID": "lectures/3a.html#functional-dependencies",
-    "href": "lectures/3a.html#functional-dependencies",
-    "title": "Data Modeling",
-    "section": "Functional Dependencies",
-    "text": "Functional Dependencies\nThe business rules imply these dependencies:\norder_id                  -&gt; order_date, customer_id\ncustomer_id               -&gt; customer_name, customer_email\nproduct_id                -&gt; product_name, unit_price\n(order_id, product_id)    -&gt; quantity\nThe composite key determines quantity, but only part of the key determines several other fields.\n\nRead each dependency as “determines.” For example, one product_id determines one product_name and one current unit_price in this simplified dataset. State that real systems may store the sale price in Order Item so price history is preserved."
-  },
-  {
-    "objectID": "lectures/3a.html#partial-dependencies-prevent-2nf",
-    "href": "lectures/3a.html#partial-dependencies-prevent-2nf",
-    "title": "Data Modeling",
-    "section": "Partial Dependencies Prevent 2NF",
-    "text": "Partial Dependencies Prevent 2NF\nThe key is (order_id, product_id).\n\norder_date and customer_id depend only on order_id\nproduct_name and unit_price depend only on product_id\nquantity depends on both parts of the key\n\nFields that depend on only part of a composite key belong in separate tables.\n\nDefine a partial dependency as dependence on one part of a composite key. Ask students which field genuinely describes the relationship between an order and a product. The answer is quantity."
-  },
-  {
-    "objectID": "lectures/3a.html#decomposition-to-second-normal-form",
-    "href": "lectures/3a.html#decomposition-to-second-normal-form",
-    "title": "Data Modeling",
-    "section": "Decomposition to Second Normal Form",
-    "text": "Decomposition to Second Normal Form\nOrders_2NF(\n  order_id PK, order_date, customer_id,\n  customer_name, customer_email\n)\n\nProducts(\n  product_id PK, product_name, unit_price\n)\n\nOrder_Items(\n  order_id PK/FK, product_id PK/FK, quantity\n)\nOrder_Items uses the composite primary key (order_id, product_id).\n\nThe split removes partial dependencies. Product facts now depend on the Products key, and order facts depend on the Orders_2NF key. Customer details remain in Orders_2NF temporarily so students can see the transitive dependency addressed by 3NF."
-  },
-  {
-    "objectID": "lectures/3a.html#transitive-dependency-prevents-3nf",
-    "href": "lectures/3a.html#transitive-dependency-prevents-3nf",
-    "title": "Data Modeling",
-    "section": "Transitive Dependency Prevents 3NF",
-    "text": "Transitive Dependency Prevents 3NF\nInside Orders_2NF:\norder_id -&gt; customer_id -&gt; customer_name, customer_email\nCustomer details depend on customer_id, which is not the primary key of Orders_2NF.\nMoving customer details into a Customers table removes the transitive dependency.\n\nExplain transitive dependency as an indirect path. order_id identifies the customer_id, and customer_id identifies the customer’s descriptive fields. Those descriptive fields belong with the customer."
-  },
-  {
-    "objectID": "lectures/3a.html#third-normal-form-schema",
-    "href": "lectures/3a.html#third-normal-form-schema",
-    "title": "Data Modeling",
-    "section": "Third Normal Form Schema",
-    "text": "Third Normal Form Schema\n\n\n\n\n\nerDiagram\n  CUSTOMERS ||--o{ ORDERS : places\n  ORDERS ||--|{ ORDER_ITEMS : contains\n  PRODUCTS ||--o{ ORDER_ITEMS : appears_in\n\n  CUSTOMERS {\n    text customer_id PK\n    text customer_name\n    text customer_email\n  }\n  ORDERS {\n    int order_id PK\n    text order_date\n    text customer_id FK\n  }\n  PRODUCTS {\n    text product_id PK\n    text product_name\n    real unit_price\n  }\n  ORDER_ITEMS {\n    int order_id PK, FK\n    text product_id PK, FK\n    int quantity\n  }\n\n\n\n\n\n\n\nWalk through the foreign keys. Orders links to Customers. Order_Items links to both Orders and Products. Each descriptive fact has one home."
-  },
-  {
-    "objectID": "lectures/3a.html#sqlite-setup-source-table",
-    "href": "lectures/3a.html#sqlite-setup-source-table",
-    "title": "Data Modeling",
-    "section": "SQLite Setup: Source Table",
-    "text": "SQLite Setup: Source Table\nRun the SQL blocks in order in a new SQLite database.\nPRAGMA foreign_keys = ON;\n\nCREATE TABLE order_lines_raw (\n  order_id       INTEGER NOT NULL,\n  order_date     TEXT NOT NULL,\n  customer_id    TEXT NOT NULL,\n  customer_name  TEXT NOT NULL,\n  customer_email TEXT NOT NULL,\n  product_id     TEXT NOT NULL,\n  product_name   TEXT NOT NULL,\n  unit_price     REAL NOT NULL CHECK (unit_price &gt;= 0),\n  quantity       INTEGER NOT NULL CHECK (quantity &gt; 0),\n  PRIMARY KEY (order_id, product_id)\n);\n\nStudents can paste this code into DB Browser for SQLite under Execute SQL. Use a new practice database because this script creates tables. PRAGMA foreign_keys enables foreign-key enforcement for the current connection."
-  },
-  {
-    "objectID": "lectures/3a.html#sqlite-setup-insert-the-dataset",
-    "href": "lectures/3a.html#sqlite-setup-insert-the-dataset",
-    "title": "Data Modeling",
-    "section": "SQLite Setup: Insert the Dataset",
-    "text": "SQLite Setup: Insert the Dataset\nINSERT INTO order_lines_raw VALUES\n  (1001, '2026-09-01', 'C01', 'Ana Rivera',\n   'ana@example.com', 'P10', 'USB-C Hub', 29.99, 1),\n  (1001, '2026-09-01', 'C01', 'Ana Rivera',\n   'ana@example.com', 'P20', 'Wireless Mouse', 24.50, 2),\n  (1002, '2026-09-02', 'C02', 'Jamal Lee',\n   'jamal@example.com', 'P10', 'USB-C Hub', 29.99, 1),\n  (1003, '2026-09-03', 'C01', 'Ana Rivera',\n   'ana@example.com', 'P30', 'Laptop Stand', 39.00, 1),\n  (1003, '2026-09-03', 'C01', 'Ana Rivera',\n   'ana@example.com', 'P20', 'Wireless Mouse', 24.50, 1);\n\nHave students run SELECT * FROM order_lines_raw after the insert. They should see five rows. Explain that an imported CSV could serve as this staging table in a real workflow."
-  },
-  {
-    "objectID": "lectures/3a.html#data-quality-check-before-splitting",
-    "href": "lectures/3a.html#data-quality-check-before-splitting",
-    "title": "Data Modeling",
-    "section": "Data Quality Check Before Splitting",
-    "text": "Data Quality Check Before Splitting\nEach identifier should describe only one version of its entity.\nSELECT customer_id,\n       COUNT(DISTINCT customer_name || '|' || customer_email) AS versions\nFROM order_lines_raw\nGROUP BY customer_id\nHAVING versions &gt; 1;\n\nSELECT product_id,\n       COUNT(DISTINCT product_name || '|' || unit_price) AS versions\nFROM order_lines_raw\nGROUP BY product_id\nHAVING versions &gt; 1;\nExpected result: both queries return zero rows.\n\nThis check catches conflicting descriptions before DISTINCT hides them or a primary-key constraint rejects them. If a query returns a row, students should resolve the conflicting source values before continuing."
-  },
-  {
-    "objectID": "lectures/3a.html#sqlite-create-the-3nf-tables",
-    "href": "lectures/3a.html#sqlite-create-the-3nf-tables",
-    "title": "Data Modeling",
-    "section": "SQLite: Create the 3NF Tables",
-    "text": "SQLite: Create the 3NF Tables\nCREATE TABLE customers (\n  customer_id    TEXT PRIMARY KEY,\n  customer_name  TEXT NOT NULL,\n  customer_email TEXT NOT NULL UNIQUE\n);\n\nCREATE TABLE products (\n  product_id   TEXT PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  unit_price   REAL NOT NULL CHECK (unit_price &gt;= 0)\n);\n\nCREATE TABLE orders (\n  order_id    INTEGER PRIMARY KEY,\n  order_date  TEXT NOT NULL,\n  customer_id TEXT NOT NULL REFERENCES customers(customer_id)\n);\n\nThe table creation order matters because Orders references Customers. Point out the domain constraints: prices cannot be negative and customer emails must be unique in this example."
-  },
-  {
-    "objectID": "lectures/3a.html#sqlite-create-the-bridge-table",
-    "href": "lectures/3a.html#sqlite-create-the-bridge-table",
-    "title": "Data Modeling",
-    "section": "SQLite: Create the Bridge Table",
-    "text": "SQLite: Create the Bridge Table\nCREATE TABLE order_items (\n  order_id   INTEGER NOT NULL\n             REFERENCES orders(order_id),\n  product_id TEXT NOT NULL\n             REFERENCES products(product_id),\n  quantity   INTEGER NOT NULL CHECK (quantity &gt; 0),\n  PRIMARY KEY (order_id, product_id)\n);\nThe composite key prevents the same product from appearing twice on one order.\n\nExplain that Order_Items resolves the many-to-many relationship between Orders and Products. If the business needs repeated lines for the same product, use an order_line_number in the key instead."
-  },
-  {
-    "objectID": "lectures/3a.html#sqlite-populate-entity-tables",
-    "href": "lectures/3a.html#sqlite-populate-entity-tables",
-    "title": "Data Modeling",
-    "section": "SQLite: Populate Entity Tables",
-    "text": "SQLite: Populate Entity Tables\nINSERT INTO customers\nSELECT DISTINCT customer_id, customer_name, customer_email\nFROM order_lines_raw;\n\nINSERT INTO products\nSELECT DISTINCT product_id, product_name, unit_price\nFROM order_lines_raw;\n\nINSERT INTO orders\nSELECT DISTINCT order_id, order_date, customer_id\nFROM order_lines_raw;\nDISTINCT removes repeated copies of the same customer, product, or order.\n\nRun these statements in the displayed order so each referenced parent row exists first. DISTINCT works here because the earlier quality checks confirmed that each ID has one consistent description."
-  },
-  {
-    "objectID": "lectures/3a.html#sqlite-populate-the-relationship-table",
-    "href": "lectures/3a.html#sqlite-populate-the-relationship-table",
-    "title": "Data Modeling",
-    "section": "SQLite: Populate the Relationship Table",
-    "text": "SQLite: Populate the Relationship Table\nINSERT INTO order_items\nSELECT order_id, product_id, quantity\nFROM order_lines_raw;\nCheck the number of rows in each table:\nSELECT 'customers' AS table_name, COUNT(*) AS rows FROM customers\nUNION ALL SELECT 'orders', COUNT(*) FROM orders\nUNION ALL SELECT 'products', COUNT(*) FROM products\nUNION ALL SELECT 'order_items', COUNT(*) FROM order_items;\nExpected counts: 2 customers, 3 orders, 3 products, and 5 order items.\n\nThe relationship table has the same number of rows as the source because each source row described one order item. The descriptive tables contain only unique entities."
-  },
-  {
-    "objectID": "lectures/3a.html#reconstruct-the-original-dataset",
-    "href": "lectures/3a.html#reconstruct-the-original-dataset",
-    "title": "Data Modeling",
-    "section": "Reconstruct the Original Dataset",
-    "text": "Reconstruct the Original Dataset\nSELECT\n  oi.order_id, o.order_date,\n  c.customer_id, c.customer_name, c.customer_email,\n  p.product_id, p.product_name, p.unit_price,\n  oi.quantity\nFROM order_items AS oi\nJOIN orders AS o\n  ON oi.order_id = o.order_id\nJOIN customers AS c\n  ON o.customer_id = c.customer_id\nJOIN products AS p\n  ON oi.product_id = p.product_id\nORDER BY oi.order_id, p.product_id;\nThe result contains the same five business records as the source table.\n\nNormalization changes storage, not the facts that users can retrieve. The joins reconstruct the convenient flat view for reports. Ask students to trace where each selected column originates."
-  },
-  {
-    "objectID": "lectures/3a.html#verify-that-no-records-changed",
-    "href": "lectures/3a.html#verify-that-no-records-changed",
-    "title": "Data Modeling",
-    "section": "Verify That No Records Changed",
-    "text": "Verify That No Records Changed\nWITH reconstructed AS (\n  SELECT oi.order_id, o.order_date, c.customer_id,\n         c.customer_name, c.customer_email, p.product_id,\n         p.product_name, p.unit_price, oi.quantity\n  FROM order_items AS oi\n  JOIN orders AS o ON oi.order_id = o.order_id\n  JOIN customers AS c ON o.customer_id = c.customer_id\n  JOIN products AS p ON oi.product_id = p.product_id\n),\nmissing AS (\n  SELECT * FROM order_lines_raw EXCEPT SELECT * FROM reconstructed\n),\nextra AS (\n  SELECT * FROM reconstructed EXCEPT SELECT * FROM order_lines_raw\n)\nSELECT 'missing from 3NF' AS issue, COUNT(*) AS rows FROM missing\nUNION ALL\nSELECT 'extra in 3NF', COUNT(*) FROM extra;\nExpected result: both counts equal 0.\n\nThis is stronger than comparing row counts. EXCEPT checks the actual values in both directions. Zero missing and zero extra rows confirm that the normalized tables reproduce the source dataset."
-  },
-  {
-    "objectID": "lectures/3a.html#what-changed-after-normalization",
-    "href": "lectures/3a.html#what-changed-after-normalization",
-    "title": "Data Modeling",
-    "section": "What Changed After Normalization?",
-    "text": "What Changed After Normalization?\n\n\n\n\n\n\n\n\nFact\nBefore\nIn 3NF\n\n\n\n\nCustomer email\nRepeated on every order line\nStored once in customers\n\n\nOrder date\nRepeated for every product\nStored once in orders\n\n\nProduct name and price\nRepeated across orders\nStored once in products\n\n\nQuantity\nMixed with descriptive fields\nStored in order_items\n\n\n\nThe database can update each fact in one place while preserving relationships through keys.\n\nUse this slide to connect the abstract normal forms to their practical effect. Ask which table would change if Ana updates her email. Only Customers should change."
-  },
-  {
-    "objectID": "lectures/3a.html#normalization-requires-business-rules",
-    "href": "lectures/3a.html#normalization-requires-business-rules",
-    "title": "Data Modeling",
-    "section": "Normalization Requires Business Rules",
-    "text": "Normalization Requires Business Rules\nThe example assumes that:\n\nEach product ID has one current price\nOne product appears at most once per order\nEach order belongs to one customer\n\nDifferent rules can require a different schema. For example, storing the sale price in order_items preserves historical prices.\n\nNormalization follows functional dependencies, and functional dependencies come from business rules. Explain that designers should confirm these assumptions with domain experts before finalizing the schema."
-  },
-  {
-    "objectID": "lectures/3a.html#activity-normalize-course-registrations",
-    "href": "lectures/3a.html#activity-normalize-course-registrations",
-    "title": "Data Modeling",
-    "section": "Activity: Normalize Course Registrations",
-    "text": "Activity: Normalize Course Registrations\nStart with:\nRegistration(\n  student_id, student_name, student_email,\n  course_id, course_name, department_id, department_name,\n  term, final_grade\n)\nUse (student_id, course_id, term) as the composite key.\nTime: 15 minutes\nDeliverable: 3NF tables with PK and FK labels, plus one sentence explaining each split.\n\nA possible solution includes Students, Departments, Courses, and Registrations. Student details depend on student_id. Course name and department_id depend on course_id. Department name depends on department_id. Final grade depends on the full registration key."
-  },
-  {
-    "objectID": "lectures/3a.html#exit-check",
-    "href": "lectures/3a.html#exit-check",
-    "title": "Data Modeling",
-    "section": "Exit Check",
-    "text": "Exit Check\nFor each statement, name the normal form it tests.\n\nEvery cell contains one value.\nEvery non-key field depends on the complete composite key.\nNo non-key field determines another non-key field.\nThe decomposed tables preserve all original records.\n\n\nAnswers: 1NF, 2NF, 3NF, and lossless decomposition. Use the fourth prompt to explain that a normalized design must preserve the data and relationships from the original dataset."
-  },
-  {
-    "objectID": "lectures/3a.html#key-takeaways",
-    "href": "lectures/3a.html#key-takeaways",
-    "title": "Data Modeling",
-    "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nER diagrams make entities and relationship rules visible\nPrimary keys identify rows, while foreign keys connect tables\n1NF removes repeating groups and multi-value cells\n2NF removes partial dependencies from composite keys\n3NF removes dependencies between non-key fields\nRow and key checks help confirm that normalization preserved the data\n\n\nClose by connecting the three lesson sections. A strong database design starts with a model, makes relationships enforceable with keys, and stores each fact in the table determined by its key."
+    "section": "First Normal Form",
+    "text": "First Normal Form\nA table satisfies first normal form when:\n\nEach cell contains one value\nEach column describes one type of fact\nEach row has a unique identifier\nRepeating column groups do not appear\n\n\n\n\n\n\nflowchart LR\n  A[Product 1 and Product 2 columns] --&gt; B[One product per row]\n  B --&gt; C[Composite row key]\n\n  classDef red fill:#D55E00,color:#FFFFFF,stroke:#111111,stroke-width:2px\n  classDef yellow fill:#F0E442,color:#000000,stroke:#111111,stroke-width:2px\n  classDef green fill:#009E73,color:#000000,stroke:#111111,stroke-width:2px\n\n  class A red\n  class B yellow\n  class C green\n\n\n\n\n\n\n\nExplain that 1NF changes repeated columns or lists into separate rows. In the working example, each row represents one product on one order, identified by the combination of order_id and product_id."
   },
   {
     "objectID": "lectures/3a.html#order-dataset-normalization",
@@ -1166,13 +963,27 @@
     "href": "lectures/3a.html#activity-normalize-student-enrollment-data",
     "title": "Data Modeling",
     "section": "Activity: Normalize Student Enrollment Data",
-    "text": "Activity: Normalize Student Enrollment Data\nUnnormalized Dataset\n\n\n\n\n\n\n\n\n\n\nstudent_id\nstudent_name\nemail\nmajor\ncourses\n\n\n\n\nS101\nAna Rivera\nana@college.edu\nM01, Data Science\nC101, Databases, Dr. Kim, A; C202, Statistics, Dr. Patel, B+\n\n\nS102\nJamal Lee\njamal@college.edu\nM02, Computer Science\nC101, Databases, Dr. Kim, B\n\n\nS103\nMei Chen\nmei@college.edu\nM01, Data Science\nC202, Statistics, Dr. Patel, A; C303, Programming, Dr. Gomez, A-\n\n\n\nThe major and courses columns contain multiple values. Therefore, the dataset does not satisfy first normal form.\nInstructions\nPart 1: Convert the Dataset to 1NF\n\nStore only one value in each cell.\nCreate one row for each student-course combination.\nSeparate the values currently stored in the major and courses columns.\nUse (student_id, course_id) as the composite primary key.\n\nPart 2: Convert the Dataset to 2NF\nUse the following functional dependencies:\nstudent_id                -&gt; student_name, email, major_id, major_name\ncourse_id                 -&gt; course_name, instructor_name\n(student_id, course_id)   -&gt; grade\n\nIdentify fields that depend on only student_id.\nIdentify fields that depend on only course_id.\nIdentify fields that depend on the complete composite key.\nSplit the 1NF table into appropriate 2NF tables.\n\nPart 3: Convert the Dataset to 3NF\nConsider the following transitive dependency:\nstudent_id -&gt; major_id -&gt; major_name\n\nIdentify the non-key field that determines another non-key field.\nCreate a separate table for majors.\nUpdate the student table so that it references the new major table.\n\nPart 4: Identify the Keys\nFor every table in your final 3NF design:\n\nLabel each primary key with PK.\nLabel each foreign key with FK.\nIdentify any composite primary keys.\nDraw the relationships between the tables.\n\nSubmission Requirements\nSubmit the following:\n\nThe dataset converted to 1NF.\nThe tables created for 2NF.\nThe final tables in 3NF.\nPrimary-key and foreign-key labels.\nOne or two sentences explaining why each table was separated.\n\n\nGive students 15 to 20 minutes. Remind them that 1NF removes multi-value cells, 2NF removes partial dependencies, and 3NF removes transitive dependencies."
+    "text": "Activity: Normalize Student Enrollment Data\nUnnormalized Dataset\n\n\n\n\n\n\n\n\n\n\nstudent_id\nstudent_name\nemail\nmajor\ncourses\n\n\n\n\nS101\nAna Rivera\nana@college.edu\nM01, Data Science\nC101, Databases, Dr. Kim, A; C202, Statistics, Dr. Patel, B+\n\n\nS102\nJamal Lee\njamal@college.edu\nM02, Computer Science\nC101, Databases, Dr. Kim, B\n\n\nS103\nMei Chen\nmei@college.edu\nM01, Data Science\nC202, Statistics, Dr. Patel, A; C303, Programming, Dr. Gomez, A-\n\n\n\nThe major and courses columns contain multiple values. Therefore, the dataset does not satisfy first normal form.\nInstructions\nPart 1: Convert the Dataset to 1NF\n\nStore only one value in each cell.\nCreate one row for each student-course combination.\nSeparate the values currently stored in the major and courses columns.\nUse (student_id, course_id) as the composite primary key.\n\nPart 2: Convert the Dataset to 2NF\nUse the following functional dependencies:\nstudent_id                -&gt; student_name, email, major_id, major_name\ncourse_id                 -&gt; course_name, instructor_name\n(student_id, course_id)   -&gt; grade\n\nIdentify fields that depend on only student_id.\nIdentify fields that depend on only course_id.\nIdentify fields that depend on the complete composite key.\nSplit the 1NF table into appropriate 2NF tables.\n\nPart 3: Convert the Dataset to 3NF\nConsider the following transitive dependency:\nstudent_id -&gt; major_id -&gt; major_name\n\nIdentify the non-key field that determines another non-key field.\nCreate a separate table for majors.\nUpdate the student table so that it references the new major table.\n\nPart 4: Identify the Keys\nFor every table in your final 3NF design:\n\nLabel each primary key with PK.\nLabel each foreign key with FK.\nIdentify any composite primary keys.\nDraw the relationships between the tables.\n\n\nGive students 15 to 20 minutes. Remind them that 1NF removes multi-value cells, 2NF removes partial dependencies, and 3NF removes transitive dependencies."
   },
   {
-    "objectID": "lectures/3a.html#instructor-solution",
-    "href": "lectures/3a.html#instructor-solution",
+    "objectID": "lectures/3a.html#key-takeaways",
+    "href": "lectures/3a.html#key-takeaways",
     "title": "Data Modeling",
-    "section": "Instructor Solution",
-    "text": "Instructor Solution\nThe final 3NF design should contain the following tables:\nStudents(\n  student_id PK,\n  student_name,\n  email,\n  major_id FK\n)\n\nMajors(\n  major_id PK,\n  major_name\n)\n\nCourses(\n  course_id PK,\n  course_name,\n  instructor_name\n)\n\nEnrollments(\n  student_id PK/FK,\n  course_id PK/FK,\n  grade\n)\nThe composite primary key for Enrollments is:\n(student_id, course_id)\nThe final relationships are:\n\nOne major can have many students.\nOne student can have many enrollments.\nOne course can have many enrollments.\nEnrollments resolves the many-to-many relationship between students and courses."
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nER diagrams make entities and relationship rules visible\nPrimary keys identify rows, while foreign keys connect tables\n1NF removes repeating groups and multi-value cells\n2NF removes partial dependencies from composite keys\n3NF removes dependencies between non-key fields\nRow and key checks help confirm that normalization preserved the data\n\n\nClose by connecting the three lesson sections. A strong database design starts with a model, makes relationships enforceable with keys, and stores each fact in the table determined by its key."
+  },
+  {
+    "objectID": "posts/2.html",
+    "href": "posts/2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "posts/2.html#resources",
+    "href": "posts/2.html#resources",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
   }
 ]
