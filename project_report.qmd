@@ -28,7 +28,7 @@ For this project, you will explore a Database Management System (DBMS)
 - DuckDB
 - Neo4j Community Edition
 
-I recommend searching job posts and see what kind of DBMS they require. You may also see what other data science professionals recommend in learning. You may also create a data pipeline for a topic of interest.
+I recommend searching job posts and see what kind of DBMS they require. You may also see what other data science professionals recommend in learning. You may also create a data pipeline for a topic of interest. **You are not required to purchase anything for the project.**
 
 
 ## Report
