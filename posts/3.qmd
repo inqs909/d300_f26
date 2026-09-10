@@ -1,0 +1,13 @@
+---
+title: "Week 3"
+date: 09-10-26
+description: This week we will install DB Browser and work on Data Systems.
+editor: source
+---
+
+
+## Resources
+
+| Lecture | Slides                   |
+|---------|--------------------------|
+| 1       | [Slides](../lectures/3a) |
