@@ -1,0 +1,13 @@
+---
+title: "Week 4"
+date: 09-14-26
+description: This week we will build databases.
+editor: source
+---
+
+
+## Resources
+
+| Lecture | Slides                   |
+|---------|--------------------------|
+| 1       | [Slides](../lectures/4a) |

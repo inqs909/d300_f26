@@ -42,18 +42,32 @@
     "text": "Deadline And Extensions\nThe report will be due on December 4, 2026 at 11:59 PM. For your report, you may receive a 24-hour extension beyond the due date for evey time you attend the writing and multiliteracy center. Each appointment must be one week apart."
   },
   {
-    "objectID": "posts/2.html",
-    "href": "posts/2.html",
-    "title": "Week 2",
+    "objectID": "posts/3.html",
+    "href": "posts/3.html",
+    "title": "Week 3",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/2.html#resources",
-    "href": "posts/2.html#resources",
-    "title": "Week 2",
+    "objectID": "posts/3.html#resources",
+    "href": "posts/3.html#resources",
+    "title": "Week 3",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/1.html",
+    "href": "posts/1.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+  },
+  {
+    "objectID": "posts/1.html#resources",
+    "href": "posts/1.html#resources",
+    "title": "Week 1",
+    "section": "",
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
   },
   {
     "objectID": "lectures/3a.html#data-modeling-1",
@@ -641,7 +655,7 @@
     "href": "index.html",
     "title": "Welcome to Introduction to Data Management!",
     "section": "",
-    "text": "Week 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Week 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "a/1.html",
@@ -704,7 +718,7 @@
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures/1b.html#sql-and-relational-databases",
@@ -973,30 +987,163 @@
     "text": "Activity 3: Pipeline Mapping\nScenario: A weather station collects temperature data every minute, sends it to a server, cleans the data (removes errors), and stores it for a yearly report.\nTask:\nDraw (on paper or digitally) a simple diagram of this pipeline. Label your:\n\nSource\nExtraction\nTransformation\nLoading\nDestination\n\n\nThis helps you visualize the flow. If the sensor sends a temperature of 999 degrees (an error), that’s where your “Transformation” step fixes the data."
   },
   {
-    "objectID": "posts/1.html",
-    "href": "posts/1.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "objectID": "lectures/4a.html#scenario",
+    "href": "lectures/4a.html#scenario",
+    "title": "Database Building",
+    "section": "Scenario",
+    "text": "Scenario\nA college stores student, major, course, instructor, and grade information in one table.\nThe registrar wants a database that:\n\navoids duplicated facts;\nprevents inconsistent updates;\nsupports students taking many courses; and\nenforces valid relationships between tables.\n\nYour team has been asked to redesign the data in third normal form (3NF).\n\nEmphasize that normalization is a design process. Students should design the relations before opening DB Browser."
   },
   {
-    "objectID": "posts/1.html#resources",
-    "href": "posts/1.html#resources",
-    "title": "Week 1",
-    "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "objectID": "lectures/4a.html#starting-dataset-unnormalized-form",
+    "href": "lectures/4a.html#starting-dataset-unnormalized-form",
+    "title": "Database Building",
+    "section": "Starting dataset: unnormalized form",
+    "text": "Starting dataset: unnormalized form\n\n\n\n\n\n\n\n\n\n\nstudent_id\nstudent_name\nemail\nmajor\ncourses\n\n\n\n\nS101\nAna Rivera\nana@college.edu\nM01, Data Science\nC101, Databases, Dr. Kim, A; C202, Statistics, Dr. Patel, B+\n\n\nS102\nJamal Lee\njamal@college.edu\nM02, Computer Science\nC101, Databases, Dr. Kim, B\n\n\nS103\nMei Chen\nmei@college.edu\nM01, Data Science\nC202, Statistics, Dr. Patel, A; C303, Programming, Dr. Gomez, A-\n\n\n\n\nPoint out that the major and courses cells contain multiple facts. Do not reveal the final relations yet."
   },
   {
-    "objectID": "posts/3.html",
-    "href": "posts/3.html",
-    "title": "Week 3",
+    "objectID": "lectures/4a.html#stage-1-convert-the-data-to-1nf",
+    "href": "lectures/4a.html#stage-1-convert-the-data-to-1nf",
+    "title": "Database Building",
+    "section": "Stage 1: convert the data to 1NF",
+    "text": "Stage 1: convert the data to 1NF\nFirst Normal Form requires that a database includes a primary key and excludes repeating columns.\nThe courses is problematic. Create repeating rows. Additionally, each cell should contain one, piece of information."
+  },
+  {
+    "objectID": "lectures/4a.html#nf-workspace",
+    "href": "lectures/4a.html#nf-workspace",
+    "title": "Database Building",
+    "section": "1NF workspace",
+    "text": "1NF workspace\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nstudent_id\nstudent_name\nemail\nmajor_id\nmajor_name\ncourse_id\ncourse_name\ninstructor\ngrade\n\n\n\n\nS101\nAna Rivera\nana@college.edu\nM01\nData Science\nC101\nDatabases\nDr. Kim\nA\n\n\nS101\nAna Rivera\nana@college.edu\nM01\nData Science\nC202\nStatistics\nDr. Patel\nB+\n\n\nS102\nJamal Lee\njamal@college.edu\nM02\nComputer Science\nC101\nDatabases\nDr. Kim\nB\n\n\nS103\nMei Chen\nmei@college.edu\nM01\nData Science\nC202\nStatistics\nDr. Patel\nA\n\n\nS103\nMei Chen\nmei@college.edu\nM01\nData Science\nC303\nProgramming\nDr. Gomez\nA-\n\n\n\nThis table satisfies First Normal Form (1NF) because:\n\nEach cell contains only one value.\nEach column represents one attribute.\nEach row represents one student-course enrollment.\nRepeating course groups have been removed.\nThe combination of student_id and course_id can uniquely identify each enrollment.\n\nStudent and course information is still repeated. This redundancy will be addressed when the table is converted to Second Normal Form (2NF)."
+  },
+  {
+    "objectID": "lectures/4a.html#stage-3-convert-the-data-to-2nf",
+    "href": "lectures/4a.html#stage-3-convert-the-data-to-2nf",
+    "title": "Database Building",
+    "section": "Stage 3: convert the data to 2NF",
+    "text": "Stage 3: convert the data to 2NF\nSecond Normal Form does not allow non-key attributes to be partially dependent on composite primary keys. Additionally, the table must be in 1NF.\nProblems: - course_name only depends on course_id, not student_id - major_name and major_id only depends on student_id (more on that later) - instructor only depends on course_id, not student_id"
+  },
+  {
+    "objectID": "lectures/4a.html#nf-workspace-1",
+    "href": "lectures/4a.html#nf-workspace-1",
+    "title": "Database Building",
+    "section": "2NF workspace",
+    "text": "2NF workspace\nTo convert the table to Second Normal Form (2NF), remove attributes that depend on only part of the composite key (student_id, course_id).\nStudents\nPrimary key: student_id\n\n\n\nstudent_id\nstudent_name\nemail\nmajor_id\nmajor_name\n\n\n\n\nS101\nAna Rivera\nana@college.edu\nM01\nData Science\n\n\nS102\nJamal Lee\njamal@college.edu\nM02\nComputer Science\n\n\nS103\nMei Chen\nmei@college.edu\nM01\nData Science\n\n\n\nCourses\nPrimary key: course_id\n\n\n\ncourse_id\ncourse_name\ninstructor\n\n\n\n\nC101\nDatabases\nDr. Kim\n\n\nC202\nStatistics\nDr. Patel\n\n\nC303\nProgramming\nDr. Gomez\n\n\n\nEnrollments\nComposite primary key: (student_id, course_id)\n\n\n\nstudent_id\ncourse_id\ngrade\n\n\n\n\nS101\nC101\nA\n\n\nS101\nC202\nB+\n\n\nS102\nC101\nB\n\n\nS103\nC202\nA\n\n\nS103\nC303\nA-\n\n\n\nThe Enrollments table is a junction table connecting students and courses.\nThis design satisfies 2NF because:\n\nEvery table is already in 1NF.\nStudent information depends entirely on student_id.\nCourse information depends entirely on course_id.\ngrade depends on the complete composite key (student_id, course_id).\nPartial dependencies have been removed.\n\nThe Students table is not yet in 3NF because major_name depends on major_id. This creates a transitive dependency:\nstudent_id → major_id → major_name"
+  },
+  {
+    "objectID": "lectures/4a.html#stage-4-convert-the-data-to-3nf",
+    "href": "lectures/4a.html#stage-4-convert-the-data-to-3nf",
+    "title": "Database Building",
+    "section": "Stage 4: convert the data to 3NF",
+    "text": "Stage 4: convert the data to 3NF\nA table is in Third Normal Form when it is in 2NF and non-key attributes do not depend on other non-key attributes.\nThe Students table in 2NF is not yet in 3NF because major_name depends on major_id. This creates a transitive dependency:"
+  },
+  {
+    "objectID": "lectures/4a.html#nf-workspace-2",
+    "href": "lectures/4a.html#nf-workspace-2",
+    "title": "Database Building",
+    "section": "3NF Workspace",
+    "text": "3NF Workspace\nStudents\nPrimary key: student_id\nForeign key: major_id\n\n\n\nstudent_id\nstudent_name\nemail\nmajor_id\n\n\n\n\nS101\nAna Rivera\nana@college.edu\nM01\n\n\nS102\nJamal Lee\njamal@college.edu\nM02\n\n\nS103\nMei Chen\nmei@college.edu\nM01\n\n\n\nMajors\nPrimary key: major_id\n\n\n\nmajor_id\nmajor_name\n\n\n\n\nM01\nData Science\n\n\nM02\nComputer Science\n\n\n\nCourses\nPrimary key: course_id\n\n\n\ncourse_id\ncourse_name\ninstructor_id\n\n\n\n\nC101\nDatabases\nDr. Kim\n\n\nC202\nStatistics\nDr. Patel\n\n\nC303\nProgramming\nDr. Gomez\n\n\n\nEnrollments\nComposite primary key: (student_id, course_id)\nForeign keys: student_id and course_id\n\n\n\nstudent_id\ncourse_id\ngrade\n\n\n\n\nS101\nC101\nA\n\n\nS101\nC202\nB+\n\n\nS102\nC101\nB\n\n\nS103\nC202\nA\n\n\nS103\nC303\nA-\n\n\n\nThis design satisfies 3NF because:\n\nEvery table satisfies 1NF and 2NF.\nEvery non-key attribute depends on the entire primary key.\nNo non-key attribute depends on another non-key attribute.\nMajor information is stored only in the Majors table.\nThe Enrollments table represents the many-to-many relationship between students and courses."
+  },
+  {
+    "objectID": "lectures/4a.html#third-normal-form-3nf",
+    "href": "lectures/4a.html#third-normal-form-3nf",
+    "title": "Database Building",
+    "section": "Third Normal Form (3NF)",
+    "text": "Third Normal Form (3NF)\nThe original table is unnormalized because major contains multiple values and courses contains repeating groups.\nThe data can be converted to 3NF using the following five tables.\nMajors\n\n\n\nmajor_id\nmajor_name\n\n\n\n\nM01\nData Science\n\n\nM02\nComputer Science\n\n\n\nPrimary key: major_id\nStudents\n\n\n\nstudent_id\nstudent_name\nemail\nmajor_id\n\n\n\n\nS101\nAna Rivera\nana@college.edu\nM01\n\n\nS102\nJamal Lee\njamal@college.edu\nM02\n\n\nS103\nMei Chen\nmei@college.edu\nM01\n\n\n\nPrimary key: student_id\nForeign key: major_id references majors.major_id\nCourses\n\n\n\ncourse_id\ncourse_name\ninstructor_id\n\n\n\n\nC101\nDatabases\nDr. Kim\n\n\nC202\nStatistics\nDr. Patel\n\n\nC303\nProgramming\nDr. Gomez\n\n\n\nPrimary key: course_id\nEnrollments\n\n\n\nstudent_id\ncourse_id\ngrade\n\n\n\n\nS101\nC101\nA\n\n\nS101\nC202\nB+\n\n\nS102\nC101\nB\n\n\nS103\nC202\nA\n\n\nS103\nC303\nA-\n\n\n\nComposite primary key: student_id, course_id\nForeign keys:\n\nstudent_id references students.student_id\ncourse_id references courses.course_id\n\nFinal 3NF structure\n\n\n\nTable\nPrimary key\nForeign key(s)\n\n\n\n\nmajors\nmajor_id\n—\n\n\nstudents\nstudent_id\nmajor_id\n\n\ncourses\ncourse_id\n—\n\n\nenrollments\nstudent_id, course_id\nstudent_id, course_id"
+  },
+  {
+    "objectID": "lectures/4a.html#create-the-database",
+    "href": "lectures/4a.html#create-the-database",
+    "title": "Database Building",
+    "section": "Create the database",
+    "text": "Create the database\nIn DB Browser for SQLite:\n\nSelect New Database.\nSave the file as college_3nf.db.\nIf the table-definition window opens, select Cancel.\nOpen the Execute SQL tab.\nEnter PRAGMA foreign_keys = ON;.\nWrite and execute your CREATE TABLE statements.\nOpen Database Structure and verify that five tables exist.\n\n\nSQLite does not use a CREATE DATABASE statement. DB Browser creates the database file through its New Database command."
+  },
+  {
+    "objectID": "lectures/4a.html#sql-tables",
+    "href": "lectures/4a.html#sql-tables",
+    "title": "Database Building",
+    "section": "SQL Tables",
+    "text": "SQL Tables\nUse this pattern for each entity table:\nCREATE TABLE table_name (\n    id_column   TEXT PRIMARY KEY,\n    description TEXT NOT NULL\n);\nUse this pattern for a foreign key:\nCREATE TABLE child_table (\n    child_id  TEXT PRIMARY KEY,\n    parent_id TEXT NOT NULL,\n    FOREIGN KEY (parent_id)\n        REFERENCES parent_table(parent_id)\n);\n\nThis slide provides syntax without giving away the full solution. Encourage students to create parent tables before child tables."
+  },
+  {
+    "objectID": "lectures/4a.html#junction-table",
+    "href": "lectures/4a.html#junction-table",
+    "title": "Database Building",
+    "section": "Junction-table",
+    "text": "Junction-table\nComplete the enrollment table:\nCREATE TABLE enrollments (\n    student_id TEXT NOT NULL,\n    course_id  TEXT NOT NULL,\n    grade      TEXT,\n\n    PRIMARY KEY (__________, __________),\n\n    FOREIGN KEY (__________)\n        REFERENCES __________(__________)\n        ON DELETE CASCADE,\n\n    FOREIGN KEY (__________)\n        REFERENCES __________(__________)\n        ON DELETE CASCADE\n);\n\nStudents should fill the composite primary key with student_id and course_id. Each foreign key references its matching parent table."
+  },
+  {
+    "objectID": "lectures/4a.html#insert-and-inspect-the-records",
+    "href": "lectures/4a.html#insert-and-inspect-the-records",
+    "title": "Database Building",
+    "section": "Insert and inspect the records",
+    "text": "Insert and inspect the records\nAfter creating all five tables:\n\nInsert the majors and instructors first.\nInsert the students and courses second.\nInsert the enrollments last.\nSelect Write Changes.\nUse Browse Data to inspect every table.\n\nExample syntax:\nINSERT INTO majors (major_id, major_name)\nVALUES\n    ('M01', 'Data Science'),\n    ('M02', 'Computer Science');\n\nThe insertion order matters because child rows require matching parent rows. Students can write INSERT statements or use Browse Data after the tables exist."
+  },
+  {
+    "objectID": "lectures/4a.html#table-definitions",
+    "href": "lectures/4a.html#table-definitions",
+    "title": "Database Building",
+    "section": "Table Definitions",
+    "text": "Table Definitions\nPRAGMA foreign_keys = ON;\n\nCREATE TABLE majors (\n    major_id TEXT PRIMARY KEY,\n    major_name TEXT NOT NULL UNIQUE\n);\n\nCREATE TABLE students (\n    student_id TEXT PRIMARY KEY,\n    student_name TEXT NOT NULL,\n    email TEXT NOT NULL UNIQUE,\n    major_id TEXT NOT NULL,\n    FOREIGN KEY (major_id) REFERENCES majors(major_id)\n);\n\nCREATE TABLE courses (\n    course_id TEXT PRIMARY KEY,\n    course_name TEXT NOT NULL,\n    instructor TEXT NOT NULL,\n);\n\nCREATE TABLE enrollments (\n    student_id TEXT NOT NULL,\n    course_id TEXT NOT NULL,\n    grade TEXT,\n    PRIMARY KEY (student_id, course_id),\n    FOREIGN KEY (student_id) REFERENCES students(student_id)\n        ON DELETE CASCADE,\n    FOREIGN KEY (course_id) REFERENCES courses(course_id)\n        ON DELETE CASCADE\n);\n\nWalk through the creation order and ask students to identify each integrity constraint. The UNIQUE constraints prevent duplicated major names and student emails."
+  },
+  {
+    "objectID": "lectures/4a.html#insert-data-key",
+    "href": "lectures/4a.html#insert-data-key",
+    "title": "Database Building",
+    "section": "Insert Data Key",
+    "text": "Insert Data Key\nINSERT INTO majors VALUES\n    ('M01', 'Data Science'),\n    ('M02', 'Computer Science');\n\n\nINSERT INTO students VALUES\n    ('S101', 'Ana Rivera', 'ana@college.edu', 'M01'),\n    ('S102', 'Jamal Lee', 'jamal@college.edu', 'M02'),\n    ('S103', 'Mei Chen', 'mei@college.edu', 'M01');\n\nINSERT INTO courses VALUES\n    ('C101', 'Databases', 'Dr. Kim'),\n    ('C202', 'Statistics', 'Dr. Patel'),\n    ('C303', 'Programming', 'Dr. Gomez');\n\n\n\nINSERT INTO enrollments VALUES\n    ('S101', 'C101', 'A'),\n    ('S101', 'C202', 'B+'),\n    ('S102', 'C101', 'B'),\n    ('S103', 'C202', 'A'),\n    ('S103', 'C303', 'A-');\n\nThe column order follows the table definitions. For production code, naming the INSERT columns explicitly is safer, but the shorter form fits this debrief slide."
+  },
+  {
+    "objectID": "lectures/4a.html#sql-command-reference-database-structure",
+    "href": "lectures/4a.html#sql-command-reference-database-structure",
+    "title": "Database Building",
+    "section": "SQL command reference: database structure",
+    "text": "SQL command reference: database structure\n\n\n\n\n\n\n\nKeyword or term\nDefinition\n\n\n\n\nPRAGMA foreign_keys = ON\nTurns on foreign-key enforcement for the current SQLite connection.\n\n\nCREATE TABLE\nCreates a new table and defines its columns and constraints.\n\n\nTEXT\nStores text values such as names, identifiers, and grades. (Data Type)\n\n\n\nPRAGMA changes a SQLite setting. The other items define the structure of the database.\n\nExplain that TEXT is a data type rather than a command. SQLite must enable foreign-key enforcement separately for each connection, so students should run the PRAGMA statement whenever they reopen the database."
+  },
+  {
+    "objectID": "lectures/4a.html#sql-command-reference-constraints",
+    "href": "lectures/4a.html#sql-command-reference-constraints",
+    "title": "Database Building",
+    "section": "SQL command reference: constraints",
+    "text": "SQL command reference: constraints\n\n\n\n\n\n\n\nKeyword or clause\nDefinition\n\n\n\n\nPRIMARY KEY\nUniquely identifies each row in a table.\n\n\nNOT NULL\nRequires the column to contain a value.\n\n\nUNIQUE\nPrevents duplicate values in a column or group of columns.\n\n\nFOREIGN KEY\nIdentifies a column whose values must match a key in another table.\n\n\nREFERENCES\nNames the parent table and parent column for a foreign key.\n\n\nON DELETE CASCADE\nAutomatically deletes related child rows when a parent row is deleted.\n\n\n\nPRIMARY KEY (student_id, course_id)\nThis composite key prevents a student from enrolling in the same course twice.\n\nContrast entity integrity, which comes from primary keys, with referential integrity, which comes from foreign keys. Ask students to identify the parent and child table in one relationship."
+  },
+  {
+    "objectID": "lectures/4a.html#sql-command-reference-inserting-data",
+    "href": "lectures/4a.html#sql-command-reference-inserting-data",
+    "title": "Database Building",
+    "section": "SQL command reference: inserting data",
+    "text": "SQL command reference: inserting data\n\n\n\n\n\n\n\nKeyword or clause\nDefinition\n\n\n\n\nINSERT INTO\nAdds one or more rows to a table.\n\n\nVALUES\nIntroduces the values for the new rows.\n\n\nNULL\nRepresents a missing or unknown value when the column permits it.\n\n\n\nINSERT INTO majors (major_id, major_name)\nVALUES\n    ('M01', 'Data Science'),\n    ('M02', 'Computer Science');\nThe value order must match the order of the named columns.\n\nRecommend naming columns in INSERT statements. Doing so makes the statement easier to read and prevents mistakes if the table’s physical column order changes."
+  },
+  {
+    "objectID": "lectures/4a.html#sql-command-reference-retrieving-data",
+    "href": "lectures/4a.html#sql-command-reference-retrieving-data",
+    "title": "Database Building",
+    "section": "SQL command reference: retrieving data",
+    "text": "SQL command reference: retrieving data\n\n\n\nKeyword or clause\nDefinition\n\n\n\n\nSELECT\nChooses the columns returned by a query.\n\n\nFROM\nIdentifies the first table used by the query.\n\n\nAS\nAssigns a temporary alias to a table or column.\n\n\nJOIN\nCombines matching rows from related tables.\n\n\nON\nStates the condition used to match rows in a join.\n\n\nORDER BY\nSorts the result using one or more columns.\n\n\n\nFROM students AS s\nJOIN majors AS m\n    ON s.major_id = m.major_id\nThe aliases s and m shorten qualified column names.\n\nExplain that an unqualified column name may become ambiguous when several joined tables contain a column with the same name. Aliases make the source of each column explicit."
+  },
+  {
+    "objectID": "posts/2.html",
+    "href": "posts/2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "posts/2.html#resources",
+    "href": "posts/2.html#resources",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "posts/4.html",
+    "href": "posts/4.html",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/3.html#resources",
-    "href": "posts/3.html#resources",
-    "title": "Week 3",
+    "objectID": "posts/4.html#resources",
+    "href": "posts/4.html#resources",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   }

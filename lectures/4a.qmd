@@ -1,0 +1,521 @@
+---
+title: "Database Building"
+format:
+  revealjs:
+    scrollable: true
+    navigation-mode: vertical
+    theme: [default, styles.scss]
+    controls-layout: bottom-right
+    controls-tutorial: true
+    progress: true
+    slide-number: c/t
+    incremental: false 
+    
+revealjs-plugins:
+  - pointer
+  - verticator
+  
+filters: 
+  - code-fullscreen
+  - reveal-auto-agenda
+
+editor: source
+
+order: 5
+---
+
+## Scenario
+
+A college stores student, major, course, instructor, and grade information in one table.
+
+The registrar wants a database that:
+
+- avoids duplicated facts;
+- prevents inconsistent updates;
+- supports students taking many courses; and
+- enforces valid relationships between tables.
+
+Your team has been asked to redesign the data in third normal form (3NF).
+
+::: {.notes}
+Emphasize that normalization is a design process. Students should design the relations before opening DB Browser.
+:::
+
+## Starting dataset: unnormalized form
+
+| student_id | student_name | email | major | courses |
+|---|---|---|---|---|
+| S101 | Ana Rivera | ana@college.edu | M01, Data Science | C101, Databases, Dr. Kim, A; C202, Statistics, Dr. Patel, B+ |
+| S102 | Jamal Lee | jamal@college.edu | M02, Computer Science | C101, Databases, Dr. Kim, B |
+| S103 | Mei Chen | mei@college.edu | M01, Data Science | C202, Statistics, Dr. Patel, A; C303, Programming, Dr. Gomez, A- |
+
+::: {.notes}
+Point out that the `major` and `courses` cells contain multiple facts. Do not reveal the final relations yet.
+:::
+
+
+# Normalization
+
+## Stage 1: convert the data to 1NF
+
+**First Normal Form** requires that a database includes a primary key and excludes repeating columns.
+
+
+The `courses` is problematic. Create repeating rows. Additionally, each cell should contain one, piece of information.
+
+
+## 1NF workspace
+
+
+| student_id | student_name | email | major_id | major_name | course_id | course_name | instructor | grade |
+|---|---|---|---|---|---|---|---|---|
+| S101 | Ana Rivera | ana@college.edu | M01 | Data Science | C101 | Databases | Dr. Kim | A |
+| S101 | Ana Rivera | ana@college.edu | M01 | Data Science | C202 | Statistics | Dr. Patel | B+ |
+| S102 | Jamal Lee | jamal@college.edu | M02 | Computer Science | C101 | Databases | Dr. Kim | B |
+| S103 | Mei Chen | mei@college.edu | M01 | Data Science | C202 | Statistics | Dr. Patel | A |
+| S103 | Mei Chen | mei@college.edu | M01 | Data Science | C303 | Programming | Dr. Gomez | A- |
+
+This table satisfies **First Normal Form (1NF)** because:
+
+- Each cell contains only one value.
+- Each column represents one attribute.
+- Each row represents one student-course enrollment.
+- Repeating course groups have been removed.
+- The combination of `student_id` and `course_id` can uniquely identify each enrollment.
+
+Student and course information is still repeated. This redundancy will be addressed when the table is converted to **Second Normal Form (2NF)**.
+
+
+## Stage 3: convert the data to 2NF
+
+**Second Normal Form** does not allow non-key attributes to be partially dependent on composite primary keys. Additionally, the table must be in 1NF.
+
+Problems:
+- `course_name` only depends on `course_id`, not `student_id`
+- `major_name` and `major_id` only depends on `student_id` (more on that later)
+- `instructor` only depends on `course_id`,  not `student_id`
+
+
+
+## 2NF workspace
+
+To convert the table to **Second Normal Form (2NF)**, remove attributes that depend on only part of the composite key `(student_id, course_id)`.
+
+### Students
+
+**Primary key:** `student_id`
+
+| student_id | student_name | email | major_id | major_name |
+|---|---|---|---|---|
+| S101 | Ana Rivera | ana@college.edu | M01 | Data Science |
+| S102 | Jamal Lee | jamal@college.edu | M02 | Computer Science |
+| S103 | Mei Chen | mei@college.edu | M01 | Data Science |
+
+### Courses
+
+**Primary key:** `course_id`
+
+| course_id | course_name | instructor |
+|---|---|---|
+| C101 | Databases | Dr. Kim |
+| C202 | Statistics | Dr. Patel |
+| C303 | Programming | Dr. Gomez |
+
+### Enrollments
+
+**Composite primary key:** `(student_id, course_id)`
+
+| student_id | course_id | grade |
+|---|---|---|
+| S101 | C101 | A |
+| S101 | C202 | B+ |
+| S102 | C101 | B |
+| S103 | C202 | A |
+| S103 | C303 | A- |
+
+The `Enrollments` table is a **junction table** connecting students and courses.
+
+This design satisfies **2NF** because:
+
+- Every table is already in 1NF.
+- Student information depends entirely on `student_id`.
+- Course information depends entirely on `course_id`.
+- `grade` depends on the complete composite key `(student_id, course_id)`.
+- Partial dependencies have been removed.
+
+The `Students` table is not yet in **3NF** because `major_name` depends on `major_id`. This creates a transitive dependency:
+
+`student_id` → `major_id` → `major_name`
+
+## Stage 4: convert the data to 3NF
+
+A table is in **Third Normal Form** when it is in 2NF and non-key attributes do not depend on other non-key attributes.
+
+The `Students` table in **2NF** is not yet in **3NF** because `major_name` depends on `major_id`. This creates a transitive dependency:
+
+## 3NF Workspace
+
+### Students
+
+**Primary key:** `student_id`  
+**Foreign key:** `major_id`
+
+| student_id | student_name | email | major_id |
+|---|---|---|---|
+| S101 | Ana Rivera | ana@college.edu | M01 |
+| S102 | Jamal Lee | jamal@college.edu | M02 |
+| S103 | Mei Chen | mei@college.edu | M01 |
+
+### Majors
+
+**Primary key:** `major_id`
+
+| major_id | major_name |
+|---|---|
+| M01 | Data Science |
+| M02 | Computer Science |
+
+
+### Courses
+
+**Primary key:** `course_id`  
+
+| course_id | course_name | instructor_id |
+|---|---|---|
+| C101 | Databases | Dr. Kim |
+| C202 | Statistics | Dr. Patel |
+| C303 | Programming | Dr. Gomez |
+
+### Enrollments
+
+**Composite primary key:** `(student_id, course_id)`  
+**Foreign keys:** `student_id` and `course_id`
+
+| student_id | course_id | grade |
+|---|---|---|
+| S101 | C101 | A |
+| S101 | C202 | B+ |
+| S102 | C101 | B |
+| S103 | C202 | A |
+| S103 | C303 | A- |
+
+This design satisfies **3NF** because:
+
+- Every table satisfies 1NF and 2NF.
+- Every non-key attribute depends on the entire primary key.
+- No non-key attribute depends on another non-key attribute.
+- Major information is stored only in the `Majors` table.
+- The `Enrollments` table represents the many-to-many relationship between students and courses.
+
+# 3NF Table
+
+## Third Normal Form (3NF)
+
+The original table is unnormalized because `major` contains multiple values and `courses` contains repeating groups.
+
+The data can be converted to 3NF using the following five tables.
+
+### Majors
+
+| major_id | major_name |
+|---|---|
+| M01 | Data Science |
+| M02 | Computer Science |
+
+**Primary key:** `major_id`
+
+### Students
+
+| student_id | student_name | email | major_id |
+|---|---|---|---|
+| S101 | Ana Rivera | ana@college.edu | M01 |
+| S102 | Jamal Lee | jamal@college.edu | M02 |
+| S103 | Mei Chen | mei@college.edu | M01 |
+
+**Primary key:** `student_id`  
+**Foreign key:** `major_id` references `majors.major_id`
+
+
+
+### Courses
+
+| course_id | course_name | instructor_id |
+|---|---|---|
+| C101 | Databases | Dr. Kim |
+| C202 | Statistics | Dr. Patel |
+| C303 | Programming | Dr. Gomez |
+
+**Primary key:** `course_id`  
+
+### Enrollments
+
+| student_id | course_id | grade |
+|---|---|---|
+| S101 | C101 | A |
+| S101 | C202 | B+ |
+| S102 | C101 | B |
+| S103 | C202 | A |
+| S103 | C303 | A- |
+
+**Composite primary key:** `student_id, course_id`
+
+**Foreign keys:**
+
+- `student_id` references `students.student_id`
+- `course_id` references `courses.course_id`
+
+### Final 3NF structure
+
+| Table | Primary key | Foreign key(s) |
+|---|---|---|
+| `majors` | `major_id` | — |
+| `students` | `student_id` | `major_id` |
+| `courses` | `course_id` | — |
+| `enrollments` | `student_id, course_id` | `student_id`, `course_id` |
+
+# Create Database
+
+## Create the database
+
+In **DB Browser for SQLite**:
+
+1. Select **New Database**.
+2. Save the file as `college_3nf.db`.
+3. If the table-definition window opens, select **Cancel**.
+4. Open the **Execute SQL** tab.
+5. Enter `PRAGMA foreign_keys = ON;`.
+6. Write and execute your `CREATE TABLE` statements.
+7. Open **Database Structure** and verify that five tables exist.
+
+::: {.notes}
+SQLite does not use a `CREATE DATABASE` statement. DB Browser creates the database file through its New Database command.
+:::
+
+## SQL Tables
+Use this pattern for each entity table:
+
+```sql
+CREATE TABLE table_name (
+    id_column   TEXT PRIMARY KEY,
+    description TEXT NOT NULL
+);
+```
+
+Use this pattern for a foreign key:
+
+```sql
+CREATE TABLE child_table (
+    child_id  TEXT PRIMARY KEY,
+    parent_id TEXT NOT NULL,
+    FOREIGN KEY (parent_id)
+        REFERENCES parent_table(parent_id)
+);
+```
+
+::: {.notes}
+This slide provides syntax without giving away the full solution. Encourage students to create parent tables before child tables.
+:::
+
+## Junction-table 
+
+Complete the enrollment table:
+
+```sql
+CREATE TABLE enrollments (
+    student_id TEXT NOT NULL,
+    course_id  TEXT NOT NULL,
+    grade      TEXT,
+
+    PRIMARY KEY (__________, __________),
+
+    FOREIGN KEY (__________)
+        REFERENCES __________(__________)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (__________)
+        REFERENCES __________(__________)
+        ON DELETE CASCADE
+);
+```
+
+::: {.notes}
+Students should fill the composite primary key with student_id and course_id. Each foreign key references its matching parent table.
+:::
+
+## Insert and inspect the records
+
+After creating all five tables:
+
+1. Insert the majors and instructors first.
+2. Insert the students and courses second.
+3. Insert the enrollments last.
+4. Select **Write Changes**.
+5. Use **Browse Data** to inspect every table.
+
+Example syntax:
+
+```sql
+INSERT INTO majors (major_id, major_name)
+VALUES
+    ('M01', 'Data Science'),
+    ('M02', 'Computer Science');
+```
+
+::: {.notes}
+The insertion order matters because child rows require matching parent rows. Students can write INSERT statements or use Browse Data after the tables exist.
+:::
+
+
+
+## Table Definitions {.smaller}
+
+```sql
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE majors (
+    major_id TEXT PRIMARY KEY,
+    major_name TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE students (
+    student_id TEXT PRIMARY KEY,
+    student_name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    major_id TEXT NOT NULL,
+    FOREIGN KEY (major_id) REFERENCES majors(major_id)
+);
+
+CREATE TABLE courses (
+    course_id TEXT PRIMARY KEY,
+    course_name TEXT NOT NULL,
+    instructor TEXT NOT NULL,
+);
+
+CREATE TABLE enrollments (
+    student_id TEXT NOT NULL,
+    course_id TEXT NOT NULL,
+    grade TEXT,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+        ON DELETE CASCADE
+);
+```
+
+::: {.notes}
+Walk through the creation order and ask students to identify each integrity constraint. The UNIQUE constraints prevent duplicated major names and student emails.
+:::
+
+## Insert Data Key {.smaller}
+
+```sql
+INSERT INTO majors VALUES
+    ('M01', 'Data Science'),
+    ('M02', 'Computer Science');
+
+
+INSERT INTO students VALUES
+    ('S101', 'Ana Rivera', 'ana@college.edu', 'M01'),
+    ('S102', 'Jamal Lee', 'jamal@college.edu', 'M02'),
+    ('S103', 'Mei Chen', 'mei@college.edu', 'M01');
+
+INSERT INTO courses VALUES
+    ('C101', 'Databases', 'Dr. Kim'),
+    ('C202', 'Statistics', 'Dr. Patel'),
+    ('C303', 'Programming', 'Dr. Gomez');
+
+
+
+INSERT INTO enrollments VALUES
+    ('S101', 'C101', 'A'),
+    ('S101', 'C202', 'B+'),
+    ('S102', 'C101', 'B'),
+    ('S103', 'C202', 'A'),
+    ('S103', 'C303', 'A-');
+```
+
+::: {.notes}
+The column order follows the table definitions. For production code, naming the INSERT columns explicitly is safer, but the shorter form fits this debrief slide.
+:::
+
+# Appendix
+
+## SQL command reference: database structure
+
+| Keyword or term | Definition |
+|---|---|
+| `PRAGMA foreign_keys = ON` | Turns on foreign-key enforcement for the current SQLite connection. |
+| `CREATE TABLE` | Creates a new table and defines its columns and constraints. |
+| `TEXT` | Stores text values such as names, identifiers, and grades. (Data Type) |
+
+`PRAGMA` changes a SQLite setting. The other items define the structure of the database.
+
+::: {.notes}
+Explain that `TEXT` is a data type rather than a command. SQLite must enable foreign-key enforcement separately for each connection, so students should run the PRAGMA statement whenever they reopen the database.
+:::
+
+## SQL command reference: constraints
+
+| Keyword or clause | Definition |
+|---|---|
+| `PRIMARY KEY` | Uniquely identifies each row in a table. |
+| `NOT NULL` | Requires the column to contain a value. |
+| `UNIQUE` | Prevents duplicate values in a column or group of columns. |
+| `FOREIGN KEY` | Identifies a column whose values must match a key in another table. |
+| `REFERENCES` | Names the parent table and parent column for a foreign key. |
+| `ON DELETE CASCADE` | Automatically deletes related child rows when a parent row is deleted. |
+
+```sql
+PRIMARY KEY (student_id, course_id)
+```
+
+This composite key prevents a student from enrolling in the same course twice.
+
+::: {.notes}
+Contrast entity integrity, which comes from primary keys, with referential integrity, which comes from foreign keys. Ask students to identify the parent and child table in one relationship.
+:::
+
+## SQL command reference: inserting data
+
+| Keyword or clause | Definition |
+|---|---|
+| `INSERT INTO` | Adds one or more rows to a table. |
+| `VALUES` | Introduces the values for the new rows. |
+| `NULL` | Represents a missing or unknown value when the column permits it. |
+
+```sql
+INSERT INTO majors (major_id, major_name)
+VALUES
+    ('M01', 'Data Science'),
+    ('M02', 'Computer Science');
+```
+
+The value order must match the order of the named columns.
+
+::: {.notes}
+Recommend naming columns in INSERT statements. Doing so makes the statement easier to read and prevents mistakes if the table's physical column order changes.
+:::
+
+## SQL command reference: retrieving data
+
+| Keyword or clause | Definition |
+|---|---|
+| `SELECT` | Chooses the columns returned by a query. |
+| `FROM` | Identifies the first table used by the query. |
+| `AS` | Assigns a temporary alias to a table or column. |
+| `JOIN` | Combines matching rows from related tables. |
+| `ON` | States the condition used to match rows in a join. |
+| `ORDER BY` | Sorts the result using one or more columns. |
+
+```sql
+FROM students AS s
+JOIN majors AS m
+    ON s.major_id = m.major_id
+```
+
+The aliases `s` and `m` shorten qualified column names.
+
+::: {.notes}
+Explain that an unqualified column name may become ambiguous when several joined tables contain a column with the same name. Aliases make the source of each column explicit.
+:::
