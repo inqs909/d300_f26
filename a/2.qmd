@@ -2,6 +2,7 @@
 title: "Creating a Database"
 format: html
 editor: source
+order: 2
 ---
 
 Using the unnormalized data set below, create a 3NF database.

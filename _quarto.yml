@@ -23,6 +23,7 @@ website:
     right:
       - lectures.qmd
       - project_report.qmd
+      - assignments.qmd
 
 
 
