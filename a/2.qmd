@@ -1,0 +1,18 @@
+---
+title: "Creating a Database"
+format: html
+editor: source
+---
+
+Using the unnormalized data set below, create a 3NF database.
+At the end, submit the SQL code to create the database on canvas. Due 9/20/26.
+
+| character_id | character_name | title | house | region | battles |
+|---|---|---|---|---|---|
+| C101 | Jon Snow | King in the North | H01, House Stark | R01, The North | B01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory |
+| C102 | Sansa Stark | Lady of Winterfell | H01, House Stark | R01, The North | B01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory |
+| C103 | Arya Stark | Assassin | H01, House Stark | R01, The North | B03, Battle of Winterfell, Winterfell, Victory |
+| C104 | Tyrion Lannister | Hand of the Queen | H02, House Lannister | R02, The Westerlands | B02, Battle of Blackwater, King's Landing, Victory; B04, Battle of King's Landing, King's Landing, Defeat |
+| C105 | Jaime Lannister | Knight | H02, House Lannister | R02, The Westerlands | B02, Battle of Blackwater, King's Landing, Victory; B03, Battle of Winterfell, Winterfell, Victory |
+| C106 | Daenerys Targaryen | Queen | H03, House Targaryen | R03, Crownlands | B03, Battle of Winterfell, Winterfell, Victory; B04, Battle of King's Landing, King's Landing, Victory |
+| C107 | Brienne of Tarth | Knight | H04, House Tarth | R04, Stormlands | B01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory |

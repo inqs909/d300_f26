@@ -658,60 +658,11 @@
     "text": "Week 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "a/1.html",
-    "href": "a/1.html",
-    "title": "Designing a Data System",
+    "objectID": "a/2.html",
+    "href": "a/2.html",
+    "title": "Creating a Database",
     "section": "",
-    "text": "In this assignment, you will act as a data systems analyst for CampusLearn, a new online learning platform. Your team must identify the types of data the platform generates, select appropriate storage technologies, and design a data pipeline that supports a weekly instructor dashboard.\nWorking in a group of 2-3 members. Submit one completed assignment per team."
-  },
-  {
-    "objectID": "a/1.html#overview",
-    "href": "a/1.html#overview",
-    "title": "Designing a Data System",
-    "section": "",
-    "text": "In this assignment, you will act as a data systems analyst for CampusLearn, a new online learning platform. Your team must identify the types of data the platform generates, select appropriate storage technologies, and design a data pipeline that supports a weekly instructor dashboard.\nWorking in a group of 2-3 members. Submit one completed assignment per team."
-  },
-  {
-    "objectID": "a/1.html#scenario",
-    "href": "a/1.html#scenario",
-    "title": "Designing a Data System",
-    "section": "Scenario",
-    "text": "Scenario\nCampusLearn collects the following data:\n\nStudent accounts and enrollments: student ID, name, email, course ID, enrollment date, and enrollment status.\nActivity events: JSON records created whenever a student opens a lesson, submits a quiz, or clicks a course link.\nLecture recordings: video files uploaded by instructors.\nCourse connections: relationships among courses, including prerequisites, corequisites, and recommended next courses.\nLogin sessions: a session ID and expiration time that must be retrieved very quickly.\n\nEach week, CampusLearn must create an instructor dashboard showing student participation, completed activities, and students who may need assistance. Data arrives continuously, but the dashboard is refreshed every Monday morning."
-  },
-  {
-    "objectID": "a/1.html#part-1-classify-the-data",
-    "href": "a/1.html#part-1-classify-the-data",
-    "title": "Designing a Data System",
-    "section": "Part 1: Classify the data",
-    "text": "Part 1: Classify the data\nFor each data source, classify it as structured, semi-structured, or unstructured. Briefly justify each classification using a characteristic from the lecture.\n\n\n\nData source\nClassification\nJustification\n\n\n\n\nStudent accounts and enrollments\n\n\n\n\nJSON activity events\n\n\n\n\nLecture recordings\n\n\n\n\nCourse connections\n\n\n\n\nLogin sessions\n\n\n\n\n\nThen answer the following question in 2–3 sentences:\nWhy does the data type matter when deciding how the data should be stored or processed?"
-  },
-  {
-    "objectID": "a/1.html#part-3-select-storage-technologies",
-    "href": "a/1.html#part-3-select-storage-technologies",
-    "title": "Designing a Data System",
-    "section": "Part 3: Select storage technologies",
-    "text": "Part 3: Select storage technologies\nRecommend a storage approach for each requirement. Choose from the technologies discussed in the lecture:\n\nRelational database\nDocument database\nKey-value database\nGraph database\nColumn-family database\nData lake\n\nYou may recommend more than one technology when needed, but explain the role of each one.\n\n\n\n\n\n\n\n\nRequirement\nRecommended storage approach\nEvidence-based justification\n\n\n\n\nStudent accounts and enrollments\n\nConsider schema, relationships, and integrity.\n\n\nJSON activity events\n\nConsider schema flexibility and scale.\n\n\nLecture recordings\n\nConsider the data’s lack of a predefined model.\n\n\nCourse prerequisites and recommendations\n\nConsider complex relationships.\n\n\nLogin sessions\n\nConsider fast retrieval by a unique key."
-  },
-  {
-    "objectID": "a/1.html#part-4-design-the-dashboard-pipeline",
-    "href": "a/1.html#part-4-design-the-dashboard-pipeline",
-    "title": "Designing a Data System",
-    "section": "Part 4: Design the dashboard pipeline",
-    "text": "Part 4: Design the dashboard pipeline\nCampusLearn needs a reliable pipeline to refresh the instructor dashboard every Monday at 6:00 a.m.\n\nStep A: Choose ETL or ELT\nChoose ETL or ELT for the dashboard workflow. In 3–5 sentences, defend your choice. Your response must state where transformation occurs and identify one advantage of your chosen workflow for this scenario.\n\n\nStep B: Map the pipeline\nComplete the following pipeline plan. Include at least two source systems and at least three specific transformations.\n\n\n\nPipeline component\nYour design\n\n\n\n\nSource(s)\n\n\n\nIngestion/extraction\n\n\n\nProcessing/transformation\n\n\n\nLoading/storage destination\n\n\n\nOutput\n\n\n\nOrchestration\n\n\n\n\nYour transformations might address missing values, duplicate events, invalid timestamps, inconsistent field names, or weekly participation totals.\n\n\nStep C: Represent the data flow\nDraw the pipeline using the boxes below, either on paper or with a digital diagram. Add details to each box and add another source box if needed.\n\n\nStep D: Plan for a failure\nSuppose the activity-event extraction fails at 5:30 a.m. on Monday. In 2–3 sentences, explain what the orchestration component should do. Address both the failed task and the downstream dashboard refresh."
-  },
-  {
-    "objectID": "a/1.html#part-5-final-recommendation",
-    "href": "a/1.html#part-5-final-recommendation",
-    "title": "Designing a Data System",
-    "section": "Part 5: Final recommendation",
-    "text": "Part 5: Final recommendation\nWrite a 4–6 sentence recommendation to the CampusLearn project manager. Summarize:\n\nwhy the system should use more than one storage technology;\nwhich technology is most important for data integrity;\nwhether the dashboard pipeline should use ETL or ELT; and\none tradeoff or limitation of your design."
-  },
-  {
-    "objectID": "a/1.html#submission",
-    "href": "a/1.html#submission",
-    "title": "Designing a Data System",
-    "section": "Submission",
-    "text": "Submission\nOnly submit one HTML document per group in CANVAS."
+    "text": "Using the unnormalized data set below, create a 3NF database. At the end, submit the SQL code to create the database on canvas. Due 9/20/26.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncharacter_id\ncharacter_name\ntitle\nhouse\nregion\nhouse_seat\nhouse_words\nweapons\nbattles\n\n\n\n\nC101\nJon Snow\nKing in the North\nH01, House Stark\nR01, The North\nWinterfell\nWinter Is Coming\nLongclaw; Dragonglass Dagger\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC102\nSansa Stark\nLady of Winterfell\nH01, House Stark\nR01, The North\nWinterfell\nWinter Is Coming\nNone\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC103\nArya Stark\nAssassin\nH01, House Stark\nR01, The North\nWinterfell\nWinter Is Coming\nNeedle; Valyrian Steel Dagger\nB03, Battle of Winterfell, Winterfell, Victory\n\n\nC104\nTyrion Lannister\nHand of the Queen\nH02, House Lannister\nR02, The Westerlands\nCasterly Rock\nHear Me Roar!\nCrossbow\nB02, Battle of Blackwater, King’s Landing, Victory; B04, Battle of King’s Landing, King’s Landing, Defeat\n\n\nC105\nJaime Lannister\nKnight\nH02, House Lannister\nR02, The Westerlands\nCasterly Rock\nHear Me Roar!\nWidow’s Wail; Golden Hand\nB02, Battle of Blackwater, King’s Landing, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC106\nDaenerys Targaryen\nQueen\nH03, House Targaryen\nR03, Crownlands\nDragonstone\nFire and Blood\nDrogon; Rhaegal; Viserion\nB03, Battle of Winterfell, Winterfell, Victory; B04, Battle of King’s Landing, King’s Landing, Victory\n\n\nC107\nBrienne of Tarth\nKnight\nH04, House Tarth\nR04, Stormlands\nEvenfall Hall\nThe Just Maid\nOathkeeper\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory"
   },
   {
     "objectID": "lectures.html",

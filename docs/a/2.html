@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Designing a Data System – Data 300</title>
+<title>Creating a Database – Data 300</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -118,33 +118,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">Scenario</a></li>
-  <li><a href="#part-1-classify-the-data" id="toc-part-1-classify-the-data" class="nav-link" data-scroll-target="#part-1-classify-the-data">Part 1: Classify the data</a></li>
-  <li><a href="#part-3-select-storage-technologies" id="toc-part-3-select-storage-technologies" class="nav-link" data-scroll-target="#part-3-select-storage-technologies">Part 3: Select storage technologies</a></li>
-  <li><a href="#part-4-design-the-dashboard-pipeline" id="toc-part-4-design-the-dashboard-pipeline" class="nav-link" data-scroll-target="#part-4-design-the-dashboard-pipeline">Part 4: Design the dashboard pipeline</a>
-  <ul class="collapse">
-  <li><a href="#step-a-choose-etl-or-elt" id="toc-step-a-choose-etl-or-elt" class="nav-link" data-scroll-target="#step-a-choose-etl-or-elt">Step A: Choose ETL or ELT</a></li>
-  <li><a href="#step-b-map-the-pipeline" id="toc-step-b-map-the-pipeline" class="nav-link" data-scroll-target="#step-b-map-the-pipeline">Step B: Map the pipeline</a></li>
-  <li><a href="#step-c-represent-the-data-flow" id="toc-step-c-represent-the-data-flow" class="nav-link" data-scroll-target="#step-c-represent-the-data-flow">Step C: Represent the data flow</a></li>
-  <li><a href="#step-d-plan-for-a-failure" id="toc-step-d-plan-for-a-failure" class="nav-link" data-scroll-target="#step-d-plan-for-a-failure">Step D: Plan for a failure</a></li>
-  </ul></li>
-  <li><a href="#part-5-final-recommendation" id="toc-part-5-final-recommendation" class="nav-link" data-scroll-target="#part-5-final-recommendation">Part 5: Final recommendation</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Designing a Data System</h1>
+<h1 class="title">Creating a Database</h1>
 </div>
 
 
@@ -161,190 +143,114 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>In this assignment, you will act as a data systems analyst for <strong>CampusLearn</strong>, a new online learning platform. Your team must identify the types of data the platform generates, select appropriate storage technologies, and design a data pipeline that supports a weekly instructor dashboard.</p>
-<p>Working in a group of 2-3 members. Submit one completed assignment per team.</p>
-</section>
-<section id="scenario" class="level2">
-<h2 class="anchored" data-anchor-id="scenario">Scenario</h2>
-<p>CampusLearn collects the following data:</p>
-<ol type="1">
-<li><strong>Student accounts and enrollments:</strong> student ID, name, email, course ID, enrollment date, and enrollment status.</li>
-<li><strong>Activity events:</strong> JSON records created whenever a student opens a lesson, submits a quiz, or clicks a course link.</li>
-<li><strong>Lecture recordings:</strong> video files uploaded by instructors.</li>
-<li><strong>Course connections:</strong> relationships among courses, including prerequisites, corequisites, and recommended next courses.</li>
-<li><strong>Login sessions:</strong> a session ID and expiration time that must be retrieved very quickly.</li>
-</ol>
-<p>Each week, CampusLearn must create an instructor dashboard showing student participation, completed activities, and students who may need assistance. Data arrives continuously, but the dashboard is refreshed every Monday morning.</p>
-</section>
-<section id="part-1-classify-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-classify-the-data">Part 1: Classify the data</h2>
-<p>For each data source, classify it as <strong>structured</strong>, <strong>semi-structured</strong>, or <strong>unstructured</strong>. Briefly justify each classification using a characteristic from the lecture.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Data source</th>
-<th>Classification</th>
-<th>Justification</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Student accounts and enrollments</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>JSON activity events</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Lecture recordings</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Course connections</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Login sessions</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Then answer the following question in 2–3 sentences:</p>
-<p><strong>Why does the data type matter when deciding how the data should be stored or processed?</strong></p>
-</section>
-<section id="part-3-select-storage-technologies" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-select-storage-technologies">Part 3: Select storage technologies</h2>
-<p>Recommend a storage approach for each requirement. Choose from the technologies discussed in the lecture:</p>
-<ul>
-<li>Relational database</li>
-<li>Document database</li>
-<li>Key-value database</li>
-<li>Graph database</li>
-<li>Column-family database</li>
-<li>Data lake</li>
-</ul>
-<p>You may recommend more than one technology when needed, but explain the role of each one.</p>
+<p>Using the unnormalized data set below, create a 3NF database. At the end, submit the SQL code to create the database on canvas. Due 9/20/26.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Requirement</th>
-<th>Recommended storage approach</th>
-<th>Evidence-based justification</th>
+<th>character_id</th>
+<th>character_name</th>
+<th>title</th>
+<th>house</th>
+<th>region</th>
+<th>house_seat</th>
+<th>house_words</th>
+<th>weapons</th>
+<th>battles</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Student accounts and enrollments</td>
-<td></td>
-<td>Consider schema, relationships, and integrity.</td>
+<td>C101</td>
+<td>Jon Snow</td>
+<td>King in the North</td>
+<td>H01, House Stark</td>
+<td>R01, The North</td>
+<td>Winterfell</td>
+<td>Winter Is Coming</td>
+<td>Longclaw; Dragonglass Dagger</td>
+<td>B01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory</td>
 </tr>
 <tr class="even">
-<td>JSON activity events</td>
-<td></td>
-<td>Consider schema flexibility and scale.</td>
+<td>C102</td>
+<td>Sansa Stark</td>
+<td>Lady of Winterfell</td>
+<td>H01, House Stark</td>
+<td>R01, The North</td>
+<td>Winterfell</td>
+<td>Winter Is Coming</td>
+<td>None</td>
+<td>B01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory</td>
 </tr>
 <tr class="odd">
-<td>Lecture recordings</td>
-<td></td>
-<td>Consider the data’s lack of a predefined model.</td>
+<td>C103</td>
+<td>Arya Stark</td>
+<td>Assassin</td>
+<td>H01, House Stark</td>
+<td>R01, The North</td>
+<td>Winterfell</td>
+<td>Winter Is Coming</td>
+<td>Needle; Valyrian Steel Dagger</td>
+<td>B03, Battle of Winterfell, Winterfell, Victory</td>
 </tr>
 <tr class="even">
-<td>Course prerequisites and recommendations</td>
-<td></td>
-<td>Consider complex relationships.</td>
+<td>C104</td>
+<td>Tyrion Lannister</td>
+<td>Hand of the Queen</td>
+<td>H02, House Lannister</td>
+<td>R02, The Westerlands</td>
+<td>Casterly Rock</td>
+<td>Hear Me Roar!</td>
+<td>Crossbow</td>
+<td>B02, Battle of Blackwater, King’s Landing, Victory; B04, Battle of King’s Landing, King’s Landing, Defeat</td>
 </tr>
 <tr class="odd">
-<td>Login sessions</td>
-<td></td>
-<td>Consider fast retrieval by a unique key.</td>
+<td>C105</td>
+<td>Jaime Lannister</td>
+<td>Knight</td>
+<td>H02, House Lannister</td>
+<td>R02, The Westerlands</td>
+<td>Casterly Rock</td>
+<td>Hear Me Roar!</td>
+<td>Widow’s Wail; Golden Hand</td>
+<td>B02, Battle of Blackwater, King’s Landing, Victory; B03, Battle of Winterfell, Winterfell, Victory</td>
+</tr>
+<tr class="even">
+<td>C106</td>
+<td>Daenerys Targaryen</td>
+<td>Queen</td>
+<td>H03, House Targaryen</td>
+<td>R03, Crownlands</td>
+<td>Dragonstone</td>
+<td>Fire and Blood</td>
+<td>Drogon; Rhaegal; Viserion</td>
+<td>B03, Battle of Winterfell, Winterfell, Victory; B04, Battle of King’s Landing, King’s Landing, Victory</td>
+</tr>
+<tr class="odd">
+<td>C107</td>
+<td>Brienne of Tarth</td>
+<td>Knight</td>
+<td>H04, House Tarth</td>
+<td>R04, Stormlands</td>
+<td>Evenfall Hall</td>
+<td>The Just Maid</td>
+<td>Oathkeeper</td>
+<td>B01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="part-4-design-the-dashboard-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="part-4-design-the-dashboard-pipeline">Part 4: Design the dashboard pipeline</h2>
-<p>CampusLearn needs a reliable pipeline to refresh the instructor dashboard every Monday at 6:00 a.m.</p>
-<section id="step-a-choose-etl-or-elt" class="level3">
-<h3 class="anchored" data-anchor-id="step-a-choose-etl-or-elt">Step A: Choose ETL or ELT</h3>
-<p>Choose <strong>ETL</strong> or <strong>ELT</strong> for the dashboard workflow. In 3–5 sentences, defend your choice. Your response must state where transformation occurs and identify one advantage of your chosen workflow for this scenario.</p>
-</section>
-<section id="step-b-map-the-pipeline" class="level3">
-<h3 class="anchored" data-anchor-id="step-b-map-the-pipeline">Step B: Map the pipeline</h3>
-<p>Complete the following pipeline plan. Include at least <strong>two source systems</strong> and at least <strong>three specific transformations</strong>.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Pipeline component</th>
-<th>Your design</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Source(s)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Ingestion/extraction</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Processing/transformation</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Loading/storage destination</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Output</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Orchestration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Your transformations might address missing values, duplicate events, invalid timestamps, inconsistent field names, or weekly participation totals.</p>
-</section>
-<section id="step-c-represent-the-data-flow" class="level3">
-<h3 class="anchored" data-anchor-id="step-c-represent-the-data-flow">Step C: Represent the data flow</h3>
-<p>Draw the pipeline using the boxes below, either on paper or with a digital diagram. Add details to each box and add another source box if needed.</p>
-</section>
-<section id="step-d-plan-for-a-failure" class="level3">
-<h3 class="anchored" data-anchor-id="step-d-plan-for-a-failure">Step D: Plan for a failure</h3>
-<p>Suppose the activity-event extraction fails at 5:30 a.m. on Monday. In 2–3 sentences, explain what the orchestration component should do. Address both the failed task and the downstream dashboard refresh.</p>
-</section>
-</section>
-<section id="part-5-final-recommendation" class="level2">
-<h2 class="anchored" data-anchor-id="part-5-final-recommendation">Part 5: Final recommendation</h2>
-<p>Write a 4–6 sentence recommendation to the CampusLearn project manager. Summarize:</p>
-<ul>
-<li>why the system should use more than one storage technology;</li>
-<li>which technology is most important for data integrity;</li>
-<li>whether the dashboard pipeline should use ETL or ELT; and</li>
-<li>one tradeoff or limitation of your design.</li>
-</ul>
-</section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Only submit one HTML document per group in CANVAS.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
