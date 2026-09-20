@@ -676,7 +676,7 @@
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\n\n\nSQL Basics\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures/1b.html#sql-and-relational-databases",
@@ -1104,5 +1104,152 @@
     "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "lectures/5a.html#sql-basics",
+    "href": "lectures/5a.html#sql-basics",
+    "title": "SQL Basics",
+    "section": "SQL Basics",
+    "text": "SQL Basics\n\nSELECT: Choose your columns.\nFROM: Choose your table.\nWHERE: Filter individual rows.\nGROUP BY: Bundle rows into categories.\nHAVING: Filter the bundles/groups.\nORDER BY: Sort your final list."
+  },
+  {
+    "objectID": "lectures/5a.html#the-select-statement",
+    "href": "lectures/5a.html#the-select-statement",
+    "title": "SQL Basics",
+    "section": "The SELECT Statement",
+    "text": "The SELECT Statement\nThe SELECT statement is used to pick the columns you want to see.\n\nBasic Syntax:\nSELECT column1, column2\nFROM table_name;\nThe Wildcard (Selects all columns):\n\nSELECT * \n  FROM table_name;\n\nThe SELECT statement is the most common command. The asterisk is a wildcard, meaning “give me everything,” though it is often better practice to name columns specifically."
+  },
+  {
+    "objectID": "lectures/5a.html#the-distinct-keyword",
+    "href": "lectures/5a.html#the-distinct-keyword",
+    "title": "SQL Basics",
+    "section": "The DISTINCT Keyword",
+    "text": "The DISTINCT Keyword\nSometimes a column contains many duplicate values. To see only unique values, use DISTINCT.\n\nSyntax:\nSELECT DISTINCT column_name \nFROM table_name;\nExample:\n\nSELECT DISTINCT country \n    FROM customers;\n\nDISTINCT is incredibly useful for seeing the unique categories or values within a specific column, like a list of countries where your customers live."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-1",
+    "href": "lectures/5a.html#activity-1",
+    "title": "SQL Basics",
+    "section": "Activity 1",
+    "text": "Activity 1"
+  },
+  {
+    "objectID": "lectures/5a.html#filtering-with-where",
+    "href": "lectures/5a.html#filtering-with-where",
+    "title": "SQL Basics",
+    "section": "Filtering with WHERE",
+    "text": "Filtering with WHERE\nThe WHERE clause is used to filter records based on specific conditions.\n\nIt acts as a gatekeeper.\nIf a row doesn’t meet the condition, it is excluded from the results.\n\nExample:\nSELECT * \n    FROM products \n    WHERE price &gt; 50;\n\nThe WHERE clause is our primary tool for filtering. It allows us to isolate exactly the rows we need from a massive dataset."
+  },
+  {
+    "objectID": "lectures/5a.html#comparison-operators",
+    "href": "lectures/5a.html#comparison-operators",
+    "title": "SQL Basics",
+    "section": "Comparison Operators",
+    "text": "Comparison Operators\nUse these to compare values in your WHERE clause:\n\n= (Equal to)\n!= (Not equal to)\n&gt; (Greater than)\n&lt; (Less than)\n&gt;= (Greater than or equal to)\n&lt;= (Less than or equal to)\n\n\nThese operators are the foundation of logical comparisons in SQL."
+  },
+  {
+    "objectID": "lectures/5a.html#logical-operators",
+    "href": "lectures/5a.html#logical-operators",
+    "title": "SQL Basics",
+    "section": "Logical Operators",
+    "text": "Logical Operators\nYou can combine multiple conditions using logic:\n\nAND: Both conditions must be true.\nOR: At least one condition must be true.\nNOT: The condition must be false.\n\nExample:\nSELECT * \n    FROM users \n    WHERE age &lt; 18 AND country = 'USA';\n\nLogical operators allow for complex filtering. AND narrows your results, while OR expands them."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-2",
+    "href": "lectures/5a.html#activity-2",
+    "title": "SQL Basics",
+    "section": "Activity 2",
+    "text": "Activity 2"
+  },
+  {
+    "objectID": "lectures/5a.html#sorting-with-order-by",
+    "href": "lectures/5a.html#sorting-with-order-by",
+    "title": "SQL Basics",
+    "section": "Sorting with ORDER BY",
+    "text": "Sorting with ORDER BY\nThe ORDER BY clause is used to sort the result set.\n\nDefault: Ascending (A-Z, 1-10).\nASC: Explicitly for Ascending.\nDESC: Explicitly for Descending (Z-A, 10-1).\n\nExample:\nSELECT name, salary \n    FROM employees \n    ORDER BY salary DESC;\n\nOrdering helps us make sense of data by presenting it in a meaningful sequence, like highest salary to lowest."
+  },
+  {
+    "objectID": "lectures/5a.html#sorting-multiple-columns",
+    "href": "lectures/5a.html#sorting-multiple-columns",
+    "title": "SQL Basics",
+    "section": "Sorting Multiple Columns",
+    "text": "Sorting Multiple Columns\nYou can sort by more than one column.\n\nSQL sorts by the first column listed.\nIf there is a “tie” in the first column, it uses the second column.\n\nExample:\nSELECT last_name, first_name \n    FROM employees \n    ORDER BY last_name ASC, first_name ASC;\n\nSorting by multiple columns is very common when dealing with data that has many duplicate values in the primary sorting column."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-3",
+    "href": "lectures/5a.html#activity-3",
+    "title": "SQL Basics",
+    "section": "Activity 3",
+    "text": "Activity 3"
+  },
+  {
+    "objectID": "lectures/5a.html#aggregation-the-big-idea",
+    "href": "lectures/5a.html#aggregation-the-big-idea",
+    "title": "SQL Basics",
+    "section": "Aggregation: The Big Idea",
+    "text": "Aggregation: The Big Idea\nAggregation is the process of performing a calculation on a set of values to return a single value.\n\nInstead of seeing 1,000 individual sales, we want to see the Total Sales.\nAggregation “collapses” rows into summary statistics.\n\n\nAggregation turns “row-level” data into “summary-level” data. This is where data becomes “information.”"
+  },
+  {
+    "objectID": "lectures/5a.html#common-aggregate-functions",
+    "href": "lectures/5a.html#common-aggregate-functions",
+    "title": "SQL Basics",
+    "section": "Common Aggregate Functions",
+    "text": "Common Aggregate Functions\n\nCOUNT(): Returns the number of rows.\nSUM(): Returns the total sum of a numeric column.\nAVG(): Returns the average value.\nMIN(): Returns the smallest value.\nMAX(): Returns the largest value.\n\n\nThese are the heavy lifters of data analysis. COUNT and SUM are perhaps the most frequently used in business reporting."
+  },
+  {
+    "objectID": "lectures/5a.html#the-group-by-clause",
+    "href": "lectures/5a.html#the-group-by-clause",
+    "title": "SQL Basics",
+    "section": "The GROUP BY Clause",
+    "text": "The GROUP BY Clause\nWhen using aggregate functions, we often want to see the summary per category.\n\nGROUP BY tells the database how to bucket the data.\n\nExample:\nSELECT department, COUNT(*) \n    FROM employees \n    GROUP BY department;\n\nIf you use an aggregate function and a regular column together, you MUST use a GROUP BY clause on that regular column."
+  },
+  {
+    "objectID": "lectures/5a.html#how-grouping-works",
+    "href": "lectures/5a.html#how-grouping-works",
+    "title": "SQL Basics",
+    "section": "How Grouping Works",
+    "text": "How Grouping Works\n%%{init: {'theme': 'base', 'themeVariables': {}} }%%\ngraph TD\n    A[Raw Data: Sales] --&gt; B{Group by Region}\n    B --&gt; C[North Bucket]\n    B --&gt; D[South Bucket]\n    B --&gt; E[East Bucket]\n    C --&gt; F[SUM(Sales)]\n    D --&gt; G[SUM(Sales)]\n    E --&gt; H[SUM(Sales)]\nAccessibility Description: A flowchart showing raw sales data being divided into three buckets (North, South, East) and then summed within those buckets.\n\nThink of Grouping like sorting a deck of cards into suits. Once they are sorted into suits, you can count how many cards are in each suit."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-4",
+    "href": "lectures/5a.html#activity-4",
+    "title": "SQL Basics",
+    "section": "Activity 4",
+    "text": "Activity 4"
+  },
+  {
+    "objectID": "lectures/5a.html#the-having-clause",
+    "href": "lectures/5a.html#the-having-clause",
+    "title": "SQL Basics",
+    "section": "The HAVING Clause",
+    "text": "The HAVING Clause\nWHERE cannot be used with aggregate functions. For that, we use HAVING.\n\nWHERE: Filters rows before they are grouped.\nHAVING: Filters groups after they are aggregated.\n\nExample:\nSELECT category, AVG(price) \n    FROM products \n    GROUP BY category \n    HAVING AVG(price) &gt; 20;\n\nThis is a common point of confusion. If you want to filter based on a calculation like “Average” or “Sum,” you must use HAVING."
+  },
+  {
+    "objectID": "lectures/5a.html#where-vs.-having",
+    "href": "lectures/5a.html#where-vs.-having",
+    "title": "SQL Basics",
+    "section": "WHERE vs. HAVING",
+    "text": "WHERE vs. HAVING\n\n\n\n\n\n\n\n\nFeature\nWHERE\nHAVING\n\n\n\n\nUsage\nFilters Rows\nFilters Groups\n\n\nTiming\nBefore Grouping\nAfter Grouping\n\n\nAggregates\nCannot use SUM(), AVG()\nUsed with SUM(), AVG()\n\n\n\n\nA good rule of thumb: If it’s a simple column condition, use WHERE. If it’s a condition on a summary calculation, use HAVING."
+  },
+  {
+    "objectID": "lectures/5a.html#sql-order-of-execution",
+    "href": "lectures/5a.html#sql-order-of-execution",
+    "title": "SQL Basics",
+    "section": "SQL Order of Execution",
+    "text": "SQL Order of Execution\nSQL is not read from top to bottom by the database engine. It follows a specific internal order:\n\nFROM (Pick the table)\nWHERE (Filter the rows)\nGROUP BY (Group the rows)\nHAVING (Filter the groups)\nSELECT (Pick columns)\nORDER BY (Sort results)\n\n\nUnderstanding this is the “secret sauce” to debugging complex queries. If your code is failing, it’s likely because you’re trying to use a column in the WHERE clause that hasn’t been selected yet!"
+  },
+  {
+    "objectID": "lectures/5a.html#sql-execution-flow",
+    "href": "lectures/5a.html#sql-execution-flow",
+    "title": "SQL Basics",
+    "section": "SQL Execution Flow",
+    "text": "SQL Execution Flow\n%%{init: {'theme': 'base', 'themeVariables': {}} }%%\ngraph TD\n    1[1. FROM/JOIN] --&gt; 2[2. WHERE]\n    2 --&gt; 3[3. GROUP BY]\n    3 --&gt; 4[4. HAVING]\n    4 --&gt; 5[5. SELECT]\n    5 --&gt; 6[6. ORDER BY]\nAccessibility Description: A vertical flowchart showing the logical order of execution from the FROM clause down to the ORDER BY clause.\n\nEven though we write SELECT first, the computer looks at the FROM clause first to know which data source to access."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-5",
+    "href": "lectures/5a.html#activity-5",
+    "title": "SQL Basics",
+    "section": "ACTIVITY 5",
+    "text": "ACTIVITY 5"
   }
 ]

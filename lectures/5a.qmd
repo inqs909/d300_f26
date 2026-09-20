@@ -1,0 +1,464 @@
+---
+title: "SQL Basics"
+format:
+  revealjs:
+    scrollable: true
+    navigation-mode: vertical
+    theme: [default, styles.scss]
+    controls-layout: bottom-right
+    controls-tutorial: true
+    progress: true
+    slide-number: c/t
+    incremental: false 
+    
+revealjs-plugins:
+  - pointer
+  - verticator
+  
+filters: 
+  - code-fullscreen
+  - reveal-auto-agenda
+
+editor: source
+
+order: 6
+---
+
+## SQL Basics
+
+* **SELECT**: Choose your columns.
+* **FROM**: Choose your table.
+* **WHERE**: Filter individual rows.
+* **GROUP BY**: Bundle rows into categories.
+* **HAVING**: Filter the bundles/groups.
+* **ORDER BY**: Sort your final list.
+
+# SELECT
+
+## The SELECT Statement
+
+The `SELECT` statement is used to pick the columns you want to see.
+
+* **Basic Syntax**:
+  ```sql
+  SELECT column1, column2
+  FROM table_name;
+  ```
+* **The Wildcard** (Selects *all* columns):
+
+```sql
+SELECT * 
+  FROM table_name;
+```
+
+
+::: {.notes}
+The SELECT statement is the most common command. The asterisk is a wildcard, meaning "give me everything," though it is often better practice to name columns specifically.
+:::
+
+
+## The DISTINCT Keyword
+
+Sometimes a column contains many duplicate values. To see only unique values, use `DISTINCT`.
+
+* **Syntax:**
+  ```sql
+  SELECT DISTINCT column_name 
+  FROM table_name;
+  ```
+
+* **Example:**
+
+```sql
+SELECT DISTINCT country 
+    FROM customers;
+```
+
+::: {.notes}
+DISTINCT is incredibly useful for seeing the unique categories or values within a specific column, like a list of countries where your customers live.
+:::
+
+## Activity 1
+
+Use the Chinook database to answer the following questions:
+
+1. Display the `FirstName`, `LastName`, and `Email` of every customer.
+2. Display each country represented in the `Customer` table only once.
+3. Display the `Name`, `Composer`, and `UnitPrice` of every track.
+
+# WHERE
+
+## Filtering with WHERE
+
+The `WHERE` clause is used to filter records based on specific conditions.
+
+* It acts as a gatekeeper.
+* If a row doesn't meet the condition, it is excluded from the results.
+
+**Example:**
+
+```sql
+SELECT * 
+    FROM products 
+    WHERE price > 50;
+```
+
+::: {.notes}
+The WHERE clause is our primary tool for filtering. It allows us to isolate exactly the rows we need from a massive dataset.
+:::
+
+## Comparison Operators
+
+Use these to compare values in your `WHERE` clause:
+
+* `=` (Equal to)
+* `!=` (Not equal to)
+* `>` (Greater than)
+* `<` (Less than)
+* `>=` (Greater than or equal to)
+* `<=` (Less than or equal to)
+
+::: {.notes}
+These operators are the foundation of logical comparisons in SQL.
+:::
+
+## Logical Operators
+
+You can combine multiple conditions using logic:
+
+* **AND**: Both conditions must be true.
+* **OR**: At least one condition must be true.
+* **NOT**: The condition must be false.
+
+**Example:**
+
+```sql
+SELECT * 
+    FROM users 
+    WHERE age < 18 AND country = 'USA';
+```
+
+
+::: {.notes}
+Logical operators allow for complex filtering. AND narrows your results, while OR expands them.
+:::
+
+## Activity 2
+
+Use the Chinook database to answer the following questions:
+
+1. Find the tracks that cost at least $1.00. Display `Name` and `UnitPrice`.
+2. Find customers who live in either the USA or Canada. Display their name and country.
+3. Find invoices from the USA with a total greater than $10.00.
+
+# ORDER BY
+
+## Sorting with ORDER BY
+
+The `ORDER BY` clause is used to sort the result set.
+
+* **Default:** Ascending (A-Z, 1-10).
+* **ASC:** Explicitly for Ascending.
+* **DESC:** Explicitly for Descending (Z-A, 10-1).
+
+**Example:**
+
+```sql
+SELECT name, salary 
+    FROM employees 
+    ORDER BY salary DESC;
+```
+
+
+::: {.notes}
+Ordering helps us make sense of data by presenting it in a meaningful sequence, like highest salary to lowest.
+:::
+
+## Sorting Multiple Columns
+
+You can sort by more than one column.
+
+* SQL sorts by the first column listed.
+* If there is a "tie" in the first column, it uses the second column.
+
+**Example:**
+
+```sql
+SELECT last_name, first_name 
+    FROM employees 
+    ORDER BY last_name ASC, first_name ASC;
+```
+
+::: {.notes}
+Sorting by multiple columns is very common when dealing with data that has many duplicate values in the primary sorting column.
+:::
+
+## Activity 3
+
+Use the Chinook database to answer the following questions:
+
+1. List customers by `Country`, then by `LastName`, and then by `FirstName`, all in ascending order.
+2. List tracks from highest to lowest `UnitPrice`. For tracks with the same price, sort by `Name` in ascending order.
+3. List invoices from highest to lowest `Total`.
+
+::: {.notes}
+Ask students which column controls the primary sort and which columns break ties.
+:::
+
+# GROUP BY
+
+## Aggregation: The Big Idea
+
+Aggregation is the process of performing a calculation on a set of values to return a single value.
+
+* **Instead of seeing 1,000 individual sales, we want to see the Total Sales.**
+* Aggregation "collapses" rows into summary statistics.
+
+::: {.notes}
+Aggregation turns "row-level" data into "summary-level" data. This is where data becomes "information."
+:::
+
+## Common Aggregate Functions
+
+* **COUNT()**: Returns the number of rows.
+* **SUM()**: Returns the total sum of a numeric column.
+* **AVG()**: Returns the average value.
+* **MIN()**: Returns the smallest value.
+* **MAX()**: Returns the largest value.
+
+::: {.notes}
+These are the heavy lifters of data analysis. COUNT and SUM are perhaps the most frequently used in business reporting.
+:::
+
+## The GROUP BY Clause
+
+When using aggregate functions, we often want to see the summary per category.
+
+* `GROUP BY` tells the database how to bucket the data.
+
+**Example:**
+
+```sql
+SELECT department, COUNT(*) 
+    FROM employees 
+    GROUP BY department;
+```
+
+::: {.notes}
+If you use an aggregate function and a regular column together, you MUST use a GROUP BY clause on that regular column.
+:::
+
+## How Grouping Works
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {}} }%%
+graph TD
+    A[Raw Data: Sales] --&gt; B{Group by Region}
+    B --&gt; C[North Bucket]
+    B --&gt; D[South Bucket]
+    B --&gt; E[East Bucket]
+    C --&gt; F[SUM(Sales)]
+    D --&gt; G[SUM(Sales)]
+    E --&gt; H[SUM(Sales)]
+```
+
+*Accessibility Description: A flowchart showing raw sales data being divided into three buckets (North, South, East) and then summed within those buckets.*
+
+::: {.notes}
+Think of Grouping like sorting a deck of cards into suits. Once they are sorted into suits, you can count how many cards are in each suit.
+:::
+
+## Activity 4
+
+Use the Chinook database to answer the following questions:
+
+1. Count the number of tracks in each `GenreId`.
+2. For each `BillingCountry`, calculate the number of invoices and the total amount invoiced.
+3. For each `AlbumId`, calculate the average track length in milliseconds.
+
+::: {.notes}
+Remind students that every selected column that is not inside an aggregate function must appear in the `GROUP BY` clause.
+:::
+
+
+# HAVING
+
+## The HAVING Clause
+
+`WHERE` cannot be used with aggregate functions. For that, we use `HAVING`.
+
+* **WHERE**: Filters rows *before* they are grouped.
+* **HAVING**: Filters groups *after* they are aggregated.
+
+**Example:**
+
+```sql
+SELECT category, AVG(price) 
+    FROM products 
+    GROUP BY category 
+    HAVING AVG(price) > 20;
+```
+
+::: {.notes}
+This is a common point of confusion. If you want to filter based on a calculation like "Average" or "Sum," you must use HAVING.
+:::
+
+## WHERE vs. HAVING
+
+| Feature | WHERE | HAVING |
+| :--- | :--- | :--- |
+| **Usage** | Filters Rows | Filters Groups |
+| **Timing** | Before Grouping | After Grouping |
+| **Aggregates** | Cannot use `SUM()`, `AVG()` | Used with `SUM()`, `AVG()` |
+
+::: {.notes}
+A good rule of thumb: If it's a simple column condition, use WHERE. If it's a condition on a summary calculation, use HAVING.
+:::
+
+## SQL Order of Execution
+
+SQL is not read from top to bottom by the database engine. It follows a specific internal order:
+
+1. **FROM** (Pick the table)
+2. **WHERE** (Filter the rows)
+3. **GROUP BY** (Group the rows)
+4. **HAVING** (Filter the groups)
+5. **SELECT** (Pick columns)
+6. **ORDER BY** (Sort results)
+
+::: {.notes}
+Understanding this is the "secret sauce" to debugging complex queries. If your code is failing, it's likely because you're trying to use a column in the WHERE clause that hasn't been selected yet!
+:::
+
+## SQL Execution Flow
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {}} }%%
+graph TD
+    1[1. FROM/JOIN] --&gt; 2[2. WHERE]
+    2 --&gt; 3[3. GROUP BY]
+    3 --&gt; 4[4. HAVING]
+    4 --&gt; 5[5. SELECT]
+    5 --&gt; 6[6. ORDER BY]
+```
+
+*Accessibility Description: A vertical flowchart showing the logical order of execution from the FROM clause down to the ORDER BY clause.*
+
+::: {.notes}
+Even though we write SELECT first, the computer looks at the FROM clause first to know which data source to access.
+:::
+
+## ACTIVITY 5
+
+Use the Chinook database to answer the following questions:
+
+1. Find billing countries whose total invoiced amount is greater than $100.
+2. Find genres that contain more than 100 tracks. Use `GenreId` to identify each genre.
+3. Find billing countries whose average invoice total is greater than $6.00.
+
+::: {.notes}
+Have students first write each grouped query without `HAVING`, then add the condition that filters the aggregated results.
+:::
+
+# Activity Solutions
+
+## Activity 1 Solutions
+
+```sql
+-- 1. Customer names and email addresses
+SELECT FirstName, LastName, Email
+FROM Customer;
+
+-- 2. Unique customer countries
+SELECT DISTINCT Country
+FROM Customer;
+
+-- 3. Track names, composers, and prices
+SELECT Name, Composer, UnitPrice
+FROM Track;
+```
+
+## Activity 2 Solutions
+
+```sql
+-- 1. Tracks that cost at least $1.00
+SELECT Name, UnitPrice
+FROM Track
+WHERE UnitPrice >= 1.00;
+
+-- 2. Customers in the USA or Canada
+SELECT FirstName, LastName, Country
+FROM Customer
+WHERE Country = 'USA' OR Country = 'Canada';
+
+-- 3. USA invoices greater than $10.00
+SELECT InvoiceId, BillingCountry, Total
+FROM Invoice
+WHERE BillingCountry = 'USA' AND Total > 10.00;
+```
+
+## Activity 3 Solutions
+
+```sql
+-- 1. Customers sorted by country and name
+SELECT FirstName, LastName, Country
+FROM Customer
+ORDER BY Country ASC, LastName ASC, FirstName ASC;
+
+-- 2. Tracks sorted by price and then name
+SELECT Name, UnitPrice
+FROM Track
+ORDER BY UnitPrice DESC, Name ASC;
+
+-- 3. Invoices sorted from highest to lowest total
+SELECT InvoiceId, CustomerId, Total
+FROM Invoice
+ORDER BY Total DESC;
+```
+
+## Activity 4 Solutions
+
+```sql
+-- 1. Number of tracks in each genre
+SELECT GenreId, COUNT(*) AS TrackCount
+FROM Track
+GROUP BY GenreId;
+
+-- 2. Invoice count and total amount by country
+SELECT BillingCountry,
+       COUNT(*) AS InvoiceCount,
+       SUM(Total) AS TotalInvoiced
+FROM Invoice
+GROUP BY BillingCountry;
+
+-- 3. Average track length for each album
+SELECT AlbumId, AVG(Milliseconds) AS AverageMilliseconds
+FROM Track
+GROUP BY AlbumId;
+```
+
+## Activity 5 Solutions
+
+```sql
+-- 1. Countries with more than $100 in invoice totals
+SELECT BillingCountry, SUM(Total) AS TotalInvoiced
+FROM Invoice
+GROUP BY BillingCountry
+HAVING SUM(Total) > 100;
+
+-- 2. Genres with more than 100 tracks
+SELECT GenreId, COUNT(*) AS TrackCount
+FROM Track
+GROUP BY GenreId
+HAVING COUNT(*) > 100;
+
+-- 3. Countries with an average invoice total over $6.00
+SELECT BillingCountry, AVG(Total) AS AverageInvoiceTotal
+FROM Invoice
+GROUP BY BillingCountry
+HAVING AVG(Total) > 6.00;
+```
+
+
+
+
