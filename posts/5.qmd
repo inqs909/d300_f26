@@ -1,0 +1,13 @@
+---
+title: "Week 1"
+date: 09-21-26
+description: This week we will cover sql basics.
+editor: source
+---
+
+
+## Resources
+
+| Lecture | Slides                   |
+|---------|--------------------------|
+| 1       | [Slides](../lectures/5a) |

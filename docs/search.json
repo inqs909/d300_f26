@@ -42,32 +42,200 @@
     "text": "Deadline And Extensions\nThe report will be due on December 4, 2026 at 11:59 PM. For your report, you may receive a 24-hour extension beyond the due date for evey time you attend the writing and multiliteracy center. Each appointment must be one week apart."
   },
   {
-    "objectID": "posts/3.html",
-    "href": "posts/3.html",
-    "title": "Week 3",
+    "objectID": "posts/4.html",
+    "href": "posts/4.html",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/3.html#resources",
-    "href": "posts/3.html#resources",
-    "title": "Week 3",
+    "objectID": "posts/4.html#resources",
+    "href": "posts/4.html#resources",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/1.html",
-    "href": "posts/1.html",
-    "title": "Week 1",
+    "objectID": "posts/2.html",
+    "href": "posts/2.html",
+    "title": "Week 2",
     "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
   },
   {
-    "objectID": "posts/1.html#resources",
-    "href": "posts/1.html#resources",
-    "title": "Week 1",
+    "objectID": "posts/2.html#resources",
+    "href": "posts/2.html#resources",
+    "title": "Week 2",
     "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "lectures/5a.html#sql-basics",
+    "href": "lectures/5a.html#sql-basics",
+    "title": "SQL Basics",
+    "section": "SQL Basics",
+    "text": "SQL Basics\n\nSELECT: Choose your columns.\nFROM: Choose your table.\nWHERE: Filter individual rows.\nGROUP BY: Bundle rows into categories.\nHAVING: Filter the bundles/groups.\nORDER BY: Sort your final list."
+  },
+  {
+    "objectID": "lectures/5a.html#the-select-statement",
+    "href": "lectures/5a.html#the-select-statement",
+    "title": "SQL Basics",
+    "section": "The SELECT Statement",
+    "text": "The SELECT Statement\nThe SELECT statement is used to pick the columns you want to see.\n\nBasic Syntax:\nSELECT column1, column2\nFROM table_name;\nThe Wildcard (Selects all columns):\n\nSELECT * \n  FROM table_name;\n\nThe SELECT statement is the most common command. The asterisk is a wildcard, meaning “give me everything,” though it is often better practice to name columns specifically."
+  },
+  {
+    "objectID": "lectures/5a.html#the-distinct-keyword",
+    "href": "lectures/5a.html#the-distinct-keyword",
+    "title": "SQL Basics",
+    "section": "The DISTINCT Keyword",
+    "text": "The DISTINCT Keyword\nSometimes a column contains many duplicate values. To see only unique values, use DISTINCT.\n\nSyntax:\nSELECT DISTINCT column_name \nFROM table_name;\nExample:\n\nSELECT DISTINCT country \n    FROM customers;\n\nDISTINCT is incredibly useful for seeing the unique categories or values within a specific column, like a list of countries where your customers live."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-1",
+    "href": "lectures/5a.html#activity-1",
+    "title": "SQL Basics",
+    "section": "Activity 1",
+    "text": "Activity 1\nUse the Chinook database to answer the following questions:\n\nDisplay the FirstName, LastName, and Email of every customer.\nDisplay each country represented in the Customer table only once.\nDisplay the Name, Composer, and UnitPrice of every track."
+  },
+  {
+    "objectID": "lectures/5a.html#filtering-with-where",
+    "href": "lectures/5a.html#filtering-with-where",
+    "title": "SQL Basics",
+    "section": "Filtering with WHERE",
+    "text": "Filtering with WHERE\nThe WHERE clause is used to filter records based on specific conditions.\n\nIt acts as a gatekeeper.\nIf a row doesn’t meet the condition, it is excluded from the results.\n\nExample:\nSELECT * \n    FROM products \n    WHERE price &gt; 50;\n\nThe WHERE clause is our primary tool for filtering. It allows us to isolate exactly the rows we need from a massive dataset."
+  },
+  {
+    "objectID": "lectures/5a.html#comparison-operators",
+    "href": "lectures/5a.html#comparison-operators",
+    "title": "SQL Basics",
+    "section": "Comparison Operators",
+    "text": "Comparison Operators\nUse these to compare values in your WHERE clause:\n\n= (Equal to)\n!= (Not equal to)\n&gt; (Greater than)\n&lt; (Less than)\n&gt;= (Greater than or equal to)\n&lt;= (Less than or equal to)\n\n\nThese operators are the foundation of logical comparisons in SQL."
+  },
+  {
+    "objectID": "lectures/5a.html#logical-operators",
+    "href": "lectures/5a.html#logical-operators",
+    "title": "SQL Basics",
+    "section": "Logical Operators",
+    "text": "Logical Operators\nYou can combine multiple conditions using logic:\n\nAND: Both conditions must be true.\nOR: At least one condition must be true.\nNOT: The condition must be false.\n\nExample:\nSELECT * \n    FROM users \n    WHERE age &lt; 18 AND country = 'USA';\n\nLogical operators allow for complex filtering. AND narrows your results, while OR expands them."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-2",
+    "href": "lectures/5a.html#activity-2",
+    "title": "SQL Basics",
+    "section": "Activity 2",
+    "text": "Activity 2\nUse the Chinook database to answer the following questions:\n\nFind the tracks that cost at least $1.00. Display Name and UnitPrice.\nFind customers who live in either the USA or Canada. Display their name and country.\nFind invoices from the USA with a total greater than $10.00."
+  },
+  {
+    "objectID": "lectures/5a.html#sorting-with-order-by",
+    "href": "lectures/5a.html#sorting-with-order-by",
+    "title": "SQL Basics",
+    "section": "Sorting with ORDER BY",
+    "text": "Sorting with ORDER BY\nThe ORDER BY clause is used to sort the result set.\n\nDefault: Ascending (A-Z, 1-10).\nASC: Explicitly for Ascending.\nDESC: Explicitly for Descending (Z-A, 10-1).\n\nExample:\nSELECT name, salary \n    FROM employees \n    ORDER BY salary DESC;\n\nOrdering helps us make sense of data by presenting it in a meaningful sequence, like highest salary to lowest."
+  },
+  {
+    "objectID": "lectures/5a.html#sorting-multiple-columns",
+    "href": "lectures/5a.html#sorting-multiple-columns",
+    "title": "SQL Basics",
+    "section": "Sorting Multiple Columns",
+    "text": "Sorting Multiple Columns\nYou can sort by more than one column.\n\nSQL sorts by the first column listed.\nIf there is a “tie” in the first column, it uses the second column.\n\nExample:\nSELECT last_name, first_name \n    FROM employees \n    ORDER BY last_name ASC, first_name ASC;\n\nSorting by multiple columns is very common when dealing with data that has many duplicate values in the primary sorting column."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-3",
+    "href": "lectures/5a.html#activity-3",
+    "title": "SQL Basics",
+    "section": "Activity 3",
+    "text": "Activity 3\nUse the Chinook database to answer the following questions:\n\nList customers by Country, then by LastName, and then by FirstName, all in ascending order.\nList tracks from highest to lowest UnitPrice. For tracks with the same price, sort by Name in ascending order.\nList invoices from highest to lowest Total.\n\n\nAsk students which column controls the primary sort and which columns break ties."
+  },
+  {
+    "objectID": "lectures/5a.html#aggregation-the-big-idea",
+    "href": "lectures/5a.html#aggregation-the-big-idea",
+    "title": "SQL Basics",
+    "section": "Aggregation: The Big Idea",
+    "text": "Aggregation: The Big Idea\nAggregation is the process of performing a calculation on a set of values to return a single value.\n\nInstead of seeing 1,000 individual sales, we want to see the Total Sales.\nAggregation “collapses” rows into summary statistics.\n\n\nAggregation turns “row-level” data into “summary-level” data. This is where data becomes “information.”"
+  },
+  {
+    "objectID": "lectures/5a.html#common-aggregate-functions",
+    "href": "lectures/5a.html#common-aggregate-functions",
+    "title": "SQL Basics",
+    "section": "Common Aggregate Functions",
+    "text": "Common Aggregate Functions\n\nCOUNT(): Returns the number of rows.\nSUM(): Returns the total sum of a numeric column.\nAVG(): Returns the average value.\nMIN(): Returns the smallest value.\nMAX(): Returns the largest value.\n\n\nThese are the heavy lifters of data analysis. COUNT and SUM are perhaps the most frequently used in business reporting."
+  },
+  {
+    "objectID": "lectures/5a.html#the-group-by-clause",
+    "href": "lectures/5a.html#the-group-by-clause",
+    "title": "SQL Basics",
+    "section": "The GROUP BY Clause",
+    "text": "The GROUP BY Clause\nWhen using aggregate functions, we often want to see the summary per category.\n\nGROUP BY tells the database how to bucket the data.\n\nExample:\nSELECT department, COUNT(*) \n    FROM employees \n    GROUP BY department;\n\nIf you use an aggregate function and a regular column together, you MUST use a GROUP BY clause on that regular column."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-4",
+    "href": "lectures/5a.html#activity-4",
+    "title": "SQL Basics",
+    "section": "Activity 4",
+    "text": "Activity 4\nUse the Chinook database to answer the following questions:\n\nCount the number of tracks in each GenreId.\nFor each BillingCountry, calculate the number of invoices and the total amount invoiced.\nFor each AlbumId, calculate the average track length in milliseconds.\n\n\nRemind students that every selected column that is not inside an aggregate function must appear in the GROUP BY clause."
+  },
+  {
+    "objectID": "lectures/5a.html#the-having-clause",
+    "href": "lectures/5a.html#the-having-clause",
+    "title": "SQL Basics",
+    "section": "The HAVING Clause",
+    "text": "The HAVING Clause\nWHERE cannot be used with aggregate functions. For that, we use HAVING.\n\nWHERE: Filters rows before they are grouped.\nHAVING: Filters groups after they are aggregated.\n\nExample:\nSELECT category, AVG(price) \n    FROM products \n    GROUP BY category \n    HAVING AVG(price) &gt; 20;\n\nThis is a common point of confusion. If you want to filter based on a calculation like “Average” or “Sum,” you must use HAVING."
+  },
+  {
+    "objectID": "lectures/5a.html#where-vs.-having",
+    "href": "lectures/5a.html#where-vs.-having",
+    "title": "SQL Basics",
+    "section": "WHERE vs. HAVING",
+    "text": "WHERE vs. HAVING\n\n\n\n\n\n\n\n\nFeature\nWHERE\nHAVING\n\n\n\n\nUsage\nFilters Rows\nFilters Groups\n\n\nTiming\nBefore Grouping\nAfter Grouping\n\n\nAggregates\nCannot use SUM(), AVG()\nUsed with SUM(), AVG()\n\n\n\n\nA good rule of thumb: If it’s a simple column condition, use WHERE. If it’s a condition on a summary calculation, use HAVING."
+  },
+  {
+    "objectID": "lectures/5a.html#sql-order-of-execution",
+    "href": "lectures/5a.html#sql-order-of-execution",
+    "title": "SQL Basics",
+    "section": "SQL Order of Execution",
+    "text": "SQL Order of Execution\nSQL is not read from top to bottom by the database engine. It follows a specific internal order:\n\nFROM (Pick the table)\nWHERE (Filter the rows)\nGROUP BY (Group the rows)\nHAVING (Filter the groups)\nSELECT (Pick columns)\nORDER BY (Sort results)\n\n\nUnderstanding this is the “secret sauce” to debugging complex queries. If your code is failing, it’s likely because you’re trying to use a column in the WHERE clause that hasn’t been selected yet!"
+  },
+  {
+    "objectID": "lectures/5a.html#activity-5",
+    "href": "lectures/5a.html#activity-5",
+    "title": "SQL Basics",
+    "section": "ACTIVITY 5",
+    "text": "ACTIVITY 5\nUse the Chinook database to answer the following questions:\n\nFind billing countries whose total invoiced amount is greater than $100.\nFind genres that contain more than 100 tracks. Use GenreId to identify each genre.\nFind billing countries whose average invoice total is greater than $6.00.\n\n\nHave students first write each grouped query without HAVING, then add the condition that filters the aggregated results."
+  },
+  {
+    "objectID": "lectures/5a.html#activity-1-solutions",
+    "href": "lectures/5a.html#activity-1-solutions",
+    "title": "SQL Basics",
+    "section": "Activity 1 Solutions",
+    "text": "Activity 1 Solutions\n-- 1. Customer names and email addresses\nSELECT FirstName, LastName, Email\nFROM Customer;\n\n-- 2. Unique customer countries\nSELECT DISTINCT Country\nFROM Customer;\n\n-- 3. Track names, composers, and prices\nSELECT Name, Composer, UnitPrice\nFROM Track;"
+  },
+  {
+    "objectID": "lectures/5a.html#activity-2-solutions",
+    "href": "lectures/5a.html#activity-2-solutions",
+    "title": "SQL Basics",
+    "section": "Activity 2 Solutions",
+    "text": "Activity 2 Solutions\n-- 1. Tracks that cost at least $1.00\nSELECT Name, UnitPrice\nFROM Track\nWHERE UnitPrice &gt;= 1.00;\n\n-- 2. Customers in the USA or Canada\nSELECT FirstName, LastName, Country\nFROM Customer\nWHERE Country = 'USA' OR Country = 'Canada';\n\n-- 3. USA invoices greater than $10.00\nSELECT InvoiceId, BillingCountry, Total\nFROM Invoice\nWHERE BillingCountry = 'USA' AND Total &gt; 10.00;"
+  },
+  {
+    "objectID": "lectures/5a.html#activity-3-solutions",
+    "href": "lectures/5a.html#activity-3-solutions",
+    "title": "SQL Basics",
+    "section": "Activity 3 Solutions",
+    "text": "Activity 3 Solutions\n-- 1. Customers sorted by country and name\nSELECT FirstName, LastName, Country\nFROM Customer\nORDER BY Country ASC, LastName ASC, FirstName ASC;\n\n-- 2. Tracks sorted by price and then name\nSELECT Name, UnitPrice\nFROM Track\nORDER BY UnitPrice DESC, Name ASC;\n\n-- 3. Invoices sorted from highest to lowest total\nSELECT InvoiceId, CustomerId, Total\nFROM Invoice\nORDER BY Total DESC;"
+  },
+  {
+    "objectID": "lectures/5a.html#activity-4-solutions",
+    "href": "lectures/5a.html#activity-4-solutions",
+    "title": "SQL Basics",
+    "section": "Activity 4 Solutions",
+    "text": "Activity 4 Solutions\n-- 1. Number of tracks in each genre\nSELECT GenreId, COUNT(*) AS TrackCount\nFROM Track\nGROUP BY GenreId;\n\n-- 2. Invoice count and total amount by country\nSELECT BillingCountry,\n       COUNT(*) AS InvoiceCount,\n       SUM(Total) AS TotalInvoiced\nFROM Invoice\nGROUP BY BillingCountry;\n\n-- 3. Average track length for each album\nSELECT AlbumId, AVG(Milliseconds) AS AverageMilliseconds\nFROM Track\nGROUP BY AlbumId;"
+  },
+  {
+    "objectID": "lectures/5a.html#activity-5-solutions",
+    "href": "lectures/5a.html#activity-5-solutions",
+    "title": "SQL Basics",
+    "section": "Activity 5 Solutions",
+    "text": "Activity 5 Solutions\n-- 1. Countries with more than $100 in invoice totals\nSELECT BillingCountry, SUM(Total) AS TotalInvoiced\nFROM Invoice\nGROUP BY BillingCountry\nHAVING SUM(Total) &gt; 100;\n\n-- 2. Genres with more than 100 tracks\nSELECT GenreId, COUNT(*) AS TrackCount\nFROM Track\nGROUP BY GenreId\nHAVING COUNT(*) &gt; 100;\n\n-- 3. Countries with an average invoice total over $6.00\nSELECT BillingCountry, AVG(Total) AS AverageInvoiceTotal\nFROM Invoice\nGROUP BY BillingCountry\nHAVING AVG(Total) &gt; 6.00;"
   },
   {
     "objectID": "lectures/3a.html#data-modeling-1",
@@ -655,7 +823,7 @@
     "href": "index.html",
     "title": "Welcome to Introduction to Data Management!",
     "section": "",
-    "text": "Week 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Week 1\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "a/2.html",
@@ -1078,178 +1246,45 @@
     "text": "SQL command reference: retrieving data\n\n\n\nKeyword or clause\nDefinition\n\n\n\n\nSELECT\nChooses the columns returned by a query.\n\n\nFROM\nIdentifies the first table used by the query.\n\n\nAS\nAssigns a temporary alias to a table or column.\n\n\nJOIN\nCombines matching rows from related tables.\n\n\nON\nStates the condition used to match rows in a join.\n\n\nORDER BY\nSorts the result using one or more columns.\n\n\n\nFROM students AS s\nJOIN majors AS m\n    ON s.major_id = m.major_id\nThe aliases s and m shorten qualified column names.\n\nExplain that an unqualified column name may become ambiguous when several joined tables contain a column with the same name. Aliases make the source of each column explicit."
   },
   {
-    "objectID": "posts/2.html",
-    "href": "posts/2.html",
-    "title": "Week 2",
+    "objectID": "posts/1.html",
+    "href": "posts/1.html",
+    "title": "Week 1",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
   },
   {
-    "objectID": "posts/2.html#resources",
-    "href": "posts/2.html#resources",
-    "title": "Week 2",
+    "objectID": "posts/1.html#resources",
+    "href": "posts/1.html#resources",
+    "title": "Week 1",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
   },
   {
-    "objectID": "posts/4.html",
-    "href": "posts/4.html",
-    "title": "Week 4",
-    "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
-  },
-  {
-    "objectID": "posts/4.html#resources",
-    "href": "posts/4.html#resources",
-    "title": "Week 4",
+    "objectID": "posts/3.html",
+    "href": "posts/3.html",
+    "title": "Week 3",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "lectures/5a.html#sql-basics",
-    "href": "lectures/5a.html#sql-basics",
-    "title": "SQL Basics",
-    "section": "SQL Basics",
-    "text": "SQL Basics\n\nSELECT: Choose your columns.\nFROM: Choose your table.\nWHERE: Filter individual rows.\nGROUP BY: Bundle rows into categories.\nHAVING: Filter the bundles/groups.\nORDER BY: Sort your final list."
+    "objectID": "posts/3.html#resources",
+    "href": "posts/3.html#resources",
+    "title": "Week 3",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "lectures/5a.html#the-select-statement",
-    "href": "lectures/5a.html#the-select-statement",
-    "title": "SQL Basics",
-    "section": "The SELECT Statement",
-    "text": "The SELECT Statement\nThe SELECT statement is used to pick the columns you want to see.\n\nBasic Syntax:\nSELECT column1, column2\nFROM table_name;\nThe Wildcard (Selects all columns):\n\nSELECT * \n  FROM table_name;\n\nThe SELECT statement is the most common command. The asterisk is a wildcard, meaning “give me everything,” though it is often better practice to name columns specifically."
+    "objectID": "posts/5.html",
+    "href": "posts/5.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "lectures/5a.html#the-distinct-keyword",
-    "href": "lectures/5a.html#the-distinct-keyword",
-    "title": "SQL Basics",
-    "section": "The DISTINCT Keyword",
-    "text": "The DISTINCT Keyword\nSometimes a column contains many duplicate values. To see only unique values, use DISTINCT.\n\nSyntax:\nSELECT DISTINCT column_name \nFROM table_name;\nExample:\n\nSELECT DISTINCT country \n    FROM customers;\n\nDISTINCT is incredibly useful for seeing the unique categories or values within a specific column, like a list of countries where your customers live."
-  },
-  {
-    "objectID": "lectures/5a.html#activity-1",
-    "href": "lectures/5a.html#activity-1",
-    "title": "SQL Basics",
-    "section": "Activity 1",
-    "text": "Activity 1"
-  },
-  {
-    "objectID": "lectures/5a.html#filtering-with-where",
-    "href": "lectures/5a.html#filtering-with-where",
-    "title": "SQL Basics",
-    "section": "Filtering with WHERE",
-    "text": "Filtering with WHERE\nThe WHERE clause is used to filter records based on specific conditions.\n\nIt acts as a gatekeeper.\nIf a row doesn’t meet the condition, it is excluded from the results.\n\nExample:\nSELECT * \n    FROM products \n    WHERE price &gt; 50;\n\nThe WHERE clause is our primary tool for filtering. It allows us to isolate exactly the rows we need from a massive dataset."
-  },
-  {
-    "objectID": "lectures/5a.html#comparison-operators",
-    "href": "lectures/5a.html#comparison-operators",
-    "title": "SQL Basics",
-    "section": "Comparison Operators",
-    "text": "Comparison Operators\nUse these to compare values in your WHERE clause:\n\n= (Equal to)\n!= (Not equal to)\n&gt; (Greater than)\n&lt; (Less than)\n&gt;= (Greater than or equal to)\n&lt;= (Less than or equal to)\n\n\nThese operators are the foundation of logical comparisons in SQL."
-  },
-  {
-    "objectID": "lectures/5a.html#logical-operators",
-    "href": "lectures/5a.html#logical-operators",
-    "title": "SQL Basics",
-    "section": "Logical Operators",
-    "text": "Logical Operators\nYou can combine multiple conditions using logic:\n\nAND: Both conditions must be true.\nOR: At least one condition must be true.\nNOT: The condition must be false.\n\nExample:\nSELECT * \n    FROM users \n    WHERE age &lt; 18 AND country = 'USA';\n\nLogical operators allow for complex filtering. AND narrows your results, while OR expands them."
-  },
-  {
-    "objectID": "lectures/5a.html#activity-2",
-    "href": "lectures/5a.html#activity-2",
-    "title": "SQL Basics",
-    "section": "Activity 2",
-    "text": "Activity 2"
-  },
-  {
-    "objectID": "lectures/5a.html#sorting-with-order-by",
-    "href": "lectures/5a.html#sorting-with-order-by",
-    "title": "SQL Basics",
-    "section": "Sorting with ORDER BY",
-    "text": "Sorting with ORDER BY\nThe ORDER BY clause is used to sort the result set.\n\nDefault: Ascending (A-Z, 1-10).\nASC: Explicitly for Ascending.\nDESC: Explicitly for Descending (Z-A, 10-1).\n\nExample:\nSELECT name, salary \n    FROM employees \n    ORDER BY salary DESC;\n\nOrdering helps us make sense of data by presenting it in a meaningful sequence, like highest salary to lowest."
-  },
-  {
-    "objectID": "lectures/5a.html#sorting-multiple-columns",
-    "href": "lectures/5a.html#sorting-multiple-columns",
-    "title": "SQL Basics",
-    "section": "Sorting Multiple Columns",
-    "text": "Sorting Multiple Columns\nYou can sort by more than one column.\n\nSQL sorts by the first column listed.\nIf there is a “tie” in the first column, it uses the second column.\n\nExample:\nSELECT last_name, first_name \n    FROM employees \n    ORDER BY last_name ASC, first_name ASC;\n\nSorting by multiple columns is very common when dealing with data that has many duplicate values in the primary sorting column."
-  },
-  {
-    "objectID": "lectures/5a.html#activity-3",
-    "href": "lectures/5a.html#activity-3",
-    "title": "SQL Basics",
-    "section": "Activity 3",
-    "text": "Activity 3"
-  },
-  {
-    "objectID": "lectures/5a.html#aggregation-the-big-idea",
-    "href": "lectures/5a.html#aggregation-the-big-idea",
-    "title": "SQL Basics",
-    "section": "Aggregation: The Big Idea",
-    "text": "Aggregation: The Big Idea\nAggregation is the process of performing a calculation on a set of values to return a single value.\n\nInstead of seeing 1,000 individual sales, we want to see the Total Sales.\nAggregation “collapses” rows into summary statistics.\n\n\nAggregation turns “row-level” data into “summary-level” data. This is where data becomes “information.”"
-  },
-  {
-    "objectID": "lectures/5a.html#common-aggregate-functions",
-    "href": "lectures/5a.html#common-aggregate-functions",
-    "title": "SQL Basics",
-    "section": "Common Aggregate Functions",
-    "text": "Common Aggregate Functions\n\nCOUNT(): Returns the number of rows.\nSUM(): Returns the total sum of a numeric column.\nAVG(): Returns the average value.\nMIN(): Returns the smallest value.\nMAX(): Returns the largest value.\n\n\nThese are the heavy lifters of data analysis. COUNT and SUM are perhaps the most frequently used in business reporting."
-  },
-  {
-    "objectID": "lectures/5a.html#the-group-by-clause",
-    "href": "lectures/5a.html#the-group-by-clause",
-    "title": "SQL Basics",
-    "section": "The GROUP BY Clause",
-    "text": "The GROUP BY Clause\nWhen using aggregate functions, we often want to see the summary per category.\n\nGROUP BY tells the database how to bucket the data.\n\nExample:\nSELECT department, COUNT(*) \n    FROM employees \n    GROUP BY department;\n\nIf you use an aggregate function and a regular column together, you MUST use a GROUP BY clause on that regular column."
-  },
-  {
-    "objectID": "lectures/5a.html#how-grouping-works",
-    "href": "lectures/5a.html#how-grouping-works",
-    "title": "SQL Basics",
-    "section": "How Grouping Works",
-    "text": "How Grouping Works\n%%{init: {'theme': 'base', 'themeVariables': {}} }%%\ngraph TD\n    A[Raw Data: Sales] --&gt; B{Group by Region}\n    B --&gt; C[North Bucket]\n    B --&gt; D[South Bucket]\n    B --&gt; E[East Bucket]\n    C --&gt; F[SUM(Sales)]\n    D --&gt; G[SUM(Sales)]\n    E --&gt; H[SUM(Sales)]\nAccessibility Description: A flowchart showing raw sales data being divided into three buckets (North, South, East) and then summed within those buckets.\n\nThink of Grouping like sorting a deck of cards into suits. Once they are sorted into suits, you can count how many cards are in each suit."
-  },
-  {
-    "objectID": "lectures/5a.html#activity-4",
-    "href": "lectures/5a.html#activity-4",
-    "title": "SQL Basics",
-    "section": "Activity 4",
-    "text": "Activity 4"
-  },
-  {
-    "objectID": "lectures/5a.html#the-having-clause",
-    "href": "lectures/5a.html#the-having-clause",
-    "title": "SQL Basics",
-    "section": "The HAVING Clause",
-    "text": "The HAVING Clause\nWHERE cannot be used with aggregate functions. For that, we use HAVING.\n\nWHERE: Filters rows before they are grouped.\nHAVING: Filters groups after they are aggregated.\n\nExample:\nSELECT category, AVG(price) \n    FROM products \n    GROUP BY category \n    HAVING AVG(price) &gt; 20;\n\nThis is a common point of confusion. If you want to filter based on a calculation like “Average” or “Sum,” you must use HAVING."
-  },
-  {
-    "objectID": "lectures/5a.html#where-vs.-having",
-    "href": "lectures/5a.html#where-vs.-having",
-    "title": "SQL Basics",
-    "section": "WHERE vs. HAVING",
-    "text": "WHERE vs. HAVING\n\n\n\n\n\n\n\n\nFeature\nWHERE\nHAVING\n\n\n\n\nUsage\nFilters Rows\nFilters Groups\n\n\nTiming\nBefore Grouping\nAfter Grouping\n\n\nAggregates\nCannot use SUM(), AVG()\nUsed with SUM(), AVG()\n\n\n\n\nA good rule of thumb: If it’s a simple column condition, use WHERE. If it’s a condition on a summary calculation, use HAVING."
-  },
-  {
-    "objectID": "lectures/5a.html#sql-order-of-execution",
-    "href": "lectures/5a.html#sql-order-of-execution",
-    "title": "SQL Basics",
-    "section": "SQL Order of Execution",
-    "text": "SQL Order of Execution\nSQL is not read from top to bottom by the database engine. It follows a specific internal order:\n\nFROM (Pick the table)\nWHERE (Filter the rows)\nGROUP BY (Group the rows)\nHAVING (Filter the groups)\nSELECT (Pick columns)\nORDER BY (Sort results)\n\n\nUnderstanding this is the “secret sauce” to debugging complex queries. If your code is failing, it’s likely because you’re trying to use a column in the WHERE clause that hasn’t been selected yet!"
-  },
-  {
-    "objectID": "lectures/5a.html#sql-execution-flow",
-    "href": "lectures/5a.html#sql-execution-flow",
-    "title": "SQL Basics",
-    "section": "SQL Execution Flow",
-    "text": "SQL Execution Flow\n%%{init: {'theme': 'base', 'themeVariables': {}} }%%\ngraph TD\n    1[1. FROM/JOIN] --&gt; 2[2. WHERE]\n    2 --&gt; 3[3. GROUP BY]\n    3 --&gt; 4[4. HAVING]\n    4 --&gt; 5[5. SELECT]\n    5 --&gt; 6[6. ORDER BY]\nAccessibility Description: A vertical flowchart showing the logical order of execution from the FROM clause down to the ORDER BY clause.\n\nEven though we write SELECT first, the computer looks at the FROM clause first to know which data source to access."
-  },
-  {
-    "objectID": "lectures/5a.html#activity-5",
-    "href": "lectures/5a.html#activity-5",
-    "title": "SQL Basics",
-    "section": "ACTIVITY 5",
-    "text": "ACTIVITY 5"
+    "objectID": "posts/5.html#resources",
+    "href": "posts/5.html#resources",
+    "title": "Week 1",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   }
 ]

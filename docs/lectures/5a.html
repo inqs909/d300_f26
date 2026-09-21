@@ -243,6 +243,9 @@
 <li><div class="agenda-inactive agenda-post-active">
 <p>HAVING</p>
 </div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Activity Solutions</p>
+</div></li>
 </ul>
 </div>
 </section>
@@ -296,8 +299,14 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="activity-1" class="slide level2">
+<section id="activity-1" class="slide level2 scrollable">
 <h2>Activity 1</h2>
+<p>Use the Chinook database to answer the following questions:</p>
+<ol type="1">
+<li>Display the <code>FirstName</code>, <code>LastName</code>, and <code>Email</code> of every customer.</li>
+<li>Display each country represented in the <code>Customer</code> table only once.</li>
+<li>Display the <code>Name</code>, <code>Composer</code>, and <code>UnitPrice</code> of every track.</li>
+</ol>
 </section></section>
 <section>
 <section id="where" class="title-slide slide level1 agenda-slide center">
@@ -318,6 +327,9 @@
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
 <p>HAVING</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Activity Solutions</p>
 </div></li>
 </ul>
 </div>
@@ -398,8 +410,14 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="activity-2" class="slide level2">
+<section id="activity-2" class="slide level2 scrollable">
 <h2>Activity 2</h2>
+<p>Use the Chinook database to answer the following questions:</p>
+<ol type="1">
+<li>Find the tracks that cost at least $1.00. Display <code>Name</code> and <code>UnitPrice</code>.</li>
+<li>Find customers who live in either the USA or Canada. Display their name and country.</li>
+<li>Find invoices from the USA with a total greater than $10.00.</li>
+</ol>
 </section></section>
 <section>
 <section id="order-by" class="title-slide slide level1 agenda-slide center">
@@ -420,6 +438,9 @@
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
 <p>HAVING</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Activity Solutions</p>
 </div></li>
 </ul>
 </div>
@@ -475,8 +496,27 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="activity-3" class="slide level2">
+<section id="activity-3" class="slide level2 scrollable">
 <h2>Activity 3</h2>
+<p>Use the Chinook database to answer the following questions:</p>
+<ol type="1">
+<li>List customers by <code>Country</code>, then by <code>LastName</code>, and then by <code>FirstName</code>, all in ascending order.</li>
+<li>List tracks from highest to lowest <code>UnitPrice</code>. For tracks with the same price, sort by <code>Name</code> in ascending order.</li>
+<li>List invoices from highest to lowest <code>Total</code>.</li>
+</ol>
+<aside class="notes">
+<p>Ask students which column controls the primary sort and which columns break ties.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="group-by" class="title-slide slide level1 agenda-slide center">
@@ -497,6 +537,9 @@
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
 <p>HAVING</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Activity Solutions</p>
 </div></li>
 </ul>
 </div>
@@ -569,20 +612,16 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="how-grouping-works" class="slide level2">
-<h2>How Grouping Works</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb10-1"><a aria-label="1"></a>%%{init: {'theme': 'base', 'themeVariables': {}} }%%</span>
-<span id="cb10-2"><a aria-label="2"></a>graph TD</span>
-<span id="cb10-3"><a aria-label="3"></a>    A[Raw Data: Sales] --&amp;gt; B{Group by Region}</span>
-<span id="cb10-4"><a aria-label="4"></a>    B --&amp;gt; C[North Bucket]</span>
-<span id="cb10-5"><a aria-label="5"></a>    B --&amp;gt; D[South Bucket]</span>
-<span id="cb10-6"><a aria-label="6"></a>    B --&amp;gt; E[East Bucket]</span>
-<span id="cb10-7"><a aria-label="7"></a>    C --&amp;gt; F[SUM(Sales)]</span>
-<span id="cb10-8"><a aria-label="8"></a>    D --&amp;gt; G[SUM(Sales)]</span>
-<span id="cb10-9"><a aria-label="9"></a>    E --&amp;gt; H[SUM(Sales)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><em>Accessibility Description: A flowchart showing raw sales data being divided into three buckets (North, South, East) and then summed within those buckets.</em></p>
+<section id="activity-4" class="slide level2 scrollable">
+<h2>Activity 4</h2>
+<p>Use the Chinook database to answer the following questions:</p>
+<ol type="1">
+<li>Count the number of tracks in each <code>GenreId</code>.</li>
+<li>For each <code>BillingCountry</code>, calculate the number of invoices and the total amount invoiced.</li>
+<li>For each <code>AlbumId</code>, calculate the average track length in milliseconds.</li>
+</ol>
 <aside class="notes">
-<p>Think of Grouping like sorting a deck of cards into suits. Once they are sorted into suits, you can count how many cards are in each suit.</p>
+<p>Remind students that every selected column that is not inside an aggregate function must appear in the <code>GROUP BY</code> clause.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -594,9 +633,6 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="activity-4" class="slide level2">
-<h2>Activity 4</h2>
 </section></section>
 <section>
 <section id="having" class="title-slide slide level1 agenda-slide center">
@@ -618,6 +654,9 @@
 <li><div class="agenda-active">
 <p>HAVING</p>
 </div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Activity Solutions</p>
+</div></li>
 </ul>
 </div>
 </section>
@@ -629,10 +668,10 @@
 <li><strong>HAVING</strong>: Filters groups <em>after</em> they are aggregated.</li>
 </ul>
 <p><strong>Example:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="kw">category</span>, <span class="fu">AVG</span>(price) </span>
-<span id="cb11-2"><a aria-label="2"></a>    <span class="kw">FROM</span> products </span>
-<span id="cb11-3"><a aria-label="3"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">category</span> </span>
-<span id="cb11-4"><a aria-label="4"></a>    <span class="kw">HAVING</span> <span class="fu">AVG</span>(price) <span class="op">&gt;</span> <span class="dv">20</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="kw">category</span>, <span class="fu">AVG</span>(price) </span>
+<span id="cb10-2"><a aria-label="2"></a>    <span class="kw">FROM</span> products </span>
+<span id="cb10-3"><a aria-label="3"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">category</span> </span>
+<span id="cb10-4"><a aria-label="4"></a>    <span class="kw">HAVING</span> <span class="fu">AVG</span>(price) <span class="op">&gt;</span> <span class="dv">20</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>This is a common point of confusion. If you want to filter based on a calculation like “Average” or “Sum,” you must use HAVING.</p>
 <style type="text/css">
@@ -719,18 +758,16 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="sql-execution-flow" class="slide level2">
-<h2>SQL Execution Flow</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a aria-label="1"></a>%%{init: {'theme': 'base', 'themeVariables': {}} }%%</span>
-<span id="cb12-2"><a aria-label="2"></a>graph TD</span>
-<span id="cb12-3"><a aria-label="3"></a>    1[1. FROM/JOIN] --&amp;gt; 2[2. WHERE]</span>
-<span id="cb12-4"><a aria-label="4"></a>    2 --&amp;gt; 3[3. GROUP BY]</span>
-<span id="cb12-5"><a aria-label="5"></a>    3 --&amp;gt; 4[4. HAVING]</span>
-<span id="cb12-6"><a aria-label="6"></a>    4 --&amp;gt; 5[5. SELECT]</span>
-<span id="cb12-7"><a aria-label="7"></a>    5 --&amp;gt; 6[6. ORDER BY]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><em>Accessibility Description: A vertical flowchart showing the logical order of execution from the FROM clause down to the ORDER BY clause.</em></p>
+<section id="activity-5" class="slide level2 scrollable">
+<h2>ACTIVITY 5</h2>
+<p>Use the Chinook database to answer the following questions:</p>
+<ol type="1">
+<li>Find billing countries whose total invoiced amount is greater than $100.</li>
+<li>Find genres that contain more than 100 tracks. Use <code>GenreId</code> to identify each genre.</li>
+<li>Find billing countries whose average invoice total is greater than $6.00.</li>
+</ol>
 <aside class="notes">
-<p>Even though we write SELECT first, the computer looks at the FROM clause first to know which data source to access.</p>
+<p>Have students first write each grouped query without <code>HAVING</code>, then add the condition that filters the aggregated results.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -742,9 +779,119 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section></section>
+<section>
+<section id="activity-solutions" class="title-slide slide level1 agenda-slide center">
+<h1>Activity Solutions</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>SELECT</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>WHERE</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>ORDER BY</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>GROUP BY</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>HAVING</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Activity Solutions</p>
+</div></li>
+</ul>
+</div>
 </section>
-<section id="activity-5" class="slide level2">
-<h2>ACTIVITY 5</h2>
+<section id="activity-1-solutions" class="slide level2">
+<h2>Activity 1 Solutions</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a aria-label="1"></a><span class="co">-- 1. Customer names and email addresses</span></span>
+<span id="cb11-2"><a aria-label="2"></a><span class="kw">SELECT</span> FirstName, LastName, Email</span>
+<span id="cb11-3"><a aria-label="3"></a><span class="kw">FROM</span> Customer;</span>
+<span id="cb11-4"><a aria-label="4"></a></span>
+<span id="cb11-5"><a aria-label="5"></a><span class="co">-- 2. Unique customer countries</span></span>
+<span id="cb11-6"><a aria-label="6"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> Country</span>
+<span id="cb11-7"><a aria-label="7"></a><span class="kw">FROM</span> Customer;</span>
+<span id="cb11-8"><a aria-label="8"></a></span>
+<span id="cb11-9"><a aria-label="9"></a><span class="co">-- 3. Track names, composers, and prices</span></span>
+<span id="cb11-10"><a aria-label="10"></a><span class="kw">SELECT</span> Name, Composer, UnitPrice</span>
+<span id="cb11-11"><a aria-label="11"></a><span class="kw">FROM</span> Track;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="activity-2-solutions" class="slide level2">
+<h2>Activity 2 Solutions</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a aria-label="1"></a><span class="co">-- 1. Tracks that cost at least $1.00</span></span>
+<span id="cb12-2"><a aria-label="2"></a><span class="kw">SELECT</span> Name, UnitPrice</span>
+<span id="cb12-3"><a aria-label="3"></a><span class="kw">FROM</span> Track</span>
+<span id="cb12-4"><a aria-label="4"></a><span class="kw">WHERE</span> UnitPrice <span class="op">&gt;=</span> <span class="fl">1.00</span>;</span>
+<span id="cb12-5"><a aria-label="5"></a></span>
+<span id="cb12-6"><a aria-label="6"></a><span class="co">-- 2. Customers in the USA or Canada</span></span>
+<span id="cb12-7"><a aria-label="7"></a><span class="kw">SELECT</span> FirstName, LastName, Country</span>
+<span id="cb12-8"><a aria-label="8"></a><span class="kw">FROM</span> Customer</span>
+<span id="cb12-9"><a aria-label="9"></a><span class="kw">WHERE</span> Country <span class="op">=</span> <span class="st">'USA'</span> <span class="kw">OR</span> Country <span class="op">=</span> <span class="st">'Canada'</span>;</span>
+<span id="cb12-10"><a aria-label="10"></a></span>
+<span id="cb12-11"><a aria-label="11"></a><span class="co">-- 3. USA invoices greater than $10.00</span></span>
+<span id="cb12-12"><a aria-label="12"></a><span class="kw">SELECT</span> InvoiceId, BillingCountry, Total</span>
+<span id="cb12-13"><a aria-label="13"></a><span class="kw">FROM</span> Invoice</span>
+<span id="cb12-14"><a aria-label="14"></a><span class="kw">WHERE</span> BillingCountry <span class="op">=</span> <span class="st">'USA'</span> <span class="kw">AND</span> Total <span class="op">&gt;</span> <span class="fl">10.00</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="activity-3-solutions" class="slide level2">
+<h2>Activity 3 Solutions</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a aria-label="1"></a><span class="co">-- 1. Customers sorted by country and name</span></span>
+<span id="cb13-2"><a aria-label="2"></a><span class="kw">SELECT</span> FirstName, LastName, Country</span>
+<span id="cb13-3"><a aria-label="3"></a><span class="kw">FROM</span> Customer</span>
+<span id="cb13-4"><a aria-label="4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Country <span class="kw">ASC</span>, LastName <span class="kw">ASC</span>, FirstName <span class="kw">ASC</span>;</span>
+<span id="cb13-5"><a aria-label="5"></a></span>
+<span id="cb13-6"><a aria-label="6"></a><span class="co">-- 2. Tracks sorted by price and then name</span></span>
+<span id="cb13-7"><a aria-label="7"></a><span class="kw">SELECT</span> Name, UnitPrice</span>
+<span id="cb13-8"><a aria-label="8"></a><span class="kw">FROM</span> Track</span>
+<span id="cb13-9"><a aria-label="9"></a><span class="kw">ORDER</span> <span class="kw">BY</span> UnitPrice <span class="kw">DESC</span>, Name <span class="kw">ASC</span>;</span>
+<span id="cb13-10"><a aria-label="10"></a></span>
+<span id="cb13-11"><a aria-label="11"></a><span class="co">-- 3. Invoices sorted from highest to lowest total</span></span>
+<span id="cb13-12"><a aria-label="12"></a><span class="kw">SELECT</span> InvoiceId, CustomerId, Total</span>
+<span id="cb13-13"><a aria-label="13"></a><span class="kw">FROM</span> Invoice</span>
+<span id="cb13-14"><a aria-label="14"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Total <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="activity-4-solutions" class="slide level2">
+<h2>Activity 4 Solutions</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a aria-label="1"></a><span class="co">-- 1. Number of tracks in each genre</span></span>
+<span id="cb14-2"><a aria-label="2"></a><span class="kw">SELECT</span> GenreId, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TrackCount</span>
+<span id="cb14-3"><a aria-label="3"></a><span class="kw">FROM</span> Track</span>
+<span id="cb14-4"><a aria-label="4"></a><span class="kw">GROUP</span> <span class="kw">BY</span> GenreId;</span>
+<span id="cb14-5"><a aria-label="5"></a></span>
+<span id="cb14-6"><a aria-label="6"></a><span class="co">-- 2. Invoice count and total amount by country</span></span>
+<span id="cb14-7"><a aria-label="7"></a><span class="kw">SELECT</span> BillingCountry,</span>
+<span id="cb14-8"><a aria-label="8"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> InvoiceCount,</span>
+<span id="cb14-9"><a aria-label="9"></a>       <span class="fu">SUM</span>(Total) <span class="kw">AS</span> TotalInvoiced</span>
+<span id="cb14-10"><a aria-label="10"></a><span class="kw">FROM</span> Invoice</span>
+<span id="cb14-11"><a aria-label="11"></a><span class="kw">GROUP</span> <span class="kw">BY</span> BillingCountry;</span>
+<span id="cb14-12"><a aria-label="12"></a></span>
+<span id="cb14-13"><a aria-label="13"></a><span class="co">-- 3. Average track length for each album</span></span>
+<span id="cb14-14"><a aria-label="14"></a><span class="kw">SELECT</span> AlbumId, <span class="fu">AVG</span>(Milliseconds) <span class="kw">AS</span> AverageMilliseconds</span>
+<span id="cb14-15"><a aria-label="15"></a><span class="kw">FROM</span> Track</span>
+<span id="cb14-16"><a aria-label="16"></a><span class="kw">GROUP</span> <span class="kw">BY</span> AlbumId;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="activity-5-solutions" class="slide level2">
+<h2>Activity 5 Solutions</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a aria-label="1"></a><span class="co">-- 1. Countries with more than $100 in invoice totals</span></span>
+<span id="cb15-2"><a aria-label="2"></a><span class="kw">SELECT</span> BillingCountry, <span class="fu">SUM</span>(Total) <span class="kw">AS</span> TotalInvoiced</span>
+<span id="cb15-3"><a aria-label="3"></a><span class="kw">FROM</span> Invoice</span>
+<span id="cb15-4"><a aria-label="4"></a><span class="kw">GROUP</span> <span class="kw">BY</span> BillingCountry</span>
+<span id="cb15-5"><a aria-label="5"></a><span class="kw">HAVING</span> <span class="fu">SUM</span>(Total) <span class="op">&gt;</span> <span class="dv">100</span>;</span>
+<span id="cb15-6"><a aria-label="6"></a></span>
+<span id="cb15-7"><a aria-label="7"></a><span class="co">-- 2. Genres with more than 100 tracks</span></span>
+<span id="cb15-8"><a aria-label="8"></a><span class="kw">SELECT</span> GenreId, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TrackCount</span>
+<span id="cb15-9"><a aria-label="9"></a><span class="kw">FROM</span> Track</span>
+<span id="cb15-10"><a aria-label="10"></a><span class="kw">GROUP</span> <span class="kw">BY</span> GenreId</span>
+<span id="cb15-11"><a aria-label="11"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">&gt;</span> <span class="dv">100</span>;</span>
+<span id="cb15-12"><a aria-label="12"></a></span>
+<span id="cb15-13"><a aria-label="13"></a><span class="co">-- 3. Countries with an average invoice total over $6.00</span></span>
+<span id="cb15-14"><a aria-label="14"></a><span class="kw">SELECT</span> BillingCountry, <span class="fu">AVG</span>(Total) <span class="kw">AS</span> AverageInvoiceTotal</span>
+<span id="cb15-15"><a aria-label="15"></a><span class="kw">FROM</span> Invoice</span>
+<span id="cb15-16"><a aria-label="16"></a><span class="kw">GROUP</span> <span class="kw">BY</span> BillingCountry</span>
+<span id="cb15-17"><a aria-label="17"></a><span class="kw">HAVING</span> <span class="fu">AVG</span>(Total) <span class="op">&gt;</span> <span class="fl">6.00</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section></section>

@@ -248,25 +248,7 @@ SELECT department, COUNT(*)
 If you use an aggregate function and a regular column together, you MUST use a GROUP BY clause on that regular column.
 :::
 
-## How Grouping Works
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {}} }%%
-graph TD
-    A[Raw Data: Sales] --&gt; B{Group by Region}
-    B --&gt; C[North Bucket]
-    B --&gt; D[South Bucket]
-    B --&gt; E[East Bucket]
-    C --&gt; F[SUM(Sales)]
-    D --&gt; G[SUM(Sales)]
-    E --&gt; H[SUM(Sales)]
-```
-
-*Accessibility Description: A flowchart showing raw sales data being divided into three buckets (North, South, East) and then summed within those buckets.*
-
-::: {.notes}
-Think of Grouping like sorting a deck of cards into suits. Once they are sorted into suits, you can count how many cards are in each suit.
-:::
 
 ## Activity 4
 
@@ -328,24 +310,6 @@ SQL is not read from top to bottom by the database engine. It follows a specific
 
 ::: {.notes}
 Understanding this is the "secret sauce" to debugging complex queries. If your code is failing, it's likely because you're trying to use a column in the WHERE clause that hasn't been selected yet!
-:::
-
-## SQL Execution Flow
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {}} }%%
-graph TD
-    1[1. FROM/JOIN] --&gt; 2[2. WHERE]
-    2 --&gt; 3[3. GROUP BY]
-    3 --&gt; 4[4. HAVING]
-    4 --&gt; 5[5. SELECT]
-    5 --&gt; 6[6. ORDER BY]
-```
-
-*Accessibility Description: A vertical flowchart showing the logical order of execution from the FROM clause down to the ORDER BY clause.*
-
-::: {.notes}
-Even though we write SELECT first, the computer looks at the FROM clause first to know which data source to access.
 :::
 
 ## ACTIVITY 5

@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-09-07">
+<meta name="dcterms.date" content="2026-09-21">
+<meta name="description" content="This week we will cover sql basics.">
 
-<title>Project – Data 300</title>
+<title>Week 1 – Data 300</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,24 +31,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./img/logo.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cf0323d384d52af67157aa1576f9552a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../img/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cf0323d384d52af67157aa1576f9552a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -86,11 +87,11 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./img/logo.png" alt="" class="navbar-logo light-content">
-    <img src="./img/logo.png" alt="" class="navbar-logo dark-content">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../img/logo.png" alt="" class="navbar-logo light-content">
+    <img src="../img/logo.png" alt="" class="navbar-logo dark-content">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Data 300</span>
     </a>
   </div>
@@ -101,15 +102,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./lectures.html"> 
+    <a class="nav-link" href="../lectures.html"> 
 <span class="menu-text">Lectures</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./project_report.html" aria-current="page"> 
+    <a class="nav-link" href="../project_report.html"> 
 <span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./assignments.html"> 
+    <a class="nav-link" href="../assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
@@ -128,14 +129,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description">Description</a></li>
-  <li><a href="#potential-dbms" id="toc-potential-dbms" class="nav-link" data-scroll-target="#potential-dbms">Potential DBMS</a></li>
-  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a>
-  <ul class="collapse">
-  <li><a href="#report-guidelines" id="toc-report-guidelines" class="nav-link" data-scroll-target="#report-guidelines">Report Guidelines</a></li>
-  </ul></li>
-  <li><a href="#rubric" id="toc-rubric" class="nav-link" data-scroll-target="#rubric">Rubric</a></li>
-  <li><a href="#deadline-and-extensions" id="toc-deadline-and-extensions" class="nav-link" data-scroll-target="#deadline-and-extensions">Deadline And Extensions</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
   </ul>
 </nav>
     </div>
@@ -144,9 +138,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project</h1>
+<h1 class="title">Week 1</h1>
 </div>
 
+<div>
+  <div class="description">
+    This week we will cover sql basics.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -155,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 7, 2026</p>
+      <p class="date">September 21, 2026</p>
     </div>
   </div>
   
@@ -167,139 +166,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="description" class="level2">
-<h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>Imagine that you work for a company that currently relies on SQLite to store, manage, and access its data. As the organization grows, its data needs have changed, and management is considering whether the current database system is still the best option.</p>
-<p>You have been tasked with researching and evaluating a new DBMS that was not used in this course. Your goal is to determine whether this proposed system could provide advantages over the company’s current DBMS.</p>
-<p>For this project, you will explore a Database Management System (DBMS)</p>
-<ul>
-<li>Select a new DBMS</li>
-<li>Create or import a database</li>
-<li>Run database operations</li>
-<li>Compare it with the DBMS used in class</li>
-<li>Submit a written report</li>
-</ul>
-</section>
-<section id="potential-dbms" class="level2">
-<h2 class="anchored" data-anchor-id="potential-dbms">Potential DBMS</h2>
-<ul>
-<li>MySQL Community Edition</li>
-<li>PostgreSQL</li>
-<li>MariaDB Commuinity Server</li>
-<li>DuckDB</li>
-<li>Neo4j Community Edition</li>
-</ul>
-<p>I recommend searching job posts and see what kind of DBMS they require. You may also see what other data science professionals recommend in learning. You may also create a data pipeline for a topic of interest. <strong>You are not required to purchase anything for the project.</strong></p>
-</section>
-<section id="report" class="level2">
-<h2 class="anchored" data-anchor-id="report">Report</h2>
-<p>Create a final report demonstrating what you have accomplished during the semester. The report should highlight the following components (similar to the presentation):</p>
-<ul>
-<li>DBMS chosen.</li>
-<li>Executive summary of findings and recommendation</li>
-<li>Appendix
-<ul>
-<li>Code (Add this to the Appendix)</li>
-<li>If possible, but not necessary, provide a link to your data (via google drive, dropbox, github, …)</li>
-<li>Other technical components</li>
-</ul></li>
-</ul>
-<section id="report-guidelines" class="level3">
-<h3 class="anchored" data-anchor-id="report-guidelines">Report Guidelines</h3>
-<ul>
-<li>3 Components:
-<ul>
-<li>Executive Summary
-<ul>
-<li>Max 1 Page</li>
-</ul></li>
-<li>Report
-<ul>
-<li>A minimum of 10 pages (15 pages for groups)</li>
-<li>Double-spaced</li>
-<li>1 inch margins</li>
-<li>Incorporate images/diagrams (include alternative text on images)</li>
-<li>Shows examples of using the DBMS</li>
-<li>Compares to class DBMS</li>
-</ul></li>
-<li>Appendix
-<ul>
-<li>No page limit</li>
-<li>Must create a table of contents</li>
-<li>Must include citations from reputable sources</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-</section>
-<section id="rubric" class="level2">
-<h2 class="anchored" data-anchor-id="rubric">Rubric</h2>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Criteria</th>
-<th>Exemplary — 5</th>
-<th>Excellent — 4</th>
-<th>Proficient — 3</th>
-<th>Developing — 2</th>
-<th>Beginning — 1</th>
+<th>Lecture</th>
+<th>Slides</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>DBMS Research and Justification</strong></td>
-<td>Provides a clear, thorough, and well-supported explanation of the proposed DBMS, including major features, intended use cases, and why it is a strong candidate.</td>
-<td>Provides a clear explanation of the proposed DBMS and gives reasonable justification for its selection.</td>
-<td>Provides a basic description of the DBMS, but justification is limited or lacks supporting detail.</td>
-<td>Provides minimal or unclear information about the DBMS and gives little justification for its selection.</td>
-<td>Does not provide meaningful research or justification for the selected DBMS.</td>
-</tr>
-<tr class="even">
-<td><strong>Database Implementation and Demonstration</strong></td>
-<td>Successfully creates or imports a database and demonstrates at least five meaningful and correctly executed database operations. Examples are well documented and clearly explained.</td>
-<td>Successfully creates or imports a database and demonstrates the required operations with only minor issues. Explanations are generally clear.</td>
-<td>Demonstrates some database operations, but examples may be incomplete, overly simple, or contain errors.</td>
-<td>Provides limited evidence that the DBMS was successfully implemented or used.</td>
-<td>Does not provide a functional database demonstration.</td>
-</tr>
-<tr class="odd">
-<td><strong>Comparison of Current and Proposed DBMS</strong></td>
-<td>Provides a detailed, balanced comparison that examines multiple relevant factors such as usability, data organization, performance, scalability, features, and integration.</td>
-<td>Provides a clear comparison covering several important differences between the two DBMS options.</td>
-<td>Provides a basic comparison, but analysis is limited or focuses primarily on surface-level differences.</td>
-<td>Provides an incomplete or unclear comparison with little meaningful analysis.</td>
-<td>Does not compare SQLite/MongoDB and proposed DBMS.</td>
-</tr>
-<tr class="even">
-<td><strong>Communication, Organization, and Documentation</strong></td>
-<td>Report is professional, logically organized, concise, and easy to follow. Technical concepts, code, results, data sources, and references are clearly documented.</td>
-<td>Report is well organized and understandable, with appropriate documentation and only minor communication issues.</td>
-<td>Report is understandable but has organizational, writing, formatting, or documentation problems that reduce clarity.</td>
-<td>Report is difficult to follow and contains substantial problems with organization, writing, or documentation.</td>
-<td>Report is missing or does not provide sufficient documentation to evaluate the project.</td>
-</tr>
-<tr class="odd">
-<td><strong>Executive Summary</strong></td>
-<td>Provides a clear, concise, and well-organized summary of the report. Effectively communicates the purpose, key findings, major conclusions, and recommendations. The summary is written for a non-technical or managerial audience and allows the reader to understand the main points of the report without reading the full document.</td>
-<td>Provides a clear and organized summary of the report that includes the purpose, key findings, conclusions, and recommendations. Most information is concise and appropriate for the intended audience, with only minor omissions or unnecessary details.</td>
-<td>Provides an adequate summary of the report and communicates most of the main points. Some key findings, conclusions, or recommendations may be missing or lack clarity. The summary may include too much technical detail or insufficient context for the intended audience.</td>
-<td>Provides a limited or poorly organized summary of the report. Important findings, conclusions, or recommendations are missing or unclear. The writing may be overly technical, lengthy, or difficult for the intended audience to understand.</td>
-<td>Executive summary is incomplete, inaccurate, or missing. It does not adequately communicate the purpose, major findings, conclusions, or recommendations of the report.</td>
+<td>1</td>
+<td><a href="../lectures/5a">Slides</a></td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="deadline-and-extensions" class="level2">
-<h2 class="anchored" data-anchor-id="deadline-and-extensions">Deadline And Extensions</h2>
-<p>The report will be due on <strong>December 4, 2026 at 11:59 PM</strong>. For your report, you may receive a 24-hour extension beyond the due date for evey time you attend the writing and multiliteracy center. Each appointment must be one week apart.</p>
 
 
 </section>
