@@ -1,5 +1,5 @@
 ---
-title: "Week 1"
+title: "Week 5"
 date: 09-21-26
 description: This week we will cover sql basics.
 editor: source
