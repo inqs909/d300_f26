@@ -9,10 +9,7 @@ order: 3
 ## Files and setup
 
 1. Download [`weather_stations.db`](https://github.com/thomasnield/oreilly_getting_started_with_sql/blob/master/weather_stations.db) from the [course-material repository](https://github.com/thomasnield/oreilly_getting_started_with_sql).
-2. Open the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.
-3. Locate the `STATION_DATA` table.
-4. Write and execute one query for every question.
-5. Paste each query into the corresponding SQL block in this document. When requested, record the result below the query.
+2. Open the database in DB Browser for SQLite
 
 
 ## Database reference

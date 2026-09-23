@@ -830,14 +830,14 @@
     "href": "a/3.html",
     "title": "ICA 3",
     "section": "",
-    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.\nLocate the STATION_DATA table.\nWrite and execute one query for every question.\nPaste each query into the corresponding SQL block in this document. When requested, record the result below the query."
+    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite"
   },
   {
     "objectID": "a/3.html#files-and-setup",
     "href": "a/3.html#files-and-setup",
     "title": "ICA 3",
     "section": "",
-    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.\nLocate the STATION_DATA table.\nWrite and execute one query for every question.\nPaste each query into the corresponding SQL block in this document. When requested, record the result below the query."
+    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite"
   },
   {
     "objectID": "a/3.html#database-reference",
