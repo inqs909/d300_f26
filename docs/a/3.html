@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Assignments – Data 300</title>
+<title>ICA 3 – Data 300</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,26 +29,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./img/logo.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-deb9980f0abb462247767bd4714b05c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../img/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-deb9980f0abb462247767bd4714b05c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,65 +74,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -145,11 +85,11 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./img/logo.png" alt="" class="navbar-logo light-content">
-    <img src="./img/logo.png" alt="" class="navbar-logo dark-content">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../img/logo.png" alt="" class="navbar-logo light-content">
+    <img src="../img/logo.png" alt="" class="navbar-logo dark-content">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Data 300</span>
     </a>
   </div>
@@ -160,15 +100,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./lectures.html"> 
+    <a class="nav-link" href="../lectures.html"> 
 <span class="menu-text">Lectures</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./project_report.html"> 
+    <a class="nav-link" href="../project_report.html"> 
 <span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./assignments.html" aria-current="page"> 
+    <a class="nav-link" href="../assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
@@ -182,15 +122,28 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#files-and-setup" id="toc-files-and-setup" class="nav-link active" data-scroll-target="#files-and-setup">Files and setup</a></li>
+  <li><a href="#database-reference" id="toc-database-reference" class="nav-link" data-scroll-target="#database-reference">Database reference</a></li>
+  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part A</a></li>
+  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part B</a></li>
+  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part C</a></li>
+  <li><a href="#part-d" id="toc-part-d" class="nav-link" data-scroll-target="#part-d">Part D</a></li>
+  <li><a href="#part-e" id="toc-part-e" class="nav-link" data-scroll-target="#part-e">Part E</a></li>
+  <li><a href="#part-f" id="toc-part-f" class="nav-link" data-scroll-target="#part-f">Part F</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Assignments</h1>
+<h1 class="title">ICA 3</h1>
 </div>
 
 
@@ -207,37 +160,150 @@ window.Quarto = {
 </header>
 
 
+<section id="files-and-setup" class="level2">
+<h2 class="anchored" data-anchor-id="files-and-setup">Files and setup</h2>
+<ol type="1">
+<li>Download <a href="https://github.com/thomasnield/oreilly_getting_started_with_sql/blob/master/weather_stations.db"><code>weather_stations.db</code></a> from the <a href="https://github.com/thomasnield/oreilly_getting_started_with_sql">course-material repository</a>.</li>
+<li>Open the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.</li>
+<li>Locate the <code>STATION_DATA</code> table.</li>
+<li>Write and execute one query for every question.</li>
+<li>Paste each query into the corresponding SQL block in this document. When requested, record the result below the query.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Protect the source data">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Protect the source data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is a read-only assignment. Do not use <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>DROP</code>, or <code>ALTER</code>.</p>
+</div>
+</div>
+</section>
+<section id="database-reference" class="level2">
+<h2 class="anchored" data-anchor-id="database-reference">Database reference</h2>
+<p>The assignment uses the <code>STATION_DATA</code> table.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Stored data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>station_number</code></td>
+<td>Weather-station identifier</td>
+</tr>
+<tr class="even">
+<td><code>report_code</code></td>
+<td>Report identifier or code</td>
+</tr>
+<tr class="odd">
+<td><code>year</code>, <code>month</code>, <code>day</code></td>
+<td>Observation date components</td>
+</tr>
+<tr class="even">
+<td><code>dew_point</code></td>
+<td>Dew-point measurement</td>
+</tr>
+<tr class="odd">
+<td><code>station_pressure</code></td>
+<td>Station-pressure measurement</td>
+</tr>
+<tr class="even">
+<td><code>visibility</code></td>
+<td>Visibility measurement</td>
+</tr>
+<tr class="odd">
+<td><code>wind_speed</code></td>
+<td>Wind-speed measurement</td>
+</tr>
+<tr class="even">
+<td><code>temperature</code></td>
+<td>Temperature measurement</td>
+</tr>
+<tr class="odd">
+<td><code>precipitation</code></td>
+<td>Precipitation measurement</td>
+</tr>
+<tr class="even">
+<td><code>snow_depth</code></td>
+<td>Snow-depth measurement</td>
+</tr>
+<tr class="odd">
+<td><code>fog</code>, <code>rain</code>, <code>hail</code>, <code>thunder</code>, <code>tornado</code></td>
+<td>Weather indicators stored as <code>1</code> for true and <code>0</code> for false</td>
+</tr>
+</tbody>
+</table>
+<p>Use the measurement values in the units in which they are stored in the database. You do not need to convert units.</p>
+</section>
+<section id="part-a" class="level2">
+<h2 class="anchored" data-anchor-id="part-a">Part A</h2>
+<ol type="1">
+<li><p>Select every column and the first 10 rows from <code>STATION_DATA</code>.</p></li>
+<li><p>Select only <code>station_number</code>, <code>year</code>, <code>month</code>, <code>day</code>, and <code>temperature</code> from <code>STATION_DATA</code>.</p></li>
+<li><p>Select <code>station_number</code>, <code>report_code</code>, <code>precipitation</code>, <code>rain</code>, and <code>thunder</code>. Rename <code>precipitation</code> as <code>precip_amount</code> in the query output.</p></li>
+</ol>
+</section>
+<section id="part-b" class="level2">
+<h2 class="anchored" data-anchor-id="part-b">Part B</h2>
+<ol type="1">
+<li><p>Return <code>station_number</code>, <code>year</code>, <code>month</code>, <code>day</code>, and <code>temperature</code> for observations recorded in the year 2000.</p></li>
+<li><p>Return the date columns, <code>station_number</code>, and <code>precipitation</code> for observations from 2000 through 2009, inclusive, that recorded precipitation greater than zero.</p></li>
+<li><p>Return <code>station_number</code>, the date columns, <code>dew_point</code>, and <code>station_pressure</code> for records in which both <code>dew_point</code> and <code>station_pressure</code> are not missing. Limit the query to observations from June, July, or August.</p></li>
+</ol>
+</section>
+<section id="part-c" class="level2">
+<h2 class="anchored" data-anchor-id="part-c">Part C</h2>
+<ol type="1">
+<li><p>Return <code>station_number</code>, the date columns, and <code>precipitation</code>. Sort the results from the greatest precipitation to the least precipitation and display only the first 20 rows.</p></li>
+<li><p>Return <code>station_number</code>, the date columns, and <code>temperature</code>. Sort first by <code>station_number</code> in ascending order and then by date from newest to oldest.</p></li>
+</ol>
+</section>
+<section id="part-d" class="level2">
+<h2 class="anchored" data-anchor-id="part-d">Part D</h2>
+<ol type="1">
+<li><p>Count the number of observations in each year. Name the count <code>observation_count</code> and return one row per year.</p></li>
+<li><p>For each calendar month, calculate the average, minimum, and maximum temperature. Use clear aliases for all three calculated columns.</p></li>
+<li><p>For each <code>station_number</code>, count the number of records that have precipitation greater than zero. Name the count <code>precipitation_report_count</code>.</p></li>
+</ol>
+</section>
+<section id="part-e" class="level2">
+<h2 class="anchored" data-anchor-id="part-e">Part E</h2>
+<ol type="1">
+<li><p>Group the data by year and count the number of records in which <code>tornado = 1</code>. Keep only years with at least one tornado record. Sort the year with the greatest count first.</p></li>
+<li><p>Count the number of observations for each <code>station_number</code>. Keep only stations with at least 100 observations and sort from the largest count to the smallest count.</p></li>
+<li><p>For each year and month, calculate the average wind speed and count the nonmissing wind-speed values. Keep only groups that have at least 20 nonmissing wind-speed values. Sort the results by year and then month, both in ascending order.</p></li>
+</ol>
+</section>
+<section id="part-f" class="level2">
+<h2 class="anchored" data-anchor-id="part-f">Part F</h2>
+<ol type="1">
+<li>Write one query that uses <code>SELECT</code>, <code>WHERE</code>, <code>GROUP BY</code>, <code>HAVING</code>, and <code>ORDER BY</code>.</li>
+</ol>
+<p>Your query must:</p>
+<ul>
+<li>use only records from 2000 through 2009, inclusive;</li>
+<li>exclude records with missing precipitation;</li>
+<li>group the remaining records by year and month;</li>
+<li>calculate total precipitation and name it <code>total_precipitation</code>;</li>
+<li>keep only year-month groups whose total precipitation is greater than 5; and</li>
+<li>sort from the greatest total precipitation to the least.</li>
+</ul>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1790023198754" data-listing-reading-time-sort="2" data-listing-word-count-sort="242">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./a/2.html" class="no-external">Creating a Database</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./a/2.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1790179919059" data-listing-reading-time-sort="3" data-listing-word-count-sort="553">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./a/3.html" class="no-external">ICA 3</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./a/3.html" class="no-external">
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

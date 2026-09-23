@@ -826,6 +826,69 @@
     "text": "Week 5\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
+    "objectID": "a/3.html",
+    "href": "a/3.html",
+    "title": "ICA 3",
+    "section": "",
+    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.\nLocate the STATION_DATA table.\nWrite and execute one query for every question.\nPaste each query into the corresponding SQL block in this document. When requested, record the result below the query.\n\n\n\n\n\n\n\nNoteProtect the source data\n\n\n\nThis is a read-only assignment. Do not use INSERT, UPDATE, DELETE, DROP, or ALTER."
+  },
+  {
+    "objectID": "a/3.html#files-and-setup",
+    "href": "a/3.html#files-and-setup",
+    "title": "ICA 3",
+    "section": "",
+    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.\nLocate the STATION_DATA table.\nWrite and execute one query for every question.\nPaste each query into the corresponding SQL block in this document. When requested, record the result below the query.\n\n\n\n\n\n\n\nNoteProtect the source data\n\n\n\nThis is a read-only assignment. Do not use INSERT, UPDATE, DELETE, DROP, or ALTER."
+  },
+  {
+    "objectID": "a/3.html#database-reference",
+    "href": "a/3.html#database-reference",
+    "title": "ICA 3",
+    "section": "Database reference",
+    "text": "Database reference\nThe assignment uses the STATION_DATA table.\n\n\n\n\n\n\n\nColumn\nStored data\n\n\n\n\nstation_number\nWeather-station identifier\n\n\nreport_code\nReport identifier or code\n\n\nyear, month, day\nObservation date components\n\n\ndew_point\nDew-point measurement\n\n\nstation_pressure\nStation-pressure measurement\n\n\nvisibility\nVisibility measurement\n\n\nwind_speed\nWind-speed measurement\n\n\ntemperature\nTemperature measurement\n\n\nprecipitation\nPrecipitation measurement\n\n\nsnow_depth\nSnow-depth measurement\n\n\nfog, rain, hail, thunder, tornado\nWeather indicators stored as 1 for true and 0 for false\n\n\n\nUse the measurement values in the units in which they are stored in the database. You do not need to convert units."
+  },
+  {
+    "objectID": "a/3.html#part-a",
+    "href": "a/3.html#part-a",
+    "title": "ICA 3",
+    "section": "Part A",
+    "text": "Part A\n\nSelect every column and the first 10 rows from STATION_DATA.\nSelect only station_number, year, month, day, and temperature from STATION_DATA.\nSelect station_number, report_code, precipitation, rain, and thunder. Rename precipitation as precip_amount in the query output."
+  },
+  {
+    "objectID": "a/3.html#part-b",
+    "href": "a/3.html#part-b",
+    "title": "ICA 3",
+    "section": "Part B",
+    "text": "Part B\n\nReturn station_number, year, month, day, and temperature for observations recorded in the year 2000.\nReturn the date columns, station_number, and precipitation for observations from 2000 through 2009, inclusive, that recorded precipitation greater than zero.\nReturn station_number, the date columns, dew_point, and station_pressure for records in which both dew_point and station_pressure are not missing. Limit the query to observations from June, July, or August."
+  },
+  {
+    "objectID": "a/3.html#part-c",
+    "href": "a/3.html#part-c",
+    "title": "ICA 3",
+    "section": "Part C",
+    "text": "Part C\n\nReturn station_number, the date columns, and precipitation. Sort the results from the greatest precipitation to the least precipitation and display only the first 20 rows.\nReturn station_number, the date columns, and temperature. Sort first by station_number in ascending order and then by date from newest to oldest."
+  },
+  {
+    "objectID": "a/3.html#part-d",
+    "href": "a/3.html#part-d",
+    "title": "ICA 3",
+    "section": "Part D",
+    "text": "Part D\n\nCount the number of observations in each year. Name the count observation_count and return one row per year.\nFor each calendar month, calculate the average, minimum, and maximum temperature. Use clear aliases for all three calculated columns.\nFor each station_number, count the number of records that have precipitation greater than zero. Name the count precipitation_report_count."
+  },
+  {
+    "objectID": "a/3.html#part-e",
+    "href": "a/3.html#part-e",
+    "title": "ICA 3",
+    "section": "Part E",
+    "text": "Part E\n\nGroup the data by year and count the number of records in which tornado = 1. Keep only years with at least one tornado record. Sort the year with the greatest count first.\nCount the number of observations for each station_number. Keep only stations with at least 100 observations and sort from the largest count to the smallest count.\nFor each year and month, calculate the average wind speed and count the nonmissing wind-speed values. Keep only groups that have at least 20 nonmissing wind-speed values. Sort the results by year and then month, both in ascending order."
+  },
+  {
+    "objectID": "a/3.html#part-f",
+    "href": "a/3.html#part-f",
+    "title": "ICA 3",
+    "section": "Part F",
+    "text": "Part F\n\nWrite one query that uses SELECT, WHERE, GROUP BY, HAVING, and ORDER BY.\n\nYour query must:\n\nuse only records from 2000 through 2009, inclusive;\nexclude records with missing precipitation;\ngroup the remaining records by year and month;\ncalculate total precipitation and name it total_precipitation;\nkeep only year-month groups whose total precipitation is greater than 5; and\nsort from the greatest total precipitation to the least."
+  },
+  {
     "objectID": "a/2.html",
     "href": "a/2.html",
     "title": "Creating a Database",
@@ -837,7 +900,7 @@
     "href": "assignments.html",
     "title": "Assignments",
     "section": "",
-    "text": "Creating a Database\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures.html",

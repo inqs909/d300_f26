@@ -1,0 +1,96 @@
+---
+title: "ICA 3"
+format: html
+editor: source
+order: 3
+---
+
+
+## Files and setup
+
+1. Download [`weather_stations.db`](https://github.com/thomasnield/oreilly_getting_started_with_sql/blob/master/weather_stations.db) from the [course-material repository](https://github.com/thomasnield/oreilly_getting_started_with_sql).
+2. Open the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.
+3. Locate the `STATION_DATA` table.
+4. Write and execute one query for every question.
+5. Paste each query into the corresponding SQL block in this document. When requested, record the result below the query.
+
+::: {.callout-note title="Protect the source data"}
+This is a read-only assignment. Do not use `INSERT`, `UPDATE`, `DELETE`, `DROP`, or `ALTER`.
+:::
+
+## Database reference
+
+The assignment uses the `STATION_DATA` table.
+
+| Column | Stored data |
+|---|---|
+| `station_number` | Weather-station identifier |
+| `report_code` | Report identifier or code |
+| `year`, `month`, `day` | Observation date components |
+| `dew_point` | Dew-point measurement |
+| `station_pressure` | Station-pressure measurement |
+| `visibility` | Visibility measurement |
+| `wind_speed` | Wind-speed measurement |
+| `temperature` | Temperature measurement |
+| `precipitation` | Precipitation measurement |
+| `snow_depth` | Snow-depth measurement |
+| `fog`, `rain`, `hail`, `thunder`, `tornado` | Weather indicators stored as `1` for true and `0` for false |
+
+Use the measurement values in the units in which they are stored in the database. You do not need to convert units.
+
+
+## Part A
+
+
+1. Select every column and the first 10 rows from `STATION_DATA`.
+
+
+2. Select only `station_number`, `year`, `month`, `day`, and `temperature` from `STATION_DATA`.
+
+
+3. Select `station_number`, `report_code`, `precipitation`, `rain`, and `thunder`. Rename `precipitation` as `precip_amount` in the query output.
+
+## Part B
+
+
+1. Return `station_number`, `year`, `month`, `day`, and `temperature` for observations recorded in the year 2000.
+
+
+2. Return the date columns, `station_number`, and `precipitation` for observations from 2000 through 2009, inclusive, that recorded precipitation greater than zero.
+
+3. Return `station_number`, the date columns, `dew_point`, and `station_pressure` for records in which both `dew_point` and `station_pressure` are not missing. Limit the query to observations from June, July, or August.
+
+## Part C
+
+1. Return `station_number`, the date columns, and `precipitation`. Sort the results from the greatest precipitation to the least precipitation and display only the first 20 rows.
+
+2. Return `station_number`, the date columns, and `temperature`. Sort first by `station_number` in ascending order and then by date from newest to oldest.
+
+## Part D
+
+1. Count the number of observations in each year. Name the count `observation_count` and return one row per year.
+2. For each calendar month, calculate the average, minimum, and maximum temperature. Use clear aliases for all three calculated columns.
+
+3. For each `station_number`, count the number of records that have precipitation greater than zero. Name the count `precipitation_report_count`.
+
+## Part E
+
+1. Group the data by year and count the number of records in which `tornado = 1`. Keep only years with at least one tornado record. Sort the year with the greatest count first.
+
+2. Count the number of observations for each `station_number`. Keep only stations with at least 100 observations and sort from the largest count to the smallest count.
+
+3. For each year and month, calculate the average wind speed and count the nonmissing wind-speed values. Keep only groups that have at least 20 nonmissing wind-speed values. Sort the results by year and then month, both in ascending order.
+
+## Part F
+
+1. Write one query that uses `SELECT`, `WHERE`, `GROUP BY`, `HAVING`, and `ORDER BY`.
+
+Your query must:
+
+- use only records from 2000 through 2009, inclusive;
+- exclude records with missing precipitation;
+- group the remaining records by year and month;
+- calculate total precipitation and name it `total_precipitation`;
+- keep only year-month groups whose total precipitation is greater than 5; and
+- sort from the greatest total precipitation to the least.
+
