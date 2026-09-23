@@ -830,14 +830,14 @@
     "href": "a/3.html",
     "title": "ICA 3",
     "section": "",
-    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.\nLocate the STATION_DATA table.\nWrite and execute one query for every question.\nPaste each query into the corresponding SQL block in this document. When requested, record the result below the query.\n\n\n\n\n\n\n\nNoteProtect the source data\n\n\n\nThis is a read-only assignment. Do not use INSERT, UPDATE, DELETE, DROP, or ALTER."
+    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.\nLocate the STATION_DATA table.\nWrite and execute one query for every question.\nPaste each query into the corresponding SQL block in this document. When requested, record the result below the query."
   },
   {
     "objectID": "a/3.html#files-and-setup",
     "href": "a/3.html#files-and-setup",
     "title": "ICA 3",
     "section": "",
-    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.\nLocate the STATION_DATA table.\nWrite and execute one query for every question.\nPaste each query into the corresponding SQL block in this document. When requested, record the result below the query.\n\n\n\n\n\n\n\nNoteProtect the source data\n\n\n\nThis is a read-only assignment. Do not use INSERT, UPDATE, DELETE, DROP, or ALTER."
+    "text": "Download weather_stations.db from the course-material repository.\nOpen the database in DB Browser for SQLite, SQLiteStudio, or another SQLite client approved by your instructor.\nLocate the STATION_DATA table.\nWrite and execute one query for every question.\nPaste each query into the corresponding SQL block in this document. When requested, record the result below the query."
   },
   {
     "objectID": "a/3.html#database-reference",
@@ -879,7 +879,7 @@
     "href": "a/3.html#part-e",
     "title": "ICA 3",
     "section": "Part E",
-    "text": "Part E\n\nGroup the data by year and count the number of records in which tornado = 1. Keep only years with at least one tornado record. Sort the year with the greatest count first.\nCount the number of observations for each station_number. Keep only stations with at least 100 observations and sort from the largest count to the smallest count.\nFor each year and month, calculate the average wind speed and count the nonmissing wind-speed values. Keep only groups that have at least 20 nonmissing wind-speed values. Sort the results by year and then month, both in ascending order."
+    "text": "Part E\n\nGroup the data by year and count the number of records in which tornado = 1. Keep only years with at least one tornado record. Sort the year with the greatest count first.\nCount the number of observations for each station_number. Keep only stations with at least 10 observations and sort from the largest count to the smallest count.\nFor each year and month, calculate the average wind speed and count the nonmissing wind-speed values. Keep only groups that have at least 20 nonmissing wind-speed values. Sort the results by year and then month, both in ascending order."
   },
   {
     "objectID": "a/3.html#part-f",
