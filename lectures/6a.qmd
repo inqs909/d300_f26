@@ -194,7 +194,6 @@ Use the Chinook database. Write one query for each task.
 1. **Album catalog:** Join `Artist` and `Album`. Return the artist name as `ArtistName` and album title as `AlbumTitle`. Sort by artist and album title.
 2. **Long tracks:** Join `Track` and `Genre`. Return `TrackName`, `GenreName`, and `Milliseconds` for tracks longer than 300,000 milliseconds. Show the longest tracks first.
 3. **Customer invoice coverage:** Use a left join between `Customer` and `Invoice`. Return each customer's ID, first name, last name, and invoice count. Keep customers who have no invoices.
-4. **Employee reporting structure:** Use a self join on `Employee`. Return each employee's first and last name with the first and last name of their manager. Keep employees who have no manager.
 
 ::: notes
 Allow students about 15 minutes. Encourage them to identify the matching key columns before they write each query. Solutions appear at the end of the deck.
@@ -266,7 +265,7 @@ Use the Chinook database. Write one query for each task.
 
 1. **Longer than average:** Return the name and length in milliseconds of every track that is longer than the average track length. Use a scalar subquery.
 2. **Rock and Metal tracks:** Return the track name and unit price for tracks whose genre is either `Rock` or `Metal`. Use a multi-row subquery with `IN`.
-3. **Customers with a large invoice:** Return the ID, first name, and last name of customers who have at least one invoice with a total greater than $20. Use a correlated subquery with `EXISTS`.
+
 
 ::: notes
 Allow students about 12 minutes. Ask them to run each inner query by itself before placing it inside the outer query.
@@ -339,8 +338,7 @@ Use the Chinook database to build and query a reusable customer summary.
 
 1. Create a view named `customer_invoice_summary` that returns each customer's ID, first name, last name, and country. Include the number of invoices as `InvoiceCount` and the total amount spent as `TotalSpent`.
 2. Query the view to show the 10 customers with the highest `TotalSpent`.
-3. Query the view to show customers from the USA whose `TotalSpent` is greater than $40. Show the highest total first.
-4. Remove the view with `DROP VIEW` after you finish.
+
 
 ::: notes
 Allow students about 12 minutes. Remind them that a standard view stores the query rather than a separate copy of its results.
@@ -433,19 +431,6 @@ GROUP BY c.CustomerId, c.FirstName, c.LastName
 ORDER BY InvoiceCount, c.LastName, c.FirstName;
 ```
 
-## Joins Activity: Solution 4
-
-```sql
-SELECT
-    e.FirstName AS EmployeeFirstName,
-    e.LastName AS EmployeeLastName,
-    m.FirstName AS ManagerFirstName,
-    m.LastName AS ManagerLastName
-FROM Employee AS e
-LEFT JOIN Employee AS m
-    ON e.ReportsTo = m.EmployeeId
-ORDER BY e.LastName, e.FirstName;
-```
 
 ## Subqueries Activity: Solution 1
 
@@ -472,18 +457,7 @@ WHERE GenreId IN (
 ORDER BY Name;
 ```
 
-## Subqueries Activity: Solution 3
 
-```sql
-SELECT c.CustomerId, c.FirstName, c.LastName
-FROM Customer AS c
-WHERE EXISTS (
-    SELECT 1
-    FROM Invoice AS i
-    WHERE i.CustomerId = c.CustomerId
-      AND i.Total > 20
-)
-ORDER BY c.LastName, c.FirstName;
 ```
 
 ## Views Activity: Solution 1
@@ -523,11 +497,3 @@ WHERE Country = 'USA'
   AND TotalSpent > 40
 ORDER BY TotalSpent DESC;
 ```
-
-## Views Activity: Solution 4
-
-```sql
-DROP VIEW customer_invoice_summary;
-```
-
-Run this command only after completing the two queries that use the view.

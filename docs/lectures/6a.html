@@ -469,7 +469,6 @@
 <li><strong>Album catalog:</strong> Join <code>Artist</code> and <code>Album</code>. Return the artist name as <code>ArtistName</code> and album title as <code>AlbumTitle</code>. Sort by artist and album title.</li>
 <li><strong>Long tracks:</strong> Join <code>Track</code> and <code>Genre</code>. Return <code>TrackName</code>, <code>GenreName</code>, and <code>Milliseconds</code> for tracks longer than 300,000 milliseconds. Show the longest tracks first.</li>
 <li><strong>Customer invoice coverage:</strong> Use a left join between <code>Customer</code> and <code>Invoice</code>. Return each customer’s ID, first name, last name, and invoice count. Keep customers who have no invoices.</li>
-<li><strong>Employee reporting structure:</strong> Use a self join on <code>Employee</code>. Return each employee’s first and last name with the first and last name of their manager. Keep employees who have no manager.</li>
 </ol>
 <aside class="notes">
 <p>Allow students about 15 minutes. Encourage them to identify the matching key columns before they write each query. Solutions appear at the end of the deck.</p>
@@ -601,7 +600,6 @@
 <ol type="1">
 <li><strong>Longer than average:</strong> Return the name and length in milliseconds of every track that is longer than the average track length. Use a scalar subquery.</li>
 <li><strong>Rock and Metal tracks:</strong> Return the track name and unit price for tracks whose genre is either <code>Rock</code> or <code>Metal</code>. Use a multi-row subquery with <code>IN</code>.</li>
-<li><strong>Customers with a large invoice:</strong> Return the ID, first name, and last name of customers who have at least one invoice with a total greater than $20. Use a correlated subquery with <code>EXISTS</code>.</li>
 </ol>
 <aside class="notes">
 <p>Allow students about 12 minutes. Ask them to run each inner query by itself before placing it inside the outer query.</p>
@@ -730,8 +728,6 @@
 <ol type="1">
 <li>Create a view named <code>customer_invoice_summary</code> that returns each customer’s ID, first name, last name, and country. Include the number of invoices as <code>InvoiceCount</code> and the total amount spent as <code>TotalSpent</code>.</li>
 <li>Query the view to show the 10 customers with the highest <code>TotalSpent</code>.</li>
-<li>Query the view to show customers from the USA whose <code>TotalSpent</code> is greater than $40. Show the highest total first.</li>
-<li>Remove the view with <code>DROP VIEW</code> after you finish.</li>
 </ol>
 <aside class="notes">
 <p>Allow students about 12 minutes. Remind them that a standard view stores the query rather than a separate copy of its results.</p>
@@ -987,89 +983,61 @@
 <span id="cb12-9"><a aria-label="9"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.CustomerId, c.FirstName, c.LastName</span>
 <span id="cb12-10"><a aria-label="10"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceCount, c.LastName, c.FirstName;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="joins-activity-solution-4" class="slide level2">
-<h2>Joins Activity: Solution 4</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a aria-label="1"></a><span class="kw">SELECT</span></span>
-<span id="cb13-2"><a aria-label="2"></a>    e.FirstName <span class="kw">AS</span> EmployeeFirstName,</span>
-<span id="cb13-3"><a aria-label="3"></a>    e.LastName <span class="kw">AS</span> EmployeeLastName,</span>
-<span id="cb13-4"><a aria-label="4"></a>    m.FirstName <span class="kw">AS</span> ManagerFirstName,</span>
-<span id="cb13-5"><a aria-label="5"></a>    m.LastName <span class="kw">AS</span> ManagerLastName</span>
-<span id="cb13-6"><a aria-label="6"></a><span class="kw">FROM</span> Employee <span class="kw">AS</span> e</span>
-<span id="cb13-7"><a aria-label="7"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> Employee <span class="kw">AS</span> m</span>
-<span id="cb13-8"><a aria-label="8"></a>    <span class="kw">ON</span> e.ReportsTo <span class="op">=</span> m.EmployeeId</span>
-<span id="cb13-9"><a aria-label="9"></a><span class="kw">ORDER</span> <span class="kw">BY</span> e.LastName, e.FirstName;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
 <section id="subqueries-activity-solution-1" class="slide level2">
 <h2>Subqueries Activity: Solution 1</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a aria-label="1"></a><span class="kw">SELECT</span> Name, Milliseconds</span>
-<span id="cb14-2"><a aria-label="2"></a><span class="kw">FROM</span> Track</span>
-<span id="cb14-3"><a aria-label="3"></a><span class="kw">WHERE</span> Milliseconds <span class="op">&gt;</span> (</span>
-<span id="cb14-4"><a aria-label="4"></a>    <span class="kw">SELECT</span> <span class="fu">AVG</span>(Milliseconds)</span>
-<span id="cb14-5"><a aria-label="5"></a>    <span class="kw">FROM</span> Track</span>
-<span id="cb14-6"><a aria-label="6"></a>)</span>
-<span id="cb14-7"><a aria-label="7"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Milliseconds <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a aria-label="1"></a><span class="kw">SELECT</span> Name, Milliseconds</span>
+<span id="cb13-2"><a aria-label="2"></a><span class="kw">FROM</span> Track</span>
+<span id="cb13-3"><a aria-label="3"></a><span class="kw">WHERE</span> Milliseconds <span class="op">&gt;</span> (</span>
+<span id="cb13-4"><a aria-label="4"></a>    <span class="kw">SELECT</span> <span class="fu">AVG</span>(Milliseconds)</span>
+<span id="cb13-5"><a aria-label="5"></a>    <span class="kw">FROM</span> Track</span>
+<span id="cb13-6"><a aria-label="6"></a>)</span>
+<span id="cb13-7"><a aria-label="7"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Milliseconds <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="subqueries-activity-solution-2" class="slide level2">
 <h2>Subqueries Activity: Solution 2</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a aria-label="1"></a><span class="kw">SELECT</span> Name, UnitPrice</span>
-<span id="cb15-2"><a aria-label="2"></a><span class="kw">FROM</span> Track</span>
-<span id="cb15-3"><a aria-label="3"></a><span class="kw">WHERE</span> GenreId <span class="kw">IN</span> (</span>
-<span id="cb15-4"><a aria-label="4"></a>    <span class="kw">SELECT</span> GenreId</span>
-<span id="cb15-5"><a aria-label="5"></a>    <span class="kw">FROM</span> Genre</span>
-<span id="cb15-6"><a aria-label="6"></a>    <span class="kw">WHERE</span> Name <span class="kw">IN</span> (<span class="st">'Rock'</span>, <span class="st">'Metal'</span>)</span>
-<span id="cb15-7"><a aria-label="7"></a>)</span>
-<span id="cb15-8"><a aria-label="8"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="subqueries-activity-solution-3" class="slide level2">
-<h2>Subqueries Activity: Solution 3</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a aria-label="1"></a><span class="kw">SELECT</span> c.CustomerId, c.FirstName, c.LastName</span>
-<span id="cb16-2"><a aria-label="2"></a><span class="kw">FROM</span> Customer <span class="kw">AS</span> c</span>
-<span id="cb16-3"><a aria-label="3"></a><span class="kw">WHERE</span> <span class="kw">EXISTS</span> (</span>
-<span id="cb16-4"><a aria-label="4"></a>    <span class="kw">SELECT</span> <span class="dv">1</span></span>
-<span id="cb16-5"><a aria-label="5"></a>    <span class="kw">FROM</span> Invoice <span class="kw">AS</span> i</span>
-<span id="cb16-6"><a aria-label="6"></a>    <span class="kw">WHERE</span> i.CustomerId <span class="op">=</span> c.CustomerId</span>
-<span id="cb16-7"><a aria-label="7"></a>      <span class="kw">AND</span> i.Total <span class="op">&gt;</span> <span class="dv">20</span></span>
-<span id="cb16-8"><a aria-label="8"></a>)</span>
-<span id="cb16-9"><a aria-label="9"></a><span class="kw">ORDER</span> <span class="kw">BY</span> c.LastName, c.FirstName;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="views-activity-solution-1" class="slide level2">
-<h2>Views Activity: Solution 1</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a aria-label="1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> customer_invoice_summary <span class="kw">AS</span></span>
-<span id="cb17-2"><a aria-label="2"></a><span class="kw">SELECT</span></span>
-<span id="cb17-3"><a aria-label="3"></a>    c.CustomerId,</span>
-<span id="cb17-4"><a aria-label="4"></a>    c.FirstName,</span>
-<span id="cb17-5"><a aria-label="5"></a>    c.LastName,</span>
-<span id="cb17-6"><a aria-label="6"></a>    c.Country,</span>
-<span id="cb17-7"><a aria-label="7"></a>    <span class="fu">COUNT</span>(i.InvoiceId) <span class="kw">AS</span> InvoiceCount,</span>
-<span id="cb17-8"><a aria-label="8"></a>    <span class="fu">ROUND</span>(<span class="fu">SUM</span>(i.Total), <span class="dv">2</span>) <span class="kw">AS</span> TotalSpent</span>
-<span id="cb17-9"><a aria-label="9"></a><span class="kw">FROM</span> Customer <span class="kw">AS</span> c</span>
-<span id="cb17-10"><a aria-label="10"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> Invoice <span class="kw">AS</span> i</span>
-<span id="cb17-11"><a aria-label="11"></a>    <span class="kw">ON</span> c.CustomerId <span class="op">=</span> i.CustomerId</span>
-<span id="cb17-12"><a aria-label="12"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb17-13"><a aria-label="13"></a>    c.CustomerId,</span>
-<span id="cb17-14"><a aria-label="14"></a>    c.FirstName,</span>
-<span id="cb17-15"><a aria-label="15"></a>    c.LastName,</span>
-<span id="cb17-16"><a aria-label="16"></a>    c.Country;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a aria-label="1"></a><span class="kw">SELECT</span> Name, UnitPrice</span>
+<span id="cb14-2"><a aria-label="2"></a><span class="kw">FROM</span> Track</span>
+<span id="cb14-3"><a aria-label="3"></a><span class="kw">WHERE</span> GenreId <span class="kw">IN</span> (</span>
+<span id="cb14-4"><a aria-label="4"></a>    <span class="kw">SELECT</span> GenreId</span>
+<span id="cb14-5"><a aria-label="5"></a>    <span class="kw">FROM</span> Genre</span>
+<span id="cb14-6"><a aria-label="6"></a>    <span class="kw">WHERE</span> Name <span class="kw">IN</span> (<span class="st">'Rock'</span>, <span class="st">'Metal'</span>)</span>
+<span id="cb14-7"><a aria-label="7"></a>)</span>
+<span id="cb14-8"><a aria-label="8"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>
+## Views Activity: Solution 1
+
+```sql
+CREATE VIEW customer_invoice_summary AS
+SELECT
+    c.CustomerId,
+    c.FirstName,
+    c.LastName,
+    c.Country,
+    COUNT(i.InvoiceId) AS InvoiceCount,
+    ROUND(SUM(i.Total), 2) AS TotalSpent
+FROM Customer AS c
+INNER JOIN Invoice AS i
+    ON c.CustomerId = i.CustomerId
+GROUP BY
+    c.CustomerId,
+    c.FirstName,
+    c.LastName,
+    c.Country;</code></pre>
 </section>
 <section id="views-activity-solutions-2-and-3" class="slide level2">
 <h2>Views Activity: Solutions 2 and 3</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a aria-label="1"></a><span class="co">-- Ten customers with the highest total spending</span></span>
-<span id="cb18-2"><a aria-label="2"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb18-3"><a aria-label="3"></a><span class="kw">FROM</span> customer_invoice_summary</span>
-<span id="cb18-4"><a aria-label="4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TotalSpent <span class="kw">DESC</span></span>
-<span id="cb18-5"><a aria-label="5"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span>
-<span id="cb18-6"><a aria-label="6"></a></span>
-<span id="cb18-7"><a aria-label="7"></a><span class="co">-- USA customers who spent more than $40</span></span>
-<span id="cb18-8"><a aria-label="8"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb18-9"><a aria-label="9"></a><span class="kw">FROM</span> customer_invoice_summary</span>
-<span id="cb18-10"><a aria-label="10"></a><span class="kw">WHERE</span> Country <span class="op">=</span> <span class="st">'USA'</span></span>
-<span id="cb18-11"><a aria-label="11"></a>  <span class="kw">AND</span> TotalSpent <span class="op">&gt;</span> <span class="dv">40</span></span>
-<span id="cb18-12"><a aria-label="12"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TotalSpent <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="views-activity-solution-4" class="slide level2">
-<h2>Views Activity: Solution 4</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb19-1"><a aria-label="1"></a><span class="kw">DROP</span> <span class="kw">VIEW</span> customer_invoice_summary;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Run this command only after completing the two queries that use the view.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a aria-label="1"></a><span class="co">-- Ten customers with the highest total spending</span></span>
+<span id="cb16-2"><a aria-label="2"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb16-3"><a aria-label="3"></a><span class="kw">FROM</span> customer_invoice_summary</span>
+<span id="cb16-4"><a aria-label="4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TotalSpent <span class="kw">DESC</span></span>
+<span id="cb16-5"><a aria-label="5"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span>
+<span id="cb16-6"><a aria-label="6"></a></span>
+<span id="cb16-7"><a aria-label="7"></a><span class="co">-- USA customers who spent more than $40</span></span>
+<span id="cb16-8"><a aria-label="8"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb16-9"><a aria-label="9"></a><span class="kw">FROM</span> customer_invoice_summary</span>
+<span id="cb16-10"><a aria-label="10"></a><span class="kw">WHERE</span> Country <span class="op">=</span> <span class="st">'USA'</span></span>
+<span id="cb16-11"><a aria-label="11"></a>  <span class="kw">AND</span> TotalSpent <span class="op">&gt;</span> <span class="dv">40</span></span>
+<span id="cb16-12"><a aria-label="12"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TotalSpent <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section></section>

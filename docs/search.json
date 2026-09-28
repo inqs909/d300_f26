@@ -1404,7 +1404,7 @@
     "href": "lectures/6a.html#activity-joins",
     "title": "SQL: Joins, Subqueries, and Views",
     "section": "Activity: Joins",
-    "text": "Activity: Joins\nUse the Chinook database. Write one query for each task.\n\nAlbum catalog: Join Artist and Album. Return the artist name as ArtistName and album title as AlbumTitle. Sort by artist and album title.\nLong tracks: Join Track and Genre. Return TrackName, GenreName, and Milliseconds for tracks longer than 300,000 milliseconds. Show the longest tracks first.\nCustomer invoice coverage: Use a left join between Customer and Invoice. Return each customer’s ID, first name, last name, and invoice count. Keep customers who have no invoices.\nEmployee reporting structure: Use a self join on Employee. Return each employee’s first and last name with the first and last name of their manager. Keep employees who have no manager.\n\n\nAllow students about 15 minutes. Encourage them to identify the matching key columns before they write each query. Solutions appear at the end of the deck."
+    "text": "Activity: Joins\nUse the Chinook database. Write one query for each task.\n\nAlbum catalog: Join Artist and Album. Return the artist name as ArtistName and album title as AlbumTitle. Sort by artist and album title.\nLong tracks: Join Track and Genre. Return TrackName, GenreName, and Milliseconds for tracks longer than 300,000 milliseconds. Show the longest tracks first.\nCustomer invoice coverage: Use a left join between Customer and Invoice. Return each customer’s ID, first name, last name, and invoice count. Keep customers who have no invoices.\n\n\nAllow students about 15 minutes. Encourage them to identify the matching key columns before they write each query. Solutions appear at the end of the deck."
   },
   {
     "objectID": "lectures/6a.html#subqueries-1",
@@ -1432,7 +1432,7 @@
     "href": "lectures/6a.html#activity-subqueries",
     "title": "SQL: Joins, Subqueries, and Views",
     "section": "Activity: Subqueries",
-    "text": "Activity: Subqueries\nUse the Chinook database. Write one query for each task.\n\nLonger than average: Return the name and length in milliseconds of every track that is longer than the average track length. Use a scalar subquery.\nRock and Metal tracks: Return the track name and unit price for tracks whose genre is either Rock or Metal. Use a multi-row subquery with IN.\nCustomers with a large invoice: Return the ID, first name, and last name of customers who have at least one invoice with a total greater than $20. Use a correlated subquery with EXISTS.\n\n\nAllow students about 12 minutes. Ask them to run each inner query by itself before placing it inside the outer query."
+    "text": "Activity: Subqueries\nUse the Chinook database. Write one query for each task.\n\nLonger than average: Return the name and length in milliseconds of every track that is longer than the average track length. Use a scalar subquery.\nRock and Metal tracks: Return the track name and unit price for tracks whose genre is either Rock or Metal. Use a multi-row subquery with IN.\n\n\nAllow students about 12 minutes. Ask them to run each inner query by itself before placing it inside the outer query."
   },
   {
     "objectID": "lectures/6a.html#views-definition",
@@ -1467,7 +1467,7 @@
     "href": "lectures/6a.html#activity-views",
     "title": "SQL: Joins, Subqueries, and Views",
     "section": "Activity: Views",
-    "text": "Activity: Views\nUse the Chinook database to build and query a reusable customer summary.\n\nCreate a view named customer_invoice_summary that returns each customer’s ID, first name, last name, and country. Include the number of invoices as InvoiceCount and the total amount spent as TotalSpent.\nQuery the view to show the 10 customers with the highest TotalSpent.\nQuery the view to show customers from the USA whose TotalSpent is greater than $40. Show the highest total first.\nRemove the view with DROP VIEW after you finish.\n\n\nAllow students about 12 minutes. Remind them that a standard view stores the query rather than a separate copy of its results."
+    "text": "Activity: Views\nUse the Chinook database to build and query a reusable customer summary.\n\nCreate a view named customer_invoice_summary that returns each customer’s ID, first name, last name, and country. Include the number of invoices as InvoiceCount and the total amount spent as TotalSpent.\nQuery the view to show the 10 customers with the highest TotalSpent.\n\n\nAllow students about 12 minutes. Remind them that a standard view stores the query rather than a separate copy of its results."
   },
   {
     "objectID": "lectures/6a.html#glossary-query-commands",
@@ -1512,13 +1512,6 @@
     "text": "Joins Activity: Solution 3\nSELECT\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    COUNT(i.InvoiceId) AS InvoiceCount\nFROM Customer AS c\nLEFT JOIN Invoice AS i\n    ON c.CustomerId = i.CustomerId\nGROUP BY c.CustomerId, c.FirstName, c.LastName\nORDER BY InvoiceCount, c.LastName, c.FirstName;"
   },
   {
-    "objectID": "lectures/6a.html#joins-activity-solution-4",
-    "href": "lectures/6a.html#joins-activity-solution-4",
-    "title": "SQL: Joins, Subqueries, and Views",
-    "section": "Joins Activity: Solution 4",
-    "text": "Joins Activity: Solution 4\nSELECT\n    e.FirstName AS EmployeeFirstName,\n    e.LastName AS EmployeeLastName,\n    m.FirstName AS ManagerFirstName,\n    m.LastName AS ManagerLastName\nFROM Employee AS e\nLEFT JOIN Employee AS m\n    ON e.ReportsTo = m.EmployeeId\nORDER BY e.LastName, e.FirstName;"
-  },
-  {
     "objectID": "lectures/6a.html#subqueries-activity-solution-1",
     "href": "lectures/6a.html#subqueries-activity-solution-1",
     "title": "SQL: Joins, Subqueries, and Views",
@@ -1530,21 +1523,7 @@
     "href": "lectures/6a.html#subqueries-activity-solution-2",
     "title": "SQL: Joins, Subqueries, and Views",
     "section": "Subqueries Activity: Solution 2",
-    "text": "Subqueries Activity: Solution 2\nSELECT Name, UnitPrice\nFROM Track\nWHERE GenreId IN (\n    SELECT GenreId\n    FROM Genre\n    WHERE Name IN ('Rock', 'Metal')\n)\nORDER BY Name;"
-  },
-  {
-    "objectID": "lectures/6a.html#subqueries-activity-solution-3",
-    "href": "lectures/6a.html#subqueries-activity-solution-3",
-    "title": "SQL: Joins, Subqueries, and Views",
-    "section": "Subqueries Activity: Solution 3",
-    "text": "Subqueries Activity: Solution 3\nSELECT c.CustomerId, c.FirstName, c.LastName\nFROM Customer AS c\nWHERE EXISTS (\n    SELECT 1\n    FROM Invoice AS i\n    WHERE i.CustomerId = c.CustomerId\n      AND i.Total &gt; 20\n)\nORDER BY c.LastName, c.FirstName;"
-  },
-  {
-    "objectID": "lectures/6a.html#views-activity-solution-1",
-    "href": "lectures/6a.html#views-activity-solution-1",
-    "title": "SQL: Joins, Subqueries, and Views",
-    "section": "Views Activity: Solution 1",
-    "text": "Views Activity: Solution 1\nCREATE VIEW customer_invoice_summary AS\nSELECT\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country,\n    COUNT(i.InvoiceId) AS InvoiceCount,\n    ROUND(SUM(i.Total), 2) AS TotalSpent\nFROM Customer AS c\nINNER JOIN Invoice AS i\n    ON c.CustomerId = i.CustomerId\nGROUP BY\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country;"
+    "text": "Subqueries Activity: Solution 2\nSELECT Name, UnitPrice\nFROM Track\nWHERE GenreId IN (\n    SELECT GenreId\n    FROM Genre\n    WHERE Name IN ('Rock', 'Metal')\n)\nORDER BY Name;\n\n## Views Activity: Solution 1\n\n```sql\nCREATE VIEW customer_invoice_summary AS\nSELECT\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country,\n    COUNT(i.InvoiceId) AS InvoiceCount,\n    ROUND(SUM(i.Total), 2) AS TotalSpent\nFROM Customer AS c\nINNER JOIN Invoice AS i\n    ON c.CustomerId = i.CustomerId\nGROUP BY\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country;"
   },
   {
     "objectID": "lectures/6a.html#views-activity-solutions-2-and-3",
@@ -1552,13 +1531,6 @@
     "title": "SQL: Joins, Subqueries, and Views",
     "section": "Views Activity: Solutions 2 and 3",
     "text": "Views Activity: Solutions 2 and 3\n-- Ten customers with the highest total spending\nSELECT *\nFROM customer_invoice_summary\nORDER BY TotalSpent DESC\nLIMIT 10;\n\n-- USA customers who spent more than $40\nSELECT *\nFROM customer_invoice_summary\nWHERE Country = 'USA'\n  AND TotalSpent &gt; 40\nORDER BY TotalSpent DESC;"
-  },
-  {
-    "objectID": "lectures/6a.html#views-activity-solution-4",
-    "href": "lectures/6a.html#views-activity-solution-4",
-    "title": "SQL: Joins, Subqueries, and Views",
-    "section": "Views Activity: Solution 4",
-    "text": "Views Activity: Solution 4\nDROP VIEW customer_invoice_summary;\nRun this command only after completing the two queries that use the view."
   },
   {
     "objectID": "posts/2.html",
