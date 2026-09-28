@@ -42,32 +42,46 @@
     "text": "Deadline And Extensions\nThe report will be due on December 4, 2026 at 11:59 PM. For your report, you may receive a 24-hour extension beyond the due date for evey time you attend the writing and multiliteracy center. Each appointment must be one week apart."
   },
   {
-    "objectID": "posts/4.html",
-    "href": "posts/4.html",
-    "title": "Week 4",
+    "objectID": "posts/5.html",
+    "href": "posts/5.html",
+    "title": "Week 5",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/4.html#resources",
-    "href": "posts/4.html#resources",
-    "title": "Week 4",
+    "objectID": "posts/5.html#resources",
+    "href": "posts/5.html#resources",
+    "title": "Week 5",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/2.html",
-    "href": "posts/2.html",
-    "title": "Week 2",
+    "objectID": "posts/3.html",
+    "href": "posts/3.html",
+    "title": "Week 3",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/2.html#resources",
-    "href": "posts/2.html#resources",
-    "title": "Week 2",
+    "objectID": "posts/3.html#resources",
+    "href": "posts/3.html#resources",
+    "title": "Week 3",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/1.html",
+    "href": "posts/1.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+  },
+  {
+    "objectID": "posts/1.html#resources",
+    "href": "posts/1.html#resources",
+    "title": "Week 1",
+    "section": "",
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
   },
   {
     "objectID": "lectures/5a.html#sql-basics",
@@ -823,7 +837,7 @@
     "href": "index.html",
     "title": "Welcome to Introduction to Data Management!",
     "section": "",
-    "text": "Week 5\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Week 6\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "a/3.html",
@@ -907,7 +921,7 @@
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\n\n\nSQL Basics\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\n\n\nSQL Basics\n\n\n\n\n\n\n\n\n\n\nSQL: Joins, Subqueries, and Views\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures/1b.html#sql-and-relational-databases",
@@ -1309,44 +1323,282 @@
     "text": "SQL command reference: retrieving data\n\n\n\nKeyword or clause\nDefinition\n\n\n\n\nSELECT\nChooses the columns returned by a query.\n\n\nFROM\nIdentifies the first table used by the query.\n\n\nAS\nAssigns a temporary alias to a table or column.\n\n\nJOIN\nCombines matching rows from related tables.\n\n\nON\nStates the condition used to match rows in a join.\n\n\nORDER BY\nSorts the result using one or more columns.\n\n\n\nFROM students AS s\nJOIN majors AS m\n    ON s.major_id = m.major_id\nThe aliases s and m shorten qualified column names.\n\nExplain that an unqualified column name may become ambiguous when several joined tables contain a column with the same name. Aliases make the source of each column explicit."
   },
   {
-    "objectID": "posts/1.html",
-    "href": "posts/1.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "objectID": "lectures/6a.html#agenda",
+    "href": "lectures/6a.html#agenda",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Agenda",
+    "text": "Agenda\n\nRelational Joins\n\nInner, Left, Right, Full, Cross, and Self Joins\n\nSubqueries\n\nScalar, Multi-row, and Correlated\n\nDatabase Views\n\nVirtual tables and Materialized Views\n\n\n\nToday we will cover three tools for organizing relational queries: joins, subqueries, and views."
   },
   {
-    "objectID": "posts/1.html#resources",
-    "href": "posts/1.html#resources",
-    "title": "Week 1",
-    "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "objectID": "lectures/6a.html#the-concept-of-joins",
+    "href": "lectures/6a.html#the-concept-of-joins",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "The Concept of Joins",
+    "text": "The Concept of Joins\nTo combine data from two or more tables, we use a common column (usually a Foreign Key).\n\n\n\n\n\ngraph LR\n    A[Table A] --- B{Join Condition}\n    C[Table B] --- B\n    B --&gt; D[Combined Result Set]\n\n    classDef table fill:#0072B2,stroke:#333,stroke-width:2px,color:#fff\n    classDef logic fill:#E69F00,stroke:#333,stroke-width:2px,color:#000\n    classDef result fill:#009E73,stroke:#333,stroke-width:2px,color:#fff\n\n    class A,C table\n    class B logic\n    class D result\n\n\n\n\n\n\n\nJoins are the heart of relational databases. We look for a “bridge” between tables to pull related information together in a single result set."
   },
   {
-    "objectID": "posts/3.html",
-    "href": "posts/3.html",
-    "title": "Week 3",
+    "objectID": "lectures/6a.html#inner-join",
+    "href": "lectures/6a.html#inner-join",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Inner Join",
+    "text": "Inner Join"
+  },
+  {
+    "objectID": "lectures/6a.html#inner-join-1",
+    "href": "lectures/6a.html#inner-join-1",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Inner Join",
+    "text": "Inner Join\nReturns records that have matching values in both tables.\nSELECT \n    employees.name, \n    departments.dept_name\nFROM employees\nINNER JOIN departments \nON employees.dept_id = departments.id;\n\nOnly matches are returned.\nIf an employee has no department, they are excluded.\nIf a department has no employees, it is excluded.\n\n\nThe Inner Join is the most common join. Think of it as the “intersection” of two sets. If there is no overlap, you get nothing."
+  },
+  {
+    "objectID": "lectures/6a.html#left-join",
+    "href": "lectures/6a.html#left-join",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Left Join",
+    "text": "Left Join"
+  },
+  {
+    "objectID": "lectures/6a.html#left-join-1",
+    "href": "lectures/6a.html#left-join-1",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Left Join",
+    "text": "Left Join\nReturns all records from the left table, and the matched records from the right table.\nSELECT \n    employees.name, \n    departments.dept_name\nFROM employees\nLEFT JOIN departments \nON employees.dept_id = departments.id;\n\nIf there is no match, the result is NULL on the right side.\nUseful for finding “missing” relationships.\n\n\nThe Left Join is crucial when you want to keep your primary list intact, regardless of whether the second table has matching data."
+  },
+  {
+    "objectID": "lectures/6a.html#right-join",
+    "href": "lectures/6a.html#right-join",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Right Join",
+    "text": "Right Join"
+  },
+  {
+    "objectID": "lectures/6a.html#right-join-1",
+    "href": "lectures/6a.html#right-join-1",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Right Join",
+    "text": "Right Join\nReturns all records from the right table, and the matched records from the left table.\nSELECT \n    employees.name, \n    departments.dept_name\nFROM employees\nRIGHT JOIN departments \nON employees.dept_id = departments.id;\n\nThe opposite of a Left Join.\nIncludes all departments, even those without employees.\nRequires SQLite 3.39.0 or later.\n\n\nWhile Right Join exists, many developers prefer using Left Join and simply switching the order of the tables to keep their logic reading from left to right."
+  },
+  {
+    "objectID": "lectures/6a.html#full-join",
+    "href": "lectures/6a.html#full-join",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Full Join",
+    "text": "Full Join"
+  },
+  {
+    "objectID": "lectures/6a.html#full-join-1",
+    "href": "lectures/6a.html#full-join-1",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Full Join",
+    "text": "Full Join\nReturns all records when there is a match in either the left or right table.\nSELECT \n    employees.name, \n    departments.dept_name\nFROM employees\nFULL OUTER JOIN departments \nON employees.dept_id = departments.id;\n\nCombines the effect of Left and Right joins.\nProvides a complete picture of all data in both tables.\nRequires SQLite 3.39.0 or later.\n\n\nFull Outer Join is used when you want to see everything from both sides, showing where matches exist and where they don’t."
+  },
+  {
+    "objectID": "lectures/6a.html#self-join",
+    "href": "lectures/6a.html#self-join",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Self Join",
+    "text": "Self Join\nA join where a table is joined with itself.\nSELECT \n    e1.name AS Employee, \n    e2.name AS Manager\nFROM employees e1\nINNER JOIN employees e2 \nON e1.manager_id = e2.id;\n\nRequires table aliasing (e1, e2).\nUsed for hierarchical data (e.g., Employee -&gt; Manager).\n\n\nSelf joins are essential for organizational charts or any data structure where a row has a relationship with another row in the same table."
+  },
+  {
+    "objectID": "lectures/6a.html#activity-joins",
+    "href": "lectures/6a.html#activity-joins",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Activity: Joins",
+    "text": "Activity: Joins\nUse the Chinook database. Write one query for each task.\n\nAlbum catalog: Join Artist and Album. Return the artist name as ArtistName and album title as AlbumTitle. Sort by artist and album title.\nLong tracks: Join Track and Genre. Return TrackName, GenreName, and Milliseconds for tracks longer than 300,000 milliseconds. Show the longest tracks first.\nCustomer invoice coverage: Use a left join between Customer and Invoice. Return each customer’s ID, first name, last name, and invoice count. Keep customers who have no invoices.\nEmployee reporting structure: Use a self join on Employee. Return each employee’s first and last name with the first and last name of their manager. Keep employees who have no manager.\n\n\nAllow students about 15 minutes. Encourage them to identify the matching key columns before they write each query. Solutions appear at the end of the deck."
+  },
+  {
+    "objectID": "lectures/6a.html#subqueries-1",
+    "href": "lectures/6a.html#subqueries-1",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Subqueries",
+    "text": "Subqueries\nA subquery is a query nested inside another query.\n\n\n\n\n\ngraph TD\n    Outer[Outer Query / Main Query] --&gt;|Contains| Inner[Inner Query / Subquery]\n    Inner --&gt;|Returns Data| Outer\n\n    classDef outer fill:#0072B2,stroke:#333,color:#fff\n    classDef inner fill:#E69F00,stroke:#333,color:#000\n\n    class Outer outer\n    class Inner inner\n\n\n\n\n\n\n\nSubqueries allow for complex, multi-step data retrieval in a single statement. They can be used in SELECT, FROM, WHERE, and HAVING clauses."
+  },
+  {
+    "objectID": "lectures/6a.html#scalar-subqueries",
+    "href": "lectures/6a.html#scalar-subqueries",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Scalar Subqueries",
+    "text": "Scalar Subqueries\nA subquery that returns exactly one value (one row, one column).\nSELECT name, salary\nFROM employees\nWHERE salary &gt; (SELECT AVG(salary) FROM employees);\n\nReturns a single value for comparison.\nOften used in SELECT or WHERE.\n\n\nScalar subqueries are very efficient for comparing individual rows against an aggregate value, like finding people paid more than the average."
+  },
+  {
+    "objectID": "lectures/6a.html#multi-row-subqueries",
+    "href": "lectures/6a.html#multi-row-subqueries",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Multi-row Subqueries",
+    "text": "Multi-row Subqueries\nSubqueries that return a list of values (one column, multiple rows).\nSELECT name\nFROM employees\nWHERE dept_id IN \n  (SELECT id FROM departments WHERE location = 'New York');\n\nCommon operators include IN, ANY, ALL, and EXISTS.\nUsed to filter against a dynamic list.\nSQLite supports IN and EXISTS, but not the SQL-standard ANY and ALL operators directly.\n\n\nMulti-row subqueries are powerful for filtering one table based on a set of criteria found in another table without using a traditional JOIN."
+  },
+  {
+    "objectID": "lectures/6a.html#activity-subqueries",
+    "href": "lectures/6a.html#activity-subqueries",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Activity: Subqueries",
+    "text": "Activity: Subqueries\nUse the Chinook database. Write one query for each task.\n\nLonger than average: Return the name and length in milliseconds of every track that is longer than the average track length. Use a scalar subquery.\nRock and Metal tracks: Return the track name and unit price for tracks whose genre is either Rock or Metal. Use a multi-row subquery with IN.\nCustomers with a large invoice: Return the ID, first name, and last name of customers who have at least one invoice with a total greater than $20. Use a correlated subquery with EXISTS.\n\n\nAllow students about 12 minutes. Ask them to run each inner query by itself before placing it inside the outer query."
+  },
+  {
+    "objectID": "lectures/6a.html#views-definition",
+    "href": "lectures/6a.html#views-definition",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Views: Definition",
+    "text": "Views: Definition\nA View is a “virtual table” based on the result-set of an SQL statement.\n\nIt does not store data itself (unless it is a Materialized View).\nIt is a stored query.\nIt acts as a window into your real tables.\n\n\nViews are not actual tables. They are saved queries that look and behave like tables."
+  },
+  {
+    "objectID": "lectures/6a.html#why-use-views",
+    "href": "lectures/6a.html#why-use-views",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Why use Views?",
+    "text": "Why use Views?\n\nSecurity: Hide sensitive columns (like salaries or SSNs) by creating a view that only shows non-sensitive info.\nSimplicity: Simplify complex joins into a single “virtual” table.\nConsistency: Standardize how specific logic (like “Active Customers”) is calculated across the organization.\n\n\nInstead of writing a 50-line JOIN query every time, you can write it once, save it as a view, and then just SELECT * FROM my_view."
+  },
+  {
+    "objectID": "lectures/6a.html#creating-and-using-views",
+    "href": "lectures/6a.html#creating-and-using-views",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Creating and Using Views",
+    "text": "Creating and Using Views\n-- Creating a view\nCREATE VIEW active_employee_contact AS\nSELECT name, email, phone\nFROM employees\nWHERE status = 'Active';\n\n-- Using the view\nSELECT * FROM active_employee_contact;\n\nYou can use SELECT, JOIN, and WHERE on a view just like a table.\n\n\nOnce the view is created, it becomes part of your database schema for all users with permission to access it."
+  },
+  {
+    "objectID": "lectures/6a.html#materialized-views",
+    "href": "lectures/6a.html#materialized-views",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Materialized Views",
+    "text": "Materialized Views\nUnlike standard views, Materialized Views actually store the data physically.\n\nPros: Extremely fast for heavy calculations or large aggregations.\nCons: The data can become “stale” (outdated) and must be refreshed.\nSQLite note: SQLite does not provide native materialized views.\n\n-- Refreshing a materialized view (syntax varies by DB)\nREFRESH MATERIALIZED VIEW sales_summary;\n\nUse Materialized Views for reporting/dashboards where the data doesn’t need to be second-by-second real-time, but speed is critical."
+  },
+  {
+    "objectID": "lectures/6a.html#activity-views",
+    "href": "lectures/6a.html#activity-views",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Activity: Views",
+    "text": "Activity: Views\nUse the Chinook database to build and query a reusable customer summary.\n\nCreate a view named customer_invoice_summary that returns each customer’s ID, first name, last name, and country. Include the number of invoices as InvoiceCount and the total amount spent as TotalSpent.\nQuery the view to show the 10 customers with the highest TotalSpent.\nQuery the view to show customers from the USA whose TotalSpent is greater than $40. Show the highest total first.\nRemove the view with DROP VIEW after you finish.\n\n\nAllow students about 12 minutes. Remind them that a standard view stores the query rather than a separate copy of its results."
+  },
+  {
+    "objectID": "lectures/6a.html#glossary-query-commands",
+    "href": "lectures/6a.html#glossary-query-commands",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Glossary: Query Commands",
+    "text": "Glossary: Query Commands\n\n\n\n\n\n\n\nCommand\nPurpose\n\n\n\n\nSELECT\nChooses the columns or calculated values to return.\n\n\nFROM\nIdentifies the source table, view, or subquery.\n\n\nWHERE\nFilters individual rows before grouping.\n\n\nGROUP BY\nCombines rows that share the same values for aggregate calculations.\n\n\nHAVING\nFilters groups after GROUP BY.\n\n\nORDER BY\nSorts the result in ascending or descending order.\n\n\nLIMIT\nRestricts the number of rows returned.\n\n\nAS\nAssigns a temporary alias to a column, table, or calculated value."
+  },
+  {
+    "objectID": "lectures/6a.html#glossary-joins",
+    "href": "lectures/6a.html#glossary-joins",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Glossary: Joins",
+    "text": "Glossary: Joins\n\n\n\n\n\n\n\nCommand or term\nPurpose\n\n\n\n\nJOIN / INNER JOIN\nReturns rows with matching values in both tables.\n\n\nLEFT JOIN\nReturns every row from the left table and matching rows from the right table.\n\n\nRIGHT JOIN\nReturns every row from the right table and matching rows from the left table.\n\n\nFULL OUTER JOIN\nReturns matched rows plus unmatched rows from both tables.\n\n\nCROSS JOIN\nReturns every possible pairing of rows from two tables.\n\n\nON\nStates the condition used to match rows.\n\n\nSelf join\nJoins a table to itself by using separate table aliases.\n\n\nNULL\nRepresents a missing or unknown value, including an unmatched outer-join value."
+  },
+  {
+    "objectID": "lectures/6a.html#glossary-subqueries-and-views",
+    "href": "lectures/6a.html#glossary-subqueries-and-views",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Glossary: Subqueries and Views",
+    "text": "Glossary: Subqueries and Views\n\n\n\n\n\n\n\nCommand or term\nPurpose\n\n\n\n\nSubquery\nPlaces one query inside another query.\n\n\nAVG()\nCalculates an arithmetic mean and can supply a scalar subquery value.\n\n\nCOUNT()\nCounts rows or non-null values.\n\n\nSUM()\nAdds numeric values.\n\n\nROUND()\nRounds a numeric value to a specified number of decimal places.\n\n\nIN\nTests whether a value occurs in a list returned by a subquery.\n\n\nEXISTS\nTests whether a subquery returns at least one row.\n\n\nANY / ALL\nCompare a value with some or every value from a subquery. SQLite does not support these operators directly.\n\n\nCREATE VIEW\nSaves a query as a virtual table.\n\n\nDROP VIEW\nRemoves a view definition.\n\n\nREFRESH MATERIALIZED VIEW\nUpdates stored materialized-view results in systems that support the command. SQLite does not."
+  },
+  {
+    "objectID": "lectures/6a.html#joins-activity-solution-1",
+    "href": "lectures/6a.html#joins-activity-solution-1",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Joins Activity: Solution 1",
+    "text": "Joins Activity: Solution 1\nSELECT\n    ar.Name AS ArtistName,\n    al.Title AS AlbumTitle\nFROM Artist AS ar\nINNER JOIN Album AS al\n    ON ar.ArtistId = al.ArtistId\nORDER BY ar.Name, al.Title;"
+  },
+  {
+    "objectID": "lectures/6a.html#joins-activity-solution-2",
+    "href": "lectures/6a.html#joins-activity-solution-2",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Joins Activity: Solution 2",
+    "text": "Joins Activity: Solution 2\nSELECT\n    t.Name AS TrackName,\n    g.Name AS GenreName,\n    t.Milliseconds\nFROM Track AS t\nINNER JOIN Genre AS g\n    ON t.GenreId = g.GenreId\nWHERE t.Milliseconds &gt; 300000\nORDER BY t.Milliseconds DESC;"
+  },
+  {
+    "objectID": "lectures/6a.html#joins-activity-solution-3",
+    "href": "lectures/6a.html#joins-activity-solution-3",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Joins Activity: Solution 3",
+    "text": "Joins Activity: Solution 3\nSELECT\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    COUNT(i.InvoiceId) AS InvoiceCount\nFROM Customer AS c\nLEFT JOIN Invoice AS i\n    ON c.CustomerId = i.CustomerId\nGROUP BY c.CustomerId, c.FirstName, c.LastName\nORDER BY InvoiceCount, c.LastName, c.FirstName;"
+  },
+  {
+    "objectID": "lectures/6a.html#joins-activity-solution-4",
+    "href": "lectures/6a.html#joins-activity-solution-4",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Joins Activity: Solution 4",
+    "text": "Joins Activity: Solution 4\nSELECT\n    e.FirstName AS EmployeeFirstName,\n    e.LastName AS EmployeeLastName,\n    m.FirstName AS ManagerFirstName,\n    m.LastName AS ManagerLastName\nFROM Employee AS e\nLEFT JOIN Employee AS m\n    ON e.ReportsTo = m.EmployeeId\nORDER BY e.LastName, e.FirstName;"
+  },
+  {
+    "objectID": "lectures/6a.html#subqueries-activity-solution-1",
+    "href": "lectures/6a.html#subqueries-activity-solution-1",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Subqueries Activity: Solution 1",
+    "text": "Subqueries Activity: Solution 1\nSELECT Name, Milliseconds\nFROM Track\nWHERE Milliseconds &gt; (\n    SELECT AVG(Milliseconds)\n    FROM Track\n)\nORDER BY Milliseconds DESC;"
+  },
+  {
+    "objectID": "lectures/6a.html#subqueries-activity-solution-2",
+    "href": "lectures/6a.html#subqueries-activity-solution-2",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Subqueries Activity: Solution 2",
+    "text": "Subqueries Activity: Solution 2\nSELECT Name, UnitPrice\nFROM Track\nWHERE GenreId IN (\n    SELECT GenreId\n    FROM Genre\n    WHERE Name IN ('Rock', 'Metal')\n)\nORDER BY Name;"
+  },
+  {
+    "objectID": "lectures/6a.html#subqueries-activity-solution-3",
+    "href": "lectures/6a.html#subqueries-activity-solution-3",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Subqueries Activity: Solution 3",
+    "text": "Subqueries Activity: Solution 3\nSELECT c.CustomerId, c.FirstName, c.LastName\nFROM Customer AS c\nWHERE EXISTS (\n    SELECT 1\n    FROM Invoice AS i\n    WHERE i.CustomerId = c.CustomerId\n      AND i.Total &gt; 20\n)\nORDER BY c.LastName, c.FirstName;"
+  },
+  {
+    "objectID": "lectures/6a.html#views-activity-solution-1",
+    "href": "lectures/6a.html#views-activity-solution-1",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Views Activity: Solution 1",
+    "text": "Views Activity: Solution 1\nCREATE VIEW customer_invoice_summary AS\nSELECT\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country,\n    COUNT(i.InvoiceId) AS InvoiceCount,\n    ROUND(SUM(i.Total), 2) AS TotalSpent\nFROM Customer AS c\nINNER JOIN Invoice AS i\n    ON c.CustomerId = i.CustomerId\nGROUP BY\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country;"
+  },
+  {
+    "objectID": "lectures/6a.html#views-activity-solutions-2-and-3",
+    "href": "lectures/6a.html#views-activity-solutions-2-and-3",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Views Activity: Solutions 2 and 3",
+    "text": "Views Activity: Solutions 2 and 3\n-- Ten customers with the highest total spending\nSELECT *\nFROM customer_invoice_summary\nORDER BY TotalSpent DESC\nLIMIT 10;\n\n-- USA customers who spent more than $40\nSELECT *\nFROM customer_invoice_summary\nWHERE Country = 'USA'\n  AND TotalSpent &gt; 40\nORDER BY TotalSpent DESC;"
+  },
+  {
+    "objectID": "lectures/6a.html#views-activity-solution-4",
+    "href": "lectures/6a.html#views-activity-solution-4",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Views Activity: Solution 4",
+    "text": "Views Activity: Solution 4\nDROP VIEW customer_invoice_summary;\nRun this command only after completing the two queries that use the view."
+  },
+  {
+    "objectID": "posts/2.html",
+    "href": "posts/2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "posts/2.html#resources",
+    "href": "posts/2.html#resources",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "posts/4.html",
+    "href": "posts/4.html",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/3.html#resources",
-    "href": "posts/3.html#resources",
-    "title": "Week 3",
+    "objectID": "posts/4.html#resources",
+    "href": "posts/4.html#resources",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/5.html",
-    "href": "posts/5.html",
-    "title": "Week 5",
+    "objectID": "posts/6.html",
+    "href": "posts/6.html",
+    "title": "Week 6",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/5.html#resources",
-    "href": "posts/5.html#resources",
-    "title": "Week 5",
+    "objectID": "posts/6.html#resources",
+    "href": "posts/6.html#resources",
+    "title": "Week 6",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   }

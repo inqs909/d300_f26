@@ -1,0 +1,13 @@
+---
+title: "Week 6"
+date: 09-27-26
+description: This week we will cover sql basics of joins.
+editor: source
+---
+
+
+## Resources
+
+| Lecture | Slides                   |
+|---------|--------------------------|
+| 1       | [Slides](../lectures/6a) |
