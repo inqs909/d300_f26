@@ -1003,26 +1003,25 @@
 <span id="cb14-6"><a aria-label="6"></a>    <span class="kw">WHERE</span> Name <span class="kw">IN</span> (<span class="st">'Rock'</span>, <span class="st">'Metal'</span>)</span>
 <span id="cb14-7"><a aria-label="7"></a>)</span>
 <span id="cb14-8"><a aria-label="8"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>
-## Views Activity: Solution 1
-
-```sql
-CREATE VIEW customer_invoice_summary AS
-SELECT
-    c.CustomerId,
-    c.FirstName,
-    c.LastName,
-    c.Country,
-    COUNT(i.InvoiceId) AS InvoiceCount,
-    ROUND(SUM(i.Total), 2) AS TotalSpent
-FROM Customer AS c
-INNER JOIN Invoice AS i
-    ON c.CustomerId = i.CustomerId
-GROUP BY
-    c.CustomerId,
-    c.FirstName,
-    c.LastName,
-    c.Country;</code></pre>
+</section>
+<section id="views-activity-solution-1" class="slide level2">
+<h2>Views Activity: Solution 1</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a aria-label="1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> customer_invoice_summary <span class="kw">AS</span></span>
+<span id="cb15-2"><a aria-label="2"></a><span class="kw">SELECT</span></span>
+<span id="cb15-3"><a aria-label="3"></a>    c.CustomerId,</span>
+<span id="cb15-4"><a aria-label="4"></a>    c.FirstName,</span>
+<span id="cb15-5"><a aria-label="5"></a>    c.LastName,</span>
+<span id="cb15-6"><a aria-label="6"></a>    c.Country,</span>
+<span id="cb15-7"><a aria-label="7"></a>    <span class="fu">COUNT</span>(i.InvoiceId) <span class="kw">AS</span> InvoiceCount,</span>
+<span id="cb15-8"><a aria-label="8"></a>    <span class="fu">ROUND</span>(<span class="fu">SUM</span>(i.Total), <span class="dv">2</span>) <span class="kw">AS</span> TotalSpent</span>
+<span id="cb15-9"><a aria-label="9"></a><span class="kw">FROM</span> Customer <span class="kw">AS</span> c</span>
+<span id="cb15-10"><a aria-label="10"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> Invoice <span class="kw">AS</span> i</span>
+<span id="cb15-11"><a aria-label="11"></a>    <span class="kw">ON</span> c.CustomerId <span class="op">=</span> i.CustomerId</span>
+<span id="cb15-12"><a aria-label="12"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb15-13"><a aria-label="13"></a>    c.CustomerId,</span>
+<span id="cb15-14"><a aria-label="14"></a>    c.FirstName,</span>
+<span id="cb15-15"><a aria-label="15"></a>    c.LastName,</span>
+<span id="cb15-16"><a aria-label="16"></a>    c.Country;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="views-activity-solutions-2-and-3" class="slide level2">
 <h2>Views Activity: Solutions 2 and 3</h2>

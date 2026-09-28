@@ -457,9 +457,6 @@ WHERE GenreId IN (
 ORDER BY Name;
 ```
 
-
-```
-
 ## Views Activity: Solution 1
 
 ```sql

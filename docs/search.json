@@ -1523,7 +1523,14 @@
     "href": "lectures/6a.html#subqueries-activity-solution-2",
     "title": "SQL: Joins, Subqueries, and Views",
     "section": "Subqueries Activity: Solution 2",
-    "text": "Subqueries Activity: Solution 2\nSELECT Name, UnitPrice\nFROM Track\nWHERE GenreId IN (\n    SELECT GenreId\n    FROM Genre\n    WHERE Name IN ('Rock', 'Metal')\n)\nORDER BY Name;\n\n## Views Activity: Solution 1\n\n```sql\nCREATE VIEW customer_invoice_summary AS\nSELECT\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country,\n    COUNT(i.InvoiceId) AS InvoiceCount,\n    ROUND(SUM(i.Total), 2) AS TotalSpent\nFROM Customer AS c\nINNER JOIN Invoice AS i\n    ON c.CustomerId = i.CustomerId\nGROUP BY\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country;"
+    "text": "Subqueries Activity: Solution 2\nSELECT Name, UnitPrice\nFROM Track\nWHERE GenreId IN (\n    SELECT GenreId\n    FROM Genre\n    WHERE Name IN ('Rock', 'Metal')\n)\nORDER BY Name;"
+  },
+  {
+    "objectID": "lectures/6a.html#views-activity-solution-1",
+    "href": "lectures/6a.html#views-activity-solution-1",
+    "title": "SQL: Joins, Subqueries, and Views",
+    "section": "Views Activity: Solution 1",
+    "text": "Views Activity: Solution 1\nCREATE VIEW customer_invoice_summary AS\nSELECT\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country,\n    COUNT(i.InvoiceId) AS InvoiceCount,\n    ROUND(SUM(i.Total), 2) AS TotalSpent\nFROM Customer AS c\nINNER JOIN Invoice AS i\n    ON c.CustomerId = i.CustomerId\nGROUP BY\n    c.CustomerId,\n    c.FirstName,\n    c.LastName,\n    c.Country;"
   },
   {
     "objectID": "lectures/6a.html#views-activity-solutions-2-and-3",
