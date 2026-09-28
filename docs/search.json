@@ -1397,14 +1397,14 @@
     "href": "lectures/6a.html#self-join",
     "title": "SQL: Joins, Subqueries, and Views",
     "section": "Self Join",
-    "text": "Self Join\nA join where a table is joined with itself.\nSELECT \n    e1.name AS Employee, \n    e2.name AS Manager\nFROM employees e1\nINNER JOIN employees e2 \nON e1.manager_id = e2.id;\n\nRequires table aliasing (e1, e2).\nUsed for hierarchical data (e.g., Employee -&gt; Manager).\n\n\nSelf joins are essential for organizational charts or any data structure where a row has a relationship with another row in the same table."
+    "text": "Self Join\nA join where a table is joined with itself.\nSELECT \n    e1.name AS Employee, \n    e2.name AS Manager\nFROM employees AS e1\nINNER JOIN employees AS e2 \nON e1.manager_id = e2.id;\n\nRequires table aliasing (e1, e2).\nUsed for hierarchical data (e.g., Employee -&gt; Manager).\n\n\nSelf joins are essential for organizational charts or any data structure where a row has a relationship with another row in the same table."
   },
   {
     "objectID": "lectures/6a.html#activity-joins",
     "href": "lectures/6a.html#activity-joins",
     "title": "SQL: Joins, Subqueries, and Views",
     "section": "Activity: Joins",
-    "text": "Activity: Joins\nUse the Chinook database. Write one query for each task.\n\nAlbum catalog: Join Artist and Album. Return the artist name as ArtistName and album title as AlbumTitle. Sort by artist and album title.\nLong tracks: Join Track and Genre. Return TrackName, GenreName, and Milliseconds for tracks longer than 300,000 milliseconds. Show the longest tracks first.\nCustomer invoice coverage: Use a left join between Customer and Invoice. Return each customer’s ID, first name, last name, and invoice count. Keep customers who have no invoices.\n\n\nAllow students about 15 minutes. Encourage them to identify the matching key columns before they write each query. Solutions appear at the end of the deck."
+    "text": "Activity: Joins\nUse the Chinook database. Write one query for each task.\n\nAlbum catalog: Join Artist and Album. Return the artist name as ArtistName and album title as AlbumTitle. Sort by artist and album title. Match bY ArtistID.\nLong tracks: Join Track and Genre. Return TrackName, GenreName, and Milliseconds for tracks longer than 300,000 milliseconds. Show the longest tracks first. Match bY GenreID.\nCustomer invoice coverage: Use a left join between Customer and Invoice. Return each customer’s ID, first name, last name, and invoice count. Keep customers who have no invoices. Match bY CustomerID.\n\n\nAllow students about 15 minutes. Encourage them to identify the matching key columns before they write each query. Solutions appear at the end of the deck."
   },
   {
     "objectID": "lectures/6a.html#subqueries-1",

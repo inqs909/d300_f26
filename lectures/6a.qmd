@@ -175,8 +175,8 @@ A join where a table is joined with itself.
 SELECT 
     e1.name AS Employee, 
     e2.name AS Manager
-FROM employees e1
-INNER JOIN employees e2 
+FROM employees AS e1
+INNER JOIN employees AS e2 
 ON e1.manager_id = e2.id;
 ```
 
@@ -191,9 +191,9 @@ Self joins are essential for organizational charts or any data structure where a
 
 Use the Chinook database. Write one query for each task.
 
-1. **Album catalog:** Join `Artist` and `Album`. Return the artist name as `ArtistName` and album title as `AlbumTitle`. Sort by artist and album title.
-2. **Long tracks:** Join `Track` and `Genre`. Return `TrackName`, `GenreName`, and `Milliseconds` for tracks longer than 300,000 milliseconds. Show the longest tracks first.
-3. **Customer invoice coverage:** Use a left join between `Customer` and `Invoice`. Return each customer's ID, first name, last name, and invoice count. Keep customers who have no invoices.
+1. **Album catalog:** Join `Artist` and `Album`. Return the artist name as `ArtistName` and album title as `AlbumTitle`. Sort by artist and album title. Match bY `ArtistID`.
+2. **Long tracks:** Join `Track` and `Genre`. Return `TrackName`, `GenreName`, and `Milliseconds` for tracks longer than 300,000 milliseconds. Show the longest tracks first. Match bY `GenreID`.
+3. **Customer invoice coverage:** Use a left join between `Customer` and `Invoice`. Return each customer's ID, first name, last name, and invoice count. Keep customers who have no invoices. Match bY `CustomerID`.
 
 ::: notes
 Allow students about 15 minutes. Encourage them to identify the matching key columns before they write each query. Solutions appear at the end of the deck.

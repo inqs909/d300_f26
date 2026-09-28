@@ -441,8 +441,8 @@
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-label="1"></a><span class="kw">SELECT</span> </span>
 <span id="cb5-2"><a aria-label="2"></a>    e1.name <span class="kw">AS</span> Employee, </span>
 <span id="cb5-3"><a aria-label="3"></a>    e2.name <span class="kw">AS</span> Manager</span>
-<span id="cb5-4"><a aria-label="4"></a><span class="kw">FROM</span> employees e1</span>
-<span id="cb5-5"><a aria-label="5"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> employees e2 </span>
+<span id="cb5-4"><a aria-label="4"></a><span class="kw">FROM</span> employees <span class="kw">AS</span> e1</span>
+<span id="cb5-5"><a aria-label="5"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> employees <span class="kw">AS</span> e2 </span>
 <span id="cb5-6"><a aria-label="6"></a><span class="kw">ON</span> e1.manager_id <span class="op">=</span> e2.<span class="kw">id</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Requires table aliasing (<code>e1</code>, <code>e2</code>).</li>
@@ -466,9 +466,9 @@
 <h2>Activity: Joins</h2>
 <p>Use the Chinook database. Write one query for each task.</p>
 <ol type="1">
-<li><strong>Album catalog:</strong> Join <code>Artist</code> and <code>Album</code>. Return the artist name as <code>ArtistName</code> and album title as <code>AlbumTitle</code>. Sort by artist and album title.</li>
-<li><strong>Long tracks:</strong> Join <code>Track</code> and <code>Genre</code>. Return <code>TrackName</code>, <code>GenreName</code>, and <code>Milliseconds</code> for tracks longer than 300,000 milliseconds. Show the longest tracks first.</li>
-<li><strong>Customer invoice coverage:</strong> Use a left join between <code>Customer</code> and <code>Invoice</code>. Return each customer’s ID, first name, last name, and invoice count. Keep customers who have no invoices.</li>
+<li><strong>Album catalog:</strong> Join <code>Artist</code> and <code>Album</code>. Return the artist name as <code>ArtistName</code> and album title as <code>AlbumTitle</code>. Sort by artist and album title. Match bY <code>ArtistID</code>.</li>
+<li><strong>Long tracks:</strong> Join <code>Track</code> and <code>Genre</code>. Return <code>TrackName</code>, <code>GenreName</code>, and <code>Milliseconds</code> for tracks longer than 300,000 milliseconds. Show the longest tracks first. Match bY <code>GenreID</code>.</li>
+<li><strong>Customer invoice coverage:</strong> Use a left join between <code>Customer</code> and <code>Invoice</code>. Return each customer’s ID, first name, last name, and invoice count. Keep customers who have no invoices. Match bY <code>CustomerID</code>.</li>
 </ol>
 <aside class="notes">
 <p>Allow students about 15 minutes. Encourage them to identify the matching key columns before they write each query. Solutions appear at the end of the deck.</p>
