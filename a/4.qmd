@@ -1,0 +1,110 @@
+---
+title: "ICA 4"
+format: html
+editor: source
+order: 4
+---
+
+
+## Files and setup
+
+1. Download [`sakila_master.db`](https://github.com/bradleygrant/sakila-sqlite3?utm_source=chatgpt.com.)
+2. Open the database in DB Browser for SQLite
+
+
+## Selected Sakila relationships
+
+| Parent table | Child table | Join condition |
+|---|---|---|
+| `language` | `film` | `language.language_id = film.language_id` |
+| `film` | `inventory` | `film.film_id = inventory.film_id` |
+| `customer` | `rental` | `customer.customer_id = rental.customer_id` |
+| `inventory` | `rental` | `inventory.inventory_id = rental.inventory_id` |
+| `rental` | `payment` | `rental.rental_id = payment.rental_id` |
+| `actor` | `film_actor` | `actor.actor_id = film_actor.actor_id` |
+| `film` | `film_actor` | `film.film_id = film_actor.film_id` |
+| `film` | `film_category` | `film.film_id = film_category.film_id` |
+| `category` | `film_category` | `category.category_id = film_category.category_id` |
+| `address` | `customer` | `address.address_id = customer.address_id` |
+| `city` | `address` | `city.city_id = address.city_id` |
+| `country` | `city` | `country.country_id = city.country_id` |
+
+
+## Part A: Inner Joins
+
+### Question 1: Films and languages
+
+Display each film's title and the name of its language. Sort the results alphabetically by film title.
+
+Use the `film` and `language` tables.
+
+### Question 2: Customers and addresses
+
+Display each customer's first name, last name, email address, street address, and postal code.
+
+Use the `customer` and `address` tables.
+
+### Question 3: Films and categories
+
+Display each film title and its category name. Sort the results first by category name and then by film title.
+
+Use the `film`, `film_category`, and `category` tables.
+
+### Question 4: Films and actors
+
+Display every film title along with the first and last name of each actor appearing in the film. Sort the results by film title and actor last name.
+
+Use the `film`, `film_actor`, and `actor` tables.
+
+
+## Part B: Left Joins
+
+### Question 5: Films and inventory records
+
+Display every film title and its inventory ID. Include films that do not have an inventory record.
+
+Use the `film` and `inventory` tables.
+
+### Question 6: Number of inventory copies
+
+Display every film's ID, title, and number of inventory copies. Include films with zero inventory copies. Sort the films from the largest number of copies to the smallest.
+
+Use the `film` and `inventory` tables.
+
+### Question 7: Films without inventory
+
+Modify the previous query to display only films that have no inventory records.
+
+Hint: After the left join, test a column from `inventory` for `NULL`.
+
+## Part C: Right Joins
+
+### Question 8: Preserve all films
+
+Begin with `inventory` and use a `RIGHT JOIN` to display every film and any corresponding inventory records. Films without inventory must remain in the result.
+
+Display the film ID, film title, inventory ID, and store ID.
+
+Use `film` and `inventory` tables.
+
+## Part 4: Full Join
+
+### Question 9: Retain all languages and films
+
+Use a `FULL OUTER JOIN` to display all languages and all films, regardless of whether a matching language-film relationship exists.
+
+Display the language ID, language name, film ID, and film title.
+
+Use `language` and `film` tables.
+
+### Question 10: Find unmatched languages or films
+
+Modify the query from Question 9 to retain only unmatched records: languages without films or films without a matching language.
+
+## Part 5: Multi-table Join
+
+### Question 11: Customer rental history
+
+Display the customer's first and last name, film title, rental date, and return date for every rental.
+
+Use the `customer`, `rental`, `inventory`, and `film` tables.

@@ -840,6 +840,69 @@
     "text": "Week 6\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
+    "objectID": "a/4.html",
+    "href": "a/4.html",
+    "title": "ICA 4",
+    "section": "",
+    "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
+  },
+  {
+    "objectID": "a/4.html#files-and-setup",
+    "href": "a/4.html#files-and-setup",
+    "title": "ICA 4",
+    "section": "",
+    "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
+  },
+  {
+    "objectID": "a/4.html#selected-sakila-relationships",
+    "href": "a/4.html#selected-sakila-relationships",
+    "title": "ICA 4",
+    "section": "Selected Sakila relationships",
+    "text": "Selected Sakila relationships\n\n\n\n\n\n\n\n\nParent table\nChild table\nJoin condition\n\n\n\n\nlanguage\nfilm\nlanguage.language_id = film.language_id\n\n\nfilm\ninventory\nfilm.film_id = inventory.film_id\n\n\ncustomer\nrental\ncustomer.customer_id = rental.customer_id\n\n\ninventory\nrental\ninventory.inventory_id = rental.inventory_id\n\n\nrental\npayment\nrental.rental_id = payment.rental_id\n\n\nactor\nfilm_actor\nactor.actor_id = film_actor.actor_id\n\n\nfilm\nfilm_actor\nfilm.film_id = film_actor.film_id\n\n\nfilm\nfilm_category\nfilm.film_id = film_category.film_id\n\n\ncategory\nfilm_category\ncategory.category_id = film_category.category_id\n\n\naddress\ncustomer\naddress.address_id = customer.address_id\n\n\ncity\naddress\ncity.city_id = address.city_id\n\n\ncountry\ncity\ncountry.country_id = city.country_id"
+  },
+  {
+    "objectID": "a/4.html#part-a-inner-joins",
+    "href": "a/4.html#part-a-inner-joins",
+    "title": "ICA 4",
+    "section": "Part A: Inner Joins",
+    "text": "Part A: Inner Joins\n\nQuestion 1: Films and languages\nDisplay each film’s title and the name of its language. Sort the results alphabetically by film title.\nUse the film and language tables.\n\n\nQuestion 2: Customers and addresses\nDisplay each customer’s first name, last name, email address, street address, and postal code.\nUse the customer and address tables.\n\n\nQuestion 3: Films and categories\nDisplay each film title and its category name. Sort the results first by category name and then by film title.\nUse the film, film_category, and category tables.\n\n\nQuestion 4: Films and actors\nDisplay every film title along with the first and last name of each actor appearing in the film. Sort the results by film title and actor last name.\nUse the film, film_actor, and actor tables."
+  },
+  {
+    "objectID": "a/4.html#part-b-left-joins",
+    "href": "a/4.html#part-b-left-joins",
+    "title": "ICA 4",
+    "section": "Part B: Left Joins",
+    "text": "Part B: Left Joins\n\nQuestion 5: Films and inventory records\nDisplay every film title and its inventory ID. Include films that do not have an inventory record.\nUse the film and inventory tables.\n\n\nQuestion 6: Number of inventory copies\nDisplay every film’s ID, title, and number of inventory copies. Include films with zero inventory copies. Sort the films from the largest number of copies to the smallest.\nUse the film and inventory tables.\n\n\nQuestion 7: Films without inventory\nModify the previous query to display only films that have no inventory records.\nHint: After the left join, test a column from inventory for NULL."
+  },
+  {
+    "objectID": "a/4.html#part-c-right-joins",
+    "href": "a/4.html#part-c-right-joins",
+    "title": "ICA 4",
+    "section": "Part C: Right Joins",
+    "text": "Part C: Right Joins\n\nQuestion 8: Preserve all films\nBegin with inventory and use a RIGHT JOIN to display every film and any corresponding inventory records. Films without inventory must remain in the result.\nDisplay the film ID, film title, inventory ID, and store ID.\nUse film and inventory tables."
+  },
+  {
+    "objectID": "a/4.html#part-4-full-join",
+    "href": "a/4.html#part-4-full-join",
+    "title": "ICA 4",
+    "section": "Part 4: Full Join",
+    "text": "Part 4: Full Join\n\nQuestion 9: Retain all languages and films\nUse a FULL OUTER JOIN to display all languages and all films, regardless of whether a matching language-film relationship exists.\nDisplay the language ID, language name, film ID, and film title.\nUse language and film tables.\n\n\nQuestion 10: Find unmatched languages or films\nModify the query from Question 9 to retain only unmatched records: languages without films or films without a matching language."
+  },
+  {
+    "objectID": "a/4.html#part-5-multi-table-join",
+    "href": "a/4.html#part-5-multi-table-join",
+    "title": "ICA 4",
+    "section": "Part 5: Multi-table Join",
+    "text": "Part 5: Multi-table Join\n\nQuestion 11: Customer rental history\nDisplay the customer’s first and last name, film title, rental date, and return date for every rental.\nUse the customer, rental, inventory, and film tables."
+  },
+  {
+    "objectID": "a/2.html",
+    "href": "a/2.html",
+    "title": "Creating a Database",
+    "section": "",
+    "text": "Using the unnormalized data set below, create a 3NF database. At the end, submit the SQL code to create the database on canvas. Due 9/20/26.\n\n\n\n\n\n\n\n\n\n\n\ncharacter_id\ncharacter_name\ntitle\nhouse\nregion\nbattles\n\n\n\n\nC101\nJon Snow\nKing in the North\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC102\nSansa Stark\nLady of Winterfell\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC103\nArya Stark\nAssassin\nH01, House Stark\nR01, The North\nB03, Battle of Winterfell, Winterfell, Victory\n\n\nC104\nTyrion Lannister\nHand of the Queen\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B04, Battle of King’s Landing, King’s Landing, Defeat\n\n\nC105\nJaime Lannister\nKnight\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC106\nDaenerys Targaryen\nQueen\nH03, House Targaryen\nR03, Crownlands\nB03, Battle of Winterfell, Winterfell, Victory; B04, Battle of King’s Landing, King’s Landing, Victory\n\n\nC107\nBrienne of Tarth\nKnight\nH04, House Tarth\nR04, Stormlands\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory"
+  },
+  {
     "objectID": "a/3.html",
     "href": "a/3.html",
     "title": "ICA 3",
@@ -903,18 +966,11 @@
     "text": "Part F\n\nWrite one query that uses SELECT, WHERE, GROUP BY, HAVING, and ORDER BY.\n\nYour query must:\n\nuse only records from 2000 through 2009, inclusive;\nexclude records with missing precipitation;\ngroup the remaining records by year and month;\ncalculate total precipitation and name it total_precipitation;\nkeep only year-month groups whose total precipitation is greater than 5; and\nsort from the greatest total precipitation to the least."
   },
   {
-    "objectID": "a/2.html",
-    "href": "a/2.html",
-    "title": "Creating a Database",
-    "section": "",
-    "text": "Using the unnormalized data set below, create a 3NF database. At the end, submit the SQL code to create the database on canvas. Due 9/20/26.\n\n\n\n\n\n\n\n\n\n\n\ncharacter_id\ncharacter_name\ntitle\nhouse\nregion\nbattles\n\n\n\n\nC101\nJon Snow\nKing in the North\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC102\nSansa Stark\nLady of Winterfell\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC103\nArya Stark\nAssassin\nH01, House Stark\nR01, The North\nB03, Battle of Winterfell, Winterfell, Victory\n\n\nC104\nTyrion Lannister\nHand of the Queen\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B04, Battle of King’s Landing, King’s Landing, Defeat\n\n\nC105\nJaime Lannister\nKnight\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC106\nDaenerys Targaryen\nQueen\nH03, House Targaryen\nR03, Crownlands\nB03, Battle of Winterfell, Winterfell, Victory; B04, Battle of King’s Landing, King’s Landing, Victory\n\n\nC107\nBrienne of Tarth\nKnight\nH04, House Tarth\nR04, Stormlands\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory"
-  },
-  {
     "objectID": "assignments.html",
     "href": "assignments.html",
     "title": "Assignments",
     "section": "",
-    "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\n\n\nICA 4\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures.html",

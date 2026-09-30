@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Assignments – Data 300</title>
+<title>ICA 4 – Data 300</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,26 +29,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./img/logo.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-deb9980f0abb462247767bd4714b05c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../img/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-deb9980f0abb462247767bd4714b05c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,65 +74,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -145,11 +85,11 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./img/logo.png" alt="" class="navbar-logo light-content">
-    <img src="./img/logo.png" alt="" class="navbar-logo dark-content">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../img/logo.png" alt="" class="navbar-logo light-content">
+    <img src="../img/logo.png" alt="" class="navbar-logo dark-content">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Data 300</span>
     </a>
   </div>
@@ -160,15 +100,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./lectures.html"> 
+    <a class="nav-link" href="../lectures.html"> 
 <span class="menu-text">Lectures</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./project_report.html"> 
+    <a class="nav-link" href="../project_report.html"> 
 <span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./assignments.html" aria-current="page"> 
+    <a class="nav-link" href="../assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
@@ -182,15 +122,48 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#files-and-setup" id="toc-files-and-setup" class="nav-link active" data-scroll-target="#files-and-setup">Files and setup</a></li>
+  <li><a href="#selected-sakila-relationships" id="toc-selected-sakila-relationships" class="nav-link" data-scroll-target="#selected-sakila-relationships">Selected Sakila relationships</a></li>
+  <li><a href="#part-a-inner-joins" id="toc-part-a-inner-joins" class="nav-link" data-scroll-target="#part-a-inner-joins">Part A: Inner Joins</a>
+  <ul class="collapse">
+  <li><a href="#question-1-films-and-languages" id="toc-question-1-films-and-languages" class="nav-link" data-scroll-target="#question-1-films-and-languages">Question 1: Films and languages</a></li>
+  <li><a href="#question-2-customers-and-addresses" id="toc-question-2-customers-and-addresses" class="nav-link" data-scroll-target="#question-2-customers-and-addresses">Question 2: Customers and addresses</a></li>
+  <li><a href="#question-3-films-and-categories" id="toc-question-3-films-and-categories" class="nav-link" data-scroll-target="#question-3-films-and-categories">Question 3: Films and categories</a></li>
+  <li><a href="#question-4-films-and-actors" id="toc-question-4-films-and-actors" class="nav-link" data-scroll-target="#question-4-films-and-actors">Question 4: Films and actors</a></li>
+  </ul></li>
+  <li><a href="#part-b-left-joins" id="toc-part-b-left-joins" class="nav-link" data-scroll-target="#part-b-left-joins">Part B: Left Joins</a>
+  <ul class="collapse">
+  <li><a href="#question-5-films-and-inventory-records" id="toc-question-5-films-and-inventory-records" class="nav-link" data-scroll-target="#question-5-films-and-inventory-records">Question 5: Films and inventory records</a></li>
+  <li><a href="#question-6-number-of-inventory-copies" id="toc-question-6-number-of-inventory-copies" class="nav-link" data-scroll-target="#question-6-number-of-inventory-copies">Question 6: Number of inventory copies</a></li>
+  <li><a href="#question-7-films-without-inventory" id="toc-question-7-films-without-inventory" class="nav-link" data-scroll-target="#question-7-films-without-inventory">Question 7: Films without inventory</a></li>
+  </ul></li>
+  <li><a href="#part-c-right-joins" id="toc-part-c-right-joins" class="nav-link" data-scroll-target="#part-c-right-joins">Part C: Right Joins</a>
+  <ul class="collapse">
+  <li><a href="#question-8-preserve-all-films" id="toc-question-8-preserve-all-films" class="nav-link" data-scroll-target="#question-8-preserve-all-films">Question 8: Preserve all films</a></li>
+  </ul></li>
+  <li><a href="#part-4-full-join" id="toc-part-4-full-join" class="nav-link" data-scroll-target="#part-4-full-join">Part 4: Full Join</a>
+  <ul class="collapse">
+  <li><a href="#question-9-retain-all-languages-and-films" id="toc-question-9-retain-all-languages-and-films" class="nav-link" data-scroll-target="#question-9-retain-all-languages-and-films">Question 9: Retain all languages and films</a></li>
+  <li><a href="#question-10-find-unmatched-languages-or-films" id="toc-question-10-find-unmatched-languages-or-films" class="nav-link" data-scroll-target="#question-10-find-unmatched-languages-or-films">Question 10: Find unmatched languages or films</a></li>
+  </ul></li>
+  <li><a href="#part-5-multi-table-join" id="toc-part-5-multi-table-join" class="nav-link" data-scroll-target="#part-5-multi-table-join">Part 5: Multi-table Join</a>
+  <ul class="collapse">
+  <li><a href="#question-11-customer-rental-history" id="toc-question-11-customer-rental-history" class="nav-link" data-scroll-target="#question-11-customer-rental-history">Question 11: Customer rental history</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Assignments</h1>
+<h1 class="title">ICA 4</h1>
 </div>
 
 
@@ -207,48 +180,167 @@ window.Quarto = {
 </header>
 
 
+<section id="files-and-setup" class="level2">
+<h2 class="anchored" data-anchor-id="files-and-setup">Files and setup</h2>
+<ol type="1">
+<li>Download <a href="https://github.com/bradleygrant/sakila-sqlite3?utm_source=chatgpt.com."><code>sakila_master.db</code></a></li>
+<li>Open the database in DB Browser for SQLite</li>
+</ol>
+</section>
+<section id="selected-sakila-relationships" class="level2">
+<h2 class="anchored" data-anchor-id="selected-sakila-relationships">Selected Sakila relationships</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parent table</th>
+<th>Child table</th>
+<th>Join condition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>language</code></td>
+<td><code>film</code></td>
+<td><code>language.language_id = film.language_id</code></td>
+</tr>
+<tr class="even">
+<td><code>film</code></td>
+<td><code>inventory</code></td>
+<td><code>film.film_id = inventory.film_id</code></td>
+</tr>
+<tr class="odd">
+<td><code>customer</code></td>
+<td><code>rental</code></td>
+<td><code>customer.customer_id = rental.customer_id</code></td>
+</tr>
+<tr class="even">
+<td><code>inventory</code></td>
+<td><code>rental</code></td>
+<td><code>inventory.inventory_id = rental.inventory_id</code></td>
+</tr>
+<tr class="odd">
+<td><code>rental</code></td>
+<td><code>payment</code></td>
+<td><code>rental.rental_id = payment.rental_id</code></td>
+</tr>
+<tr class="even">
+<td><code>actor</code></td>
+<td><code>film_actor</code></td>
+<td><code>actor.actor_id = film_actor.actor_id</code></td>
+</tr>
+<tr class="odd">
+<td><code>film</code></td>
+<td><code>film_actor</code></td>
+<td><code>film.film_id = film_actor.film_id</code></td>
+</tr>
+<tr class="even">
+<td><code>film</code></td>
+<td><code>film_category</code></td>
+<td><code>film.film_id = film_category.film_id</code></td>
+</tr>
+<tr class="odd">
+<td><code>category</code></td>
+<td><code>film_category</code></td>
+<td><code>category.category_id = film_category.category_id</code></td>
+</tr>
+<tr class="even">
+<td><code>address</code></td>
+<td><code>customer</code></td>
+<td><code>address.address_id = customer.address_id</code></td>
+</tr>
+<tr class="odd">
+<td><code>city</code></td>
+<td><code>address</code></td>
+<td><code>city.city_id = address.city_id</code></td>
+</tr>
+<tr class="even">
+<td><code>country</code></td>
+<td><code>city</code></td>
+<td><code>country.country_id = city.country_id</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="part-a-inner-joins" class="level2">
+<h2 class="anchored" data-anchor-id="part-a-inner-joins">Part A: Inner Joins</h2>
+<section id="question-1-films-and-languages" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-films-and-languages">Question 1: Films and languages</h3>
+<p>Display each film’s title and the name of its language. Sort the results alphabetically by film title.</p>
+<p>Use the <code>film</code> and <code>language</code> tables.</p>
+</section>
+<section id="question-2-customers-and-addresses" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-customers-and-addresses">Question 2: Customers and addresses</h3>
+<p>Display each customer’s first name, last name, email address, street address, and postal code.</p>
+<p>Use the <code>customer</code> and <code>address</code> tables.</p>
+</section>
+<section id="question-3-films-and-categories" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-films-and-categories">Question 3: Films and categories</h3>
+<p>Display each film title and its category name. Sort the results first by category name and then by film title.</p>
+<p>Use the <code>film</code>, <code>film_category</code>, and <code>category</code> tables.</p>
+</section>
+<section id="question-4-films-and-actors" class="level3">
+<h3 class="anchored" data-anchor-id="question-4-films-and-actors">Question 4: Films and actors</h3>
+<p>Display every film title along with the first and last name of each actor appearing in the film. Sort the results by film title and actor last name.</p>
+<p>Use the <code>film</code>, <code>film_actor</code>, and <code>actor</code> tables.</p>
+</section>
+</section>
+<section id="part-b-left-joins" class="level2">
+<h2 class="anchored" data-anchor-id="part-b-left-joins">Part B: Left Joins</h2>
+<section id="question-5-films-and-inventory-records" class="level3">
+<h3 class="anchored" data-anchor-id="question-5-films-and-inventory-records">Question 5: Films and inventory records</h3>
+<p>Display every film title and its inventory ID. Include films that do not have an inventory record.</p>
+<p>Use the <code>film</code> and <code>inventory</code> tables.</p>
+</section>
+<section id="question-6-number-of-inventory-copies" class="level3">
+<h3 class="anchored" data-anchor-id="question-6-number-of-inventory-copies">Question 6: Number of inventory copies</h3>
+<p>Display every film’s ID, title, and number of inventory copies. Include films with zero inventory copies. Sort the films from the largest number of copies to the smallest.</p>
+<p>Use the <code>film</code> and <code>inventory</code> tables.</p>
+</section>
+<section id="question-7-films-without-inventory" class="level3">
+<h3 class="anchored" data-anchor-id="question-7-films-without-inventory">Question 7: Films without inventory</h3>
+<p>Modify the previous query to display only films that have no inventory records.</p>
+<p>Hint: After the left join, test a column from <code>inventory</code> for <code>NULL</code>.</p>
+</section>
+</section>
+<section id="part-c-right-joins" class="level2">
+<h2 class="anchored" data-anchor-id="part-c-right-joins">Part C: Right Joins</h2>
+<section id="question-8-preserve-all-films" class="level3">
+<h3 class="anchored" data-anchor-id="question-8-preserve-all-films">Question 8: Preserve all films</h3>
+<p>Begin with <code>inventory</code> and use a <code>RIGHT JOIN</code> to display every film and any corresponding inventory records. Films without inventory must remain in the result.</p>
+<p>Display the film ID, film title, inventory ID, and store ID.</p>
+<p>Use <code>film</code> and <code>inventory</code> tables.</p>
+</section>
+</section>
+<section id="part-4-full-join" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-full-join">Part 4: Full Join</h2>
+<section id="question-9-retain-all-languages-and-films" class="level3">
+<h3 class="anchored" data-anchor-id="question-9-retain-all-languages-and-films">Question 9: Retain all languages and films</h3>
+<p>Use a <code>FULL OUTER JOIN</code> to display all languages and all films, regardless of whether a matching language-film relationship exists.</p>
+<p>Display the language ID, language name, film ID, and film title.</p>
+<p>Use <code>language</code> and <code>film</code> tables.</p>
+</section>
+<section id="question-10-find-unmatched-languages-or-films" class="level3">
+<h3 class="anchored" data-anchor-id="question-10-find-unmatched-languages-or-films">Question 10: Find unmatched languages or films</h3>
+<p>Modify the query from Question 9 to retain only unmatched records: languages without films or films without a matching language.</p>
+</section>
+</section>
+<section id="part-5-multi-table-join" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-multi-table-join">Part 5: Multi-table Join</h2>
+<section id="question-11-customer-rental-history" class="level3">
+<h3 class="anchored" data-anchor-id="question-11-customer-rental-history">Question 11: Customer rental history</h3>
+<p>Display the customer’s first and last name, film title, rental date, and return date for every rental.</p>
+<p>Use the <code>customer</code>, <code>rental</code>, <code>inventory</code>, and <code>film</code> tables.</p>
 
 
+</section>
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1790023198754" data-listing-reading-time-sort="2" data-listing-word-count-sort="242">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./a/2.html" class="no-external">Creating a Database</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./a/2.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1790199063187" data-listing-reading-time-sort="3" data-listing-word-count-sort="495">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./a/3.html" class="no-external">ICA 3</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./a/3.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1790797918805" data-listing-reading-time-sort="3" data-listing-word-count-sort="486">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./a/4.html" class="no-external">ICA 4</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./a/4.html" class="no-external">
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
