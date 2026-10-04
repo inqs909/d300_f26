@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/7.html",
       "/posts/6.html",
       "/posts/5.html",
       "/posts/4.html",
@@ -28,7 +29,8 @@
       "/lectures/3a.html",
       "/lectures/4a.html",
       "/lectures/5a.html",
-      "/lectures/6a.html"
+      "/lectures/6a.html",
+      "/lectures/7a.html"
     ]
   }
 ]

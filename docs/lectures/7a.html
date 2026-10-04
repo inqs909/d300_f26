@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../img/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
+<script src="../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
+<link href="../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <title>Data 300 – Advanced SQL</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-790353dee5d6eee0f058cafec333de0b.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-pointer/pointer.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Advanced SQL</h1>
+  <p class="subtitle">Common Table Expressions</p>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section>
+<section id="cte" class="title-slide slide level1 agenda-slide center">
+<h1>CTE</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-active">
+<p>CTE</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Recursive CTEs</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Activity Solutions</p>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="common-table-expressions-ctes" class="slide level2">
+<h2>Common Table Expressions (CTEs)</h2>
+<p>A <strong>common table expression (CTE)</strong> names a query result that you can reference within a single SQL statement.</p>
+<ul>
+<li>Defined with <code>WITH</code>.</li>
+<li>Reusable in the statement</li>
+<li>Its scope ends when the statement ends.</li>
+</ul>
+<p>A CTE helps organize query logic. It does not create a permanent table.</p>
+<aside class="notes">
+<p>A CTE is a logical named result. SQLite can choose different execution strategies, so do not assume that every CTE stores a physical intermediate table. Source: https://www.sqlite.org/lang_with.html</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-structure-of-an-ordinary-cte" class="slide level2">
+<h2>The structure of an ordinary CTE</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-label="2"></a><span class="kw">WITH</span> large_invoices <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-label="3"></a>    <span class="kw">SELECT</span> InvoiceId, CustomerId, Total</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4" aria-label="4"></a>    <span class="kw">FROM</span> Invoice</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4">4</button><span id="annotated-cell-1-5" class="code-annotation-target"><a href="#annotated-cell-1-5" aria-label="5"></a>    <span class="kw">WHERE</span> Total <span class="op">&gt;=</span> <span class="dv">20</span></span>
+<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6" aria-label="6"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5">5</button><span id="annotated-cell-1-7" class="code-annotation-target"><a href="#annotated-cell-1-7" aria-label="7"></a><span class="kw">SELECT</span> InvoiceId, CustomerId, Total</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="6">6</button><span id="annotated-cell-1-8" class="code-annotation-target"><a href="#annotated-cell-1-8" aria-label="8"></a><span class="kw">FROM</span> large_invoices</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="7">7</button><span id="annotated-cell-1-9" class="code-annotation-target"><a href="#annotated-cell-1-9" aria-label="9"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Total <span class="kw">DESC</span>, InvoiceId;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="1">Define a common table expression (CTE) named <code>large_invoices</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="2">Select each invoice’s ID, customer ID, and total.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="3">Read records from the <code>Invoice</code> table.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="5" data-code-annotation="4">Keep invoices with a total of at least 20.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="7" data-code-annotation="5">Display the invoice ID, customer ID, and total in the final result.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="8" data-code-annotation="6">Read the filtered records from <code>large_invoices</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="9" data-code-annotation="7">Sort by total from largest to smallest. For invoices with the same total, sort by invoice ID in ascending order.</span>
+</dd>
+</dl>
+</section>
+<section id="cte-vs.-subquery" class="slide level2">
+<h2>CTE vs.&nbsp;Subquery</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">Subquery</th>
+<th style="text-align: left;">CTE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Readability</strong></td>
+<td style="text-align: left;">Low (Nested)</td>
+<td style="text-align: left;">High (Sequential)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Reusability</strong></td>
+<td style="text-align: left;">Can only be used once</td>
+<td style="text-align: left;">Can be referenced multiple times</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Debugging</strong></td>
+<td style="text-align: left;">Difficult</td>
+<td style="text-align: left;">Easy (Test CTE separately)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Complexity</strong></td>
+<td style="text-align: left;">Hard to manage</td>
+<td style="text-align: left;">Great for complex logic</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>When deciding which to use, remember: If you are nesting more than one level deep, or if you need to use the same logic twice in one query, reach for a CTE.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="aggregating-inside-a-cte" class="slide level2">
+<h2>Aggregating inside a CTE</h2>
+<p><strong>Question:</strong> Which billing countries have total sales above 200?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-label="2"></a><span class="kw">WITH</span> country_sales <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-label="3"></a>    <span class="kw">SELECT</span> BillingCountry, <span class="fu">SUM</span>(Total) <span class="kw">AS</span> total_sales</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-label="4"></a>    <span class="kw">FROM</span> Invoice</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5" aria-label="5"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> BillingCountry</span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6" aria-label="6"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5">5</button><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7" aria-label="7"></a><span class="kw">SELECT</span> BillingCountry, <span class="fu">ROUND</span>(total_sales, <span class="dv">2</span>) <span class="kw">AS</span> total_sales</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="6">6</button><span id="annotated-cell-2-8" class="code-annotation-target"><a href="#annotated-cell-2-8" aria-label="8"></a><span class="kw">FROM</span> country_sales</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="7">7</button><span id="annotated-cell-2-9" class="code-annotation-target"><a href="#annotated-cell-2-9" aria-label="9"></a><span class="kw">WHERE</span> total_sales <span class="op">&gt;</span> <span class="dv">200</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="8">8</button><span id="annotated-cell-2-10" class="code-annotation-target"><a href="#annotated-cell-2-10" aria-label="10"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_sales <span class="kw">DESC</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="1">Define a common table expression (CTE) named <code>country_sales</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="2">Select each billing country and calculate its total sales by adding invoice totals.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="3">Read records from the <code>Invoice</code> table.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="5" data-code-annotation="4">Group invoices by billing country, producing one summary row per country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="5">Display each country and its total sales rounded to two decimal places.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="8" data-code-annotation="6">Read the summarized records from <code>country_sales</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="9" data-code-annotation="7">Keep countries whose unrounded total sales exceed 200.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="10" data-code-annotation="8">Sort by the displayed total sales from largest to smallest.</span>
+</dd>
+</dl>
+</section>
+<section id="multiple-ctes-in-one-statement" class="slide level2">
+<h2>Multiple CTEs in one statement</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-label="2"></a><span class="kw">WITH</span> country_stats <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-label="3"></a>    <span class="kw">SELECT</span> BillingCountry, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> invoice_count,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-label="4"></a>           <span class="fu">SUM</span>(Total) <span class="kw">AS</span> total_sales</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4">4</button><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-label="5"></a>    <span class="kw">FROM</span> Invoice</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5">5</button><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-label="6"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> BillingCountry</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-label="7"></a>),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6">6</button><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-label="8"></a>busy_countries <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="7">7</button><span id="annotated-cell-3-9" class="code-annotation-target"><a href="#annotated-cell-3-9" aria-label="9"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> country_stats</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="8">8</button><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-label="10"></a>    <span class="kw">WHERE</span> invoice_count <span class="op">&gt;=</span> <span class="dv">20</span></span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-label="11"></a>)</span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-label="12"></a><span class="kw">SELECT</span> BillingCountry, invoice_count,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="9">9</button><span id="annotated-cell-3-13" class="code-annotation-target"><a href="#annotated-cell-3-13" aria-label="13"></a>       <span class="fu">ROUND</span>(total_sales, <span class="dv">2</span>) <span class="kw">AS</span> total_sales</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="10">10</button><span id="annotated-cell-3-14" class="code-annotation-target"><a href="#annotated-cell-3-14" aria-label="14"></a><span class="kw">FROM</span> busy_countries</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="11">11</button><span id="annotated-cell-3-15" class="code-annotation-target"><a href="#annotated-cell-3-15" aria-label="15"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_sales <span class="kw">DESC</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="12">12</button><span id="annotated-cell-3-16" class="code-annotation-target"><a href="#annotated-cell-3-16" aria-label="16"></a><span class="kw">LIMIT</span> <span class="dv">3</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">Define the first CTE, <code>country_stats</code>, to summarize invoices by billing country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="2">Select each country and count its invoices.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="3">Add invoice totals to calculate each country’s total sales.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="4">Read records from the <code>Invoice</code> table.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="5">Group invoices by country, producing one summary row per country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="6">Define the second CTE, <code>busy_countries</code>. A comma separates the two CTE definitions.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="9" data-code-annotation="7">Select all columns from the first CTE.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="10" data-code-annotation="8">Keep countries with at least 20 invoices.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="13" data-code-annotation="9">Display each country’s name, invoice count, and total sales rounded to two decimal places.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="14" data-code-annotation="10">Read the qualifying countries from the second CTE.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="11">11</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="15" data-code-annotation="11">Sort by the rounded total sales from largest to smallest.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="12">12</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="16" data-code-annotation="12">Return only the first three countries from the sorted results.</span>
+</dd>
+</dl>
+<p>Use one <code>WITH</code> and commas between CTE definitions.</p>
+</section>
+<section id="joining-a-cte-to-a-table" class="slide level2">
+<h2>Joining a CTE to a table</h2>
+<p><strong>Question:</strong> Which customers have spent the most?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-label="2"></a><span class="kw">WITH</span> customer_spending <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-label="3"></a>    <span class="kw">SELECT</span> CustomerId, <span class="fu">SUM</span>(Total) <span class="kw">AS</span> total_spent</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4" aria-label="4"></a>    <span class="kw">FROM</span> Invoice</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-label="5"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> CustomerId</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-label="6"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5">5</button><span id="annotated-cell-4-7" class="code-annotation-target"><a href="#annotated-cell-4-7" aria-label="7"></a><span class="kw">SELECT</span> c.FirstName <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> c.LastName <span class="kw">AS</span> customer,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="6">6</button><span id="annotated-cell-4-8" class="code-annotation-target"><a href="#annotated-cell-4-8" aria-label="8"></a>       <span class="fu">ROUND</span>(s.total_spent, <span class="dv">2</span>) <span class="kw">AS</span> total_spent</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="7">7</button><span id="annotated-cell-4-9" class="code-annotation-target"><a href="#annotated-cell-4-9" aria-label="9"></a><span class="kw">FROM</span> Customer <span class="kw">AS</span> c</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="8">8</button><span id="annotated-cell-4-10" class="code-annotation-target"><a href="#annotated-cell-4-10" aria-label="10"></a><span class="kw">JOIN</span> customer_spending <span class="kw">AS</span> s <span class="kw">ON</span> c.CustomerId <span class="op">=</span> s.CustomerId</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="9">9</button><span id="annotated-cell-4-11" class="code-annotation-target"><a href="#annotated-cell-4-11" aria-label="11"></a><span class="kw">ORDER</span> <span class="kw">BY</span> s.total_spent <span class="kw">DESC</span>, c.CustomerId</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="10">10</button><span id="annotated-cell-4-12" class="code-annotation-target"><a href="#annotated-cell-4-12" aria-label="12"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1">Define a CTE named <code>customer_spending</code> to summarize spending by customer.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="2">Select each customer’s ID and add their invoice totals to calculate total spending.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="4" data-code-annotation="3">Read records from the <code>Invoice</code> table.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="4">Group invoices by customer ID, producing one summary row per customer with invoices.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="7" data-code-annotation="5">Combine the customer’s first and last names with a space, naming the output column <code>customer</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="8" data-code-annotation="6">Display total spending rounded to two decimal places.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="9" data-code-annotation="7">Read customer information from <code>Customer</code>, using the alias <code>c</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="10" data-code-annotation="8">Use an inner join to match customers with their spending summaries by customer ID. The alias <code>s</code> refers to <code>customer_spending</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="11" data-code-annotation="9">Sort by unrounded total spending from largest to smallest. Break ties using customer ID in ascending order.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="12" data-code-annotation="10">Return the first five customers from the sorted results.</span>
+</dd>
+</dl>
+<p>The CTE summarizes invoices. The join adds customer names.</p>
+<aside class="notes">
+<p>The output contains Helena Holý (49.62), Richard Cunningham (47.62), Luis Rojas (46.62), Ladislav Kovács (45.62), and Hugh O’Reilly (45.62), in that order after the CustomerId tie-breaker. The inner join includes customers with invoices. A LEFT JOIN plus COALESCE would be needed to include customers with zero invoices.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-1-ordinary-ctes" class="slide level2">
+<h2>Activity 1: ordinary CTEs</h2>
+<p><strong>A. Sales by billing country</strong></p>
+<p>Create a CTE with each billing country’s invoice count and total sales. Return countries with at least 20 invoices. Sort by total sales from largest to smallest.</p>
+<p><strong>B. Larger average invoices</strong></p>
+<p>Use two CTEs: first calculate invoice counts and average invoice totals by billing country, then keep countries with at least 20 invoices. Return those with an average invoice total above 5.50, sorted by average total from largest to smallest.</p>
+</section></section>
+<section>
+<section id="recursive-ctes" class="title-slide slide level1 agenda-slide center">
+<h1>Recursive CTEs</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>CTE</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Recursive CTEs</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Activity Solutions</p>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="what-is-recursion" class="slide level2">
+<h2>What is recursion?</h2>
+<p>Recursion is a process that uses its own previous result to produce the next result. It needs a starting point and a condition that stops it.</p>
+</section>
+<section id="parts-of-a-recursive-cte" class="slide level2">
+<h2>Parts of a recursive CTE</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>WITH RECURSIVE</code></td>
+<td>Introduces the CTE definitions</td>
+</tr>
+<tr class="even">
+<td>Anchor query</td>
+<td>Produces the starting rows</td>
+</tr>
+<tr class="odd">
+<td><code>UNION ALL</code></td>
+<td>Combines generated rows, keeping duplicates (Adds Rows to the new table)</td>
+</tr>
+<tr class="even">
+<td>Recursive member</td>
+<td>References the CTE to generate more rows</td>
+</tr>
+<tr class="odd">
+<td>Termination rule</td>
+<td>Prevents further expansion when finished</td>
+</tr>
+<tr class="even">
+<td>Final query</td>
+<td>Selects and orders the result</td>
+</tr>
+</tbody>
+</table>
+<p>The anchor and recursive member must return the same number of columns in corresponding positions.</p>
+<aside class="notes">
+<p>Use consistent meanings and compatible values in corresponding columns. SQLite’s flexible type system should not be treated as a reason to mix unrelated values. SQLite accepts recursive CTEs even without the RECURSIVE keyword, but this lesson includes it for clarity. Source: https://www.sqlite.org/lang_with.html</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="first-recursive-example-counting" class="slide level2">
+<h2>First recursive example: counting</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-label="1"></a><span class="kw">WITH</span> RECURSIVE numbers(n) <span class="kw">AS</span> (</span>
+<span id="cb1-2"><a aria-label="2"></a>    <span class="kw">SELECT</span> <span class="dv">1</span>                 <span class="co">-- Anchor Query</span></span>
+<span id="cb1-3"><a aria-label="3"></a>    <span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="cb1-4"><a aria-label="4"></a>    <span class="kw">SELECT</span> n <span class="op">+</span> <span class="dv">1</span>             <span class="co">-- Recursive member</span></span>
+<span id="cb1-5"><a aria-label="5"></a>    <span class="kw">FROM</span> numbers             </span>
+<span id="cb1-6"><a aria-label="6"></a>    <span class="kw">WHERE</span> n <span class="op">&lt;</span> <span class="dv">5</span>              <span class="co">-- Stops expansion at 5</span></span>
+<span id="cb1-7"><a aria-label="7"></a>)</span>
+<span id="cb1-8"><a aria-label="8"></a><span class="kw">SELECT</span> n</span>
+<span id="cb1-9"><a aria-label="9"></a><span class="kw">FROM</span> numbers</span>
+<span id="cb1-10"><a aria-label="10"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Result:</strong> <code>1, 2, 3, 4, 5</code>.</p>
+<p><code>numbers(n)</code> explicitly names the CTE’s output column.</p>
+</section>
+<section id="tracing-the-recursion" class="slide level2">
+<h2>Tracing the recursion</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Current row</th>
+<th>Does <code>n &lt; 5</code> hold?</th>
+<th style="text-align: right;">New row</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Anchor</td>
+<td>Not evaluated</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td>Yes</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td>Yes</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td>Yes</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td>Yes</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td>No</td>
+<td style="text-align: right;">None</td>
+</tr>
+</tbody>
+</table>
+<p>The condition checks the <strong>current</strong> <code>n</code> before producing <code>n + 1</code>.</p>
+<p><strong>Predict:</strong> What would <code>WHERE n &lt;= 5</code> produce?</p>
+<aside class="notes">
+<p>Answer: 1 through 6. In SQLite’s evaluation model, the anchor fills a work queue, then SQLite processes queued rows and adds generated rows. This table traces a one-row-at-a-time sequence, not a claim about the evaluation order of every recursive query. Source: https://www.sqlite.org/lang_with.html</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-chinook-employee-hierarchy" class="slide level2">
+<h2>The Chinook employee hierarchy</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Level below Andrew</th>
+<th>Employees</th>
+<th>Direct manager</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td>Andrew Adams</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td>Nancy Edwards, Michael Mitchell</td>
+<td>Andrew Adams</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td>Jane Peacock, Margaret Park, Steve Johnson</td>
+<td>Nancy Edwards</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td>Robert King, Laura Callahan</td>
+<td>Michael Mitchell</td>
+</tr>
+</tbody>
+</table>
+<p>A <strong>direct report</strong> is one link below a manager.</p>
+<p>A <strong>descendant</strong> can be any number of links below that manager.</p>
+<p><code>depth</code> will count links from the chosen starting employee.</p>
+</section>
+<section id="lets-look-at-employee-table" class="slide level2">
+<h2>Let’s Look at <code>Employee</code> Table</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb2-2"><a aria-label="2"></a><span class="kw">FROM</span> Employee;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="all-employees-below-andrew" class="slide level2 compact">
+<h2>All employees below Andrew</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-label="2"></a><span class="kw">WITH</span> RECURSIVE team(EmployeeId, employee_name, <span class="fu">depth</span>) <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2">2</button><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3" aria-label="3"></a>    <span class="kw">SELECT</span> EmployeeId, FirstName <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> LastName, <span class="dv">0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3">3</button><span id="annotated-cell-7-4" class="code-annotation-target"><a href="#annotated-cell-7-4" aria-label="4"></a>    <span class="kw">FROM</span> Employee</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="4">4</button><span id="annotated-cell-7-5" class="code-annotation-target"><a href="#annotated-cell-7-5" aria-label="5"></a>    <span class="kw">WHERE</span> EmployeeId <span class="op">=</span> <span class="dv">1</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="5">5</button><span id="annotated-cell-7-6" class="code-annotation-target"><a href="#annotated-cell-7-6" aria-label="6"></a>    <span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="6">6</button><span id="annotated-cell-7-7" class="code-annotation-target"><a href="#annotated-cell-7-7" aria-label="7"></a>    <span class="kw">SELECT</span> e.EmployeeId, e.FirstName <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> e.LastName,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="7">7</button><span id="annotated-cell-7-8" class="code-annotation-target"><a href="#annotated-cell-7-8" aria-label="8"></a>           t.<span class="fu">depth</span> <span class="op">+</span> <span class="dv">1</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="8">8</button><span id="annotated-cell-7-9" class="code-annotation-target"><a href="#annotated-cell-7-9" aria-label="9"></a>    <span class="kw">FROM</span> Employee <span class="kw">AS</span> e</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="9">9</button><span id="annotated-cell-7-10" class="code-annotation-target"><a href="#annotated-cell-7-10" aria-label="10"></a>    <span class="kw">JOIN</span> team <span class="kw">AS</span> t <span class="kw">ON</span> e.ReportsTo <span class="op">=</span> t.EmployeeId</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="10">10</button><span id="annotated-cell-7-11" class="code-annotation-target"><a href="#annotated-cell-7-11" aria-label="11"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="11">11</button><span id="annotated-cell-7-12" class="code-annotation-target"><a href="#annotated-cell-7-12" aria-label="12"></a><span class="kw">SELECT</span> employee_name, <span class="fu">depth</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="12">12</button><span id="annotated-cell-7-13" class="code-annotation-target"><a href="#annotated-cell-7-13" aria-label="13"></a><span class="kw">FROM</span> team</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="13">13</button><span id="annotated-cell-7-14" class="code-annotation-target"><a href="#annotated-cell-7-14" aria-label="14"></a><span class="kw">WHERE</span> <span class="fu">depth</span> <span class="op">&gt;</span> <span class="dv">0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="14">14</button><span id="annotated-cell-7-15" class="code-annotation-target"><a href="#annotated-cell-7-15" aria-label="15"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">depth</span>, employee_name;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="1">Define a recursive common table expression named <code>team</code> with three columns: employee ID, employee name, and depth.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="2">Begin the <strong>anchor query</strong>: select the starting employee’s ID, combine their first and last names using <code>||</code>, and assign depth <code>0</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="4" data-code-annotation="3">Read the starting employee’s information from the <code>Employee</code> table.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="5" data-code-annotation="4">Choose employee <code>1</code>—Andrew Adams in Chinook—as the starting point.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="6" data-code-annotation="5">Combine the anchor row with rows generated by the recursive query, retaining duplicates.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="7" data-code-annotation="6">Begin the <strong>recursive query</strong>: select each matching employee’s ID and full name.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="8" data-code-annotation="7">Set the employee’s depth to their manager’s depth plus one.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="9" data-code-annotation="8">Read employees from <code>Employee</code>, using <code>e</code> as a short alias.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="10" data-code-annotation="9">Match employees to their managers in <code>team</code>. Each match finds a direct report; repeating this step finds employees farther down the hierarchy.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="11" data-code-annotation="10">Close the definition of the recursive CTE.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="11">11</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="12" data-code-annotation="11">Choose the employee name and depth for the final output.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="12">12</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="13" data-code-annotation="12">Read from the completed <code>team</code> result.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="13">13</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="14" data-code-annotation="13">Exclude the starting employee at depth <code>0</code>, leaving only their descendants.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="14">14</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="15" data-code-annotation="14">Sort by depth first, then alphabetically by employee name within each depth.</span>
+</dd>
+</dl>
+<aside class="notes">
+<p>This query assumes Chinook’s acyclic hierarchy. The join follows a manager’s EmployeeId to employees whose ReportsTo matches it. Expansion stops when no matching reports remain. Later slides add protection for cyclic data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="hierarchy-query-results" class="slide level2">
+<h2>Hierarchy query results</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>employee_name</th>
+<th style="text-align: right;">depth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Michael Mitchell</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>Nancy Edwards</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td>Jane Peacock</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>Laura Callahan</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td>Margaret Park</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>Robert King</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td>Steve Johnson</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Do not assume a recursive query returns rows in a particular order without a final ORDER BY.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lauras-chain-of-managers" class="slide level2 compact">
+<h2>Laura’s chain of managers</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-8"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-label="2"></a><span class="kw">WITH</span> RECURSIVE chain <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3" aria-label="3"></a>    <span class="kw">SELECT</span> EmployeeId, FirstName, LastName, ReportsTo,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3">3</button><span id="annotated-cell-8-4" class="code-annotation-target"><a href="#annotated-cell-8-4" aria-label="4"></a>           <span class="dv">0</span> <span class="kw">AS</span> <span class="fu">depth</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="4">4</button><span id="annotated-cell-8-5" class="code-annotation-target"><a href="#annotated-cell-8-5" aria-label="5"></a>    <span class="kw">FROM</span> Employee <span class="kw">WHERE</span> EmployeeId <span class="op">=</span> <span class="dv">8</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="5">5</button><span id="annotated-cell-8-6" class="code-annotation-target"><a href="#annotated-cell-8-6" aria-label="6"></a>    <span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="6">6</button><span id="annotated-cell-8-7" class="code-annotation-target"><a href="#annotated-cell-8-7" aria-label="7"></a>    <span class="kw">SELECT</span> e.EmployeeId, e.FirstName, e.LastName, e.ReportsTo,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="7">7</button><span id="annotated-cell-8-8" class="code-annotation-target"><a href="#annotated-cell-8-8" aria-label="8"></a>           c.<span class="fu">depth</span> <span class="op">+</span> <span class="dv">1</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="8">8</button><span id="annotated-cell-8-9" class="code-annotation-target"><a href="#annotated-cell-8-9" aria-label="9"></a>    <span class="kw">FROM</span> Employee <span class="kw">AS</span> e</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="9">9</button><span id="annotated-cell-8-10" class="code-annotation-target"><a href="#annotated-cell-8-10" aria-label="10"></a>    <span class="kw">JOIN</span> chain <span class="kw">AS</span> c <span class="kw">ON</span> e.EmployeeId <span class="op">=</span> c.ReportsTo</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="10">10</button><span id="annotated-cell-8-11" class="code-annotation-target"><a href="#annotated-cell-8-11" aria-label="11"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="11">11</button><span id="annotated-cell-8-12" class="code-annotation-target"><a href="#annotated-cell-8-12" aria-label="12"></a><span class="kw">SELECT</span> FirstName <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> LastName <span class="kw">AS</span> manager, <span class="fu">depth</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="12">12</button><span id="annotated-cell-8-13" class="code-annotation-target"><a href="#annotated-cell-8-13" aria-label="13"></a><span class="kw">FROM</span> chain</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="13">13</button><span id="annotated-cell-8-14" class="code-annotation-target"><a href="#annotated-cell-8-14" aria-label="14"></a><span class="kw">WHERE</span> <span class="fu">depth</span> <span class="op">&gt;</span> <span class="dv">0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="14">14</button><span id="annotated-cell-8-15" class="code-annotation-target"><a href="#annotated-cell-8-15" aria-label="15"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">depth</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="1">Define a recursive common table expression (CTE) named <code>chain</code> to trace an employee’s managers.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="3" data-code-annotation="2">Begin the <strong>anchor query</strong> by selecting the starting employee’s ID, name, and direct manager’s ID (<code>ReportsTo</code>).</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="4" data-code-annotation="3">Assign the starting employee a depth of <code>0</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="5" data-code-annotation="4">Choose employee <code>8</code> as the starting point.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="6" data-code-annotation="5">Combine the starting row with rows produced by the recursive query, retaining duplicates.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="7" data-code-annotation="6">Begin the <strong>recursive query</strong> by selecting the matched manager’s information, including their own manager’s ID.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="8" data-code-annotation="7">Increase depth by one for each step up the management hierarchy.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="9" data-code-annotation="8">Read potential managers from <code>Employee</code>, using the alias <code>e</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="10" data-code-annotation="9">Find the manager of the current person in <code>chain</code>: match the manager’s <code>EmployeeId</code> to that person’s <code>ReportsTo</code>. This moves <strong>up</strong> the hierarchy.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="11" data-code-annotation="10">Close the CTE definition. Recursion stops when no further manager matches.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="11">11</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="12" data-code-annotation="11">Combine each manager’s first and last names with a space, label the column <code>manager</code>, and include depth.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="12">12</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="13" data-code-annotation="12">Read the accumulated rows from <code>chain</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="13">13</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="14" data-code-annotation="13">Exclude the starting employee, keeping only their managers.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="14">14</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="15" data-code-annotation="14">Sort from the nearest manager (<code>depth = 1</code>) upward through the hierarchy.</span>
+</dd>
+</dl>
+<aside class="notes">
+<p>Andrew’s ReportsTo is NULL, so the recursive join finds no next manager. Laura remains in the CTE at depth 0 but does not appear in the displayed result.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="termination-and-depth-limits" class="slide level2">
+<h2>Termination and depth limits</h2>
+<p>A recursive query ends when no unprocessed rows remain.</p>
+<p>For these examples, expansion stops when:</p>
+<ul>
+<li>A numeric condition fails, such as <code>n &lt; 5</code>.</li>
+<li>A join finds no more children or managers.</li>
+<li>An explicit depth condition prevents another step.</li>
+</ul>
+</section>
+<section id="union-all-and-union" class="slide level2">
+<h2>UNION ALL and UNION</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Treatment of generated rows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>UNION ALL</code></td>
+<td>Keeps repeated rows</td>
+</tr>
+<tr class="even">
+<td><code>UNION</code></td>
+<td>Discards duplicate complete rows</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Duplicate elimination adds work. Select the operator based on the intended result and termination logic. Replacing UNION ALL with UNION does not automatically fix every cyclic traversal. Source: https://www.sqlite.org/lang_with.html</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-2-recursive-ctes" class="slide level2">
+<h2>Activity 2: recursive CTEs</h2>
+<p><strong>A. Nancy’s reports</strong></p>
+<p>Start with Nancy Edwards (<code>EmployeeId = 2</code>). Return her descendants and their depths, excluding Nancy. Sort by depth and name.</p>
+<p><strong>B. Jane’s managers</strong></p>
+<p>Start with Jane Peacock (<code>EmployeeId = 3</code>) and move upward through her managers.</p>
+<p><strong>C. Andrew’s report counts</strong></p>
+<p>Start with Andrew Adams (<code>EmployeeId = 1</code>). Count his descendants at each depth. Exclude depth 0 and sort by depth.</p>
+</section></section>
+<section>
+<section id="activity-solutions" class="title-slide slide level1 agenda-slide center">
+<h1>Activity Solutions</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>CTE</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Recursive CTEs</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Activity Solutions</p>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="activity-1a" class="slide level2">
+<h2>Activity 1A</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-9"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-2" class="code-annotation-target"><a href="#annotated-cell-9-2" aria-label="2"></a><span class="kw">WITH</span> country_sales <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2">2</button><span id="annotated-cell-9-3" class="code-annotation-target"><a href="#annotated-cell-9-3" aria-label="3"></a>    <span class="kw">SELECT</span> BillingCountry,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3">3</button><span id="annotated-cell-9-4" class="code-annotation-target"><a href="#annotated-cell-9-4" aria-label="4"></a>           <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> invoice_count,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="4">4</button><span id="annotated-cell-9-5" class="code-annotation-target"><a href="#annotated-cell-9-5" aria-label="5"></a>           <span class="fu">SUM</span>(Total) <span class="kw">AS</span> total_sales</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="5">5</button><span id="annotated-cell-9-6" class="code-annotation-target"><a href="#annotated-cell-9-6" aria-label="6"></a>    <span class="kw">FROM</span> Invoice</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="6">6</button><span id="annotated-cell-9-7" class="code-annotation-target"><a href="#annotated-cell-9-7" aria-label="7"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> BillingCountry</span>
+<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8" aria-label="8"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="7">7</button><span id="annotated-cell-9-9" class="code-annotation-target"><a href="#annotated-cell-9-9" aria-label="9"></a><span class="kw">SELECT</span> BillingCountry, invoice_count, total_sales</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="8">8</button><span id="annotated-cell-9-10" class="code-annotation-target"><a href="#annotated-cell-9-10" aria-label="10"></a><span class="kw">FROM</span> country_sales</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="9">9</button><span id="annotated-cell-9-11" class="code-annotation-target"><a href="#annotated-cell-9-11" aria-label="11"></a><span class="kw">WHERE</span> invoice_count <span class="op">&gt;=</span> <span class="dv">20</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="10">10</button><span id="annotated-cell-9-12" class="code-annotation-target"><a href="#annotated-cell-9-12" aria-label="12"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_sales <span class="kw">DESC</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="2" data-code-annotation="1">Define a CTE named <code>country_sales</code> to summarize invoices by billing country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="3" data-code-annotation="2">Select the billing country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="4" data-code-annotation="3">Count the invoices in each country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="5" data-code-annotation="4">Add the invoice totals to calculate each country’s total sales.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="6" data-code-annotation="5">Read the records from the <code>Invoice</code> table.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="7" data-code-annotation="6">Group invoices by billing country, producing one summary row per country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="9" data-code-annotation="7">Display the country, invoice count, and total sales.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="10" data-code-annotation="8">Read the summarized results from the CTE.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="11" data-code-annotation="9">Keep countries with at least 20 invoices.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="12" data-code-annotation="10">Sort total sales from largest to smallest.</span>
+</dd>
+</dl>
+</section>
+<section id="activity-1b" class="slide level2">
+<h2>Activity 1B</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-10"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-2" class="code-annotation-target"><a href="#annotated-cell-10-2" aria-label="2"></a><span class="kw">WITH</span> country_summary <span class="kw">AS</span> (</span>
+<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3" aria-label="3"></a>    <span class="kw">SELECT</span> BillingCountry,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-4" class="code-annotation-target"><a href="#annotated-cell-10-4" aria-label="4"></a>           <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> invoice_count,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3">3</button><span id="annotated-cell-10-5" class="code-annotation-target"><a href="#annotated-cell-10-5" aria-label="5"></a>           <span class="fu">AVG</span>(Total) <span class="kw">AS</span> average_total</span>
+<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6" aria-label="6"></a>    <span class="kw">FROM</span> Invoice</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="4">4</button><span id="annotated-cell-10-7" class="code-annotation-target"><a href="#annotated-cell-10-7" aria-label="7"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> BillingCountry</span>
+<span id="annotated-cell-10-8"><a href="#annotated-cell-10-8" aria-label="8"></a>),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="5">5</button><span id="annotated-cell-10-9" class="code-annotation-target"><a href="#annotated-cell-10-9" aria-label="9"></a>eligible_countries <span class="kw">AS</span> (</span>
+<span id="annotated-cell-10-10"><a href="#annotated-cell-10-10" aria-label="10"></a>    <span class="kw">SELECT</span> BillingCountry, invoice_count, average_total</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="6">6</button><span id="annotated-cell-10-11" class="code-annotation-target"><a href="#annotated-cell-10-11" aria-label="11"></a>    <span class="kw">FROM</span> country_summary</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="7">7</button><span id="annotated-cell-10-12" class="code-annotation-target"><a href="#annotated-cell-10-12" aria-label="12"></a>    <span class="kw">WHERE</span> invoice_count <span class="op">&gt;=</span> <span class="dv">20</span></span>
+<span id="annotated-cell-10-13"><a href="#annotated-cell-10-13" aria-label="13"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="8">8</button><span id="annotated-cell-10-14" class="code-annotation-target"><a href="#annotated-cell-10-14" aria-label="14"></a><span class="kw">SELECT</span> BillingCountry, invoice_count, average_total</span>
+<span id="annotated-cell-10-15"><a href="#annotated-cell-10-15" aria-label="15"></a><span class="kw">FROM</span> eligible_countries</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="9">9</button><span id="annotated-cell-10-16" class="code-annotation-target"><a href="#annotated-cell-10-16" aria-label="16"></a><span class="kw">WHERE</span> average_total <span class="op">&gt;</span> <span class="fl">5.50</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="10">10</button><span id="annotated-cell-10-17" class="code-annotation-target"><a href="#annotated-cell-10-17" aria-label="17"></a><span class="kw">ORDER</span> <span class="kw">BY</span> average_total <span class="kw">DESC</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="2" data-code-annotation="1">Define the first CTE, <code>country_summary</code>, to summarize invoices by billing country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="4" data-code-annotation="2">Count the invoices for each country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="5" data-code-annotation="3">Calculate each country’s average invoice total.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="7" data-code-annotation="4">Group invoices by billing country, producing one summary row per country.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="9" data-code-annotation="5">Define the second CTE, <code>eligible_countries</code>. A comma separates the two CTE definitions.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="11" data-code-annotation="6">Read the summarized results from the first CTE.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="12" data-code-annotation="7">Keep countries with at least 20 invoices.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="14" data-code-annotation="8">Display the country, invoice count, and average invoice total from the second CTE.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="16" data-code-annotation="9">Keep only countries whose average invoice total is strictly greater than 5.50.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="17" data-code-annotation="10">Sort by average invoice total from largest to smallest.</span>
+</dd>
+</dl>
+</section>
+<section id="activity-2a" class="slide level2">
+<h2>Activity 2A</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-11"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-2" class="code-annotation-target"><a href="#annotated-cell-11-2" aria-label="2"></a><span class="kw">WITH</span> RECURSIVE team <span class="kw">AS</span> (</span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-label="3"></a>    <span class="kw">SELECT</span> EmployeeId, FirstName <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> LastName <span class="kw">AS</span> employee_name,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-4" class="code-annotation-target"><a href="#annotated-cell-11-4" aria-label="4"></a>           <span class="dv">0</span> <span class="kw">AS</span> <span class="fu">depth</span></span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5" aria-label="5"></a>    <span class="kw">FROM</span> Employee</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="3">3</button><span id="annotated-cell-11-6" class="code-annotation-target"><a href="#annotated-cell-11-6" aria-label="6"></a>    <span class="kw">WHERE</span> EmployeeId <span class="op">=</span> <span class="dv">2</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="4">4</button><span id="annotated-cell-11-7" class="code-annotation-target"><a href="#annotated-cell-11-7" aria-label="7"></a>    <span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="annotated-cell-11-8"><a href="#annotated-cell-11-8" aria-label="8"></a>    <span class="kw">SELECT</span> e.EmployeeId, e.FirstName <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> e.LastName,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="5">5</button><span id="annotated-cell-11-9" class="code-annotation-target"><a href="#annotated-cell-11-9" aria-label="9"></a>           t.<span class="fu">depth</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10" aria-label="10"></a>    <span class="kw">FROM</span> Employee <span class="kw">AS</span> e</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="6">6</button><span id="annotated-cell-11-11" class="code-annotation-target"><a href="#annotated-cell-11-11" aria-label="11"></a>    <span class="kw">JOIN</span> team <span class="kw">AS</span> t <span class="kw">ON</span> e.ReportsTo <span class="op">=</span> t.EmployeeId</span>
+<span id="annotated-cell-11-12"><a href="#annotated-cell-11-12" aria-label="12"></a>)</span>
+<span id="annotated-cell-11-13"><a href="#annotated-cell-11-13" aria-label="13"></a><span class="kw">SELECT</span> employee_name, <span class="fu">depth</span></span>
+<span id="annotated-cell-11-14"><a href="#annotated-cell-11-14" aria-label="14"></a><span class="kw">FROM</span> team</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="7">7</button><span id="annotated-cell-11-15" class="code-annotation-target"><a href="#annotated-cell-11-15" aria-label="15"></a><span class="kw">WHERE</span> <span class="fu">depth</span> <span class="op">&gt;</span> <span class="dv">0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="8">8</button><span id="annotated-cell-11-16" class="code-annotation-target"><a href="#annotated-cell-11-16" aria-label="16"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">depth</span>, employee_name;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="2" data-code-annotation="1">Define a recursive CTE named <code>team</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="2">Select the starting employee and assign depth <code>0</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="6" data-code-annotation="3">Choose Nancy Edwards as the starting employee.</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="7" data-code-annotation="4">Combine the anchor row with rows generated by recursion, retaining duplicates.</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="9" data-code-annotation="5">Assign each direct report a depth one greater than their manager’s.</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="11" data-code-annotation="6">Move <strong>down</strong> the hierarchy: find employees whose <code>ReportsTo</code> matches the current manager’s ID.</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="15" data-code-annotation="7">Exclude Nancy from the final result.</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="16" data-code-annotation="8">Sort by distance below Nancy, then alphabetically by name.</span>
+</dd>
+</dl>
+</section>
+<section id="activity-2b" class="slide level2">
+<h2>Activity 2B</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-label="1"></a></span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2" aria-label="2"></a><span class="kw">WITH</span> RECURSIVE chain <span class="kw">AS</span> (</span>
+<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3" aria-label="3"></a>    <span class="kw">SELECT</span> EmployeeId, FirstName, LastName, ReportsTo,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-4" class="code-annotation-target"><a href="#annotated-cell-12-4" aria-label="4"></a>           <span class="dv">0</span> <span class="kw">AS</span> <span class="fu">depth</span></span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5" aria-label="5"></a>    <span class="kw">FROM</span> Employee</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2">2</button><span id="annotated-cell-12-6" class="code-annotation-target"><a href="#annotated-cell-12-6" aria-label="6"></a>    <span class="kw">WHERE</span> EmployeeId <span class="op">=</span> <span class="dv">3</span></span>
+<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7" aria-label="7"></a>    <span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8" aria-label="8"></a>    <span class="kw">SELECT</span> e.EmployeeId, e.FirstName, e.LastName, e.ReportsTo,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="3">3</button><span id="annotated-cell-12-9" class="code-annotation-target"><a href="#annotated-cell-12-9" aria-label="9"></a>           c.<span class="fu">depth</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10" aria-label="10"></a>    <span class="kw">FROM</span> Employee <span class="kw">AS</span> e</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="4">4</button><span id="annotated-cell-12-11" class="code-annotation-target"><a href="#annotated-cell-12-11" aria-label="11"></a>    <span class="kw">JOIN</span> chain <span class="kw">AS</span> c <span class="kw">ON</span> e.EmployeeId <span class="op">=</span> c.ReportsTo</span>
+<span id="annotated-cell-12-12"><a href="#annotated-cell-12-12" aria-label="12"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="5">5</button><span id="annotated-cell-12-13" class="code-annotation-target"><a href="#annotated-cell-12-13" aria-label="13"></a><span class="kw">SELECT</span> FirstName <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> LastName <span class="kw">AS</span> manager, <span class="fu">depth</span></span>
+<span id="annotated-cell-12-14"><a href="#annotated-cell-12-14" aria-label="14"></a><span class="kw">FROM</span> chain</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="6">6</button><span id="annotated-cell-12-15" class="code-annotation-target"><a href="#annotated-cell-12-15" aria-label="15"></a><span class="kw">WHERE</span> <span class="fu">depth</span> <span class="op">&gt;</span> <span class="dv">0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="7">7</button><span id="annotated-cell-12-16" class="code-annotation-target"><a href="#annotated-cell-12-16" aria-label="16"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">depth</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="4" data-code-annotation="1">Keep the employee’s manager ID (<code>ReportsTo</code>) so the recursive query can find the next manager. Start at depth <code>0</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="6" data-code-annotation="2">Choose Jane Peacock as the starting employee.</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="9" data-code-annotation="3">Increase depth by one for each step upward.</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="11" data-code-annotation="4">Move <strong>up</strong> the hierarchy by matching the current person’s manager ID to an employee ID.</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="13" data-code-annotation="5">Display each manager’s full name and depth.</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="15" data-code-annotation="6">Exclude Jane, leaving only her managers.</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="16" data-code-annotation="7">Show the nearest manager first.</span>
+</dd>
+</dl>
+</section>
+<section id="activity-2c" class="slide level2">
+<h2>Activity 2C</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-13"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-label="1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2" aria-label="2"></a><span class="kw">WITH</span> RECURSIVE descendants <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2">2</button><span id="annotated-cell-13-3" class="code-annotation-target"><a href="#annotated-cell-13-3" aria-label="3"></a>    <span class="kw">SELECT</span> EmployeeId, <span class="dv">0</span> <span class="kw">AS</span> <span class="fu">depth</span></span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4" aria-label="4"></a>    <span class="kw">FROM</span> Employee</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="3">3</button><span id="annotated-cell-13-5" class="code-annotation-target"><a href="#annotated-cell-13-5" aria-label="5"></a>    <span class="kw">WHERE</span> EmployeeId <span class="op">=</span> <span class="dv">1</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="4">4</button><span id="annotated-cell-13-6" class="code-annotation-target"><a href="#annotated-cell-13-6" aria-label="6"></a>    <span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="5">5</button><span id="annotated-cell-13-7" class="code-annotation-target"><a href="#annotated-cell-13-7" aria-label="7"></a>    <span class="kw">SELECT</span> e.EmployeeId, d.<span class="fu">depth</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="annotated-cell-13-8"><a href="#annotated-cell-13-8" aria-label="8"></a>    <span class="kw">FROM</span> Employee <span class="kw">AS</span> e</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="6">6</button><span id="annotated-cell-13-9" class="code-annotation-target"><a href="#annotated-cell-13-9" aria-label="9"></a>    <span class="kw">JOIN</span> descendants <span class="kw">AS</span> d <span class="kw">ON</span> e.ReportsTo <span class="op">=</span> d.EmployeeId</span>
+<span id="annotated-cell-13-10"><a href="#annotated-cell-13-10" aria-label="10"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="7">7</button><span id="annotated-cell-13-11" class="code-annotation-target"><a href="#annotated-cell-13-11" aria-label="11"></a><span class="kw">SELECT</span> <span class="fu">depth</span>, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> descendant_count</span>
+<span id="annotated-cell-13-12"><a href="#annotated-cell-13-12" aria-label="12"></a><span class="kw">FROM</span> descendants</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="8">8</button><span id="annotated-cell-13-13" class="code-annotation-target"><a href="#annotated-cell-13-13" aria-label="13"></a><span class="kw">WHERE</span> <span class="fu">depth</span> <span class="op">&gt;</span> <span class="dv">0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="9">9</button><span id="annotated-cell-13-14" class="code-annotation-target"><a href="#annotated-cell-13-14" aria-label="14"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="fu">depth</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="10">10</button><span id="annotated-cell-13-15" class="code-annotation-target"><a href="#annotated-cell-13-15" aria-label="15"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">depth</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="2" data-code-annotation="1">Define a recursive CTE named <code>descendants</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="3" data-code-annotation="2">Select the starting employee and assign depth <code>0</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="5" data-code-annotation="3">Choose Andrew Adams as the starting employee.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="6" data-code-annotation="4">Combine the anchor row with rows generated by the recursive query.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="7" data-code-annotation="5">Select each newly found employee and assign their manager’s depth plus one.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="9" data-code-annotation="6">Move downward through the hierarchy by finding employees who report to the current person.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="11" data-code-annotation="7">Display each depth and count the descendants at that depth.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="13" data-code-annotation="8">Exclude Andrew, whose depth is <code>0</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="14" data-code-annotation="9">Group the remaining employees by depth so each level has its own count.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="15" data-code-annotation="10">Sort by depth in ascending order.</span>
+</dd>
+</dl>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'pointer': {"key":"q","color":"red","pointerSize":16,"alwaysVisible":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealPointer, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("www\.inqs\.info\/d300_f26");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+            let selectedAnnoteEl;
+            const selectorForAnnotation = ( cell, annotation) => {
+              let cellAttr = 'data-code-cell="' + cell + '"';
+              let lineAttr = 'data-code-annotation="' +  annotation + '"';
+              const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+              return selector;
+            }
+            const selectCodeLines = (annoteEl) => {
+              const doc = window.document;
+              const targetCell = annoteEl.getAttribute("data-target-cell");
+              const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+              const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+              const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+              const lineIds = lines.map((line) => {
+                return targetCell + "-" + line;
+              })
+              let top = null;
+              let height = null;
+              let parent = null;
+              if (lineIds.length > 0) {
+                  //compute the position of the single el (top and bottom and make a div)
+                  const el = window.document.getElementById(lineIds[0]);
+                  top = el.offsetTop;
+                  height = el.offsetHeight;
+                  parent = el.parentElement.parentElement;
+                if (lineIds.length > 1) {
+                  const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                  const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                  height = bottom - top;
+                }
+                if (top !== null && height !== null && parent !== null) {
+                  // cook up a div (if necessary) and position it 
+                  let div = window.document.getElementById("code-annotation-line-highlight");
+                  if (div === null) {
+                    div = window.document.createElement("div");
+                    div.setAttribute("id", "code-annotation-line-highlight");
+                    div.style.position = 'absolute';
+                    parent.appendChild(div);
+                  }
+                  div.style.top = top - 2 + "px";
+                  div.style.height = height + 4 + "px";
+                  div.style.left = 0;
+                  let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                  if (gutterDiv === null) {
+                    gutterDiv = window.document.createElement("div");
+                    gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                    gutterDiv.style.position = 'absolute';
+                    const codeCell = window.document.getElementById(targetCell);
+                    const gutter = codeCell.querySelector('.code-annotation-gutter');
+                    gutter.appendChild(gutterDiv);
+                  }
+                  gutterDiv.style.top = top - 2 + "px";
+                  gutterDiv.style.height = height + 4 + "px";
+                }
+                selectedAnnoteEl = annoteEl;
+              }
+            };
+            const unselectCodeLines = () => {
+              const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+              elementsIds.forEach((elId) => {
+                const div = window.document.getElementById(elId);
+                if (div) {
+                  div.remove();
+                }
+              });
+              selectedAnnoteEl = undefined;
+            };
+              // Handle positioning of the toggle
+          window.addEventListener(
+            "resize",
+            throttle(() => {
+              elRect = undefined;
+              if (selectedAnnoteEl) {
+                selectCodeLines(selectedAnnoteEl);
+              }
+            }, 10)
+          );
+          function throttle(fn, ms) {
+          let throttle = false;
+          let timer;
+            return (...args) => {
+              if(!throttle) { // first call gets through
+                  fn.apply(this, args);
+                  throttle = true;
+              } else { // all the others get throttled
+                  if(timer) clearTimeout(timer); // cancel #2
+                  timer = setTimeout(() => {
+                    fn.apply(this, args);
+                    timer = throttle = false;
+                  }, ms);
+              }
+            };
+          }
+            const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+            for (let i=0; i<annoteTargets.length; i++) {
+              const annoteTarget = annoteTargets[i];
+              const targetCell = annoteTarget.getAttribute("data-target-cell");
+              const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+              const contentFn = () => {
+                const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+                if (content) {
+                  const tipContent = content.cloneNode(true);
+                  tipContent.classList.add("code-annotation-tip-content");
+                  return tipContent.outerHTML;
+                }
+              }
+              const config = {
+                allowHTML: true,
+                content: contentFn,
+                onShow: (instance) => {
+                  selectCodeLines(instance.reference);
+                  instance.reference.classList.add('code-annotation-active');
+                  window.tippy.hideAll();
+                },
+                onHide: (instance) => {
+                  unselectCodeLines();
+                  instance.reference.classList.remove('code-annotation-active');
+                },
+                maxWidth: 300,
+                delay: [50, 0],
+                duration: [200, 0],
+                offset: [5, 10],
+                arrow: true,
+                trigger: 'click',
+                appendTo: function(el) {
+                  return el.parentElement.parentElement.parentElement;
+                },
+                interactive: true,
+                interactiveBorder: 10,
+                theme: 'light-border',
+                placement: 'right',
+                positionFixed: true,
+                popperOptions: {
+                  modifiers: [
+                  {
+                    name: 'flip',
+                    options: {
+                      flipVariations: false, // true by default
+                      allowedAutoPlacements: ['right'],
+                      fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                    },
+                  },
+                  {
+                    name: 'preventOverflow',
+                    options: {
+                      mainAxis: false,
+                      altAxis: false
+                    }
+                  }
+                  ]        
+                }      
+              };
+              window.tippy(annoteTarget, config); 
+            }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

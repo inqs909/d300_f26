@@ -114,3 +114,7 @@ div.scrollable pre {
   white-space: pre;         /* keep original formatting; change to pre-wrap if you prefer wrapping */
   overflow-x: auto;         /* allow horizontal scroll for very long lines */
 }
+
+.reveal .controls {
+  font-size: 6px;
+}

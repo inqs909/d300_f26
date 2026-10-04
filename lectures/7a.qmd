@@ -1,115 +1,70 @@
 ---
-title: "More Advanced SQL"
-subtitle: "CTEs and Window Functions"
-author: "Data Analytics Pro"
-format: 
+title: "Advanced SQL"
+subtitle: "Common Table Expressions"
+format:
   revealjs:
-    theme: white
-    slide-number: true
-    incremental: true
-    chalkboard: true
+    scrollable: true
+    navigation-mode: vertical
+    theme: [default, styles.scss]
+    controls-layout: edges
+    controls-tutorial: true
+    code-annotations: select
+    progress: true
+    slide-number: c/t
+    incremental: false 
+    
+revealjs-plugins:
+  - pointer
+  
+filters: 
+  - code-fullscreen
+  - reveal-auto-agenda
+
+editor: source
+
+order: 8
 ---
 
-# More Advanced SQL
-## Mastering CTEs and Window Functions
+# CTE
 
-&lt;!-- .notes --&gt;
-# Welcome everyone. Today we are moving beyond basic SELECT and JOIN statements into the world of advanced SQL: Common Table Expressions and Window Functions.
+## Common Table Expressions (CTEs)
 
----
+A **common table expression (CTE)** names a query result that you can reference within a single SQL statement.
 
-# Agenda
+- Defined with `WITH`.
+- Reusable in the statement
+- Its scope ends when the statement ends.
 
-1.  **The Problem** with Subqueries
-2.  **Common Table Expressions (CTEs)**
-    *   Syntax and Structure
-    *   CTEs vs. Subqueries
-    *   Recursive CTEs
-3.  **Student Activity 1**
-4.  **Window Functions**
-    *   The `OVER` Clause
-    *   `PARTITION BY` vs. `GROUP BY`
-    *   Ranking Functions (`ROW_NUMBER`, `RANK`, `DENSE_RANK`)
-    *   Value Functions (`LEAD`, `LAG`)
-5.  **Student Activity 2**
-6.  **Advanced Window Frames**
-7.  **Student Activity 3**
-8.  **Real-world Scenarios**
-9.  **Student Activity 4**
-10. **Summary & Q&A**
+A CTE helps organize query logic. It does not create a permanent table.
 
-&lt;!-- .notes --&gt;
-# Here is our roadmap for the session. We will start by identifying why standard queries become unmanageable, then solve that with CTEs, move into the powerful world of Window Functions, and have plenty of practice in between.
+::: notes
+A CTE is a logical named result. SQLite can choose different execution strategies, so do not assume that every CTE stores a physical intermediate table. Source: https://www.sqlite.org/lang_with.html
+:::
 
----
-
-# The Problem: "Subquery Spaghetti"
-
-*   **Complexity:** Nested subqueries make code unreadable.
-*   **Maintenance:** Hard to debug specific parts of the logic.
-*   **Performance:** Can be difficult for the optimizer to handle.
-*   **Readability:** The "inside-out" logic is hard for humans to follow.
-
-&lt;!-- .notes --&gt;
-# Before we learn the solution, we must understand the problem. Subqueries, when nested multiple levels deep, create "spaghetti code" that is nearly impossible to read or maintain.
-
----
-
-# Solution: Common Table Expressions (CTEs)
-
-*   **Definition:** A temporary result set that you can reference within a `SELECT`, `INSERT`, `UPDATE`, or `DELETE` statement.
-*   **The `WITH` Clause:** Used to define the CTE.
-*   **Benefit:** It allows you to name a subquery and treat it like a real table for the duration of the query.
-
-&lt;!-- .notes --&gt;
-# Enter the CTE. Think of a CTE as a named temporary table that exists only for the duration of that single query. It makes your SQL read like a story from top to bottom.
-
----
-
-# CTE Syntax Structure
+## The structure of an ordinary CTE
 
 ```sql
-WITH CTE_Name AS (
-    SELECT 
-        column1, 
-        column2
-    FROM table_name
-    WHERE condition
+
+WITH large_invoices AS ( -- <1>
+    SELECT InvoiceId, CustomerId, Total -- <2>
+    FROM Invoice -- <3>
+    WHERE Total >= 20 -- <4>
 )
-SELECT * 
-FROM CTE_Name
-JOIN other_table ON ...;
+SELECT InvoiceId, CustomerId, Total -- <5>
+FROM large_invoices -- <6>
+ORDER BY Total DESC, InvoiceId; -- <7>
 ```
 
-&lt;!-- .notes --&gt;
-# The syntax is straightforward. You start with the word `WITH`, give your temporary table a name, define the query inside parentheses, and then immediately use that name in your main query.
+1. Define a common table expression (CTE) named `large_invoices`.
+2. Select each invoice's ID, customer ID, and total.
+3. Read records from the `Invoice` table.
+4. Keep invoices with a total of at least 20.
+5. Display the invoice ID, customer ID, and total in the final result.
+6. Read the filtered records from `large_invoices`.
+7. Sort by total from largest to smallest. For invoices with the same total, sort by invoice ID in ascending order.
 
----
 
-# How a CTE Works (Data Flow)
-
-```{mermaid}
-accTitle: Flowchart showing data flowing from a source table into a CTE and then into the final output.
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'edgeColor': '#000000'}}}%%
-graph LR
-    A[(Source Table)] --&gt;|Data Processed| B(CTE Name)
-    B --&gt; C{Main Query}
-    C --&gt; D[(Final Output)]
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#bbf,stroke:#333,stroke-width:2px
-    style D fill:#bfb,stroke:#333,stroke-width:2px
-```
-
-*   **Step 1:** Source data is filtered/joined.
-*   **Step 2:** Result is stored in a temporary "virtual" table (CTE).
-*   **Step 3:** The Main Query runs against the CTE.
-
-&lt;!-- .notes --&gt;
-# This diagram shows the data flow. Unlike a subquery where the logic is buried inside the main query, the CTE pulls the logic out to the front, acting as a stepping stone for the data.
-
----
-
-# CTE vs. Subquery
+## CTE vs. Subquery
 
 | Feature | Subquery | CTE |
 | :--- | :--- | :--- |
@@ -118,335 +73,492 @@ graph LR
 | **Debugging** | Difficult | Easy (Test CTE separately) |
 | **Complexity** | Hard to manage | Great for complex logic |
 
-&lt;!-- .notes --&gt;
-# When deciding which to use, remember: If you are nesting more than one level deep, or if you need to use the same logic twice in one query, reach for a CTE.
+::: notes
+When deciding which to use, remember: If you are nesting more than one level deep, or if you need to use the same logic twice in one query, reach for a CTE.
+:::
 
----
+## Aggregating inside a CTE
+
+**Question:** Which billing countries have total sales above 200?
+
+```sql
+
+WITH country_sales AS ( -- <1>
+    SELECT BillingCountry, SUM(Total) AS total_sales -- <2>
+    FROM Invoice -- <3>
+    GROUP BY BillingCountry -- <4>
+)
+SELECT BillingCountry, ROUND(total_sales, 2) AS total_sales -- <5>
+FROM country_sales -- <6>
+WHERE total_sales > 200 -- <7>
+ORDER BY total_sales DESC; -- <8>
+```
+
+1. Define a common table expression (CTE) named `country_sales`.
+2. Select each billing country and calculate its total sales by adding invoice totals.
+3. Read records from the `Invoice` table.
+4. Group invoices by billing country, producing one summary row per country.
+5. Display each country and its total sales rounded to two decimal places.
+6. Read the summarized records from `country_sales`.
+7. Keep countries whose unrounded total sales exceed 200.
+8. Sort by the displayed total sales from largest to smallest.
+
+## Multiple CTEs in one statement
+
+```sql
+
+WITH country_stats AS ( -- <1>
+    SELECT BillingCountry, COUNT(*) AS invoice_count, -- <2>
+           SUM(Total) AS total_sales -- <3>
+    FROM Invoice -- <4>
+    GROUP BY BillingCountry -- <5>
+),
+busy_countries AS ( -- <6>
+    SELECT * FROM country_stats -- <7>
+    WHERE invoice_count >= 20 -- <8>
+)
+SELECT BillingCountry, invoice_count,
+       ROUND(total_sales, 2) AS total_sales -- <9>
+FROM busy_countries -- <10>
+ORDER BY total_sales DESC -- <11>
+LIMIT 3; -- <12>
+```
+
+1. Define the first CTE, `country_stats`, to summarize invoices by billing country.
+2. Select each country and count its invoices.
+3. Add invoice totals to calculate each country's total sales.
+4. Read records from the `Invoice` table.
+5. Group invoices by country, producing one summary row per country.
+6. Define the second CTE, `busy_countries`. A comma separates the two CTE definitions.
+7. Select all columns from the first CTE.
+8. Keep countries with at least 20 invoices.
+9. Display each country's name, invoice count, and total sales rounded to two decimal places.
+10. Read the qualifying countries from the second CTE.
+11. Sort by the rounded total sales from largest to smallest.
+12. Return only the first three countries from the sorted results.
+
+Use one `WITH` and commas between CTE definitions.
+
+
+## Joining a CTE to a table
+
+**Question:** Which customers have spent the most?
+
+```sql
+
+WITH customer_spending AS ( -- <1>
+    SELECT CustomerId, SUM(Total) AS total_spent -- <2>
+    FROM Invoice -- <3>
+    GROUP BY CustomerId -- <4>
+)
+SELECT c.FirstName || ' ' || c.LastName AS customer, -- <5>
+       ROUND(s.total_spent, 2) AS total_spent -- <6>
+FROM Customer AS c -- <7>
+JOIN customer_spending AS s ON c.CustomerId = s.CustomerId -- <8>
+ORDER BY s.total_spent DESC, c.CustomerId -- <9>
+LIMIT 5; -- <10>
+```
+
+1. Define a CTE named `customer_spending` to summarize spending by customer.
+2. Select each customer's ID and add their invoice totals to calculate total spending.
+3. Read records from the `Invoice` table.
+4. Group invoices by customer ID, producing one summary row per customer with invoices.
+5. Combine the customer's first and last names with a space, naming the output column `customer`.
+6. Display total spending rounded to two decimal places.
+7. Read customer information from `Customer`, using the alias `c`.
+8. Use an inner join to match customers with their spending summaries by customer ID. The alias `s` refers to `customer_spending`.
+9. Sort by unrounded total spending from largest to smallest. Break ties using customer ID in ascending order.
+10. Return the first five customers from the sorted results.
+
+The CTE summarizes invoices. The join adds customer names.
+
+::: notes
+The output contains Helena Holý (49.62), Richard Cunningham (47.62), Luis Rojas (46.62), Ladislav Kovács (45.62), and Hugh O'Reilly (45.62), in that order after the CustomerId tie-breaker. The inner join includes customers with invoices. A LEFT JOIN plus COALESCE would be needed to include customers with zero invoices.
+:::
+
+
+## Activity 1: ordinary CTEs
+
+**A. Sales by billing country**
+
+Create a CTE with each billing country's invoice count and total sales. Return countries with at least 20 invoices. Sort by total sales from largest to smallest.
+
+**B. Larger average invoices**
+
+Use two CTEs: first calculate invoice counts and average invoice totals by billing country, then keep countries with at least 20 invoices. Return those with an average invoice total above 5.50, sorted by average total from largest to smallest.
+
+
 
 # Recursive CTEs
 
-*   **Purpose:** Used to query hierarchical data (e.g., Org Charts, Family Trees, Folder structures).
-*   **How it works:** A CTE that references itself.
-*   **Structure:**
-    1.  **Anchor Member:** The starting point.
-    2.  **Recursive Member:** The part that joins back to the CTE.
-    3.  **Termination Condition:** When to stop.
+## What is recursion?
 
-&lt;!-- .notes --&gt;
-# One of the most powerful (and advanced) uses of CTEs is recursion. This allows SQL to "loop" through data, which is perfect for things like organizational hierarchies.
+Recursion is a process that uses its own previous result to produce the next result. It needs a starting point and a condition that stops it.
 
----
 
-# 🛠️ Activity 1: The Clean-Up Challenge
+## Parts of a recursive CTE
 
-**Goal:** Rewrite a nested subquery as a CTE.
+| Part | Purpose |
+|---|---|
+| `WITH RECURSIVE` | Introduces the CTE definitions |
+| Anchor query | Produces the starting rows |
+| `UNION ALL` | Combines generated rows, keeping duplicates (Adds Rows to the new table) |
+| Recursive member | References the CTE to generate more rows |
+| Termination rule | Prevents further expansion when finished |
+| Final query | Selects and orders the result |
 
-**The Messy Query:**
-```sql
-SELECT customer_name 
-FROM customers 
-WHERE customer_id IN (
-    SELECT customer_id 
-    FROM orders 
-    WHERE order_date &gt; '2023-01-01'
-);
-```
+The anchor and recursive member must return the same number of columns in corresponding positions.
 
-**Your Task:** 
-1. Create a CTE named `RecentOrders`.
-2. Select `customer_name` from `customers` joined with `RecentOrders`.
+::: notes
+Use consistent meanings and compatible values in corresponding columns. SQLite's flexible type system should not be treated as a reason to mix unrelated values. SQLite accepts recursive CTEs even without the RECURSIVE keyword, but this lesson includes it for clarity. Source: https://www.sqlite.org/lang_with.html
+:::
 
-&lt;!-- .notes --&gt;
-# Time for your first activity. Look at the "Messy Query" on the screen. I want you to rewrite this using a WITH clause to make it readable.
-
----
-
-# Introduction to Window Functions
-
-*   **Definition:** Performs a calculation across a set of table rows that are related to the current row.
-*   **Key Difference:** Unlike `GROUP BY`, window functions **do not** collapse rows. You keep your original row detail while adding the calculation.
-
-&lt;!-- .notes --&gt;
-# Now we move to the crown jewel of advanced SQL: Window Functions. The biggest distinction to remember is that aggregate functions collapse rows into a single result, while window functions add the result to every single row.
-
----
-
-# The "Window" Concept
-
-```{mermaid}
-accTitle: Diagram showing a table where one row is highlighted to represent the 'window' of data being calculated.
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'edgeColor': '#000000'}}}%%
-graph TD
-    A[Full Table] --&gt; B[Partition / Grouping]
-    B --&gt; C[The Window / Subset of Rows]
-    C --&gt; D[Calculation Applied to Window]
-    style C fill:#ffcc00,stroke:#000,stroke-width:4px
-```
-
-*   The "Window" is the subset of rows relevant to the current row.
-*   The window is defined by the `OVER` clause.
-
-&lt;!-- .notes --&gt;
-# Think of a window as a sliding lens. As you move down the rows in your table, the lens moves with you, looking at a specific subset of data to perform its math.
-
----
-
-# Window Function Syntax
+## First recursive example: counting
 
 ```sql
-SELECT 
-    column_name,
-    FUNCTION(column_name) OVER (
-        PARTITION BY column_to_group_by
-        ORDER BY column_to_sort_by
-    ) as alias_name
-FROM table_name;
+WITH RECURSIVE numbers(n) AS (
+    SELECT 1                 -- Anchor Query
+    UNION ALL
+    SELECT n + 1             -- Recursive member
+    FROM numbers             
+    WHERE n < 5              -- Stops expansion at 5
+)
+SELECT n
+FROM numbers
+ORDER BY n;
 ```
 
-&lt;!-- .notes --&gt;
-# The `OVER` clause is what makes it a window function. Inside it, we use `PARTITION BY` to define our groups and `ORDER BY` to define the sequence of the calculation.
+**Result:** `1, 2, 3, 4, 5`.
 
----
+`numbers(n)` explicitly names the CTE's output column.
 
-# Aggregate vs. Window Functions
+## Tracing the recursion
 
-| Aggregation (`GROUP BY`) | Window Function (`OVER`) |
-| :--- | :--- |
-| Reduces the number of rows | Retains all original rows |
-| One row per group | One row per original row |
-| Useful for Summary Totals | Useful for Running Totals/Ranks |
+| Current row | Does `n < 5` hold? | New row |
+|---:|---|---:|
+| Anchor | Not evaluated | 1 |
+| 1 | Yes | 2 |
+| 2 | Yes | 3 |
+| 3 | Yes | 4 |
+| 4 | Yes | 5 |
+| 5 | No | None |
 
-&lt;!-- .notes --&gt;
-# This is the most common point of confusion. If you want a summary table, use GROUP BY. If you want to compare an individual row to a group total, use a Window Function.
+The condition checks the **current** `n` before producing `n + 1`.
 
----
+**Predict:** What would `WHERE n <= 5` produce?
 
-# PARTITION BY
+::: notes
+Answer: 1 through 6. In SQLite's evaluation model, the anchor fills a work queue, then SQLite processes queued rows and adds generated rows. This table traces a one-row-at-a-time sequence, not a claim about the evaluation order of every recursive query. Source: https://www.sqlite.org/lang_with.html
+:::
 
-*   Divides the result set into partitions.
-*   The function is applied to each partition separately.
-*   It is like `GROUP BY` for window functions, but it doesn't hide the individual rows.
 
-&lt;!-- .notes --&gt;
-# PARTITION BY is how we tell SQL where one group ends and the next begins. For example, if we partition by "Department," the math starts over for every new department.
+## The Chinook employee hierarchy
 
----
+| Level below Andrew | Employees | Direct manager |
+|---:|---|---|
+| 0 | Andrew Adams | None |
+| 1 | Nancy Edwards, Michael Mitchell | Andrew Adams |
+| 2 | Jane Peacock, Margaret Park, Steve Johnson | Nancy Edwards |
+| 2 | Robert King, Laura Callahan | Michael Mitchell |
 
-# ORDER BY in Window Functions
+A **direct report** is one link below a manager.
 
-*   Crucial for:
-    *   **Running Totals** (Cumulative sums).
-    *   **Rankings**.
-    *   **Moving Averages**.
-*   It defines the direction in which the window "slides" (e.g., from oldest to newest).
+A **descendant** can be any number of links below that manager.
 
-&lt;!-- .notes --&gt;
-# You almost always use `ORDER BY` inside your `OVER` clause. Without it, the computer doesn't know which row comes "before" or "after" another, making rankings or running totals impossible.
+`depth` will count links from the chosen starting employee.
 
----
-
-# 🛠️ Activity 2: Partitioning Practice
-
-**The Scenario:** You have a `Sales` table with `Region`, `Salesperson`, and `Amount`.
-
-**The Goal:**
-1. Show every sale.
-2. Add a column showing the **Total Sales for that specific Region** next to every row.
-3. Add a column showing the **Rank of the Salesperson** within that region based on their amount.
-
-&lt;!-- .notes --&gt;
-# In this activity, I want you to use `SUM() OVER(PARTITION BY...)` and `RANK() OVER(PARTITION BY... ORDER BY...)`. Try to visualize how the region total appears on every row.
-
----
-
-# Ranking Functions: The Big Three
-
-1.  **`ROW_NUMBER()`**: Assigns a unique, sequential integer to rows (1, 2, 3, 4).
-2.  **`RANK()`**: Assigns the same rank to ties, but **skips** the next number (1, 2, 2, 4).
-3.  **`DENSE_RANK()`**: Assigns the same rank to ties, but **does not skip** numbers (1, 2, 2, 3).
-
-&lt;!-- .notes --&gt;
-# Not all rankings are created equal. If two people tie for 2nd place, do you want the next person to be 3rd, or 4th? That's the difference between RANK and DENSE_RANK.
-
----
-
-# Ranking Comparison Diagram
-
-```{mermaid}
-accTitle: Flowchart illustrating the difference between ROW_NUMBER, RANK, and DENSE_RANK when encountering ties.
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'edgeColor': '#000000'}}}%%
-graph TD
-    A[Data: 10, 10, 8, 5] --&gt; B{Function Type}
-    B --&gt; C[ROW_NUMBER: 1, 2, 3, 4]
-    B --&gt; D[RANK: 1, 1, 3, 4]
-    B --&gt; E[DENSE_RANK: 1, 1, 2, 3]
-    style C fill:#f96,stroke:#333
-    style D fill:#69f,stroke:#333
-    style E fill:#6f9,stroke:#333
-```
-
-*   **Row Number:** Strictly unique.
-*   **Rank:** Leaves gaps.
-*   **Dense Rank:** No gaps.
-
-&lt;!-- .notes --&gt;
-# This diagram helps visualize the "Gap" behavior. Notice how RANK jumps from 1 to 3 because two people tied for 1st.
-
----
-
-# Value Functions: LEAD and LAG
-
-*   **`LAG(column)`**: Accesses data from the **previous** row.
-*   **`LEAD(column)`**: Accesses data from the **following** row.
-*   **Use Case:** Comparing this month's sales to last month's sales to calculate growth.
-
-&lt;!-- .notes --&gt;
-# LEAD and LAG are like time machines. They allow you to look back at the past row or ahead to the future row without needing a complex self-join.
-
----
-
-# Deep Dive: LAG
+## Let's Look at `Employee` Table
 
 ```sql
-SELECT 
-    month,
-    revenue,
-    LAG(revenue) OVER (ORDER BY month) as prev_month_revenue,
-    (revenue - LAG(revenue) OVER (ORDER BY month)) as revenue_diff
-FROM monthly_sales;
+SELECT *
+FROM Employee;
 ```
 
-*   **Result:** You can calculate Month-over-Month (MoM) growth instantly.
 
-&lt;!-- .notes --&gt;
-# LAG is the primary tool for time-series analysis. It's how we calculate "growth" or "change" by comparing the current row's value to the one directly above it.
-
----
-
-# Deep Dive: LEAD
+## All employees below Andrew {.compact}
 
 ```sql
-SELECT 
-    task_id,
-    due_date,
-    LEAD(due_date) OVER (ORDER BY due_date) as next_task_deadline
-FROM project_timeline;
+
+WITH RECURSIVE team(EmployeeId, employee_name, depth) AS ( -- <1>
+    SELECT EmployeeId, FirstName || ' ' || LastName, 0 -- <2>
+    FROM Employee -- <3>
+    WHERE EmployeeId = 1 -- <4>
+    UNION ALL -- <5>
+    SELECT e.EmployeeId, e.FirstName || ' ' || e.LastName, -- <6>
+           t.depth + 1 -- <7>
+    FROM Employee AS e -- <8>
+    JOIN team AS t ON e.ReportsTo = t.EmployeeId -- <9>
+) -- <10>
+SELECT employee_name, depth -- <11>
+FROM team -- <12>
+WHERE depth > 0 -- <13>
+ORDER BY depth, employee_name; -- <14>
 ```
 
-*   **Result:** Helps identify the gap between the current task and the next scheduled task.
+1. Define a recursive common table expression named `team` with three columns: employee ID, employee name, and depth.
+2. Begin the **anchor query**: select the starting employee's ID, combine their first and last names using `||`, and assign depth `0`.
+3. Read the starting employee's information from the `Employee` table.
+4. Choose employee `1`—Andrew Adams in Chinook—as the starting point.
+5. Combine the anchor row with rows generated by the recursive query, retaining duplicates.
+6. Begin the **recursive query**: select each matching employee's ID and full name.
+7. Set the employee's depth to their manager's depth plus one.
+8. Read employees from `Employee`, using `e` as a short alias.
+9. Match employees to their managers in `team`. Each match finds a direct report; repeating this step finds employees farther down the hierarchy.
+10. Close the definition of the recursive CTE.
+11. Choose the employee name and depth for the final output.
+12. Read from the completed `team` result.
+13. Exclude the starting employee at depth `0`, leaving only their descendants.
+14. Sort by depth first, then alphabetically by employee name within each depth.
 
-&lt;!-- .notes --&gt;
-# Conversely, LEAD looks forward. If you want to know how much time you have between the current event and the next event, LEAD is your friend.
 
----
 
-# 🛠️ Activity 3: The Growth Analyst
+::: notes
+This query assumes Chinook's acyclic hierarchy. The join follows a manager's EmployeeId to employees whose ReportsTo matches it. Expansion stops when no matching reports remain. Later slides add protection for cyclic data.
+:::
 
-**Scenario:** A `Stock_Prices` table has `Ticker`, `Price`, and `Date`.
+## Hierarchy query results
 
-**The Goal:**
-Write a query that returns:
-1. The `Ticker`.
-2. The `Date`.
-3. The `Price`.
-4. The `Price_Yesterday` (using LAG).
-5. The `Price_Tomorrow` (using LEAD).
-6. The `Daily_Change` (Price - Price_Yesterday).
+| employee_name | depth |
+|---|---:|
+| Michael Mitchell | 1 |
+| Nancy Edwards | 1 |
+| Jane Peacock | 2 |
+| Laura Callahan | 2 |
+| Margaret Park | 2 |
+| Robert King | 2 |
+| Steve Johnson | 2 |
 
-&lt;!-- .notes --&gt;
-# You are now a Growth Analyst. Use the LAG and LEAD functions to create a report that shows price movement in both directions.
+::: notes
+Do not assume a recursive query returns rows in a particular order without a final ORDER BY.
+:::
 
----
+## Laura's chain of managers {.compact}
 
-# Window Frames: The "Moving" Window
-
-Sometimes, you don't want to look at the *entire* partition. You only want a subset of it.
-
-*   **`ROWS BETWEEN ...`**
-*   **`UNBOUNDED PRECEDING`**: Start from the very first row of the partition.
-*   **`CURRENT ROW`**: End at the row you are on.
-*   **`1 PRECEDING`**: Look at exactly one row before.
-
-*Example: 3-Day Moving Average*
 ```sql
-AVG(price) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
+
+WITH RECURSIVE chain AS ( -- <1>
+    SELECT EmployeeId, FirstName, LastName, ReportsTo, -- <2>
+           0 AS depth -- <3>
+    FROM Employee WHERE EmployeeId = 8 -- <4>
+    UNION ALL -- <5>
+    SELECT e.EmployeeId, e.FirstName, e.LastName, e.ReportsTo, -- <6>
+           c.depth + 1 -- <7>
+    FROM Employee AS e -- <8>
+    JOIN chain AS c ON e.EmployeeId = c.ReportsTo -- <9>
+) -- <10>
+SELECT FirstName || ' ' || LastName AS manager, depth -- <11>
+FROM chain -- <12>
+WHERE depth > 0 -- <13>
+ORDER BY depth; -- <14>
 ```
 
-&lt;!-- .notes --&gt;
-# We can even limit the window size. This is how "Moving Averages" are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows.
+1. Define a recursive common table expression (CTE) named `chain` to trace an employee's managers.
+2. Begin the **anchor query** by selecting the starting employee's ID, name, and direct manager's ID (`ReportsTo`).
+3. Assign the starting employee a depth of `0`.
+4. Choose employee `8` as the starting point.
+5. Combine the starting row with rows produced by the recursive query, retaining duplicates.
+6. Begin the **recursive query** by selecting the matched manager's information, including their own manager's ID.
+7. Increase depth by one for each step up the management hierarchy.
+8. Read potential managers from `Employee`, using the alias `e`.
+9. Find the manager of the current person in `chain`: match the manager's `EmployeeId` to that person's `ReportsTo`. This moves **up** the hierarchy.
+10. Close the CTE definition. Recursion stops when no further manager matches.
+11. Combine each manager's first and last names with a space, label the column `manager`, and include depth.
+12. Read the accumulated rows from `chain`.
+13. Exclude the starting employee, keeping only their managers.
+14. Sort from the nearest manager (`depth = 1`) upward through the hierarchy.
 
----
+::: notes
+Andrew's ReportsTo is NULL, so the recursive join finds no next manager. Laura remains in the CTE at depth 0 but does not appear in the displayed result.
+:::
 
-# Summary of Window Functions
+## Termination and depth limits
 
-| Category | Functions | Best For... |
-| :--- | :--- | :--- |
-| **Ranking** | `RANK`, `DENSE_RANK`, `ROW_NUMBER` | Top N lists, finding duplicates |
-| **Value** | `LAG`, `LEAD`, `FIRST_VALUE` | Time-series, growth, trends |
-| **Aggregate** | `SUM`, `AVG`, `COUNT` | Running totals, moving averages |
+A recursive query ends when no unprocessed rows remain.
 
-&lt;!-- .notes --&gt;
-# Let's review. We've covered Ranking for lists, Value for trends, and Aggregate for moving totals.
+For these examples, expansion stops when:
 
----
+- A numeric condition fails, such as `n < 5`.
+- A join finds no more children or managers.
+- An explicit depth condition prevents another step.
 
-# 🛠️ Activity 4: The Final Boss
 
-**Scenario:** A `Student_Scores` table has `Student_ID`, `Subject`, and `Score`.
+## UNION ALL and UNION
 
-**The Challenge:**
-Write a single query that:
-1. Calculates the **Average Score** for the whole class for every student.
-2. Calculates the **Student's Rank** in their specific subject.
-3. Finds the **Difference** between their score and the highest score in that subject.
+| Operator | Treatment of generated rows |
+|---|---|
+| `UNION ALL` | Keeps repeated rows |
+| `UNION` | Discards duplicate complete rows |
 
-&lt;!-- .notes #-}
-# This is the final test. You will need to combine a Window Function (AVG), a Ranking Function (RANK), and a Subtraction operation using a Window Function.
 
----
+::: notes
+Duplicate elimination adds work. Select the operator based on the intended result and termination logic. Replacing UNION ALL with UNION does not automatically fix every cyclic traversal. Source: https://www.sqlite.org/lang_with.html
+:::
 
-# Common Mistakes to Avoid
 
-*   **Forgetting the `OVER` clause:** Window functions *require* an `OVER` clause.
-*   **Using `GROUP BY` when you meant `PARTITION BY`:** If rows are disappearing, you used `GROUP BY`.
-*   **Ordering issues:** Forgetting `ORDER BY` in `RANK()` or `LAG()` functions.
-*   **Performance:** Running window functions on massive datasets without proper indexing on the partition/order columns.
+## Activity 2: recursive CTEs
 
-&lt;!-- .notes --&gt;
-# Watch out for these. The most common error is accidentally grouping your data when you only intended to partition it.
+**A. Nancy's reports**
 
----
+Start with Nancy Edwards (`EmployeeId = 2`). Return her descendants and their depths, excluding Nancy. Sort by depth and name.
 
-# Best Practices
+**B. Jane's managers**
 
-1.  **Use CTEs for Readability:** If the logic is complex, name it!
-2.  **Index your Columns:** Ensure the columns used in `PARTITION BY` and `ORDER BY` are indexed.
-3.  **Test in Stages:** Test your CTE separately before joining it into the main query.
-4.  **Mind the NAs:** Remember that `LAG` on the first row will return `NULL`.
+Start with Jane Peacock (`EmployeeId = 3`) and move upward through her managers.
 
-&lt;!-- .notes --&gt;
-# To wrap up: Keep your code clean with CTEs, keep it fast with indexing, and always test your parts individually.
+**C. Andrew's report counts**
 
----
+Start with Andrew Adams (`EmployeeId = 1`). Count his descendants at each depth. Exclude depth 0 and sort by depth.
 
-# Summary & Review
+# Activity Solutions
 
-*   **CTEs** turn messy subqueries into clean, readable, and reusable logic.
-*   **Window Functions** allow for complex calculations (ranks, running totals) without collapsing your data.
-*   **`PARTITION BY`** creates the groups.
-*   **`ORDER BY`** defines the sequence.
-*   **`LAG`/`LEAD`** enable time-series/trend analysis.
+## Activity 1A
 
-&lt;!-- .notes --&gt;
-# We've covered a lot. We started with the "why" of CTEs and ended with the "how" of advanced Window Frames.
+```sql
 
----
+WITH country_sales AS ( -- <1>
+    SELECT BillingCountry, -- <2>
+           COUNT(*) AS invoice_count, -- <3>
+           SUM(Total) AS total_sales -- <4>
+    FROM Invoice -- <5>
+    GROUP BY BillingCountry -- <6>
+)
+SELECT BillingCountry, invoice_count, total_sales -- <7>
+FROM country_sales -- <8>
+WHERE invoice_count >= 20 -- <9>
+ORDER BY total_sales DESC; -- <10>
+```
 
-# Q&A
+1. Define a CTE named `country_sales` to summarize invoices by billing country.
+2. Select the billing country.
+3. Count the invoices in each country.
+4. Add the invoice totals to calculate each country's total sales.
+5. Read the records from the `Invoice` table.
+6. Group invoices by billing country, producing one summary row per country.
+7. Display the country, invoice count, and total sales.
+8. Read the summarized results from the CTE.
+9. Keep countries with at least 20 invoices.
+10. Sort total sales from largest to smallest.
 
-## Thank You!
+## Activity 1B
 
-**Any Questions?**
+```sql
 
-&lt;!-- .notes --&gt;
-# Thank you for your attention. I'll now open the floor for any questions regarding CTEs or Window Functions.
+WITH country_summary AS ( -- <1>
+    SELECT BillingCountry,
+           COUNT(*) AS invoice_count, -- <2>
+           AVG(Total) AS average_total -- <3>
+    FROM Invoice
+    GROUP BY BillingCountry -- <4>
+),
+eligible_countries AS ( -- <5>
+    SELECT BillingCountry, invoice_count, average_total
+    FROM country_summary -- <6>
+    WHERE invoice_count >= 20 -- <7>
+)
+SELECT BillingCountry, invoice_count, average_total -- <8>
+FROM eligible_countries
+WHERE average_total > 5.50 -- <9>
+ORDER BY average_total DESC; -- <10>
+```
+
+1. Define the first CTE, `country_summary`, to summarize invoices by billing country.
+2. Count the invoices for each country.
+3. Calculate each country's average invoice total.
+4. Group invoices by billing country, producing one summary row per country.
+5. Define the second CTE, `eligible_countries`. A comma separates the two CTE definitions.
+6. Read the summarized results from the first CTE.
+7. Keep countries with at least 20 invoices.
+8. Display the country, invoice count, and average invoice total from the second CTE.
+9. Keep only countries whose average invoice total is strictly greater than 5.50.
+10. Sort by average invoice total from largest to smallest.
+
+## Activity 2A
+
+```sql
+
+WITH RECURSIVE team AS ( -- <1>
+    SELECT EmployeeId, FirstName || ' ' || LastName AS employee_name,
+           0 AS depth -- <2>
+    FROM Employee
+    WHERE EmployeeId = 2 -- <3>
+    UNION ALL -- <4>
+    SELECT e.EmployeeId, e.FirstName || ' ' || e.LastName,
+           t.depth + 1 -- <5>
+    FROM Employee AS e
+    JOIN team AS t ON e.ReportsTo = t.EmployeeId -- <6>
+)
+SELECT employee_name, depth
+FROM team
+WHERE depth > 0 -- <7>
+ORDER BY depth, employee_name; -- <8>
+```
+
+1. Define a recursive CTE named `team`.
+2. Select the starting employee and assign depth `0`.
+3. Choose Nancy Edwards as the starting employee.
+4. Combine the anchor row with rows generated by recursion, retaining duplicates.
+5. Assign each direct report a depth one greater than their manager's.
+6. Move **down** the hierarchy: find employees whose `ReportsTo` matches the current manager's ID.
+7. Exclude Nancy from the final result.
+8. Sort by distance below Nancy, then alphabetically by name.
+
+## Activity 2B
+
+```sql
+
+WITH RECURSIVE chain AS (
+    SELECT EmployeeId, FirstName, LastName, ReportsTo,
+           0 AS depth -- <1>
+    FROM Employee
+    WHERE EmployeeId = 3 -- <2>
+    UNION ALL
+    SELECT e.EmployeeId, e.FirstName, e.LastName, e.ReportsTo,
+           c.depth + 1 -- <3>
+    FROM Employee AS e
+    JOIN chain AS c ON e.EmployeeId = c.ReportsTo -- <4>
+)
+SELECT FirstName || ' ' || LastName AS manager, depth -- <5>
+FROM chain
+WHERE depth > 0 -- <6>
+ORDER BY depth; -- <7>
+```
+
+1. Keep the employee's manager ID (`ReportsTo`) so the recursive query can find the next manager. Start at depth `0`.
+2. Choose Jane Peacock as the starting employee.
+3. Increase depth by one for each step upward.
+4. Move **up** the hierarchy by matching the current person's manager ID to an employee ID.
+5. Display each manager's full name and depth.
+6. Exclude Jane, leaving only her managers.
+7. Show the nearest manager first.
+
+## Activity 2C
+
+```sql
+
+WITH RECURSIVE descendants AS ( -- <1>
+    SELECT EmployeeId, 0 AS depth -- <2>
+    FROM Employee
+    WHERE EmployeeId = 1 -- <3>
+    UNION ALL -- <4>
+    SELECT e.EmployeeId, d.depth + 1 -- <5>
+    FROM Employee AS e
+    JOIN descendants AS d ON e.ReportsTo = d.EmployeeId -- <6>
+)
+SELECT depth, COUNT(*) AS descendant_count -- <7>
+FROM descendants
+WHERE depth > 0 -- <8>
+GROUP BY depth -- <9>
+ORDER BY depth; -- <10>
+```
+
+1. Define a recursive CTE named `descendants`.
+2. Select the starting employee and assign depth `0`.
+3. Choose Andrew Adams as the starting employee.
+4. Combine the anchor row with rows generated by the recursive query.
+5. Select each newly found employee and assign their manager's depth plus one.
+6. Move downward through the hierarchy by finding employees who report to the current person.
+7. Display each depth and count the descendants at that depth.
+8. Exclude Andrew, whose depth is `0`.
+9. Group the remaining employees by depth so each level has its own count.
+10. Sort by depth in ascending order.
+

@@ -42,46 +42,214 @@
     "text": "Deadline And Extensions\nThe report will be due on December 4, 2026 at 11:59 PM. For your report, you may receive a 24-hour extension beyond the due date for evey time you attend the writing and multiliteracy center. Each appointment must be one week apart."
   },
   {
-    "objectID": "posts/5.html",
-    "href": "posts/5.html",
-    "title": "Week 5",
+    "objectID": "posts/6.html",
+    "href": "posts/6.html",
+    "title": "Week 6",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/5.html#resources",
-    "href": "posts/5.html#resources",
-    "title": "Week 5",
+    "objectID": "posts/6.html#resources",
+    "href": "posts/6.html#resources",
+    "title": "Week 6",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/3.html",
-    "href": "posts/3.html",
-    "title": "Week 3",
+    "objectID": "posts/4.html",
+    "href": "posts/4.html",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/3.html#resources",
-    "href": "posts/3.html#resources",
-    "title": "Week 3",
+    "objectID": "posts/4.html#resources",
+    "href": "posts/4.html#resources",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/1.html",
-    "href": "posts/1.html",
-    "title": "Week 1",
+    "objectID": "posts/2.html",
+    "href": "posts/2.html",
+    "title": "Week 2",
     "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
   },
   {
-    "objectID": "posts/1.html#resources",
-    "href": "posts/1.html#resources",
-    "title": "Week 1",
+    "objectID": "posts/2.html#resources",
+    "href": "posts/2.html#resources",
+    "title": "Week 2",
     "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "lectures/7a.html#common-table-expressions-ctes",
+    "href": "lectures/7a.html#common-table-expressions-ctes",
+    "title": "Advanced SQL",
+    "section": "Common Table Expressions (CTEs)",
+    "text": "Common Table Expressions (CTEs)\nA common table expression (CTE) names a query result that you can reference within a single SQL statement.\n\nDefined with WITH.\nReusable in the statement\nIts scope ends when the statement ends.\n\nA CTE helps organize query logic. It does not create a permanent table.\n\nA CTE is a logical named result. SQLite can choose different execution strategies, so do not assume that every CTE stores a physical intermediate table. Source: https://www.sqlite.org/lang_with.html"
+  },
+  {
+    "objectID": "lectures/7a.html#the-structure-of-an-ordinary-cte",
+    "href": "lectures/7a.html#the-structure-of-an-ordinary-cte",
+    "title": "Advanced SQL",
+    "section": "The structure of an ordinary CTE",
+    "text": "The structure of an ordinary CTE\n\n1WITH large_invoices AS (\n2    SELECT InvoiceId, CustomerId, Total\n3    FROM Invoice\n4    WHERE Total &gt;= 20\n)\n5SELECT InvoiceId, CustomerId, Total\n6FROM large_invoices\n7ORDER BY Total DESC, InvoiceId;\n\n1\n\nDefine a common table expression (CTE) named large_invoices.\n\n2\n\nSelect each invoice’s ID, customer ID, and total.\n\n3\n\nRead records from the Invoice table.\n\n4\n\nKeep invoices with a total of at least 20.\n\n5\n\nDisplay the invoice ID, customer ID, and total in the final result.\n\n6\n\nRead the filtered records from large_invoices.\n\n7\n\nSort by total from largest to smallest. For invoices with the same total, sort by invoice ID in ascending order."
+  },
+  {
+    "objectID": "lectures/7a.html#cte-vs.-subquery",
+    "href": "lectures/7a.html#cte-vs.-subquery",
+    "title": "Advanced SQL",
+    "section": "CTE vs. Subquery",
+    "text": "CTE vs. Subquery\n\n\n\n\n\n\n\n\nFeature\nSubquery\nCTE\n\n\n\n\nReadability\nLow (Nested)\nHigh (Sequential)\n\n\nReusability\nCan only be used once\nCan be referenced multiple times\n\n\nDebugging\nDifficult\nEasy (Test CTE separately)\n\n\nComplexity\nHard to manage\nGreat for complex logic\n\n\n\n\nWhen deciding which to use, remember: If you are nesting more than one level deep, or if you need to use the same logic twice in one query, reach for a CTE."
+  },
+  {
+    "objectID": "lectures/7a.html#aggregating-inside-a-cte",
+    "href": "lectures/7a.html#aggregating-inside-a-cte",
+    "title": "Advanced SQL",
+    "section": "Aggregating inside a CTE",
+    "text": "Aggregating inside a CTE\nQuestion: Which billing countries have total sales above 200?\n\n1WITH country_sales AS (\n2    SELECT BillingCountry, SUM(Total) AS total_sales\n3    FROM Invoice\n4    GROUP BY BillingCountry\n)\n5SELECT BillingCountry, ROUND(total_sales, 2) AS total_sales\n6FROM country_sales\n7WHERE total_sales &gt; 200\n8ORDER BY total_sales DESC;\n\n1\n\nDefine a common table expression (CTE) named country_sales.\n\n2\n\nSelect each billing country and calculate its total sales by adding invoice totals.\n\n3\n\nRead records from the Invoice table.\n\n4\n\nGroup invoices by billing country, producing one summary row per country.\n\n5\n\nDisplay each country and its total sales rounded to two decimal places.\n\n6\n\nRead the summarized records from country_sales.\n\n7\n\nKeep countries whose unrounded total sales exceed 200.\n\n8\n\nSort by the displayed total sales from largest to smallest."
+  },
+  {
+    "objectID": "lectures/7a.html#multiple-ctes-in-one-statement",
+    "href": "lectures/7a.html#multiple-ctes-in-one-statement",
+    "title": "Advanced SQL",
+    "section": "Multiple CTEs in one statement",
+    "text": "Multiple CTEs in one statement\n\n1WITH country_stats AS (\n2    SELECT BillingCountry, COUNT(*) AS invoice_count,\n3           SUM(Total) AS total_sales\n4    FROM Invoice\n5    GROUP BY BillingCountry\n),\n6busy_countries AS (\n7    SELECT * FROM country_stats\n8    WHERE invoice_count &gt;= 20\n)\nSELECT BillingCountry, invoice_count,\n9       ROUND(total_sales, 2) AS total_sales\n10FROM busy_countries\n11ORDER BY total_sales DESC\n12LIMIT 3;\n\n1\n\nDefine the first CTE, country_stats, to summarize invoices by billing country.\n\n2\n\nSelect each country and count its invoices.\n\n3\n\nAdd invoice totals to calculate each country’s total sales.\n\n4\n\nRead records from the Invoice table.\n\n5\n\nGroup invoices by country, producing one summary row per country.\n\n6\n\nDefine the second CTE, busy_countries. A comma separates the two CTE definitions.\n\n7\n\nSelect all columns from the first CTE.\n\n8\n\nKeep countries with at least 20 invoices.\n\n9\n\nDisplay each country’s name, invoice count, and total sales rounded to two decimal places.\n\n10\n\nRead the qualifying countries from the second CTE.\n\n11\n\nSort by the rounded total sales from largest to smallest.\n\n12\n\nReturn only the first three countries from the sorted results.\n\n\nUse one WITH and commas between CTE definitions."
+  },
+  {
+    "objectID": "lectures/7a.html#joining-a-cte-to-a-table",
+    "href": "lectures/7a.html#joining-a-cte-to-a-table",
+    "title": "Advanced SQL",
+    "section": "Joining a CTE to a table",
+    "text": "Joining a CTE to a table\nQuestion: Which customers have spent the most?\n\n1WITH customer_spending AS (\n2    SELECT CustomerId, SUM(Total) AS total_spent\n3    FROM Invoice\n4    GROUP BY CustomerId\n)\n5SELECT c.FirstName || ' ' || c.LastName AS customer,\n6       ROUND(s.total_spent, 2) AS total_spent\n7FROM Customer AS c\n8JOIN customer_spending AS s ON c.CustomerId = s.CustomerId\n9ORDER BY s.total_spent DESC, c.CustomerId\n10LIMIT 5;\n\n1\n\nDefine a CTE named customer_spending to summarize spending by customer.\n\n2\n\nSelect each customer’s ID and add their invoice totals to calculate total spending.\n\n3\n\nRead records from the Invoice table.\n\n4\n\nGroup invoices by customer ID, producing one summary row per customer with invoices.\n\n5\n\nCombine the customer’s first and last names with a space, naming the output column customer.\n\n6\n\nDisplay total spending rounded to two decimal places.\n\n7\n\nRead customer information from Customer, using the alias c.\n\n8\n\nUse an inner join to match customers with their spending summaries by customer ID. The alias s refers to customer_spending.\n\n9\n\nSort by unrounded total spending from largest to smallest. Break ties using customer ID in ascending order.\n\n10\n\nReturn the first five customers from the sorted results.\n\n\nThe CTE summarizes invoices. The join adds customer names.\n\nThe output contains Helena Holý (49.62), Richard Cunningham (47.62), Luis Rojas (46.62), Ladislav Kovács (45.62), and Hugh O’Reilly (45.62), in that order after the CustomerId tie-breaker. The inner join includes customers with invoices. A LEFT JOIN plus COALESCE would be needed to include customers with zero invoices."
+  },
+  {
+    "objectID": "lectures/7a.html#activity-1-ordinary-ctes",
+    "href": "lectures/7a.html#activity-1-ordinary-ctes",
+    "title": "Advanced SQL",
+    "section": "Activity 1: ordinary CTEs",
+    "text": "Activity 1: ordinary CTEs\nA. Sales by billing country\nCreate a CTE with each billing country’s invoice count and total sales. Return countries with at least 20 invoices. Sort by total sales from largest to smallest.\nB. Larger average invoices\nUse two CTEs: first calculate invoice counts and average invoice totals by billing country, then keep countries with at least 20 invoices. Return those with an average invoice total above 5.50, sorted by average total from largest to smallest."
+  },
+  {
+    "objectID": "lectures/7a.html#what-is-recursion",
+    "href": "lectures/7a.html#what-is-recursion",
+    "title": "Advanced SQL",
+    "section": "What is recursion?",
+    "text": "What is recursion?\nRecursion is a process that uses its own previous result to produce the next result. It needs a starting point and a condition that stops it."
+  },
+  {
+    "objectID": "lectures/7a.html#parts-of-a-recursive-cte",
+    "href": "lectures/7a.html#parts-of-a-recursive-cte",
+    "title": "Advanced SQL",
+    "section": "Parts of a recursive CTE",
+    "text": "Parts of a recursive CTE\n\n\n\n\n\n\n\nPart\nPurpose\n\n\n\n\nWITH RECURSIVE\nIntroduces the CTE definitions\n\n\nAnchor query\nProduces the starting rows\n\n\nUNION ALL\nCombines generated rows, keeping duplicates (Adds Rows to the new table)\n\n\nRecursive member\nReferences the CTE to generate more rows\n\n\nTermination rule\nPrevents further expansion when finished\n\n\nFinal query\nSelects and orders the result\n\n\n\nThe anchor and recursive member must return the same number of columns in corresponding positions.\n\nUse consistent meanings and compatible values in corresponding columns. SQLite’s flexible type system should not be treated as a reason to mix unrelated values. SQLite accepts recursive CTEs even without the RECURSIVE keyword, but this lesson includes it for clarity. Source: https://www.sqlite.org/lang_with.html"
+  },
+  {
+    "objectID": "lectures/7a.html#first-recursive-example-counting",
+    "href": "lectures/7a.html#first-recursive-example-counting",
+    "title": "Advanced SQL",
+    "section": "First recursive example: counting",
+    "text": "First recursive example: counting\nWITH RECURSIVE numbers(n) AS (\n    SELECT 1                 -- Anchor Query\n    UNION ALL\n    SELECT n + 1             -- Recursive member\n    FROM numbers             \n    WHERE n &lt; 5              -- Stops expansion at 5\n)\nSELECT n\nFROM numbers\nORDER BY n;\nResult: 1, 2, 3, 4, 5.\nnumbers(n) explicitly names the CTE’s output column."
+  },
+  {
+    "objectID": "lectures/7a.html#tracing-the-recursion",
+    "href": "lectures/7a.html#tracing-the-recursion",
+    "title": "Advanced SQL",
+    "section": "Tracing the recursion",
+    "text": "Tracing the recursion\n\n\n\nCurrent row\nDoes n &lt; 5 hold?\nNew row\n\n\n\n\nAnchor\nNot evaluated\n1\n\n\n1\nYes\n2\n\n\n2\nYes\n3\n\n\n3\nYes\n4\n\n\n4\nYes\n5\n\n\n5\nNo\nNone\n\n\n\nThe condition checks the current n before producing n + 1.\nPredict: What would WHERE n &lt;= 5 produce?\n\nAnswer: 1 through 6. In SQLite’s evaluation model, the anchor fills a work queue, then SQLite processes queued rows and adds generated rows. This table traces a one-row-at-a-time sequence, not a claim about the evaluation order of every recursive query. Source: https://www.sqlite.org/lang_with.html"
+  },
+  {
+    "objectID": "lectures/7a.html#the-chinook-employee-hierarchy",
+    "href": "lectures/7a.html#the-chinook-employee-hierarchy",
+    "title": "Advanced SQL",
+    "section": "The Chinook employee hierarchy",
+    "text": "The Chinook employee hierarchy\n\n\n\nLevel below Andrew\nEmployees\nDirect manager\n\n\n\n\n0\nAndrew Adams\nNone\n\n\n1\nNancy Edwards, Michael Mitchell\nAndrew Adams\n\n\n2\nJane Peacock, Margaret Park, Steve Johnson\nNancy Edwards\n\n\n2\nRobert King, Laura Callahan\nMichael Mitchell\n\n\n\nA direct report is one link below a manager.\nA descendant can be any number of links below that manager.\ndepth will count links from the chosen starting employee."
+  },
+  {
+    "objectID": "lectures/7a.html#lets-look-at-employee-table",
+    "href": "lectures/7a.html#lets-look-at-employee-table",
+    "title": "Advanced SQL",
+    "section": "Let’s Look at Employee Table",
+    "text": "Let’s Look at Employee Table\nSELECT *\nFROM Employee;"
+  },
+  {
+    "objectID": "lectures/7a.html#all-employees-below-andrew",
+    "href": "lectures/7a.html#all-employees-below-andrew",
+    "title": "Advanced SQL",
+    "section": "All employees below Andrew",
+    "text": "All employees below Andrew\n\n1WITH RECURSIVE team(EmployeeId, employee_name, depth) AS (\n2    SELECT EmployeeId, FirstName || ' ' || LastName, 0\n3    FROM Employee\n4    WHERE EmployeeId = 1\n5    UNION ALL\n6    SELECT e.EmployeeId, e.FirstName || ' ' || e.LastName,\n7           t.depth + 1\n8    FROM Employee AS e\n9    JOIN team AS t ON e.ReportsTo = t.EmployeeId\n10)\n11SELECT employee_name, depth\n12FROM team\n13WHERE depth &gt; 0\n14ORDER BY depth, employee_name;\n\n1\n\nDefine a recursive common table expression named team with three columns: employee ID, employee name, and depth.\n\n2\n\nBegin the anchor query: select the starting employee’s ID, combine their first and last names using ||, and assign depth 0.\n\n3\n\nRead the starting employee’s information from the Employee table.\n\n4\n\nChoose employee 1—Andrew Adams in Chinook—as the starting point.\n\n5\n\nCombine the anchor row with rows generated by the recursive query, retaining duplicates.\n\n6\n\nBegin the recursive query: select each matching employee’s ID and full name.\n\n7\n\nSet the employee’s depth to their manager’s depth plus one.\n\n8\n\nRead employees from Employee, using e as a short alias.\n\n9\n\nMatch employees to their managers in team. Each match finds a direct report; repeating this step finds employees farther down the hierarchy.\n\n10\n\nClose the definition of the recursive CTE.\n\n11\n\nChoose the employee name and depth for the final output.\n\n12\n\nRead from the completed team result.\n\n13\n\nExclude the starting employee at depth 0, leaving only their descendants.\n\n14\n\nSort by depth first, then alphabetically by employee name within each depth.\n\n\n\nThis query assumes Chinook’s acyclic hierarchy. The join follows a manager’s EmployeeId to employees whose ReportsTo matches it. Expansion stops when no matching reports remain. Later slides add protection for cyclic data."
+  },
+  {
+    "objectID": "lectures/7a.html#hierarchy-query-results",
+    "href": "lectures/7a.html#hierarchy-query-results",
+    "title": "Advanced SQL",
+    "section": "Hierarchy query results",
+    "text": "Hierarchy query results\n\n\n\nemployee_name\ndepth\n\n\n\n\nMichael Mitchell\n1\n\n\nNancy Edwards\n1\n\n\nJane Peacock\n2\n\n\nLaura Callahan\n2\n\n\nMargaret Park\n2\n\n\nRobert King\n2\n\n\nSteve Johnson\n2\n\n\n\n\nDo not assume a recursive query returns rows in a particular order without a final ORDER BY."
+  },
+  {
+    "objectID": "lectures/7a.html#lauras-chain-of-managers",
+    "href": "lectures/7a.html#lauras-chain-of-managers",
+    "title": "Advanced SQL",
+    "section": "Laura’s chain of managers",
+    "text": "Laura’s chain of managers\n\n1WITH RECURSIVE chain AS (\n2    SELECT EmployeeId, FirstName, LastName, ReportsTo,\n3           0 AS depth\n4    FROM Employee WHERE EmployeeId = 8\n5    UNION ALL\n6    SELECT e.EmployeeId, e.FirstName, e.LastName, e.ReportsTo,\n7           c.depth + 1\n8    FROM Employee AS e\n9    JOIN chain AS c ON e.EmployeeId = c.ReportsTo\n10)\n11SELECT FirstName || ' ' || LastName AS manager, depth\n12FROM chain\n13WHERE depth &gt; 0\n14ORDER BY depth;\n\n1\n\nDefine a recursive common table expression (CTE) named chain to trace an employee’s managers.\n\n2\n\nBegin the anchor query by selecting the starting employee’s ID, name, and direct manager’s ID (ReportsTo).\n\n3\n\nAssign the starting employee a depth of 0.\n\n4\n\nChoose employee 8 as the starting point.\n\n5\n\nCombine the starting row with rows produced by the recursive query, retaining duplicates.\n\n6\n\nBegin the recursive query by selecting the matched manager’s information, including their own manager’s ID.\n\n7\n\nIncrease depth by one for each step up the management hierarchy.\n\n8\n\nRead potential managers from Employee, using the alias e.\n\n9\n\nFind the manager of the current person in chain: match the manager’s EmployeeId to that person’s ReportsTo. This moves up the hierarchy.\n\n10\n\nClose the CTE definition. Recursion stops when no further manager matches.\n\n11\n\nCombine each manager’s first and last names with a space, label the column manager, and include depth.\n\n12\n\nRead the accumulated rows from chain.\n\n13\n\nExclude the starting employee, keeping only their managers.\n\n14\n\nSort from the nearest manager (depth = 1) upward through the hierarchy.\n\n\n\nAndrew’s ReportsTo is NULL, so the recursive join finds no next manager. Laura remains in the CTE at depth 0 but does not appear in the displayed result."
+  },
+  {
+    "objectID": "lectures/7a.html#termination-and-depth-limits",
+    "href": "lectures/7a.html#termination-and-depth-limits",
+    "title": "Advanced SQL",
+    "section": "Termination and depth limits",
+    "text": "Termination and depth limits\nA recursive query ends when no unprocessed rows remain.\nFor these examples, expansion stops when:\n\nA numeric condition fails, such as n &lt; 5.\nA join finds no more children or managers.\nAn explicit depth condition prevents another step."
+  },
+  {
+    "objectID": "lectures/7a.html#union-all-and-union",
+    "href": "lectures/7a.html#union-all-and-union",
+    "title": "Advanced SQL",
+    "section": "UNION ALL and UNION",
+    "text": "UNION ALL and UNION\n\n\n\nOperator\nTreatment of generated rows\n\n\n\n\nUNION ALL\nKeeps repeated rows\n\n\nUNION\nDiscards duplicate complete rows\n\n\n\n\nDuplicate elimination adds work. Select the operator based on the intended result and termination logic. Replacing UNION ALL with UNION does not automatically fix every cyclic traversal. Source: https://www.sqlite.org/lang_with.html"
+  },
+  {
+    "objectID": "lectures/7a.html#activity-2-recursive-ctes",
+    "href": "lectures/7a.html#activity-2-recursive-ctes",
+    "title": "Advanced SQL",
+    "section": "Activity 2: recursive CTEs",
+    "text": "Activity 2: recursive CTEs\nA. Nancy’s reports\nStart with Nancy Edwards (EmployeeId = 2). Return her descendants and their depths, excluding Nancy. Sort by depth and name.\nB. Jane’s managers\nStart with Jane Peacock (EmployeeId = 3) and move upward through her managers.\nC. Andrew’s report counts\nStart with Andrew Adams (EmployeeId = 1). Count his descendants at each depth. Exclude depth 0 and sort by depth."
+  },
+  {
+    "objectID": "lectures/7a.html#activity-1a",
+    "href": "lectures/7a.html#activity-1a",
+    "title": "Advanced SQL",
+    "section": "Activity 1A",
+    "text": "Activity 1A\n\n1WITH country_sales AS (\n2    SELECT BillingCountry,\n3           COUNT(*) AS invoice_count,\n4           SUM(Total) AS total_sales\n5    FROM Invoice\n6    GROUP BY BillingCountry\n)\n7SELECT BillingCountry, invoice_count, total_sales\n8FROM country_sales\n9WHERE invoice_count &gt;= 20\n10ORDER BY total_sales DESC;\n\n1\n\nDefine a CTE named country_sales to summarize invoices by billing country.\n\n2\n\nSelect the billing country.\n\n3\n\nCount the invoices in each country.\n\n4\n\nAdd the invoice totals to calculate each country’s total sales.\n\n5\n\nRead the records from the Invoice table.\n\n6\n\nGroup invoices by billing country, producing one summary row per country.\n\n7\n\nDisplay the country, invoice count, and total sales.\n\n8\n\nRead the summarized results from the CTE.\n\n9\n\nKeep countries with at least 20 invoices.\n\n10\n\nSort total sales from largest to smallest."
+  },
+  {
+    "objectID": "lectures/7a.html#activity-1b",
+    "href": "lectures/7a.html#activity-1b",
+    "title": "Advanced SQL",
+    "section": "Activity 1B",
+    "text": "Activity 1B\n\n1WITH country_summary AS (\n    SELECT BillingCountry,\n2           COUNT(*) AS invoice_count,\n3           AVG(Total) AS average_total\n    FROM Invoice\n4    GROUP BY BillingCountry\n),\n5eligible_countries AS (\n    SELECT BillingCountry, invoice_count, average_total\n6    FROM country_summary\n7    WHERE invoice_count &gt;= 20\n)\n8SELECT BillingCountry, invoice_count, average_total\nFROM eligible_countries\n9WHERE average_total &gt; 5.50\n10ORDER BY average_total DESC;\n\n1\n\nDefine the first CTE, country_summary, to summarize invoices by billing country.\n\n2\n\nCount the invoices for each country.\n\n3\n\nCalculate each country’s average invoice total.\n\n4\n\nGroup invoices by billing country, producing one summary row per country.\n\n5\n\nDefine the second CTE, eligible_countries. A comma separates the two CTE definitions.\n\n6\n\nRead the summarized results from the first CTE.\n\n7\n\nKeep countries with at least 20 invoices.\n\n8\n\nDisplay the country, invoice count, and average invoice total from the second CTE.\n\n9\n\nKeep only countries whose average invoice total is strictly greater than 5.50.\n\n10\n\nSort by average invoice total from largest to smallest."
+  },
+  {
+    "objectID": "lectures/7a.html#activity-2a",
+    "href": "lectures/7a.html#activity-2a",
+    "title": "Advanced SQL",
+    "section": "Activity 2A",
+    "text": "Activity 2A\n\n1WITH RECURSIVE team AS (\n    SELECT EmployeeId, FirstName || ' ' || LastName AS employee_name,\n2           0 AS depth\n    FROM Employee\n3    WHERE EmployeeId = 2\n4    UNION ALL\n    SELECT e.EmployeeId, e.FirstName || ' ' || e.LastName,\n5           t.depth + 1\n    FROM Employee AS e\n6    JOIN team AS t ON e.ReportsTo = t.EmployeeId\n)\nSELECT employee_name, depth\nFROM team\n7WHERE depth &gt; 0\n8ORDER BY depth, employee_name;\n\n1\n\nDefine a recursive CTE named team.\n\n2\n\nSelect the starting employee and assign depth 0.\n\n3\n\nChoose Nancy Edwards as the starting employee.\n\n4\n\nCombine the anchor row with rows generated by recursion, retaining duplicates.\n\n5\n\nAssign each direct report a depth one greater than their manager’s.\n\n6\n\nMove down the hierarchy: find employees whose ReportsTo matches the current manager’s ID.\n\n7\n\nExclude Nancy from the final result.\n\n8\n\nSort by distance below Nancy, then alphabetically by name."
+  },
+  {
+    "objectID": "lectures/7a.html#activity-2b",
+    "href": "lectures/7a.html#activity-2b",
+    "title": "Advanced SQL",
+    "section": "Activity 2B",
+    "text": "Activity 2B\n\nWITH RECURSIVE chain AS (\n    SELECT EmployeeId, FirstName, LastName, ReportsTo,\n1           0 AS depth\n    FROM Employee\n2    WHERE EmployeeId = 3\n    UNION ALL\n    SELECT e.EmployeeId, e.FirstName, e.LastName, e.ReportsTo,\n3           c.depth + 1\n    FROM Employee AS e\n4    JOIN chain AS c ON e.EmployeeId = c.ReportsTo\n)\n5SELECT FirstName || ' ' || LastName AS manager, depth\nFROM chain\n6WHERE depth &gt; 0\n7ORDER BY depth;\n\n1\n\nKeep the employee’s manager ID (ReportsTo) so the recursive query can find the next manager. Start at depth 0.\n\n2\n\nChoose Jane Peacock as the starting employee.\n\n3\n\nIncrease depth by one for each step upward.\n\n4\n\nMove up the hierarchy by matching the current person’s manager ID to an employee ID.\n\n5\n\nDisplay each manager’s full name and depth.\n\n6\n\nExclude Jane, leaving only her managers.\n\n7\n\nShow the nearest manager first."
+  },
+  {
+    "objectID": "lectures/7a.html#activity-2c",
+    "href": "lectures/7a.html#activity-2c",
+    "title": "Advanced SQL",
+    "section": "Activity 2C",
+    "text": "Activity 2C\n\n1WITH RECURSIVE descendants AS (\n2    SELECT EmployeeId, 0 AS depth\n    FROM Employee\n3    WHERE EmployeeId = 1\n4    UNION ALL\n5    SELECT e.EmployeeId, d.depth + 1\n    FROM Employee AS e\n6    JOIN descendants AS d ON e.ReportsTo = d.EmployeeId\n)\n7SELECT depth, COUNT(*) AS descendant_count\nFROM descendants\n8WHERE depth &gt; 0\n9GROUP BY depth\n10ORDER BY depth;\n\n1\n\nDefine a recursive CTE named descendants.\n\n2\n\nSelect the starting employee and assign depth 0.\n\n3\n\nChoose Andrew Adams as the starting employee.\n\n4\n\nCombine the anchor row with rows generated by the recursive query.\n\n5\n\nSelect each newly found employee and assign their manager’s depth plus one.\n\n6\n\nMove downward through the hierarchy by finding employees who report to the current person.\n\n7\n\nDisplay each depth and count the descendants at that depth.\n\n8\n\nExclude Andrew, whose depth is 0.\n\n9\n\nGroup the remaining employees by depth so each level has its own count.\n\n10\n\nSort by depth in ascending order."
   },
   {
     "objectID": "lectures/5a.html#sql-basics",
@@ -837,7 +1005,7 @@
     "href": "index.html",
     "title": "Welcome to Introduction to Data Management!",
     "section": "",
-    "text": "Week 6\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Week 7\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nOct 4, 2026\n\n\n\n\n\n\n\nWeek 6\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "a/4.html",
@@ -977,7 +1145,7 @@
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\n\n\nSQL Basics\n\n\n\n\n\n\n\n\n\n\nSQL: Joins, Subqueries, and Views\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\n\n\nSQL Basics\n\n\n\n\n\n\n\n\n\n\nSQL: Joins, Subqueries, and Views\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures/1b.html#sql-and-relational-databases",
@@ -1596,44 +1764,58 @@
     "text": "Views Activity: Solutions 2 and 3\n-- Ten customers with the highest total spending\nSELECT *\nFROM customer_invoice_summary\nORDER BY TotalSpent DESC\nLIMIT 10;\n\n-- USA customers who spent more than $40\nSELECT *\nFROM customer_invoice_summary\nWHERE Country = 'USA'\n  AND TotalSpent &gt; 40\nORDER BY TotalSpent DESC;"
   },
   {
-    "objectID": "posts/2.html",
-    "href": "posts/2.html",
-    "title": "Week 2",
+    "objectID": "posts/1.html",
+    "href": "posts/1.html",
+    "title": "Week 1",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
   },
   {
-    "objectID": "posts/2.html#resources",
-    "href": "posts/2.html#resources",
-    "title": "Week 2",
+    "objectID": "posts/1.html#resources",
+    "href": "posts/1.html#resources",
+    "title": "Week 1",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
   },
   {
-    "objectID": "posts/4.html",
-    "href": "posts/4.html",
-    "title": "Week 4",
-    "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
-  },
-  {
-    "objectID": "posts/4.html#resources",
-    "href": "posts/4.html#resources",
-    "title": "Week 4",
+    "objectID": "posts/3.html",
+    "href": "posts/3.html",
+    "title": "Week 3",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/6.html",
-    "href": "posts/6.html",
-    "title": "Week 6",
+    "objectID": "posts/3.html#resources",
+    "href": "posts/3.html#resources",
+    "title": "Week 3",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/6.html#resources",
-    "href": "posts/6.html#resources",
-    "title": "Week 6",
+    "objectID": "posts/5.html",
+    "href": "posts/5.html",
+    "title": "Week 5",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/5.html#resources",
+    "href": "posts/5.html#resources",
+    "title": "Week 5",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/7.html",
+    "href": "posts/7.html",
+    "title": "Week 7",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/7.html#resources",
+    "href": "posts/7.html#resources",
+    "title": "Week 7",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   }
