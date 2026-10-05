@@ -1,0 +1,824 @@
+---
+title: "Advanced SQL"
+subtitle: "Common Table Expressions"
+format:
+  revealjs:
+    scrollable: true
+    navigation-mode: vertical
+    theme: [default, styles.scss]
+    controls-layout: edges
+    controls-tutorial: true
+    code-annotations: select
+    progress: true
+    slide-number: c/t
+    incremental: false 
+    
+revealjs-plugins:
+  - pointer
+  
+filters: 
+  - code-fullscreen
+  - reveal-auto-agenda
+
+editor: source
+
+order: 10
+---
+
+
+## Databases and downloads
+
+| Database | Download | Tables used |
+|---|---|---|
+| Chinook | [Chinook releases](https://github.com/lerocha/chinook-database/releases)  | `Invoice` |
+| Northwind | [northwind.db](https://github.com/jpwhite3/northwind-SQLite3/blob/main/dist/northwind.db)  | `Products`, `Categories`, `Orders`, `"Order Details"` |
+
+
+::: notes
+Sources: https://github.com/lerocha/chinook-database and https://github.com/jpwhite3/northwind-SQLite3
+:::
+
+
+
+## Long and wide layouts
+
+**Illustrative sales totals, not Chinook output**
+
+:::: {.columns}
+::: {.column width="48%"}
+**Long: one row per country and month**
+
+| country | month | sales |
+|---|---|---:|
+| Canada | Jan | 30 |
+| Canada | Feb | 20 |
+| USA | Jan | 50 |
+| USA | Feb | 40 |
+:::
+::: {.column width="48%"}
+**Wide: one row per country**
+
+| country | Jan | Feb |
+|---|---:|---:|
+| Canada | 30 | 20 |
+| USA | 50 | 40 |
+
+**Pivot:** category values become columns.
+
+**Unpivot:** columns become category/value rows.
+:::
+::::
+
+## The three decisions in a pivot
+
+For a report of monthly sales by country:
+
+| Decision | Example | SQL role |
+|---|---|---|
+| What identifies a row? | Country and year | `GROUP BY` |
+| Which categories become columns? | January, February, March | `CASE WHEN` conditions |
+| What fills each cell? | Total sales | `SUM(Total)` |
+
+The **grain** describes what one row represents. Adding year to the row keys keeps January in different years separate.
+
+## Pivot and unpivot in SQLite
+
+SQLite has no built-in `PIVOT` or `UNPIVOT` operators.
+
+| Transformation | SQLite approach |
+|---|---|
+| Pivot | `GROUP BY` with `SUM(CASE WHEN ... END)` |
+| Pivot, alternative | An aggregate with `FILTER (WHERE ...)` |
+| Unpivot | One `SELECT` per source column, combined with `UNION ALL` |
+
+A pivot query has a fixed set of output columns. New category values do not automatically create new columns.
+
+::: notes
+Sources: https://sqlite.org/lang_select.html and https://sqlite.org/lang_aggfunc.html
+:::
+
+## Activity 1: plan the transformation
+
+**Pairs · 5 minutes · No SQL required**
+
+Use the illustrative sales table from earlier.
+
+1. Identify the row key, column category, and value column for a country-by-month pivot.
+2. Suppose Canada has a second January sale of 10 before aggregation. What should the January total become?
+3. What columns would an unpivoted result contain?
+4. Could unpivoting the totals recover the separate sales of 30 and 10? Explain.
+
+**Deliverable:** a wide table and four short answers.
+
+## Chinook: invoices as the starting point
+
+| Field | Meaning in this lesson |
+|---|---|
+| `InvoiceId` | Identifies one invoice |
+| `InvoiceDate` | Date and time of the invoice |
+| `BillingCountry` | Country on the invoice |
+| `Total` | Total invoice amount |
+
+The starting grain is **one row per invoice**.
+
+We will summarize to **one row per billing country and year**. We do not need a join for this report.
+
+::: notes
+Schema: https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sql
+:::
+
+## Chinook: inspecting invoice dates
+
+**Database: Chinook**
+
+```sql
+SELECT MIN(InvoiceDate) AS first_invoice,
+       MAX(InvoiceDate) AS last_invoice
+FROM Invoice; -- <1>
+
+SELECT InvoiceId, BillingCountry, InvoiceDate,
+       strftime('%Y', InvoiceDate) AS sales_year, -- <2>
+       strftime('%m', InvoiceDate) AS sales_month,
+       Total
+FROM Invoice
+ORDER BY InvoiceDate, InvoiceId
+LIMIT 6; -- <3>
+```
+
+1. Check the actual date range. Chinook releases may use different years.
+2. Extract year and month as text. Compare months with `'01'`, `'02'`, and so on.
+3. Preview six invoices with deterministic ordering.
+
+## Chinook: a long monthly summary
+
+**Database: Chinook**
+
+```sql
+SELECT BillingCountry,
+       strftime('%Y', InvoiceDate) AS sales_year,
+       strftime('%m', InvoiceDate) AS sales_month, -- <1>
+       ROUND(SUM(Total), 2) AS sales -- <2>
+FROM Invoice
+WHERE strftime('%m', InvoiceDate) IN ('01', '02', '03')
+GROUP BY BillingCountry, sales_year, sales_month -- <3>
+ORDER BY BillingCountry, sales_year, sales_month;
+```
+
+1. Extract the time categories before grouping.
+2. Add invoice totals, then round the displayed result.
+3. Each result row represents an observed country/year/month combination in January–March.
+
+## Chinook: how CASE selects values
+
+**Database: Chinook**
+
+```sql
+SELECT InvoiceId, InvoiceDate, Total,
+       CASE
+         WHEN strftime('%m', InvoiceDate) = '01'
+         THEN Total -- <1>
+         ELSE 0 -- <2>
+       END AS january_contribution
+FROM Invoice
+ORDER BY InvoiceDate, InvoiceId
+LIMIT 10; -- <3>
+```
+
+1. A January invoice contributes its total.
+2. Every other invoice contributes zero to the January sum.
+3. `CASE` by itself still returns invoice-level rows. Aggregation performs the next step.
+
+## Chinook: the first pivot
+
+**Database: Chinook**
+
+```sql
+SELECT BillingCountry,
+       strftime('%Y', InvoiceDate) AS sales_year, -- <1>
+       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'
+                      THEN Total ELSE 0 END), 2) AS Jan, -- <2>
+       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '02'
+                      THEN Total ELSE 0 END), 2) AS Feb,
+       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '03'
+                      THEN Total ELSE 0 END), 2) AS Mar
+FROM Invoice
+GROUP BY BillingCountry, sales_year -- <3>
+ORDER BY BillingCountry, sales_year;
+```
+
+1. Keep country and year as the row keys.
+2. Each conditional sum fills one month column.
+3. Combine invoices into one row for each observed country/year pair.
+
+All invoices remain in the input, so a country/year with only later sales still appears with three zeros.
+
+## Reading a pivot result
+
+| BillingCountry | sales_year | Jan | Feb | Mar |
+|---|---|---:|---:|---:|
+| Canada | 2025 | 30 | 20 | 0 |
+
+**Illustrative row, not actual Chinook output.**
+
+- `Jan = 30` represents the sum of January invoice totals.
+- The columns contain amounts, not invoice counts.
+- `Mar = 0` can mean no March invoices under our zero-filling rule.
+- A country/year with no invoices at all will not appear.
+
+To include entirely absent groups, start with a complete list of desired row keys and use a `LEFT JOIN`.
+
+## Chinook: counting instead of summing sales
+
+**Database: Chinook**
+
+```sql
+SELECT strftime('%Y', InvoiceDate) AS sales_year,
+       SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'
+                THEN 1 ELSE 0 END) AS Jan_invoices, -- <1>
+       COUNT(CASE WHEN strftime('%m', InvoiceDate) = '02'
+                  THEN 1 END) AS Feb_invoices -- <2>
+FROM Invoice
+GROUP BY sales_year
+ORDER BY sales_year;
+```
+
+1. Sum one for each matching invoice and zero for each nonmatch.
+2. `COUNT(expression)` counts non-NULL values. Without `ELSE`, nonmatches produce NULL.
+
+**Pitfall:** `COUNT(CASE WHEN ... THEN 1 ELSE 0 END)` counts both ones and zeros.
+
+## Chinook: the FILTER alternative
+
+**Database: Chinook**
+
+```sql
+SELECT BillingCountry,
+       strftime('%Y', InvoiceDate) AS sales_year,
+       ROUND(COALESCE(SUM(Total) FILTER (
+         WHERE strftime('%m', InvoiceDate) = '01'
+       ), 0), 2) AS Jan, -- <1>
+       ROUND(COALESCE(SUM(Total) FILTER (
+         WHERE strftime('%m', InvoiceDate) = '02'
+       ), 0), 2) AS Feb -- <2>
+FROM Invoice
+GROUP BY BillingCountry, sales_year
+ORDER BY BillingCountry, sales_year;
+```
+
+1. `FILTER` restricts the input to this aggregate without removing the group.
+2. `SUM` returns NULL when it has no non-NULL inputs. `COALESCE(..., 0)` supplies zero.
+
+Optional syntax: SQLite 3.30.0+. The `CASE` approach remains the main method for this lecture.
+
+## Zero, NULL, and absent groups
+
+| Situation | Meaning | Treatment |
+|---|---|---|
+| Known value of zero | Measured amount is zero | Keep zero |
+| Missing or unknown measurement | Value is unknown | Usually keep `NULL` |
+| No transactions for a displayed cell | No matching invoices | Zero may suit a sales report |
+| No source rows for a row key | Group is absent | Build a complete group list if needed |
+
+`ELSE 0` and `COALESCE` are reporting choices. They do not prove that missing information is a measured zero.
+
+For a conditional **average**, use `AVG(CASE WHEN ... THEN Total END)`. Adding `ELSE 0` would include nonmatches in the denominator.
+
+## Activity 2: Chinook invoice counts
+
+**Individual or pairs · 10 minutes · Database: Chinook**
+
+Build a pivot with one row per invoice year.
+
+1. Create columns `Apr_invoices`, `May_invoices`, and `Jun_invoices`.
+2. Count invoices, rather than summing `Total`.
+3. Add `Q2_invoices`, covering April through June.
+4. Sort by year and check that the three month columns add to `Q2_invoices`.
+5. Explain why grouping only by month would answer a different question.
+
+**Deliverable:** SQL, its output, and your explanation. Use all available invoice years.
+
+## Chinook: a reusable Q1 pivot
+
+**Database: Chinook**
+
+```sql
+DROP VIEW IF EXISTS temp.lecture_q1_sales;
+CREATE TEMP VIEW lecture_q1_sales AS -- <1>
+SELECT BillingCountry,
+       strftime('%Y', InvoiceDate) AS sales_year,
+       SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'
+                THEN Total ELSE 0 END) AS Jan,
+       SUM(CASE WHEN strftime('%m', InvoiceDate) = '02'
+                THEN Total ELSE 0 END) AS Feb,
+       SUM(CASE WHEN strftime('%m', InvoiceDate) = '03'
+                THEN Total ELSE 0 END) AS Mar -- <2>
+FROM Invoice
+GROUP BY BillingCountry, sales_year; -- <3>
+```
+
+1. Create a temporary named query, replacing only this lesson’s temporary view on reruns.
+2. Keep unrounded amounts for later calculations. Round the final display.
+3. The view has one row per observed country/year pair. It lasts for the current connection.
+
+Run the entire block. This view is required for Activity 4.
+
+## Northwind: inventory in a wide table
+
+**Database: Northwind**
+
+| Field in `Products` | Meaning |
+|---|---|
+| `ProductID` | Stable product identifier |
+| `ProductName` | Product label |
+| `UnitsInStock` | Units currently in inventory |
+| `UnitsOnOrder` | Units ordered from suppliers |
+| `ReorderLevel` | Inventory threshold for reordering |
+
+We will convert the stock and order columns into rows.
+
+A reorder threshold is a different kind of quantity. Do not add it to stock and orders as if it were inventory.
+
+::: notes
+Schema: https://github.com/jpwhite3/northwind-SQLite3
+:::
+
+## Northwind: inspecting the source
+
+**Database: Northwind**
+
+```sql
+SELECT ProductID, ProductName,
+       UnitsInStock, UnitsOnOrder, ReorderLevel -- <1>
+FROM Products
+ORDER BY ProductID
+LIMIT 5; -- <2>
+```
+
+1. Read the measures currently stored in separate columns.
+2. Inspect a small sample. One source row represents one product.
+
+## Unpivot: a worked table
+
+**Illustrative inventory, not Northwind output**
+
+| ProductID | ProductName | UnitsInStock | UnitsOnOrder |
+|---:|---|---:|---:|
+| 101 | Tea | 12 | 5 |
+| 102 | Coffee | 0 | 8 |
+
+After unpivoting:
+
+| ProductID | ProductName | inventory_status | units |
+|---:|---|---|---:|
+| 101 | Tea | In stock | 12 |
+| 101 | Tea | On order | 5 |
+| 102 | Coffee | In stock | 0 |
+| 102 | Coffee | On order | 8 |
+
+The new grain is **one row per product and inventory status**.
+
+## Northwind: unpivot with UNION ALL
+
+**Database: Northwind**
+
+```sql
+SELECT ProductID, ProductName,
+       'In stock' AS inventory_status, -- <1>
+       UnitsInStock AS units
+FROM Products
+UNION ALL -- <2>
+SELECT ProductID, ProductName,
+       'On order' AS inventory_status,
+       UnitsOnOrder AS units -- <3>
+FROM Products
+ORDER BY ProductID, inventory_status; -- <4>
+```
+
+1. Convert the original column meaning into a text value.
+2. Stack both result sets and preserve every generated row.
+3. Use the same column order and compatible types in both branches.
+4. Sort the complete combined result. Keep the product ID in both branches.
+
+## UNION ALL and missing values
+
+- Every branch must return the same number of columns in the same logical order.
+- The first `SELECT` determines the output column names.
+- `UNION ALL` retains all generated rows. `UNION` removes exact duplicates.
+- This unpivot keeps zero values and `NULL` values.
+- With two branches and no filters, **N products produce 2N rows**.
+
+Preserve `ProductID`. Different products can share a name.
+
+::: notes
+Source: https://sqlite.org/lang_select.html, compound SELECT statements.
+:::
+
+## Northwind: a reusable long inventory view
+
+**Database: Northwind**
+
+```sql
+DROP VIEW IF EXISTS temp.lecture_inventory_long;
+CREATE TEMP VIEW lecture_inventory_long AS -- <1>
+SELECT ProductID, ProductName,
+       'In stock' AS inventory_status, UnitsInStock AS units
+FROM Products
+UNION ALL
+SELECT ProductID, ProductName,
+       'On order' AS inventory_status, UnitsOnOrder AS units
+FROM Products; -- <2>
+```
+
+1. Save the unpivot query as a temporary view.
+2. The view keeps one row for every product/status pair, including NULL and zero values.
+
+## Northwind: filtering the long result
+
+**Database: Northwind**
+
+```sql
+SELECT ProductID, ProductName, inventory_status, units
+FROM lecture_inventory_long
+WHERE units IS NOT NULL -- <1>
+ORDER BY ProductID, inventory_status;
+
+SELECT inventory_status, SUM(units) AS total_units,
+       COUNT(*) AS rows_present,
+       COUNT(units) AS known_values -- <2>
+FROM lecture_inventory_long
+GROUP BY inventory_status;
+```
+
+1. Filter the outer query to drop unknown measurements from both branches. Zero remains.
+2. `COUNT(*)` counts rows while `COUNT(units)` counts known values. `SUM` ignores NULL inputs.
+
+Prerequisite: run the temporary-view block on the previous slide in this connection.
+
+## Northwind: pivoting inventory back
+
+**Database: Northwind**
+
+```sql
+SELECT ProductID, ProductName,
+       MAX(CASE WHEN inventory_status = 'In stock'
+                THEN units END) AS UnitsInStock, -- <1>
+       MAX(CASE WHEN inventory_status = 'On order'
+                THEN units END) AS UnitsOnOrder
+FROM lecture_inventory_long
+GROUP BY ProductID, ProductName -- <2>
+ORDER BY ProductID;
+```
+
+1. With exactly one value per product/status, `MAX` retrieves that value. Missing values stay NULL.
+2. Group by the product identifier and its label to restore one row per product.
+
+`MAX` is appropriate here because each product/status pair is unique. Check uniqueness before using it to reshape other data.
+
+## Activity 3: three Northwind measures
+
+**Pairs · 10 minutes · Database: Northwind**
+
+Unpivot `UnitsInStock`, `UnitsOnOrder`, and `ReorderLevel`.
+
+1. Return `ProductID`, `ProductName`, `measure`, and `value`.
+2. Label the measures `In stock`, `On order`, and `Reorder level`.
+3. Keep every product and preserve zeros and NULLs.
+4. Predict the row count as a multiple of the product count.
+5. Return a second result containing only positive `On order` values.
+
+**Deliverable:** both SQL queries and a sentence explaining why you should not add the three measures together.
+
+## What a round trip can recover
+
+| Starting data | Pivot behavior | What unpivoting recovers |
+|---|---|---|
+| One value per product/status | Retrieves each value | Original values, if keys and NULLs are preserved |
+| Many invoices per country/month | Adds invoice totals | Monthly totals only |
+| Missing category replaced with zero | Fills a missing cell | Zero, without its original missingness |
+
+Aggregation discards information. A total of 40 does not reveal whether the original invoices were 30 + 10, 20 + 20, or one invoice of 40.
+
+## Activity 4: Chinook pivot and unpivot
+
+**Pairs · 12 minutes · Database: Chinook**
+
+First run the earlier **reusable Q1 pivot** block to create `lecture_q1_sales`.
+
+1. Unpivot its `Jan`, `Feb`, and `Mar` columns.
+2. Return `BillingCountry`, `sales_year`, `sales_month`, and `sales`.
+3. Use month labels `'01'`, `'02'`, and `'03'`. Preserve zeros.
+4. Sort by country, year, and month.
+5. Check that total long sales equals the original January–March invoice total, rounded to two decimals.
+6. Explain why the long result need not have the same row count as the earlier long monthly summary.
+
+**Deliverable:** an unpivot query, a totals check, and your explanation.
+
+## Northwind extension: revenue across countries
+
+The extension combines joins with a pivot.
+
+| Table | Fields needed |
+|---|---|
+| `Orders` | `OrderID`, `ShipCountry` |
+| `"Order Details"` | `OrderID`, `ProductID`, `UnitPrice`, `Quantity`, `Discount` |
+| `Products` | `ProductID`, `CategoryID` |
+| `Categories` | `CategoryID`, `CategoryName` |
+
+**Line revenue = UnitPrice × Quantity × (1 − Discount)**
+
+Use the order-line price. `Products.UnitPrice` describes the catalog price and may differ. `Discount` is a fraction, such as 0.10 for 10%.
+
+## Activity 5: Northwind revenue pivot
+
+**Optional extension · 15 minutes · Database: Northwind**
+
+1. Join orders to order details, products, and categories.
+2. Calculate discounted revenue at the order-line grain.
+3. Pivot to one row per category, with columns `USA`, `Germany`, and `Other` based on `ShipCountry`.
+4. Treat every remaining country, including NULL, as `Other` for this exercise.
+5. Add `total_revenue` and round displayed amounts to two decimals.
+6. Explain why adding order-level freight after this join could overcount it.
+
+**Deliverable:** a CTE plus pivot query and your explanation. Include categories represented by the joined order lines.
+
+## Common mistakes
+
+| Mistake | Result | Correction |
+|---|---|---|
+| Grouping by month while creating month columns | Separate rows for months | Group by the intended row keys |
+| Omitting year unintentionally | Same months across years combine | Keep year among the keys |
+| `COUNT(CASE ... ELSE 0 END)` | Nonmatches count too | Use `SUM` of 1/0 or omit `ELSE` |
+| Dropping product identifiers | Different products may combine | Retain `ProductID` |
+| Summing order totals after joining lines | Repeated amounts inflate totals | Aggregate at the correct grain |
+| Summing already-rounded cells | Small discrepancies | Round after the final sum |
+
+## Glossary: reshaping
+
+| Term | Meaning |
+|---|---|
+| Grain | What one result row represents |
+| Long format | Categories appear as values in rows |
+| Wide format | Selected categories appear as separate columns |
+| Pivot | Reshapes category values into columns, often aggregating |
+| Unpivot | Reshapes selected columns into category/value rows |
+| Conditional aggregation | Applies an aggregate to values selected by a condition |
+| Row key | Column or set of columns that identifies a result row |
+
+## Glossary: SQL expressions
+
+| Expression | Role in this lecture |
+|---|---|
+| `CASE WHEN ... THEN ... ELSE ... END` | Chooses each row’s contribution |
+| `SUM`, `COUNT`, `MAX`, `AVG` | Summarize selected values |
+| `FILTER (WHERE ...)` | Restricts input to one aggregate |
+| `strftime('%Y', date)` | Extracts a year as text |
+| `strftime('%m', date)` | Extracts a two-digit month as text |
+| `COALESCE(x, 0)` | Replaces NULL with zero |
+| `ROUND(x, 2)` | Rounds a result to two decimal places |
+
+## Glossary: query structure
+
+| Command | Role in this lecture |
+|---|---|
+| `SELECT ... FROM ...` | Chooses expressions and their source |
+| `WHERE` | Filters source rows |
+| `GROUP BY` | Defines aggregation groups |
+| `ORDER BY`, `LIMIT` | Sorts and restricts returned rows |
+| `UNION ALL` | Stacks rows without removing duplicates |
+| `WITH ... AS (...)` | Names a query for one statement |
+| `CREATE TEMP VIEW` | Names a query for the current connection |
+| `JOIN ... ON ...` | Combines matching rows from related tables |
+
+## Sources and further reading
+
+- [Chinook database and SQLite downloads](https://github.com/lerocha/chinook-database)
+- [Northwind SQLite database and schema](https://github.com/jpwhite3/northwind-SQLite3)
+- [SQLite SELECT and compound queries](https://sqlite.org/lang_select.html)
+- [SQLite aggregate functions and FILTER](https://sqlite.org/lang_aggfunc.html)
+- [SQLite CASE expressions](https://sqlite.org/lang_expr.html)
+- [SQLite date and time functions](https://sqlite.org/lang_datefunc.html)
+- [SQLite CREATE VIEW](https://sqlite.org/lang_createview.html)
+- [Quarto code annotations](https://quarto.org/docs/authoring/code-annotation.html)
+
+All remaining slides contain **activity solutions**.
+
+## Activity solutions
+
+The following slides contain complete answers to Activities 1–5.
+
+Run each answer in its named database connection.
+
+Activity 4 depends on `lecture_q1_sales`, created in the lecture. Activity 5’s second block depends on its first block’s temporary view.
+
+## Solution 1: planning the transformation
+
+1. **Row key:** country. **Column category:** month. **Values:** summed sales.
+2. Canada’s January total becomes **40**.
+3. The unpivoted columns are `country`, `month`, and `sales`.
+4. Unpivoting returns 40, not the separate sales of 30 and 10.
+
+| country | Jan | Feb |
+|---|---:|---:|
+| Canada | 40 | 20 |
+| USA | 50 | 40 |
+
+The pivot has one row per country. The unpivoted summary has one row per country/month.
+
+## Solution 2: Chinook invoice counts
+
+**Database: Chinook**
+
+```sql
+SELECT strftime('%Y', InvoiceDate) AS sales_year, -- <1>
+       SUM(CASE WHEN strftime('%m', InvoiceDate) = '04'
+                THEN 1 ELSE 0 END) AS Apr_invoices,
+       SUM(CASE WHEN strftime('%m', InvoiceDate) = '05'
+                THEN 1 ELSE 0 END) AS May_invoices,
+       SUM(CASE WHEN strftime('%m', InvoiceDate) = '06'
+                THEN 1 ELSE 0 END) AS Jun_invoices, -- <2>
+       SUM(CASE WHEN strftime('%m', InvoiceDate)
+                     IN ('04', '05', '06')
+                THEN 1 ELSE 0 END) AS Q2_invoices -- <3>
+FROM Invoice
+GROUP BY sales_year
+ORDER BY sales_year;
+```
+
+1. One result row represents one invoice year.
+2. Each matching invoice contributes one to its month.
+3. The Q2 condition covers exactly the three displayed months.
+
+## Solution 2: interpretation and check
+
+For every year:
+
+`Apr_invoices + May_invoices + Jun_invoices = Q2_invoices`
+
+The month conditions are mutually exclusive, and together they cover Q2.
+
+Grouping only by month would combine the same month across different years. It would create a monthly summary with a different grain.
+
+All invoice years remain in the query. A year with no Q2 invoices receives four zeros.
+
+## Solution 3: a three-measure unpivot
+
+**Database: Northwind**
+
+```sql
+DROP VIEW IF EXISTS temp.lecture_product_measures;
+CREATE TEMP VIEW lecture_product_measures AS
+SELECT ProductID, ProductName,
+       'In stock' AS measure, UnitsInStock AS value -- <1>
+FROM Products
+UNION ALL
+SELECT ProductID, ProductName,
+       'On order', UnitsOnOrder
+FROM Products
+UNION ALL
+SELECT ProductID, ProductName,
+       'Reorder level', ReorderLevel -- <2>
+FROM Products;
+```
+
+1. The first branch names the output columns.
+2. The third branch adds one threshold row per product. No branch filters out zeros or NULLs.
+
+## Solution 3: output, filter, and row count
+
+**Database: Northwind**
+
+```sql
+SELECT * FROM lecture_product_measures
+ORDER BY ProductID, measure; -- <1>
+
+SELECT ProductID, ProductName, measure, value
+FROM lecture_product_measures
+WHERE measure = 'On order' AND value > 0 -- <2>
+ORDER BY ProductID;
+
+SELECT (SELECT COUNT(*) FROM Products) * 3 AS expected_rows,
+       COUNT(*) AS actual_rows
+FROM lecture_product_measures; -- <3>
+```
+
+1. Inspect the entire long result.
+2. Return only positive order quantities. NULL does not satisfy this condition.
+3. Each product contributes exactly three rows, so the counts should match.
+
+The reorder level is a threshold. Adding it to stock and orders would not produce a meaningful inventory total.
+
+## Solution 4: unpivoting the Q1 sales view
+
+**Database: Chinook**
+
+```sql
+DROP VIEW IF EXISTS temp.lecture_q1_long;
+CREATE TEMP VIEW lecture_q1_long AS -- <1>
+SELECT BillingCountry, sales_year,
+       '01' AS sales_month, Jan AS sales
+FROM lecture_q1_sales
+UNION ALL
+SELECT BillingCountry, sales_year, '02', Feb
+FROM lecture_q1_sales
+UNION ALL
+SELECT BillingCountry, sales_year, '03', Mar
+FROM lecture_q1_sales; -- <2>
+
+SELECT BillingCountry, sales_year, sales_month,
+       ROUND(sales, 2) AS sales -- <3>
+FROM lecture_q1_long
+ORDER BY BillingCountry, sales_year, sales_month;
+```
+
+1. Prerequisite: run the lecture block that creates `lecture_q1_sales`.
+2. Generate three month rows per country/year, preserving zero cells.
+3. Round only for display. The view retains unrounded values.
+
+## Solution 4: checking totals
+
+**Database: Chinook**
+
+```sql
+SELECT
+  (SELECT ROUND(SUM(sales), 2)
+   FROM lecture_q1_long) AS unpivoted_total, -- <1>
+  (SELECT ROUND(SUM(Total), 2)
+   FROM Invoice
+   WHERE strftime('%m', InvoiceDate)
+         IN ('01', '02', '03')) AS invoice_total; -- <2>
+```
+
+1. Sum all three months across every country/year in the long view.
+2. Independently sum the original Q1 invoices. The rounded totals should match.
+
+SQLite may use floating-point arithmetic for decimal amounts. Compare rounded totals for this classroom check.
+
+## Solution 4: why row counts can differ
+
+The earlier long summary contains only country/year/month combinations with invoices.
+
+The pivot contains every country/year found anywhere in `Invoice`. Unpivoting its three month columns generates **three rows for each of those pairs**.
+
+Consequently, the unpivoted result can include explicit zero rows that were absent from the original summary.
+
+The totals agree, but neither the row count nor the individual invoice detail must match. Unpivoting does not reverse aggregation.
+
+## Solution 5: joined order-line revenue
+
+**Database: Northwind**
+
+```sql
+DROP VIEW IF EXISTS temp.lecture_order_lines;
+CREATE TEMP VIEW lecture_order_lines AS
+SELECT c.CategoryID, c.CategoryName, o.ShipCountry,
+       d.UnitPrice * d.Quantity * (1 - d.Discount)
+         AS line_revenue -- <1>
+FROM Orders AS o
+JOIN "Order Details" AS d ON o.OrderID = d.OrderID -- <2>
+JOIN Products AS p ON d.ProductID = p.ProductID
+JOIN Categories AS c ON p.CategoryID = c.CategoryID; -- <3>
+```
+
+1. Calculate revenue from the price, quantity, and discount on each order line.
+2. Quote the table name because it contains a space.
+3. Add each product’s category without changing the order-line grain.
+
+## Solution 5: revenue pivot with a CTE
+
+**Database: Northwind**
+
+```sql
+WITH country_groups AS (
+  SELECT CategoryID, CategoryName, line_revenue,
+         CASE WHEN ShipCountry IN ('USA', 'Germany')
+              THEN ShipCountry ELSE 'Other' END AS country_group -- <1>
+  FROM lecture_order_lines
+)
+SELECT CategoryID, CategoryName,
+       ROUND(SUM(CASE WHEN country_group = 'USA'
+                      THEN line_revenue ELSE 0 END), 2) AS USA,
+       ROUND(SUM(CASE WHEN country_group = 'Germany'
+                      THEN line_revenue ELSE 0 END), 2) AS Germany,
+       ROUND(SUM(CASE WHEN country_group = 'Other'
+                      THEN line_revenue ELSE 0 END), 2) AS Other, -- <2>
+       ROUND(SUM(line_revenue), 2) AS total_revenue
+FROM country_groups
+GROUP BY CategoryID, CategoryName -- <3>
+ORDER BY CategoryID;
+```
+
+1. Classify every line, including a NULL shipping country, into one of three groups.
+2. Sum line revenue once into exactly one country column.
+3. Keep the category identifier and label as row keys.
+
+## Solution 5: interpretation and join grain
+
+Before rounding, `USA + Germany + Other` equals `total_revenue` for each category.
+
+Independently rounded columns can differ slightly from a separately rounded total.
+
+An order with three detail rows appears three times after the join. Summing its order-level `Freight` at that point would count freight three times.
+
+Compute an order-level measure once per order, or define an explicit allocation to order lines before summarizing by category.
+
+The inner joins include categories with matching order lines. Categories with no matching sales are absent.
