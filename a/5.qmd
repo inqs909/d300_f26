@@ -99,6 +99,6 @@ Create a recursive CTE named `manager_team` that:
 
 - Starts with the chosen manager at depth `0`.
 - Finds all direct and indirect reports.
-- Builds a `management_path` beginning with the chosen manager's name and appending each employee's name with ` -> `.
+- Builds a `management_path` beginning with the chosen manager's name and appending each employee's name.
 
 In the final output, exclude the starting manager. Return `EmployeeID`, `employee_name`, `depth`, and `management_path`. Sort by `depth` ascending, then `EmployeeID` ascending.
