@@ -1,0 +1,104 @@
+---
+title: "ICA 5"
+format: html
+editor: source
+order: 5
+---
+
+
+## Tables and variables used
+
+Use the SQLite database linked from the [Northwind-SQLite3 repository](https://github.com/jpwhite3/northwind-SQLite3). The names below match that repository's documented schema. Other Northwind versions may use different table names.
+
+### Table overview
+
+| Table | What one row represents | Key |
+|---|---|---|
+| `Customers` | One customer organization | `CustomerID` |
+| `Orders` | One order placed by a customer | `OrderID` |
+| `"Order Details"` | One product line within an order | The combination of `OrderID` and `ProductID` |
+| `Employees` | One employee | `EmployeeID` |
+
+
+### Column guide
+
+| Table | Column | Meaning in this assignment |
+|---|---|---|
+| `Customers` | `CustomerID` | Customer identifier |
+| `Customers` | `CompanyName` | Customer organization's name |
+| `Customers` | `Country` | Customer's country |
+| `Orders` | `OrderID` | Order identifier |
+| `Orders` | `CustomerID` | Customer who placed the order |
+| `Orders` | `EmployeeID` | Employee associated with the order |
+| `"Order Details"` | `OrderID` | Order containing the line item |
+| `"Order Details"` | `ProductID` | Product on the line item |
+| `"Order Details"` | `UnitPrice` | Selling price per unit on that order line |
+| `"Order Details"` | `Quantity` | Number of units ordered |
+| `"Order Details"` | `Discount` | Fraction of the line price discounted; for example, `0.10` means 10% |
+| `Employees` | `EmployeeID` | Employee identifier |
+| `Employees` | `FirstName` | Employee's first name |
+| `Employees` | `LastName` | Employee's last name |
+| `Employees` | `ReportsTo` | `EmployeeID` of the employee's direct manager; `NULL` identifies an employee with no listed manager |
+
+### Relationships used in your queries
+
+| Starting column | Related column | Relationship |
+|---|---|---|
+| `Orders.CustomerID` | `Customers.CustomerID` | Many orders can belong to one customer |
+| `"Order Details".OrderID` | `Orders.OrderID` | Many line items can belong to one order |
+| `Orders.EmployeeID` | `Employees.EmployeeID` | Many orders can be associated with one employee |
+| `Employees.ReportsTo` | `Employees.EmployeeID` | Many employees can report to one manager |
+
+The last relationship is a **self-reference**: both columns belong to `Employees`.
+
+
+## Part A: Ordinary CTEs
+
+### Question 1: Customers with many orders
+
+Create a CTE that counts orders (`order_count`) for each `CustomerID` in `Orders`.
+
+Use the CTE in an outer query to:
+
+- Join to `Customers` to obtain the company name and country.
+- Keep customers with at least 10 orders.
+- Return `CustomerID`, `CompanyName`, `Country`, and `order_count`.
+- Sort by `order_count` descending, then `CustomerID` ascending.
+
+
+### Question 2: Orders above the average order value
+
+Create a CTE that calculates `order_total` for each `OrderID` from `"Order Details"`.
+
+Use it to:
+
+- Calculate the average of the order totals, using a second CTE or a scalar subquery that reads the first CTE.
+- Return only orders whose totals are strictly greater than that average.
+- Return `OrderID`, `order_total`, and `average_order_total`.
+- Sort by the unrounded order total descending, then `OrderID` ascending.
+
+
+## Part B: Recursive CTEs
+
+### Question 3: Build the organization hierarchy
+
+Create a recursive CTE named `employee_hierarchy`.
+
+- Anchor: select employees whose `ReportsTo IS NULL`; assign depth `0`.
+- Recursive member: find employees reporting to an employee already in the CTE; increase depth by `1`.
+- Return `EmployeeID`, `employee_name`, `ReportsTo`, and `depth`.
+- Sort by `depth` ascending, then `EmployeeID` ascending.
+
+**Check:** If every employee connects to a root, every employee should appear exactly once.
+
+### Question 4: Find a manager's entire team
+
+Use your initial inspection query to choose an employee who has at least one direct report. State the chosen employee's name and ID in your response.
+
+Create a recursive CTE named `manager_team` that:
+
+- Starts with the chosen manager at depth `0`.
+- Finds all direct and indirect reports.
+- Builds a `management_path` beginning with the chosen manager's name and appending each employee's name with ` -> `.
+
+In the final output, exclude the starting manager. Return `EmployeeID`, `employee_name`, `depth`, and `management_path`. Sort by `depth` ascending, then `EmployeeID` ascending.

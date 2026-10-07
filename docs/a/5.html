@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lectures – Data 300</title>
+<title>ICA 5 – Data 300</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,26 +29,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./img/logo.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-deb9980f0abb462247767bd4714b05c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../img/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-deb9980f0abb462247767bd4714b05c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,65 +74,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -145,11 +85,11 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./img/logo.png" alt="" class="navbar-logo light-content">
-    <img src="./img/logo.png" alt="" class="navbar-logo dark-content">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../img/logo.png" alt="" class="navbar-logo light-content">
+    <img src="../img/logo.png" alt="" class="navbar-logo dark-content">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Data 300</span>
     </a>
   </div>
@@ -160,15 +100,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./lectures.html" aria-current="page"> 
+    <a class="nav-link" href="../lectures.html"> 
 <span class="menu-text">Lectures</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./project_report.html"> 
+    <a class="nav-link" href="../project_report.html"> 
 <span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./assignments.html"> 
+    <a class="nav-link" href="../assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
@@ -182,15 +122,36 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#tables-and-variables-used" id="toc-tables-and-variables-used" class="nav-link active" data-scroll-target="#tables-and-variables-used">Tables and variables used</a>
+  <ul class="collapse">
+  <li><a href="#table-overview" id="toc-table-overview" class="nav-link" data-scroll-target="#table-overview">Table overview</a></li>
+  <li><a href="#column-guide" id="toc-column-guide" class="nav-link" data-scroll-target="#column-guide">Column guide</a></li>
+  <li><a href="#relationships-used-in-your-queries" id="toc-relationships-used-in-your-queries" class="nav-link" data-scroll-target="#relationships-used-in-your-queries">Relationships used in your queries</a></li>
+  </ul></li>
+  <li><a href="#part-a-ordinary-ctes" id="toc-part-a-ordinary-ctes" class="nav-link" data-scroll-target="#part-a-ordinary-ctes">Part A: Ordinary CTEs</a>
+  <ul class="collapse">
+  <li><a href="#question-1-customers-with-many-orders" id="toc-question-1-customers-with-many-orders" class="nav-link" data-scroll-target="#question-1-customers-with-many-orders">Question 1: Customers with many orders</a></li>
+  <li><a href="#question-2-orders-above-the-average-order-value" id="toc-question-2-orders-above-the-average-order-value" class="nav-link" data-scroll-target="#question-2-orders-above-the-average-order-value">Question 2: Orders above the average order value</a></li>
+  </ul></li>
+  <li><a href="#part-b-recursive-ctes" id="toc-part-b-recursive-ctes" class="nav-link" data-scroll-target="#part-b-recursive-ctes">Part B: Recursive CTEs</a>
+  <ul class="collapse">
+  <li><a href="#question-3-build-the-organization-hierarchy" id="toc-question-3-build-the-organization-hierarchy" class="nav-link" data-scroll-target="#question-3-build-the-organization-hierarchy">Question 3: Build the organization hierarchy</a></li>
+  <li><a href="#question-4-find-a-managers-entire-team" id="toc-question-4-find-a-managers-entire-team" class="nav-link" data-scroll-target="#question-4-find-a-managers-entire-team">Question 4: Find a manager’s entire team</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lectures</h1>
+<h1 class="title">ICA 5</h1>
 </div>
 
 
@@ -207,125 +168,237 @@ window.Quarto = {
 </header>
 
 
+<section id="tables-and-variables-used" class="level2">
+<h2 class="anchored" data-anchor-id="tables-and-variables-used">Tables and variables used</h2>
+<p>Use the SQLite database linked from the <a href="https://github.com/jpwhite3/northwind-SQLite3">Northwind-SQLite3 repository</a>. The names below match that repository’s documented schema. Other Northwind versions may use different table names.</p>
+<section id="table-overview" class="level3">
+<h3 class="anchored" data-anchor-id="table-overview">Table overview</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>What one row represents</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Customers</code></td>
+<td>One customer organization</td>
+<td><code>CustomerID</code></td>
+</tr>
+<tr class="even">
+<td><code>Orders</code></td>
+<td>One order placed by a customer</td>
+<td><code>OrderID</code></td>
+</tr>
+<tr class="odd">
+<td><code>"Order Details"</code></td>
+<td>One product line within an order</td>
+<td>The combination of <code>OrderID</code> and <code>ProductID</code></td>
+</tr>
+<tr class="even">
+<td><code>Employees</code></td>
+<td>One employee</td>
+<td><code>EmployeeID</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="column-guide" class="level3">
+<h3 class="anchored" data-anchor-id="column-guide">Column guide</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Column</th>
+<th>Meaning in this assignment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Customers</code></td>
+<td><code>CustomerID</code></td>
+<td>Customer identifier</td>
+</tr>
+<tr class="even">
+<td><code>Customers</code></td>
+<td><code>CompanyName</code></td>
+<td>Customer organization’s name</td>
+</tr>
+<tr class="odd">
+<td><code>Customers</code></td>
+<td><code>Country</code></td>
+<td>Customer’s country</td>
+</tr>
+<tr class="even">
+<td><code>Orders</code></td>
+<td><code>OrderID</code></td>
+<td>Order identifier</td>
+</tr>
+<tr class="odd">
+<td><code>Orders</code></td>
+<td><code>CustomerID</code></td>
+<td>Customer who placed the order</td>
+</tr>
+<tr class="even">
+<td><code>Orders</code></td>
+<td><code>EmployeeID</code></td>
+<td>Employee associated with the order</td>
+</tr>
+<tr class="odd">
+<td><code>"Order Details"</code></td>
+<td><code>OrderID</code></td>
+<td>Order containing the line item</td>
+</tr>
+<tr class="even">
+<td><code>"Order Details"</code></td>
+<td><code>ProductID</code></td>
+<td>Product on the line item</td>
+</tr>
+<tr class="odd">
+<td><code>"Order Details"</code></td>
+<td><code>UnitPrice</code></td>
+<td>Selling price per unit on that order line</td>
+</tr>
+<tr class="even">
+<td><code>"Order Details"</code></td>
+<td><code>Quantity</code></td>
+<td>Number of units ordered</td>
+</tr>
+<tr class="odd">
+<td><code>"Order Details"</code></td>
+<td><code>Discount</code></td>
+<td>Fraction of the line price discounted; for example, <code>0.10</code> means 10%</td>
+</tr>
+<tr class="even">
+<td><code>Employees</code></td>
+<td><code>EmployeeID</code></td>
+<td>Employee identifier</td>
+</tr>
+<tr class="odd">
+<td><code>Employees</code></td>
+<td><code>FirstName</code></td>
+<td>Employee’s first name</td>
+</tr>
+<tr class="even">
+<td><code>Employees</code></td>
+<td><code>LastName</code></td>
+<td>Employee’s last name</td>
+</tr>
+<tr class="odd">
+<td><code>Employees</code></td>
+<td><code>ReportsTo</code></td>
+<td><code>EmployeeID</code> of the employee’s direct manager; <code>NULL</code> identifies an employee with no listed manager</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="relationships-used-in-your-queries" class="level3">
+<h3 class="anchored" data-anchor-id="relationships-used-in-your-queries">Relationships used in your queries</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Starting column</th>
+<th>Related column</th>
+<th>Relationship</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Orders.CustomerID</code></td>
+<td><code>Customers.CustomerID</code></td>
+<td>Many orders can belong to one customer</td>
+</tr>
+<tr class="even">
+<td><code>"Order Details".OrderID</code></td>
+<td><code>Orders.OrderID</code></td>
+<td>Many line items can belong to one order</td>
+</tr>
+<tr class="odd">
+<td><code>Orders.EmployeeID</code></td>
+<td><code>Employees.EmployeeID</code></td>
+<td>Many orders can be associated with one employee</td>
+</tr>
+<tr class="even">
+<td><code>Employees.ReportsTo</code></td>
+<td><code>Employees.EmployeeID</code></td>
+<td>Many employees can report to one manager</td>
+</tr>
+</tbody>
+</table>
+<p>The last relationship is a <strong>self-reference</strong>: both columns belong to <code>Employees</code>.</p>
+</section>
+</section>
+<section id="part-a-ordinary-ctes" class="level2">
+<h2 class="anchored" data-anchor-id="part-a-ordinary-ctes">Part A: Ordinary CTEs</h2>
+<section id="question-1-customers-with-many-orders" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-customers-with-many-orders">Question 1: Customers with many orders</h3>
+<p>Create a CTE that counts orders (<code>order_count</code>) for each <code>CustomerID</code> in <code>Orders</code>.</p>
+<p>Use the CTE in an outer query to:</p>
+<ul>
+<li>Join to <code>Customers</code> to obtain the company name and country.</li>
+<li>Keep customers with at least 10 orders.</li>
+<li>Return <code>CustomerID</code>, <code>CompanyName</code>, <code>Country</code>, and <code>order_count</code>.</li>
+<li>Sort by <code>order_count</code> descending, then <code>CustomerID</code> ascending.</li>
+</ul>
+</section>
+<section id="question-2-orders-above-the-average-order-value" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-orders-above-the-average-order-value">Question 2: Orders above the average order value</h3>
+<p>Create a CTE that calculates <code>order_total</code> for each <code>OrderID</code> from <code>"Order Details"</code>.</p>
+<p>Use it to:</p>
+<ul>
+<li>Calculate the average of the order totals, using a second CTE or a scalar subquery that reads the first CTE.</li>
+<li>Return only orders whose totals are strictly greater than that average.</li>
+<li>Return <code>OrderID</code>, <code>order_total</code>, and <code>average_order_total</code>.</li>
+<li>Sort by the unrounded order total descending, then <code>OrderID</code> ascending.</li>
+</ul>
+</section>
+</section>
+<section id="part-b-recursive-ctes" class="level2">
+<h2 class="anchored" data-anchor-id="part-b-recursive-ctes">Part B: Recursive CTEs</h2>
+<section id="question-3-build-the-organization-hierarchy" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-build-the-organization-hierarchy">Question 3: Build the organization hierarchy</h3>
+<p>Create a recursive CTE named <code>employee_hierarchy</code>.</p>
+<ul>
+<li>Anchor: select employees whose <code>ReportsTo IS NULL</code>; assign depth <code>0</code>.</li>
+<li>Recursive member: find employees reporting to an employee already in the CTE; increase depth by <code>1</code>.</li>
+<li>Return <code>EmployeeID</code>, <code>employee_name</code>, <code>ReportsTo</code>, and <code>depth</code>.</li>
+<li>Sort by <code>depth</code> ascending, then <code>EmployeeID</code> ascending.</li>
+</ul>
+<p><strong>Check:</strong> If every employee connects to a root, every employee should appear exactly once.</p>
+</section>
+<section id="question-4-find-a-managers-entire-team" class="level3">
+<h3 class="anchored" data-anchor-id="question-4-find-a-managers-entire-team">Question 4: Find a manager’s entire team</h3>
+<p>Use your initial inspection query to choose an employee who has at least one direct report. State the chosen employee’s name and ID in your response.</p>
+<p>Create a recursive CTE named <code>manager_team</code> that:</p>
+<ul>
+<li>Starts with the chosen manager at depth <code>0</code>.</li>
+<li>Finds all direct and indirect reports.</li>
+<li>Builds a <code>management_path</code> beginning with the chosen manager’s name and appending each employee’s name with <code>-&gt;</code>.</li>
+</ul>
+<p>In the final output, exclude the starting manager. Return <code>EmployeeID</code>, <code>employee_name</code>, <code>depth</code>, and <code>management_path</code>. Sort by <code>depth</code> ascending, then <code>EmployeeID</code> ascending.</p>
 
 
+</section>
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1790023198854" data-listing-reading-time-sort="6" data-listing-word-count-sort="1066">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/1a.html" class="no-external">Data 300</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/1a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1790023198854" data-listing-reading-time-sort="4" data-listing-word-count-sort="648">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/1b.html" class="no-external">Computational Setup</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/1b.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1790023198854" data-listing-reading-time-sort="3" data-listing-word-count-sort="455">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/2a.html" class="no-external">Computational Setup</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/2a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1790023198858" data-listing-reading-time-sort="8" data-listing-word-count-sort="1435">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/2b.html" class="no-external">Data Systems</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/2b.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1790023198858" data-listing-reading-time-sort="19" data-listing-word-count-sort="3734">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/3a.html" class="no-external">Data Modeling</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/3a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-file-modified-sort="1790023198858" data-listing-reading-time-sort="11" data-listing-word-count-sort="2190">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/4a.html" class="no-external">Database Building</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/4a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-file-modified-sort="1790023198858" data-listing-reading-time-sort="7" data-listing-word-count-sort="1389">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/5a.html" class="no-external">SQL Basics</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/5a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-listing-file-modified-sort="1790633804105" data-listing-reading-time-sort="10" data-listing-word-count-sort="1970">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/6a.html" class="no-external">SQL: Joins, Subqueries, and Views</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/6a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-listing-file-modified-sort="1791221136116" data-listing-reading-time-sort="16" data-listing-word-count-sort="3195">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/7a.html" class="no-external">Advanced SQL</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/7a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-listing-file-modified-sort="1791221136116" data-listing-reading-time-sort="22" data-listing-word-count-sort="4249">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/9a.html" class="no-external">Advanced SQL</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/9a.html" class="no-external">
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
