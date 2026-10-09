@@ -2188,7 +2188,7 @@
     "href": "lectures/8a.html#window-function-syntax",
     "title": "Advanced SQL",
     "section": "Window Function Syntax",
-    "text": "Window Function Syntax\nSELECT \n    column_name,\n    FUNCTION(column_name) OVER (\n        PARTITION BY column_to_group_by\n        ORDER BY column_to_sort_by\n    ) as alias_name\nFROM table_name;\n\nThe OVER clause is what makes it a window function. Inside it, we use PARTITION BY to define our groups and ORDER BY to define the sequence of the calculation."
+    "text": "Window Function Syntax\nSELECT\n1    column_name,\n2    FUNCTION(column_name) OVER (\n3        PARTITION BY column_to_group_by\n4        ORDER BY column_to_sort_by\n5    ) AS alias_name\n6FROM table_name;\n\n1\n\nInclude this original column in the output. Window functions preserve individual rows.\n\n2\n\nApply a window function, such as SUM() or AVG(). The OVER() clause defines how rows are organized for the calculation.\n\n3\n\nDivide the rows into partitions. The function operates independently within each partition.\n\n4\n\nDefine the order of rows within each partition for the calculation. This does not guarantee the display order of the final output.\n\n5\n\nName the calculated output column.\n\n6\n\nSpecify the table containing the data.\n\n\n\nThe OVER clause is what makes it a window function. Inside it, we use PARTITION BY to define our groups and ORDER BY to define the sequence of the calculation."
   },
   {
     "objectID": "lectures/8a.html#aggregate-vs.-window-functions",
@@ -2209,7 +2209,7 @@
     "href": "lectures/8a.html#order-by-in-window-functions",
     "title": "Advanced SQL",
     "section": "ORDER BY in Window Functions",
-    "text": "ORDER BY in Window Functions\n\nCrucial for:\n\nRunning Totals (Cumulative sums).\nRankings.\nMoving Averages.\n\nIt defines the direction in which the window “slides” (e.g., from oldest to newest).\n\n\nYou almost always use ORDER BY inside your OVER clause. Without it, the computer doesn’t know which row comes “before” or “after” another, making rankings or running totals impossible.\n\n\nIn this activity, I want you to use SUM() OVER(PARTITION BY...) and RANK() OVER(PARTITION BY... ORDER BY...). Try to visualize how the region total appears on every row."
+    "text": "ORDER BY in Window Functions\n\nCrucial for:\n\nRunning Totals (Cumulative sums).\nRankings.\nMoving Averages.\n\nIt defines the direction in which the window “slides” (e.g., from oldest to newest).\n\n\nYou almost always use ORDER BY inside your OVER clause. Without it, the computer doesn’t know which row comes “before” or “after” another, making rankings or running totals impossible."
   },
   {
     "objectID": "lectures/8a.html#ranking-functions-the-big-three",

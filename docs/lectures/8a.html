@@ -214,12 +214,12 @@
 </section>
 <section id="the-window-concept" class="slide level2">
 <h2>The “Window” Concept</h2>
-<div class="cell" data-fig-responsive="false" data-layout-align="default">
+<div class="cell" data-fig-responsive="false" data-layout-align="center">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<p><img data-src="8a_files/figure-revealjs/mermaid-figure-1.png" style="width:2in;height:3.12in"></p>
+<p><img data-src="8a_files/figure-revealjs/mermaid-figure-1.png" style="width:4in;height:5.3in"></p>
 </div>
 <p></p></figure><p></p>
 </div>
@@ -232,50 +232,68 @@
 <li>The “Window” is the subset of rows relevant to the current row.</li>
 <li>The window is defined by the <code>OVER</code> clause.</li>
 </ul>
-<div class=".notes">
+<aside class="notes">
 <p>Think of a window as a sliding lens. As you move down the rows in your table, the lens moves with you, looking at a specific subset of data to perform its math.</p>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="window-function-syntax" class="slide level2">
 <h2>Window Function Syntax</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-label="1"></a><span class="kw">SELECT</span> </span>
-<span id="cb1-2"><a aria-label="2"></a>    column_name,</span>
-<span id="cb1-3"><a aria-label="3"></a>    <span class="kw">FUNCTION</span>(column_name) <span class="kw">OVER</span> (</span>
-<span id="cb1-4"><a aria-label="4"></a>        <span class="kw">PARTITION</span> <span class="kw">BY</span> column_to_group_by</span>
-<span id="cb1-5"><a aria-label="5"></a>        <span class="kw">ORDER</span> <span class="kw">BY</span> column_to_sort_by</span>
-<span id="cb1-6"><a aria-label="6"></a>    ) <span class="kw">as</span> alias_name</span>
-<span id="cb1-7"><a aria-label="7"></a><span class="kw">FROM</span> table_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class=".notes">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-label="1"></a><span class="kw">SELECT</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-label="2"></a>    column_name,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-label="3"></a>    <span class="kw">FUNCTION</span>(column_name) <span class="kw">OVER</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4" aria-label="4"></a>        <span class="kw">PARTITION</span> <span class="kw">BY</span> column_to_group_by</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4">4</button><span id="annotated-cell-1-5" class="code-annotation-target"><a href="#annotated-cell-1-5" aria-label="5"></a>        <span class="kw">ORDER</span> <span class="kw">BY</span> column_to_sort_by</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5">5</button><span id="annotated-cell-1-6" class="code-annotation-target"><a href="#annotated-cell-1-6" aria-label="6"></a>    ) <span class="kw">AS</span> alias_name</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="6">6</button><span id="annotated-cell-1-7" class="code-annotation-target"><a href="#annotated-cell-1-7" aria-label="7"></a><span class="kw">FROM</span> table_name;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="1">Include this original column in the output. Window functions preserve individual rows.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="2">Apply a window function, such as <code>SUM()</code> or <code>AVG()</code>. The <code>OVER()</code> clause defines how rows are organized for the calculation.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="3">Divide the rows into partitions. The function operates independently within each partition.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="5" data-code-annotation="4">Define the order of rows within each partition for the calculation. This does not guarantee the display order of the final output.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="5">Name the calculated output column.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="7" data-code-annotation="6">Specify the table containing the data.</span>
+</dd>
+</dl>
+<aside class="notes">
 <p>The <code>OVER</code> clause is what makes it a window function. Inside it, we use <code>PARTITION BY</code> to define our groups and <code>ORDER BY</code> to define the sequence of the calculation.</p>
-</div>
-</section>
-<section id="aggregate-vs.-window-functions" class="slide level2">
-<h2>Aggregate vs.&nbsp;Window Functions</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Aggregation (<code>GROUP BY</code>)</th>
-<th style="text-align: left;">Window Function (<code>OVER</code>)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Reduces the number of rows</td>
-<td style="text-align: left;">Retains all original rows</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">One row per group</td>
-<td style="text-align: left;">One row per original row</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Useful for Summary Totals</td>
-<td style="text-align: left;">Useful for Running Totals/Ranks</td>
-</tr>
-</tbody>
-</table>
-<div class=".notes">
-<p>This is the most common point of confusion. If you want a summary table, use GROUP BY. If you want to compare an individual row to a group total, use a Window Function.</p>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="partition-by" class="slide level2">
 <h2>PARTITION BY</h2>
@@ -284,9 +302,19 @@
 <li>The function is applied to each partition separately.</li>
 <li>It is like <code>GROUP BY</code> for window functions, but it doesn’t hide the individual rows.</li>
 </ul>
-<div class=".notes">
+<aside class="notes">
 <p>PARTITION BY is how we tell SQL where one group ends and the next begins. For example, if we partition by “Department,” the math starts over for every new department.</p>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="order-by-in-window-functions" class="slide level2">
 <h2>ORDER BY in Window Functions</h2>
@@ -299,12 +327,19 @@
 </ul></li>
 <li>It defines the direction in which the window “slides” (e.g., from oldest to newest).</li>
 </ul>
-<div class=".notes">
+<aside class="notes">
 <p>You almost always use <code>ORDER BY</code> inside your <code>OVER</code> clause. Without it, the computer doesn’t know which row comes “before” or “after” another, making rankings or running totals impossible.</p>
-</div>
-<div class=".notes">
-<p>In this activity, I want you to use <code>SUM() OVER(PARTITION BY...)</code> and <code>RANK() OVER(PARTITION BY... ORDER BY...)</code>. Try to visualize how the region total appears on every row.</p>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="ranking-functions-the-big-three" class="slide level2 scrollable">
 <h2>Ranking Functions: The Big Three</h2>
@@ -313,9 +348,19 @@
 <li><strong><code>RANK()</code></strong>: Assigns the same rank to ties, but <strong>skips</strong> the next number (1, 2, 2, 4).</li>
 <li><strong><code>DENSE_RANK()</code></strong>: Assigns the same rank to ties, but <strong>does not skip</strong> numbers (1, 2, 2, 3).</li>
 </ol>
-<div class=".notes">
+<aside class="notes">
 <p>Not all rankings are created equal. If two people tie for 2nd place, do you want the next person to be 3rd, or 4th? That’s the difference between RANK and DENSE_RANK.</p>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="ranking-comparison-diagram" class="slide level2">
 <h2>Ranking Comparison Diagram</h2>
@@ -335,9 +380,19 @@
 <li><strong>Rank:</strong> Leaves gaps.</li>
 <li><strong>Dense Rank:</strong> No gaps.</li>
 </ul>
-<div class=".notes">
+<aside class="notes">
 <p>This diagram helps visualize the “Gap” behavior. Notice how RANK jumps from 1 to 3 because two people tied for 1st.</p>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="value-functions-lead-and-lag" class="slide level2">
 <h2>Value Functions: LEAD and LAG</h2>
@@ -346,38 +401,68 @@
 <li><strong><code>LEAD(column)</code></strong>: Accesses data from the <strong>following</strong> row.</li>
 <li><strong>Use Case:</strong> Comparing this month’s sales to last month’s sales to calculate growth.</li>
 </ul>
-<div class=".notes">
+<aside class="notes">
 <p>LEAD and LAG are like time machines. They allow you to look back at the past row or ahead to the future row without needing a complex self-join.</p>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="deep-dive-lag" class="slide level2">
 <h2>Deep Dive: LAG</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-label="1"></a><span class="kw">SELECT</span> </span>
-<span id="cb2-2"><a aria-label="2"></a>    <span class="dt">month</span>,</span>
-<span id="cb2-3"><a aria-label="3"></a>    revenue,</span>
-<span id="cb2-4"><a aria-label="4"></a>    <span class="fu">LAG</span>(revenue) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">month</span>) <span class="kw">as</span> prev_month_revenue,</span>
-<span id="cb2-5"><a aria-label="5"></a>    (revenue <span class="op">-</span> <span class="fu">LAG</span>(revenue) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">month</span>)) <span class="kw">as</span> revenue_diff</span>
-<span id="cb2-6"><a aria-label="6"></a><span class="kw">FROM</span> monthly_sales;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-label="1"></a><span class="kw">SELECT</span> </span>
+<span id="cb1-2"><a aria-label="2"></a>    <span class="dt">month</span>,</span>
+<span id="cb1-3"><a aria-label="3"></a>    revenue,</span>
+<span id="cb1-4"><a aria-label="4"></a>    <span class="fu">LAG</span>(revenue) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">month</span>) <span class="kw">as</span> prev_month_revenue,</span>
+<span id="cb1-5"><a aria-label="5"></a>    (revenue <span class="op">-</span> <span class="fu">LAG</span>(revenue) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">month</span>)) <span class="kw">as</span> revenue_diff</span>
+<span id="cb1-6"><a aria-label="6"></a><span class="kw">FROM</span> monthly_sales;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><strong>Result:</strong> You can calculate Month-over-Month (MoM) growth instantly.</li>
 </ul>
-<div class=".notes">
+<aside class="notes">
 <p>LAG is the primary tool for time-series analysis. It’s how we calculate “growth” or “change” by comparing the current row’s value to the one directly above it.</p>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="deep-dive-lead" class="slide level2">
 <h2>Deep Dive: LEAD</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-label="1"></a><span class="kw">SELECT</span> </span>
-<span id="cb3-2"><a aria-label="2"></a>    task_id,</span>
-<span id="cb3-3"><a aria-label="3"></a>    due_date,</span>
-<span id="cb3-4"><a aria-label="4"></a>    <span class="fu">LEAD</span>(due_date) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> due_date) <span class="kw">as</span> next_task_deadline</span>
-<span id="cb3-5"><a aria-label="5"></a><span class="kw">FROM</span> project_timeline;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-label="1"></a><span class="kw">SELECT</span> </span>
+<span id="cb2-2"><a aria-label="2"></a>    task_id,</span>
+<span id="cb2-3"><a aria-label="3"></a>    due_date,</span>
+<span id="cb2-4"><a aria-label="4"></a>    <span class="fu">LEAD</span>(due_date) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> due_date) <span class="kw">as</span> next_task_deadline</span>
+<span id="cb2-5"><a aria-label="5"></a><span class="kw">FROM</span> project_timeline;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><strong>Result:</strong> Helps identify the gap between the current task and the next scheduled task.</li>
 </ul>
-<div class=".notes">
+<aside class="notes">
 <p>Conversely, LEAD looks forward. If you want to know how much time you have between the current event and the next event, LEAD is your friend.</p>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="window-frames-the-moving-window" class="slide level2">
 <h2>Window Frames: The “Moving” Window</h2>
@@ -389,7 +474,7 @@
 <li><strong><code>1 PRECEDING</code></strong>: Look at exactly one row before.</li>
 </ul>
 <p><em>Example: 3-Day Moving Average</em></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-label="1"></a><span class="fu">AVG</span>(price) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">date</span> <span class="kw">ROWS</span> <span class="kw">BETWEEN</span> <span class="dv">2</span> <span class="kw">PRECEDING</span> <span class="kw">AND</span> <span class="kw">CURRENT</span> <span class="kw">ROW</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-label="1"></a><span class="fu">AVG</span>(price) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">date</span> <span class="kw">ROWS</span> <span class="kw">BETWEEN</span> <span class="dv">2</span> <span class="kw">PRECEDING</span> <span class="kw">AND</span> <span class="kw">CURRENT</span> <span class="kw">ROW</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>We can even limit the window size. This is how “Moving Averages” are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows.</p>
 <style type="text/css">

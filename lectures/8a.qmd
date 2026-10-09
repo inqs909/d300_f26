@@ -30,87 +30,107 @@ order: 9
 ## The "Window" Concept
 
 ```{mermaid}
-%%| fig-width: 2
+%%| fig-width: 4
 %%| fig-responsive: false
+%%| fig-align: center
 
-graph TD
-    accTitle: Window function calculation
-    accDescr: Rows are partitioned into groups, and a calculation is applied to a window of rows.
+flowchart TB
+    subgraph P["PARTITION BY"]
+        direction TB
 
-    A["Full Table"] --> B["Partition / Grouping"]
-    B --> C["The Window / Subset of Rows"]
-    C --> D["Calculation Applied to Window"]
+        O["ORDER BY day"]
 
-    style A fill:#ffffff,stroke:#000000,color:#000000
-    style B fill:#ffffff,stroke:#000000,color:#000000
-    style C fill:#ffcc00,stroke:#000000,stroke-width:4px,color:#000000
-    style D fill:#ffffff,stroke:#000000,color:#000000
-    linkStyle default stroke:#000000
+        subgraph W["WINDOW FRAME "]
+            direction TB
+            D1["Day 1"]
+            D2["Day 2"]
+            D3["Day 3"]
+
+            D1 --> D2 --> D3
+        end
+
+        D4["Day 4"]
+
+        O --> D1
+        D3 --> D4
+    end
+
+    W --> C["FUN(*)"]
+
+    C --> R["OUTPUT FOR THE CURRENT ROW"]
+
+    R --> M["MOVE TO THE NEXT ROW"]
+
+    M --> K["KEEP EVERY ORIGINAL ROW"]
+
+    style P fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a
+    style W fill:#dbeafe,stroke:#2563eb,stroke-width:3px,color:#1e3a8a
+    style O fill:#e0e7ff,stroke:#6366f1,color:#312e81
+    style D1 fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a
+    style D2 fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#78350f
+    style D3 fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a
+    style D4 fill:#f1f5f9,stroke:#94a3b8,color:#475569
+    style C fill:#dcfce7,stroke:#16a34a,color:#14532d
+    style R fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style M fill:#f3e8ff,stroke:#9333ea,color:#581c87
+    style K fill:#f8fafc,stroke:#64748b,color:#0f172a
 ```
 
 ## The "Window" Concept
 
+
 -   The "Window" is the subset of rows relevant to the current row.
 -   The window is defined by the `OVER` clause.
 
-::: .notes
+::: notes
 Think of a window as a sliding lens. As you move down the rows in your table, the lens moves with you, looking at a specific subset of data to perform its math.
 ::: 
 
 ## Window Function Syntax
 
 ```sql
-SELECT 
-    column_name,
-    FUNCTION(column_name) OVER (
-        PARTITION BY column_to_group_by
-        ORDER BY column_to_sort_by
-    ) as alias_name
-FROM table_name;
+SELECT
+    column_name, -- <1>
+    FUNCTION(column_name) OVER ( -- <2>
+        PARTITION BY column_to_group_by -- <3>
+        ORDER BY column_to_sort_by -- <4>
+    ) AS alias_name -- <5>
+FROM table_name; -- <6>
 ```
 
-::: .notes
+1. Include this original column in the output. Window functions preserve individual rows.
+2. Apply a window function, such as `SUM()` or `AVG()`. The `OVER()` clause defines how rows are organized for the calculation.
+3. Divide the rows into partitions. The function operates independently within each partition.
+4. Define the order of rows within each partition for the calculation. This does not guarantee the display order of the final output.
+5. Name the calculated output column.
+6. Specify the table containing the data.
+
+::: notes
 The `OVER` clause is what makes it a window function. Inside it, we use `PARTITION BY` to define our groups and `ORDER BY` to define the sequence of the calculation.
-::: 
-
-## Aggregate vs. Window Functions
-
-| Aggregation (`GROUP BY`) | Window Function (`OVER`) |
-|:---|:---|
-| Reduces the number of rows | Retains all original rows |
-| One row per group | One row per original row |
-| Useful for Summary Totals | Useful for Running Totals/Ranks |
-
-::: .notes
-This is the most common point of confusion. If you want a summary table, use GROUP BY. If you want to compare an individual row to a group total, use a Window Function.
 ::: 
 
 ## PARTITION BY
 
-*   Divides the result set into partitions.
-*   The function is applied to each partition separately.
-*   It is like `GROUP BY` for window functions, but it doesn't hide the individual rows.
+-   Divides the result set into partitions.
+-   The function is applied to each partition separately.
+-   It is like `GROUP BY` for window functions, but it doesn't hide the individual rows.
 
-::: .notes
+::: notes
 PARTITION BY is how we tell SQL where one group ends and the next begins. For example, if we partition by "Department," the math starts over for every new department.
 ::: 
 
 ## ORDER BY in Window Functions
 
-*   Crucial for:
-    *   **Running Totals** (Cumulative sums).
-    *   **Rankings**.
-    *   **Moving Averages**.
-*   It defines the direction in which the window "slides" (e.g., from oldest to newest).
+-   Crucial for:
+    -   **Running Totals** (Cumulative sums).
+    -   **Rankings**.
+    -   **Moving Averages**.
+-   It defines the direction in which the window "slides" (e.g., from oldest to newest).
 
-::: .notes
+::: notes
 You almost always use `ORDER BY` inside your `OVER` clause. Without it, the computer doesn't know which row comes "before" or "after" another, making rankings or running totals impossible.
 ::: 
 
-
-::: .notes
-In this activity, I want you to use `SUM() OVER(PARTITION BY...)` and `RANK() OVER(PARTITION BY... ORDER BY...)`. Try to visualize how the region total appears on every row.
-::: 
 
 ## Ranking Functions: The Big Three
 
@@ -118,7 +138,7 @@ In this activity, I want you to use `SUM() OVER(PARTITION BY...)` and `RANK() OV
 2.  **`RANK()`**: Assigns the same rank to ties, but **skips** the next number (1, 2, 2, 4).
 3.  **`DENSE_RANK()`**: Assigns the same rank to ties, but **does not skip** numbers (1, 2, 2, 3).
 
-::: .notes
+::: notes
  Not all rankings are created equal. If two people tie for 2nd place, do you want the next person to be 3rd, or 4th? That's the difference between RANK and DENSE_RANK.
 ::: 
 
@@ -146,7 +166,7 @@ graph TD
 *   **Rank:** Leaves gaps.
 *   **Dense Rank:** No gaps.
 
-::: .notes
+::: notes
 This diagram helps visualize the "Gap" behavior. Notice how RANK jumps from 1 to 3 because two people tied for 1st.
 ::: 
 
@@ -156,40 +176,51 @@ This diagram helps visualize the "Gap" behavior. Notice how RANK jumps from 1 to
 *   **`LEAD(column)`**: Accesses data from the **following** row.
 *   **Use Case:** Comparing this month's sales to last month's sales to calculate growth.
 
-::: .notes
+::: notes
 LEAD and LAG are like time machines. They allow you to look back at the past row or ahead to the future row without needing a complex self-join.
 ::: 
 
 ## Deep Dive: LAG
 
 ```sql
-SELECT 
-    month,
-    revenue,
-    LAG(revenue) OVER (ORDER BY month) as prev_month_revenue,
-    (revenue - LAG(revenue) OVER (ORDER BY month)) as revenue_diff
-FROM monthly_sales;
+SELECT
+    month, -- <1>
+    revenue, -- <2>
+    LAG(revenue) OVER (ORDER BY month) AS prev_month_revenue, -- <3>
+    (revenue - LAG(revenue) OVER (ORDER BY month)) AS revenue_diff -- <4>
+FROM monthly_sales; -- <5>
 ```
 
-*   **Result:** You can calculate Month-over-Month (MoM) growth instantly.
+1. Display the month for each row.
+2. Display the revenue for that month.
+3. Order the rows by `month` and retrieve the previous row’s revenue using `LAG()`. The first row returns `NULL` because no previous row exists.
+4. Subtract the previous row’s revenue from the current revenue. Positive values indicate an increase; negative values indicate a decrease. The first row returns `NULL`.
+5. Retrieve the data from the `monthly_sales` table.
 
-::: .notes
+-  **Result:** You can calculate Month-over-Month (MoM) growth instantly.
+
+::: notes
 LAG is the primary tool for time-series analysis. It's how we calculate "growth" or "change" by comparing the current row's value to the one directly above it.
 ::: 
 
 ## Deep Dive: LEAD
 
 ```sql
-SELECT 
-    task_id,
-    due_date,
-    LEAD(due_date) OVER (ORDER BY due_date) as next_task_deadline
-FROM project_timeline;
+SELECT
+    task_id, -- <1>
+    due_date, -- <2>
+    LEAD(due_date) OVER (ORDER BY due_date) AS next_task_deadline -- <3>
+FROM project_timeline; -- <4>
 ```
 
-*   **Result:** Helps identify the gap between the current task and the next scheduled task.
+1. Display the unique identifier for each task.
+2. Display the current task’s deadline.
+3. Order the rows by `due_date` and retrieve the next row’s deadline using `LEAD()`. Name the result `next_task_deadline`. The last row returns `NULL` because no next row exists.
+4. Retrieve the data from the `project_timeline` table.
 
-::: .notes
+-   **Result:** Helps identify the gap between the current task and the next scheduled task.
+
+::: notes
 Conversely, LEAD looks forward. If you want to know how much time you have between the current event and the next event, LEAD is your friend.
 ::: 
 
@@ -212,14 +243,3 @@ AVG(price) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
  We can even limit the window size. This is how "Moving Averages" are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows.
 :::
 
-## Summary of Window Functions
-
-| Category | Functions | Best For... |
-|:---|:---|:---|
-| **Ranking** | `RANK`, `DENSE_RANK`, `ROW_NUMBER` | Top N lists, finding duplicates |
-| **Value** | `LAG`, `LEAD`, `FIRST_VALUE` | Time-series, growth, trends |
-| **Aggregate** | `SUM`, `AVG`, `COUNT` | Running totals, moving averages |
-
-::: notes
-Let's review. We've covered Ranking for lists, Value for trends, and Aggregate for moving totals.
-:::
