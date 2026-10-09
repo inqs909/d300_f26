@@ -1026,7 +1026,7 @@
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\n\n\nSQL Basics\n\n\n\n\n\n\n\n\n\n\nSQL: Joins, Subqueries, and Views\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Data 300\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\n\n\nSQL Basics\n\n\n\n\n\n\n\n\n\n\nSQL: Joins, Subqueries, and Views\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "assignments.html",
@@ -2168,5 +2168,103 @@
     "title": "Week 7",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "lectures/8a.html",
+    "href": "lectures/8a.html",
+    "title": "Data 300",
+    "section": "",
+    "text": "title: \"Advanced SQL\"\nsubtitle: \"Window Functions\"\nformat:\n  revealjs:\n    scrollable: true\n    navigation-mode: vertical\n    theme: [default, styles.scss]\n    controls-layout: edges\n    controls-tutorial: true\n    code-annotations: select\n    progress: true\n    slide-number: c/t\n    incremental: false \n    \nrevealjs-plugins:\n  - pointer\n  \nfilters: \n  - code-fullscreen\n  - reveal-auto-agenda\n\neditor: source\n\norder: 9"
+  },
+  {
+    "objectID": "lectures/8a.html#the-window-concept",
+    "href": "lectures/8a.html#the-window-concept",
+    "title": "Advanced SQL",
+    "section": "The “Window” Concept",
+    "text": "The “Window” Concept"
+  },
+  {
+    "objectID": "lectures/8a.html#window-function-syntax",
+    "href": "lectures/8a.html#window-function-syntax",
+    "title": "Advanced SQL",
+    "section": "Window Function Syntax",
+    "text": "Window Function Syntax\nSELECT \n    column_name,\n    FUNCTION(column_name) OVER (\n        PARTITION BY column_to_group_by\n        ORDER BY column_to_sort_by\n    ) as alias_name\nFROM table_name;\n\nThe OVER clause is what makes it a window function. Inside it, we use PARTITION BY to define our groups and ORDER BY to define the sequence of the calculation."
+  },
+  {
+    "objectID": "lectures/8a.html#aggregate-vs.-window-functions",
+    "href": "lectures/8a.html#aggregate-vs.-window-functions",
+    "title": "Advanced SQL",
+    "section": "Aggregate vs. Window Functions",
+    "text": "Aggregate vs. Window Functions\n\n\n\nAggregation (GROUP BY)\nWindow Function (OVER)\n\n\n\n\nReduces the number of rows\nRetains all original rows\n\n\nOne row per group\nOne row per original row\n\n\nUseful for Summary Totals\nUseful for Running Totals/Ranks\n\n\n\n\nThis is the most common point of confusion. If you want a summary table, use GROUP BY. If you want to compare an individual row to a group total, use a Window Function."
+  },
+  {
+    "objectID": "lectures/8a.html#partition-by",
+    "href": "lectures/8a.html#partition-by",
+    "title": "Advanced SQL",
+    "section": "PARTITION BY",
+    "text": "PARTITION BY\n\nDivides the result set into partitions.\nThe function is applied to each partition separately.\nIt is like GROUP BY for window functions, but it doesn’t hide the individual rows.\n\n\nPARTITION BY is how we tell SQL where one group ends and the next begins. For example, if we partition by “Department,” the math starts over for every new department."
+  },
+  {
+    "objectID": "lectures/8a.html#order-by-in-window-functions",
+    "href": "lectures/8a.html#order-by-in-window-functions",
+    "title": "Advanced SQL",
+    "section": "ORDER BY in Window Functions",
+    "text": "ORDER BY in Window Functions\n\nCrucial for:\n\nRunning Totals (Cumulative sums).\nRankings.\nMoving Averages.\n\nIt defines the direction in which the window “slides” (e.g., from oldest to newest).\n\n\nYou almost always use ORDER BY inside your OVER clause. Without it, the computer doesn’t know which row comes “before” or “after” another, making rankings or running totals impossible.\n\n\nIn this activity, I want you to use SUM() OVER(PARTITION BY...) and RANK() OVER(PARTITION BY... ORDER BY...). Try to visualize how the region total appears on every row."
+  },
+  {
+    "objectID": "lectures/8a.html#ranking-functions-the-big-three",
+    "href": "lectures/8a.html#ranking-functions-the-big-three",
+    "title": "Advanced SQL",
+    "section": "Ranking Functions: The Big Three",
+    "text": "Ranking Functions: The Big Three\n\nROW_NUMBER(): Assigns a unique, sequential integer to rows (1, 2, 3, 4).\nRANK(): Assigns the same rank to ties, but skips the next number (1, 2, 2, 4).\nDENSE_RANK(): Assigns the same rank to ties, but does not skip numbers (1, 2, 2, 3).\n\n\nNot all rankings are created equal. If two people tie for 2nd place, do you want the next person to be 3rd, or 4th? That’s the difference between RANK and DENSE_RANK."
+  },
+  {
+    "objectID": "lectures/8a.html#ranking-comparison-diagram",
+    "href": "lectures/8a.html#ranking-comparison-diagram",
+    "title": "Advanced SQL",
+    "section": "Ranking Comparison Diagram",
+    "text": "Ranking Comparison Diagram\n\n\n\n\n\n\n\n\n\n\n\n\nRow Number: Strictly unique.\nRank: Leaves gaps.\nDense Rank: No gaps.\n\n\nThis diagram helps visualize the “Gap” behavior. Notice how RANK jumps from 1 to 3 because two people tied for 1st."
+  },
+  {
+    "objectID": "lectures/8a.html#value-functions-lead-and-lag",
+    "href": "lectures/8a.html#value-functions-lead-and-lag",
+    "title": "Advanced SQL",
+    "section": "Value Functions: LEAD and LAG",
+    "text": "Value Functions: LEAD and LAG\n\nLAG(column): Accesses data from the previous row.\nLEAD(column): Accesses data from the following row.\nUse Case: Comparing this month’s sales to last month’s sales to calculate growth.\n\n\nLEAD and LAG are like time machines. They allow you to look back at the past row or ahead to the future row without needing a complex self-join."
+  },
+  {
+    "objectID": "lectures/8a.html#deep-dive-lag",
+    "href": "lectures/8a.html#deep-dive-lag",
+    "title": "Advanced SQL",
+    "section": "Deep Dive: LAG",
+    "text": "Deep Dive: LAG\nSELECT \n    month,\n    revenue,\n    LAG(revenue) OVER (ORDER BY month) as prev_month_revenue,\n    (revenue - LAG(revenue) OVER (ORDER BY month)) as revenue_diff\nFROM monthly_sales;\n\nResult: You can calculate Month-over-Month (MoM) growth instantly.\n\n\nLAG is the primary tool for time-series analysis. It’s how we calculate “growth” or “change” by comparing the current row’s value to the one directly above it."
+  },
+  {
+    "objectID": "lectures/8a.html#deep-dive-lead",
+    "href": "lectures/8a.html#deep-dive-lead",
+    "title": "Advanced SQL",
+    "section": "Deep Dive: LEAD",
+    "text": "Deep Dive: LEAD\nSELECT \n    task_id,\n    due_date,\n    LEAD(due_date) OVER (ORDER BY due_date) as next_task_deadline\nFROM project_timeline;\n\nResult: Helps identify the gap between the current task and the next scheduled task.\n\n\nConversely, LEAD looks forward. If you want to know how much time you have between the current event and the next event, LEAD is your friend."
+  },
+  {
+    "objectID": "lectures/8a.html#window-frames-the-moving-window",
+    "href": "lectures/8a.html#window-frames-the-moving-window",
+    "title": "Advanced SQL",
+    "section": "Window Frames: The “Moving” Window",
+    "text": "Window Frames: The “Moving” Window\nSometimes, you don’t want to look at the entire partition. You only want a subset of it.\n\nROWS BETWEEN ...\nUNBOUNDED PRECEDING: Start from the very first row of the partition.\nCURRENT ROW: End at the row you are on.\n1 PRECEDING: Look at exactly one row before.\n\nExample: 3-Day Moving Average\nAVG(price) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)\n\nWe can even limit the window size. This is how “Moving Averages” are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows."
+  },
+  {
+    "objectID": "lectures/8a.html#summary-of-window-functions",
+    "href": "lectures/8a.html#summary-of-window-functions",
+    "title": "Advanced SQL",
+    "section": "Summary of Window Functions",
+    "text": "Summary of Window Functions\n\n\n\n\n\n\n\n\nCategory\nFunctions\nBest For…\n\n\n\n\nRanking\nRANK, DENSE_RANK, ROW_NUMBER\nTop N lists, finding duplicates\n\n\nValue\nLAG, LEAD, FIRST_VALUE\nTime-series, growth, trends\n\n\nAggregate\nSUM, AVG, COUNT\nRunning totals, moving averages\n\n\n\n\nLet’s review. We’ve covered Ranking for lists, Value for trends, and Aggregate for moving totals."
+  },
+  {
+    "objectID": "lectures/8a.html#the-window-concept-1",
+    "href": "lectures/8a.html#the-window-concept-1",
+    "title": "Advanced SQL",
+    "section": "The “Window” Concept",
+    "text": "The “Window” Concept\n\nThe “Window” is the subset of rows relevant to the current row.\nThe window is defined by the OVER clause.\n\n\nThink of a window as a sliding lens. As you move down the rows in your table, the lens moves with you, looking at a specific subset of data to perform its math."
   }
 ]
