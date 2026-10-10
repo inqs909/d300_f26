@@ -1,0 +1,135 @@
+---
+title: "ICA 6"
+format: html
+editor: source
+order: 6
+draft: true
+---
+
+
+
+## Database setup and reference
+
+Download `northwind.db` using the **Download here** link in the [Northwind SQLite repository](https://github.com/jpwhite3/northwind-SQLite3). 
+
+
+## Tables and columns used
+
+| Table | What one row represents | Relevant columns |
+|---|---|---|
+| `Products` | One product | `ProductID`: identifier; `ProductName`: name; `CategoryID`: category; `UnitPrice`: catalog price |
+| `Categories` | One product category | `CategoryID`: identifier; `CategoryName`: category label |
+| `Orders` | One customer order | `OrderID`: identifier; `CustomerID`: customer code; `OrderDate`: order date/time; `Freight`: order shipping charge |
+| `"Order Details"` | One product line within an order | `OrderID`, `ProductID`: identify the line; `UnitPrice`: price on that order; `Quantity`: units ordered; `Discount`: fractional discount |
+
+**Relationships:** 
+
+`Products.CategoryID` joins to `Categories.CategoryID`
+
+`Orders.OrderID` joins to `"Order Details".OrderID`.
+
+**Revenue definition:** For this assignment, revenue is merchandise sales after discounts, excluding freight and taxes:
+
+```sql
+UnitPrice * Quantity * (1 - Discount)
+```
+
+Use `UnitPrice` from `"Order Details"` for historical sales, rather than the catalog price in `Products`. A discount of `0.10` means 10%. Retain precision during calculations and round monetary output to two decimal places.
+
+
+## Problem 1: Compare products within categories
+
+How does each product's catalog price compare with the average price in its category?
+
+1. Join `Products` to `Categories` and retain one row per eligible product.
+2. Return `ProductID`, `ProductName`, `CategoryID`, `CategoryName`, and `UnitPrice`.
+3. Add `category_avg_price` using a window average partitioned by category.
+4. Add `price_difference`: product price minus its category's average price. Round both calculated columns to two decimals.
+5. Display results by `CategoryID`, then `ProductID`.
+
+
+## Problem 2: Rank products and investigate ties 
+
+Which products are the most expensive within each category?
+
+### Part A: Compare rankings
+
+Return `ProductID`, `ProductName`, `CategoryID`, and `UnitPrice`, plus:
+
+- `price_row_number`: `ROW_NUMBER()` ordered by price descending, then `ProductID` ascending, within category.
+- `price_rank`: `RANK()` ordered by price descending within category.
+- `price_dense_rank`: `DENSE_RANK()` ordered by price descending within category.
+
+Display by `CategoryID`, descending `UnitPrice`, then `ProductID`.
+
+**Explain:** Locate equal prices within a category and compare their rankings. Why should `ProductID` appear in the `ROW_NUMBER()` ordering but not the other two window orderings when ties mean equal prices?
+
+Whether or not you find ties in your copy, predict all three rankings for prices **30, 20, 20, 10**, with product IDs increasing in that displayed order.
+
+### Part B: Select leading price levels
+
+Put the ranked result in a CTE. Return products in the **two highest distinct price levels per category**, keeping every tie. Display the three ranking columns too.
+
+**Explain:** Which ranking should you filter? Can a category return more than two products? Why does filtering `ROW_NUMBER() <= 2` answer a different question?
+
+**Hint:** Calculate ranks inside a CTE; apply the rank filter in the outer query.
+
+## Problem 3: Compare orders with LAG
+
+How does each order's freight charge compare with the preceding eligible order from the same customer?
+
+1. Use all eligible orders, excluding missing freight charges.
+2. Return `CustomerID`, `OrderID`, `OrderDate`, and `Freight`.
+3. Add `previous_freight` using `LAG(Freight)` within each customer, ordered by `OrderDate, OrderID`.
+4. Add `freight_change`: current freight minus previous freight, rounded to two decimals. Use a CTE to reuse `previous_freight`.
+5. Display by `CustomerID`, `OrderDate`, then `OrderID`.
+
+**Explain:** What do positive and negative changes mean? Why is the first `freight_change` for each customer `NULL`? If a middle order has missing freight and is excluded, which order becomes the previous row?
+
+**Check:** Every customer's first eligible order must remain in the results.
+
+## Problem 4: Find the next order with LEAD
+
+How long does each customer wait until their next order?
+
+1. Return `CustomerID`, `OrderID`, and `OrderDate` for all eligible orders.
+2. Add `next_order_date` from the next order for the same customer, ordered by `OrderDate, OrderID`.
+3. In an outer query, calculate `days_until_next`, rounded to two decimals.
+4. Keep each customer's final order. Display by `CustomerID`, `OrderDate`, then `OrderID`.
+
+**SQLite date helper:** `JULIANDAY(later_date) - JULIANDAY(earlier_date)` gives elapsed days, potentially including fractions.
+
+**Explain:** Why does the last order have no next-order date? Is a gap of zero necessarily an error? What changes if `PARTITION BY CustomerID` is removed?
+
+**Check:** Nonmissing gaps should be nonnegative. Each customer's last row should have a `NULL` gap.
+
+## Probelm 5: Track revenue through time
+
+How are cumulative sales and recent daily sales changing?
+
+Use this supplied CTE to obtain one row per observed order date. Replace the final `SELECT` with your window calculations.
+
+```sql
+WITH daily_sales AS (
+    SELECT DATE(o.OrderDate) AS order_day,
+           SUM(d.UnitPrice * d.Quantity * (1.0 - d.Discount))
+               AS daily_revenue
+    FROM Orders AS o
+    JOIN "Order Details" AS d ON o.OrderID = d.OrderID
+    WHERE o.OrderDate IS NOT NULL
+    GROUP BY DATE(o.OrderDate)
+)
+SELECT order_day, daily_revenue
+FROM daily_sales
+ORDER BY order_day;
+```
+
+1. Return `order_day` and `daily_revenue`.
+2. Add `running_revenue` using `SUM()` from the first daily row through the current row. Write the frame explicitly.
+3. Add `moving_avg_3_rows` using `AVG()` over the current row and up to two preceding rows.
+4. Round all three monetary columns to two decimals. Display dates ascending.
+
+**Explain:** How many rows enter the first, second, and third moving averages? Does this represent three consecutive calendar days? Why aggregate order lines to days before calculating these windows?
+
+**Manual check:** Copy the first three unrounded daily revenues. Confirm that the third running total is their sum and the third moving average is their average. The final running total should equal the sum of all daily revenue.
+

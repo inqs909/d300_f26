@@ -1,0 +1,13 @@
+---
+title: "Week 8"
+date: 10-10-26
+description: This week we will cover CTE.
+editor: source
+---
+
+
+## Resources
+
+| Lecture | Slides                   |
+|---------|--------------------------|
+| 1       | [Slides](../lectures/8a) |

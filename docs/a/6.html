@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lectures – Data 300</title>
+<title>ICA 6 – Data 300</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,29 +26,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./img/logo.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-deb9980f0abb462247767bd4714b05c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../img/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-deb9980f0abb462247767bd4714b05c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,65 +109,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -145,11 +120,11 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./img/logo.png" alt="" class="navbar-logo light-content">
-    <img src="./img/logo.png" alt="" class="navbar-logo dark-content">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../img/logo.png" alt="" class="navbar-logo light-content">
+    <img src="../img/logo.png" alt="" class="navbar-logo dark-content">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Data 300</span>
     </a>
   </div>
@@ -160,15 +135,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./lectures.html" aria-current="page"> 
+    <a class="nav-link" href="../lectures.html"> 
 <span class="menu-text">Lectures</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./project_report.html"> 
+    <a class="nav-link" href="../project_report.html"> 
 <span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./assignments.html"> 
+    <a class="nav-link" href="../assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
@@ -182,15 +157,31 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#database-setup-and-reference" id="toc-database-setup-and-reference" class="nav-link active" data-scroll-target="#database-setup-and-reference">Database setup and reference</a></li>
+  <li><a href="#tables-and-columns-used" id="toc-tables-and-columns-used" class="nav-link" data-scroll-target="#tables-and-columns-used">Tables and columns used</a></li>
+  <li><a href="#problem-1-compare-products-within-categories" id="toc-problem-1-compare-products-within-categories" class="nav-link" data-scroll-target="#problem-1-compare-products-within-categories">Problem 1: Compare products within categories</a></li>
+  <li><a href="#problem-2-rank-products-and-investigate-ties" id="toc-problem-2-rank-products-and-investigate-ties" class="nav-link" data-scroll-target="#problem-2-rank-products-and-investigate-ties">Problem 2: Rank products and investigate ties</a>
+  <ul class="collapse">
+  <li><a href="#part-a-compare-rankings" id="toc-part-a-compare-rankings" class="nav-link" data-scroll-target="#part-a-compare-rankings">Part A: Compare rankings</a></li>
+  <li><a href="#part-b-select-leading-price-levels" id="toc-part-b-select-leading-price-levels" class="nav-link" data-scroll-target="#part-b-select-leading-price-levels">Part B: Select leading price levels</a></li>
+  </ul></li>
+  <li><a href="#problem-3-compare-orders-with-lag" id="toc-problem-3-compare-orders-with-lag" class="nav-link" data-scroll-target="#problem-3-compare-orders-with-lag">Problem 3: Compare orders with LAG</a></li>
+  <li><a href="#problem-4-find-the-next-order-with-lead" id="toc-problem-4-find-the-next-order-with-lead" class="nav-link" data-scroll-target="#problem-4-find-the-next-order-with-lead">Problem 4: Find the next order with LEAD</a></li>
+  <li><a href="#probelm-5-track-revenue-through-time" id="toc-probelm-5-track-revenue-through-time" class="nav-link" data-scroll-target="#probelm-5-track-revenue-through-time">Probelm 5: Track revenue through time</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lectures</h1>
+<h1 class="title">ICA 6</h1>
 </div>
 
 
@@ -207,136 +198,146 @@ window.Quarto = {
 </header>
 
 
+<section id="database-setup-and-reference" class="level2">
+<h2 class="anchored" data-anchor-id="database-setup-and-reference">Database setup and reference</h2>
+<p>Download <code>northwind.db</code> using the <strong>Download here</strong> link in the <a href="https://github.com/jpwhite3/northwind-SQLite3">Northwind SQLite repository</a>.</p>
+</section>
+<section id="tables-and-columns-used" class="level2">
+<h2 class="anchored" data-anchor-id="tables-and-columns-used">Tables and columns used</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>What one row represents</th>
+<th>Relevant columns</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Products</code></td>
+<td>One product</td>
+<td><code>ProductID</code>: identifier; <code>ProductName</code>: name; <code>CategoryID</code>: category; <code>UnitPrice</code>: catalog price</td>
+</tr>
+<tr class="even">
+<td><code>Categories</code></td>
+<td>One product category</td>
+<td><code>CategoryID</code>: identifier; <code>CategoryName</code>: category label</td>
+</tr>
+<tr class="odd">
+<td><code>Orders</code></td>
+<td>One customer order</td>
+<td><code>OrderID</code>: identifier; <code>CustomerID</code>: customer code; <code>OrderDate</code>: order date/time; <code>Freight</code>: order shipping charge</td>
+</tr>
+<tr class="even">
+<td><code>"Order Details"</code></td>
+<td>One product line within an order</td>
+<td><code>OrderID</code>, <code>ProductID</code>: identify the line; <code>UnitPrice</code>: price on that order; <code>Quantity</code>: units ordered; <code>Discount</code>: fractional discount</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relationships:</strong></p>
+<p><code>Products.CategoryID</code> joins to <code>Categories.CategoryID</code></p>
+<p><code>Orders.OrderID</code> joins to <code>"Order Details".OrderID</code>.</p>
+<p><strong>Revenue definition:</strong> For this assignment, revenue is merchandise sales after discounts, excluding freight and taxes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>UnitPrice <span class="op">*</span> Quantity <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">-</span> Discount)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use <code>UnitPrice</code> from <code>"Order Details"</code> for historical sales, rather than the catalog price in <code>Products</code>. A discount of <code>0.10</code> means 10%. Retain precision during calculations and round monetary output to two decimal places.</p>
+</section>
+<section id="problem-1-compare-products-within-categories" class="level2">
+<h2 class="anchored" data-anchor-id="problem-1-compare-products-within-categories">Problem 1: Compare products within categories</h2>
+<p>How does each product’s catalog price compare with the average price in its category?</p>
+<ol type="1">
+<li>Join <code>Products</code> to <code>Categories</code> and retain one row per eligible product.</li>
+<li>Return <code>ProductID</code>, <code>ProductName</code>, <code>CategoryID</code>, <code>CategoryName</code>, and <code>UnitPrice</code>.</li>
+<li>Add <code>category_avg_price</code> using a window average partitioned by category.</li>
+<li>Add <code>price_difference</code>: product price minus its category’s average price. Round both calculated columns to two decimals.</li>
+<li>Display results by <code>CategoryID</code>, then <code>ProductID</code>.</li>
+</ol>
+<p><strong>Explain:</strong> Why does <code>PARTITION BY</code> retain every product, while a query grouped only by category does not? Find a product above its category average and interpret its <code>price_difference</code>.</p>
+<p><strong>Check:</strong> Products in the same category should have the same <code>category_avg_price</code>.</p>
+<p><strong>Hint:</strong> A full-category average needs <code>PARTITION BY</code> but no ordering inside <code>OVER()</code>.</p>
+</section>
+<section id="problem-2-rank-products-and-investigate-ties" class="level2">
+<h2 class="anchored" data-anchor-id="problem-2-rank-products-and-investigate-ties">Problem 2: Rank products and investigate ties</h2>
+<p>Which products are the most expensive within each category?</p>
+<section id="part-a-compare-rankings" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-compare-rankings">Part A: Compare rankings</h3>
+<p>Return <code>ProductID</code>, <code>ProductName</code>, <code>CategoryID</code>, and <code>UnitPrice</code>, plus:</p>
+<ul>
+<li><code>price_row_number</code>: <code>ROW_NUMBER()</code> ordered by price descending, then <code>ProductID</code> ascending, within category.</li>
+<li><code>price_rank</code>: <code>RANK()</code> ordered by price descending within category.</li>
+<li><code>price_dense_rank</code>: <code>DENSE_RANK()</code> ordered by price descending within category.</li>
+</ul>
+<p>Display by <code>CategoryID</code>, descending <code>UnitPrice</code>, then <code>ProductID</code>.</p>
+<p><strong>Explain:</strong> Locate equal prices within a category and compare their rankings. Why should <code>ProductID</code> appear in the <code>ROW_NUMBER()</code> ordering but not the other two window orderings when ties mean equal prices?</p>
+<p>Whether or not you find ties in your copy, predict all three rankings for prices <strong>30, 20, 20, 10</strong>, with product IDs increasing in that displayed order.</p>
+</section>
+<section id="part-b-select-leading-price-levels" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-select-leading-price-levels">Part B: Select leading price levels</h3>
+<p>Put the ranked result in a CTE. Return products in the <strong>two highest distinct price levels per category</strong>, keeping every tie. Display the three ranking columns too.</p>
+<p><strong>Explain:</strong> Which ranking should you filter? Can a category return more than two products? Why does filtering <code>ROW_NUMBER() &lt;= 2</code> answer a different question?</p>
+<p><strong>Hint:</strong> Calculate ranks inside a CTE; apply the rank filter in the outer query.</p>
+</section>
+</section>
+<section id="problem-3-compare-orders-with-lag" class="level2">
+<h2 class="anchored" data-anchor-id="problem-3-compare-orders-with-lag">Problem 3: Compare orders with LAG</h2>
+<p>How does each order’s freight charge compare with the preceding eligible order from the same customer?</p>
+<ol type="1">
+<li>Use all eligible orders, excluding missing freight charges.</li>
+<li>Return <code>CustomerID</code>, <code>OrderID</code>, <code>OrderDate</code>, and <code>Freight</code>.</li>
+<li>Add <code>previous_freight</code> using <code>LAG(Freight)</code> within each customer, ordered by <code>OrderDate, OrderID</code>.</li>
+<li>Add <code>freight_change</code>: current freight minus previous freight, rounded to two decimals. Use a CTE to reuse <code>previous_freight</code>.</li>
+<li>Display by <code>CustomerID</code>, <code>OrderDate</code>, then <code>OrderID</code>.</li>
+</ol>
+<p><strong>Explain:</strong> What do positive and negative changes mean? Why is the first <code>freight_change</code> for each customer <code>NULL</code>? If a middle order has missing freight and is excluded, which order becomes the previous row?</p>
+<p><strong>Check:</strong> Every customer’s first eligible order must remain in the results.</p>
+</section>
+<section id="problem-4-find-the-next-order-with-lead" class="level2">
+<h2 class="anchored" data-anchor-id="problem-4-find-the-next-order-with-lead">Problem 4: Find the next order with LEAD</h2>
+<p>How long does each customer wait until their next order?</p>
+<ol type="1">
+<li>Return <code>CustomerID</code>, <code>OrderID</code>, and <code>OrderDate</code> for all eligible orders.</li>
+<li>Add <code>next_order_date</code> from the next order for the same customer, ordered by <code>OrderDate, OrderID</code>.</li>
+<li>In an outer query, calculate <code>days_until_next</code>, rounded to two decimals.</li>
+<li>Keep each customer’s final order. Display by <code>CustomerID</code>, <code>OrderDate</code>, then <code>OrderID</code>.</li>
+</ol>
+<p><strong>SQLite date helper:</strong> <code>JULIANDAY(later_date) - JULIANDAY(earlier_date)</code> gives elapsed days, potentially including fractions.</p>
+<p><strong>Explain:</strong> Why does the last order have no next-order date? Is a gap of zero necessarily an error? What changes if <code>PARTITION BY CustomerID</code> is removed?</p>
+<p><strong>Check:</strong> Nonmissing gaps should be nonnegative. Each customer’s last row should have a <code>NULL</code> gap.</p>
+</section>
+<section id="probelm-5-track-revenue-through-time" class="level2">
+<h2 class="anchored" data-anchor-id="probelm-5-track-revenue-through-time">Probelm 5: Track revenue through time</h2>
+<p><strong>Business question:</strong> How are cumulative sales and recent daily sales changing?</p>
+<p>Use this supplied CTE to obtain one row per observed order date. Replace the final <code>SELECT</code> with your window calculations.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> daily_sales <span class="kw">AS</span> (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="dt">DATE</span>(o.OrderDate) <span class="kw">AS</span> order_day,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">SUM</span>(d.UnitPrice <span class="op">*</span> d.Quantity <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">-</span> d.Discount))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="kw">AS</span> daily_revenue</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> Orders <span class="kw">AS</span> o</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> <span class="ot">"Order Details"</span> <span class="kw">AS</span> d <span class="kw">ON</span> o.OrderID <span class="op">=</span> d.OrderID</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> o.OrderDate <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">DATE</span>(o.OrderDate)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> order_day, daily_revenue</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> daily_sales</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> order_day;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Return <code>order_day</code> and <code>daily_revenue</code>.</li>
+<li>Add <code>running_revenue</code> using <code>SUM()</code> from the first daily row through the current row. Write the frame explicitly.</li>
+<li>Add <code>moving_avg_3_rows</code> using <code>AVG()</code> over the current row and up to two preceding rows.</li>
+<li>Round all three monetary columns to two decimals. Display dates ascending.</li>
+</ol>
+<p><strong>Explain:</strong> How many rows enter the first, second, and third moving averages? Does this represent three consecutive calendar days? Why aggregate order lines to days before calculating these windows?</p>
+<p><strong>Manual check:</strong> Copy the first three unrounded daily revenues. Confirm that the third running total is their sum and the third moving average is their average. The final running total should equal the sum of all daily revenue.</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1790023198854" data-listing-reading-time-sort="6" data-listing-word-count-sort="1066">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/1a.html" class="no-external">Data 300</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/1a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1790023198854" data-listing-reading-time-sort="4" data-listing-word-count-sort="648">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/1b.html" class="no-external">Computational Setup</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/1b.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1790023198854" data-listing-reading-time-sort="3" data-listing-word-count-sort="455">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/2a.html" class="no-external">Computational Setup</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/2a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1790023198858" data-listing-reading-time-sort="8" data-listing-word-count-sort="1435">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/2b.html" class="no-external">Data Systems</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/2b.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1790023198858" data-listing-reading-time-sort="19" data-listing-word-count-sort="3734">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/3a.html" class="no-external">Data Modeling</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/3a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-file-modified-sort="1790023198858" data-listing-reading-time-sort="11" data-listing-word-count-sort="2190">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/4a.html" class="no-external">Database Building</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/4a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-file-modified-sort="1790023198858" data-listing-reading-time-sort="7" data-listing-word-count-sort="1389">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/5a.html" class="no-external">SQL Basics</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/5a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-listing-file-modified-sort="1790633804105" data-listing-reading-time-sort="10" data-listing-word-count-sort="1970">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/6a.html" class="no-external">SQL: Joins, Subqueries, and Views</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/6a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-listing-file-modified-sort="1791221136116" data-listing-reading-time-sort="16" data-listing-word-count-sort="3195">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/7a.html" class="no-external">Advanced SQL</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/7a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-listing-file-modified-sort="1791601107177" data-listing-reading-time-sort="13" data-listing-word-count-sort="2425">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/8a.html" class="no-external">Advanced SQL</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/8a.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-listing-file-modified-sort="1791221136116" data-listing-reading-time-sort="22" data-listing-word-count-sort="4249">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./lectures/9a.html" class="no-external">Advanced SQL</a>
-</h3>
-</div>
-<div class="metadata">
-<a href="./lectures/9a.html" class="no-external">
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

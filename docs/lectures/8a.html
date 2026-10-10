@@ -212,19 +212,50 @@
 </div>
 
 </section>
+<section>
+<section id="window-functions" class="title-slide slide level1 agenda-slide center">
+<h1>Window Functions</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-active">
+<p>Window Functions</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Activity Solutions</p>
+</div></li>
+</ul>
+</div>
+</section>
 <section id="the-window-concept" class="slide level2">
 <h2>The “Window” Concept</h2>
+<div class="columns">
+<div class="column">
+<h3 id="window-1">Window 1</h3>
 <div class="cell" data-fig-responsive="false" data-layout-align="center">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<p><img data-src="8a_files/figure-revealjs/mermaid-figure-1.png" style="width:4in;height:5.3in"></p>
+<p><img data-src="8a_files/figure-revealjs/mermaid-figure-1.png" style="width:4in;height:5.48in"></p>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
+</div><div class="column">
+<h3 id="window-2">Window 2</h3>
+<div class="cell" data-fig-responsive="false" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<p><img data-src="8a_files/figure-revealjs/mermaid-figure-3.png" style="width:4in;height:5.48in"></p>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section id="the-window-concept-1" class="slide level2">
 <h2>The “Window” Concept</h2>
@@ -316,6 +347,10 @@
           display:block!important;
       }</style></aside>
 </section>
+<section id="activity-1" class="slide level2">
+<h2>Activity 1</h2>
+<p>Using <code>film</code>, return <code>film_id</code>, <code>title</code>, <code>rating</code>, and <code>length</code> for every film with a nonmissing length. Add <code>rating_avg_length</code>: the average length of films with the same rating.</p>
+</section>
 <section id="order-by-in-window-functions" class="slide level2">
 <h2>ORDER BY in Window Functions</h2>
 <ul>
@@ -394,6 +429,16 @@
           display:block!important;
       }</style></aside>
 </section>
+<section id="activity-2" class="slide level2 scrollable">
+<h2>Activity 2</h2>
+<p>Using films with nonmissing lengths, rank films within each rating, longest film length first. Return <code>film_id</code>, <code>title</code>, <code>rating</code>, film <code>length</code>, and all three rankings:</p>
+<ol type="1">
+<li><code>ROW_NUMBER()</code>: rank by film <code>length</code> and <code>film_id</code>.</li>
+<li><code>RANK()</code>: rank by film <code>length</code></li>
+<li><code>DENSE_RANK()</code>: rank by film length</li>
+</ol>
+<p><em>What does each ranking do?</em></p>
+</section>
 <section id="value-functions-lead-and-lag" class="slide level2">
 <h2>Value Functions: LEAD and LAG</h2>
 <ul>
@@ -415,54 +460,25 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="deep-dive-lag" class="slide level2">
-<h2>Deep Dive: LAG</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-label="1"></a><span class="kw">SELECT</span> </span>
-<span id="cb1-2"><a aria-label="2"></a>    <span class="dt">month</span>,</span>
-<span id="cb1-3"><a aria-label="3"></a>    revenue,</span>
-<span id="cb1-4"><a aria-label="4"></a>    <span class="fu">LAG</span>(revenue) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">month</span>) <span class="kw">as</span> prev_month_revenue,</span>
-<span id="cb1-5"><a aria-label="5"></a>    (revenue <span class="op">-</span> <span class="fu">LAG</span>(revenue) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">month</span>)) <span class="kw">as</span> revenue_diff</span>
-<span id="cb1-6"><a aria-label="6"></a><span class="kw">FROM</span> monthly_sales;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li><strong>Result:</strong> You can calculate Month-over-Month (MoM) growth instantly.</li>
-</ul>
-<aside class="notes">
-<p>LAG is the primary tool for time-series analysis. It’s how we calculate “growth” or “change” by comparing the current row’s value to the one directly above it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="activity-3" class="slide level2 scrollable">
+<h2>Activity 3</h2>
+<p>Using <code>payment</code>, examine all payments for <code>customer_id = 1</code>, ordered by <code>payment_date</code>, then <code>payment_id</code>.</p>
+<ol type="1">
+<li>Return <code>payment_id</code>, <code>payment_date</code>, and <code>amount</code>.</li>
+<li>Add <code>previous_amount</code> from the preceding payment.</li>
+<li>Keep the first payment even though no previous payment exists.</li>
+</ol>
 </section>
-<section id="deep-dive-lead" class="slide level2">
-<h2>Deep Dive: LEAD</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-label="1"></a><span class="kw">SELECT</span> </span>
-<span id="cb2-2"><a aria-label="2"></a>    task_id,</span>
-<span id="cb2-3"><a aria-label="3"></a>    due_date,</span>
-<span id="cb2-4"><a aria-label="4"></a>    <span class="fu">LEAD</span>(due_date) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> due_date) <span class="kw">as</span> next_task_deadline</span>
-<span id="cb2-5"><a aria-label="5"></a><span class="kw">FROM</span> project_timeline;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li><strong>Result:</strong> Helps identify the gap between the current task and the next scheduled task.</li>
-</ul>
-<aside class="notes">
-<p>Conversely, LEAD looks forward. If you want to know how much time you have between the current event and the next event, LEAD is your friend.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="activity-4" class="slide level2 scrollable">
+<h2>Activity 4</h2>
+<p>Using <code>rental</code>, examine every rental for customers 1, 2, and 3.</p>
+<ol type="1">
+<li>Return <code>customer_id</code>, <code>rental_id</code>, and <code>rental_date</code>.</li>
+<li>Add <code>next_rental_date</code> for the <strong>same customer</strong>, ordered by <code>rental_date</code>, then <code>rental_id</code>.</li>
+<li>Add <code>days_until_next</code>, rounded to two decimals.</li>
+<li>Display by <code>customer_id</code>, <code>rental_date</code>, then <code>rental_id</code>.</li>
+</ol>
+<p><strong>Hint:</strong> In SQLite, <code>JULIANDAY(later) - JULIANDAY(earlier)</code> gives elapsed days, including fractions.</p>
 </section>
 <section id="window-frames-the-moving-window" class="slide level2">
 <h2>Window Frames: The “Moving” Window</h2>
@@ -473,8 +489,11 @@
 <li><strong><code>CURRENT ROW</code></strong>: End at the row you are on.</li>
 <li><strong><code>1 PRECEDING</code></strong>: Look at exactly one row before.</li>
 </ul>
+</section>
+<section id="window-frames-example" class="slide level2">
+<h2>Window Frames Example</h2>
 <p><em>Example: 3-Day Moving Average</em></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-label="1"></a><span class="fu">AVG</span>(price) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">date</span> <span class="kw">ROWS</span> <span class="kw">BETWEEN</span> <span class="dv">2</span> <span class="kw">PRECEDING</span> <span class="kw">AND</span> <span class="kw">CURRENT</span> <span class="kw">ROW</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-label="1"></a><span class="fu">AVG</span>(price) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">date</span> <span class="kw">ROWS</span> <span class="kw">BETWEEN</span> <span class="dv">2</span> <span class="kw">PRECEDING</span> <span class="kw">AND</span> <span class="kw">CURRENT</span> <span class="kw">ROW</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>We can even limit the window size. This is how “Moving Averages” are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows.</p>
 <style type="text/css">
@@ -489,55 +508,224 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="summary-of-window-functions" class="slide level2">
-<h2>Summary of Window Functions</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Category</th>
-<th style="text-align: left;">Functions</th>
-<th style="text-align: left;">Best For…</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Ranking</strong></td>
-<td style="text-align: left;"><code>RANK</code>, <code>DENSE_RANK</code>, <code>ROW_NUMBER</code></td>
-<td style="text-align: left;">Top N lists, finding duplicates</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Value</strong></td>
-<td style="text-align: left;"><code>LAG</code>, <code>LEAD</code>, <code>FIRST_VALUE</code></td>
-<td style="text-align: left;">Time-series, growth, trends</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Aggregate</strong></td>
-<td style="text-align: left;"><code>SUM</code>, <code>AVG</code>, <code>COUNT</code></td>
-<td style="text-align: left;">Running totals, moving averages</td>
-</tr>
-</tbody>
-</table>
-<aside class="notes">
-<p>Let’s review. We’ve covered Ranking for lists, Value for trends, and Aggregate for moving totals.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-
-
+<section id="activity-5" class="slide level2 scrollable">
+<h2>Activity 5</h2>
+<p>Using <code>payment</code>, first create a CTE containing one row per payment date: <code>payment_day</code> and <code>daily_revenue</code>. Use <code>DATE(payment_date)</code> to remove the time.</p>
+<ol type="1">
+<li>Return each observed payment date and its daily revenue.</li>
+<li>Add <code>running_revenue</code>: revenue from the first observed date through the current row.</li>
+<li>Add <code>moving_avg_3_rows</code>: average daily revenue over the current row and up to two preceding rows.</li>
+<li>Round monetary outputs to two decimals and display dates in ascending order.</li>
+</ol>
+</section></section>
+<section>
+<section id="activity-solutions" class="title-slide slide level1 agenda-slide center">
+<h1>Activity Solutions</h1>
+<div class="agenda">
+<ul>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Window Functions</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Activity Solutions</p>
+</div></li>
+</ul>
+</div>
 </section>
+<section id="solution-1" class="slide level2">
+<h2>Solution 1</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-label="1"></a><span class="kw">SELECT</span> film_id, title, rating, <span class="fu">length</span>,</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-label="2"></a>       <span class="fu">AVG</span>(<span class="fu">length</span>) <span class="kw">OVER</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-label="3"></a>           <span class="kw">PARTITION</span> <span class="kw">BY</span> rating) <span class="kw">AS</span> rating_avg_length</span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-label="4"></a><span class="kw">FROM</span> film</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-label="5"></a><span class="kw">WHERE</span> <span class="fu">length</span> <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-label="6"></a><span class="kw">ORDER</span> <span class="kw">BY</span> rating, film_id;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="1">Compute the average across the entire rating partition. With no window ordering, this average is repeated for every film in that rating.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="2">Exclude missing lengths before calculating the window values.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="3">Set the displayed order independently of the window calculation.</span>
+</dd>
+</dl>
+<p><strong>Interpretation:</strong> A positive difference means the film is longer than its rating’s average. Unlike <code>GROUP BY</code>, this window calculation retains each film row.</p>
+</section>
+<section id="solution-2" class="slide level2">
+<h2>Solution 2</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-label="1"></a><span class="kw">SELECT</span> film_id, title, rating, <span class="fu">length</span>,</span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-label="2"></a>       <span class="fu">ROW_NUMBER</span>() <span class="kw">OVER</span> (</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-label="3"></a>           <span class="kw">PARTITION</span> <span class="kw">BY</span> rating</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4" aria-label="4"></a>           <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">length</span> <span class="kw">DESC</span>, film_id) <span class="kw">AS</span> row_num,</span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5" aria-label="5"></a>       <span class="fu">RANK</span>() <span class="kw">OVER</span> (</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-label="6"></a>           <span class="kw">PARTITION</span> <span class="kw">BY</span> rating</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-7" class="code-annotation-target"><a href="#annotated-cell-4-7" aria-label="7"></a>           <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">length</span> <span class="kw">DESC</span>) <span class="kw">AS</span> length_rank,</span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8" aria-label="8"></a>       <span class="fu">DENSE_RANK</span>() <span class="kw">OVER</span> (</span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-label="9"></a>           <span class="kw">PARTITION</span> <span class="kw">BY</span> rating</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-10" class="code-annotation-target"><a href="#annotated-cell-4-10" aria-label="10"></a>           <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">length</span> <span class="kw">DESC</span>) <span class="kw">AS</span> dense_length_rank</span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11" aria-label="11"></a><span class="kw">FROM</span> film</span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12" aria-label="12"></a><span class="kw">WHERE</span> <span class="fu">length</span> <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-13" class="code-annotation-target"><a href="#annotated-cell-4-13" aria-label="13"></a><span class="kw">ORDER</span> <span class="kw">BY</span> rating, <span class="fu">length</span> <span class="kw">DESC</span>, film_id;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="4" data-code-annotation="1">Assign unique sequential numbers within each rating. The identifier gives tied lengths a repeatable order.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="7" data-code-annotation="2">Give equal lengths equal ranks; leave gaps after ties.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="10" data-code-annotation="3">Give equal lengths equal ranks without gaps between distinct lengths.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="13" data-code-annotation="4">Display ties in identifier order without changing their shared ranks.</span>
+</dd>
+</dl>
+</section>
+<section id="solution-3" class="slide level2">
+<h2>Solution 3</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-5"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1" aria-label="1"></a><span class="kw">SELECT</span> payment_id, payment_date, amount,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2">2</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-label="2"></a>       <span class="fu">LAG</span>(amount) <span class="kw">OVER</span> (</span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-label="3"></a>           <span class="kw">PARTITION</span> <span class="kw">BY</span> customer_id</span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4" aria-label="4"></a>           <span class="kw">ORDER</span> <span class="kw">BY</span> payment_date, payment_id</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="3">3</button><span id="annotated-cell-5-5" class="code-annotation-target"><a href="#annotated-cell-5-5" aria-label="5"></a>       ) <span class="kw">AS</span> previous_amount</span>
+<span id="annotated-cell-5-6"><a href="#annotated-cell-5-6" aria-label="6"></a><span class="kw">FROM</span> payment</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="4">4</button><span id="annotated-cell-5-7" class="code-annotation-target"><a href="#annotated-cell-5-7" aria-label="7"></a><span class="kw">WHERE</span> customer_id <span class="op">=</span> <span class="dv">1</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="1" data-code-annotation="1">Select the columns to be displayed.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="2">Creates the window function and applies the lag function to obtain the previous amount.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="5" data-code-annotation="3">Partitions by <code>customer_id</code> and orders by <code>payment_date</code> and <code>payment_id</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="7" data-code-annotation="4">Restrict the input to customer 1.</span>
+</dd>
+</dl>
+</section>
+<section id="solution-4" class="slide level2">
+<h2>Solution 4</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-6"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1" aria-label="1"></a><span class="kw">SELECT</span> customer_id, rental_id, rental_date,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2">2</button><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-label="2"></a>       <span class="fu">LEAD</span>(rental_date) <span class="kw">OVER</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3">3</button><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-label="3"></a>           <span class="kw">PARTITION</span> <span class="kw">BY</span> customer_id</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4">4</button><span id="annotated-cell-6-4" class="code-annotation-target"><a href="#annotated-cell-6-4" aria-label="4"></a>           <span class="kw">ORDER</span> <span class="kw">BY</span> rental_date, rental_id</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="5">5</button><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-label="5"></a>       ) <span class="kw">AS</span> next_rental_date</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="6">6</button><span id="annotated-cell-6-6" class="code-annotation-target"><a href="#annotated-cell-6-6" aria-label="6"></a><span class="kw">FROM</span> rental</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="7">7</button><span id="annotated-cell-6-7" class="code-annotation-target"><a href="#annotated-cell-6-7" aria-label="7"></a><span class="kw">WHERE</span> customer_id <span class="kw">IN</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>);</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="1" data-code-annotation="1">Display the customer identifier, rental identifier, and rental timestamp.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="2" data-code-annotation="2">Use <code>LEAD()</code> to retrieve the following row’s rental date within the window.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="3">Create a separate partition for each customer so the next rental belongs to the same customer.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="4" data-code-annotation="4">Order each customer’s rentals chronologically. Use <code>rental_id</code> to break ties when timestamps match. This controls the window calculation, not the final display order.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="5" data-code-annotation="5">Name the calculated column <code>next_rental_date</code>. Each customer’s final rental returns <code>NULL</code> because no following rental exists.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="6" data-code-annotation="6">Retrieve records from the <code>rental</code> table.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="7" data-code-annotation="7">Include only customers 1, 2, and 3. This filter applies before the window function is calculated.</span>
+</dd>
+</dl>
+</section>
+<section id="solution-5" class="slide level2">
+<h2>Solution 5</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1" aria-label="1"></a><span class="kw">WITH</span> daily_sales <span class="kw">AS</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2">2</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-label="2"></a>    <span class="kw">SELECT</span> <span class="dt">DATE</span>(payment_date) <span class="kw">AS</span> payment_day,</span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3" aria-label="3"></a>           <span class="fu">SUM</span>(amount) <span class="kw">AS</span> daily_revenue</span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4" aria-label="4"></a>    <span class="kw">FROM</span> payment</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3">3</button><span id="annotated-cell-7-5" class="code-annotation-target"><a href="#annotated-cell-7-5" aria-label="5"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">DATE</span>(payment_date)</span>
+<span id="annotated-cell-7-6"><a href="#annotated-cell-7-6" aria-label="6"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="4">4</button><span id="annotated-cell-7-7" class="code-annotation-target"><a href="#annotated-cell-7-7" aria-label="7"></a><span class="kw">SELECT</span> payment_day, daily_revenue,</span>
+<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8" aria-label="8"></a>       <span class="fu">SUM</span>(daily_revenue) <span class="kw">OVER</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="5">5</button><span id="annotated-cell-7-9" class="code-annotation-target"><a href="#annotated-cell-7-9" aria-label="9"></a>           <span class="kw">ORDER</span> <span class="kw">BY</span> payment_day</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="6">6</button><span id="annotated-cell-7-10" class="code-annotation-target"><a href="#annotated-cell-7-10" aria-label="10"></a>           <span class="kw">ROWS</span> <span class="kw">BETWEEN</span> <span class="kw">UNBOUNDED</span> <span class="kw">PRECEDING</span> <span class="kw">AND</span> <span class="kw">CURRENT</span> <span class="kw">ROW</span></span>
+<span id="annotated-cell-7-11"><a href="#annotated-cell-7-11" aria-label="11"></a>       ) <span class="kw">AS</span> running_revenue,</span>
+<span id="annotated-cell-7-12"><a href="#annotated-cell-7-12" aria-label="12"></a>       <span class="fu">AVG</span>(daily_revenue) <span class="kw">OVER</span> (</span>
+<span id="annotated-cell-7-13"><a href="#annotated-cell-7-13" aria-label="13"></a>           <span class="kw">ORDER</span> <span class="kw">BY</span> payment_day</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="7">7</button><span id="annotated-cell-7-14" class="code-annotation-target"><a href="#annotated-cell-7-14" aria-label="14"></a>           <span class="kw">ROWS</span> <span class="kw">BETWEEN</span> <span class="dv">2</span> <span class="kw">PRECEDING</span> <span class="kw">AND</span> <span class="kw">CURRENT</span> <span class="kw">ROW</span></span>
+<span id="annotated-cell-7-15"><a href="#annotated-cell-7-15" aria-label="15"></a>       ) <span class="kw">AS</span> moving_avg_3_rows</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="8">8</button><span id="annotated-cell-7-16" class="code-annotation-target"><a href="#annotated-cell-7-16" aria-label="16"></a><span class="kw">FROM</span> daily_sales</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="9">9</button><span id="annotated-cell-7-17" class="code-annotation-target"><a href="#annotated-cell-7-17" aria-label="17"></a><span class="kw">ORDER</span> <span class="kw">BY</span> payment_day;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="1" data-code-annotation="1">Create a common table expression (CTE) named <code>daily_sales</code> to summarize payments before applying window functions.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="2">Extract the date from each payment timestamp, removing the time, and name it <code>payment_day</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="5" data-code-annotation="3">Group payments by date. <code>SUM(amount)</code> calculates total revenue for each date, producing one row per observed payment date.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="7" data-code-annotation="4">Display each payment date and its daily revenue.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="9" data-code-annotation="5">Order the daily rows chronologically for the running-total calculation.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="10" data-code-annotation="6">Include every row from the beginning through the current row. <code>SUM()</code> over this frame calculates cumulative revenue as <code>running_revenue</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="14" data-code-annotation="7">Include the current row and up to two preceding rows. <code>AVG()</code> calculates their average daily revenue. The first result uses one row, the second uses two, and subsequent results use three. These are observed payment dates, not necessarily consecutive calendar days.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="16" data-code-annotation="8">Retrieve the daily summaries from the CTE. Both window functions preserve one output row per observed payment date.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="17" data-code-annotation="9">Display the final results chronologically. The ordering inside <code>OVER()</code> controls calculations but does not guarantee the final display order.</span>
+</dd>
+</dl>
+</section>
+<section id="references-for-the-activities" class="slide level2">
+<h2>References for the activities</h2>
+<ul>
+<li><a href="https://github.com/bradleygrant/sakila-sqlite3">Sakila SQLite database and source</a></li>
+<li><a href="https://www.sqlite.org/windowfunctions.html">SQLite window functions</a></li>
+<li><a href="https://www.sqlite.org/lang_datefunc.html">SQLite date and time functions</a></li>
+</ul>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

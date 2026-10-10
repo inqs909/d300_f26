@@ -21,12 +21,14 @@
       "/a/2.html",
       "/a/3.html",
       "/a/4.html",
-      "/a/5.html"
+      "/a/5.html",
+      "/a/6.html"
     ]
   },
   {
     "listing": "/index.html",
     "items": [
+      "/posts/8.html",
       "/posts/7.html",
       "/posts/6.html",
       "/posts/5.html",

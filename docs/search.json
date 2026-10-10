@@ -1033,7 +1033,7 @@
     "href": "assignments.html",
     "title": "Assignments",
     "section": "",
-    "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\n\n\nICA 4\n\n\n\n\n\n\n\n\n\n\nICA 5\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\n\n\nICA 4\n\n\n\n\n\n\n\n\n\n\nICA 5\n\n\n\n\n\n\n\n\n\n\nICA 6\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "a/4.html",
@@ -1194,7 +1194,7 @@
     "href": "index.html",
     "title": "Welcome to Introduction to Data Management!",
     "section": "",
-    "text": "Week 7\n\n\nThis week we will cover CTE.\n\n\n\n\n\nOct 4, 2026\n\n\n\n\n\n\n\nWeek 6\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Week 8\n\n\nThis week we will cover CTE.\n\n\n\n\n\nOct 10, 2026\n\n\n\n\n\n\n\nWeek 7\n\n\nThis week we will cover CTE.\n\n\n\n\n\nOct 4, 2026\n\n\n\n\n\n\n\nWeek 6\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures/1a.html#introductions-1",
@@ -2181,7 +2181,7 @@
     "href": "lectures/8a.html#the-window-concept",
     "title": "Advanced SQL",
     "section": "The “Window” Concept",
-    "text": "The “Window” Concept"
+    "text": "The “Window” Concept\n\n\nWindow 1\n\n\n\n\n\n\n\n\n\n\n\n\nWindow 2"
   },
   {
     "objectID": "lectures/8a.html#window-function-syntax",
@@ -2237,21 +2237,21 @@
     "href": "lectures/8a.html#deep-dive-lag",
     "title": "Advanced SQL",
     "section": "Deep Dive: LAG",
-    "text": "Deep Dive: LAG\nSELECT \n    month,\n    revenue,\n    LAG(revenue) OVER (ORDER BY month) as prev_month_revenue,\n    (revenue - LAG(revenue) OVER (ORDER BY month)) as revenue_diff\nFROM monthly_sales;\n\nResult: You can calculate Month-over-Month (MoM) growth instantly.\n\n\nLAG is the primary tool for time-series analysis. It’s how we calculate “growth” or “change” by comparing the current row’s value to the one directly above it."
+    "text": "Deep Dive: LAG\nSELECT\n1    month,\n2    revenue,\n3    LAG(revenue) OVER (ORDER BY month) AS prev_month_revenue,\n4    (revenue - LAG(revenue) OVER (ORDER BY month)) AS revenue_diff\n5FROM monthly_sales;\n\n1\n\nDisplay the month for each row.\n\n2\n\nDisplay the revenue for that month.\n\n3\n\nOrder the rows by month and retrieve the previous row’s revenue using LAG(). The first row returns NULL because no previous row exists.\n\n4\n\nSubtract the previous row’s revenue from the current revenue. Positive values indicate an increase; negative values indicate a decrease. The first row returns NULL.\n\n5\n\nRetrieve the data from the monthly_sales table.\n\n\n\nResult: You can calculate Month-over-Month (MoM) growth instantly.\n\n\nLAG is the primary tool for time-series analysis. It’s how we calculate “growth” or “change” by comparing the current row’s value to the one directly above it."
   },
   {
     "objectID": "lectures/8a.html#deep-dive-lead",
     "href": "lectures/8a.html#deep-dive-lead",
     "title": "Advanced SQL",
     "section": "Deep Dive: LEAD",
-    "text": "Deep Dive: LEAD\nSELECT \n    task_id,\n    due_date,\n    LEAD(due_date) OVER (ORDER BY due_date) as next_task_deadline\nFROM project_timeline;\n\nResult: Helps identify the gap between the current task and the next scheduled task.\n\n\nConversely, LEAD looks forward. If you want to know how much time you have between the current event and the next event, LEAD is your friend."
+    "text": "Deep Dive: LEAD\nSELECT\n1    task_id,\n2    due_date,\n3    LEAD(due_date) OVER (ORDER BY due_date) AS next_task_deadline\n4FROM project_timeline;\n\n1\n\nDisplay the unique identifier for each task.\n\n2\n\nDisplay the current task’s deadline.\n\n3\n\nOrder the rows by due_date and retrieve the next row’s deadline using LEAD(). Name the result next_task_deadline. The last row returns NULL because no next row exists.\n\n4\n\nRetrieve the data from the project_timeline table.\n\n\n\nResult: Helps identify the gap between the current task and the next scheduled task.\n\n\nConversely, LEAD looks forward. If you want to know how much time you have between the current event and the next event, LEAD is your friend."
   },
   {
     "objectID": "lectures/8a.html#window-frames-the-moving-window",
     "href": "lectures/8a.html#window-frames-the-moving-window",
     "title": "Advanced SQL",
     "section": "Window Frames: The “Moving” Window",
-    "text": "Window Frames: The “Moving” Window\nSometimes, you don’t want to look at the entire partition. You only want a subset of it.\n\nROWS BETWEEN ...\nUNBOUNDED PRECEDING: Start from the very first row of the partition.\nCURRENT ROW: End at the row you are on.\n1 PRECEDING: Look at exactly one row before.\n\nExample: 3-Day Moving Average\nAVG(price) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)\n\nWe can even limit the window size. This is how “Moving Averages” are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows."
+    "text": "Window Frames: The “Moving” Window\nSometimes, you don’t want to look at the entire partition. You only want a subset of it.\n\nROWS BETWEEN ...\nUNBOUNDED PRECEDING: Start from the very first row of the partition.\nCURRENT ROW: End at the row you are on.\n1 PRECEDING: Look at exactly one row before."
   },
   {
     "objectID": "lectures/8a.html#summary-of-window-functions",
@@ -2266,5 +2266,236 @@
     "title": "Advanced SQL",
     "section": "The “Window” Concept",
     "text": "The “Window” Concept\n\nThe “Window” is the subset of rows relevant to the current row.\nThe window is defined by the OVER clause.\n\n\nThink of a window as a sliding lens. As you move down the rows in your table, the lens moves with you, looking at a specific subset of data to perform its math."
+  },
+  {
+    "objectID": "lectures/8a.html#activity-1",
+    "href": "lectures/8a.html#activity-1",
+    "title": "Advanced SQL",
+    "section": "Activity 1",
+    "text": "Activity 1\nUsing film, return film_id, title, rating, and length for every film with a nonmissing length. Add rating_avg_length: the average length of films with the same rating."
+  },
+  {
+    "objectID": "lectures/8a.html#activity-2",
+    "href": "lectures/8a.html#activity-2",
+    "title": "Advanced SQL",
+    "section": "Activity 2",
+    "text": "Activity 2\nUsing films with nonmissing lengths, rank films within each rating, longest film length first. Return film_id, title, rating, film length, and all three rankings:\n\nROW_NUMBER(): rank by film length and film_id.\nRANK(): rank by film length\nDENSE_RANK(): rank by film length\n\nWhat does each ranking do?"
+  },
+  {
+    "objectID": "lectures/8a.html#activity-3",
+    "href": "lectures/8a.html#activity-3",
+    "title": "Advanced SQL",
+    "section": "Activity 3",
+    "text": "Activity 3\nUsing payment, examine all payments for customer_id = 1, ordered by payment_date, then payment_id.\n\nReturn payment_id, payment_date, and amount.\nAdd previous_amount from the preceding payment.\nKeep the first payment even though no previous payment exists."
+  },
+  {
+    "objectID": "lectures/8a.html#activity-4",
+    "href": "lectures/8a.html#activity-4",
+    "title": "Advanced SQL",
+    "section": "Activity 4",
+    "text": "Activity 4\nUsing rental, examine every rental for customers 1, 2, and 3.\n\nReturn customer_id, rental_id, and rental_date.\nAdd next_rental_date for the same customer, ordered by rental_date, then rental_id.\nAdd days_until_next, rounded to two decimals.\nDisplay by customer_id, rental_date, then rental_id.\n\nHint: In SQLite, JULIANDAY(later) - JULIANDAY(earlier) gives elapsed days, including fractions."
+  },
+  {
+    "objectID": "lectures/8a.html#activity-5",
+    "href": "lectures/8a.html#activity-5",
+    "title": "Advanced SQL",
+    "section": "Activity 5",
+    "text": "Activity 5\nUsing payment, first create a CTE containing one row per payment date: payment_day and daily_revenue. Use DATE(payment_date) to remove the time.\n\nReturn each observed payment date and its daily revenue.\nAdd running_revenue: revenue from the first observed date through the current row.\nAdd moving_avg_3_rows: average daily revenue over the current row and up to two preceding rows.\nRound monetary outputs to two decimals and display dates in ascending order."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-1-compare-films-within-a-rating",
+    "href": "lectures/8a.html#solution-1-compare-films-within-a-rating",
+    "title": "Advanced SQL",
+    "section": "Solution 1: compare films within a rating",
+    "text": "Solution 1: compare films within a rating\nSELECT film_id, title, rating, length,\n       AVG(length) OVER (\n1           PARTITION BY rating) AS rating_avg_length\nFROM film\n2WHERE length IS NOT NULL\n3ORDER BY rating, film_id;\n\n1\n\nCompute the average across the entire rating partition. With no window ordering, this average is repeated for every film in that rating.\n\n2\n\nExclude missing lengths before calculating the window values.\n\n3\n\nSet the displayed order independently of the window calculation.\n\n\nInterpretation: A positive difference means the film is longer than its rating’s average. Unlike GROUP BY, this window calculation retains each film row."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-2-compare-three-ranking-functions",
+    "href": "lectures/8a.html#solution-2-compare-three-ranking-functions",
+    "title": "Advanced SQL",
+    "section": "Solution 2: compare three ranking functions",
+    "text": "Solution 2: compare three ranking functions\nSELECT film_id, title, rating, length,\n       ROW_NUMBER() OVER (\n           PARTITION BY rating\n1           ORDER BY length DESC, film_id) AS row_num,\n       RANK() OVER (\n           PARTITION BY rating\n2           ORDER BY length DESC) AS length_rank,\n       DENSE_RANK() OVER (\n           PARTITION BY rating\n3           ORDER BY length DESC) AS dense_length_rank\nFROM film\nWHERE length IS NOT NULL\n4ORDER BY rating, length DESC, film_id;\n\n1\n\nAssign unique sequential numbers within each rating. The identifier gives tied lengths a repeatable order.\n\n2\n\nGive equal lengths equal ranks; leave gaps after ties.\n\n3\n\nGive equal lengths equal ranks without gaps between distinct lengths.\n\n4\n\nDisplay ties in identifier order without changing their shared ranks."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-2-interpreting-ties",
+    "href": "lectures/8a.html#solution-2-interpreting-ties",
+    "title": "Advanced SQL",
+    "section": "Solution 2: interpreting ties",
+    "text": "Solution 2: interpreting ties\nFor illustrative lengths 120, 120, 110 within a rating:\n\n\n\nLength\nRow number\nRank\nDense rank\n\n\n\n\n120\n1\n1\n1\n\n\n120\n2\n1\n1\n\n\n110\n3\n3\n2\n\n\n\nRANK() counts the two earlier rows before assigning rank 3. DENSE_RANK() advances only when length changes.\nAdding the unique film_id to the ordering of RANK() or DENSE_RANK() would eliminate ties: the full ordering values would differ for every film."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-3-compare-consecutive-payments",
+    "href": "lectures/8a.html#solution-3-compare-consecutive-payments",
+    "title": "Advanced SQL",
+    "section": "Solution 3: compare consecutive payments",
+    "text": "Solution 3: compare consecutive payments\n1SELECT payment_id, payment_date, amount,\n2       LAG(amount) OVER (\n           PARTITION BY customer_id\n           ORDER BY payment_date, payment_id\n3       ) AS previous_amount\nFROM payment\n4WHERE customer_id = 1;\n\n1\n\nSelect the columns to be displayed.\n\n2\n\nCreates the window function and applies the lag function to obtain the previous amount.\n\n3\n\nPartitions by customer_id and orders by payment_date and payment_id.\n\n4\n\nRestrict the input to customer 1."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-4-find-the-next-rental",
+    "href": "lectures/8a.html#solution-4-find-the-next-rental",
+    "title": "Advanced SQL",
+    "section": "Solution 4: find the next rental",
+    "text": "Solution 4: find the next rental\n1SELECT customer_id, rental_id, rental_date,\n2       LEAD(rental_date) OVER (\n3           PARTITION BY customer_id\n4           ORDER BY rental_date, rental_id\n5       ) AS next_rental_date\n6FROM rental\n7WHERE customer_id IN (1, 2, 3);\n\n1\n\nDisplay the customer identifier, rental identifier, and rental timestamp.\n\n2\n\nUse LEAD() to retrieve the following row’s rental date within the window.\n\n3\n\nCreate a separate partition for each customer so the next rental belongs to the same customer.\n\n4\n\nOrder each customer’s rentals chronologically. Use rental_id to break ties when timestamps match. This controls the window calculation, not the final display order.\n\n5\n\nName the calculated column next_rental_date. Each customer’s final rental returns NULL because no following rental exists.\n\n6\n\nRetrieve records from the rental table.\n\n7\n\nInclude only customers 1, 2, and 3. This filter applies before the window function is calculated."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-5-running-revenue-and-moving-averages",
+    "href": "lectures/8a.html#solution-5-running-revenue-and-moving-averages",
+    "title": "Advanced SQL",
+    "section": "Solution 5: running revenue and moving averages",
+    "text": "Solution 5: running revenue and moving averages\n1WITH daily_sales AS (\n2    SELECT DATE(payment_date) AS payment_day,\n           SUM(amount) AS daily_revenue\n    FROM payment\n3    GROUP BY DATE(payment_date)\n)\n4SELECT payment_day, daily_revenue,\n       SUM(daily_revenue) OVER (\n5           ORDER BY payment_day\n6           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS running_revenue,\n       AVG(daily_revenue) OVER (\n           ORDER BY payment_day\n7           ROWS BETWEEN 2 PRECEDING AND CURRENT ROW\n       ) AS moving_avg_3_rows\n8FROM daily_sales\n9ORDER BY payment_day;\n\n1\n\nCreate a common table expression (CTE) named daily_sales to summarize payments before applying window functions.\n\n2\n\nExtract the date from each payment timestamp, removing the time, and name it payment_day.\n\n3\n\nGroup payments by date. SUM(amount) calculates total revenue for each date, producing one row per observed payment date.\n\n4\n\nDisplay each payment date and its daily revenue.\n\n5\n\nOrder the daily rows chronologically for the running-total calculation.\n\n6\n\nInclude every row from the beginning through the current row. SUM() over this frame calculates cumulative revenue as running_revenue.\n\n7\n\nInclude the current row and up to two preceding rows. AVG() calculates their average daily revenue. The first result uses one row, the second uses two, and subsequent results use three. These are observed payment dates, not necessarily consecutive calendar days.\n\n8\n\nRetrieve the daily summaries from the CTE. Both window functions preserve one output row per observed payment date.\n\n9\n\nDisplay the final results chronologically. The ordering inside OVER() controls calculations but does not guarantee the final display order."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-5-interpreting-the-frames",
+    "href": "lectures/8a.html#solution-5-interpreting-the-frames",
+    "title": "Advanced SQL",
+    "section": "Solution 5: interpreting the frames",
+    "text": "Solution 5: interpreting the frames\n\nThe first moving average uses one row; the second uses two rows; subsequent averages use three rows.\nA date with no payment has no row in daily_sales. This is an average over three observed payment dates, which need not be consecutive calendar dates.\nA true three-calendar-day average would require a complete calendar with zero revenue filled in for dates without payments.\nThe final running revenue should equal SUM(amount) from payment, rounded to two decimals."
+  },
+  {
+    "objectID": "lectures/8a.html#references-for-the-activities",
+    "href": "lectures/8a.html#references-for-the-activities",
+    "title": "Advanced SQL",
+    "section": "References for the activities",
+    "text": "References for the activities\n\nSakila SQLite database and source\nSQLite window functions\nSQLite date and time functions"
+  },
+  {
+    "objectID": "lectures/8a.html#window-frames-example",
+    "href": "lectures/8a.html#window-frames-example",
+    "title": "Advanced SQL",
+    "section": "Window Frames Example",
+    "text": "Window Frames Example\nExample: 3-Day Moving Average\nAVG(price) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)\n\nWe can even limit the window size. This is how “Moving Averages” are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-1",
+    "href": "lectures/8a.html#solution-1",
+    "title": "Advanced SQL",
+    "section": "Solution 1",
+    "text": "Solution 1\nSELECT film_id, title, rating, length,\n       AVG(length) OVER (\n1           PARTITION BY rating) AS rating_avg_length\nFROM film\n2WHERE length IS NOT NULL\n3ORDER BY rating, film_id;\n\n1\n\nCompute the average across the entire rating partition. With no window ordering, this average is repeated for every film in that rating.\n\n2\n\nExclude missing lengths before calculating the window values.\n\n3\n\nSet the displayed order independently of the window calculation.\n\n\nInterpretation: A positive difference means the film is longer than its rating’s average. Unlike GROUP BY, this window calculation retains each film row."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-2",
+    "href": "lectures/8a.html#solution-2",
+    "title": "Advanced SQL",
+    "section": "Solution 2",
+    "text": "Solution 2\nSELECT film_id, title, rating, length,\n       ROW_NUMBER() OVER (\n           PARTITION BY rating\n1           ORDER BY length DESC, film_id) AS row_num,\n       RANK() OVER (\n           PARTITION BY rating\n2           ORDER BY length DESC) AS length_rank,\n       DENSE_RANK() OVER (\n           PARTITION BY rating\n3           ORDER BY length DESC) AS dense_length_rank\nFROM film\nWHERE length IS NOT NULL\n4ORDER BY rating, length DESC, film_id;\n\n1\n\nAssign unique sequential numbers within each rating. The identifier gives tied lengths a repeatable order.\n\n2\n\nGive equal lengths equal ranks; leave gaps after ties.\n\n3\n\nGive equal lengths equal ranks without gaps between distinct lengths.\n\n4\n\nDisplay ties in identifier order without changing their shared ranks."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-3",
+    "href": "lectures/8a.html#solution-3",
+    "title": "Advanced SQL",
+    "section": "Solution 3",
+    "text": "Solution 3\n1SELECT payment_id, payment_date, amount,\n2       LAG(amount) OVER (\n           PARTITION BY customer_id\n           ORDER BY payment_date, payment_id\n3       ) AS previous_amount\nFROM payment\n4WHERE customer_id = 1;\n\n1\n\nSelect the columns to be displayed.\n\n2\n\nCreates the window function and applies the lag function to obtain the previous amount.\n\n3\n\nPartitions by customer_id and orders by payment_date and payment_id.\n\n4\n\nRestrict the input to customer 1."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-4",
+    "href": "lectures/8a.html#solution-4",
+    "title": "Advanced SQL",
+    "section": "Solution 4",
+    "text": "Solution 4\n1SELECT customer_id, rental_id, rental_date,\n2       LEAD(rental_date) OVER (\n3           PARTITION BY customer_id\n4           ORDER BY rental_date, rental_id\n5       ) AS next_rental_date\n6FROM rental\n7WHERE customer_id IN (1, 2, 3);\n\n1\n\nDisplay the customer identifier, rental identifier, and rental timestamp.\n\n2\n\nUse LEAD() to retrieve the following row’s rental date within the window.\n\n3\n\nCreate a separate partition for each customer so the next rental belongs to the same customer.\n\n4\n\nOrder each customer’s rentals chronologically. Use rental_id to break ties when timestamps match. This controls the window calculation, not the final display order.\n\n5\n\nName the calculated column next_rental_date. Each customer’s final rental returns NULL because no following rental exists.\n\n6\n\nRetrieve records from the rental table.\n\n7\n\nInclude only customers 1, 2, and 3. This filter applies before the window function is calculated."
+  },
+  {
+    "objectID": "lectures/8a.html#solution-5",
+    "href": "lectures/8a.html#solution-5",
+    "title": "Advanced SQL",
+    "section": "Solution 5",
+    "text": "Solution 5\n1WITH daily_sales AS (\n2    SELECT DATE(payment_date) AS payment_day,\n           SUM(amount) AS daily_revenue\n    FROM payment\n3    GROUP BY DATE(payment_date)\n)\n4SELECT payment_day, daily_revenue,\n       SUM(daily_revenue) OVER (\n5           ORDER BY payment_day\n6           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS running_revenue,\n       AVG(daily_revenue) OVER (\n           ORDER BY payment_day\n7           ROWS BETWEEN 2 PRECEDING AND CURRENT ROW\n       ) AS moving_avg_3_rows\n8FROM daily_sales\n9ORDER BY payment_day;\n\n1\n\nCreate a common table expression (CTE) named daily_sales to summarize payments before applying window functions.\n\n2\n\nExtract the date from each payment timestamp, removing the time, and name it payment_day.\n\n3\n\nGroup payments by date. SUM(amount) calculates total revenue for each date, producing one row per observed payment date.\n\n4\n\nDisplay each payment date and its daily revenue.\n\n5\n\nOrder the daily rows chronologically for the running-total calculation.\n\n6\n\nInclude every row from the beginning through the current row. SUM() over this frame calculates cumulative revenue as running_revenue.\n\n7\n\nInclude the current row and up to two preceding rows. AVG() calculates their average daily revenue. The first result uses one row, the second uses two, and subsequent results use three. These are observed payment dates, not necessarily consecutive calendar days.\n\n8\n\nRetrieve the daily summaries from the CTE. Both window functions preserve one output row per observed payment date.\n\n9\n\nDisplay the final results chronologically. The ordering inside OVER() controls calculations but does not guarantee the final display order."
+  },
+  {
+    "objectID": "a/6.html",
+    "href": "a/6.html",
+    "title": "ICA 6",
+    "section": "",
+    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
+  },
+  {
+    "objectID": "a/6.html#tables-and-columns-used",
+    "href": "a/6.html#tables-and-columns-used",
+    "title": "ICA 6",
+    "section": "Tables and columns used",
+    "text": "Tables and columns used\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nRelevant columns\n\n\n\n\nProducts\nOne product\nProductID: identifier; ProductName: name; CategoryID: category; UnitPrice: catalog price\n\n\nCategories\nOne product category\nCategoryID: identifier; CategoryName: category label\n\n\nOrders\nOne customer order\nOrderID: identifier; CustomerID: customer code; OrderDate: order date/time; Freight: order shipping charge\n\n\n\"Order Details\"\nOne product line within an order\nOrderID, ProductID: identify the line; UnitPrice: price on that order; Quantity: units ordered; Discount: fractional discount\n\n\n\nRelationships:\nProducts.CategoryID joins to Categories.CategoryID\nOrders.OrderID joins to \"Order Details\".OrderID.\nRevenue definition: For this assignment, revenue is merchandise sales after discounts, excluding freight and taxes:\nUnitPrice * Quantity * (1.0 - Discount)\nUse UnitPrice from \"Order Details\" for historical sales, rather than the catalog price in Products. A discount of 0.10 means 10%. Retain precision during calculations and round monetary output to two decimal places."
+  },
+  {
+    "objectID": "a/6.html#setup-check-10-minutes",
+    "href": "a/6.html#setup-check-10-minutes",
+    "title": "ICA 6",
+    "section": "",
+    "text": "Run these statements individually:\nSELECT sqlite_version();\n\nSELECT name\nFROM sqlite_master\nWHERE type = 'table'\nORDER BY name;\n\nPRAGMA table_info('Products');\nPRAGMA table_info('Orders');\nPRAGMA table_info('Order Details');\n\nSELECT ProductID, ProductName, CategoryID, UnitPrice\nFROM Products\nORDER BY ProductID\nLIMIT 5;\n\nSELECT OrderID, CustomerID, OrderDate, Freight\nFROM Orders\nORDER BY OrderDate, OrderID\nLIMIT 5;\nIdentify a column suitable for partitioning products and a column suitable for ordering customer transactions. Check that the table names match the reference above."
+  },
+  {
+    "objectID": "a/6.html#working-conventions",
+    "href": "a/6.html#working-conventions",
+    "title": "ICA 6",
+    "section": "",
+    "text": "Use all products with nonmissing CategoryID and UnitPrice in Activities 1–2, including discontinued products.\nUse orders with nonmissing CustomerID and OrderDate in Activities 3–4. Activity 3 additionally excludes missing Freight.\nUse OrderDate, OrderID for chronological windows so same-date orders have a repeatable sequence.\nInclude a final ORDER BY to control display order.\nDo not replace unavailable previous/next values with zero: keep their NULL values."
+  },
+  {
+    "objectID": "a/6.html#part-a-compare-rankings",
+    "href": "a/6.html#part-a-compare-rankings",
+    "title": "ICA 6",
+    "section": "Part A: Compare rankings",
+    "text": "Part A: Compare rankings\nReturn ProductID, ProductName, CategoryID, and UnitPrice, plus:\n\nprice_row_number: ROW_NUMBER() ordered by price descending, then ProductID ascending, within category.\nprice_rank: RANK() ordered by price descending within category.\nprice_dense_rank: DENSE_RANK() ordered by price descending within category.\n\nDisplay by CategoryID, descending UnitPrice, then ProductID.\nExplain: Locate equal prices within a category and compare their rankings. Why should ProductID appear in the ROW_NUMBER() ordering but not the other two window orderings when ties mean equal prices?\nWhether or not you find ties in your copy, predict all three rankings for prices 30, 20, 20, 10, with product IDs increasing in that displayed order."
+  },
+  {
+    "objectID": "a/6.html#part-b-select-leading-price-levels",
+    "href": "a/6.html#part-b-select-leading-price-levels",
+    "title": "ICA 6",
+    "section": "Part B: Select leading price levels",
+    "text": "Part B: Select leading price levels\nPut the ranked result in a CTE. Return products in the two highest distinct price levels per category, keeping every tie. Display the three ranking columns too.\nExplain: Which ranking should you filter? Can a category return more than two products? Why does filtering ROW_NUMBER() &lt;= 2 answer a different question?\nHint: Calculate ranks inside a CTE; apply the rank filter in the outer query."
+  },
+  {
+    "objectID": "posts/8.html",
+    "href": "posts/8.html",
+    "title": "Week 8",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/8.html#resources",
+    "href": "posts/8.html#resources",
+    "title": "Week 8",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "a/6.html#database-setup-and-reference",
+    "href": "a/6.html#database-setup-and-reference",
+    "title": "ICA 6",
+    "section": "",
+    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
+  },
+  {
+    "objectID": "a/6.html#problem-1-compare-products-within-categories",
+    "href": "a/6.html#problem-1-compare-products-within-categories",
+    "title": "ICA 6",
+    "section": "Problem 1: Compare products within categories",
+    "text": "Problem 1: Compare products within categories\nHow does each product’s catalog price compare with the average price in its category?\n\nJoin Products to Categories and retain one row per eligible product.\nReturn ProductID, ProductName, CategoryID, CategoryName, and UnitPrice.\nAdd category_avg_price using a window average partitioned by category.\nAdd price_difference: product price minus its category’s average price. Round both calculated columns to two decimals.\nDisplay results by CategoryID, then ProductID.\n\nExplain: Why does PARTITION BY retain every product, while a query grouped only by category does not? Find a product above its category average and interpret its price_difference.\nCheck: Products in the same category should have the same category_avg_price.\nHint: A full-category average needs PARTITION BY but no ordering inside OVER()."
+  },
+  {
+    "objectID": "a/6.html#problem-2-rank-products-and-investigate-ties",
+    "href": "a/6.html#problem-2-rank-products-and-investigate-ties",
+    "title": "ICA 6",
+    "section": "Problem 2: Rank products and investigate ties",
+    "text": "Problem 2: Rank products and investigate ties\nWhich products are the most expensive within each category?\n\nPart A: Compare rankings\nReturn ProductID, ProductName, CategoryID, and UnitPrice, plus:\n\nprice_row_number: ROW_NUMBER() ordered by price descending, then ProductID ascending, within category.\nprice_rank: RANK() ordered by price descending within category.\nprice_dense_rank: DENSE_RANK() ordered by price descending within category.\n\nDisplay by CategoryID, descending UnitPrice, then ProductID.\nExplain: Locate equal prices within a category and compare their rankings. Why should ProductID appear in the ROW_NUMBER() ordering but not the other two window orderings when ties mean equal prices?\nWhether or not you find ties in your copy, predict all three rankings for prices 30, 20, 20, 10, with product IDs increasing in that displayed order.\n\n\nPart B: Select leading price levels\nPut the ranked result in a CTE. Return products in the two highest distinct price levels per category, keeping every tie. Display the three ranking columns too.\nExplain: Which ranking should you filter? Can a category return more than two products? Why does filtering ROW_NUMBER() &lt;= 2 answer a different question?\nHint: Calculate ranks inside a CTE; apply the rank filter in the outer query."
+  },
+  {
+    "objectID": "a/6.html#problem-3-compare-orders-with-lag",
+    "href": "a/6.html#problem-3-compare-orders-with-lag",
+    "title": "ICA 6",
+    "section": "Problem 3: Compare orders with LAG",
+    "text": "Problem 3: Compare orders with LAG\nHow does each order’s freight charge compare with the preceding eligible order from the same customer?\n\nUse all eligible orders, excluding missing freight charges.\nReturn CustomerID, OrderID, OrderDate, and Freight.\nAdd previous_freight using LAG(Freight) within each customer, ordered by OrderDate, OrderID.\nAdd freight_change: current freight minus previous freight, rounded to two decimals. Use a CTE to reuse previous_freight.\nDisplay by CustomerID, OrderDate, then OrderID.\n\nExplain: What do positive and negative changes mean? Why is the first freight_change for each customer NULL? If a middle order has missing freight and is excluded, which order becomes the previous row?\nCheck: Every customer’s first eligible order must remain in the results."
+  },
+  {
+    "objectID": "a/6.html#problem-4-find-the-next-order-with-lead",
+    "href": "a/6.html#problem-4-find-the-next-order-with-lead",
+    "title": "ICA 6",
+    "section": "Problem 4: Find the next order with LEAD",
+    "text": "Problem 4: Find the next order with LEAD\nHow long does each customer wait until their next order?\n\nReturn CustomerID, OrderID, and OrderDate for all eligible orders.\nAdd next_order_date from the next order for the same customer, ordered by OrderDate, OrderID.\nIn an outer query, calculate days_until_next, rounded to two decimals.\nKeep each customer’s final order. Display by CustomerID, OrderDate, then OrderID.\n\nSQLite date helper: JULIANDAY(later_date) - JULIANDAY(earlier_date) gives elapsed days, potentially including fractions.\nExplain: Why does the last order have no next-order date? Is a gap of zero necessarily an error? What changes if PARTITION BY CustomerID is removed?\nCheck: Nonmissing gaps should be nonnegative. Each customer’s last row should have a NULL gap."
+  },
+  {
+    "objectID": "a/6.html#probelm-5-track-revenue-through-time",
+    "href": "a/6.html#probelm-5-track-revenue-through-time",
+    "title": "ICA 6",
+    "section": "Probelm 5: Track revenue through time",
+    "text": "Probelm 5: Track revenue through time\nBusiness question: How are cumulative sales and recent daily sales changing?\nUse this supplied CTE to obtain one row per observed order date. Replace the final SELECT with your window calculations.\nWITH daily_sales AS (\n    SELECT DATE(o.OrderDate) AS order_day,\n           SUM(d.UnitPrice * d.Quantity * (1.0 - d.Discount))\n               AS daily_revenue\n    FROM Orders AS o\n    JOIN \"Order Details\" AS d ON o.OrderID = d.OrderID\n    WHERE o.OrderDate IS NOT NULL\n    GROUP BY DATE(o.OrderDate)\n)\nSELECT order_day, daily_revenue\nFROM daily_sales\nORDER BY order_day;\n\nReturn order_day and daily_revenue.\nAdd running_revenue using SUM() from the first daily row through the current row. Write the frame explicitly.\nAdd moving_avg_3_rows using AVG() over the current row and up to two preceding rows.\nRound all three monetary columns to two decimals. Display dates ascending.\n\nExplain: How many rows enter the first, second, and third moving averages? Does this represent three consecutive calendar days? Why aggregate order lines to days before calculating these windows?\nManual check: Copy the first three unrounded daily revenues. Confirm that the third running total is their sum and the third moving average is their average. The final running total should equal the sum of all daily revenue."
   }
 ]

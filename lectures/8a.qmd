@@ -26,8 +26,16 @@ editor: source
 order: 9
 --- 
 
+# Window Functions
 
 ## The "Window" Concept
+
+
+::: {.columns}
+
+::: {.column}
+
+### Window 1
 
 ```{mermaid}
 %%| fig-width: 4
@@ -57,9 +65,9 @@ flowchart TB
 
     W --> C["FUN(*)"]
 
-    C --> R["OUTPUT FOR THE CURRENT ROW"]
+    C --> R["OUTPUT FOR THE CURRENT ROW (2)"]
 
-    R --> M["MOVE TO THE NEXT ROW"]
+    R --> M["MOVE TO THE NEXT ROW (3)"]
 
     M --> K["KEEP EVERY ORIGINAL ROW"]
 
@@ -75,6 +83,66 @@ flowchart TB
     style M fill:#f3e8ff,stroke:#9333ea,color:#581c87
     style K fill:#f8fafc,stroke:#64748b,color:#0f172a
 ```
+
+
+:::
+
+::: {.column}
+
+### Window 2
+
+```{mermaid}
+%%| fig-width: 4
+%%| fig-responsive: false
+%%| fig-align: center
+
+flowchart TB
+    subgraph P["PARTITION BY"]
+        direction TB
+
+        O["ORDER BY day"]
+
+        subgraph W["WINDOW FRAME "]
+            direction TB
+            D1["Day 2"]
+            D2["Day 3"]
+            D3["Day 4"]
+
+            D1 --> D2 --> D3
+        end
+
+        D4["Day 5"]
+
+        O --> D1
+        D3 --> D4
+    end
+
+    W --> C["FUN(*)"]
+
+    C --> R["OUTPUT FOR THE CURRENT ROW (3)"]
+
+    R --> M["MOVE TO THE NEXT ROW (4)"]
+
+    M --> K["KEEP EVERY ORIGINAL ROW"]
+
+    style P fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a
+    style W fill:#dbeafe,stroke:#2563eb,stroke-width:3px,color:#1e3a8a
+    style O fill:#e0e7ff,stroke:#6366f1,color:#312e81
+    style D1 fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a
+    style D2 fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#78350f
+    style D3 fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a
+    style D4 fill:#f1f5f9,stroke:#94a3b8,color:#475569
+    style C fill:#dcfce7,stroke:#16a34a,color:#14532d
+    style R fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style M fill:#f3e8ff,stroke:#9333ea,color:#581c87
+    style K fill:#f8fafc,stroke:#64748b,color:#0f172a
+```
+
+
+:::
+
+:::
+
 
 ## The "Window" Concept
 
@@ -118,6 +186,10 @@ The `OVER` clause is what makes it a window function. Inside it, we use `PARTITI
 ::: notes
 PARTITION BY is how we tell SQL where one group ends and the next begins. For example, if we partition by "Department," the math starts over for every new department.
 ::: 
+
+## Activity 1
+
+Using `film`, return `film_id`, `title`, `rating`, and `length` for every film with a nonmissing length. Add `rating_avg_length`: the average length of films with the same rating.
 
 ## ORDER BY in Window Functions
 
@@ -170,6 +242,19 @@ graph TD
 This diagram helps visualize the "Gap" behavior. Notice how RANK jumps from 1 to 3 because two people tied for 1st.
 ::: 
 
+## Activity 2
+
+Using films with nonmissing lengths, rank films within each rating, longest film length first. Return `film_id`, `title`, `rating`, film `length`, and all three rankings:
+
+1. `ROW_NUMBER()`: rank by film `length` and `film_id`.
+2. `RANK()`: rank by film `length`
+3. `DENSE_RANK()`: rank by film length
+
+
+*What does each ranking do?*
+
+
+
 ## Value Functions: LEAD and LAG
 
 *   **`LAG(column)`**: Accesses data from the **previous** row.
@@ -180,49 +265,25 @@ This diagram helps visualize the "Gap" behavior. Notice how RANK jumps from 1 to
 LEAD and LAG are like time machines. They allow you to look back at the past row or ahead to the future row without needing a complex self-join.
 ::: 
 
-## Deep Dive: LAG
+## Activity 3
 
-```sql
-SELECT
-    month, -- <1>
-    revenue, -- <2>
-    LAG(revenue) OVER (ORDER BY month) AS prev_month_revenue, -- <3>
-    (revenue - LAG(revenue) OVER (ORDER BY month)) AS revenue_diff -- <4>
-FROM monthly_sales; -- <5>
-```
+Using `payment`, examine all payments for `customer_id = 1`, ordered by `payment_date`, then `payment_id`.
 
-1. Display the month for each row.
-2. Display the revenue for that month.
-3. Order the rows by `month` and retrieve the previous row’s revenue using `LAG()`. The first row returns `NULL` because no previous row exists.
-4. Subtract the previous row’s revenue from the current revenue. Positive values indicate an increase; negative values indicate a decrease. The first row returns `NULL`.
-5. Retrieve the data from the `monthly_sales` table.
+1. Return `payment_id`, `payment_date`, and `amount`.
+2. Add `previous_amount` from the preceding payment.
+3. Keep the first payment even though no previous payment exists.
 
--  **Result:** You can calculate Month-over-Month (MoM) growth instantly.
 
-::: notes
-LAG is the primary tool for time-series analysis. It's how we calculate "growth" or "change" by comparing the current row's value to the one directly above it.
-::: 
+## Activity 4
 
-## Deep Dive: LEAD
+Using `rental`, examine every rental for customers 1, 2, and 3.
 
-```sql
-SELECT
-    task_id, -- <1>
-    due_date, -- <2>
-    LEAD(due_date) OVER (ORDER BY due_date) AS next_task_deadline -- <3>
-FROM project_timeline; -- <4>
-```
+1. Return `customer_id`, `rental_id`, and `rental_date`.
+2. Add `next_rental_date` for the **same customer**, ordered by `rental_date`, then `rental_id`.
+3. Add `days_until_next`, rounded to two decimals.
+4. Display by `customer_id`, `rental_date`, then `rental_id`.
 
-1. Display the unique identifier for each task.
-2. Display the current task’s deadline.
-3. Order the rows by `due_date` and retrieve the next row’s deadline using `LEAD()`. Name the result `next_task_deadline`. The last row returns `NULL` because no next row exists.
-4. Retrieve the data from the `project_timeline` table.
-
--   **Result:** Helps identify the gap between the current task and the next scheduled task.
-
-::: notes
-Conversely, LEAD looks forward. If you want to know how much time you have between the current event and the next event, LEAD is your friend.
-::: 
+**Hint:** In SQLite, `JULIANDAY(later) - JULIANDAY(earlier)` gives elapsed days, including fractions.
 
 ## Window Frames: The "Moving" Window
 
@@ -232,6 +293,8 @@ Sometimes, you don't want to look at the *entire* partition. You only want a sub
 *   **`UNBOUNDED PRECEDING`**: Start from the very first row of the partition.
 *   **`CURRENT ROW`**: End at the row you are on.
 *   **`1 PRECEDING`**: Look at exactly one row before.
+
+## Window Frames Example
 
 *Example: 3-Day Moving Average*
 
@@ -243,3 +306,134 @@ AVG(price) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
  We can even limit the window size. This is how "Moving Averages" are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows.
 :::
 
+## Activity 5
+
+
+Using `payment`, first create a CTE containing one row per payment date: `payment_day` and `daily_revenue`. Use `DATE(payment_date)` to remove the time.
+
+1. Return each observed payment date and its daily revenue.
+2. Add `running_revenue`: revenue from the first observed date through the current row.
+3. Add `moving_avg_3_rows`: average daily revenue over the current row and up to two preceding rows.
+4. Round monetary outputs to two decimals and display dates in ascending order.
+
+
+# Activity Solutions
+
+
+## Solution 1
+
+```sql
+SELECT film_id, title, rating, length,
+       AVG(length) OVER (
+           PARTITION BY rating) AS rating_avg_length -- <1>
+FROM film
+WHERE length IS NOT NULL -- <2>
+ORDER BY rating, film_id; -- <3>
+```
+
+1. Compute the average across the entire rating partition. With no window ordering, this average is repeated for every film in that rating.
+2. Exclude missing lengths before calculating the window values.
+3. Set the displayed order independently of the window calculation.
+
+**Interpretation:** A positive difference means the film is longer than its rating's average. Unlike `GROUP BY`, this window calculation retains each film row.
+
+## Solution 2
+
+```sql
+SELECT film_id, title, rating, length,
+       ROW_NUMBER() OVER (
+           PARTITION BY rating
+           ORDER BY length DESC, film_id) AS row_num, -- <1>
+       RANK() OVER (
+           PARTITION BY rating
+           ORDER BY length DESC) AS length_rank, -- <2>
+       DENSE_RANK() OVER (
+           PARTITION BY rating
+           ORDER BY length DESC) AS dense_length_rank -- <3>
+FROM film
+WHERE length IS NOT NULL
+ORDER BY rating, length DESC, film_id; -- <4>
+```
+
+1. Assign unique sequential numbers within each rating. The identifier gives tied lengths a repeatable order.
+2. Give equal lengths equal ranks; leave gaps after ties.
+3. Give equal lengths equal ranks without gaps between distinct lengths.
+4. Display ties in identifier order without changing their shared ranks.
+
+
+## Solution 3
+
+```sql
+SELECT payment_id, payment_date, amount, -- <1>
+       LAG(amount) OVER ( --<2>
+           PARTITION BY customer_id
+           ORDER BY payment_date, payment_id
+       ) AS previous_amount -- <3>
+FROM payment
+WHERE customer_id = 1; -- <4>
+
+```
+
+1. Select the columns to be displayed.
+2. Creates the window function and applies the lag function to obtain the previous amount.
+3. Partitions by `customer_id` and orders by `payment_date` and `payment_id`.
+4. Restrict the input to customer 1. 
+
+## Solution 4
+
+```sql
+SELECT customer_id, rental_id, rental_date, -- <1>
+       LEAD(rental_date) OVER ( -- <2>
+           PARTITION BY customer_id -- <3>
+           ORDER BY rental_date, rental_id -- <4>
+       ) AS next_rental_date -- <5>
+FROM rental -- <6>
+WHERE customer_id IN (1, 2, 3); -- <7>
+```
+
+1. Display the customer identifier, rental identifier, and rental timestamp.
+2. Use `LEAD()` to retrieve the following row’s rental date within the window.
+3. Create a separate partition for each customer so the next rental belongs to the same customer.
+4. Order each customer’s rentals chronologically. Use `rental_id` to break ties when timestamps match. This controls the window calculation, not the final display order.
+5. Name the calculated column `next_rental_date`. Each customer’s final rental returns `NULL` because no following rental exists.
+6. Retrieve records from the `rental` table.
+7. Include only customers 1, 2, and 3. This filter applies before the window function is calculated.
+
+## Solution 5
+
+```sql
+WITH daily_sales AS ( -- <1>
+    SELECT DATE(payment_date) AS payment_day, -- <2>
+           SUM(amount) AS daily_revenue
+    FROM payment
+    GROUP BY DATE(payment_date) -- <3>
+)
+SELECT payment_day, daily_revenue, -- <4>
+       SUM(daily_revenue) OVER (
+           ORDER BY payment_day -- <5>
+           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW -- <6>
+       ) AS running_revenue,
+       AVG(daily_revenue) OVER (
+           ORDER BY payment_day
+           ROWS BETWEEN 2 PRECEDING AND CURRENT ROW -- <7>
+       ) AS moving_avg_3_rows
+FROM daily_sales -- <8>
+ORDER BY payment_day; -- <9>
+```
+
+1. Create a common table expression (CTE) named `daily_sales` to summarize payments before applying window functions.
+2. Extract the date from each payment timestamp, removing the time, and name it `payment_day`.
+3. Group payments by date. `SUM(amount)` calculates total revenue for each date, producing one row per observed payment date.
+4. Display each payment date and its daily revenue.
+5. Order the daily rows chronologically for the running-total calculation.
+6. Include every row from the beginning through the current row. `SUM()` over this frame calculates cumulative revenue as `running_revenue`.
+7. Include the current row and up to two preceding rows. `AVG()` calculates their average daily revenue. The first result uses one row, the second uses two, and subsequent results use three. These are observed payment dates, not necessarily consecutive calendar days.
+8. Retrieve the daily summaries from the CTE. Both window functions preserve one output row per observed payment date.
+9. Display the final results chronologically. The ordering inside `OVER()` controls calculations but does not guarantee the final display order.
+
+
+## References for the activities
+
+- [Sakila SQLite database and source](https://github.com/bradleygrant/sakila-sqlite3)
+- [SQLite window functions](https://www.sqlite.org/windowfunctions.html)
+- [SQLite date and time functions](https://www.sqlite.org/lang_datefunc.html)
