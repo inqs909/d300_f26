@@ -42,368 +42,207 @@
     "text": "Deadline And Extensions\nThe report will be due on December 4, 2026 at 11:59 PM. For your report, you may receive a 24-hour extension beyond the due date for evey time you attend the writing and multiliteracy center. Each appointment must be one week apart."
   },
   {
-    "objectID": "posts/6.html",
-    "href": "posts/6.html",
-    "title": "Week 6",
+    "objectID": "posts/7.html",
+    "href": "posts/7.html",
+    "title": "Week 7",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/6.html#resources",
-    "href": "posts/6.html#resources",
-    "title": "Week 6",
+    "objectID": "posts/7.html#resources",
+    "href": "posts/7.html#resources",
+    "title": "Week 7",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/4.html",
-    "href": "posts/4.html",
-    "title": "Week 4",
+    "objectID": "posts/5.html",
+    "href": "posts/5.html",
+    "title": "Week 5",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/4.html#resources",
-    "href": "posts/4.html#resources",
-    "title": "Week 4",
+    "objectID": "posts/5.html#resources",
+    "href": "posts/5.html#resources",
+    "title": "Week 5",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/2.html",
-    "href": "posts/2.html",
-    "title": "Week 2",
+    "objectID": "posts/3.html",
+    "href": "posts/3.html",
+    "title": "Week 3",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/2.html#resources",
-    "href": "posts/2.html#resources",
-    "title": "Week 2",
+    "objectID": "posts/3.html#resources",
+    "href": "posts/3.html#resources",
+    "title": "Week 3",
     "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "lectures/9a.html#databases-and-downloads",
-    "href": "lectures/9a.html#databases-and-downloads",
-    "title": "Advanced SQL",
-    "section": "Databases and downloads",
-    "text": "Databases and downloads\n\n\n\nDatabase\nDownload\nTables used\n\n\n\n\nChinook\nChinook releases\nInvoice\n\n\nNorthwind\nnorthwind.db\nProducts, Categories, Orders, \"Order Details\"\n\n\n\n\nSources: https://github.com/lerocha/chinook-database and https://github.com/jpwhite3/northwind-SQLite3"
+    "objectID": "posts/1.html",
+    "href": "posts/1.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
   },
   {
-    "objectID": "lectures/9a.html#long-and-wide-layouts",
-    "href": "lectures/9a.html#long-and-wide-layouts",
-    "title": "Advanced SQL",
-    "section": "Long and wide layouts",
-    "text": "Long and wide layouts\nIllustrative sales totals, not Chinook output\n\n\nLong: one row per country and month\n\n\n\ncountry\nmonth\nsales\n\n\n\n\nCanada\nJan\n30\n\n\nCanada\nFeb\n20\n\n\nUSA\nJan\n50\n\n\nUSA\nFeb\n40\n\n\n\n\nWide: one row per country\n\n\n\ncountry\nJan\nFeb\n\n\n\n\nCanada\n30\n20\n\n\nUSA\n50\n40\n\n\n\nPivot: category values become columns.\nUnpivot: columns become category/value rows."
+    "objectID": "posts/1.html#resources",
+    "href": "posts/1.html#resources",
+    "title": "Week 1",
+    "section": "",
+    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
   },
   {
-    "objectID": "lectures/9a.html#the-three-decisions-in-a-pivot",
-    "href": "lectures/9a.html#the-three-decisions-in-a-pivot",
+    "objectID": "lectures/8a.html#the-window-concept",
+    "href": "lectures/8a.html#the-window-concept",
     "title": "Advanced SQL",
-    "section": "The three decisions in a pivot",
-    "text": "The three decisions in a pivot\nFor a report of monthly sales by country:\n\n\n\n\n\n\n\n\nDecision\nExample\nSQL role\n\n\n\n\nWhat identifies a row?\nCountry and year\nGROUP BY\n\n\nWhich categories become columns?\nJanuary, February, March\nCASE WHEN conditions\n\n\nWhat fills each cell?\nTotal sales\nSUM(Total)\n\n\n\nThe grain describes what one row represents. Adding year to the row keys keeps January in different years separate."
+    "section": "The “Window” Concept",
+    "text": "The “Window” Concept\n\n\nWindow 1\n\n\n\n\n\n\n\n\n\n\n\n\nWindow 2"
   },
   {
-    "objectID": "lectures/9a.html#pivot-and-unpivot-in-sqlite",
-    "href": "lectures/9a.html#pivot-and-unpivot-in-sqlite",
+    "objectID": "lectures/8a.html#the-window-concept-1",
+    "href": "lectures/8a.html#the-window-concept-1",
     "title": "Advanced SQL",
-    "section": "Pivot and unpivot in SQLite",
-    "text": "Pivot and unpivot in SQLite\nSQLite has no built-in PIVOT or UNPIVOT operators.\n\n\n\nTransformation\nSQLite approach\n\n\n\n\nPivot\nGROUP BY with SUM(CASE WHEN ... END)\n\n\nPivot, alternative\nAn aggregate with FILTER (WHERE ...)\n\n\nUnpivot\nOne SELECT per source column, combined with UNION ALL\n\n\n\nA pivot query has a fixed set of output columns. New category values do not automatically create new columns.\n\nSources: https://sqlite.org/lang_select.html and https://sqlite.org/lang_aggfunc.html"
+    "section": "The “Window” Concept",
+    "text": "The “Window” Concept\n\nThe “Window” is the subset of rows relevant to the current row.\nThe window is defined by the OVER clause.\n\n\nThink of a window as a sliding lens. As you move down the rows in your table, the lens moves with you, looking at a specific subset of data to perform its math."
   },
   {
-    "objectID": "lectures/9a.html#activity-1-plan-the-transformation",
-    "href": "lectures/9a.html#activity-1-plan-the-transformation",
+    "objectID": "lectures/8a.html#window-function-syntax",
+    "href": "lectures/8a.html#window-function-syntax",
     "title": "Advanced SQL",
-    "section": "Activity 1: plan the transformation",
-    "text": "Activity 1: plan the transformation\nPairs · 5 minutes · No SQL required\nUse the illustrative sales table from earlier.\n\nIdentify the row key, column category, and value column for a country-by-month pivot.\nSuppose Canada has a second January sale of 10 before aggregation. What should the January total become?\nWhat columns would an unpivoted result contain?\nCould unpivoting the totals recover the separate sales of 30 and 10? Explain.\n\nDeliverable: a wide table and four short answers."
+    "section": "Window Function Syntax",
+    "text": "Window Function Syntax\nSELECT\n1    column_name,\n2    FUNCTION(column_name) OVER (\n3        PARTITION BY column_to_group_by\n4        ORDER BY column_to_sort_by\n5    ) AS alias_name\n6FROM table_name;\n\n1\n\nInclude this original column in the output. Window functions preserve individual rows.\n\n2\n\nApply a window function, such as SUM() or AVG(). The OVER() clause defines how rows are organized for the calculation.\n\n3\n\nDivide the rows into partitions. The function operates independently within each partition.\n\n4\n\nDefine the order of rows within each partition for the calculation. This does not guarantee the display order of the final output.\n\n5\n\nName the calculated output column.\n\n6\n\nSpecify the table containing the data.\n\n\n\nThe OVER clause is what makes it a window function. Inside it, we use PARTITION BY to define our groups and ORDER BY to define the sequence of the calculation."
   },
   {
-    "objectID": "lectures/9a.html#chinook-invoices-as-the-starting-point",
-    "href": "lectures/9a.html#chinook-invoices-as-the-starting-point",
+    "objectID": "lectures/8a.html#partition-by",
+    "href": "lectures/8a.html#partition-by",
     "title": "Advanced SQL",
-    "section": "Chinook: invoices as the starting point",
-    "text": "Chinook: invoices as the starting point\n\n\n\nField\nMeaning in this lesson\n\n\n\n\nInvoiceId\nIdentifies one invoice\n\n\nInvoiceDate\nDate and time of the invoice\n\n\nBillingCountry\nCountry on the invoice\n\n\nTotal\nTotal invoice amount\n\n\n\nThe starting grain is one row per invoice.\nWe will summarize to one row per billing country and year. We do not need a join for this report.\n\nSchema: https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sql"
+    "section": "PARTITION BY",
+    "text": "PARTITION BY\n\nDivides the result set into partitions.\nThe function is applied to each partition separately.\nIt is like GROUP BY for window functions, but it doesn’t hide the individual rows.\n\n\nPARTITION BY is how we tell SQL where one group ends and the next begins. For example, if we partition by “Department,” the math starts over for every new department."
   },
   {
-    "objectID": "lectures/9a.html#chinook-inspecting-invoice-dates",
-    "href": "lectures/9a.html#chinook-inspecting-invoice-dates",
+    "objectID": "lectures/8a.html#activity-1",
+    "href": "lectures/8a.html#activity-1",
     "title": "Advanced SQL",
-    "section": "Chinook: inspecting invoice dates",
-    "text": "Chinook: inspecting invoice dates\nDatabase: Chinook\nSELECT MIN(InvoiceDate) AS first_invoice,\n       MAX(InvoiceDate) AS last_invoice\n1FROM Invoice;\n\nSELECT InvoiceId, BillingCountry, InvoiceDate,\n2       strftime('%Y', InvoiceDate) AS sales_year,\n       strftime('%m', InvoiceDate) AS sales_month,\n       Total\nFROM Invoice\nORDER BY InvoiceDate, InvoiceId\n3LIMIT 6;\n\n1\n\nCheck the actual date range. Chinook releases may use different years.\n\n2\n\nExtract year and month as text. Compare months with '01', '02', and so on.\n\n3\n\nPreview six invoices with deterministic ordering."
+    "section": "Activity 1",
+    "text": "Activity 1\nUsing film, return film_id, title, rating, and length for every film with a nonmissing length. Add rating_avg_length: the average length of films with the same rating."
   },
   {
-    "objectID": "lectures/9a.html#chinook-a-long-monthly-summary",
-    "href": "lectures/9a.html#chinook-a-long-monthly-summary",
+    "objectID": "lectures/8a.html#order-by-in-window-functions",
+    "href": "lectures/8a.html#order-by-in-window-functions",
     "title": "Advanced SQL",
-    "section": "Chinook: a long monthly summary",
-    "text": "Chinook: a long monthly summary\nDatabase: Chinook\nSELECT BillingCountry,\n       strftime('%Y', InvoiceDate) AS sales_year,\n1       strftime('%m', InvoiceDate) AS sales_month,\n2       ROUND(SUM(Total), 2) AS sales\nFROM Invoice\nWHERE strftime('%m', InvoiceDate) IN ('01', '02', '03')\n3GROUP BY BillingCountry, sales_year, sales_month\nORDER BY BillingCountry, sales_year, sales_month;\n\n1\n\nExtract the time categories before grouping.\n\n2\n\nAdd invoice totals, then round the displayed result.\n\n3\n\nEach result row represents an observed country/year/month combination in January–March."
+    "section": "ORDER BY in Window Functions",
+    "text": "ORDER BY in Window Functions\n\nCrucial for:\n\nRunning Totals (Cumulative sums).\nRankings.\nMoving Averages.\n\nIt defines the direction in which the window “slides” (e.g., from oldest to newest).\n\n\nYou almost always use ORDER BY inside your OVER clause. Without it, the computer doesn’t know which row comes “before” or “after” another, making rankings or running totals impossible."
   },
   {
-    "objectID": "lectures/9a.html#chinook-how-case-selects-values",
-    "href": "lectures/9a.html#chinook-how-case-selects-values",
+    "objectID": "lectures/8a.html#ranking-functions-the-big-three",
+    "href": "lectures/8a.html#ranking-functions-the-big-three",
     "title": "Advanced SQL",
-    "section": "Chinook: how CASE selects values",
-    "text": "Chinook: how CASE selects values\nDatabase: Chinook\nSELECT InvoiceId, InvoiceDate, Total,\n       CASE\n         WHEN strftime('%m', InvoiceDate) = '01'\n1         THEN Total\n2         ELSE 0\n       END AS january_contribution\nFROM Invoice\nORDER BY InvoiceDate, InvoiceId\n3LIMIT 10;\n\n1\n\nA January invoice contributes its total.\n\n2\n\nEvery other invoice contributes zero to the January sum.\n\n3\n\nCASE by itself still returns invoice-level rows. Aggregation performs the next step."
+    "section": "Ranking Functions: The Big Three",
+    "text": "Ranking Functions: The Big Three\n\nROW_NUMBER(): Assigns a unique, sequential integer to rows (1, 2, 3, 4).\nRANK(): Assigns the same rank to ties, but skips the next number (1, 2, 2, 4).\nDENSE_RANK(): Assigns the same rank to ties, but does not skip numbers (1, 2, 2, 3).\n\n\nNot all rankings are created equal. If two people tie for 2nd place, do you want the next person to be 3rd, or 4th? That’s the difference between RANK and DENSE_RANK."
   },
   {
-    "objectID": "lectures/9a.html#chinook-the-first-pivot",
-    "href": "lectures/9a.html#chinook-the-first-pivot",
+    "objectID": "lectures/8a.html#ranking-comparison-diagram",
+    "href": "lectures/8a.html#ranking-comparison-diagram",
     "title": "Advanced SQL",
-    "section": "Chinook: the first pivot",
-    "text": "Chinook: the first pivot\nDatabase: Chinook\nSELECT BillingCountry,\n1       strftime('%Y', InvoiceDate) AS sales_year,\n       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'\n2                      THEN Total ELSE 0 END), 2) AS Jan,\n       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '02'\n                      THEN Total ELSE 0 END), 2) AS Feb,\n       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '03'\n                      THEN Total ELSE 0 END), 2) AS Mar\nFROM Invoice\n3GROUP BY BillingCountry, sales_year\nORDER BY BillingCountry, sales_year;\n\n1\n\nKeep country and year as the row keys.\n\n2\n\nEach conditional sum fills one month column.\n\n3\n\nCombine invoices into one row for each observed country/year pair.\n\n\nAll invoices remain in the input, so a country/year with only later sales still appears with three zeros."
+    "section": "Ranking Comparison Diagram",
+    "text": "Ranking Comparison Diagram\n\n\n\n\n\n\n\n\n\n\n\n\nRow Number: Strictly unique.\nRank: Leaves gaps.\nDense Rank: No gaps.\n\n\nThis diagram helps visualize the “Gap” behavior. Notice how RANK jumps from 1 to 3 because two people tied for 1st."
   },
   {
-    "objectID": "lectures/9a.html#reading-a-pivot-result",
-    "href": "lectures/9a.html#reading-a-pivot-result",
+    "objectID": "lectures/8a.html#activity-2",
+    "href": "lectures/8a.html#activity-2",
     "title": "Advanced SQL",
-    "section": "Reading a pivot result",
-    "text": "Reading a pivot result\n\n\n\nBillingCountry\nsales_year\nJan\nFeb\nMar\n\n\n\n\nCanada\n2025\n30\n20\n0\n\n\n\nIllustrative row, not actual Chinook output.\n\nJan = 30 represents the sum of January invoice totals.\nThe columns contain amounts, not invoice counts.\nMar = 0 can mean no March invoices under our zero-filling rule.\nA country/year with no invoices at all will not appear.\n\nTo include entirely absent groups, start with a complete list of desired row keys and use a LEFT JOIN."
+    "section": "Activity 2",
+    "text": "Activity 2\nUsing films with nonmissing lengths, rank films within each rating, longest film length first. Return film_id, title, rating, film length, and all three rankings:\n\nROW_NUMBER(): rank by film length and film_id.\nRANK(): rank by film length\nDENSE_RANK(): rank by film length\n\nWhat does each ranking do?"
   },
   {
-    "objectID": "lectures/9a.html#chinook-counting-instead-of-summing-sales",
-    "href": "lectures/9a.html#chinook-counting-instead-of-summing-sales",
+    "objectID": "lectures/8a.html#value-functions-lead-and-lag",
+    "href": "lectures/8a.html#value-functions-lead-and-lag",
     "title": "Advanced SQL",
-    "section": "Chinook: counting instead of summing sales",
-    "text": "Chinook: counting instead of summing sales\nDatabase: Chinook\nSELECT strftime('%Y', InvoiceDate) AS sales_year,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'\n1                THEN 1 ELSE 0 END) AS Jan_invoices,\n       COUNT(CASE WHEN strftime('%m', InvoiceDate) = '02'\n2                  THEN 1 END) AS Feb_invoices\nFROM Invoice\nGROUP BY sales_year\nORDER BY sales_year;\n\n1\n\nSum one for each matching invoice and zero for each nonmatch.\n\n2\n\nCOUNT(expression) counts non-NULL values. Without ELSE, nonmatches produce NULL.\n\n\nPitfall: COUNT(CASE WHEN ... THEN 1 ELSE 0 END) counts both ones and zeros."
+    "section": "Value Functions: LEAD and LAG",
+    "text": "Value Functions: LEAD and LAG\n\nLAG(column): Accesses data from the previous row.\nLEAD(column): Accesses data from the following row.\nUse Case: Comparing this month’s sales to last month’s sales to calculate growth.\n\n\nLEAD and LAG are like time machines. They allow you to look back at the past row or ahead to the future row without needing a complex self-join."
   },
   {
-    "objectID": "lectures/9a.html#chinook-the-filter-alternative",
-    "href": "lectures/9a.html#chinook-the-filter-alternative",
+    "objectID": "lectures/8a.html#activity-3",
+    "href": "lectures/8a.html#activity-3",
     "title": "Advanced SQL",
-    "section": "Chinook: the FILTER alternative",
-    "text": "Chinook: the FILTER alternative\nDatabase: Chinook\nSELECT BillingCountry,\n       strftime('%Y', InvoiceDate) AS sales_year,\n       ROUND(COALESCE(SUM(Total) FILTER (\n         WHERE strftime('%m', InvoiceDate) = '01'\n1       ), 0), 2) AS Jan,\n       ROUND(COALESCE(SUM(Total) FILTER (\n         WHERE strftime('%m', InvoiceDate) = '02'\n2       ), 0), 2) AS Feb\nFROM Invoice\nGROUP BY BillingCountry, sales_year\nORDER BY BillingCountry, sales_year;\n\n1\n\nFILTER restricts the input to this aggregate without removing the group.\n\n2\n\nSUM returns NULL when it has no non-NULL inputs. COALESCE(..., 0) supplies zero.\n\n\nOptional syntax: SQLite 3.30.0+. The CASE approach remains the main method for this lecture."
+    "section": "Activity 3",
+    "text": "Activity 3\nUsing payment, examine all payments for customer_id = 1, ordered by payment_date, then payment_id.\n\nReturn payment_id, payment_date, and amount.\nAdd previous_amount from the preceding payment.\nKeep the first payment even though no previous payment exists."
   },
   {
-    "objectID": "lectures/9a.html#zero-null-and-absent-groups",
-    "href": "lectures/9a.html#zero-null-and-absent-groups",
+    "objectID": "lectures/8a.html#activity-4",
+    "href": "lectures/8a.html#activity-4",
     "title": "Advanced SQL",
-    "section": "Zero, NULL, and absent groups",
-    "text": "Zero, NULL, and absent groups\n\n\n\n\n\n\n\n\nSituation\nMeaning\nTreatment\n\n\n\n\nKnown value of zero\nMeasured amount is zero\nKeep zero\n\n\nMissing or unknown measurement\nValue is unknown\nUsually keep NULL\n\n\nNo transactions for a displayed cell\nNo matching invoices\nZero may suit a sales report\n\n\nNo source rows for a row key\nGroup is absent\nBuild a complete group list if needed\n\n\n\nELSE 0 and COALESCE are reporting choices. They do not prove that missing information is a measured zero.\nFor a conditional average, use AVG(CASE WHEN ... THEN Total END). Adding ELSE 0 would include nonmatches in the denominator."
+    "section": "Activity 4",
+    "text": "Activity 4\nUsing rental, examine every rental for customers 1, 2, and 3.\n\nReturn customer_id, rental_id, and rental_date.\nAdd next_rental_date for the same customer, ordered by rental_date, then rental_id.\nAdd days_until_next, rounded to two decimals.\nDisplay by customer_id, rental_date, then rental_id.\n\nHint: In SQLite, JULIANDAY(later) - JULIANDAY(earlier) gives elapsed days, including fractions."
   },
   {
-    "objectID": "lectures/9a.html#activity-2-chinook-invoice-counts",
-    "href": "lectures/9a.html#activity-2-chinook-invoice-counts",
+    "objectID": "lectures/8a.html#window-frames-the-moving-window",
+    "href": "lectures/8a.html#window-frames-the-moving-window",
     "title": "Advanced SQL",
-    "section": "Activity 2: Chinook invoice counts",
-    "text": "Activity 2: Chinook invoice counts\nIndividual or pairs · 10 minutes · Database: Chinook\nBuild a pivot with one row per invoice year.\n\nCreate columns Apr_invoices, May_invoices, and Jun_invoices.\nCount invoices, rather than summing Total.\nAdd Q2_invoices, covering April through June.\nSort by year and check that the three month columns add to Q2_invoices.\nExplain why grouping only by month would answer a different question.\n\nDeliverable: SQL, its output, and your explanation. Use all available invoice years."
+    "section": "Window Frames: The “Moving” Window",
+    "text": "Window Frames: The “Moving” Window\nSometimes, you don’t want to look at the entire partition. You only want a subset of it.\n\nROWS BETWEEN ...\nUNBOUNDED PRECEDING: Start from the very first row of the partition.\nCURRENT ROW: End at the row you are on.\n1 PRECEDING: Look at exactly one row before."
   },
   {
-    "objectID": "lectures/9a.html#chinook-a-reusable-q1-pivot",
-    "href": "lectures/9a.html#chinook-a-reusable-q1-pivot",
+    "objectID": "lectures/8a.html#window-frames-example",
+    "href": "lectures/8a.html#window-frames-example",
     "title": "Advanced SQL",
-    "section": "Chinook: a reusable Q1 pivot",
-    "text": "Chinook: a reusable Q1 pivot\nDatabase: Chinook\nDROP VIEW IF EXISTS temp.lecture_q1_sales;\n1CREATE TEMP VIEW lecture_q1_sales AS\nSELECT BillingCountry,\n       strftime('%Y', InvoiceDate) AS sales_year,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'\n                THEN Total ELSE 0 END) AS Jan,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '02'\n                THEN Total ELSE 0 END) AS Feb,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '03'\n2                THEN Total ELSE 0 END) AS Mar\nFROM Invoice\n3GROUP BY BillingCountry, sales_year;\n\n1\n\nCreate a temporary named query, replacing only this lesson’s temporary view on reruns.\n\n2\n\nKeep unrounded amounts for later calculations. Round the final display.\n\n3\n\nThe view has one row per observed country/year pair. It lasts for the current connection.\n\n\nRun the entire block. This view is required for Activity 4."
+    "section": "Window Frames Example",
+    "text": "Window Frames Example\nExample: 3-Day Moving Average\nAVG(price) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)\n\nWe can even limit the window size. This is how “Moving Averages” are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows."
   },
   {
-    "objectID": "lectures/9a.html#northwind-inventory-in-a-wide-table",
-    "href": "lectures/9a.html#northwind-inventory-in-a-wide-table",
+    "objectID": "lectures/8a.html#activity-5",
+    "href": "lectures/8a.html#activity-5",
     "title": "Advanced SQL",
-    "section": "Northwind: inventory in a wide table",
-    "text": "Northwind: inventory in a wide table\nDatabase: Northwind\n\n\n\nField in Products\nMeaning\n\n\n\n\nProductID\nStable product identifier\n\n\nProductName\nProduct label\n\n\nUnitsInStock\nUnits currently in inventory\n\n\nUnitsOnOrder\nUnits ordered from suppliers\n\n\nReorderLevel\nInventory threshold for reordering\n\n\n\nWe will convert the stock and order columns into rows.\nA reorder threshold is a different kind of quantity. Do not add it to stock and orders as if it were inventory.\n\nSchema: https://github.com/jpwhite3/northwind-SQLite3"
+    "section": "Activity 5",
+    "text": "Activity 5\nUsing payment, first create a CTE containing one row per payment date: payment_day and daily_revenue. Use DATE(payment_date) to remove the time.\n\nReturn each observed payment date and its daily revenue.\nAdd running_revenue: revenue from the first observed date through the current row.\nAdd moving_avg_3_rows: average daily revenue over the current row and up to two preceding rows.\nRound monetary outputs to two decimals and display dates in ascending order."
   },
   {
-    "objectID": "lectures/9a.html#northwind-inspecting-the-source",
-    "href": "lectures/9a.html#northwind-inspecting-the-source",
+    "objectID": "lectures/8a.html#solution-1",
+    "href": "lectures/8a.html#solution-1",
     "title": "Advanced SQL",
-    "section": "Northwind: inspecting the source",
-    "text": "Northwind: inspecting the source\nDatabase: Northwind\nSELECT ProductID, ProductName,\n1       UnitsInStock, UnitsOnOrder, ReorderLevel\nFROM Products\nORDER BY ProductID\n2LIMIT 5;\n\n1\n\nRead the measures currently stored in separate columns.\n\n2\n\nInspect a small sample. One source row represents one product."
+    "section": "Solution 1",
+    "text": "Solution 1\nSELECT film_id, title, rating, length,\n       AVG(length) OVER (\n1           PARTITION BY rating) AS rating_avg_length\nFROM film\n2WHERE length IS NOT NULL\n3ORDER BY rating, film_id;\n\n1\n\nCompute the average across the entire rating partition. With no window ordering, this average is repeated for every film in that rating.\n\n2\n\nExclude missing lengths before calculating the window values.\n\n3\n\nSet the displayed order independently of the window calculation.\n\n\nInterpretation: A positive difference means the film is longer than its rating’s average. Unlike GROUP BY, this window calculation retains each film row."
   },
   {
-    "objectID": "lectures/9a.html#unpivot-a-worked-table",
-    "href": "lectures/9a.html#unpivot-a-worked-table",
+    "objectID": "lectures/8a.html#solution-2",
+    "href": "lectures/8a.html#solution-2",
     "title": "Advanced SQL",
-    "section": "Unpivot: a worked table",
-    "text": "Unpivot: a worked table\nIllustrative inventory, not Northwind output\n\n\n\nProductID\nProductName\nUnitsInStock\nUnitsOnOrder\n\n\n\n\n101\nTea\n12\n5\n\n\n102\nCoffee\n0\n8\n\n\n\nAfter unpivoting:\n\n\n\nProductID\nProductName\ninventory_status\nunits\n\n\n\n\n101\nTea\nIn stock\n12\n\n\n101\nTea\nOn order\n5\n\n\n102\nCoffee\nIn stock\n0\n\n\n102\nCoffee\nOn order\n8\n\n\n\nThe new grain is one row per product and inventory status."
+    "section": "Solution 2",
+    "text": "Solution 2\nSELECT film_id, title, rating, length,\n       ROW_NUMBER() OVER (\n           PARTITION BY rating\n1           ORDER BY length DESC, film_id) AS row_num,\n       RANK() OVER (\n           PARTITION BY rating\n2           ORDER BY length DESC) AS length_rank,\n       DENSE_RANK() OVER (\n           PARTITION BY rating\n3           ORDER BY length DESC) AS dense_length_rank\nFROM film\nWHERE length IS NOT NULL\n4ORDER BY rating, length DESC, film_id;\n\n1\n\nAssign unique sequential numbers within each rating. The identifier gives tied lengths a repeatable order.\n\n2\n\nGive equal lengths equal ranks; leave gaps after ties.\n\n3\n\nGive equal lengths equal ranks without gaps between distinct lengths.\n\n4\n\nDisplay ties in identifier order without changing their shared ranks."
   },
   {
-    "objectID": "lectures/9a.html#northwind-unpivot-with-union-all",
-    "href": "lectures/9a.html#northwind-unpivot-with-union-all",
+    "objectID": "lectures/8a.html#solution-3",
+    "href": "lectures/8a.html#solution-3",
     "title": "Advanced SQL",
-    "section": "Northwind: unpivot with UNION ALL",
-    "text": "Northwind: unpivot with UNION ALL\nDatabase: Northwind\nSELECT ProductID, ProductName,\n1       'In stock' AS inventory_status,\n       UnitsInStock AS units\nFROM Products\n2UNION ALL\nSELECT ProductID, ProductName,\n       'On order' AS inventory_status,\n3       UnitsOnOrder AS units\nFROM Products\n4ORDER BY ProductID, inventory_status;\n\n1\n\nConvert the original column meaning into a text value.\n\n2\n\nStack both result sets and preserve every generated row.\n\n3\n\nUse the same column order and compatible types in both branches.\n\n4\n\nSort the complete combined result. Keep the product ID in both branches."
+    "section": "Solution 3",
+    "text": "Solution 3\n1SELECT payment_id, payment_date, amount,\n2       LAG(amount) OVER (\n           PARTITION BY customer_id\n           ORDER BY payment_date, payment_id\n3       ) AS previous_amount\nFROM payment\n4WHERE customer_id = 1;\n\n1\n\nSelect the columns to be displayed.\n\n2\n\nCreates the window function and applies the lag function to obtain the previous amount.\n\n3\n\nPartitions by customer_id and orders by payment_date and payment_id.\n\n4\n\nRestrict the input to customer 1."
   },
   {
-    "objectID": "lectures/9a.html#union-all-and-missing-values",
-    "href": "lectures/9a.html#union-all-and-missing-values",
+    "objectID": "lectures/8a.html#solution-4",
+    "href": "lectures/8a.html#solution-4",
     "title": "Advanced SQL",
-    "section": "UNION ALL and missing values",
-    "text": "UNION ALL and missing values\n\nEvery branch must return the same number of columns in the same logical order.\nThe first SELECT determines the output column names.\nUNION ALL retains all generated rows. UNION removes exact duplicates.\nThis unpivot keeps zero values and NULL values.\nWith two branches and no filters, N products produce 2N rows.\n\nPreserve ProductID. Different products can share a name.\n\nSource: https://sqlite.org/lang_select.html, compound SELECT statements."
+    "section": "Solution 4",
+    "text": "Solution 4\n1SELECT customer_id, rental_id, rental_date,\n2       LEAD(rental_date) OVER (\n3           PARTITION BY customer_id\n4           ORDER BY rental_date, rental_id\n5       ) AS next_rental_date\n6FROM rental\n7WHERE customer_id IN (1, 2, 3);\n\n1\n\nDisplay the customer identifier, rental identifier, and rental timestamp.\n\n2\n\nUse LEAD() to retrieve the following row’s rental date within the window.\n\n3\n\nCreate a separate partition for each customer so the next rental belongs to the same customer.\n\n4\n\nOrder each customer’s rentals chronologically. Use rental_id to break ties when timestamps match. This controls the window calculation, not the final display order.\n\n5\n\nName the calculated column next_rental_date. Each customer’s final rental returns NULL because no following rental exists.\n\n6\n\nRetrieve records from the rental table.\n\n7\n\nInclude only customers 1, 2, and 3. This filter applies before the window function is calculated."
   },
   {
-    "objectID": "lectures/9a.html#northwind-a-reusable-long-inventory-view",
-    "href": "lectures/9a.html#northwind-a-reusable-long-inventory-view",
+    "objectID": "lectures/8a.html#solution-5",
+    "href": "lectures/8a.html#solution-5",
     "title": "Advanced SQL",
-    "section": "Northwind: a reusable long inventory view",
-    "text": "Northwind: a reusable long inventory view\nDatabase: Northwind\nDROP VIEW IF EXISTS temp.lecture_inventory_long;\n1CREATE TEMP VIEW lecture_inventory_long AS\nSELECT ProductID, ProductName,\n       'In stock' AS inventory_status, UnitsInStock AS units\nFROM Products\nUNION ALL\nSELECT ProductID, ProductName,\n       'On order' AS inventory_status, UnitsOnOrder AS units\n2FROM Products;\n\n1\n\nSave the unpivot query as a temporary view.\n\n2\n\nThe view keeps one row for every product/status pair, including NULL and zero values."
+    "section": "Solution 5",
+    "text": "Solution 5\n1WITH daily_sales AS (\n2    SELECT DATE(payment_date) AS payment_day,\n           SUM(amount) AS daily_revenue\n    FROM payment\n3    GROUP BY DATE(payment_date)\n)\n4SELECT payment_day, daily_revenue,\n       SUM(daily_revenue) OVER (\n5           ORDER BY payment_day\n6           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS running_revenue,\n       AVG(daily_revenue) OVER (\n           ORDER BY payment_day\n7           ROWS BETWEEN 2 PRECEDING AND CURRENT ROW\n       ) AS moving_avg_3_rows\n8FROM daily_sales\n9ORDER BY payment_day;\n\n1\n\nCreate a common table expression (CTE) named daily_sales to summarize payments before applying window functions.\n\n2\n\nExtract the date from each payment timestamp, removing the time, and name it payment_day.\n\n3\n\nGroup payments by date. SUM(amount) calculates total revenue for each date, producing one row per observed payment date.\n\n4\n\nDisplay each payment date and its daily revenue.\n\n5\n\nOrder the daily rows chronologically for the running-total calculation.\n\n6\n\nInclude every row from the beginning through the current row. SUM() over this frame calculates cumulative revenue as running_revenue.\n\n7\n\nInclude the current row and up to two preceding rows. AVG() calculates their average daily revenue. The first result uses one row, the second uses two, and subsequent results use three. These are observed payment dates, not necessarily consecutive calendar days.\n\n8\n\nRetrieve the daily summaries from the CTE. Both window functions preserve one output row per observed payment date.\n\n9\n\nDisplay the final results chronologically. The ordering inside OVER() controls calculations but does not guarantee the final display order."
   },
   {
-    "objectID": "lectures/9a.html#northwind-filtering-the-long-result",
-    "href": "lectures/9a.html#northwind-filtering-the-long-result",
+    "objectID": "lectures/8a.html#references-for-the-activities",
+    "href": "lectures/8a.html#references-for-the-activities",
     "title": "Advanced SQL",
-    "section": "Northwind: filtering the long result",
-    "text": "Northwind: filtering the long result\nDatabase: Northwind\nSELECT ProductID, ProductName, inventory_status, units\nFROM lecture_inventory_long\n1WHERE units IS NOT NULL\nORDER BY ProductID, inventory_status;\n\nSELECT inventory_status, SUM(units) AS total_units,\n       COUNT(*) AS rows_present,\n2       COUNT(units) AS known_values\nFROM lecture_inventory_long\nGROUP BY inventory_status;\n\n1\n\nFilter the outer query to drop unknown measurements from both branches. Zero remains.\n\n2\n\nCOUNT(*) counts rows while COUNT(units) counts known values. SUM ignores NULL inputs.\n\n\nPrerequisite: run the temporary-view block on the previous slide in this connection."
-  },
-  {
-    "objectID": "lectures/9a.html#northwind-pivoting-inventory-back",
-    "href": "lectures/9a.html#northwind-pivoting-inventory-back",
-    "title": "Advanced SQL",
-    "section": "Northwind: pivoting inventory back",
-    "text": "Northwind: pivoting inventory back\nDatabase: Northwind\nSELECT ProductID, ProductName,\n       MAX(CASE WHEN inventory_status = 'In stock'\n1                THEN units END) AS UnitsInStock,\n       MAX(CASE WHEN inventory_status = 'On order'\n                THEN units END) AS UnitsOnOrder\nFROM lecture_inventory_long\n2GROUP BY ProductID, ProductName\nORDER BY ProductID;\n\n1\n\nWith exactly one value per product/status, MAX retrieves that value. Missing values stay NULL.\n\n2\n\nGroup by the product identifier and its label to restore one row per product.\n\n\nMAX is appropriate here because each product/status pair is unique. Check uniqueness before using it to reshape other data."
-  },
-  {
-    "objectID": "lectures/9a.html#activity-3-three-northwind-measures",
-    "href": "lectures/9a.html#activity-3-three-northwind-measures",
-    "title": "Advanced SQL",
-    "section": "Activity 3: three Northwind measures",
-    "text": "Activity 3: three Northwind measures\nPairs · 10 minutes · Database: Northwind\nUnpivot UnitsInStock, UnitsOnOrder, and ReorderLevel.\n\nReturn ProductID, ProductName, measure, and value.\nLabel the measures In stock, On order, and Reorder level.\nKeep every product and preserve zeros and NULLs.\nPredict the row count as a multiple of the product count.\nReturn a second result containing only positive On order values.\n\nDeliverable: both SQL queries and a sentence explaining why you should not add the three measures together."
-  },
-  {
-    "objectID": "lectures/9a.html#what-a-round-trip-can-recover",
-    "href": "lectures/9a.html#what-a-round-trip-can-recover",
-    "title": "Advanced SQL",
-    "section": "What a round trip can recover",
-    "text": "What a round trip can recover\n\n\n\n\n\n\n\n\nStarting data\nPivot behavior\nWhat unpivoting recovers\n\n\n\n\nOne value per product/status\nRetrieves each value\nOriginal values, if keys and NULLs are preserved\n\n\nMany invoices per country/month\nAdds invoice totals\nMonthly totals only\n\n\nMissing category replaced with zero\nFills a missing cell\nZero, without its original missingness\n\n\n\nAggregation discards information. A total of 40 does not reveal whether the original invoices were 30 + 10, 20 + 20, or one invoice of 40."
-  },
-  {
-    "objectID": "lectures/9a.html#activity-4-chinook-pivot-and-unpivot",
-    "href": "lectures/9a.html#activity-4-chinook-pivot-and-unpivot",
-    "title": "Advanced SQL",
-    "section": "Activity 4: Chinook pivot and unpivot",
-    "text": "Activity 4: Chinook pivot and unpivot\nPairs · 12 minutes · Database: Chinook\nFirst run the earlier reusable Q1 pivot block to create lecture_q1_sales.\n\nUnpivot its Jan, Feb, and Mar columns.\nReturn BillingCountry, sales_year, sales_month, and sales.\nUse month labels '01', '02', and '03'. Preserve zeros.\nSort by country, year, and month.\nCheck that total long sales equals the original January–March invoice total, rounded to two decimals.\nExplain why the long result need not have the same row count as the earlier long monthly summary.\n\nDeliverable: an unpivot query, a totals check, and your explanation."
-  },
-  {
-    "objectID": "lectures/9a.html#northwind-extension-revenue-across-countries",
-    "href": "lectures/9a.html#northwind-extension-revenue-across-countries",
-    "title": "Advanced SQL",
-    "section": "Northwind extension: revenue across countries",
-    "text": "Northwind extension: revenue across countries\nThe extension combines joins with a pivot.\n\n\n\n\n\n\n\nTable\nFields needed\n\n\n\n\nOrders\nOrderID, ShipCountry\n\n\n\"Order Details\"\nOrderID, ProductID, UnitPrice, Quantity, Discount\n\n\nProducts\nProductID, CategoryID\n\n\nCategories\nCategoryID, CategoryName\n\n\n\nLine revenue = UnitPrice × Quantity × (1 − Discount)\nUse the order-line price. Products.UnitPrice describes the catalog price and may differ. Discount is a fraction, such as 0.10 for 10%."
-  },
-  {
-    "objectID": "lectures/9a.html#activity-5-northwind-revenue-pivot",
-    "href": "lectures/9a.html#activity-5-northwind-revenue-pivot",
-    "title": "Advanced SQL",
-    "section": "Activity 5: Northwind revenue pivot",
-    "text": "Activity 5: Northwind revenue pivot\nOptional extension · 15 minutes · Database: Northwind\n\nJoin orders to order details, products, and categories.\nCalculate discounted revenue at the order-line grain.\nPivot to one row per category, with columns USA, Germany, and Other based on ShipCountry.\nTreat every remaining country, including NULL, as Other for this exercise.\nAdd total_revenue and round displayed amounts to two decimals.\nExplain why adding order-level freight after this join could overcount it.\n\nDeliverable: a CTE plus pivot query and your explanation. Include categories represented by the joined order lines."
-  },
-  {
-    "objectID": "lectures/9a.html#common-mistakes",
-    "href": "lectures/9a.html#common-mistakes",
-    "title": "Advanced SQL",
-    "section": "Common mistakes",
-    "text": "Common mistakes\n\n\n\n\n\n\n\n\nMistake\nResult\nCorrection\n\n\n\n\nGrouping by month while creating month columns\nSeparate rows for months\nGroup by the intended row keys\n\n\nOmitting year unintentionally\nSame months across years combine\nKeep year among the keys\n\n\nCOUNT(CASE ... ELSE 0 END)\nNonmatches count too\nUse SUM of 1/0 or omit ELSE\n\n\nDropping product identifiers\nDifferent products may combine\nRetain ProductID\n\n\nSumming order totals after joining lines\nRepeated amounts inflate totals\nAggregate at the correct grain\n\n\nSumming already-rounded cells\nSmall discrepancies\nRound after the final sum"
-  },
-  {
-    "objectID": "lectures/9a.html#glossary-reshaping",
-    "href": "lectures/9a.html#glossary-reshaping",
-    "title": "Advanced SQL",
-    "section": "Glossary: reshaping",
-    "text": "Glossary: reshaping\n\n\n\n\n\n\n\nTerm\nMeaning\n\n\n\n\nGrain\nWhat one result row represents\n\n\nLong format\nCategories appear as values in rows\n\n\nWide format\nSelected categories appear as separate columns\n\n\nPivot\nReshapes category values into columns, often aggregating\n\n\nUnpivot\nReshapes selected columns into category/value rows\n\n\nConditional aggregation\nApplies an aggregate to values selected by a condition\n\n\nRow key\nColumn or set of columns that identifies a result row"
-  },
-  {
-    "objectID": "lectures/9a.html#glossary-sql-expressions",
-    "href": "lectures/9a.html#glossary-sql-expressions",
-    "title": "Advanced SQL",
-    "section": "Glossary: SQL expressions",
-    "text": "Glossary: SQL expressions\n\n\n\n\n\n\n\nExpression\nRole in this lecture\n\n\n\n\nCASE WHEN ... THEN ... ELSE ... END\nChooses each row’s contribution\n\n\nSUM, COUNT, MAX, AVG\nSummarize selected values\n\n\nFILTER (WHERE ...)\nRestricts input to one aggregate\n\n\nstrftime('%Y', date)\nExtracts a year as text\n\n\nstrftime('%m', date)\nExtracts a two-digit month as text\n\n\nCOALESCE(x, 0)\nReplaces NULL with zero\n\n\nROUND(x, 2)\nRounds a result to two decimal places"
-  },
-  {
-    "objectID": "lectures/9a.html#glossary-query-structure",
-    "href": "lectures/9a.html#glossary-query-structure",
-    "title": "Advanced SQL",
-    "section": "Glossary: query structure",
-    "text": "Glossary: query structure\n\n\n\nCommand\nRole in this lecture\n\n\n\n\nSELECT ... FROM ...\nChooses expressions and their source\n\n\nWHERE\nFilters source rows\n\n\nGROUP BY\nDefines aggregation groups\n\n\nORDER BY, LIMIT\nSorts and restricts returned rows\n\n\nUNION ALL\nStacks rows without removing duplicates\n\n\nWITH ... AS (...)\nNames a query for one statement\n\n\nCREATE TEMP VIEW\nNames a query for the current connection\n\n\nJOIN ... ON ...\nCombines matching rows from related tables"
-  },
-  {
-    "objectID": "lectures/9a.html#sources-and-further-reading",
-    "href": "lectures/9a.html#sources-and-further-reading",
-    "title": "Advanced SQL",
-    "section": "Sources and further reading",
-    "text": "Sources and further reading\n\nChinook database and SQLite downloads\nNorthwind SQLite database and schema\nSQLite SELECT and compound queries\nSQLite aggregate functions and FILTER\nSQLite CASE expressions\nSQLite date and time functions\nSQLite CREATE VIEW\nQuarto code annotations\n\nAll remaining slides contain activity solutions."
-  },
-  {
-    "objectID": "lectures/9a.html#activity-solutions",
-    "href": "lectures/9a.html#activity-solutions",
-    "title": "Advanced SQL",
-    "section": "Activity solutions",
-    "text": "Activity solutions\nThe following slides contain complete answers to Activities 1–5.\nRun each answer in its named database connection.\nActivity 4 depends on lecture_q1_sales, created in the lecture. Activity 5’s second block depends on its first block’s temporary view."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-1-planning-the-transformation",
-    "href": "lectures/9a.html#solution-1-planning-the-transformation",
-    "title": "Advanced SQL",
-    "section": "Solution 1: planning the transformation",
-    "text": "Solution 1: planning the transformation\n\nRow key: country. Column category: month. Values: summed sales.\nCanada’s January total becomes 40.\nThe unpivoted columns are country, month, and sales.\nUnpivoting returns 40, not the separate sales of 30 and 10.\n\n\n\n\ncountry\nJan\nFeb\n\n\n\n\nCanada\n40\n20\n\n\nUSA\n50\n40\n\n\n\nThe pivot has one row per country. The unpivoted summary has one row per country/month."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-2-chinook-invoice-counts",
-    "href": "lectures/9a.html#solution-2-chinook-invoice-counts",
-    "title": "Advanced SQL",
-    "section": "Solution 2: Chinook invoice counts",
-    "text": "Solution 2: Chinook invoice counts\nDatabase: Chinook\n1SELECT strftime('%Y', InvoiceDate) AS sales_year,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '04'\n                THEN 1 ELSE 0 END) AS Apr_invoices,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '05'\n                THEN 1 ELSE 0 END) AS May_invoices,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '06'\n2                THEN 1 ELSE 0 END) AS Jun_invoices,\n       SUM(CASE WHEN strftime('%m', InvoiceDate)\n                     IN ('04', '05', '06')\n3                THEN 1 ELSE 0 END) AS Q2_invoices\nFROM Invoice\nGROUP BY sales_year\nORDER BY sales_year;\n\n1\n\nOne result row represents one invoice year.\n\n2\n\nEach matching invoice contributes one to its month.\n\n3\n\nThe Q2 condition covers exactly the three displayed months."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-2-interpretation-and-check",
-    "href": "lectures/9a.html#solution-2-interpretation-and-check",
-    "title": "Advanced SQL",
-    "section": "Solution 2: interpretation and check",
-    "text": "Solution 2: interpretation and check\nFor every year:\nApr_invoices + May_invoices + Jun_invoices = Q2_invoices\nThe month conditions are mutually exclusive, and together they cover Q2.\nGrouping only by month would combine the same month across different years. It would create a monthly summary with a different grain.\nAll invoice years remain in the query. A year with no Q2 invoices receives four zeros."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-3-a-three-measure-unpivot",
-    "href": "lectures/9a.html#solution-3-a-three-measure-unpivot",
-    "title": "Advanced SQL",
-    "section": "Solution 3: a three-measure unpivot",
-    "text": "Solution 3: a three-measure unpivot\nDatabase: Northwind\nDROP VIEW IF EXISTS temp.lecture_product_measures;\nCREATE TEMP VIEW lecture_product_measures AS\nSELECT ProductID, ProductName,\n1       'In stock' AS measure, UnitsInStock AS value\nFROM Products\nUNION ALL\nSELECT ProductID, ProductName,\n       'On order', UnitsOnOrder\nFROM Products\nUNION ALL\nSELECT ProductID, ProductName,\n2       'Reorder level', ReorderLevel\nFROM Products;\n\n1\n\nThe first branch names the output columns.\n\n2\n\nThe third branch adds one threshold row per product. No branch filters out zeros or NULLs."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-3-output-filter-and-row-count",
-    "href": "lectures/9a.html#solution-3-output-filter-and-row-count",
-    "title": "Advanced SQL",
-    "section": "Solution 3: output, filter, and row count",
-    "text": "Solution 3: output, filter, and row count\nDatabase: Northwind\nSELECT * FROM lecture_product_measures\n1ORDER BY ProductID, measure;\n\nSELECT ProductID, ProductName, measure, value\nFROM lecture_product_measures\n2WHERE measure = 'On order' AND value &gt; 0\nORDER BY ProductID;\n\nSELECT (SELECT COUNT(*) FROM Products) * 3 AS expected_rows,\n       COUNT(*) AS actual_rows\n3FROM lecture_product_measures;\n\n1\n\nInspect the entire long result.\n\n2\n\nReturn only positive order quantities. NULL does not satisfy this condition.\n\n3\n\nEach product contributes exactly three rows, so the counts should match.\n\n\nThe reorder level is a threshold. Adding it to stock and orders would not produce a meaningful inventory total."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-4-unpivoting-the-q1-sales-view",
-    "href": "lectures/9a.html#solution-4-unpivoting-the-q1-sales-view",
-    "title": "Advanced SQL",
-    "section": "Solution 4: unpivoting the Q1 sales view",
-    "text": "Solution 4: unpivoting the Q1 sales view\nDatabase: Chinook\nDROP VIEW IF EXISTS temp.lecture_q1_long;\n1CREATE TEMP VIEW lecture_q1_long AS\nSELECT BillingCountry, sales_year,\n       '01' AS sales_month, Jan AS sales\nFROM lecture_q1_sales\nUNION ALL\nSELECT BillingCountry, sales_year, '02', Feb\nFROM lecture_q1_sales\nUNION ALL\nSELECT BillingCountry, sales_year, '03', Mar\n2FROM lecture_q1_sales;\n\nSELECT BillingCountry, sales_year, sales_month,\n3       ROUND(sales, 2) AS sales\nFROM lecture_q1_long\nORDER BY BillingCountry, sales_year, sales_month;\n\n1\n\nPrerequisite: run the lecture block that creates lecture_q1_sales.\n\n2\n\nGenerate three month rows per country/year, preserving zero cells.\n\n3\n\nRound only for display. The view retains unrounded values."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-4-checking-totals",
-    "href": "lectures/9a.html#solution-4-checking-totals",
-    "title": "Advanced SQL",
-    "section": "Solution 4: checking totals",
-    "text": "Solution 4: checking totals\nDatabase: Chinook\nSELECT\n  (SELECT ROUND(SUM(sales), 2)\n1   FROM lecture_q1_long) AS unpivoted_total,\n  (SELECT ROUND(SUM(Total), 2)\n   FROM Invoice\n   WHERE strftime('%m', InvoiceDate)\n2         IN ('01', '02', '03')) AS invoice_total;\n\n1\n\nSum all three months across every country/year in the long view.\n\n2\n\nIndependently sum the original Q1 invoices. The rounded totals should match.\n\n\nSQLite may use floating-point arithmetic for decimal amounts. Compare rounded totals for this classroom check."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-4-why-row-counts-can-differ",
-    "href": "lectures/9a.html#solution-4-why-row-counts-can-differ",
-    "title": "Advanced SQL",
-    "section": "Solution 4: why row counts can differ",
-    "text": "Solution 4: why row counts can differ\nThe earlier long summary contains only country/year/month combinations with invoices.\nThe pivot contains every country/year found anywhere in Invoice. Unpivoting its three month columns generates three rows for each of those pairs.\nConsequently, the unpivoted result can include explicit zero rows that were absent from the original summary.\nThe totals agree, but neither the row count nor the individual invoice detail must match. Unpivoting does not reverse aggregation."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-5-joined-order-line-revenue",
-    "href": "lectures/9a.html#solution-5-joined-order-line-revenue",
-    "title": "Advanced SQL",
-    "section": "Solution 5: joined order-line revenue",
-    "text": "Solution 5: joined order-line revenue\nDatabase: Northwind\nDROP VIEW IF EXISTS temp.lecture_order_lines;\nCREATE TEMP VIEW lecture_order_lines AS\nSELECT c.CategoryID, c.CategoryName, o.ShipCountry,\n       d.UnitPrice * d.Quantity * (1 - d.Discount)\n1         AS line_revenue\nFROM Orders AS o\n2JOIN \"Order Details\" AS d ON o.OrderID = d.OrderID\nJOIN Products AS p ON d.ProductID = p.ProductID\n3JOIN Categories AS c ON p.CategoryID = c.CategoryID;\n\n1\n\nCalculate revenue from the price, quantity, and discount on each order line.\n\n2\n\nQuote the table name because it contains a space.\n\n3\n\nAdd each product’s category without changing the order-line grain."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-5-revenue-pivot-with-a-cte",
-    "href": "lectures/9a.html#solution-5-revenue-pivot-with-a-cte",
-    "title": "Advanced SQL",
-    "section": "Solution 5: revenue pivot with a CTE",
-    "text": "Solution 5: revenue pivot with a CTE\nDatabase: Northwind\nWITH country_groups AS (\n  SELECT CategoryID, CategoryName, line_revenue,\n         CASE WHEN ShipCountry IN ('USA', 'Germany')\n1              THEN ShipCountry ELSE 'Other' END AS country_group\n  FROM lecture_order_lines\n)\nSELECT CategoryID, CategoryName,\n       ROUND(SUM(CASE WHEN country_group = 'USA'\n                      THEN line_revenue ELSE 0 END), 2) AS USA,\n       ROUND(SUM(CASE WHEN country_group = 'Germany'\n                      THEN line_revenue ELSE 0 END), 2) AS Germany,\n       ROUND(SUM(CASE WHEN country_group = 'Other'\n2                      THEN line_revenue ELSE 0 END), 2) AS Other,\n       ROUND(SUM(line_revenue), 2) AS total_revenue\nFROM country_groups\n3GROUP BY CategoryID, CategoryName\nORDER BY CategoryID;\n\n1\n\nClassify every line, including a NULL shipping country, into one of three groups.\n\n2\n\nSum line revenue once into exactly one country column.\n\n3\n\nKeep the category identifier and label as row keys."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-5-interpretation-and-join-grain",
-    "href": "lectures/9a.html#solution-5-interpretation-and-join-grain",
-    "title": "Advanced SQL",
-    "section": "Solution 5: interpretation and join grain",
-    "text": "Solution 5: interpretation and join grain\nBefore rounding, USA + Germany + Other equals total_revenue for each category.\nIndependently rounded columns can differ slightly from a separately rounded total.\nAn order with three detail rows appears three times after the join. Summing its order-level Freight at that point would count freight three times.\nCompute an order-level measure once per order, or define an explicit allocation to order lines before summarizing by category.\nThe inner joins include categories with matching order lines. Categories with no matching sales are absent."
+    "section": "References for the activities",
+    "text": "References for the activities\n\nSakila SQLite database and source\nSQLite window functions\nSQLite date and time functions"
   },
   {
     "objectID": "lectures/6a.html#agenda",
@@ -1036,67 +875,32 @@
     "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\n\n\nICA 4\n\n\n\n\n\n\n\n\n\n\nICA 5\n\n\n\n\n\n\n\n\n\n\nICA 6\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "a/4.html",
-    "href": "a/4.html",
-    "title": "ICA 4",
+    "objectID": "a/5.html",
+    "href": "a/5.html",
+    "title": "ICA 5",
     "section": "",
-    "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
+    "text": "Use the SQLite database linked from the Northwind-SQLite3 repository. The names below match that repository’s documented schema. Other Northwind versions may use different table names.\n\n\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nKey\n\n\n\n\nCustomers\nOne customer organization\nCustomerID\n\n\nOrders\nOne order placed by a customer\nOrderID\n\n\n\"Order Details\"\nOne product line within an order\nThe combination of OrderID and ProductID\n\n\nEmployees\nOne employee\nEmployeeID\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable\nColumn\nMeaning in this assignment\n\n\n\n\nCustomers\nCustomerID\nCustomer identifier\n\n\nCustomers\nCompanyName\nCustomer organization’s name\n\n\nCustomers\nCountry\nCustomer’s country\n\n\nOrders\nOrderID\nOrder identifier\n\n\nOrders\nCustomerID\nCustomer who placed the order\n\n\nOrders\nEmployeeID\nEmployee associated with the order\n\n\n\"Order Details\"\nOrderID\nOrder containing the line item\n\n\n\"Order Details\"\nProductID\nProduct on the line item\n\n\n\"Order Details\"\nUnitPrice\nSelling price per unit on that order line\n\n\n\"Order Details\"\nQuantity\nNumber of units ordered\n\n\n\"Order Details\"\nDiscount\nFraction of the line price discounted; for example, 0.10 means 10%\n\n\nEmployees\nEmployeeID\nEmployee identifier\n\n\nEmployees\nFirstName\nEmployee’s first name\n\n\nEmployees\nLastName\nEmployee’s last name\n\n\nEmployees\nReportsTo\nEmployeeID of the employee’s direct manager; NULL identifies an employee with no listed manager\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStarting column\nRelated column\nRelationship\n\n\n\n\nOrders.CustomerID\nCustomers.CustomerID\nMany orders can belong to one customer\n\n\n\"Order Details\".OrderID\nOrders.OrderID\nMany line items can belong to one order\n\n\nOrders.EmployeeID\nEmployees.EmployeeID\nMany orders can be associated with one employee\n\n\nEmployees.ReportsTo\nEmployees.EmployeeID\nMany employees can report to one manager\n\n\n\nThe last relationship is a self-reference: both columns belong to Employees."
   },
   {
-    "objectID": "a/4.html#files-and-setup",
-    "href": "a/4.html#files-and-setup",
-    "title": "ICA 4",
+    "objectID": "a/5.html#tables-and-variables-used",
+    "href": "a/5.html#tables-and-variables-used",
+    "title": "ICA 5",
     "section": "",
-    "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
+    "text": "Use the SQLite database linked from the Northwind-SQLite3 repository. The names below match that repository’s documented schema. Other Northwind versions may use different table names.\n\n\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nKey\n\n\n\n\nCustomers\nOne customer organization\nCustomerID\n\n\nOrders\nOne order placed by a customer\nOrderID\n\n\n\"Order Details\"\nOne product line within an order\nThe combination of OrderID and ProductID\n\n\nEmployees\nOne employee\nEmployeeID\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable\nColumn\nMeaning in this assignment\n\n\n\n\nCustomers\nCustomerID\nCustomer identifier\n\n\nCustomers\nCompanyName\nCustomer organization’s name\n\n\nCustomers\nCountry\nCustomer’s country\n\n\nOrders\nOrderID\nOrder identifier\n\n\nOrders\nCustomerID\nCustomer who placed the order\n\n\nOrders\nEmployeeID\nEmployee associated with the order\n\n\n\"Order Details\"\nOrderID\nOrder containing the line item\n\n\n\"Order Details\"\nProductID\nProduct on the line item\n\n\n\"Order Details\"\nUnitPrice\nSelling price per unit on that order line\n\n\n\"Order Details\"\nQuantity\nNumber of units ordered\n\n\n\"Order Details\"\nDiscount\nFraction of the line price discounted; for example, 0.10 means 10%\n\n\nEmployees\nEmployeeID\nEmployee identifier\n\n\nEmployees\nFirstName\nEmployee’s first name\n\n\nEmployees\nLastName\nEmployee’s last name\n\n\nEmployees\nReportsTo\nEmployeeID of the employee’s direct manager; NULL identifies an employee with no listed manager\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStarting column\nRelated column\nRelationship\n\n\n\n\nOrders.CustomerID\nCustomers.CustomerID\nMany orders can belong to one customer\n\n\n\"Order Details\".OrderID\nOrders.OrderID\nMany line items can belong to one order\n\n\nOrders.EmployeeID\nEmployees.EmployeeID\nMany orders can be associated with one employee\n\n\nEmployees.ReportsTo\nEmployees.EmployeeID\nMany employees can report to one manager\n\n\n\nThe last relationship is a self-reference: both columns belong to Employees."
   },
   {
-    "objectID": "a/4.html#selected-sakila-relationships",
-    "href": "a/4.html#selected-sakila-relationships",
-    "title": "ICA 4",
-    "section": "Selected Sakila relationships",
-    "text": "Selected Sakila relationships\n\n\n\n\n\n\n\n\nParent table\nChild table\nJoin condition\n\n\n\n\nlanguage\nfilm\nlanguage.language_id = film.language_id\n\n\nfilm\ninventory\nfilm.film_id = inventory.film_id\n\n\ncustomer\nrental\ncustomer.customer_id = rental.customer_id\n\n\ninventory\nrental\ninventory.inventory_id = rental.inventory_id\n\n\nrental\npayment\nrental.rental_id = payment.rental_id\n\n\nactor\nfilm_actor\nactor.actor_id = film_actor.actor_id\n\n\nfilm\nfilm_actor\nfilm.film_id = film_actor.film_id\n\n\nfilm\nfilm_category\nfilm.film_id = film_category.film_id\n\n\ncategory\nfilm_category\ncategory.category_id = film_category.category_id\n\n\naddress\ncustomer\naddress.address_id = customer.address_id\n\n\ncity\naddress\ncity.city_id = address.city_id\n\n\ncountry\ncity\ncountry.country_id = city.country_id"
+    "objectID": "a/5.html#part-a-ordinary-ctes",
+    "href": "a/5.html#part-a-ordinary-ctes",
+    "title": "ICA 5",
+    "section": "Part A: Ordinary CTEs",
+    "text": "Part A: Ordinary CTEs\n\nQuestion 1: Customers with many orders\nCreate a CTE that counts orders (order_count) for each CustomerID in Orders.\nUse the CTE in an outer query to:\n\nJoin to Customers to obtain the company name and country.\nKeep customers with at least 10 orders.\nReturn CustomerID, CompanyName, Country, and order_count.\nSort by order_count descending, then CustomerID ascending.\n\n\n\nQuestion 2: Orders above the average order value\nCreate a CTE that calculates order_total for each OrderID from \"Order Details\".\nUse it to:\n\nCalculate the average of the order totals, using a second CTE or a scalar subquery that reads the first CTE.\nReturn only orders whose totals are strictly greater than that average.\nReturn OrderID, order_total, and average_order_total.\nSort by the unrounded order total descending, then OrderID ascending."
   },
   {
-    "objectID": "a/4.html#part-a-inner-joins",
-    "href": "a/4.html#part-a-inner-joins",
-    "title": "ICA 4",
-    "section": "Part A: Inner Joins",
-    "text": "Part A: Inner Joins\n\nQuestion 1: Films and languages\nDisplay each film’s title and the name of its language. Sort the results alphabetically by film title.\nUse the film and language tables.\n\n\nQuestion 2: Customers and addresses\nDisplay each customer’s first name, last name, email address, street address, and postal code.\nUse the customer and address tables.\n\n\nQuestion 3: Films and categories\nDisplay each film title and its category name. Sort the results first by category name and then by film title.\nUse the film, film_category, and category tables.\n\n\nQuestion 4: Films and actors\nDisplay every film title along with the first and last name of each actor appearing in the film. Sort the results by film title and actor last name.\nUse the film, film_actor, and actor tables."
-  },
-  {
-    "objectID": "a/4.html#part-b-left-joins",
-    "href": "a/4.html#part-b-left-joins",
-    "title": "ICA 4",
-    "section": "Part B: Left Joins",
-    "text": "Part B: Left Joins\n\nQuestion 5: Films and inventory records\nDisplay every film title and its inventory ID. Include films that do not have an inventory record.\nUse the film and inventory tables.\n\n\nQuestion 6: Number of inventory copies\nDisplay every film’s ID, title, and number of inventory copies. Include films with zero inventory copies. Sort the films from the largest number of copies to the smallest.\nUse the film and inventory tables.\n\n\nQuestion 7: Films without inventory\nModify the previous query to display only films that have no inventory records.\nHint: After the left join, test a column from inventory for NULL."
-  },
-  {
-    "objectID": "a/4.html#part-c-right-joins",
-    "href": "a/4.html#part-c-right-joins",
-    "title": "ICA 4",
-    "section": "Part C: Right Joins",
-    "text": "Part C: Right Joins\n\nQuestion 8: Preserve all films\nBegin with inventory and use a RIGHT JOIN to display every film and any corresponding inventory records. Films without inventory must remain in the result.\nDisplay the film ID, film title, inventory ID, and store ID.\nUse film and inventory tables."
-  },
-  {
-    "objectID": "a/4.html#part-4-full-join",
-    "href": "a/4.html#part-4-full-join",
-    "title": "ICA 4",
-    "section": "Part 4: Full Join",
-    "text": "Part 4: Full Join\n\nQuestion 9: Retain all languages and films\nUse a FULL OUTER JOIN to display all languages and all films, regardless of whether a matching language-film relationship exists.\nDisplay the language ID, language name, film ID, and film title.\nUse language and film tables.\n\n\nQuestion 10: Find unmatched languages or films\nModify the query from Question 9 to retain only unmatched records: languages without films or films without a matching language."
-  },
-  {
-    "objectID": "a/4.html#part-5-multi-table-join",
-    "href": "a/4.html#part-5-multi-table-join",
-    "title": "ICA 4",
-    "section": "Part 5: Multi-table Join",
-    "text": "Part 5: Multi-table Join\n\nQuestion 11: Customer rental history\nDisplay the customer’s first and last name, film title, rental date, and return date for every rental.\nUse the customer, rental, inventory, and film tables."
-  },
-  {
-    "objectID": "a/2.html",
-    "href": "a/2.html",
-    "title": "Creating a Database",
-    "section": "",
-    "text": "Using the unnormalized data set below, create a 3NF database. At the end, submit the SQL code to create the database on canvas. Due 9/20/26.\n\n\n\n\n\n\n\n\n\n\n\ncharacter_id\ncharacter_name\ntitle\nhouse\nregion\nbattles\n\n\n\n\nC101\nJon Snow\nKing in the North\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC102\nSansa Stark\nLady of Winterfell\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC103\nArya Stark\nAssassin\nH01, House Stark\nR01, The North\nB03, Battle of Winterfell, Winterfell, Victory\n\n\nC104\nTyrion Lannister\nHand of the Queen\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B04, Battle of King’s Landing, King’s Landing, Defeat\n\n\nC105\nJaime Lannister\nKnight\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC106\nDaenerys Targaryen\nQueen\nH03, House Targaryen\nR03, Crownlands\nB03, Battle of Winterfell, Winterfell, Victory; B04, Battle of King’s Landing, King’s Landing, Victory\n\n\nC107\nBrienne of Tarth\nKnight\nH04, House Tarth\nR04, Stormlands\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory"
+    "objectID": "a/5.html#part-b-recursive-ctes",
+    "href": "a/5.html#part-b-recursive-ctes",
+    "title": "ICA 5",
+    "section": "Part B: Recursive CTEs",
+    "text": "Part B: Recursive CTEs\n\nQuestion 3: Build the organization hierarchy\nCreate a recursive CTE named employee_hierarchy.\n\nAnchor: select employees whose ReportsTo IS NULL; assign depth 0.\nRecursive member: find employees reporting to an employee already in the CTE; increase depth by 1.\nReturn EmployeeID, employee_name, ReportsTo, and depth.\nSort by depth ascending, then EmployeeID ascending.\n\nCheck: If every employee connects to a root, every employee should appear exactly once.\n\n\nQuestion 4: Find a manager’s entire team\nUse your initial inspection query to choose an employee who has at least one direct report. State the chosen employee’s name and ID in your response.\nCreate a recursive CTE named manager_team that:\n\nStarts with the chosen manager at depth 0.\nFinds all direct and indirect reports.\nBuilds a management_path beginning with the chosen manager’s name and appending each employee’s name.\n\nIn the final output, exclude the starting manager. Return EmployeeID, employee_name, depth, and management_path. Sort by depth ascending, then EmployeeID ascending."
   },
   {
     "objectID": "a/3.html",
@@ -1162,32 +966,123 @@
     "text": "Part F\n\nWrite one query that uses SELECT, WHERE, GROUP BY, HAVING, and ORDER BY.\n\nYour query must:\n\nuse only records from 2000 through 2009, inclusive;\nexclude records with missing precipitation;\ngroup the remaining records by year and month;\ncalculate total precipitation and name it total_precipitation;\nkeep only year-month groups whose total precipitation is greater than 5; and\nsort from the greatest total precipitation to the least."
   },
   {
-    "objectID": "a/5.html",
-    "href": "a/5.html",
-    "title": "ICA 5",
+    "objectID": "a/2.html",
+    "href": "a/2.html",
+    "title": "Creating a Database",
     "section": "",
-    "text": "Use the SQLite database linked from the Northwind-SQLite3 repository. The names below match that repository’s documented schema. Other Northwind versions may use different table names.\n\n\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nKey\n\n\n\n\nCustomers\nOne customer organization\nCustomerID\n\n\nOrders\nOne order placed by a customer\nOrderID\n\n\n\"Order Details\"\nOne product line within an order\nThe combination of OrderID and ProductID\n\n\nEmployees\nOne employee\nEmployeeID\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable\nColumn\nMeaning in this assignment\n\n\n\n\nCustomers\nCustomerID\nCustomer identifier\n\n\nCustomers\nCompanyName\nCustomer organization’s name\n\n\nCustomers\nCountry\nCustomer’s country\n\n\nOrders\nOrderID\nOrder identifier\n\n\nOrders\nCustomerID\nCustomer who placed the order\n\n\nOrders\nEmployeeID\nEmployee associated with the order\n\n\n\"Order Details\"\nOrderID\nOrder containing the line item\n\n\n\"Order Details\"\nProductID\nProduct on the line item\n\n\n\"Order Details\"\nUnitPrice\nSelling price per unit on that order line\n\n\n\"Order Details\"\nQuantity\nNumber of units ordered\n\n\n\"Order Details\"\nDiscount\nFraction of the line price discounted; for example, 0.10 means 10%\n\n\nEmployees\nEmployeeID\nEmployee identifier\n\n\nEmployees\nFirstName\nEmployee’s first name\n\n\nEmployees\nLastName\nEmployee’s last name\n\n\nEmployees\nReportsTo\nEmployeeID of the employee’s direct manager; NULL identifies an employee with no listed manager\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStarting column\nRelated column\nRelationship\n\n\n\n\nOrders.CustomerID\nCustomers.CustomerID\nMany orders can belong to one customer\n\n\n\"Order Details\".OrderID\nOrders.OrderID\nMany line items can belong to one order\n\n\nOrders.EmployeeID\nEmployees.EmployeeID\nMany orders can be associated with one employee\n\n\nEmployees.ReportsTo\nEmployees.EmployeeID\nMany employees can report to one manager\n\n\n\nThe last relationship is a self-reference: both columns belong to Employees."
+    "text": "Using the unnormalized data set below, create a 3NF database. At the end, submit the SQL code to create the database on canvas. Due 9/20/26.\n\n\n\n\n\n\n\n\n\n\n\ncharacter_id\ncharacter_name\ntitle\nhouse\nregion\nbattles\n\n\n\n\nC101\nJon Snow\nKing in the North\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC102\nSansa Stark\nLady of Winterfell\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC103\nArya Stark\nAssassin\nH01, House Stark\nR01, The North\nB03, Battle of Winterfell, Winterfell, Victory\n\n\nC104\nTyrion Lannister\nHand of the Queen\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B04, Battle of King’s Landing, King’s Landing, Defeat\n\n\nC105\nJaime Lannister\nKnight\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC106\nDaenerys Targaryen\nQueen\nH03, House Targaryen\nR03, Crownlands\nB03, Battle of Winterfell, Winterfell, Victory; B04, Battle of King’s Landing, King’s Landing, Victory\n\n\nC107\nBrienne of Tarth\nKnight\nH04, House Tarth\nR04, Stormlands\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory"
   },
   {
-    "objectID": "a/5.html#tables-and-variables-used",
-    "href": "a/5.html#tables-and-variables-used",
-    "title": "ICA 5",
+    "objectID": "a/4.html",
+    "href": "a/4.html",
+    "title": "ICA 4",
     "section": "",
-    "text": "Use the SQLite database linked from the Northwind-SQLite3 repository. The names below match that repository’s documented schema. Other Northwind versions may use different table names.\n\n\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nKey\n\n\n\n\nCustomers\nOne customer organization\nCustomerID\n\n\nOrders\nOne order placed by a customer\nOrderID\n\n\n\"Order Details\"\nOne product line within an order\nThe combination of OrderID and ProductID\n\n\nEmployees\nOne employee\nEmployeeID\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable\nColumn\nMeaning in this assignment\n\n\n\n\nCustomers\nCustomerID\nCustomer identifier\n\n\nCustomers\nCompanyName\nCustomer organization’s name\n\n\nCustomers\nCountry\nCustomer’s country\n\n\nOrders\nOrderID\nOrder identifier\n\n\nOrders\nCustomerID\nCustomer who placed the order\n\n\nOrders\nEmployeeID\nEmployee associated with the order\n\n\n\"Order Details\"\nOrderID\nOrder containing the line item\n\n\n\"Order Details\"\nProductID\nProduct on the line item\n\n\n\"Order Details\"\nUnitPrice\nSelling price per unit on that order line\n\n\n\"Order Details\"\nQuantity\nNumber of units ordered\n\n\n\"Order Details\"\nDiscount\nFraction of the line price discounted; for example, 0.10 means 10%\n\n\nEmployees\nEmployeeID\nEmployee identifier\n\n\nEmployees\nFirstName\nEmployee’s first name\n\n\nEmployees\nLastName\nEmployee’s last name\n\n\nEmployees\nReportsTo\nEmployeeID of the employee’s direct manager; NULL identifies an employee with no listed manager\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStarting column\nRelated column\nRelationship\n\n\n\n\nOrders.CustomerID\nCustomers.CustomerID\nMany orders can belong to one customer\n\n\n\"Order Details\".OrderID\nOrders.OrderID\nMany line items can belong to one order\n\n\nOrders.EmployeeID\nEmployees.EmployeeID\nMany orders can be associated with one employee\n\n\nEmployees.ReportsTo\nEmployees.EmployeeID\nMany employees can report to one manager\n\n\n\nThe last relationship is a self-reference: both columns belong to Employees."
+    "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
   },
   {
-    "objectID": "a/5.html#part-a-ordinary-ctes",
-    "href": "a/5.html#part-a-ordinary-ctes",
-    "title": "ICA 5",
-    "section": "Part A: Ordinary CTEs",
-    "text": "Part A: Ordinary CTEs\n\nQuestion 1: Customers with many orders\nCreate a CTE that counts orders (order_count) for each CustomerID in Orders.\nUse the CTE in an outer query to:\n\nJoin to Customers to obtain the company name and country.\nKeep customers with at least 10 orders.\nReturn CustomerID, CompanyName, Country, and order_count.\nSort by order_count descending, then CustomerID ascending.\n\n\n\nQuestion 2: Orders above the average order value\nCreate a CTE that calculates order_total for each OrderID from \"Order Details\".\nUse it to:\n\nCalculate the average of the order totals, using a second CTE or a scalar subquery that reads the first CTE.\nReturn only orders whose totals are strictly greater than that average.\nReturn OrderID, order_total, and average_order_total.\nSort by the unrounded order total descending, then OrderID ascending."
+    "objectID": "a/4.html#files-and-setup",
+    "href": "a/4.html#files-and-setup",
+    "title": "ICA 4",
+    "section": "",
+    "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
   },
   {
-    "objectID": "a/5.html#part-b-recursive-ctes",
-    "href": "a/5.html#part-b-recursive-ctes",
-    "title": "ICA 5",
-    "section": "Part B: Recursive CTEs",
-    "text": "Part B: Recursive CTEs\n\nQuestion 3: Build the organization hierarchy\nCreate a recursive CTE named employee_hierarchy.\n\nAnchor: select employees whose ReportsTo IS NULL; assign depth 0.\nRecursive member: find employees reporting to an employee already in the CTE; increase depth by 1.\nReturn EmployeeID, employee_name, ReportsTo, and depth.\nSort by depth ascending, then EmployeeID ascending.\n\nCheck: If every employee connects to a root, every employee should appear exactly once.\n\n\nQuestion 4: Find a manager’s entire team\nUse your initial inspection query to choose an employee who has at least one direct report. State the chosen employee’s name and ID in your response.\nCreate a recursive CTE named manager_team that:\n\nStarts with the chosen manager at depth 0.\nFinds all direct and indirect reports.\nBuilds a management_path beginning with the chosen manager’s name and appending each employee’s name.\n\nIn the final output, exclude the starting manager. Return EmployeeID, employee_name, depth, and management_path. Sort by depth ascending, then EmployeeID ascending."
+    "objectID": "a/4.html#selected-sakila-relationships",
+    "href": "a/4.html#selected-sakila-relationships",
+    "title": "ICA 4",
+    "section": "Selected Sakila relationships",
+    "text": "Selected Sakila relationships\n\n\n\n\n\n\n\n\nParent table\nChild table\nJoin condition\n\n\n\n\nlanguage\nfilm\nlanguage.language_id = film.language_id\n\n\nfilm\ninventory\nfilm.film_id = inventory.film_id\n\n\ncustomer\nrental\ncustomer.customer_id = rental.customer_id\n\n\ninventory\nrental\ninventory.inventory_id = rental.inventory_id\n\n\nrental\npayment\nrental.rental_id = payment.rental_id\n\n\nactor\nfilm_actor\nactor.actor_id = film_actor.actor_id\n\n\nfilm\nfilm_actor\nfilm.film_id = film_actor.film_id\n\n\nfilm\nfilm_category\nfilm.film_id = film_category.film_id\n\n\ncategory\nfilm_category\ncategory.category_id = film_category.category_id\n\n\naddress\ncustomer\naddress.address_id = customer.address_id\n\n\ncity\naddress\ncity.city_id = address.city_id\n\n\ncountry\ncity\ncountry.country_id = city.country_id"
+  },
+  {
+    "objectID": "a/4.html#part-a-inner-joins",
+    "href": "a/4.html#part-a-inner-joins",
+    "title": "ICA 4",
+    "section": "Part A: Inner Joins",
+    "text": "Part A: Inner Joins\n\nQuestion 1: Films and languages\nDisplay each film’s title and the name of its language. Sort the results alphabetically by film title.\nUse the film and language tables.\n\n\nQuestion 2: Customers and addresses\nDisplay each customer’s first name, last name, email address, street address, and postal code.\nUse the customer and address tables.\n\n\nQuestion 3: Films and categories\nDisplay each film title and its category name. Sort the results first by category name and then by film title.\nUse the film, film_category, and category tables.\n\n\nQuestion 4: Films and actors\nDisplay every film title along with the first and last name of each actor appearing in the film. Sort the results by film title and actor last name.\nUse the film, film_actor, and actor tables."
+  },
+  {
+    "objectID": "a/4.html#part-b-left-joins",
+    "href": "a/4.html#part-b-left-joins",
+    "title": "ICA 4",
+    "section": "Part B: Left Joins",
+    "text": "Part B: Left Joins\n\nQuestion 5: Films and inventory records\nDisplay every film title and its inventory ID. Include films that do not have an inventory record.\nUse the film and inventory tables.\n\n\nQuestion 6: Number of inventory copies\nDisplay every film’s ID, title, and number of inventory copies. Include films with zero inventory copies. Sort the films from the largest number of copies to the smallest.\nUse the film and inventory tables.\n\n\nQuestion 7: Films without inventory\nModify the previous query to display only films that have no inventory records.\nHint: After the left join, test a column from inventory for NULL."
+  },
+  {
+    "objectID": "a/4.html#part-c-right-joins",
+    "href": "a/4.html#part-c-right-joins",
+    "title": "ICA 4",
+    "section": "Part C: Right Joins",
+    "text": "Part C: Right Joins\n\nQuestion 8: Preserve all films\nBegin with inventory and use a RIGHT JOIN to display every film and any corresponding inventory records. Films without inventory must remain in the result.\nDisplay the film ID, film title, inventory ID, and store ID.\nUse film and inventory tables."
+  },
+  {
+    "objectID": "a/4.html#part-4-full-join",
+    "href": "a/4.html#part-4-full-join",
+    "title": "ICA 4",
+    "section": "Part 4: Full Join",
+    "text": "Part 4: Full Join\n\nQuestion 9: Retain all languages and films\nUse a FULL OUTER JOIN to display all languages and all films, regardless of whether a matching language-film relationship exists.\nDisplay the language ID, language name, film ID, and film title.\nUse language and film tables.\n\n\nQuestion 10: Find unmatched languages or films\nModify the query from Question 9 to retain only unmatched records: languages without films or films without a matching language."
+  },
+  {
+    "objectID": "a/4.html#part-5-multi-table-join",
+    "href": "a/4.html#part-5-multi-table-join",
+    "title": "ICA 4",
+    "section": "Part 5: Multi-table Join",
+    "text": "Part 5: Multi-table Join\n\nQuestion 11: Customer rental history\nDisplay the customer’s first and last name, film title, rental date, and return date for every rental.\nUse the customer, rental, inventory, and film tables."
+  },
+  {
+    "objectID": "a/6.html",
+    "href": "a/6.html",
+    "title": "ICA 6",
+    "section": "",
+    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
+  },
+  {
+    "objectID": "a/6.html#database-setup-and-reference",
+    "href": "a/6.html#database-setup-and-reference",
+    "title": "ICA 6",
+    "section": "",
+    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
+  },
+  {
+    "objectID": "a/6.html#tables-and-columns-used",
+    "href": "a/6.html#tables-and-columns-used",
+    "title": "ICA 6",
+    "section": "Tables and columns used",
+    "text": "Tables and columns used\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nRelevant columns\n\n\n\n\nProducts\nOne product\nProductID: identifier; ProductName: name; CategoryID: category; UnitPrice: catalog price\n\n\nCategories\nOne product category\nCategoryID: identifier; CategoryName: category label\n\n\nOrders\nOne customer order\nOrderID: identifier; CustomerID: customer code; OrderDate: order date/time; Freight: order shipping charge\n\n\n\"Order Details\"\nOne product line within an order\nOrderID, ProductID: identify the line; UnitPrice: price on that order; Quantity: units ordered; Discount: fractional discount\n\n\n\nRelationships:\nProducts.CategoryID joins to Categories.CategoryID\nOrders.OrderID joins to \"Order Details\".OrderID.\nRevenue definition: For this assignment, revenue is merchandise sales after discounts, excluding freight and taxes:\nUnitPrice * Quantity * (1 - Discount)\nA discount of 0.10 means 10%. Retain precision during calculations and round monetary output to two decimal places."
+  },
+  {
+    "objectID": "a/6.html#problem-1-compare-products-within-categories",
+    "href": "a/6.html#problem-1-compare-products-within-categories",
+    "title": "ICA 6",
+    "section": "Problem 1: Compare products within categories",
+    "text": "Problem 1: Compare products within categories\nHow does each product’s catalog price compare with the average price in its category?\n\nJoin Products to Categories and retain one row per eligible product.\nReturn ProductID, ProductName, CategoryID, CategoryName, and UnitPrice.\nAdd category_avg_price using a window average partitioned by category.\nAdd price_difference: product price minus its category’s average price. Round both calculated columns to two decimals.\nOrder results by CategoryID, then ProductID."
+  },
+  {
+    "objectID": "a/6.html#problem-2-rank-products-and-investigate-ties",
+    "href": "a/6.html#problem-2-rank-products-and-investigate-ties",
+    "title": "ICA 6",
+    "section": "Problem 2: Rank products and investigate ties",
+    "text": "Problem 2: Rank products and investigate ties\nWhich products are the most expensive within each category?\n\nPart A: Compare rankings\nReturn ProductID, ProductName, CategoryID, and UnitPrice, plus:\n\nprice_row_number: ROW_NUMBER() ordered by price descending, then ProductID ascending, within category.\nprice_rank: RANK() ordered by price descending within category.\nprice_dense_rank: DENSE_RANK() ordered by price descending within category.\n\nOrder by CategoryID, descending UnitPrice, then ProductID.\n\n\nPart B: Select leading price levels\nPut the ranked result in a CTE. Return products in the two highest distinct price levels per category, keeping every tie. Display the three ranking columns too."
+  },
+  {
+    "objectID": "a/6.html#problem-3-compare-orders-with-lag",
+    "href": "a/6.html#problem-3-compare-orders-with-lag",
+    "title": "ICA 6",
+    "section": "Problem 3: Compare orders with LAG",
+    "text": "Problem 3: Compare orders with LAG\nHow does each order’s freight charge compare with the preceding eligible order from the same customer?\n\nUse all eligible orders, excluding missing freight charges.\nReturn CustomerID, OrderID, OrderDate, and Freight.\nAdd previous_freight using LAG(Freight) within each customer, ordered by OrderDate, OrderID.\nAdd freight_change: current freight minus previous freight, rounded to two decimals. Use a CTE to reuse previous_freight.\nOrder by CustomerID, OrderDate, then OrderID."
+  },
+  {
+    "objectID": "a/6.html#problem-4-find-the-next-order-with-lead",
+    "href": "a/6.html#problem-4-find-the-next-order-with-lead",
+    "title": "ICA 6",
+    "section": "Problem 4: Find the next order with LEAD",
+    "text": "Problem 4: Find the next order with LEAD\nHow long does each customer wait until their next order?\n\nReturn CustomerID, OrderID, and OrderDate for all eligible orders.\nAdd next_order_date from the next order for the same customer, ordered by OrderDate, OrderID.\nIn an outer query, calculate days_until_next, rounded to two decimals.\nKeep each customer’s final order. Order by CustomerID, OrderDate, then OrderID.\n\nSQLite date helper: JULIANDAY(later_date) - JULIANDAY(earlier_date) gives elapsed days, potentially including fractions."
+  },
+  {
+    "objectID": "a/6.html#probelm-5-track-revenue-through-time",
+    "href": "a/6.html#probelm-5-track-revenue-through-time",
+    "title": "ICA 6",
+    "section": "Probelm 5: Track revenue through time",
+    "text": "Probelm 5: Track revenue through time\nHow are cumulative sales and recent daily sales changing?\nUse UnitPrice from \"Order Details\" for historical sales, rather than the catalog price in Products. Use this supplied CTE to obtain one row per observed order date. Replace the final SELECT with your window calculations.\nWITH daily_sales AS (\n    SELECT DATE(o.OrderDate) AS order_day,\n           SUM(d.UnitPrice * d.Quantity * (1.0 - d.Discount))\n               AS daily_revenue\n    FROM Orders AS o\n    JOIN \"Order Details\" AS d ON o.OrderID = d.OrderID\n    WHERE o.OrderDate IS NOT NULL\n    GROUP BY DATE(o.OrderDate)\n)\n\nReturn order_day and daily_revenue.\nAdd running_revenue using SUM() from the first daily row through the current row. Write the frame explicitly.\nAdd moving_avg_3_rows using AVG() over the current row and up to two preceding rows.\nRound all three monetary columns to two decimals. Display dates ascending."
   },
   {
     "objectID": "index.html",
@@ -2114,333 +2009,368 @@
     "text": "Activity 2C\n\n1WITH RECURSIVE descendants AS (\n2    SELECT EmployeeId, 0 AS depth\n    FROM Employee\n3    WHERE EmployeeId = 1\n4    UNION ALL\n5    SELECT e.EmployeeId, d.depth + 1\n    FROM Employee AS e\n6    JOIN descendants AS d ON e.ReportsTo = d.EmployeeId\n)\n7SELECT depth, COUNT(*) AS descendant_count\nFROM descendants\n8WHERE depth &gt; 0\n9GROUP BY depth\n10ORDER BY depth;\n\n1\n\nDefine a recursive CTE named descendants.\n\n2\n\nSelect the starting employee and assign depth 0.\n\n3\n\nChoose Andrew Adams as the starting employee.\n\n4\n\nCombine the anchor row with rows generated by the recursive query.\n\n5\n\nSelect each newly found employee and assign their manager’s depth plus one.\n\n6\n\nMove downward through the hierarchy by finding employees who report to the current person.\n\n7\n\nDisplay each depth and count the descendants at that depth.\n\n8\n\nExclude Andrew, whose depth is 0.\n\n9\n\nGroup the remaining employees by depth so each level has its own count.\n\n10\n\nSort by depth in ascending order."
   },
   {
-    "objectID": "posts/1.html",
-    "href": "posts/1.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "objectID": "lectures/9a.html#databases-and-downloads",
+    "href": "lectures/9a.html#databases-and-downloads",
+    "title": "Advanced SQL",
+    "section": "Databases and downloads",
+    "text": "Databases and downloads\n\n\n\nDatabase\nDownload\nTables used\n\n\n\n\nChinook\nChinook releases\nInvoice\n\n\nNorthwind\nnorthwind.db\nProducts, Categories, Orders, \"Order Details\"\n\n\n\n\nSources: https://github.com/lerocha/chinook-database and https://github.com/jpwhite3/northwind-SQLite3"
   },
   {
-    "objectID": "posts/1.html#resources",
-    "href": "posts/1.html#resources",
-    "title": "Week 1",
-    "section": "",
-    "text": "Lecture\nSlides\nVideos\n\n\n\n\n1\nSlides\nNA\n\n\n2\nSlides\nNA"
+    "objectID": "lectures/9a.html#long-and-wide-layouts",
+    "href": "lectures/9a.html#long-and-wide-layouts",
+    "title": "Advanced SQL",
+    "section": "Long and wide layouts",
+    "text": "Long and wide layouts\nIllustrative sales totals, not Chinook output\n\n\nLong: one row per country and month\n\n\n\ncountry\nmonth\nsales\n\n\n\n\nCanada\nJan\n30\n\n\nCanada\nFeb\n20\n\n\nUSA\nJan\n50\n\n\nUSA\nFeb\n40\n\n\n\n\nWide: one row per country\n\n\n\ncountry\nJan\nFeb\n\n\n\n\nCanada\n30\n20\n\n\nUSA\n50\n40\n\n\n\nPivot: category values become columns.\nUnpivot: columns become category/value rows."
   },
   {
-    "objectID": "posts/3.html",
-    "href": "posts/3.html",
-    "title": "Week 3",
+    "objectID": "lectures/9a.html#the-three-decisions-in-a-pivot",
+    "href": "lectures/9a.html#the-three-decisions-in-a-pivot",
+    "title": "Advanced SQL",
+    "section": "The three decisions in a pivot",
+    "text": "The three decisions in a pivot\nFor a report of monthly sales by country:\n\n\n\n\n\n\n\n\nDecision\nExample\nSQL role\n\n\n\n\nWhat identifies a row?\nCountry and year\nGROUP BY\n\n\nWhich categories become columns?\nJanuary, February, March\nCASE WHEN conditions\n\n\nWhat fills each cell?\nTotal sales\nSUM(Total)\n\n\n\nThe grain describes what one row represents. Adding year to the row keys keeps January in different years separate."
+  },
+  {
+    "objectID": "lectures/9a.html#pivot-and-unpivot-in-sqlite",
+    "href": "lectures/9a.html#pivot-and-unpivot-in-sqlite",
+    "title": "Advanced SQL",
+    "section": "Pivot and unpivot in SQLite",
+    "text": "Pivot and unpivot in SQLite\nSQLite has no built-in PIVOT or UNPIVOT operators.\n\n\n\nTransformation\nSQLite approach\n\n\n\n\nPivot\nGROUP BY with SUM(CASE WHEN ... END)\n\n\nPivot, alternative\nAn aggregate with FILTER (WHERE ...)\n\n\nUnpivot\nOne SELECT per source column, combined with UNION ALL\n\n\n\nA pivot query has a fixed set of output columns. New category values do not automatically create new columns.\n\nSources: https://sqlite.org/lang_select.html and https://sqlite.org/lang_aggfunc.html"
+  },
+  {
+    "objectID": "lectures/9a.html#activity-1-plan-the-transformation",
+    "href": "lectures/9a.html#activity-1-plan-the-transformation",
+    "title": "Advanced SQL",
+    "section": "Activity 1: plan the transformation",
+    "text": "Activity 1: plan the transformation\nPairs · 5 minutes · No SQL required\nUse the illustrative sales table from earlier.\n\nIdentify the row key, column category, and value column for a country-by-month pivot.\nSuppose Canada has a second January sale of 10 before aggregation. What should the January total become?\nWhat columns would an unpivoted result contain?\nCould unpivoting the totals recover the separate sales of 30 and 10? Explain.\n\nDeliverable: a wide table and four short answers."
+  },
+  {
+    "objectID": "lectures/9a.html#chinook-invoices-as-the-starting-point",
+    "href": "lectures/9a.html#chinook-invoices-as-the-starting-point",
+    "title": "Advanced SQL",
+    "section": "Chinook: invoices as the starting point",
+    "text": "Chinook: invoices as the starting point\n\n\n\nField\nMeaning in this lesson\n\n\n\n\nInvoiceId\nIdentifies one invoice\n\n\nInvoiceDate\nDate and time of the invoice\n\n\nBillingCountry\nCountry on the invoice\n\n\nTotal\nTotal invoice amount\n\n\n\nThe starting grain is one row per invoice.\nWe will summarize to one row per billing country and year. We do not need a join for this report.\n\nSchema: https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sql"
+  },
+  {
+    "objectID": "lectures/9a.html#chinook-inspecting-invoice-dates",
+    "href": "lectures/9a.html#chinook-inspecting-invoice-dates",
+    "title": "Advanced SQL",
+    "section": "Chinook: inspecting invoice dates",
+    "text": "Chinook: inspecting invoice dates\nDatabase: Chinook\nSELECT MIN(InvoiceDate) AS first_invoice,\n       MAX(InvoiceDate) AS last_invoice\n1FROM Invoice;\n\nSELECT InvoiceId, BillingCountry, InvoiceDate,\n2       strftime('%Y', InvoiceDate) AS sales_year,\n       strftime('%m', InvoiceDate) AS sales_month,\n       Total\nFROM Invoice\nORDER BY InvoiceDate, InvoiceId\n3LIMIT 6;\n\n1\n\nCheck the actual date range. Chinook releases may use different years.\n\n2\n\nExtract year and month as text. Compare months with '01', '02', and so on.\n\n3\n\nPreview six invoices with deterministic ordering."
+  },
+  {
+    "objectID": "lectures/9a.html#chinook-a-long-monthly-summary",
+    "href": "lectures/9a.html#chinook-a-long-monthly-summary",
+    "title": "Advanced SQL",
+    "section": "Chinook: a long monthly summary",
+    "text": "Chinook: a long monthly summary\nDatabase: Chinook\nSELECT BillingCountry,\n       strftime('%Y', InvoiceDate) AS sales_year,\n1       strftime('%m', InvoiceDate) AS sales_month,\n2       ROUND(SUM(Total), 2) AS sales\nFROM Invoice\nWHERE strftime('%m', InvoiceDate) IN ('01', '02', '03')\n3GROUP BY BillingCountry, sales_year, sales_month\nORDER BY BillingCountry, sales_year, sales_month;\n\n1\n\nExtract the time categories before grouping.\n\n2\n\nAdd invoice totals, then round the displayed result.\n\n3\n\nEach result row represents an observed country/year/month combination in January–March."
+  },
+  {
+    "objectID": "lectures/9a.html#chinook-how-case-selects-values",
+    "href": "lectures/9a.html#chinook-how-case-selects-values",
+    "title": "Advanced SQL",
+    "section": "Chinook: how CASE selects values",
+    "text": "Chinook: how CASE selects values\nDatabase: Chinook\nSELECT InvoiceId, InvoiceDate, Total,\n       CASE\n         WHEN strftime('%m', InvoiceDate) = '01'\n1         THEN Total\n2         ELSE 0\n       END AS january_contribution\nFROM Invoice\nORDER BY InvoiceDate, InvoiceId\n3LIMIT 10;\n\n1\n\nA January invoice contributes its total.\n\n2\n\nEvery other invoice contributes zero to the January sum.\n\n3\n\nCASE by itself still returns invoice-level rows. Aggregation performs the next step."
+  },
+  {
+    "objectID": "lectures/9a.html#chinook-the-first-pivot",
+    "href": "lectures/9a.html#chinook-the-first-pivot",
+    "title": "Advanced SQL",
+    "section": "Chinook: the first pivot",
+    "text": "Chinook: the first pivot\nDatabase: Chinook\nSELECT BillingCountry,\n1       strftime('%Y', InvoiceDate) AS sales_year,\n       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'\n2                      THEN Total ELSE 0 END), 2) AS Jan,\n       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '02'\n                      THEN Total ELSE 0 END), 2) AS Feb,\n       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '03'\n                      THEN Total ELSE 0 END), 2) AS Mar\nFROM Invoice\n3GROUP BY BillingCountry, sales_year\nORDER BY BillingCountry, sales_year;\n\n1\n\nKeep country and year as the row keys.\n\n2\n\nEach conditional sum fills one month column.\n\n3\n\nCombine invoices into one row for each observed country/year pair.\n\n\nAll invoices remain in the input, so a country/year with only later sales still appears with three zeros."
+  },
+  {
+    "objectID": "lectures/9a.html#reading-a-pivot-result",
+    "href": "lectures/9a.html#reading-a-pivot-result",
+    "title": "Advanced SQL",
+    "section": "Reading a pivot result",
+    "text": "Reading a pivot result\n\n\n\nBillingCountry\nsales_year\nJan\nFeb\nMar\n\n\n\n\nCanada\n2025\n30\n20\n0\n\n\n\nIllustrative row, not actual Chinook output.\n\nJan = 30 represents the sum of January invoice totals.\nThe columns contain amounts, not invoice counts.\nMar = 0 can mean no March invoices under our zero-filling rule.\nA country/year with no invoices at all will not appear.\n\nTo include entirely absent groups, start with a complete list of desired row keys and use a LEFT JOIN."
+  },
+  {
+    "objectID": "lectures/9a.html#chinook-counting-instead-of-summing-sales",
+    "href": "lectures/9a.html#chinook-counting-instead-of-summing-sales",
+    "title": "Advanced SQL",
+    "section": "Chinook: counting instead of summing sales",
+    "text": "Chinook: counting instead of summing sales\nDatabase: Chinook\nSELECT strftime('%Y', InvoiceDate) AS sales_year,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'\n1                THEN 1 ELSE 0 END) AS Jan_invoices,\n       COUNT(CASE WHEN strftime('%m', InvoiceDate) = '02'\n2                  THEN 1 END) AS Feb_invoices\nFROM Invoice\nGROUP BY sales_year\nORDER BY sales_year;\n\n1\n\nSum one for each matching invoice and zero for each nonmatch.\n\n2\n\nCOUNT(expression) counts non-NULL values. Without ELSE, nonmatches produce NULL.\n\n\nPitfall: COUNT(CASE WHEN ... THEN 1 ELSE 0 END) counts both ones and zeros."
+  },
+  {
+    "objectID": "lectures/9a.html#chinook-the-filter-alternative",
+    "href": "lectures/9a.html#chinook-the-filter-alternative",
+    "title": "Advanced SQL",
+    "section": "Chinook: the FILTER alternative",
+    "text": "Chinook: the FILTER alternative\nDatabase: Chinook\nSELECT BillingCountry,\n       strftime('%Y', InvoiceDate) AS sales_year,\n       ROUND(COALESCE(SUM(Total) FILTER (\n         WHERE strftime('%m', InvoiceDate) = '01'\n1       ), 0), 2) AS Jan,\n       ROUND(COALESCE(SUM(Total) FILTER (\n         WHERE strftime('%m', InvoiceDate) = '02'\n2       ), 0), 2) AS Feb\nFROM Invoice\nGROUP BY BillingCountry, sales_year\nORDER BY BillingCountry, sales_year;\n\n1\n\nFILTER restricts the input to this aggregate without removing the group.\n\n2\n\nSUM returns NULL when it has no non-NULL inputs. COALESCE(..., 0) supplies zero.\n\n\nOptional syntax: SQLite 3.30.0+. The CASE approach remains the main method for this lecture."
+  },
+  {
+    "objectID": "lectures/9a.html#zero-null-and-absent-groups",
+    "href": "lectures/9a.html#zero-null-and-absent-groups",
+    "title": "Advanced SQL",
+    "section": "Zero, NULL, and absent groups",
+    "text": "Zero, NULL, and absent groups\n\n\n\n\n\n\n\n\nSituation\nMeaning\nTreatment\n\n\n\n\nKnown value of zero\nMeasured amount is zero\nKeep zero\n\n\nMissing or unknown measurement\nValue is unknown\nUsually keep NULL\n\n\nNo transactions for a displayed cell\nNo matching invoices\nZero may suit a sales report\n\n\nNo source rows for a row key\nGroup is absent\nBuild a complete group list if needed\n\n\n\nELSE 0 and COALESCE are reporting choices. They do not prove that missing information is a measured zero.\nFor a conditional average, use AVG(CASE WHEN ... THEN Total END). Adding ELSE 0 would include nonmatches in the denominator."
+  },
+  {
+    "objectID": "lectures/9a.html#activity-2-chinook-invoice-counts",
+    "href": "lectures/9a.html#activity-2-chinook-invoice-counts",
+    "title": "Advanced SQL",
+    "section": "Activity 2: Chinook invoice counts",
+    "text": "Activity 2: Chinook invoice counts\nIndividual or pairs · 10 minutes · Database: Chinook\nBuild a pivot with one row per invoice year.\n\nCreate columns Apr_invoices, May_invoices, and Jun_invoices.\nCount invoices, rather than summing Total.\nAdd Q2_invoices, covering April through June.\nSort by year and check that the three month columns add to Q2_invoices.\nExplain why grouping only by month would answer a different question.\n\nDeliverable: SQL, its output, and your explanation. Use all available invoice years."
+  },
+  {
+    "objectID": "lectures/9a.html#chinook-a-reusable-q1-pivot",
+    "href": "lectures/9a.html#chinook-a-reusable-q1-pivot",
+    "title": "Advanced SQL",
+    "section": "Chinook: a reusable Q1 pivot",
+    "text": "Chinook: a reusable Q1 pivot\nDatabase: Chinook\nDROP VIEW IF EXISTS temp.lecture_q1_sales;\n1CREATE TEMP VIEW lecture_q1_sales AS\nSELECT BillingCountry,\n       strftime('%Y', InvoiceDate) AS sales_year,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'\n                THEN Total ELSE 0 END) AS Jan,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '02'\n                THEN Total ELSE 0 END) AS Feb,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '03'\n2                THEN Total ELSE 0 END) AS Mar\nFROM Invoice\n3GROUP BY BillingCountry, sales_year;\n\n1\n\nCreate a temporary named query, replacing only this lesson’s temporary view on reruns.\n\n2\n\nKeep unrounded amounts for later calculations. Round the final display.\n\n3\n\nThe view has one row per observed country/year pair. It lasts for the current connection.\n\n\nRun the entire block. This view is required for Activity 4."
+  },
+  {
+    "objectID": "lectures/9a.html#northwind-inventory-in-a-wide-table",
+    "href": "lectures/9a.html#northwind-inventory-in-a-wide-table",
+    "title": "Advanced SQL",
+    "section": "Northwind: inventory in a wide table",
+    "text": "Northwind: inventory in a wide table\nDatabase: Northwind\n\n\n\nField in Products\nMeaning\n\n\n\n\nProductID\nStable product identifier\n\n\nProductName\nProduct label\n\n\nUnitsInStock\nUnits currently in inventory\n\n\nUnitsOnOrder\nUnits ordered from suppliers\n\n\nReorderLevel\nInventory threshold for reordering\n\n\n\nWe will convert the stock and order columns into rows.\nA reorder threshold is a different kind of quantity. Do not add it to stock and orders as if it were inventory.\n\nSchema: https://github.com/jpwhite3/northwind-SQLite3"
+  },
+  {
+    "objectID": "lectures/9a.html#northwind-inspecting-the-source",
+    "href": "lectures/9a.html#northwind-inspecting-the-source",
+    "title": "Advanced SQL",
+    "section": "Northwind: inspecting the source",
+    "text": "Northwind: inspecting the source\nDatabase: Northwind\nSELECT ProductID, ProductName,\n1       UnitsInStock, UnitsOnOrder, ReorderLevel\nFROM Products\nORDER BY ProductID\n2LIMIT 5;\n\n1\n\nRead the measures currently stored in separate columns.\n\n2\n\nInspect a small sample. One source row represents one product."
+  },
+  {
+    "objectID": "lectures/9a.html#unpivot-a-worked-table",
+    "href": "lectures/9a.html#unpivot-a-worked-table",
+    "title": "Advanced SQL",
+    "section": "Unpivot: a worked table",
+    "text": "Unpivot: a worked table\nIllustrative inventory, not Northwind output\n\n\n\nProductID\nProductName\nUnitsInStock\nUnitsOnOrder\n\n\n\n\n101\nTea\n12\n5\n\n\n102\nCoffee\n0\n8\n\n\n\nAfter unpivoting:\n\n\n\nProductID\nProductName\ninventory_status\nunits\n\n\n\n\n101\nTea\nIn stock\n12\n\n\n101\nTea\nOn order\n5\n\n\n102\nCoffee\nIn stock\n0\n\n\n102\nCoffee\nOn order\n8\n\n\n\nThe new grain is one row per product and inventory status."
+  },
+  {
+    "objectID": "lectures/9a.html#northwind-unpivot-with-union-all",
+    "href": "lectures/9a.html#northwind-unpivot-with-union-all",
+    "title": "Advanced SQL",
+    "section": "Northwind: unpivot with UNION ALL",
+    "text": "Northwind: unpivot with UNION ALL\nDatabase: Northwind\nSELECT ProductID, ProductName,\n1       'In stock' AS inventory_status,\n       UnitsInStock AS units\nFROM Products\n2UNION ALL\nSELECT ProductID, ProductName,\n       'On order' AS inventory_status,\n3       UnitsOnOrder AS units\nFROM Products\n4ORDER BY ProductID, inventory_status;\n\n1\n\nConvert the original column meaning into a text value.\n\n2\n\nStack both result sets and preserve every generated row.\n\n3\n\nUse the same column order and compatible types in both branches.\n\n4\n\nSort the complete combined result. Keep the product ID in both branches."
+  },
+  {
+    "objectID": "lectures/9a.html#union-all-and-missing-values",
+    "href": "lectures/9a.html#union-all-and-missing-values",
+    "title": "Advanced SQL",
+    "section": "UNION ALL and missing values",
+    "text": "UNION ALL and missing values\n\nEvery branch must return the same number of columns in the same logical order.\nThe first SELECT determines the output column names.\nUNION ALL retains all generated rows. UNION removes exact duplicates.\nThis unpivot keeps zero values and NULL values.\nWith two branches and no filters, N products produce 2N rows.\n\nPreserve ProductID. Different products can share a name.\n\nSource: https://sqlite.org/lang_select.html, compound SELECT statements."
+  },
+  {
+    "objectID": "lectures/9a.html#northwind-a-reusable-long-inventory-view",
+    "href": "lectures/9a.html#northwind-a-reusable-long-inventory-view",
+    "title": "Advanced SQL",
+    "section": "Northwind: a reusable long inventory view",
+    "text": "Northwind: a reusable long inventory view\nDatabase: Northwind\nDROP VIEW IF EXISTS temp.lecture_inventory_long;\n1CREATE TEMP VIEW lecture_inventory_long AS\nSELECT ProductID, ProductName,\n       'In stock' AS inventory_status, UnitsInStock AS units\nFROM Products\nUNION ALL\nSELECT ProductID, ProductName,\n       'On order' AS inventory_status, UnitsOnOrder AS units\n2FROM Products;\n\n1\n\nSave the unpivot query as a temporary view.\n\n2\n\nThe view keeps one row for every product/status pair, including NULL and zero values."
+  },
+  {
+    "objectID": "lectures/9a.html#northwind-filtering-the-long-result",
+    "href": "lectures/9a.html#northwind-filtering-the-long-result",
+    "title": "Advanced SQL",
+    "section": "Northwind: filtering the long result",
+    "text": "Northwind: filtering the long result\nDatabase: Northwind\nSELECT ProductID, ProductName, inventory_status, units\nFROM lecture_inventory_long\n1WHERE units IS NOT NULL\nORDER BY ProductID, inventory_status;\n\nSELECT inventory_status, SUM(units) AS total_units,\n       COUNT(*) AS rows_present,\n2       COUNT(units) AS known_values\nFROM lecture_inventory_long\nGROUP BY inventory_status;\n\n1\n\nFilter the outer query to drop unknown measurements from both branches. Zero remains.\n\n2\n\nCOUNT(*) counts rows while COUNT(units) counts known values. SUM ignores NULL inputs.\n\n\nPrerequisite: run the temporary-view block on the previous slide in this connection."
+  },
+  {
+    "objectID": "lectures/9a.html#northwind-pivoting-inventory-back",
+    "href": "lectures/9a.html#northwind-pivoting-inventory-back",
+    "title": "Advanced SQL",
+    "section": "Northwind: pivoting inventory back",
+    "text": "Northwind: pivoting inventory back\nDatabase: Northwind\nSELECT ProductID, ProductName,\n       MAX(CASE WHEN inventory_status = 'In stock'\n1                THEN units END) AS UnitsInStock,\n       MAX(CASE WHEN inventory_status = 'On order'\n                THEN units END) AS UnitsOnOrder\nFROM lecture_inventory_long\n2GROUP BY ProductID, ProductName\nORDER BY ProductID;\n\n1\n\nWith exactly one value per product/status, MAX retrieves that value. Missing values stay NULL.\n\n2\n\nGroup by the product identifier and its label to restore one row per product.\n\n\nMAX is appropriate here because each product/status pair is unique. Check uniqueness before using it to reshape other data."
+  },
+  {
+    "objectID": "lectures/9a.html#activity-3-three-northwind-measures",
+    "href": "lectures/9a.html#activity-3-three-northwind-measures",
+    "title": "Advanced SQL",
+    "section": "Activity 3: three Northwind measures",
+    "text": "Activity 3: three Northwind measures\nPairs · 10 minutes · Database: Northwind\nUnpivot UnitsInStock, UnitsOnOrder, and ReorderLevel.\n\nReturn ProductID, ProductName, measure, and value.\nLabel the measures In stock, On order, and Reorder level.\nKeep every product and preserve zeros and NULLs.\nPredict the row count as a multiple of the product count.\nReturn a second result containing only positive On order values.\n\nDeliverable: both SQL queries and a sentence explaining why you should not add the three measures together."
+  },
+  {
+    "objectID": "lectures/9a.html#what-a-round-trip-can-recover",
+    "href": "lectures/9a.html#what-a-round-trip-can-recover",
+    "title": "Advanced SQL",
+    "section": "What a round trip can recover",
+    "text": "What a round trip can recover\n\n\n\n\n\n\n\n\nStarting data\nPivot behavior\nWhat unpivoting recovers\n\n\n\n\nOne value per product/status\nRetrieves each value\nOriginal values, if keys and NULLs are preserved\n\n\nMany invoices per country/month\nAdds invoice totals\nMonthly totals only\n\n\nMissing category replaced with zero\nFills a missing cell\nZero, without its original missingness\n\n\n\nAggregation discards information. A total of 40 does not reveal whether the original invoices were 30 + 10, 20 + 20, or one invoice of 40."
+  },
+  {
+    "objectID": "lectures/9a.html#activity-4-chinook-pivot-and-unpivot",
+    "href": "lectures/9a.html#activity-4-chinook-pivot-and-unpivot",
+    "title": "Advanced SQL",
+    "section": "Activity 4: Chinook pivot and unpivot",
+    "text": "Activity 4: Chinook pivot and unpivot\nPairs · 12 minutes · Database: Chinook\nFirst run the earlier reusable Q1 pivot block to create lecture_q1_sales.\n\nUnpivot its Jan, Feb, and Mar columns.\nReturn BillingCountry, sales_year, sales_month, and sales.\nUse month labels '01', '02', and '03'. Preserve zeros.\nSort by country, year, and month.\nCheck that total long sales equals the original January–March invoice total, rounded to two decimals.\nExplain why the long result need not have the same row count as the earlier long monthly summary.\n\nDeliverable: an unpivot query, a totals check, and your explanation."
+  },
+  {
+    "objectID": "lectures/9a.html#northwind-extension-revenue-across-countries",
+    "href": "lectures/9a.html#northwind-extension-revenue-across-countries",
+    "title": "Advanced SQL",
+    "section": "Northwind extension: revenue across countries",
+    "text": "Northwind extension: revenue across countries\nThe extension combines joins with a pivot.\n\n\n\n\n\n\n\nTable\nFields needed\n\n\n\n\nOrders\nOrderID, ShipCountry\n\n\n\"Order Details\"\nOrderID, ProductID, UnitPrice, Quantity, Discount\n\n\nProducts\nProductID, CategoryID\n\n\nCategories\nCategoryID, CategoryName\n\n\n\nLine revenue = UnitPrice × Quantity × (1 − Discount)\nUse the order-line price. Products.UnitPrice describes the catalog price and may differ. Discount is a fraction, such as 0.10 for 10%."
+  },
+  {
+    "objectID": "lectures/9a.html#activity-5-northwind-revenue-pivot",
+    "href": "lectures/9a.html#activity-5-northwind-revenue-pivot",
+    "title": "Advanced SQL",
+    "section": "Activity 5: Northwind revenue pivot",
+    "text": "Activity 5: Northwind revenue pivot\nOptional extension · 15 minutes · Database: Northwind\n\nJoin orders to order details, products, and categories.\nCalculate discounted revenue at the order-line grain.\nPivot to one row per category, with columns USA, Germany, and Other based on ShipCountry.\nTreat every remaining country, including NULL, as Other for this exercise.\nAdd total_revenue and round displayed amounts to two decimals.\nExplain why adding order-level freight after this join could overcount it.\n\nDeliverable: a CTE plus pivot query and your explanation. Include categories represented by the joined order lines."
+  },
+  {
+    "objectID": "lectures/9a.html#common-mistakes",
+    "href": "lectures/9a.html#common-mistakes",
+    "title": "Advanced SQL",
+    "section": "Common mistakes",
+    "text": "Common mistakes\n\n\n\n\n\n\n\n\nMistake\nResult\nCorrection\n\n\n\n\nGrouping by month while creating month columns\nSeparate rows for months\nGroup by the intended row keys\n\n\nOmitting year unintentionally\nSame months across years combine\nKeep year among the keys\n\n\nCOUNT(CASE ... ELSE 0 END)\nNonmatches count too\nUse SUM of 1/0 or omit ELSE\n\n\nDropping product identifiers\nDifferent products may combine\nRetain ProductID\n\n\nSumming order totals after joining lines\nRepeated amounts inflate totals\nAggregate at the correct grain\n\n\nSumming already-rounded cells\nSmall discrepancies\nRound after the final sum"
+  },
+  {
+    "objectID": "lectures/9a.html#glossary-reshaping",
+    "href": "lectures/9a.html#glossary-reshaping",
+    "title": "Advanced SQL",
+    "section": "Glossary: reshaping",
+    "text": "Glossary: reshaping\n\n\n\n\n\n\n\nTerm\nMeaning\n\n\n\n\nGrain\nWhat one result row represents\n\n\nLong format\nCategories appear as values in rows\n\n\nWide format\nSelected categories appear as separate columns\n\n\nPivot\nReshapes category values into columns, often aggregating\n\n\nUnpivot\nReshapes selected columns into category/value rows\n\n\nConditional aggregation\nApplies an aggregate to values selected by a condition\n\n\nRow key\nColumn or set of columns that identifies a result row"
+  },
+  {
+    "objectID": "lectures/9a.html#glossary-sql-expressions",
+    "href": "lectures/9a.html#glossary-sql-expressions",
+    "title": "Advanced SQL",
+    "section": "Glossary: SQL expressions",
+    "text": "Glossary: SQL expressions\n\n\n\n\n\n\n\nExpression\nRole in this lecture\n\n\n\n\nCASE WHEN ... THEN ... ELSE ... END\nChooses each row’s contribution\n\n\nSUM, COUNT, MAX, AVG\nSummarize selected values\n\n\nFILTER (WHERE ...)\nRestricts input to one aggregate\n\n\nstrftime('%Y', date)\nExtracts a year as text\n\n\nstrftime('%m', date)\nExtracts a two-digit month as text\n\n\nCOALESCE(x, 0)\nReplaces NULL with zero\n\n\nROUND(x, 2)\nRounds a result to two decimal places"
+  },
+  {
+    "objectID": "lectures/9a.html#glossary-query-structure",
+    "href": "lectures/9a.html#glossary-query-structure",
+    "title": "Advanced SQL",
+    "section": "Glossary: query structure",
+    "text": "Glossary: query structure\n\n\n\nCommand\nRole in this lecture\n\n\n\n\nSELECT ... FROM ...\nChooses expressions and their source\n\n\nWHERE\nFilters source rows\n\n\nGROUP BY\nDefines aggregation groups\n\n\nORDER BY, LIMIT\nSorts and restricts returned rows\n\n\nUNION ALL\nStacks rows without removing duplicates\n\n\nWITH ... AS (...)\nNames a query for one statement\n\n\nCREATE TEMP VIEW\nNames a query for the current connection\n\n\nJOIN ... ON ...\nCombines matching rows from related tables"
+  },
+  {
+    "objectID": "lectures/9a.html#sources-and-further-reading",
+    "href": "lectures/9a.html#sources-and-further-reading",
+    "title": "Advanced SQL",
+    "section": "Sources and further reading",
+    "text": "Sources and further reading\n\nChinook database and SQLite downloads\nNorthwind SQLite database and schema\nSQLite SELECT and compound queries\nSQLite aggregate functions and FILTER\nSQLite CASE expressions\nSQLite date and time functions\nSQLite CREATE VIEW\nQuarto code annotations\n\nAll remaining slides contain activity solutions."
+  },
+  {
+    "objectID": "lectures/9a.html#activity-solutions",
+    "href": "lectures/9a.html#activity-solutions",
+    "title": "Advanced SQL",
+    "section": "Activity solutions",
+    "text": "Activity solutions\nThe following slides contain complete answers to Activities 1–5.\nRun each answer in its named database connection.\nActivity 4 depends on lecture_q1_sales, created in the lecture. Activity 5’s second block depends on its first block’s temporary view."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-1-planning-the-transformation",
+    "href": "lectures/9a.html#solution-1-planning-the-transformation",
+    "title": "Advanced SQL",
+    "section": "Solution 1: planning the transformation",
+    "text": "Solution 1: planning the transformation\n\nRow key: country. Column category: month. Values: summed sales.\nCanada’s January total becomes 40.\nThe unpivoted columns are country, month, and sales.\nUnpivoting returns 40, not the separate sales of 30 and 10.\n\n\n\n\ncountry\nJan\nFeb\n\n\n\n\nCanada\n40\n20\n\n\nUSA\n50\n40\n\n\n\nThe pivot has one row per country. The unpivoted summary has one row per country/month."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-2-chinook-invoice-counts",
+    "href": "lectures/9a.html#solution-2-chinook-invoice-counts",
+    "title": "Advanced SQL",
+    "section": "Solution 2: Chinook invoice counts",
+    "text": "Solution 2: Chinook invoice counts\nDatabase: Chinook\n1SELECT strftime('%Y', InvoiceDate) AS sales_year,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '04'\n                THEN 1 ELSE 0 END) AS Apr_invoices,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '05'\n                THEN 1 ELSE 0 END) AS May_invoices,\n       SUM(CASE WHEN strftime('%m', InvoiceDate) = '06'\n2                THEN 1 ELSE 0 END) AS Jun_invoices,\n       SUM(CASE WHEN strftime('%m', InvoiceDate)\n                     IN ('04', '05', '06')\n3                THEN 1 ELSE 0 END) AS Q2_invoices\nFROM Invoice\nGROUP BY sales_year\nORDER BY sales_year;\n\n1\n\nOne result row represents one invoice year.\n\n2\n\nEach matching invoice contributes one to its month.\n\n3\n\nThe Q2 condition covers exactly the three displayed months."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-2-interpretation-and-check",
+    "href": "lectures/9a.html#solution-2-interpretation-and-check",
+    "title": "Advanced SQL",
+    "section": "Solution 2: interpretation and check",
+    "text": "Solution 2: interpretation and check\nFor every year:\nApr_invoices + May_invoices + Jun_invoices = Q2_invoices\nThe month conditions are mutually exclusive, and together they cover Q2.\nGrouping only by month would combine the same month across different years. It would create a monthly summary with a different grain.\nAll invoice years remain in the query. A year with no Q2 invoices receives four zeros."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-3-a-three-measure-unpivot",
+    "href": "lectures/9a.html#solution-3-a-three-measure-unpivot",
+    "title": "Advanced SQL",
+    "section": "Solution 3: a three-measure unpivot",
+    "text": "Solution 3: a three-measure unpivot\nDatabase: Northwind\nDROP VIEW IF EXISTS temp.lecture_product_measures;\nCREATE TEMP VIEW lecture_product_measures AS\nSELECT ProductID, ProductName,\n1       'In stock' AS measure, UnitsInStock AS value\nFROM Products\nUNION ALL\nSELECT ProductID, ProductName,\n       'On order', UnitsOnOrder\nFROM Products\nUNION ALL\nSELECT ProductID, ProductName,\n2       'Reorder level', ReorderLevel\nFROM Products;\n\n1\n\nThe first branch names the output columns.\n\n2\n\nThe third branch adds one threshold row per product. No branch filters out zeros or NULLs."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-3-output-filter-and-row-count",
+    "href": "lectures/9a.html#solution-3-output-filter-and-row-count",
+    "title": "Advanced SQL",
+    "section": "Solution 3: output, filter, and row count",
+    "text": "Solution 3: output, filter, and row count\nDatabase: Northwind\nSELECT * FROM lecture_product_measures\n1ORDER BY ProductID, measure;\n\nSELECT ProductID, ProductName, measure, value\nFROM lecture_product_measures\n2WHERE measure = 'On order' AND value &gt; 0\nORDER BY ProductID;\n\nSELECT (SELECT COUNT(*) FROM Products) * 3 AS expected_rows,\n       COUNT(*) AS actual_rows\n3FROM lecture_product_measures;\n\n1\n\nInspect the entire long result.\n\n2\n\nReturn only positive order quantities. NULL does not satisfy this condition.\n\n3\n\nEach product contributes exactly three rows, so the counts should match.\n\n\nThe reorder level is a threshold. Adding it to stock and orders would not produce a meaningful inventory total."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-4-unpivoting-the-q1-sales-view",
+    "href": "lectures/9a.html#solution-4-unpivoting-the-q1-sales-view",
+    "title": "Advanced SQL",
+    "section": "Solution 4: unpivoting the Q1 sales view",
+    "text": "Solution 4: unpivoting the Q1 sales view\nDatabase: Chinook\nDROP VIEW IF EXISTS temp.lecture_q1_long;\n1CREATE TEMP VIEW lecture_q1_long AS\nSELECT BillingCountry, sales_year,\n       '01' AS sales_month, Jan AS sales\nFROM lecture_q1_sales\nUNION ALL\nSELECT BillingCountry, sales_year, '02', Feb\nFROM lecture_q1_sales\nUNION ALL\nSELECT BillingCountry, sales_year, '03', Mar\n2FROM lecture_q1_sales;\n\nSELECT BillingCountry, sales_year, sales_month,\n3       ROUND(sales, 2) AS sales\nFROM lecture_q1_long\nORDER BY BillingCountry, sales_year, sales_month;\n\n1\n\nPrerequisite: run the lecture block that creates lecture_q1_sales.\n\n2\n\nGenerate three month rows per country/year, preserving zero cells.\n\n3\n\nRound only for display. The view retains unrounded values."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-4-checking-totals",
+    "href": "lectures/9a.html#solution-4-checking-totals",
+    "title": "Advanced SQL",
+    "section": "Solution 4: checking totals",
+    "text": "Solution 4: checking totals\nDatabase: Chinook\nSELECT\n  (SELECT ROUND(SUM(sales), 2)\n1   FROM lecture_q1_long) AS unpivoted_total,\n  (SELECT ROUND(SUM(Total), 2)\n   FROM Invoice\n   WHERE strftime('%m', InvoiceDate)\n2         IN ('01', '02', '03')) AS invoice_total;\n\n1\n\nSum all three months across every country/year in the long view.\n\n2\n\nIndependently sum the original Q1 invoices. The rounded totals should match.\n\n\nSQLite may use floating-point arithmetic for decimal amounts. Compare rounded totals for this classroom check."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-4-why-row-counts-can-differ",
+    "href": "lectures/9a.html#solution-4-why-row-counts-can-differ",
+    "title": "Advanced SQL",
+    "section": "Solution 4: why row counts can differ",
+    "text": "Solution 4: why row counts can differ\nThe earlier long summary contains only country/year/month combinations with invoices.\nThe pivot contains every country/year found anywhere in Invoice. Unpivoting its three month columns generates three rows for each of those pairs.\nConsequently, the unpivoted result can include explicit zero rows that were absent from the original summary.\nThe totals agree, but neither the row count nor the individual invoice detail must match. Unpivoting does not reverse aggregation."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-5-joined-order-line-revenue",
+    "href": "lectures/9a.html#solution-5-joined-order-line-revenue",
+    "title": "Advanced SQL",
+    "section": "Solution 5: joined order-line revenue",
+    "text": "Solution 5: joined order-line revenue\nDatabase: Northwind\nDROP VIEW IF EXISTS temp.lecture_order_lines;\nCREATE TEMP VIEW lecture_order_lines AS\nSELECT c.CategoryID, c.CategoryName, o.ShipCountry,\n       d.UnitPrice * d.Quantity * (1 - d.Discount)\n1         AS line_revenue\nFROM Orders AS o\n2JOIN \"Order Details\" AS d ON o.OrderID = d.OrderID\nJOIN Products AS p ON d.ProductID = p.ProductID\n3JOIN Categories AS c ON p.CategoryID = c.CategoryID;\n\n1\n\nCalculate revenue from the price, quantity, and discount on each order line.\n\n2\n\nQuote the table name because it contains a space.\n\n3\n\nAdd each product’s category without changing the order-line grain."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-5-revenue-pivot-with-a-cte",
+    "href": "lectures/9a.html#solution-5-revenue-pivot-with-a-cte",
+    "title": "Advanced SQL",
+    "section": "Solution 5: revenue pivot with a CTE",
+    "text": "Solution 5: revenue pivot with a CTE\nDatabase: Northwind\nWITH country_groups AS (\n  SELECT CategoryID, CategoryName, line_revenue,\n         CASE WHEN ShipCountry IN ('USA', 'Germany')\n1              THEN ShipCountry ELSE 'Other' END AS country_group\n  FROM lecture_order_lines\n)\nSELECT CategoryID, CategoryName,\n       ROUND(SUM(CASE WHEN country_group = 'USA'\n                      THEN line_revenue ELSE 0 END), 2) AS USA,\n       ROUND(SUM(CASE WHEN country_group = 'Germany'\n                      THEN line_revenue ELSE 0 END), 2) AS Germany,\n       ROUND(SUM(CASE WHEN country_group = 'Other'\n2                      THEN line_revenue ELSE 0 END), 2) AS Other,\n       ROUND(SUM(line_revenue), 2) AS total_revenue\nFROM country_groups\n3GROUP BY CategoryID, CategoryName\nORDER BY CategoryID;\n\n1\n\nClassify every line, including a NULL shipping country, into one of three groups.\n\n2\n\nSum line revenue once into exactly one country column.\n\n3\n\nKeep the category identifier and label as row keys."
+  },
+  {
+    "objectID": "lectures/9a.html#solution-5-interpretation-and-join-grain",
+    "href": "lectures/9a.html#solution-5-interpretation-and-join-grain",
+    "title": "Advanced SQL",
+    "section": "Solution 5: interpretation and join grain",
+    "text": "Solution 5: interpretation and join grain\nBefore rounding, USA + Germany + Other equals total_revenue for each category.\nIndependently rounded columns can differ slightly from a separately rounded total.\nAn order with three detail rows appears three times after the join. Summing its order-level Freight at that point would count freight three times.\nCompute an order-level measure once per order, or define an explicit allocation to order lines before summarizing by category.\nThe inner joins include categories with matching order lines. Categories with no matching sales are absent."
+  },
+  {
+    "objectID": "posts/2.html",
+    "href": "posts/2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "posts/2.html#resources",
+    "href": "posts/2.html#resources",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "posts/4.html",
+    "href": "posts/4.html",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/3.html#resources",
-    "href": "posts/3.html#resources",
-    "title": "Week 3",
+    "objectID": "posts/4.html#resources",
+    "href": "posts/4.html#resources",
+    "title": "Week 4",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/5.html",
-    "href": "posts/5.html",
-    "title": "Week 5",
+    "objectID": "posts/6.html",
+    "href": "posts/6.html",
+    "title": "Week 6",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/5.html#resources",
-    "href": "posts/5.html#resources",
-    "title": "Week 5",
+    "objectID": "posts/6.html#resources",
+    "href": "posts/6.html#resources",
+    "title": "Week 6",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
-  },
-  {
-    "objectID": "posts/7.html",
-    "href": "posts/7.html",
-    "title": "Week 7",
-    "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
-  },
-  {
-    "objectID": "posts/7.html#resources",
-    "href": "posts/7.html#resources",
-    "title": "Week 7",
-    "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
-  },
-  {
-    "objectID": "lectures/8a.html",
-    "href": "lectures/8a.html",
-    "title": "Data 300",
-    "section": "",
-    "text": "title: \"Advanced SQL\"\nsubtitle: \"Window Functions\"\nformat:\n  revealjs:\n    scrollable: true\n    navigation-mode: vertical\n    theme: [default, styles.scss]\n    controls-layout: edges\n    controls-tutorial: true\n    code-annotations: select\n    progress: true\n    slide-number: c/t\n    incremental: false \n    \nrevealjs-plugins:\n  - pointer\n  \nfilters: \n  - code-fullscreen\n  - reveal-auto-agenda\n\neditor: source\n\norder: 9"
-  },
-  {
-    "objectID": "lectures/8a.html#the-window-concept",
-    "href": "lectures/8a.html#the-window-concept",
-    "title": "Advanced SQL",
-    "section": "The “Window” Concept",
-    "text": "The “Window” Concept\n\n\nWindow 1\n\n\n\n\n\n\n\n\n\n\n\n\nWindow 2"
-  },
-  {
-    "objectID": "lectures/8a.html#window-function-syntax",
-    "href": "lectures/8a.html#window-function-syntax",
-    "title": "Advanced SQL",
-    "section": "Window Function Syntax",
-    "text": "Window Function Syntax\nSELECT\n1    column_name,\n2    FUNCTION(column_name) OVER (\n3        PARTITION BY column_to_group_by\n4        ORDER BY column_to_sort_by\n5    ) AS alias_name\n6FROM table_name;\n\n1\n\nInclude this original column in the output. Window functions preserve individual rows.\n\n2\n\nApply a window function, such as SUM() or AVG(). The OVER() clause defines how rows are organized for the calculation.\n\n3\n\nDivide the rows into partitions. The function operates independently within each partition.\n\n4\n\nDefine the order of rows within each partition for the calculation. This does not guarantee the display order of the final output.\n\n5\n\nName the calculated output column.\n\n6\n\nSpecify the table containing the data.\n\n\n\nThe OVER clause is what makes it a window function. Inside it, we use PARTITION BY to define our groups and ORDER BY to define the sequence of the calculation."
-  },
-  {
-    "objectID": "lectures/8a.html#aggregate-vs.-window-functions",
-    "href": "lectures/8a.html#aggregate-vs.-window-functions",
-    "title": "Advanced SQL",
-    "section": "Aggregate vs. Window Functions",
-    "text": "Aggregate vs. Window Functions\n\n\n\nAggregation (GROUP BY)\nWindow Function (OVER)\n\n\n\n\nReduces the number of rows\nRetains all original rows\n\n\nOne row per group\nOne row per original row\n\n\nUseful for Summary Totals\nUseful for Running Totals/Ranks\n\n\n\n\nThis is the most common point of confusion. If you want a summary table, use GROUP BY. If you want to compare an individual row to a group total, use a Window Function."
-  },
-  {
-    "objectID": "lectures/8a.html#partition-by",
-    "href": "lectures/8a.html#partition-by",
-    "title": "Advanced SQL",
-    "section": "PARTITION BY",
-    "text": "PARTITION BY\n\nDivides the result set into partitions.\nThe function is applied to each partition separately.\nIt is like GROUP BY for window functions, but it doesn’t hide the individual rows.\n\n\nPARTITION BY is how we tell SQL where one group ends and the next begins. For example, if we partition by “Department,” the math starts over for every new department."
-  },
-  {
-    "objectID": "lectures/8a.html#order-by-in-window-functions",
-    "href": "lectures/8a.html#order-by-in-window-functions",
-    "title": "Advanced SQL",
-    "section": "ORDER BY in Window Functions",
-    "text": "ORDER BY in Window Functions\n\nCrucial for:\n\nRunning Totals (Cumulative sums).\nRankings.\nMoving Averages.\n\nIt defines the direction in which the window “slides” (e.g., from oldest to newest).\n\n\nYou almost always use ORDER BY inside your OVER clause. Without it, the computer doesn’t know which row comes “before” or “after” another, making rankings or running totals impossible."
-  },
-  {
-    "objectID": "lectures/8a.html#ranking-functions-the-big-three",
-    "href": "lectures/8a.html#ranking-functions-the-big-three",
-    "title": "Advanced SQL",
-    "section": "Ranking Functions: The Big Three",
-    "text": "Ranking Functions: The Big Three\n\nROW_NUMBER(): Assigns a unique, sequential integer to rows (1, 2, 3, 4).\nRANK(): Assigns the same rank to ties, but skips the next number (1, 2, 2, 4).\nDENSE_RANK(): Assigns the same rank to ties, but does not skip numbers (1, 2, 2, 3).\n\n\nNot all rankings are created equal. If two people tie for 2nd place, do you want the next person to be 3rd, or 4th? That’s the difference between RANK and DENSE_RANK."
-  },
-  {
-    "objectID": "lectures/8a.html#ranking-comparison-diagram",
-    "href": "lectures/8a.html#ranking-comparison-diagram",
-    "title": "Advanced SQL",
-    "section": "Ranking Comparison Diagram",
-    "text": "Ranking Comparison Diagram\n\n\n\n\n\n\n\n\n\n\n\n\nRow Number: Strictly unique.\nRank: Leaves gaps.\nDense Rank: No gaps.\n\n\nThis diagram helps visualize the “Gap” behavior. Notice how RANK jumps from 1 to 3 because two people tied for 1st."
-  },
-  {
-    "objectID": "lectures/8a.html#value-functions-lead-and-lag",
-    "href": "lectures/8a.html#value-functions-lead-and-lag",
-    "title": "Advanced SQL",
-    "section": "Value Functions: LEAD and LAG",
-    "text": "Value Functions: LEAD and LAG\n\nLAG(column): Accesses data from the previous row.\nLEAD(column): Accesses data from the following row.\nUse Case: Comparing this month’s sales to last month’s sales to calculate growth.\n\n\nLEAD and LAG are like time machines. They allow you to look back at the past row or ahead to the future row without needing a complex self-join."
-  },
-  {
-    "objectID": "lectures/8a.html#deep-dive-lag",
-    "href": "lectures/8a.html#deep-dive-lag",
-    "title": "Advanced SQL",
-    "section": "Deep Dive: LAG",
-    "text": "Deep Dive: LAG\nSELECT\n1    month,\n2    revenue,\n3    LAG(revenue) OVER (ORDER BY month) AS prev_month_revenue,\n4    (revenue - LAG(revenue) OVER (ORDER BY month)) AS revenue_diff\n5FROM monthly_sales;\n\n1\n\nDisplay the month for each row.\n\n2\n\nDisplay the revenue for that month.\n\n3\n\nOrder the rows by month and retrieve the previous row’s revenue using LAG(). The first row returns NULL because no previous row exists.\n\n4\n\nSubtract the previous row’s revenue from the current revenue. Positive values indicate an increase; negative values indicate a decrease. The first row returns NULL.\n\n5\n\nRetrieve the data from the monthly_sales table.\n\n\n\nResult: You can calculate Month-over-Month (MoM) growth instantly.\n\n\nLAG is the primary tool for time-series analysis. It’s how we calculate “growth” or “change” by comparing the current row’s value to the one directly above it."
-  },
-  {
-    "objectID": "lectures/8a.html#deep-dive-lead",
-    "href": "lectures/8a.html#deep-dive-lead",
-    "title": "Advanced SQL",
-    "section": "Deep Dive: LEAD",
-    "text": "Deep Dive: LEAD\nSELECT\n1    task_id,\n2    due_date,\n3    LEAD(due_date) OVER (ORDER BY due_date) AS next_task_deadline\n4FROM project_timeline;\n\n1\n\nDisplay the unique identifier for each task.\n\n2\n\nDisplay the current task’s deadline.\n\n3\n\nOrder the rows by due_date and retrieve the next row’s deadline using LEAD(). Name the result next_task_deadline. The last row returns NULL because no next row exists.\n\n4\n\nRetrieve the data from the project_timeline table.\n\n\n\nResult: Helps identify the gap between the current task and the next scheduled task.\n\n\nConversely, LEAD looks forward. If you want to know how much time you have between the current event and the next event, LEAD is your friend."
-  },
-  {
-    "objectID": "lectures/8a.html#window-frames-the-moving-window",
-    "href": "lectures/8a.html#window-frames-the-moving-window",
-    "title": "Advanced SQL",
-    "section": "Window Frames: The “Moving” Window",
-    "text": "Window Frames: The “Moving” Window\nSometimes, you don’t want to look at the entire partition. You only want a subset of it.\n\nROWS BETWEEN ...\nUNBOUNDED PRECEDING: Start from the very first row of the partition.\nCURRENT ROW: End at the row you are on.\n1 PRECEDING: Look at exactly one row before."
-  },
-  {
-    "objectID": "lectures/8a.html#summary-of-window-functions",
-    "href": "lectures/8a.html#summary-of-window-functions",
-    "title": "Advanced SQL",
-    "section": "Summary of Window Functions",
-    "text": "Summary of Window Functions\n\n\n\n\n\n\n\n\nCategory\nFunctions\nBest For…\n\n\n\n\nRanking\nRANK, DENSE_RANK, ROW_NUMBER\nTop N lists, finding duplicates\n\n\nValue\nLAG, LEAD, FIRST_VALUE\nTime-series, growth, trends\n\n\nAggregate\nSUM, AVG, COUNT\nRunning totals, moving averages\n\n\n\n\nLet’s review. We’ve covered Ranking for lists, Value for trends, and Aggregate for moving totals."
-  },
-  {
-    "objectID": "lectures/8a.html#the-window-concept-1",
-    "href": "lectures/8a.html#the-window-concept-1",
-    "title": "Advanced SQL",
-    "section": "The “Window” Concept",
-    "text": "The “Window” Concept\n\nThe “Window” is the subset of rows relevant to the current row.\nThe window is defined by the OVER clause.\n\n\nThink of a window as a sliding lens. As you move down the rows in your table, the lens moves with you, looking at a specific subset of data to perform its math."
-  },
-  {
-    "objectID": "lectures/8a.html#activity-1",
-    "href": "lectures/8a.html#activity-1",
-    "title": "Advanced SQL",
-    "section": "Activity 1",
-    "text": "Activity 1\nUsing film, return film_id, title, rating, and length for every film with a nonmissing length. Add rating_avg_length: the average length of films with the same rating."
-  },
-  {
-    "objectID": "lectures/8a.html#activity-2",
-    "href": "lectures/8a.html#activity-2",
-    "title": "Advanced SQL",
-    "section": "Activity 2",
-    "text": "Activity 2\nUsing films with nonmissing lengths, rank films within each rating, longest film length first. Return film_id, title, rating, film length, and all three rankings:\n\nROW_NUMBER(): rank by film length and film_id.\nRANK(): rank by film length\nDENSE_RANK(): rank by film length\n\nWhat does each ranking do?"
-  },
-  {
-    "objectID": "lectures/8a.html#activity-3",
-    "href": "lectures/8a.html#activity-3",
-    "title": "Advanced SQL",
-    "section": "Activity 3",
-    "text": "Activity 3\nUsing payment, examine all payments for customer_id = 1, ordered by payment_date, then payment_id.\n\nReturn payment_id, payment_date, and amount.\nAdd previous_amount from the preceding payment.\nKeep the first payment even though no previous payment exists."
-  },
-  {
-    "objectID": "lectures/8a.html#activity-4",
-    "href": "lectures/8a.html#activity-4",
-    "title": "Advanced SQL",
-    "section": "Activity 4",
-    "text": "Activity 4\nUsing rental, examine every rental for customers 1, 2, and 3.\n\nReturn customer_id, rental_id, and rental_date.\nAdd next_rental_date for the same customer, ordered by rental_date, then rental_id.\nAdd days_until_next, rounded to two decimals.\nDisplay by customer_id, rental_date, then rental_id.\n\nHint: In SQLite, JULIANDAY(later) - JULIANDAY(earlier) gives elapsed days, including fractions."
-  },
-  {
-    "objectID": "lectures/8a.html#activity-5",
-    "href": "lectures/8a.html#activity-5",
-    "title": "Advanced SQL",
-    "section": "Activity 5",
-    "text": "Activity 5\nUsing payment, first create a CTE containing one row per payment date: payment_day and daily_revenue. Use DATE(payment_date) to remove the time.\n\nReturn each observed payment date and its daily revenue.\nAdd running_revenue: revenue from the first observed date through the current row.\nAdd moving_avg_3_rows: average daily revenue over the current row and up to two preceding rows.\nRound monetary outputs to two decimals and display dates in ascending order."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-1-compare-films-within-a-rating",
-    "href": "lectures/8a.html#solution-1-compare-films-within-a-rating",
-    "title": "Advanced SQL",
-    "section": "Solution 1: compare films within a rating",
-    "text": "Solution 1: compare films within a rating\nSELECT film_id, title, rating, length,\n       AVG(length) OVER (\n1           PARTITION BY rating) AS rating_avg_length\nFROM film\n2WHERE length IS NOT NULL\n3ORDER BY rating, film_id;\n\n1\n\nCompute the average across the entire rating partition. With no window ordering, this average is repeated for every film in that rating.\n\n2\n\nExclude missing lengths before calculating the window values.\n\n3\n\nSet the displayed order independently of the window calculation.\n\n\nInterpretation: A positive difference means the film is longer than its rating’s average. Unlike GROUP BY, this window calculation retains each film row."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-2-compare-three-ranking-functions",
-    "href": "lectures/8a.html#solution-2-compare-three-ranking-functions",
-    "title": "Advanced SQL",
-    "section": "Solution 2: compare three ranking functions",
-    "text": "Solution 2: compare three ranking functions\nSELECT film_id, title, rating, length,\n       ROW_NUMBER() OVER (\n           PARTITION BY rating\n1           ORDER BY length DESC, film_id) AS row_num,\n       RANK() OVER (\n           PARTITION BY rating\n2           ORDER BY length DESC) AS length_rank,\n       DENSE_RANK() OVER (\n           PARTITION BY rating\n3           ORDER BY length DESC) AS dense_length_rank\nFROM film\nWHERE length IS NOT NULL\n4ORDER BY rating, length DESC, film_id;\n\n1\n\nAssign unique sequential numbers within each rating. The identifier gives tied lengths a repeatable order.\n\n2\n\nGive equal lengths equal ranks; leave gaps after ties.\n\n3\n\nGive equal lengths equal ranks without gaps between distinct lengths.\n\n4\n\nDisplay ties in identifier order without changing their shared ranks."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-2-interpreting-ties",
-    "href": "lectures/8a.html#solution-2-interpreting-ties",
-    "title": "Advanced SQL",
-    "section": "Solution 2: interpreting ties",
-    "text": "Solution 2: interpreting ties\nFor illustrative lengths 120, 120, 110 within a rating:\n\n\n\nLength\nRow number\nRank\nDense rank\n\n\n\n\n120\n1\n1\n1\n\n\n120\n2\n1\n1\n\n\n110\n3\n3\n2\n\n\n\nRANK() counts the two earlier rows before assigning rank 3. DENSE_RANK() advances only when length changes.\nAdding the unique film_id to the ordering of RANK() or DENSE_RANK() would eliminate ties: the full ordering values would differ for every film."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-3-compare-consecutive-payments",
-    "href": "lectures/8a.html#solution-3-compare-consecutive-payments",
-    "title": "Advanced SQL",
-    "section": "Solution 3: compare consecutive payments",
-    "text": "Solution 3: compare consecutive payments\n1SELECT payment_id, payment_date, amount,\n2       LAG(amount) OVER (\n           PARTITION BY customer_id\n           ORDER BY payment_date, payment_id\n3       ) AS previous_amount\nFROM payment\n4WHERE customer_id = 1;\n\n1\n\nSelect the columns to be displayed.\n\n2\n\nCreates the window function and applies the lag function to obtain the previous amount.\n\n3\n\nPartitions by customer_id and orders by payment_date and payment_id.\n\n4\n\nRestrict the input to customer 1."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-4-find-the-next-rental",
-    "href": "lectures/8a.html#solution-4-find-the-next-rental",
-    "title": "Advanced SQL",
-    "section": "Solution 4: find the next rental",
-    "text": "Solution 4: find the next rental\n1SELECT customer_id, rental_id, rental_date,\n2       LEAD(rental_date) OVER (\n3           PARTITION BY customer_id\n4           ORDER BY rental_date, rental_id\n5       ) AS next_rental_date\n6FROM rental\n7WHERE customer_id IN (1, 2, 3);\n\n1\n\nDisplay the customer identifier, rental identifier, and rental timestamp.\n\n2\n\nUse LEAD() to retrieve the following row’s rental date within the window.\n\n3\n\nCreate a separate partition for each customer so the next rental belongs to the same customer.\n\n4\n\nOrder each customer’s rentals chronologically. Use rental_id to break ties when timestamps match. This controls the window calculation, not the final display order.\n\n5\n\nName the calculated column next_rental_date. Each customer’s final rental returns NULL because no following rental exists.\n\n6\n\nRetrieve records from the rental table.\n\n7\n\nInclude only customers 1, 2, and 3. This filter applies before the window function is calculated."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-5-running-revenue-and-moving-averages",
-    "href": "lectures/8a.html#solution-5-running-revenue-and-moving-averages",
-    "title": "Advanced SQL",
-    "section": "Solution 5: running revenue and moving averages",
-    "text": "Solution 5: running revenue and moving averages\n1WITH daily_sales AS (\n2    SELECT DATE(payment_date) AS payment_day,\n           SUM(amount) AS daily_revenue\n    FROM payment\n3    GROUP BY DATE(payment_date)\n)\n4SELECT payment_day, daily_revenue,\n       SUM(daily_revenue) OVER (\n5           ORDER BY payment_day\n6           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS running_revenue,\n       AVG(daily_revenue) OVER (\n           ORDER BY payment_day\n7           ROWS BETWEEN 2 PRECEDING AND CURRENT ROW\n       ) AS moving_avg_3_rows\n8FROM daily_sales\n9ORDER BY payment_day;\n\n1\n\nCreate a common table expression (CTE) named daily_sales to summarize payments before applying window functions.\n\n2\n\nExtract the date from each payment timestamp, removing the time, and name it payment_day.\n\n3\n\nGroup payments by date. SUM(amount) calculates total revenue for each date, producing one row per observed payment date.\n\n4\n\nDisplay each payment date and its daily revenue.\n\n5\n\nOrder the daily rows chronologically for the running-total calculation.\n\n6\n\nInclude every row from the beginning through the current row. SUM() over this frame calculates cumulative revenue as running_revenue.\n\n7\n\nInclude the current row and up to two preceding rows. AVG() calculates their average daily revenue. The first result uses one row, the second uses two, and subsequent results use three. These are observed payment dates, not necessarily consecutive calendar days.\n\n8\n\nRetrieve the daily summaries from the CTE. Both window functions preserve one output row per observed payment date.\n\n9\n\nDisplay the final results chronologically. The ordering inside OVER() controls calculations but does not guarantee the final display order."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-5-interpreting-the-frames",
-    "href": "lectures/8a.html#solution-5-interpreting-the-frames",
-    "title": "Advanced SQL",
-    "section": "Solution 5: interpreting the frames",
-    "text": "Solution 5: interpreting the frames\n\nThe first moving average uses one row; the second uses two rows; subsequent averages use three rows.\nA date with no payment has no row in daily_sales. This is an average over three observed payment dates, which need not be consecutive calendar dates.\nA true three-calendar-day average would require a complete calendar with zero revenue filled in for dates without payments.\nThe final running revenue should equal SUM(amount) from payment, rounded to two decimals."
-  },
-  {
-    "objectID": "lectures/8a.html#references-for-the-activities",
-    "href": "lectures/8a.html#references-for-the-activities",
-    "title": "Advanced SQL",
-    "section": "References for the activities",
-    "text": "References for the activities\n\nSakila SQLite database and source\nSQLite window functions\nSQLite date and time functions"
-  },
-  {
-    "objectID": "lectures/8a.html#window-frames-example",
-    "href": "lectures/8a.html#window-frames-example",
-    "title": "Advanced SQL",
-    "section": "Window Frames Example",
-    "text": "Window Frames Example\nExample: 3-Day Moving Average\nAVG(price) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)\n\nWe can even limit the window size. This is how “Moving Averages” are calculated in finance. Instead of looking at all data, we tell SQL to look at only the last 3 rows."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-1",
-    "href": "lectures/8a.html#solution-1",
-    "title": "Advanced SQL",
-    "section": "Solution 1",
-    "text": "Solution 1\nSELECT film_id, title, rating, length,\n       AVG(length) OVER (\n1           PARTITION BY rating) AS rating_avg_length\nFROM film\n2WHERE length IS NOT NULL\n3ORDER BY rating, film_id;\n\n1\n\nCompute the average across the entire rating partition. With no window ordering, this average is repeated for every film in that rating.\n\n2\n\nExclude missing lengths before calculating the window values.\n\n3\n\nSet the displayed order independently of the window calculation.\n\n\nInterpretation: A positive difference means the film is longer than its rating’s average. Unlike GROUP BY, this window calculation retains each film row."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-2",
-    "href": "lectures/8a.html#solution-2",
-    "title": "Advanced SQL",
-    "section": "Solution 2",
-    "text": "Solution 2\nSELECT film_id, title, rating, length,\n       ROW_NUMBER() OVER (\n           PARTITION BY rating\n1           ORDER BY length DESC, film_id) AS row_num,\n       RANK() OVER (\n           PARTITION BY rating\n2           ORDER BY length DESC) AS length_rank,\n       DENSE_RANK() OVER (\n           PARTITION BY rating\n3           ORDER BY length DESC) AS dense_length_rank\nFROM film\nWHERE length IS NOT NULL\n4ORDER BY rating, length DESC, film_id;\n\n1\n\nAssign unique sequential numbers within each rating. The identifier gives tied lengths a repeatable order.\n\n2\n\nGive equal lengths equal ranks; leave gaps after ties.\n\n3\n\nGive equal lengths equal ranks without gaps between distinct lengths.\n\n4\n\nDisplay ties in identifier order without changing their shared ranks."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-3",
-    "href": "lectures/8a.html#solution-3",
-    "title": "Advanced SQL",
-    "section": "Solution 3",
-    "text": "Solution 3\n1SELECT payment_id, payment_date, amount,\n2       LAG(amount) OVER (\n           PARTITION BY customer_id\n           ORDER BY payment_date, payment_id\n3       ) AS previous_amount\nFROM payment\n4WHERE customer_id = 1;\n\n1\n\nSelect the columns to be displayed.\n\n2\n\nCreates the window function and applies the lag function to obtain the previous amount.\n\n3\n\nPartitions by customer_id and orders by payment_date and payment_id.\n\n4\n\nRestrict the input to customer 1."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-4",
-    "href": "lectures/8a.html#solution-4",
-    "title": "Advanced SQL",
-    "section": "Solution 4",
-    "text": "Solution 4\n1SELECT customer_id, rental_id, rental_date,\n2       LEAD(rental_date) OVER (\n3           PARTITION BY customer_id\n4           ORDER BY rental_date, rental_id\n5       ) AS next_rental_date\n6FROM rental\n7WHERE customer_id IN (1, 2, 3);\n\n1\n\nDisplay the customer identifier, rental identifier, and rental timestamp.\n\n2\n\nUse LEAD() to retrieve the following row’s rental date within the window.\n\n3\n\nCreate a separate partition for each customer so the next rental belongs to the same customer.\n\n4\n\nOrder each customer’s rentals chronologically. Use rental_id to break ties when timestamps match. This controls the window calculation, not the final display order.\n\n5\n\nName the calculated column next_rental_date. Each customer’s final rental returns NULL because no following rental exists.\n\n6\n\nRetrieve records from the rental table.\n\n7\n\nInclude only customers 1, 2, and 3. This filter applies before the window function is calculated."
-  },
-  {
-    "objectID": "lectures/8a.html#solution-5",
-    "href": "lectures/8a.html#solution-5",
-    "title": "Advanced SQL",
-    "section": "Solution 5",
-    "text": "Solution 5\n1WITH daily_sales AS (\n2    SELECT DATE(payment_date) AS payment_day,\n           SUM(amount) AS daily_revenue\n    FROM payment\n3    GROUP BY DATE(payment_date)\n)\n4SELECT payment_day, daily_revenue,\n       SUM(daily_revenue) OVER (\n5           ORDER BY payment_day\n6           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS running_revenue,\n       AVG(daily_revenue) OVER (\n           ORDER BY payment_day\n7           ROWS BETWEEN 2 PRECEDING AND CURRENT ROW\n       ) AS moving_avg_3_rows\n8FROM daily_sales\n9ORDER BY payment_day;\n\n1\n\nCreate a common table expression (CTE) named daily_sales to summarize payments before applying window functions.\n\n2\n\nExtract the date from each payment timestamp, removing the time, and name it payment_day.\n\n3\n\nGroup payments by date. SUM(amount) calculates total revenue for each date, producing one row per observed payment date.\n\n4\n\nDisplay each payment date and its daily revenue.\n\n5\n\nOrder the daily rows chronologically for the running-total calculation.\n\n6\n\nInclude every row from the beginning through the current row. SUM() over this frame calculates cumulative revenue as running_revenue.\n\n7\n\nInclude the current row and up to two preceding rows. AVG() calculates their average daily revenue. The first result uses one row, the second uses two, and subsequent results use three. These are observed payment dates, not necessarily consecutive calendar days.\n\n8\n\nRetrieve the daily summaries from the CTE. Both window functions preserve one output row per observed payment date.\n\n9\n\nDisplay the final results chronologically. The ordering inside OVER() controls calculations but does not guarantee the final display order."
-  },
-  {
-    "objectID": "a/6.html",
-    "href": "a/6.html",
-    "title": "ICA 6",
-    "section": "",
-    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
-  },
-  {
-    "objectID": "a/6.html#tables-and-columns-used",
-    "href": "a/6.html#tables-and-columns-used",
-    "title": "ICA 6",
-    "section": "Tables and columns used",
-    "text": "Tables and columns used\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nRelevant columns\n\n\n\n\nProducts\nOne product\nProductID: identifier; ProductName: name; CategoryID: category; UnitPrice: catalog price\n\n\nCategories\nOne product category\nCategoryID: identifier; CategoryName: category label\n\n\nOrders\nOne customer order\nOrderID: identifier; CustomerID: customer code; OrderDate: order date/time; Freight: order shipping charge\n\n\n\"Order Details\"\nOne product line within an order\nOrderID, ProductID: identify the line; UnitPrice: price on that order; Quantity: units ordered; Discount: fractional discount\n\n\n\nRelationships:\nProducts.CategoryID joins to Categories.CategoryID\nOrders.OrderID joins to \"Order Details\".OrderID.\nRevenue definition: For this assignment, revenue is merchandise sales after discounts, excluding freight and taxes:\nUnitPrice * Quantity * (1.0 - Discount)\nUse UnitPrice from \"Order Details\" for historical sales, rather than the catalog price in Products. A discount of 0.10 means 10%. Retain precision during calculations and round monetary output to two decimal places."
-  },
-  {
-    "objectID": "a/6.html#setup-check-10-minutes",
-    "href": "a/6.html#setup-check-10-minutes",
-    "title": "ICA 6",
-    "section": "",
-    "text": "Run these statements individually:\nSELECT sqlite_version();\n\nSELECT name\nFROM sqlite_master\nWHERE type = 'table'\nORDER BY name;\n\nPRAGMA table_info('Products');\nPRAGMA table_info('Orders');\nPRAGMA table_info('Order Details');\n\nSELECT ProductID, ProductName, CategoryID, UnitPrice\nFROM Products\nORDER BY ProductID\nLIMIT 5;\n\nSELECT OrderID, CustomerID, OrderDate, Freight\nFROM Orders\nORDER BY OrderDate, OrderID\nLIMIT 5;\nIdentify a column suitable for partitioning products and a column suitable for ordering customer transactions. Check that the table names match the reference above."
-  },
-  {
-    "objectID": "a/6.html#working-conventions",
-    "href": "a/6.html#working-conventions",
-    "title": "ICA 6",
-    "section": "",
-    "text": "Use all products with nonmissing CategoryID and UnitPrice in Activities 1–2, including discontinued products.\nUse orders with nonmissing CustomerID and OrderDate in Activities 3–4. Activity 3 additionally excludes missing Freight.\nUse OrderDate, OrderID for chronological windows so same-date orders have a repeatable sequence.\nInclude a final ORDER BY to control display order.\nDo not replace unavailable previous/next values with zero: keep their NULL values."
-  },
-  {
-    "objectID": "a/6.html#part-a-compare-rankings",
-    "href": "a/6.html#part-a-compare-rankings",
-    "title": "ICA 6",
-    "section": "Part A: Compare rankings",
-    "text": "Part A: Compare rankings\nReturn ProductID, ProductName, CategoryID, and UnitPrice, plus:\n\nprice_row_number: ROW_NUMBER() ordered by price descending, then ProductID ascending, within category.\nprice_rank: RANK() ordered by price descending within category.\nprice_dense_rank: DENSE_RANK() ordered by price descending within category.\n\nDisplay by CategoryID, descending UnitPrice, then ProductID.\nExplain: Locate equal prices within a category and compare their rankings. Why should ProductID appear in the ROW_NUMBER() ordering but not the other two window orderings when ties mean equal prices?\nWhether or not you find ties in your copy, predict all three rankings for prices 30, 20, 20, 10, with product IDs increasing in that displayed order."
-  },
-  {
-    "objectID": "a/6.html#part-b-select-leading-price-levels",
-    "href": "a/6.html#part-b-select-leading-price-levels",
-    "title": "ICA 6",
-    "section": "Part B: Select leading price levels",
-    "text": "Part B: Select leading price levels\nPut the ranked result in a CTE. Return products in the two highest distinct price levels per category, keeping every tie. Display the three ranking columns too.\nExplain: Which ranking should you filter? Can a category return more than two products? Why does filtering ROW_NUMBER() &lt;= 2 answer a different question?\nHint: Calculate ranks inside a CTE; apply the rank filter in the outer query."
   },
   {
     "objectID": "posts/8.html",
@@ -2455,47 +2385,5 @@
     "title": "Week 8",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
-  },
-  {
-    "objectID": "a/6.html#database-setup-and-reference",
-    "href": "a/6.html#database-setup-and-reference",
-    "title": "ICA 6",
-    "section": "",
-    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
-  },
-  {
-    "objectID": "a/6.html#problem-1-compare-products-within-categories",
-    "href": "a/6.html#problem-1-compare-products-within-categories",
-    "title": "ICA 6",
-    "section": "Problem 1: Compare products within categories",
-    "text": "Problem 1: Compare products within categories\nHow does each product’s catalog price compare with the average price in its category?\n\nJoin Products to Categories and retain one row per eligible product.\nReturn ProductID, ProductName, CategoryID, CategoryName, and UnitPrice.\nAdd category_avg_price using a window average partitioned by category.\nAdd price_difference: product price minus its category’s average price. Round both calculated columns to two decimals.\nDisplay results by CategoryID, then ProductID.\n\nExplain: Why does PARTITION BY retain every product, while a query grouped only by category does not? Find a product above its category average and interpret its price_difference.\nCheck: Products in the same category should have the same category_avg_price.\nHint: A full-category average needs PARTITION BY but no ordering inside OVER()."
-  },
-  {
-    "objectID": "a/6.html#problem-2-rank-products-and-investigate-ties",
-    "href": "a/6.html#problem-2-rank-products-and-investigate-ties",
-    "title": "ICA 6",
-    "section": "Problem 2: Rank products and investigate ties",
-    "text": "Problem 2: Rank products and investigate ties\nWhich products are the most expensive within each category?\n\nPart A: Compare rankings\nReturn ProductID, ProductName, CategoryID, and UnitPrice, plus:\n\nprice_row_number: ROW_NUMBER() ordered by price descending, then ProductID ascending, within category.\nprice_rank: RANK() ordered by price descending within category.\nprice_dense_rank: DENSE_RANK() ordered by price descending within category.\n\nDisplay by CategoryID, descending UnitPrice, then ProductID.\nExplain: Locate equal prices within a category and compare their rankings. Why should ProductID appear in the ROW_NUMBER() ordering but not the other two window orderings when ties mean equal prices?\nWhether or not you find ties in your copy, predict all three rankings for prices 30, 20, 20, 10, with product IDs increasing in that displayed order.\n\n\nPart B: Select leading price levels\nPut the ranked result in a CTE. Return products in the two highest distinct price levels per category, keeping every tie. Display the three ranking columns too.\nExplain: Which ranking should you filter? Can a category return more than two products? Why does filtering ROW_NUMBER() &lt;= 2 answer a different question?\nHint: Calculate ranks inside a CTE; apply the rank filter in the outer query."
-  },
-  {
-    "objectID": "a/6.html#problem-3-compare-orders-with-lag",
-    "href": "a/6.html#problem-3-compare-orders-with-lag",
-    "title": "ICA 6",
-    "section": "Problem 3: Compare orders with LAG",
-    "text": "Problem 3: Compare orders with LAG\nHow does each order’s freight charge compare with the preceding eligible order from the same customer?\n\nUse all eligible orders, excluding missing freight charges.\nReturn CustomerID, OrderID, OrderDate, and Freight.\nAdd previous_freight using LAG(Freight) within each customer, ordered by OrderDate, OrderID.\nAdd freight_change: current freight minus previous freight, rounded to two decimals. Use a CTE to reuse previous_freight.\nDisplay by CustomerID, OrderDate, then OrderID.\n\nExplain: What do positive and negative changes mean? Why is the first freight_change for each customer NULL? If a middle order has missing freight and is excluded, which order becomes the previous row?\nCheck: Every customer’s first eligible order must remain in the results."
-  },
-  {
-    "objectID": "a/6.html#problem-4-find-the-next-order-with-lead",
-    "href": "a/6.html#problem-4-find-the-next-order-with-lead",
-    "title": "ICA 6",
-    "section": "Problem 4: Find the next order with LEAD",
-    "text": "Problem 4: Find the next order with LEAD\nHow long does each customer wait until their next order?\n\nReturn CustomerID, OrderID, and OrderDate for all eligible orders.\nAdd next_order_date from the next order for the same customer, ordered by OrderDate, OrderID.\nIn an outer query, calculate days_until_next, rounded to two decimals.\nKeep each customer’s final order. Display by CustomerID, OrderDate, then OrderID.\n\nSQLite date helper: JULIANDAY(later_date) - JULIANDAY(earlier_date) gives elapsed days, potentially including fractions.\nExplain: Why does the last order have no next-order date? Is a gap of zero necessarily an error? What changes if PARTITION BY CustomerID is removed?\nCheck: Nonmissing gaps should be nonnegative. Each customer’s last row should have a NULL gap."
-  },
-  {
-    "objectID": "a/6.html#probelm-5-track-revenue-through-time",
-    "href": "a/6.html#probelm-5-track-revenue-through-time",
-    "title": "ICA 6",
-    "section": "Probelm 5: Track revenue through time",
-    "text": "Probelm 5: Track revenue through time\nBusiness question: How are cumulative sales and recent daily sales changing?\nUse this supplied CTE to obtain one row per observed order date. Replace the final SELECT with your window calculations.\nWITH daily_sales AS (\n    SELECT DATE(o.OrderDate) AS order_day,\n           SUM(d.UnitPrice * d.Quantity * (1.0 - d.Discount))\n               AS daily_revenue\n    FROM Orders AS o\n    JOIN \"Order Details\" AS d ON o.OrderID = d.OrderID\n    WHERE o.OrderDate IS NOT NULL\n    GROUP BY DATE(o.OrderDate)\n)\nSELECT order_day, daily_revenue\nFROM daily_sales\nORDER BY order_day;\n\nReturn order_day and daily_revenue.\nAdd running_revenue using SUM() from the first daily row through the current row. Write the frame explicitly.\nAdd moving_avg_3_rows using AVG() over the current row and up to two preceding rows.\nRound all three monetary columns to two decimals. Display dates ascending.\n\nExplain: How many rows enter the first, second, and third moving averages? Does this represent three consecutive calendar days? Why aggregate order lines to days before calculating these windows?\nManual check: Copy the first three unrounded daily revenues. Confirm that the third running total is their sum and the third moving average is their average. The final running total should equal the sum of all daily revenue."
   }
 ]

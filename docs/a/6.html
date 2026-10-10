@@ -81,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-deb9980f0abb462247767bd4714b05c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-cf0323d384d52af67157aa1576f9552a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -244,8 +244,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>Products.CategoryID</code> joins to <code>Categories.CategoryID</code></p>
 <p><code>Orders.OrderID</code> joins to <code>"Order Details".OrderID</code>.</p>
 <p><strong>Revenue definition:</strong> For this assignment, revenue is merchandise sales after discounts, excluding freight and taxes:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>UnitPrice <span class="op">*</span> Quantity <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">-</span> Discount)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Use <code>UnitPrice</code> from <code>"Order Details"</code> for historical sales, rather than the catalog price in <code>Products</code>. A discount of <code>0.10</code> means 10%. Retain precision during calculations and round monetary output to two decimal places.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>UnitPrice <span class="op">*</span> Quantity <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> Discount)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A discount of <code>0.10</code> means 10%. Retain precision during calculations and round monetary output to two decimal places.</p>
 </section>
 <section id="problem-1-compare-products-within-categories" class="level2">
 <h2 class="anchored" data-anchor-id="problem-1-compare-products-within-categories">Problem 1: Compare products within categories</h2>
@@ -255,11 +255,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Return <code>ProductID</code>, <code>ProductName</code>, <code>CategoryID</code>, <code>CategoryName</code>, and <code>UnitPrice</code>.</li>
 <li>Add <code>category_avg_price</code> using a window average partitioned by category.</li>
 <li>Add <code>price_difference</code>: product price minus its category’s average price. Round both calculated columns to two decimals.</li>
-<li>Display results by <code>CategoryID</code>, then <code>ProductID</code>.</li>
+<li>Order results by <code>CategoryID</code>, then <code>ProductID</code>.</li>
 </ol>
-<p><strong>Explain:</strong> Why does <code>PARTITION BY</code> retain every product, while a query grouped only by category does not? Find a product above its category average and interpret its <code>price_difference</code>.</p>
-<p><strong>Check:</strong> Products in the same category should have the same <code>category_avg_price</code>.</p>
-<p><strong>Hint:</strong> A full-category average needs <code>PARTITION BY</code> but no ordering inside <code>OVER()</code>.</p>
 </section>
 <section id="problem-2-rank-products-and-investigate-ties" class="level2">
 <h2 class="anchored" data-anchor-id="problem-2-rank-products-and-investigate-ties">Problem 2: Rank products and investigate ties</h2>
@@ -272,15 +269,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>price_rank</code>: <code>RANK()</code> ordered by price descending within category.</li>
 <li><code>price_dense_rank</code>: <code>DENSE_RANK()</code> ordered by price descending within category.</li>
 </ul>
-<p>Display by <code>CategoryID</code>, descending <code>UnitPrice</code>, then <code>ProductID</code>.</p>
-<p><strong>Explain:</strong> Locate equal prices within a category and compare their rankings. Why should <code>ProductID</code> appear in the <code>ROW_NUMBER()</code> ordering but not the other two window orderings when ties mean equal prices?</p>
-<p>Whether or not you find ties in your copy, predict all three rankings for prices <strong>30, 20, 20, 10</strong>, with product IDs increasing in that displayed order.</p>
+<p>Order by <code>CategoryID</code>, descending <code>UnitPrice</code>, then <code>ProductID</code>.</p>
 </section>
 <section id="part-b-select-leading-price-levels" class="level3">
 <h3 class="anchored" data-anchor-id="part-b-select-leading-price-levels">Part B: Select leading price levels</h3>
 <p>Put the ranked result in a CTE. Return products in the <strong>two highest distinct price levels per category</strong>, keeping every tie. Display the three ranking columns too.</p>
-<p><strong>Explain:</strong> Which ranking should you filter? Can a category return more than two products? Why does filtering <code>ROW_NUMBER() &lt;= 2</code> answer a different question?</p>
-<p><strong>Hint:</strong> Calculate ranks inside a CTE; apply the rank filter in the outer query.</p>
 </section>
 </section>
 <section id="problem-3-compare-orders-with-lag" class="level2">
@@ -291,10 +284,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Return <code>CustomerID</code>, <code>OrderID</code>, <code>OrderDate</code>, and <code>Freight</code>.</li>
 <li>Add <code>previous_freight</code> using <code>LAG(Freight)</code> within each customer, ordered by <code>OrderDate, OrderID</code>.</li>
 <li>Add <code>freight_change</code>: current freight minus previous freight, rounded to two decimals. Use a CTE to reuse <code>previous_freight</code>.</li>
-<li>Display by <code>CustomerID</code>, <code>OrderDate</code>, then <code>OrderID</code>.</li>
+<li>Order by <code>CustomerID</code>, <code>OrderDate</code>, then <code>OrderID</code>.</li>
 </ol>
-<p><strong>Explain:</strong> What do positive and negative changes mean? Why is the first <code>freight_change</code> for each customer <code>NULL</code>? If a middle order has missing freight and is excluded, which order becomes the previous row?</p>
-<p><strong>Check:</strong> Every customer’s first eligible order must remain in the results.</p>
 </section>
 <section id="problem-4-find-the-next-order-with-lead" class="level2">
 <h2 class="anchored" data-anchor-id="problem-4-find-the-next-order-with-lead">Problem 4: Find the next order with LEAD</h2>
@@ -303,16 +294,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Return <code>CustomerID</code>, <code>OrderID</code>, and <code>OrderDate</code> for all eligible orders.</li>
 <li>Add <code>next_order_date</code> from the next order for the same customer, ordered by <code>OrderDate, OrderID</code>.</li>
 <li>In an outer query, calculate <code>days_until_next</code>, rounded to two decimals.</li>
-<li>Keep each customer’s final order. Display by <code>CustomerID</code>, <code>OrderDate</code>, then <code>OrderID</code>.</li>
+<li>Keep each customer’s final order. Order by <code>CustomerID</code>, <code>OrderDate</code>, then <code>OrderID</code>.</li>
 </ol>
 <p><strong>SQLite date helper:</strong> <code>JULIANDAY(later_date) - JULIANDAY(earlier_date)</code> gives elapsed days, potentially including fractions.</p>
-<p><strong>Explain:</strong> Why does the last order have no next-order date? Is a gap of zero necessarily an error? What changes if <code>PARTITION BY CustomerID</code> is removed?</p>
-<p><strong>Check:</strong> Nonmissing gaps should be nonnegative. Each customer’s last row should have a <code>NULL</code> gap.</p>
 </section>
 <section id="probelm-5-track-revenue-through-time" class="level2">
 <h2 class="anchored" data-anchor-id="probelm-5-track-revenue-through-time">Probelm 5: Track revenue through time</h2>
-<p><strong>Business question:</strong> How are cumulative sales and recent daily sales changing?</p>
-<p>Use this supplied CTE to obtain one row per observed order date. Replace the final <code>SELECT</code> with your window calculations.</p>
+<p>How are cumulative sales and recent daily sales changing?</p>
+<p>Use <code>UnitPrice</code> from <code>"Order Details"</code> for historical sales, rather than the catalog price in <code>Products</code>. Use this supplied CTE to obtain one row per observed order date. Replace the final <code>SELECT</code> with your window calculations.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> daily_sales <span class="kw">AS</span> (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="dt">DATE</span>(o.OrderDate) <span class="kw">AS</span> order_day,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">SUM</span>(d.UnitPrice <span class="op">*</span> d.Quantity <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">-</span> d.Discount))</span>
@@ -321,18 +310,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> <span class="ot">"Order Details"</span> <span class="kw">AS</span> d <span class="kw">ON</span> o.OrderID <span class="op">=</span> d.OrderID</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> o.OrderDate <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">DATE</span>(o.OrderDate)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> order_day, daily_revenue</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> daily_sales</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> order_day;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="1">
 <li>Return <code>order_day</code> and <code>daily_revenue</code>.</li>
 <li>Add <code>running_revenue</code> using <code>SUM()</code> from the first daily row through the current row. Write the frame explicitly.</li>
 <li>Add <code>moving_avg_3_rows</code> using <code>AVG()</code> over the current row and up to two preceding rows.</li>
 <li>Round all three monetary columns to two decimals. Display dates ascending.</li>
 </ol>
-<p><strong>Explain:</strong> How many rows enter the first, second, and third moving averages? Does this represent three consecutive calendar days? Why aggregate order lines to days before calculating these windows?</p>
-<p><strong>Manual check:</strong> Copy the first three unrounded daily revenues. Confirm that the third running total is their sum and the third moving average is their average. The final running total should equal the sum of all daily revenue.</p>
 
 
 </section>
