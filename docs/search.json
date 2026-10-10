@@ -1029,62 +1029,6 @@
     "text": "Part 5: Multi-table Join\n\nQuestion 11: Customer rental history\nDisplay the customer’s first and last name, film title, rental date, and return date for every rental.\nUse the customer, rental, inventory, and film tables."
   },
   {
-    "objectID": "a/6.html",
-    "href": "a/6.html",
-    "title": "ICA 6",
-    "section": "",
-    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
-  },
-  {
-    "objectID": "a/6.html#database-setup-and-reference",
-    "href": "a/6.html#database-setup-and-reference",
-    "title": "ICA 6",
-    "section": "",
-    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
-  },
-  {
-    "objectID": "a/6.html#tables-and-columns-used",
-    "href": "a/6.html#tables-and-columns-used",
-    "title": "ICA 6",
-    "section": "Tables and columns used",
-    "text": "Tables and columns used\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nRelevant columns\n\n\n\n\nProducts\nOne product\nProductID: identifier; ProductName: name; CategoryID: category; UnitPrice: catalog price\n\n\nCategories\nOne product category\nCategoryID: identifier; CategoryName: category label\n\n\nOrders\nOne customer order\nOrderID: identifier; CustomerID: customer code; OrderDate: order date/time; Freight: order shipping charge\n\n\n\"Order Details\"\nOne product line within an order\nOrderID, ProductID: identify the line; UnitPrice: price on that order; Quantity: units ordered; Discount: fractional discount\n\n\n\nRelationships:\nProducts.CategoryID joins to Categories.CategoryID\nOrders.OrderID joins to \"Order Details\".OrderID.\nRevenue definition: For this assignment, revenue is merchandise sales after discounts, excluding freight and taxes:\nUnitPrice * Quantity * (1 - Discount)\nA discount of 0.10 means 10%. Retain precision during calculations and round monetary output to two decimal places."
-  },
-  {
-    "objectID": "a/6.html#problem-1-compare-products-within-categories",
-    "href": "a/6.html#problem-1-compare-products-within-categories",
-    "title": "ICA 6",
-    "section": "Problem 1: Compare products within categories",
-    "text": "Problem 1: Compare products within categories\nHow does each product’s catalog price compare with the average price in its category?\n\nJoin Products to Categories and retain one row per eligible product.\nReturn ProductID, ProductName, CategoryID, CategoryName, and UnitPrice.\nAdd category_avg_price using a window average partitioned by category.\nAdd price_difference: product price minus its category’s average price. Round both calculated columns to two decimals.\nOrder results by CategoryID, then ProductID."
-  },
-  {
-    "objectID": "a/6.html#problem-2-rank-products-and-investigate-ties",
-    "href": "a/6.html#problem-2-rank-products-and-investigate-ties",
-    "title": "ICA 6",
-    "section": "Problem 2: Rank products and investigate ties",
-    "text": "Problem 2: Rank products and investigate ties\nWhich products are the most expensive within each category?\n\nPart A: Compare rankings\nReturn ProductID, ProductName, CategoryID, and UnitPrice, plus:\n\nprice_row_number: ROW_NUMBER() ordered by price descending, then ProductID ascending, within category.\nprice_rank: RANK() ordered by price descending within category.\nprice_dense_rank: DENSE_RANK() ordered by price descending within category.\n\nOrder by CategoryID, descending UnitPrice, then ProductID.\n\n\nPart B: Select leading price levels\nPut the ranked result in a CTE. Return products in the two highest distinct price levels per category, keeping every tie. Display the three ranking columns too."
-  },
-  {
-    "objectID": "a/6.html#problem-3-compare-orders-with-lag",
-    "href": "a/6.html#problem-3-compare-orders-with-lag",
-    "title": "ICA 6",
-    "section": "Problem 3: Compare orders with LAG",
-    "text": "Problem 3: Compare orders with LAG\nHow does each order’s freight charge compare with the preceding eligible order from the same customer?\n\nUse all eligible orders, excluding missing freight charges.\nReturn CustomerID, OrderID, OrderDate, and Freight.\nAdd previous_freight using LAG(Freight) within each customer, ordered by OrderDate, OrderID.\nAdd freight_change: current freight minus previous freight, rounded to two decimals. Use a CTE to reuse previous_freight.\nOrder by CustomerID, OrderDate, then OrderID."
-  },
-  {
-    "objectID": "a/6.html#problem-4-find-the-next-order-with-lead",
-    "href": "a/6.html#problem-4-find-the-next-order-with-lead",
-    "title": "ICA 6",
-    "section": "Problem 4: Find the next order with LEAD",
-    "text": "Problem 4: Find the next order with LEAD\nHow long does each customer wait until their next order?\n\nReturn CustomerID, OrderID, and OrderDate for all eligible orders.\nAdd next_order_date from the next order for the same customer, ordered by OrderDate, OrderID.\nIn an outer query, calculate days_until_next, rounded to two decimals.\nKeep each customer’s final order. Order by CustomerID, OrderDate, then OrderID.\n\nSQLite date helper: JULIANDAY(later_date) - JULIANDAY(earlier_date) gives elapsed days, potentially including fractions."
-  },
-  {
-    "objectID": "a/6.html#probelm-5-track-revenue-through-time",
-    "href": "a/6.html#probelm-5-track-revenue-through-time",
-    "title": "ICA 6",
-    "section": "Probelm 5: Track revenue through time",
-    "text": "Probelm 5: Track revenue through time\nHow are cumulative sales and recent daily sales changing?\nUse UnitPrice from \"Order Details\" for historical sales, rather than the catalog price in Products. Use this supplied CTE to obtain one row per observed order date. Replace the final SELECT with your window calculations.\nWITH daily_sales AS (\n    SELECT DATE(o.OrderDate) AS order_day,\n           SUM(d.UnitPrice * d.Quantity * (1.0 - d.Discount))\n               AS daily_revenue\n    FROM Orders AS o\n    JOIN \"Order Details\" AS d ON o.OrderID = d.OrderID\n    WHERE o.OrderDate IS NOT NULL\n    GROUP BY DATE(o.OrderDate)\n)\n\nReturn order_day and daily_revenue.\nAdd running_revenue using SUM() from the first daily row through the current row. Write the frame explicitly.\nAdd moving_avg_3_rows using AVG() over the current row and up to two preceding rows.\nRound all three monetary columns to two decimals. Display dates ascending."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome to Introduction to Data Management!",
