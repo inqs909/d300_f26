@@ -1,5 +1,5 @@
 ---
-title: "Week 7"
+title: "Week 7: CTE"
 date: 10-04-26
 description: This week we will cover CTE.
 editor: source
@@ -11,3 +11,12 @@ editor: source
 | Lecture | Slides                   |
 |---------|--------------------------|
 | 1       | [Slides](../lectures/7a) |
+
+## Youtube Videos
+
+-  [Advanced SQL Tutorial — CTE (Common Table Expression)](https://www.youtube.com/watch?v=K1WeoKxLZ5o) 
+-  [SQL WITH Clause — How to Write SQL Queries Using WITH Clause](https://www.youtube.com/watch?v=QNfnuK-1YYY) 
+- [SQL WITH Clause](https://www.youtube.com/watch?v=LJC8277LONg)
+- [Complex SQL Breakdown](https://www.youtube.com/watch?v=DQkvqsziVG4&t=504s)
+- [Recursive CTE](https://www.youtube.com/watch?v=VBja7KnzOs8)
+- [Recursive SQL Queries](https://www.youtube.com/watch?v=7hZYh9qXxe4)

@@ -1,0 +1,16 @@
+---
+title: "Week 9: Pivot Tables"
+date: 10-19-26
+description: This week we will cover Pivot Tables.
+editor: source
+---
+
+
+## Resources
+
+| Lecture | Slides                   |
+|---------|--------------------------|
+| 1       | [Slides](../lectures/8a) |
+
+## Videos 
+

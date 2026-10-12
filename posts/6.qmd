@@ -1,5 +1,5 @@
 ---
-title: "Week 6"
+title: "Week 6: Joins"
 date: 09-27-26
 description: This week we will cover sql basics of joins.
 editor: source

@@ -1,5 +1,5 @@
 ---
-title: "Week 4"
+title: "Week 4: Databases"
 date: 09-14-26
 description: This week we will build databases.
 editor: source

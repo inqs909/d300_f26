@@ -42,46 +42,60 @@
     "text": "Deadline And Extensions\nThe report will be due on December 4, 2026 at 11:59 PM. For your report, you may receive a 24-hour extension beyond the due date for evey time you attend the writing and multiliteracy center. Each appointment must be one week apart."
   },
   {
-    "objectID": "posts/7.html",
-    "href": "posts/7.html",
-    "title": "Week 7",
+    "objectID": "posts/8.html",
+    "href": "posts/8.html",
+    "title": "Week 8: Window Functions",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/7.html#resources",
-    "href": "posts/7.html#resources",
-    "title": "Week 7",
+    "objectID": "posts/8.html#resources",
+    "href": "posts/8.html#resources",
+    "title": "Week 8: Window Functions",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/5.html",
-    "href": "posts/5.html",
-    "title": "Week 5",
+    "objectID": "posts/6.html",
+    "href": "posts/6.html",
+    "title": "Week 6: Joins",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/5.html#resources",
-    "href": "posts/5.html#resources",
-    "title": "Week 5",
+    "objectID": "posts/6.html#resources",
+    "href": "posts/6.html#resources",
+    "title": "Week 6: Joins",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/3.html",
-    "href": "posts/3.html",
-    "title": "Week 3",
+    "objectID": "posts/4.html",
+    "href": "posts/4.html",
+    "title": "Week 4: Databases",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/3.html#resources",
-    "href": "posts/3.html#resources",
-    "title": "Week 3",
+    "objectID": "posts/4.html#resources",
+    "href": "posts/4.html#resources",
+    "title": "Week 4: Databases",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/2.html",
+    "href": "posts/2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
+  },
+  {
+    "objectID": "posts/2.html#resources",
+    "href": "posts/2.html#resources",
+    "title": "Week 2",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
   },
   {
     "objectID": "posts/1.html",
@@ -1089,7 +1103,7 @@
     "href": "index.html",
     "title": "Welcome to Introduction to Data Management!",
     "section": "",
-    "text": "Week 8\n\n\nThis week we will cover CTE.\n\n\n\n\n\nOct 10, 2026\n\n\n\n\n\n\n\nWeek 7\n\n\nThis week we will cover CTE.\n\n\n\n\n\nOct 4, 2026\n\n\n\n\n\n\n\nWeek 6\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Week 10: Dates, Times and Strings\n\n\nThis week we will cover Dates and Strings.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\nWeek 9: Pivot Tables\n\n\nThis week we will cover Pivot Tables.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\nWeek 8: Window Functions\n\n\nThis week we will cover Window Functions.\n\n\n\n\n\nOct 10, 2026\n\n\n\n\n\n\n\nWeek 7: CTE\n\n\nThis week we will cover CTE.\n\n\n\n\n\nOct 4, 2026\n\n\n\n\n\n\n\nWeek 6: Joins\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5: SQL Basics\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4: Databases\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures/1a.html#introductions-1",
@@ -2331,59 +2345,94 @@
     "text": "Solution 5: interpretation and join grain\nBefore rounding, USA + Germany + Other equals total_revenue for each category.\nIndependently rounded columns can differ slightly from a separately rounded total.\nAn order with three detail rows appears three times after the join. Summing its order-level Freight at that point would count freight three times.\nCompute an order-level measure once per order, or define an explicit allocation to order lines before summarizing by category.\nThe inner joins include categories with matching order lines. Categories with no matching sales are absent."
   },
   {
-    "objectID": "posts/2.html",
-    "href": "posts/2.html",
-    "title": "Week 2",
-    "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
-  },
-  {
-    "objectID": "posts/2.html#resources",
-    "href": "posts/2.html#resources",
-    "title": "Week 2",
-    "section": "",
-    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides\n\n\n2\nSlides"
-  },
-  {
-    "objectID": "posts/4.html",
-    "href": "posts/4.html",
-    "title": "Week 4",
+    "objectID": "posts/10.html",
+    "href": "posts/10.html",
+    "title": "Week 10: Dates, Times and Strings",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/4.html#resources",
-    "href": "posts/4.html#resources",
-    "title": "Week 4",
+    "objectID": "posts/10.html#resources",
+    "href": "posts/10.html#resources",
+    "title": "Week 10: Dates, Times and Strings",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/6.html",
-    "href": "posts/6.html",
-    "title": "Week 6",
+    "objectID": "posts/10.html#videos",
+    "href": "posts/10.html#videos",
+    "title": "Week 10: Dates, Times and Strings",
+    "section": "Videos",
+    "text": "Videos"
+  },
+  {
+    "objectID": "posts/3.html",
+    "href": "posts/3.html",
+    "title": "Week 3",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/6.html#resources",
-    "href": "posts/6.html#resources",
-    "title": "Week 6",
+    "objectID": "posts/3.html#resources",
+    "href": "posts/3.html#resources",
+    "title": "Week 3",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/8.html",
-    "href": "posts/8.html",
-    "title": "Week 8",
+    "objectID": "posts/5.html",
+    "href": "posts/5.html",
+    "title": "Week 5: SQL Basics",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
-    "objectID": "posts/8.html#resources",
-    "href": "posts/8.html#resources",
-    "title": "Week 8",
+    "objectID": "posts/5.html#resources",
+    "href": "posts/5.html#resources",
+    "title": "Week 5: SQL Basics",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/7.html",
+    "href": "posts/7.html",
+    "title": "Week 7: CTE",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/7.html#resources",
+    "href": "posts/7.html#resources",
+    "title": "Week 7: CTE",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/7.html#youtube-videos",
+    "href": "posts/7.html#youtube-videos",
+    "title": "Week 7: CTE",
+    "section": "Youtube Videos",
+    "text": "Youtube Videos\n\nAdvanced SQL Tutorial — CTE (Common Table Expression)\nSQL WITH Clause — How to Write SQL Queries Using WITH Clause\nSQL WITH Clause\nComplex SQL Breakdown\nRecursive CTE\nRecursive SQL Queries"
+  },
+  {
+    "objectID": "posts/9.html",
+    "href": "posts/9.html",
+    "title": "Week 9: Pivot Tables",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/9.html#resources",
+    "href": "posts/9.html#resources",
+    "title": "Week 9: Pivot Tables",
+    "section": "",
+    "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
+  },
+  {
+    "objectID": "posts/9.html#videos",
+    "href": "posts/9.html#videos",
+    "title": "Week 9: Pivot Tables",
+    "section": "Videos",
+    "text": "Videos"
   }
 ]

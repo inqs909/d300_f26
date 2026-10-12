@@ -1,7 +1,7 @@
 ---
-title: "Week 8"
+title: "Week 8: Window Functions"
 date: 10-10-26
-description: This week we will cover CTE.
+description: This week we will cover Window Functions.
 editor: source
 ---
 
