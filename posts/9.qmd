@@ -1,7 +1,7 @@
 ---
-title: "Week 9: Pivot Tables"
+title: "Week 9: Dates, Times and Strings"
 date: 10-19-26
-description: This week we will cover Pivot Tables.
+description: This week we will cover Dates and Strings.
 editor: source
 ---
 
@@ -13,4 +13,13 @@ editor: source
 | 1       | [Slides](../lectures/8a) |
 
 ## Videos 
+
+### Dates
+
+[Dates](https://www.youtube.com/watch?v=nJRvz5Rhrx0)
+
+### Strings
+
+[String Functions (MySQL)](https://www.youtube.com/watch?v=KRXSJb9ql1Y)
+[Full Text Search (SQLite)](https://www.youtube.com/watch?v=eXMA_2dEMO0)
 

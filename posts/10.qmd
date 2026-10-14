@@ -1,7 +1,7 @@
 ---
-title: "Week 10: Dates, Times and Strings"
+title: "Week 10: Pivot Tables"
 date: 10-19-26
-description: This week we will cover Dates and Strings.
+description: This week we will cover Pivot Tables.
 editor: source
 ---
 
@@ -12,5 +12,4 @@ editor: source
 |---------|--------------------------|
 | 1       | [Slides](../lectures/8a) |
 
-## Videos 
 

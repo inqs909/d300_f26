@@ -11,3 +11,6 @@ editor: source
 | Lecture | Slides                   |
 |---------|--------------------------|
 | 1       | [Slides](../lectures/8a) |
+
+## Videos
+

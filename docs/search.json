@@ -56,6 +56,13 @@
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
+    "objectID": "posts/8.html#videos",
+    "href": "posts/8.html#videos",
+    "title": "Week 8: Window Functions",
+    "section": "Videos",
+    "text": "Videos"
+  },
+  {
     "objectID": "posts/6.html",
     "href": "posts/6.html",
     "title": "Week 6: Joins",
@@ -1103,7 +1110,7 @@
     "href": "index.html",
     "title": "Welcome to Introduction to Data Management!",
     "section": "",
-    "text": "Week 10: Dates, Times and Strings\n\n\nThis week we will cover Dates and Strings.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\nWeek 9: Pivot Tables\n\n\nThis week we will cover Pivot Tables.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\nWeek 8: Window Functions\n\n\nThis week we will cover Window Functions.\n\n\n\n\n\nOct 10, 2026\n\n\n\n\n\n\n\nWeek 7: CTE\n\n\nThis week we will cover CTE.\n\n\n\n\n\nOct 4, 2026\n\n\n\n\n\n\n\nWeek 6: Joins\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5: SQL Basics\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4: Databases\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Week 10: Pivot Tables\n\n\nThis week we will cover Pivot Tables.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\nWeek 9: Dates, Times and Strings\n\n\nThis week we will cover Dates and Strings.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\nWeek 8: Window Functions\n\n\nThis week we will cover Window Functions.\n\n\n\n\n\nOct 10, 2026\n\n\n\n\n\n\n\nWeek 7: CTE\n\n\nThis week we will cover CTE.\n\n\n\n\n\nOct 4, 2026\n\n\n\n\n\n\n\nWeek 6: Joins\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5: SQL Basics\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4: Databases\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures/1a.html#introductions-1",
@@ -2347,23 +2354,16 @@
   {
     "objectID": "posts/10.html",
     "href": "posts/10.html",
-    "title": "Week 10: Dates, Times and Strings",
+    "title": "Week 10: Pivot Tables",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
     "objectID": "posts/10.html#resources",
     "href": "posts/10.html#resources",
-    "title": "Week 10: Dates, Times and Strings",
+    "title": "Week 10: Pivot Tables",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
-  },
-  {
-    "objectID": "posts/10.html#videos",
-    "href": "posts/10.html#videos",
-    "title": "Week 10: Dates, Times and Strings",
-    "section": "Videos",
-    "text": "Videos"
   },
   {
     "objectID": "posts/3.html",
@@ -2417,22 +2417,22 @@
   {
     "objectID": "posts/9.html",
     "href": "posts/9.html",
-    "title": "Week 9: Pivot Tables",
+    "title": "Week 9: Dates, Times and Strings",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
     "objectID": "posts/9.html#resources",
     "href": "posts/9.html#resources",
-    "title": "Week 9: Pivot Tables",
+    "title": "Week 9: Dates, Times and Strings",
     "section": "",
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
     "objectID": "posts/9.html#videos",
     "href": "posts/9.html#videos",
-    "title": "Week 9: Pivot Tables",
+    "title": "Week 9: Dates, Times and Strings",
     "section": "Videos",
-    "text": "Videos"
+    "text": "Videos\n\nDates\nDates\n\n\nStrings\nString Functions (MySQL) Full Text Search (SQLite)"
   }
 ]
