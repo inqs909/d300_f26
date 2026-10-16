@@ -1,6 +1,6 @@
 ---
 title: "Advanced SQL"
-subtitle: "Common Table Expressions"
+subtitle: "Date/Time and String Functions"
 format:
   revealjs:
     scrollable: true
@@ -26,799 +26,1728 @@ order: 10
 ---
 
 
-## Databases and downloads
+## Files and classroom setup
 
-| Database | Download | Tables used |
+1. Open **`classroom_music.sqlite`** in your SQLite application.
+2. Use its SQL editor to run each example or activity.
+3. Keep the database open throughout the lesson.
+
+The included database is **synthetic classroom data**. `Customer`, `Invoice`, `Track`, and `Employee` use selected Chinook table and column names.
+
+`classroom_setup.sql` can rebuild it in a **new, empty** database. Do not run that script against an existing Chinook database.
+
+::: {.notes}
+The full Chinook database is optional. Examples using its shared columns transfer to it, but dates, counts, and totals differ. practice_contact and practice_event are classroom-only tables. The supplied database is already initialized.
+:::
+
+## The music-store tables
+
+| Table | Columns used | One row represents |
 |---|---|---|
-| Chinook | [Chinook releases](https://github.com/lerocha/chinook-database/releases)  | `Invoice` |
-| Northwind | [northwind.db](https://github.com/jpwhite3/northwind-SQLite3/blob/main/dist/northwind.db)  | `Products`, `Categories`, `Orders`, `"Order Details"` |
+| `Customer` | `CustomerId`, `FirstName`, `LastName`, `Company`, `Email`, `Phone`, `Country` | One customer |
+| `Invoice` | `InvoiceId`, `CustomerId`, `InvoiceDate`, `Total` | One purchase |
+| `Track` | `TrackId`, `Name`, `Composer`, `Milliseconds` | One track |
+| `Employee` | `EmployeeId`, `FirstName`, `LastName`, `BirthDate`, `HireDate` | One employee |
 
+Join `Invoice.CustomerId` to `Customer.CustomerId`.
 
-::: notes
-Sources: https://github.com/lerocha/chinook-database and https://github.com/jpwhite3/northwind-SQLite3
-:::
+Classroom `InvoiceDate` values use UTC, with format `YYYY-MM-DD HH:MM:SS`.
 
+## Tables for deliberately messy data
 
-
-## Long and wide layouts
-
-**Illustrative sales totals, not Chinook output**
-
-:::: {.columns}
-::: {.column width="48%"}
-**Long: one row per country and month**
-
-| country | month | sales |
-|---|---|---:|
-| Canada | Jan | 30 |
-| Canada | Feb | 20 |
-| USA | Jan | 50 |
-| USA | Feb | 40 |
-:::
-::: {.column width="48%"}
-**Wide: one row per country**
-
-| country | Jan | Feb |
-|---|---:|---:|
-| Canada | 30 | 20 |
-| USA | 50 | 40 |
-
-**Pivot:** category values become columns.
-
-**Unpivot:** columns become category/value rows.
-:::
-::::
-
-## The three decisions in a pivot
-
-For a report of monthly sales by country:
-
-| Decision | Example | SQL role |
+| Table | Columns | Purpose |
 |---|---|---|
-| What identifies a row? | Country and year | `GROUP BY` |
-| Which categories become columns? | January, February, March | `CASE WHEN` conditions |
-| What fills each cell? | Total sales | `SUM(Total)` |
+| `practice_contact` | `contact_id`, `first_name`, `last_name`, `email`, `phone` | Spaces, blanks, NULLs, mixed case, malformed email |
+| `practice_event` | `event_id`, `label`, `start_text`, `end_text` | Offsets, missing endpoints, invalid input, reversed intervals |
 
-The **grain** describes what one row represents. Adding year to the row keys keeps January in different years separate.
+A timestamp without an offset in these exercises is **assumed UTC**.
 
-## Pivot and unpivot in SQLite
+Keep the raw values. Derive cleaned columns with `SELECT` so you can compare before and after.
 
-SQLite has no built-in `PIVOT` or `UNPIVOT` operators.
+## The SQLite version matters
 
-| Transformation | SQLite approach |
-|---|---|
-| Pivot | `GROUP BY` with `SUM(CASE WHEN ... END)` |
-| Pivot, alternative | An aggregate with `FILTER (WHERE ...)` |
-| Unpivot | One `SELECT` per source column, combined with `UNION ALL` |
+```sql
+SELECT sqlite_version() AS sqlite_version;
+```
 
-A pivot query has a fixed set of output columns. New category values do not automatically create new columns.
+| Feature | Minimum SQLite version |
+|---|---:|
+| `substring()` alias | 3.34.0 |
+| `unixepoch()` and `format()` | 3.38.0 |
+| `subsec` modifier | 3.42.0 |
+| `timediff()`, `octet_length()` | 3.43.0 |
+| `concat()`, `concat_ws()`, ordered aggregate syntax | 3.44.0 |
+| ISO week formats `%G/%V`, `floor`/`ceiling` modifiers | 3.46.0 |
+| `unistr()`, `unistr_quote()` | 3.50.0 |
 
-::: notes
-Sources: https://sqlite.org/lang_select.html and https://sqlite.org/lang_aggfunc.html
+**3.46+ recommended.** Newer optional features are labeled. Core activity solutions use 3.38+.
+
+::: {.notes}
+The engine bundled with a GUI or extension can differ from a separately installed SQLite command. Version checks must run inside the application students use. unistr examples are optional.
 :::
 
-## Activity 1: plan the transformation
+# 1 · Strings
 
-**Pairs · 5 minutes · No SQL required**
+Text values, cleaning, extraction, and search
 
-Use the illustrative sales table from earlier.
+## Text literals and identifiers
 
-1. Identify the row key, column category, and value column for a country-by-month pivot.
-2. Suppose Canada has a second January sale of 10 before aggregation. What should the January total become?
-3. What columns would an unpivoted result contain?
-4. Could unpivoting the totals recover the separate sales of 30 and 10? Explain.
+```sql
+SELECT 'Ada' AS first_name,          -- <1>
+       'O''Brien' AS last_name,      -- <2>
+       'Data 300' AS "course label"; -- <3>
+```
 
-**Deliverable:** a wide table and four short answers.
+1. Single quotes create a text value.
+2. Two adjacent apostrophes represent one apostrophe.
+3. Double quotes delimit an identifier, including an alias with a space.
 
-## Chinook: invoices as the starting point
+`NULL`, `''`, and `'NULL'` are three different values.
 
-| Field | Meaning in this lesson |
+## Text, numbers, and missing values
+
+```sql
+SELECT typeof('007') AS text_type,
+       typeof(7) AS number_type,
+       length('') AS empty_length,
+       length(NULL) AS missing_length;
+```
+
+| `text_type` | `number_type` | `empty_length` | `missing_length` |
+|---|---|---:|---|
+| text | integer | 0 | NULL |
+
+Store phone numbers, postal codes, and identifiers as text when leading zeros matter.
+
+Use `IS NULL` to test missingness. `= NULL` does not evaluate to true.
+
+## Concatenation with ||
+
+```sql
+SELECT CustomerId,
+       FirstName || ' ' || LastName AS customer_name -- <1>
+FROM Customer
+ORDER BY CustomerId;
+```
+
+1. `||` joins text expressions in the order written.
+
+`'Data ' || '300'` gives `Data 300`.
+
+`'Data ' + '300'` performs numeric conversion and addition. In this example it gives `300`.
+
+## NULL-aware labels
+
+```sql
+SELECT CustomerId,
+       FirstName || ' ' || LastName AS customer_name,
+       COALESCE(NULLIF(trim(Company), ''),
+                'Individual') AS customer_type -- <1>
+FROM Customer
+ORDER BY CustomerId;
+```
+
+1. `trim()` removes surrounding spaces, `NULLIF(..., '')` converts blanks to NULL, and `COALESCE()` provides a fallback.
+
+Most string functions propagate NULL. `text || NULL` produces NULL.
+
+`ifnull(x, fallback)` is the two-argument alternative to `coalesce()`.
+
+## concat() and concat_ws() · SQLite 3.44+
+
+```sql
+SELECT concat('Ana', NULL, 'Rivera') AS joined,
+       concat_ws(' ', 'Ana', NULL, 'Rivera') AS spaced;
+```
+
+| `joined` | `spaced` |
 |---|---|
-| `InvoiceId` | Identifies one invoice |
-| `InvoiceDate` | Date and time of the invoice |
-| `BillingCountry` | Country on the invoice |
-| `Total` | Total invoice amount |
+| AnaRivera | Ana Rivera |
 
-The starting grain is **one row per invoice**.
+- These functions skip NULL values among the values being joined.
+- `concat_ws()` places the separator between retained values.
+- Empty strings are retained and can create extra separators.
+- All NULL value arguments give `''`. A NULL separator gives NULL.
 
-We will summarize to **one row per billing country and year**. We do not need a join for this report.
+## Activity 1 · Predict before running {.activity}
 
-::: notes
-Schema: https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sql
-:::
+**Pairs · 4 minutes · No table needed**
 
-## Chinook: inspecting invoice dates
-
-**Database: Chinook**
+Predict every output. Explain which results are NULL.
 
 ```sql
-SELECT MIN(InvoiceDate) AS first_invoice,
-       MAX(InvoiceDate) AS last_invoice
-FROM Invoice; -- <1>
-
-SELECT InvoiceId, BillingCountry, InvoiceDate,
-       strftime('%Y', InvoiceDate) AS sales_year, -- <2>
-       strftime('%m', InvoiceDate) AS sales_month,
-       Total
-FROM Invoice
-ORDER BY InvoiceDate, InvoiceId
-LIMIT 6; -- <3>
+SELECT 'A' || NULL AS a,
+       'A' || '' AS b,
+       length('') AS c,
+       COALESCE(NULLIF(trim('   '), ''), 'Unknown') AS d;
 ```
 
-1. Check the actual date range. Chinook releases may use different years.
-2. Extract year and month as text. Compare months with `'01'`, `'02'`, and so on.
-3. Preview six invoices with deterministic ordering.
+Then run the query and write one sentence explaining why an empty string and NULL behave differently.
 
-## Chinook: a long monthly summary
-
-**Database: Chinook**
+## Case conversion and Unicode
 
 ```sql
-SELECT BillingCountry,
-       strftime('%Y', InvoiceDate) AS sales_year,
-       strftime('%m', InvoiceDate) AS sales_month, -- <1>
-       ROUND(SUM(Total), 2) AS sales -- <2>
-FROM Invoice
-WHERE strftime('%m', InvoiceDate) IN ('01', '02', '03')
-GROUP BY BillingCountry, sales_year, sales_month -- <3>
-ORDER BY BillingCountry, sales_year, sales_month;
+SELECT lower('DATA 300') AS lower_case,
+       upper('Data 300') AS upper_case,
+       upper('é') AS accented_letter;
 ```
 
-1. Extract the time categories before grouping.
-2. Add invoice totals, then round the displayed result.
-3. Each result row represents an observed country/year/month combination in January–March.
+Expected: `data 300`, `DATA 300`, and `é` with the standard built-in functions.
 
-## Chinook: how CASE selects values
+`lower()` and `upper()` handle **ASCII case conversion** by default. They do not provide full Unicode case folding or accent removal.
 
-**Database: Chinook**
+For multilingual matching, define a normalization policy and use an appropriate extension or application layer.
+
+## How long is a string?
 
 ```sql
-SELECT InvoiceId, InvoiceDate, Total,
-       CASE
-         WHEN strftime('%m', InvoiceDate) = '01'
-         THEN Total -- <1>
-         ELSE 0 -- <2>
-       END AS january_contribution
-FROM Invoice
-ORDER BY InvoiceDate, InvoiceId
-LIMIT 10; -- <3>
+SELECT length('café') AS code_points,
+       length(CAST('café' AS BLOB)) AS utf8_bytes; -- <1>
 ```
 
-1. A January invoice contributes its total.
-2. Every other invoice contributes zero to the January sum.
-3. `CASE` by itself still returns invoice-level rows. Aggregation performs the next step.
+1. In the supplied UTF-8 database, the results are **4** and **5**.
 
-## Chinook: the first pivot
+- `length(TEXT)` counts Unicode code points before the first NUL character.
+- `length(BLOB)` counts bytes.
+- A visible symbol can contain multiple code points.
+- `octet_length()` counts text bytes directly in SQLite 3.43+.
 
-**Database: Chinook**
+Character count, visible-symbol count, and byte count can differ.
+
+## Extracting with substr()
 
 ```sql
-SELECT BillingCountry,
-       strftime('%Y', InvoiceDate) AS sales_year, -- <1>
-       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'
-                      THEN Total ELSE 0 END), 2) AS Jan, -- <2>
-       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '02'
-                      THEN Total ELSE 0 END), 2) AS Feb,
-       ROUND(SUM(CASE WHEN strftime('%m', InvoiceDate) = '03'
-                      THEN Total ELSE 0 END), 2) AS Mar
-FROM Invoice
-GROUP BY BillingCountry, sales_year -- <3>
-ORDER BY BillingCountry, sales_year;
+SELECT substr('SQLite', 1, 3) AS first_three, -- <1>
+       substr('SQLite', 4) AS from_four,     -- <2>
+       substr('SQLite', -3) AS last_three;   -- <3>
 ```
 
-1. Keep country and year as the row keys.
-2. Each conditional sum fills one month column.
-3. Combine invoices into one row for each observed country/year pair.
+1. Start at position **1** and take three characters: `SQL`.
+2. Omit the length to continue to the end: `ite`.
+3. A negative start counts from the right: `ite`.
 
-All invoices remain in the input, so a country/year with only later sales still appears with three zeros.
+`substring()` is an alias in SQLite 3.34+. Prefer positive lengths for clear classroom code.
 
-## Reading a pivot result
-
-| BillingCountry | sales_year | Jan | Feb | Mar |
-|---|---|---:|---:|---:|
-| Canada | 2025 | 30 | 20 | 0 |
-
-**Illustrative row, not actual Chinook output.**
-
-- `Jan = 30` represents the sum of January invoice totals.
-- The columns contain amounts, not invoice counts.
-- `Mar = 0` can mean no March invoices under our zero-filling rule.
-- A country/year with no invoices at all will not appear.
-
-To include entirely absent groups, start with a complete list of desired row keys and use a `LEFT JOIN`.
-
-## Chinook: counting instead of summing sales
-
-**Database: Chinook**
+## Finding a delimiter with instr()
 
 ```sql
-SELECT strftime('%Y', InvoiceDate) AS sales_year,
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'
-                THEN 1 ELSE 0 END) AS Jan_invoices, -- <1>
-       COUNT(CASE WHEN strftime('%m', InvoiceDate) = '02'
-                  THEN 1 END) AS Feb_invoices -- <2>
-FROM Invoice
-GROUP BY sales_year
-ORDER BY sales_year;
+SELECT instr('ana@example.edu', '@') AS at_position,
+       instr('ana.example.edu', '@') AS missing_at;
 ```
 
-1. Sum one for each matching invoice and zero for each nonmatch.
-2. `COUNT(expression)` counts non-NULL values. Without `ELSE`, nonmatches produce NULL.
+Results: **4** and **0**.
 
-**Pitfall:** `COUNT(CASE WHEN ... THEN 1 ELSE 0 END)` counts both ones and zeros.
+`instr(text, search)` returns the position of the **first** match. It returns 0 when there is no match, and NULL if an argument is NULL.
 
-## Chinook: the FILTER alternative
+A zero result must be handled before extracting text relative to a delimiter.
 
-**Database: Chinook**
-
-```sql
-SELECT BillingCountry,
-       strftime('%Y', InvoiceDate) AS sales_year,
-       ROUND(COALESCE(SUM(Total) FILTER (
-         WHERE strftime('%m', InvoiceDate) = '01'
-       ), 0), 2) AS Jan, -- <1>
-       ROUND(COALESCE(SUM(Total) FILTER (
-         WHERE strftime('%m', InvoiceDate) = '02'
-       ), 0), 2) AS Feb -- <2>
-FROM Invoice
-GROUP BY BillingCountry, sales_year
-ORDER BY BillingCountry, sales_year;
-```
-
-1. `FILTER` restricts the input to this aggregate without removing the group.
-2. `SUM` returns NULL when it has no non-NULL inputs. `COALESCE(..., 0)` supplies zero.
-
-Optional syntax: SQLite 3.30.0+. The `CASE` approach remains the main method for this lecture.
-
-## Zero, NULL, and absent groups
-
-| Situation | Meaning | Treatment |
-|---|---|---|
-| Known value of zero | Measured amount is zero | Keep zero |
-| Missing or unknown measurement | Value is unknown | Usually keep `NULL` |
-| No transactions for a displayed cell | No matching invoices | Zero may suit a sales report |
-| No source rows for a row key | Group is absent | Build a complete group list if needed |
-
-`ELSE 0` and `COALESCE` are reporting choices. They do not prove that missing information is a measured zero.
-
-For a conditional **average**, use `AVG(CASE WHEN ... THEN Total END)`. Adding `ELSE 0` would include nonmatches in the denominator.
-
-## Activity 2: Chinook invoice counts
-
-**Individual or pairs · 10 minutes · Database: Chinook**
-
-Build a pivot with one row per invoice year.
-
-1. Create columns `Apr_invoices`, `May_invoices`, and `Jun_invoices`.
-2. Count invoices, rather than summing `Total`.
-3. Add `Q2_invoices`, covering April through June.
-4. Sort by year and check that the three month columns add to `Q2_invoices`.
-5. Explain why grouping only by month would answer a different question.
-
-**Deliverable:** SQL, its output, and your explanation. Use all available invoice years.
-
-## Chinook: a reusable Q1 pivot
-
-**Database: Chinook**
+## Extracting an email domain
 
 ```sql
-DROP VIEW IF EXISTS temp.lecture_q1_sales;
-CREATE TEMP VIEW lecture_q1_sales AS -- <1>
-SELECT BillingCountry,
-       strftime('%Y', InvoiceDate) AS sales_year,
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '01'
-                THEN Total ELSE 0 END) AS Jan,
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '02'
-                THEN Total ELSE 0 END) AS Feb,
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '03'
-                THEN Total ELSE 0 END) AS Mar -- <2>
-FROM Invoice
-GROUP BY BillingCountry, sales_year; -- <3>
-```
-
-1. Create a temporary named query, replacing only this lesson’s temporary view on reruns.
-2. Keep unrounded amounts for later calculations. Round the final display.
-3. The view has one row per observed country/year pair. It lasts for the current connection.
-
-Run the entire block. This view is required for Activity 4.
-
-## Northwind: inventory in a wide table
-
-**Database: Northwind**
-
-| Field in `Products` | Meaning |
-|---|---|
-| `ProductID` | Stable product identifier |
-| `ProductName` | Product label |
-| `UnitsInStock` | Units currently in inventory |
-| `UnitsOnOrder` | Units ordered from suppliers |
-| `ReorderLevel` | Inventory threshold for reordering |
-
-We will convert the stock and order columns into rows.
-
-A reorder threshold is a different kind of quantity. Do not add it to stock and orders as if it were inventory.
-
-::: notes
-Schema: https://github.com/jpwhite3/northwind-SQLite3
-:::
-
-## Northwind: inspecting the source
-
-**Database: Northwind**
-
-```sql
-SELECT ProductID, ProductName,
-       UnitsInStock, UnitsOnOrder, ReorderLevel -- <1>
-FROM Products
-ORDER BY ProductID
-LIMIT 5; -- <2>
-```
-
-1. Read the measures currently stored in separate columns.
-2. Inspect a small sample. One source row represents one product.
-
-## Unpivot: a worked table
-
-**Illustrative inventory, not Northwind output**
-
-| ProductID | ProductName | UnitsInStock | UnitsOnOrder |
-|---:|---|---:|---:|
-| 101 | Tea | 12 | 5 |
-| 102 | Coffee | 0 | 8 |
-
-After unpivoting:
-
-| ProductID | ProductName | inventory_status | units |
-|---:|---|---|---:|
-| 101 | Tea | In stock | 12 |
-| 101 | Tea | On order | 5 |
-| 102 | Coffee | In stock | 0 |
-| 102 | Coffee | On order | 8 |
-
-The new grain is **one row per product and inventory status**.
-
-## Northwind: unpivot with UNION ALL
-
-**Database: Northwind**
-
-```sql
-SELECT ProductID, ProductName,
-       'In stock' AS inventory_status, -- <1>
-       UnitsInStock AS units
-FROM Products
-UNION ALL -- <2>
-SELECT ProductID, ProductName,
-       'On order' AS inventory_status,
-       UnitsOnOrder AS units -- <3>
-FROM Products
-ORDER BY ProductID, inventory_status; -- <4>
-```
-
-1. Convert the original column meaning into a text value.
-2. Stack both result sets and preserve every generated row.
-3. Use the same column order and compatible types in both branches.
-4. Sort the complete combined result. Keep the product ID in both branches.
-
-## UNION ALL and missing values
-
-- Every branch must return the same number of columns in the same logical order.
-- The first `SELECT` determines the output column names.
-- `UNION ALL` retains all generated rows. `UNION` removes exact duplicates.
-- This unpivot keeps zero values and `NULL` values.
-- With two branches and no filters, **N products produce 2N rows**.
-
-Preserve `ProductID`. Different products can share a name.
-
-::: notes
-Source: https://sqlite.org/lang_select.html, compound SELECT statements.
-:::
-
-## Northwind: a reusable long inventory view
-
-**Database: Northwind**
-
-```sql
-DROP VIEW IF EXISTS temp.lecture_inventory_long;
-CREATE TEMP VIEW lecture_inventory_long AS -- <1>
-SELECT ProductID, ProductName,
-       'In stock' AS inventory_status, UnitsInStock AS units
-FROM Products
-UNION ALL
-SELECT ProductID, ProductName,
-       'On order' AS inventory_status, UnitsOnOrder AS units
-FROM Products; -- <2>
-```
-
-1. Save the unpivot query as a temporary view.
-2. The view keeps one row for every product/status pair, including NULL and zero values.
-
-## Northwind: filtering the long result
-
-**Database: Northwind**
-
-```sql
-SELECT ProductID, ProductName, inventory_status, units
-FROM lecture_inventory_long
-WHERE units IS NOT NULL -- <1>
-ORDER BY ProductID, inventory_status;
-
-SELECT inventory_status, SUM(units) AS total_units,
-       COUNT(*) AS rows_present,
-       COUNT(units) AS known_values -- <2>
-FROM lecture_inventory_long
-GROUP BY inventory_status;
-```
-
-1. Filter the outer query to drop unknown measurements from both branches. Zero remains.
-2. `COUNT(*)` counts rows while `COUNT(units)` counts known values. `SUM` ignores NULL inputs.
-
-Prerequisite: run the temporary-view block on the previous slide in this connection.
-
-## Northwind: pivoting inventory back
-
-**Database: Northwind**
-
-```sql
-SELECT ProductID, ProductName,
-       MAX(CASE WHEN inventory_status = 'In stock'
-                THEN units END) AS UnitsInStock, -- <1>
-       MAX(CASE WHEN inventory_status = 'On order'
-                THEN units END) AS UnitsOnOrder
-FROM lecture_inventory_long
-GROUP BY ProductID, ProductName -- <2>
-ORDER BY ProductID;
-```
-
-1. With exactly one value per product/status, `MAX` retrieves that value. Missing values stay NULL.
-2. Group by the product identifier and its label to restore one row per product.
-
-`MAX` is appropriate here because each product/status pair is unique. Check uniqueness before using it to reshape other data.
-
-## Activity 3: three Northwind measures
-
-**Pairs · 10 minutes · Database: Northwind**
-
-Unpivot `UnitsInStock`, `UnitsOnOrder`, and `ReorderLevel`.
-
-1. Return `ProductID`, `ProductName`, `measure`, and `value`.
-2. Label the measures `In stock`, `On order`, and `Reorder level`.
-3. Keep every product and preserve zeros and NULLs.
-4. Predict the row count as a multiple of the product count.
-5. Return a second result containing only positive `On order` values.
-
-**Deliverable:** both SQL queries and a sentence explaining why you should not add the three measures together.
-
-## What a round trip can recover
-
-| Starting data | Pivot behavior | What unpivoting recovers |
-|---|---|---|
-| One value per product/status | Retrieves each value | Original values, if keys and NULLs are preserved |
-| Many invoices per country/month | Adds invoice totals | Monthly totals only |
-| Missing category replaced with zero | Fills a missing cell | Zero, without its original missingness |
-
-Aggregation discards information. A total of 40 does not reveal whether the original invoices were 30 + 10, 20 + 20, or one invoice of 40.
-
-## Activity 4: Chinook pivot and unpivot
-
-**Pairs · 12 minutes · Database: Chinook**
-
-First run the earlier **reusable Q1 pivot** block to create `lecture_q1_sales`.
-
-1. Unpivot its `Jan`, `Feb`, and `Mar` columns.
-2. Return `BillingCountry`, `sales_year`, `sales_month`, and `sales`.
-3. Use month labels `'01'`, `'02'`, and `'03'`. Preserve zeros.
-4. Sort by country, year, and month.
-5. Check that total long sales equals the original January–March invoice total, rounded to two decimals.
-6. Explain why the long result need not have the same row count as the earlier long monthly summary.
-
-**Deliverable:** an unpivot query, a totals check, and your explanation.
-
-## Northwind extension: revenue across countries
-
-The extension combines joins with a pivot.
-
-| Table | Fields needed |
-|---|---|
-| `Orders` | `OrderID`, `ShipCountry` |
-| `"Order Details"` | `OrderID`, `ProductID`, `UnitPrice`, `Quantity`, `Discount` |
-| `Products` | `ProductID`, `CategoryID` |
-| `Categories` | `CategoryID`, `CategoryName` |
-
-**Line revenue = UnitPrice × Quantity × (1 − Discount)**
-
-Use the order-line price. `Products.UnitPrice` describes the catalog price and may differ. `Discount` is a fraction, such as 0.10 for 10%.
-
-## Activity 5: Northwind revenue pivot
-
-**Optional extension · 15 minutes · Database: Northwind**
-
-1. Join orders to order details, products, and categories.
-2. Calculate discounted revenue at the order-line grain.
-3. Pivot to one row per category, with columns `USA`, `Germany`, and `Other` based on `ShipCountry`.
-4. Treat every remaining country, including NULL, as `Other` for this exercise.
-5. Add `total_revenue` and round displayed amounts to two decimals.
-6. Explain why adding order-level freight after this join could overcount it.
-
-**Deliverable:** a CTE plus pivot query and your explanation. Include categories represented by the joined order lines.
-
-## Common mistakes
-
-| Mistake | Result | Correction |
-|---|---|---|
-| Grouping by month while creating month columns | Separate rows for months | Group by the intended row keys |
-| Omitting year unintentionally | Same months across years combine | Keep year among the keys |
-| `COUNT(CASE ... ELSE 0 END)` | Nonmatches count too | Use `SUM` of 1/0 or omit `ELSE` |
-| Dropping product identifiers | Different products may combine | Retain `ProductID` |
-| Summing order totals after joining lines | Repeated amounts inflate totals | Aggregate at the correct grain |
-| Summing already-rounded cells | Small discrepancies | Round after the final sum |
-
-## Glossary: reshaping
-
-| Term | Meaning |
-|---|---|
-| Grain | What one result row represents |
-| Long format | Categories appear as values in rows |
-| Wide format | Selected categories appear as separate columns |
-| Pivot | Reshapes category values into columns, often aggregating |
-| Unpivot | Reshapes selected columns into category/value rows |
-| Conditional aggregation | Applies an aggregate to values selected by a condition |
-| Row key | Column or set of columns that identifies a result row |
-
-## Glossary: SQL expressions
-
-| Expression | Role in this lecture |
-|---|---|
-| `CASE WHEN ... THEN ... ELSE ... END` | Chooses each row’s contribution |
-| `SUM`, `COUNT`, `MAX`, `AVG` | Summarize selected values |
-| `FILTER (WHERE ...)` | Restricts input to one aggregate |
-| `strftime('%Y', date)` | Extracts a year as text |
-| `strftime('%m', date)` | Extracts a two-digit month as text |
-| `COALESCE(x, 0)` | Replaces NULL with zero |
-| `ROUND(x, 2)` | Rounds a result to two decimal places |
-
-## Glossary: query structure
-
-| Command | Role in this lecture |
-|---|---|
-| `SELECT ... FROM ...` | Chooses expressions and their source |
-| `WHERE` | Filters source rows |
-| `GROUP BY` | Defines aggregation groups |
-| `ORDER BY`, `LIMIT` | Sorts and restricts returned rows |
-| `UNION ALL` | Stacks rows without removing duplicates |
-| `WITH ... AS (...)` | Names a query for one statement |
-| `CREATE TEMP VIEW` | Names a query for the current connection |
-| `JOIN ... ON ...` | Combines matching rows from related tables |
-
-## Sources and further reading
-
-- [Chinook database and SQLite downloads](https://github.com/lerocha/chinook-database)
-- [Northwind SQLite database and schema](https://github.com/jpwhite3/northwind-SQLite3)
-- [SQLite SELECT and compound queries](https://sqlite.org/lang_select.html)
-- [SQLite aggregate functions and FILTER](https://sqlite.org/lang_aggfunc.html)
-- [SQLite CASE expressions](https://sqlite.org/lang_expr.html)
-- [SQLite date and time functions](https://sqlite.org/lang_datefunc.html)
-- [SQLite CREATE VIEW](https://sqlite.org/lang_createview.html)
-- [Quarto code annotations](https://quarto.org/docs/authoring/code-annotation.html)
-
-All remaining slides contain **activity solutions**.
-
-## Activity solutions
-
-The following slides contain complete answers to Activities 1–5.
-
-Run each answer in its named database connection.
-
-Activity 4 depends on `lecture_q1_sales`, created in the lecture. Activity 5’s second block depends on its first block’s temporary view.
-
-## Solution 1: planning the transformation
-
-1. **Row key:** country. **Column category:** month. **Values:** summed sales.
-2. Canada’s January total becomes **40**.
-3. The unpivoted columns are `country`, `month`, and `sales`.
-4. Unpivoting returns 40, not the separate sales of 30 and 10.
-
-| country | Jan | Feb |
-|---|---:|---:|
-| Canada | 40 | 20 |
-| USA | 50 | 40 |
-
-The pivot has one row per country. The unpivoted summary has one row per country/month.
-
-## Solution 2: Chinook invoice counts
-
-**Database: Chinook**
-
-```sql
-SELECT strftime('%Y', InvoiceDate) AS sales_year, -- <1>
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '04'
-                THEN 1 ELSE 0 END) AS Apr_invoices,
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '05'
-                THEN 1 ELSE 0 END) AS May_invoices,
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '06'
-                THEN 1 ELSE 0 END) AS Jun_invoices, -- <2>
-       SUM(CASE WHEN strftime('%m', InvoiceDate)
-                     IN ('04', '05', '06')
-                THEN 1 ELSE 0 END) AS Q2_invoices -- <3>
-FROM Invoice
-GROUP BY sales_year
-ORDER BY sales_year;
-```
-
-1. One result row represents one invoice year.
-2. Each matching invoice contributes one to its month.
-3. The Q2 condition covers exactly the three displayed months.
-
-## Solution 2: interpretation and check
-
-For every year:
-
-`Apr_invoices + May_invoices + Jun_invoices = Q2_invoices`
-
-The month conditions are mutually exclusive, and together they cover Q2.
-
-Grouping only by month would combine the same month across different years. It would create a monthly summary with a different grain.
-
-All invoice years remain in the query. A year with no Q2 invoices receives four zeros.
-
-## Solution 3: a three-measure unpivot
-
-**Database: Northwind**
-
-```sql
-DROP VIEW IF EXISTS temp.lecture_product_measures;
-CREATE TEMP VIEW lecture_product_measures AS
-SELECT ProductID, ProductName,
-       'In stock' AS measure, UnitsInStock AS value -- <1>
-FROM Products
-UNION ALL
-SELECT ProductID, ProductName,
-       'On order', UnitsOnOrder
-FROM Products
-UNION ALL
-SELECT ProductID, ProductName,
-       'Reorder level', ReorderLevel -- <2>
-FROM Products;
-```
-
-1. The first branch names the output columns.
-2. The third branch adds one threshold row per product. No branch filters out zeros or NULLs.
-
-## Solution 3: output, filter, and row count
-
-**Database: Northwind**
-
-```sql
-SELECT * FROM lecture_product_measures
-ORDER BY ProductID, measure; -- <1>
-
-SELECT ProductID, ProductName, measure, value
-FROM lecture_product_measures
-WHERE measure = 'On order' AND value > 0 -- <2>
-ORDER BY ProductID;
-
-SELECT (SELECT COUNT(*) FROM Products) * 3 AS expected_rows,
-       COUNT(*) AS actual_rows
-FROM lecture_product_measures; -- <3>
-```
-
-1. Inspect the entire long result.
-2. Return only positive order quantities. NULL does not satisfy this condition.
-3. Each product contributes exactly three rows, so the counts should match.
-
-The reorder level is a threshold. Adding it to stock and orders would not produce a meaningful inventory total.
-
-## Solution 4: unpivoting the Q1 sales view
-
-**Database: Chinook**
-
-```sql
-DROP VIEW IF EXISTS temp.lecture_q1_long;
-CREATE TEMP VIEW lecture_q1_long AS -- <1>
-SELECT BillingCountry, sales_year,
-       '01' AS sales_month, Jan AS sales
-FROM lecture_q1_sales
-UNION ALL
-SELECT BillingCountry, sales_year, '02', Feb
-FROM lecture_q1_sales
-UNION ALL
-SELECT BillingCountry, sales_year, '03', Mar
-FROM lecture_q1_sales; -- <2>
-
-SELECT BillingCountry, sales_year, sales_month,
-       ROUND(sales, 2) AS sales -- <3>
-FROM lecture_q1_long
-ORDER BY BillingCountry, sales_year, sales_month;
-```
-
-1. Prerequisite: run the lecture block that creates `lecture_q1_sales`.
-2. Generate three month rows per country/year, preserving zero cells.
-3. Round only for display. The view retains unrounded values.
-
-## Solution 4: checking totals
-
-**Database: Chinook**
-
-```sql
-SELECT
-  (SELECT ROUND(SUM(sales), 2)
-   FROM lecture_q1_long) AS unpivoted_total, -- <1>
-  (SELECT ROUND(SUM(Total), 2)
-   FROM Invoice
-   WHERE strftime('%m', InvoiceDate)
-         IN ('01', '02', '03')) AS invoice_total; -- <2>
-```
-
-1. Sum all three months across every country/year in the long view.
-2. Independently sum the original Q1 invoices. The rounded totals should match.
-
-SQLite may use floating-point arithmetic for decimal amounts. Compare rounded totals for this classroom check.
-
-## Solution 4: why row counts can differ
-
-The earlier long summary contains only country/year/month combinations with invoices.
-
-The pivot contains every country/year found anywhere in `Invoice`. Unpivoting its three month columns generates **three rows for each of those pairs**.
-
-Consequently, the unpivoted result can include explicit zero rows that were absent from the original summary.
-
-The totals agree, but neither the row count nor the individual invoice detail must match. Unpivoting does not reverse aggregation.
-
-## Solution 5: joined order-line revenue
-
-**Database: Northwind**
-
-```sql
-DROP VIEW IF EXISTS temp.lecture_order_lines;
-CREATE TEMP VIEW lecture_order_lines AS
-SELECT c.CategoryID, c.CategoryName, o.ShipCountry,
-       d.UnitPrice * d.Quantity * (1 - d.Discount)
-         AS line_revenue -- <1>
-FROM Orders AS o
-JOIN "Order Details" AS d ON o.OrderID = d.OrderID -- <2>
-JOIN Products AS p ON d.ProductID = p.ProductID
-JOIN Categories AS c ON p.CategoryID = c.CategoryID; -- <3>
-```
-
-1. Calculate revenue from the price, quantity, and discount on each order line.
-2. Quote the table name because it contains a space.
-3. Add each product’s category without changing the order-line grain.
-
-## Solution 5: revenue pivot with a CTE
-
-**Database: Northwind**
-
-```sql
-WITH country_groups AS (
-  SELECT CategoryID, CategoryName, line_revenue,
-         CASE WHEN ShipCountry IN ('USA', 'Germany')
-              THEN ShipCountry ELSE 'Other' END AS country_group -- <1>
-  FROM lecture_order_lines
+WITH cleaned AS (
+    SELECT contact_id,
+           NULLIF(lower(trim(email)), '') AS email_clean -- <1>
+    FROM practice_contact
 )
-SELECT CategoryID, CategoryName,
-       ROUND(SUM(CASE WHEN country_group = 'USA'
-                      THEN line_revenue ELSE 0 END), 2) AS USA,
-       ROUND(SUM(CASE WHEN country_group = 'Germany'
-                      THEN line_revenue ELSE 0 END), 2) AS Germany,
-       ROUND(SUM(CASE WHEN country_group = 'Other'
-                      THEN line_revenue ELSE 0 END), 2) AS Other, -- <2>
-       ROUND(SUM(line_revenue), 2) AS total_revenue
-FROM country_groups
-GROUP BY CategoryID, CategoryName -- <3>
-ORDER BY CategoryID;
+SELECT contact_id,
+       CASE WHEN instr(email_clean, '@') > 1
+            THEN substr(email_clean, instr(email_clean, '@') + 1)
+       END AS email_domain -- <2>
+FROM cleaned
+ORDER BY contact_id;
 ```
 
-1. Classify every line, including a NULL shipping country, into one of three groups.
-2. Sum line revenue once into exactly one country column.
-3. Keep the category identifier and label as row keys.
+1. Normalize spaces, ASCII case, and blank values.
+2. Extract after `@`, with a basic guard for a missing username or delimiter.
 
-## Solution 5: interpretation and join grain
+This is **extraction**, not complete email validation.
 
-Before rounding, `USA + Germany + Other` equals `total_revenue` for each category.
+## trim(), ltrim(), and rtrim()
 
-Independently rounded columns can differ slightly from a separately rounded total.
+```sql
+SELECT trim('  Ana  ') AS both_ends,
+       ltrim('  Ana  ') AS left_only,
+       rtrim('  Ana  ') AS right_only,
+       trim('xyAnayx', 'xy') AS character_set;
+```
 
-An order with three detail rows appears three times after the join. Summing its order-level `Freight` at that point would count freight three times.
+`character_set` is `Ana`: the second argument is a **set of characters**, not a word or substring to remove.
 
-Compute an order-level measure once per order, or define an explicit allocation to order lines before summarizing by category.
+By default, these functions remove ordinary spaces at the selected ends. They leave interior spaces and do not automatically remove every kind of whitespace.
 
-The inner joins include categories with matching order lines. Categories with no matching sales are absent.
+## Tabs, line breaks, and replacement
+
+```sql
+SELECT trim(char(9) || 'Ana' || char(10),
+            ' ' || char(9) || char(10) || char(13)) AS clean; -- <1>
+
+SELECT replace('555-010-1001', '-', '') AS phone_digits;      -- <2>
+```
+
+1. Supply spaces, tabs, line feeds, and carriage returns explicitly.
+2. `replace(text, old, new)` replaces every exact occurrence.
+
+`replace()` is case sensitive. Repeated replacements can remove a known set of punctuation characters, but they do not validate a telephone number.
+
+## Activity 2 · Clean contact labels {.activity}
+
+**Pairs · 8 minutes · `practice_contact`**
+
+Return one row per contact with:
+
+1. `contact_id`
+2. `display_name`: trim both names, join with one space, and avoid a trailing space when the last name is NULL.
+3. `email_clean`: lowercase and trim the email, then convert blanks to NULL.
+4. `email_label`: use `No email` when the cleaned email is NULL.
+
+Sort by `contact_id`. **Check:** contact 6 should display `Noah` and `No email`.
+
+Discuss: does lowercasing a name always preserve the person's preferred spelling?
+
+## Activity 3 · Summarize email domains {.activity}
+
+**Pairs · 8 minutes · `practice_contact`**
+
+1. Clean emails using `lower()`, `trim()`, and `NULLIF()`.
+2. Keep rows with exactly one `@`, a nonempty part before it, and a nonempty part after it.
+3. Extract the domain and count contacts per domain.
+4. Sort by count descending, then domain ascending.
+
+**Check:** `music.org` has two contacts and `example.edu` has one.
+
+Hint: count `@` characters with `length(email) - length(replace(email, '@', ''))`.
+
+These checks are intentionally limited and do not establish email validity.
+
+## LIKE patterns
+
+| Pattern | Meaning |
+|---|---|
+| `'Love%'` | Starts with Love |
+| `'%Love%'` | Contains Love |
+| `'%Live'` | Ends with Live |
+| `'A_'` | A followed by exactly one character |
+
+```sql
+SELECT TrackId, Name
+FROM Track
+WHERE Name LIKE '%love%'
+ORDER BY TrackId;
+```
+
+Default `LIKE` ignores ASCII letter case, but does not fully fold non-ASCII case.
+
+## Searching for literal % and _
+
+```sql
+SELECT TrackId, Name
+FROM Track
+WHERE Name LIKE '%!%%' ESCAPE '!' -- <1>
+   OR Name LIKE '%!_%' ESCAPE '!' -- <2>
+ORDER BY TrackId;
+```
+
+1. `!%` means a literal percent sign. The outer `%` symbols remain wildcards.
+2. `!_` means a literal underscore.
+
+The classroom matches are `100% Live` and `Blue_Night`.
+
+Choose an explicit escape character so the pattern's meaning is clear.
+
+## GLOB and regular expressions
+
+```sql
+SELECT TrackId, Name
+FROM Track
+WHERE Name GLOB '*[0-9]*' -- <1>
+ORDER BY TrackId;
+```
+
+1. `*` matches any sequence, and `[0-9]` matches one digit.
+
+| Operator | Wildcards | Case behavior |
+|---|---|---|
+| `LIKE` | `%`, `_` | ASCII case insensitive by default |
+| `GLOB` | `*`, `?`, `[abc]`, `[^abc]` | Case sensitive |
+
+`REGEXP` requires an application-defined function or extension. Stock SQLite does not supply a general regular-expression implementation.
+
+## Activity 4 · Pattern detective {.activity}
+
+**Pairs · 6 minutes · `Track`**
+
+Write separate queries for tracks whose names:
+
+1. Contain `love`, ignoring ASCII case using default `LIKE`.
+2. Contain a literal `%`.
+3. Contain a literal `_`.
+4. Contain at least one digit, using `GLOB`.
+
+Return `TrackId` and `Name`, ordered by `TrackId`.
+
+Predict: will `GLOB '*love*'` match `Love Song`? Explain.
+
+## Collations control comparison and sorting
+
+```sql
+SELECT CustomerId, LastName
+FROM Customer
+ORDER BY LastName COLLATE NOCASE, CustomerId;
+```
+
+| Built-in collation | Main behavior |
+|---|---|
+| `BINARY` | Compares underlying encoded values |
+| `NOCASE` | Folds ASCII uppercase letters for comparison |
+| `RTRIM` | Ignores trailing ordinary spaces when comparing |
+
+A collation does not rewrite the stored text. `NOCASE` does not provide locale-aware multilingual ordering, and does not redefine `LIKE` behavior.
+
+## Formatting values for display
+
+```sql
+SELECT InvoiceId,
+       printf('INV-%04d', InvoiceId) AS invoice_label, -- <1>
+       printf('$%.2f', Total) AS total_label           -- <2>
+FROM Invoice
+ORDER BY InvoiceId
+LIMIT 3;
+```
+
+1. `%04d` formats an integer with at least four digits, padding with zeros.
+2. `%.2f` formats a number with two decimal places.
+
+The labels are **text**. Keep `Total` numeric for sums and numeric sorting. `format()` is an alias in SQLite 3.38+.
+
+## Combining rows with group_concat()
+
+```sql
+SELECT Country,
+       group_concat(FirstName, ', ') AS customers -- <1>
+FROM Customer
+GROUP BY Country
+ORDER BY Country;
+```
+
+1. Join the non-NULL values from multiple rows into one string per group.
+
+Without an explicit input order, the order inside the string is not guaranteed.
+
+`group_concat(DISTINCT Country)` removes duplicates with the default comma separator. Deduplicate in a CTE when you also need a custom separator.
+
+## Ordered text aggregation · SQLite 3.44+
+
+```sql
+SELECT Country,
+       group_concat(FirstName, ', '
+                    ORDER BY FirstName, CustomerId) AS customers -- <1>
+FROM Customer
+GROUP BY Country
+ORDER BY Country;
+```
+
+1. This `ORDER BY` controls the order **inside each joined string**.
+
+The outer `ORDER BY` controls the order of the result rows.
+
+`string_agg(value, separator)` is an alias for the two-argument form of `group_concat()` in SQLite 3.44+.
+
+## Activity 5 · A customer directory {.activity}
+
+**Pairs · 6 minutes · `Customer`**
+
+For each country, return:
+
+1. The country.
+2. The number of customers.
+3. A comma-separated list of customers' full names.
+
+Sort the countries alphabetically. On SQLite 3.44+, also order names by last name, first name, and customer ID inside the list.
+
+**Check:** USA has four customers. The full result contains four countries.
+
+## CAST converts, but does not validate
+
+```sql
+SELECT CAST('007' AS INTEGER) AS number,
+       CAST(7 AS TEXT) AS text_number,
+       CAST('12abc' AS INTEGER) AS numeric_prefix,
+       CAST('abc' AS INTEGER) AS nonnumeric;
+```
+
+Results: **7**, **'7'**, **12**, and **0**.
+
+SQLite can convert a numeric prefix or produce zero without reporting an invalid-number error. Validate an input's structure before treating a successful cast as trustworthy.
+
+Keep identifiers as text when leading zeros are meaningful.
+
+## A portable text workflow
+
+1. Preserve the original input.
+2. Convert documented blanks to NULL.
+3. Remove known unwanted spaces or punctuation.
+4. Normalize case only when appropriate for the field.
+5. Check structure before extracting components.
+6. Aggregate or join using the cleaned value.
+
+Use a CTE to name intermediate results. Do not assume a new alias is available to another expression in the same `SELECT` list.
+
+# 2 · Dates and times
+
+Storage, parsing, formatting, arithmetic, and intervals
+
+## A date, a timestamp, and a duration
+
+| Concept | Example | Interpretation |
+|---|---|---|
+| Calendar date | `2024-02-29` | A day on the calendar |
+| Local date and time | `2024-03-01 09:00:00` | Needs a time-zone convention |
+| Timestamp with offset | `2024-03-01T09:00:00-08:00` | An instant with an explicit offset |
+| Duration | `5400` seconds | Elapsed time between instants |
+
+A birthday usually needs a date. An event log usually needs an instant.
+
+Store track durations as numeric elapsed time, such as `Track.Milliseconds`.
+
+## SQLite has no dedicated date/time storage class
+
+| Representation | Example | Useful for |
+|---|---|---|
+| `TEXT` | `'2024-01-01 00:00:00'` | Readable timestamps in a fixed format |
+| `INTEGER` | `1704067200` | Unix seconds since 1970-01-01 UTC |
+| `REAL` | `2460310.5` | Julian day number and fractional days |
+
+Declaring a column `DATE` or `DATETIME` does not automatically parse or validate every value inserted into it.
+
+Choose one representation, precision, and time-zone policy per column.
+
+## Supported input conventions
+
+```sql
+SELECT datetime('2024-03-01 09:30:00') AS spaced,
+       datetime('2024-03-01T09:30:00Z') AS utc_text,
+       datetime('2024-03-01T09:30:00-08:00') AS offset_text;
+```
+
+The first two give `2024-03-01 09:30:00`. The third gives `2024-03-01 17:30:00`.
+
+Use supported, zero-padded year-month-day forms. SQLite does not parse every ISO 8601 variant or arbitrary locale format such as `03/01/2024`.
+
+Document the meaning of timestamps that have no offset.
+
+## Reformatting a documented import layout
+
+```sql
+WITH imported(raw_date) AS (VALUES ('03/25/2024'))
+SELECT raw_date,
+       substr(raw_date, 7, 4) || '-' ||
+       substr(raw_date, 1, 2) || '-' ||
+       substr(raw_date, 4, 2) AS candidate_iso_date
+FROM imported;
+```
+
+This produces **2024-03-25** only because the source contract specifies `MM/DD/YYYY` with fixed widths.
+
+`03/04/2024` is ambiguous without that contract. Reshaping the string does not validate the resulting date. Apply the date-only round-trip check later in the lecture.
+
+## The date/time function family
+
+| Function | Result type | Example use |
+|---|---|---|
+| `date()` | TEXT | Calendar date |
+| `time()` | TEXT | Time of day |
+| `datetime()` | TEXT | Date and time |
+| `strftime()` | TEXT | Custom format or date component |
+| `julianday()` | REAL | Fractional-day arithmetic |
+| `unixepoch()` | INTEGER, or REAL with `subsec` | Elapsed seconds |
+| `timediff()` | TEXT | Calendar-aware difference, 3.43+ |
+
+The first six accept modifiers. `timediff(A, B)` takes exactly two time values.
+
+## Extracting a date and a time
+
+```sql
+SELECT InvoiceId,
+       date(InvoiceDate) AS invoice_day, -- <1>
+       time(InvoiceDate) AS invoice_time -- <2>
+FROM Invoice
+ORDER BY InvoiceId
+LIMIT 3;
+```
+
+1. Produce a normalized `YYYY-MM-DD` date.
+2. Produce an `HH:MM:SS` time of day.
+
+These expressions return derived values. They do not change `InvoiceDate`.
+
+## The current moment
+
+```sql
+SELECT CURRENT_DATE AS today_utc,
+       CURRENT_TIME AS time_utc,
+       CURRENT_TIMESTAMP AS timestamp_utc,
+       datetime('now') AS also_utc;
+```
+
+- The current-time keywords take no parentheses.
+- `'now'` uses UTC and depends on when the query runs.
+- Repeated `'now'` calls within the same SQLite step use the same instant.
+- A fixed reference date makes classroom outputs reproducible.
+
+This lecture uses **`2024-07-01`** for historical customer-recency examples.
+
+## Unix seconds: explicit conversions
+
+```sql
+SELECT unixepoch('2024-01-01 00:00:00') AS seconds, -- <1>
+       datetime(1704067200, 'unixepoch') AS timestamp; -- <2>
+```
+
+1. Convert a timestamp to integer Unix seconds: `1704067200`.
+2. Interpret the number as Unix seconds to reconstruct the timestamp.
+
+For epoch **milliseconds**, divide by `1000.0` before using `'unixepoch'`.
+
+Avoid `'auto'` when the unit is known. Small Unix-second values from early 1970 are ambiguous with Julian day numbers.
+
+## Activity 6 · One instant, three representations {.activity}
+
+**Pairs · 5 minutes · No table needed**
+
+Use `2024-01-01 00:00:00`.
+
+1. Return its date, Julian day number, and Unix seconds.
+2. Convert the Unix seconds back with `datetime()`.
+3. Use `typeof()` to inspect the result of `unixepoch()` and `strftime('%s', ...)`.
+
+Explain why two values can look numeric but have different SQLite storage classes.
+
+**Check:** the Julian day number is `2460310.5`.
+
+## strftime(): formatting and extraction
+
+```sql
+SELECT InvoiceId,
+       strftime('%Y-%m', InvoiceDate) AS year_month, -- <1>
+       strftime('%w', InvoiceDate) AS weekday_code, -- <2>
+       CAST(strftime('%H', InvoiceDate) AS INTEGER) AS hour -- <3>
+FROM Invoice
+ORDER BY InvoiceId;
+```
+
+1. A sortable year-month grouping key.
+2. Weekday code, with Sunday = `0` and Saturday = `6`.
+3. Convert the text component to a number when numeric operations need it.
+
+`%m` means **month**. `%M` means **minute**.
+
+## Common strftime() codes
+
+| Code | Meaning | Example |
+|---|---|---|
+| `%Y`, `%m`, `%d` | Year, month, day | `2024`, `02`, `29` |
+| `%H`, `%M`, `%S` | Hour, minute, second | `09`, `05`, `07` |
+| `%f` | Seconds including fraction | `07.125` |
+| `%j` | Day of year | `060` |
+| `%w` | Weekday, Sunday = 0 | `4` |
+| `%W` | Week number, Monday-based, 00–53 | `09` |
+| `%s`, `%J` | Unix seconds, Julian day as text | Numeric-looking text |
+| `%%` | Literal percent sign | `%` |
+
+An unsupported format code makes the result NULL. Month and weekday names need a mapping such as `CASE` or a lookup table.
+
+## ISO weeks can belong to a different year · 3.46+
+
+```sql
+SELECT strftime('%Y', '2021-01-01') AS calendar_year,
+       strftime('%G-W%V', '2021-01-01') AS iso_week;
+```
+
+| `calendar_year` | `iso_week` |
+|---|---|
+| 2021 | 2020-W53 |
+
+Use `%G` with `%V` for an ISO week-year key. Combining `%Y` with `%V` can mislabel weeks near New Year.
+
+`%W` and `%U` are different week-numbering systems and can include week `00`.
+
+## Modifiers transform a time value
+
+```sql
+SELECT date('2024-02-28', '+1 day') AS next_day,
+       datetime('2024-03-01 09:30:00', '+90 minutes') AS later,
+       date('2024-03-15', 'start of month') AS month_start;
+```
+
+Results: `2024-02-29`, `2024-03-01 11:00:00`, and `2024-03-01`.
+
+Useful modifiers include signed days, hours, minutes, seconds, months, and years, plus `start of day`, `start of month`, and `start of year`.
+
+Modifiers apply **from left to right**.
+
+## Calendar boundaries and modifier order
+
+```sql
+SELECT date('2024-02-15', 'start of month',
+            '+1 month', '-1 day') AS month_end; -- <1>
+
+SELECT date('2024-01-31', 'start of month',
+            '+1 month') AS next_month_start;   -- <2>
+```
+
+1. February 1 → March 1 → February 29.
+2. January 1 → February 1.
+
+Start from a known boundary before moving by months. Shifting January 31 directly can encounter a nonexistent target date.
+
+## Ambiguous month and year shifts · SQLite 3.46+
+
+```sql
+SELECT date('2024-01-31', '+1 month') AS default_shift,
+       date('2024-01-31', '+1 month', 'floor') AS earlier,
+       date('2024-01-31', '+1 month', 'ceiling') AS later;
+```
+
+| `default_shift` | `earlier` | `later` |
+|---|---|---|
+| 2024-03-02 | 2024-02-29 | 2024-03-02 |
+
+February has no 31st. `floor` selects the earlier resolution and `ceiling` the later one. Default behavior uses `ceiling`.
+
+Choose the rule that matches a billing, renewal, or anniversary policy.
+
+## Finding a weekday
+
+```sql
+SELECT date('2024-03-01', 'weekday 1') AS monday,
+       date('2024-03-04', 'weekday 1') AS already_monday;
+```
+
+Both results are `2024-03-04`.
+
+For the portable `weekday N` pattern, use `0` = Sunday through `6` = Saturday. It advances to that weekday or stays on the date if it already matches.
+
+It does not automatically skip holidays. Business-day schedules need a calendar table with explicit holiday rules.
+
+## Half-open date ranges
+
+```sql
+SELECT InvoiceId, InvoiceDate, Total
+FROM Invoice
+WHERE InvoiceDate >= '2024-02-01 00:00:00' -- <1>
+  AND InvoiceDate <  '2024-03-01 00:00:00' -- <2>
+ORDER BY InvoiceDate, InvoiceId;
+```
+
+1. Include the lower boundary.
+2. Exclude the next period's lower boundary.
+
+This includes every February timestamp, including leap day. It avoids guessing the final second or fractional second of the month.
+
+## When text timestamp comparisons are reliable
+
+Text order matches time order when values share:
+
+- A fixed, zero-padded format.
+- The same separator and precision conventions.
+- A common time-zone basis.
+
+`'2024-03-01T23:30:00-08:00'` and UTC strings should be normalized before raw text comparisons.
+
+A date-only upper bound such as `<= '2024-02-29'` excludes timestamps later that day. `BETWEEN` includes both endpoints, which can also cause boundary mistakes.
+
+## Activity 7 · February billing {.activity}
+
+**Pairs · 8 minutes · `Invoice`**
+
+1. Return all invoices in February 2024 using a half-open range.
+2. Add `due_date`, exactly **14 calendar days** after the invoice date.
+3. Add `invoice_month_end`, the final date of the invoice's month.
+4. Sort by timestamp, then invoice ID.
+
+**Check:** invoice IDs `4`, `5`, and `6` are included. Invoice `7` is excluded.
+
+Explain why `BETWEEN '2024-02-01' AND '2024-02-29'` fails to include every February timestamp.
+
+## Elapsed time in days and seconds
+
+```sql
+SELECT julianday('2024-02-29 01:00:00')
+       - julianday('2024-02-28 23:30:00') AS days, -- <1>
+       unixepoch('2024-02-29 01:00:00')
+       - unixepoch('2024-02-28 23:30:00') AS seconds; -- <2>
+```
+
+1. The elapsed interval is `0.0625` days.
+2. The same interval is `5400` seconds, or 90 minutes.
+
+Subtract **end minus start**. Divide seconds by `60.0`, `3600.0`, or `86400.0` to preserve fractional units.
+
+## Direct subtraction does not parse dates
+
+```sql
+SELECT '2024-03-01' - '2024-02-28' AS wrong_days,
+       julianday('2024-03-01')
+       - julianday('2024-02-28') AS elapsed_days;
+```
+
+Results: **0** and **2.0**.
+
+The subtraction operator converts the strings to numbers using their numeric prefixes. Both prefixes are 2024.
+
+Convert timestamps to a numeric time representation before subtracting. There are two days here because 2024 includes February 29.
+
+## Calendar dates and completed 24-hour periods
+
+```sql
+SELECT julianday(date('2024-02-29 01:00:00'))
+       - julianday(date('2024-02-28 23:30:00')) AS date_steps,
+       (unixepoch('2024-02-29 01:00:00')
+        - unixepoch('2024-02-28 23:30:00')) / 86400.0 AS elapsed_days;
+```
+
+Results: **1** calendar-date step and **0.0625** elapsed days.
+
+Counted dates, completed days, and exact duration answer different questions. State the metric before choosing the calculation.
+
+Floating-point Julian day differences can have small rounding errors.
+
+## timediff() gives a calendar-aware description · 3.43+
+
+```sql
+SELECT timediff('2024-03-15', '2024-02-15') AS span_a,
+       timediff('2024-04-15', '2024-03-15') AS span_b;
+```
+
+Both results are `+0000-01-00 00:00:00.000`.
+
+The spans contain **29** and **31** elapsed days. A calendar month has variable length.
+
+Use `julianday()` or `unixepoch()` subtraction for numeric durations. `timediff()` has no modifier arguments, so convert Unix inputs first.
+
+## Subsecond precision · SQLite 3.42+
+
+```sql
+SELECT datetime('2024-03-01 09:00:00.125', 'subsec') AS stamp,
+       unixepoch('2024-03-01 09:00:00.125', 'subsec') AS seconds;
+```
+
+`subsec` preserves the supported fractional output, currently milliseconds.
+
+- `datetime()` and `time()` normally show whole seconds.
+- `unixepoch()` normally returns integer seconds.
+- `strftime('%f', ...)` includes fractional seconds.
+- Preserve raw text or integer units if the application needs finer precision than the date/time functions provide.
+
+## Track duration is not a time of day
+
+```sql
+SELECT TrackId, Name,
+       Milliseconds / 1000.0 AS duration_seconds, -- <1>
+       printf('%d:%02d', Milliseconds / 60000,
+              (Milliseconds / 1000) % 60) AS minutes_seconds -- <2>
+FROM Track
+ORDER BY TrackId;
+```
+
+1. Keep a numeric duration for analysis.
+2. Format whole minutes and remaining seconds for display.
+
+Do not use `time()` as a general duration formatter. It describes a clock time and can wrap at day boundaries.
+
+## Activity 8 · Event durations and problems {.activity}
+
+**Pairs · 8 minutes · `practice_event`**
+
+Return `event_id`, `label`, and a `status`:
+
+- `missing endpoint` if either endpoint is NULL.
+- `unparseable` if `datetime()` cannot parse an endpoint.
+- `end before start` if the normalized end precedes the start.
+- `valid` otherwise.
+
+Calculate `duration_minutes` **only for valid rows**.
+
+**Check:** events 1, 2, and 6 are valid, with 90, 75, and 60 minutes.
+
+# 3 · Time zones, quality, and analysis
+
+From individual timestamps to defensible summaries
+
+## UTC offsets can change the calendar date
+
+```sql
+SELECT datetime('2024-03-01T23:30:00-08:00') AS utc_instant,
+       date('2024-03-01T23:30:00-08:00') AS utc_date;
+```
+
+Results: `2024-03-02 07:30:00` and `2024-03-02`.
+
+The source's local date is March 1. The UTC date is March 2.
+
+Before grouping events by day, decide whose day the report means. An offset identifies the difference from UTC at that instant, not a complete named time-zone rule set.
+
+## localtime, utc, and daylight saving
+
+```sql
+SELECT datetime('2024-03-01 17:00:00', 'localtime') AS local_display;
+```
+
+The result depends on the host environment's local time zone.
+
+- `localtime` converts a UTC value to the host's local time.
+- `utc` is for an input that represents the host's local time.
+- SQLite's built-in modifiers do not accept named zones such as `America/Los_Angeles`.
+- A fixed offset does not encode daylight-saving transitions.
+
+Store instants consistently in UTC. Use a time-zone-aware layer when reports require named-zone calendar rules.
+
+::: {.notes}
+Do not promise a particular output from this example. A hosted database tool can use UTC even if the student is in another zone. Repeated or skipped local clock times require more information than a naive timestamp.
+:::
+
+## Missing, unparseable, and normalized dates
+
+```sql
+SELECT datetime(NULL) AS missing,
+       datetime('not a date') AS unparseable,
+       date('2024-02-30', '+0 days') AS normalized;
+```
+
+The first two results are NULL. The final result is `2024-03-01`.
+
+A non-NULL result does **not** prove that the original text described a real date in the required format. SQLite can normalize impossible day-of-month values.
+
+Use format checks, round-trip checks, and explicit business rules. Keep rejected raw values for review.
+
+## A round-trip check for date-only input
+
+```sql
+WITH inputs(raw_date) AS (
+    VALUES ('2024-02-29'), ('2024-02-30'),
+           ('2024-2-9'), (NULL)
+)
+SELECT raw_date,
+       COALESCE(
+         length(raw_date) = 10
+         AND raw_date GLOB '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'
+         AND date(raw_date, '+0 days') = raw_date,
+         0) AS valid_date
+FROM inputs;
+```
+
+Only `2024-02-29` passes. This check is specifically for canonical **date-only** strings, not arbitrary timestamps.
+
+::: {.notes}
+The pattern checks shape and the normalized round trip checks the calendar. The COALESCE converts an unknown result to 0. Add allowed year ranges and domain rules when needed.
+:::
+
+## Constraints need an explicit NULL policy
+
+```sql
+CREATE TEMP TABLE validated_date (
+    event_date TEXT NOT NULL,
+    CHECK (COALESCE(
+        length(event_date) = 10
+        AND event_date GLOB
+            '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'
+        AND date(event_date, '+0 days') = event_date,
+        0))
+);
+```
+
+A `CHECK` expression that evaluates to NULL does not fail by itself. `NOT NULL` and `COALESCE(..., 0)` make the intended rule explicit.
+
+This demo creates a temporary table only. Use a deliberate migration to change a production schema.
+
+## A monthly revenue summary
+
+```sql
+SELECT strftime('%Y-%m', InvoiceDate) AS invoice_month, -- <1>
+       COUNT(*) AS invoice_count,
+       ROUND(SUM(Total), 2) AS revenue
+FROM Invoice
+GROUP BY strftime('%Y-%m', InvoiceDate)
+ORDER BY invoice_month; -- <2>
+```
+
+1. Keep the year in the key so January from different years stays separate.
+2. The fixed `YYYY-MM` form sorts chronologically.
+
+Only months with invoices appear. Missing rows are not automatically zero-revenue months.
+
+## Time-based categories with CASE
+
+```sql
+SELECT CASE strftime('%w', InvoiceDate)
+           WHEN '0' THEN 'Weekend'
+           WHEN '6' THEN 'Weekend'
+           ELSE 'Weekday'
+       END AS day_type,
+       COUNT(*) AS invoice_count,
+       ROUND(SUM(Total), 2) AS revenue
+FROM Invoice
+GROUP BY day_type
+ORDER BY day_type;
+```
+
+The weekend definition is a business assumption. For these classroom timestamps, the grouping uses UTC calendar days.
+
+## Activity 9 · Monthly reporting {.activity}
+
+**Pairs · 8 minutes · `Invoice`**
+
+For every observed month in 2024, return:
+
+1. `invoice_month` as `YYYY-MM`.
+2. `invoice_count`.
+3. `revenue`, rounded to two decimal places.
+4. `average_invoice`, rounded to two decimal places.
+
+Use a half-open filter for the year. Sort chronologically.
+
+**Check:** January revenue is `30.00`, February revenue is `40.00`, and April is absent. Explain what is needed to show April as zero.
+
+## Customer recency uses a reference date
+
+```sql
+SELECT c.CustomerId,
+       c.FirstName || ' ' || c.LastName AS customer_name,
+       MAX(i.InvoiceDate) AS last_purchase,
+       CAST(julianday('2024-07-01')
+            - julianday(date(MAX(i.InvoiceDate))) AS INTEGER)
+           AS calendar_days_since_purchase -- <1>
+FROM Customer AS c
+LEFT JOIN Invoice AS i ON i.CustomerId = c.CustomerId -- <2>
+GROUP BY c.CustomerId, c.FirstName, c.LastName
+ORDER BY c.CustomerId;
+```
+
+1. Measure UTC calendar-date difference from a fixed snapshot.
+2. Retain customers who have no purchases. Their last purchase and recency remain NULL.
+
+## Completed years: age and tenure
+
+```sql
+SELECT EmployeeId,
+       CAST(strftime('%Y', '2026-10-14') AS INTEGER)
+       - CAST(strftime('%Y', BirthDate) AS INTEGER)
+       - (strftime('%m-%d', '2026-10-14')
+          < strftime('%m-%d', BirthDate)) AS completed_years
+FROM Employee
+ORDER BY EmployeeId;
+```
+
+The final comparison subtracts one when this year's birthday has not yet occurred.
+
+This example assumes nonfuture birth dates. For February 29 birthdays or anniversaries, define whether February 28 or March 1 applies in a non-leap year.
+
+## Activity 10 · Which day does the event belong to? {.activity}
+
+**Pairs · 6 minutes · `practice_event`, event 6**
+
+1. Show the original `start_text`.
+2. Extract the source's written date using `substr(start_text, 1, 10)`.
+3. Normalize with `datetime()` and derive the UTC date with `date()`.
+4. Explain why the two date labels differ.
+
+Then explain why successful parsing alone cannot validate `2024-02-30` as a real input date.
+
+Your answer should distinguish **text extraction**, **instant conversion**, and **validation**.
+
+## Gaps between purchases with LAG()
+
+```sql
+WITH ordered AS (
+    SELECT CustomerId, InvoiceId, InvoiceDate,
+           LAG(InvoiceDate) OVER (
+               PARTITION BY CustomerId
+               ORDER BY InvoiceDate, InvoiceId
+           ) AS previous_date -- <1>
+    FROM Invoice
+)
+SELECT *,
+       ROUND(julianday(InvoiceDate) - julianday(previous_date), 2)
+           AS elapsed_days
+FROM ordered
+ORDER BY CustomerId, InvoiceDate, InvoiceId;
+```
+
+1. Find the previous purchase for each customer, with a deterministic tie-breaker.
+
+Each customer's first purchase has a NULL gap.
+
+::: {.notes}
+Window functions require SQLite 3.25+. This is an extension connecting the lecture to previous window-function material. Two invoices at the same instant have a zero elapsed gap even when IDs differ.
+:::
+
+## A calendar makes missing months visible
+
+```sql
+WITH RECURSIVE months(month_start) AS (
+    VALUES ('2024-01-01') -- <1>
+    UNION ALL
+    SELECT date(month_start, '+1 month')
+    FROM months
+    WHERE month_start < '2024-06-01' -- <2>
+)
+SELECT month_start
+FROM months
+ORDER BY month_start;
+```
+
+1. Begin at a stable month boundary.
+2. Stop after generating June 1.
+
+The six generated rows give the reporting periods, whether or not invoices exist.
+
+## Joining the calendar to the data
+
+```sql
+WITH RECURSIVE months(month_start) AS (
+    VALUES ('2024-01-01')
+    UNION ALL
+    SELECT date(month_start, '+1 month') FROM months
+    WHERE month_start < '2024-06-01'
+)
+SELECT m.month_start, COUNT(i.InvoiceId) AS invoice_count,
+       ROUND(COALESCE(SUM(i.Total), 0), 2) AS revenue
+FROM months AS m
+LEFT JOIN Invoice AS i
+  ON i.InvoiceDate >= m.month_start || ' 00:00:00'
+ AND i.InvoiceDate < datetime(m.month_start, '+1 month')
+GROUP BY m.month_start
+ORDER BY m.month_start;
+```
+
+Count `i.InvoiceId`, not `COUNT(*)`: an unmatched month still creates a joined row.
+
+::: {.notes}
+Do not move invoice filters to a WHERE clause that removes NULL rows after the LEFT JOIN. Zero-filling assumes the source data for the reporting interval is complete.
+:::
+
+## A row window needs a complete calendar
+
+A three-row moving average covers three **calendar months** only when each month has a row.
+
+After building a monthly summary with zero-filled months:
+
+```sql
+-- Illustrative window expression, applied to a monthly CTE:
+-- AVG(revenue) OVER (
+--   ORDER BY month_start
+--   ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+-- )
+```
+
+At the beginning of the series, fewer than three months are available. Decide whether to show a partial average or wait for a full window.
+
+## Activity 11 · Time-series extension {.activity}
+
+**Pairs · 10 minutes · `Invoice`**
+
+Choose one task, then compare with a group that chose the other.
+
+**A. Purchase gaps:** return each customer's purchases with the previous timestamp and elapsed hours. Keep the first purchase's gap NULL.
+
+**B. Complete calendar:** return all six months from January through June 2024, invoice counts, and revenue, including April as zero.
+
+**Checks:** A has 12 rows. B has 6 rows, with April count `0` and revenue `0.00`.
+
+Explain one reason why a missing result row differs from a zero.
+
+## Indexes and functions in filters
+
+```sql
+CREATE INDEX IF NOT EXISTS idx_invoice_date ON Invoice(InvoiceDate);
+
+EXPLAIN QUERY PLAN
+SELECT InvoiceId
+FROM Invoice
+WHERE InvoiceDate >= '2024-02-01 00:00:00'
+  AND InvoiceDate <  '2024-03-01 00:00:00';
+```
+
+A range on the stored timestamp can use its index directly.
+
+Wrapping the column in `date()` generally prevents a direct range search on a plain `InvoiceDate` index. A matching expression index is a separate option.
+
+::: {.notes}
+This optional demonstration adds an index to the classroom database. On small tables, a scan can still be a reasonable planner choice. Query plans depend on schema, statistics, and the SQLite version.
+:::
+
+## Expression indexes and text search
+
+```sql
+CREATE INDEX IF NOT EXISTS idx_customer_email_clean
+ON Customer(lower(trim(Email)));
+
+EXPLAIN QUERY PLAN
+SELECT CustomerId
+FROM Customer
+WHERE lower(trim(Email)) = 'ana@example.edu';
+```
+
+The query expression should match the indexed expression.
+
+An ordinary index typically cannot narrow a leading-wildcard search such as `LIKE '%music%'`. A prefix search may be optimized when its collation and other conditions permit it. Full-text search is a separate topic.
+
+## Activity 12 · Customer snapshot {.activity}
+
+**Groups · 15 minutes · `Customer` and `Invoice`**
+
+As of **2024-07-01 00:00:00 UTC**, return every customer with:
+
+1. Full name, email domain, and invoice count before the snapshot.
+2. Total spending, with `0` for customers with no invoices.
+3. Last purchase and UTC calendar days since that purchase.
+4. A segment: `Never purchased`, `Recent` (0–30 days), or `Earlier` (>30 days).
+
+Sort by total spending descending, then customer ID.
+
+**Checks:** Ana spent `47.00`. Aisha has recency `30` and is `Recent`. Omar is `Never purchased` with NULL recency.
+
+::: {.notes}
+A real historical snapshot may also need a customer creation date to exclude customers who did not yet exist. This classroom table has no creation date, so the exercise uses the provided customer population.
+:::
+
+## A debugging checklist
+
+| Symptom | Question to ask |
+|---|---|
+| Label becomes NULL | Did `||` receive a NULL? |
+| Pattern misses an accented name | Did I assume full Unicode case folding? |
+| Date function returns NULL | Is the format, modifier, or version unsupported? |
+| Last day is missing | Did I use a date-only upper bound? |
+| Monthly totals mix years | Did I group by month number alone? |
+| Duration is negative | Are end/start order and offsets correct? |
+| April disappears | Does the query generate a complete calendar? |
+| “Age” is one year too high | Has the anniversary occurred yet? |
+
+## Exit ticket
+
+Answer in one or two sentences each.
+
+1. Why can `COALESCE(email, 'Unknown')` leave a blank email unchanged?
+2. Why might `date(timestamp)` produce a different date from the first ten input characters?
+3. Why is a half-open interval useful for monthly reporting?
+4. When should you use `unixepoch()` subtraction rather than `timediff()`?
+5. Why can zero-filling a missing month be misleading when the source data is incomplete?
+
+# Reference and optional extensions
+
+Function glossary, compatibility, and source links
+
+## String function glossary · cleaning and extraction
+
+| Expression | Purpose |
+|---|---|
+| `a || b` | Concatenate, propagating NULL |
+| `lower(x)`, `upper(x)` | Convert ASCII letter case |
+| `length(x)` | Text code-point length or BLOB byte length |
+| `substr(x, start, n)` | Extract part of a string |
+| `instr(x, part)` | First match position, or 0 |
+| `trim(x[, chars])` | Remove end characters on both sides |
+| `ltrim()`, `rtrim()` | Remove end characters on one side |
+| `replace(x, old, new)` | Replace exact occurrences |
+| `nullif(x, y)` | NULL if values are equal |
+| `coalesce(x, ...)`, `ifnull(x, y)` | Substitute for NULL |
+
+## String function glossary · display and comparison
+
+| Expression | Purpose |
+|---|---|
+| `printf(pattern, ...)`, `format()` | Produce formatted display text |
+| `LIKE ... ESCAPE ...` | SQL pattern matching |
+| `GLOB` | Case-sensitive shell-style patterns |
+| `COLLATE` | Choose comparison/sorting rules |
+| `group_concat(value[, sep])` | Join non-NULL values across rows |
+| `concat()`, `concat_ws()` | Join values with NULL-skipping behavior, 3.44+ |
+| `CAST(x AS TEXT/INTEGER/REAL)` | Explicit conversion |
+| `typeof(x)` | Inspect the storage class |
+| `quote(x)` | Produce an SQL literal representation |
+
+## Optional character and byte helpers
+
+```sql
+SELECT char(65, 66, 67) AS letters,
+       unicode('A') AS first_code_point,
+       hex('AB') AS encoded_bytes,
+       quote('O''Brien') AS sql_literal;
+```
+
+Results: `ABC`, `65`, `4142`, and `'O''Brien'`.
+
+- `char()` constructs text from Unicode code points.
+- `unicode()` reads the first character's code point.
+- `hex()` encodes bytes. `unhex()` decodes to a BLOB in 3.41+.
+- `quote()` is useful for inspecting values. Applications should use bound parameters for SQL inputs.
+
+## Unicode escape helpers · SQLite 3.50+
+
+```sql
+SELECT unistr('\u00E9') AS accented_character,
+       unistr_quote('line1' || char(10) || 'line2') AS escaped_literal;
+```
+
+`unistr()` interprets supported Unicode escapes. `unistr_quote()` produces an SQL literal or expression with escapes for relevant control characters.
+
+These are optional diagnostics and construction helpers. They do not add Unicode-aware sorting, accent removal, or language-specific case conversion.
+
+## Common functions from other SQL dialects
+
+| You may have seen elsewhere | SQLite approach |
+|---|---|
+| `LEFT(text, n)` | `substr(text, 1, n)` |
+| `RIGHT(text, n)` | `substr(text, -n)` for positive n |
+| `LEN(text)` | `length(text)` |
+| `CHARINDEX(part, text)` | `instr(text, part)` |
+| `DATEADD(...)` | `date()` / `datetime()` with modifiers |
+| `DATEDIFF(...)` | Define the unit, then subtract numeric time values |
+| `EXTRACT(...)` / `DATE_PART(...)` | `strftime()` plus a cast when needed |
+| `DATE_TRUNC('month', ...)` | `date(value, 'start of month')` |
+| `SPLIT_PART`, `REGEXP_REPLACE`, `LPAD`, `RPAD` | No direct standard built-in equivalents |
+
+Choose an explicit recipe, extension, or application operation for unsupported functions.
+
+## Date/time function glossary
+
+| Expression | Typical output |
+|---|---|
+| `date(value, ...)` | `YYYY-MM-DD` text |
+| `time(value, ...)` | `HH:MM:SS` text |
+| `datetime(value, ...)` | `YYYY-MM-DD HH:MM:SS` text |
+| `julianday(value, ...)` | Numeric fractional day count |
+| `unixepoch(value, ...)` | Numeric seconds since the Unix epoch |
+| `strftime(pattern, value, ...)` | Formatted text |
+| `timediff(A, B)` | Calendar shift from B to A, 3.43+ |
+| `CURRENT_DATE`, `CURRENT_TIME`, `CURRENT_TIMESTAMP` | Current UTC values |
+
+Use the date/time functions within their documented supported ranges. They are not a leap-second or high-precision scientific time system.
+
+## Modifier reference
+
+| Modifier | Use |
+|---|---|
+| `'+7 days'`, `'-2 hours'` | Shift by a numeric interval |
+| `'+1 month'`, `'+1 year'` | Shift by a calendar interval |
+| `'start of day/month/year'` | Move to the relevant beginning |
+| `'weekday N'` | Advance to weekday N, using 0–6 here |
+| `'unixepoch'`, `'julianday'` | Interpret numeric input explicitly |
+| `'auto'` | Infer numeric input type, with early-1970 ambiguity |
+| `'localtime'`, `'utc'` | Convert using the host's local-zone convention |
+| `'subsec'` / `'subsecond'` | Fractional output, 3.42+ |
+| `'floor'`, `'ceiling'` | Resolve ambiguous calendar shifts, 3.46+ |
+
+Place a numeric interpretation modifier immediately after its numeric input. Apply later modifiers in the intended order.
+
+## Additional strftime() formats
+
+| Codes | Meaning | Added by |
+|---|---|---|
+| `%e`, `%k`, `%l` | Day / 24-hour / 12-hour values without zero padding | 3.44 |
+| `%F`, `%R`, `%T` | Date / hour:minute / hour:minute:second | 3.44 |
+| `%I`, `%p`, `%P` | 12-hour clock and AM/PM labels | 3.44 |
+| `%u` | Weekday 1–7, Monday = 1 | 3.44 |
+| `%G`, `%g`, `%V` | ISO week-year (4/2 digits) and ISO week | 3.46 |
+| `%U` | Sunday-based week number, 00–53 | 3.46 |
+
+Keep formatting separate from analytical keys when a display label would sort poorly, such as `MM/DD/YYYY`.
+
+## Official references · SQLite behavior
+
+- [Built-in scalar functions](https://sqlite.org/lang_corefunc.html)
+- [Date and time functions, inputs, and modifiers](https://sqlite.org/lang_datefunc.html)
+- [SQL expressions, LIKE, GLOB, and NULL](https://sqlite.org/lang_expr.html)
+- [Storage classes, affinity, and collations](https://sqlite.org/datatype3.html)
+- [Aggregate functions](https://sqlite.org/lang_aggfunc.html)
+- [Formatting with printf](https://sqlite.org/printf.html)
+- [Expression indexes](https://sqlite.org/expridx.html)
+
+Examples and classroom datasets in this lecture are original. Use the documentation alongside `sqlite_version()` to check your engine's capabilities.
+
+## Official references · versions and teaching files
+
+- [SQLite 3.38: unixepoch and format](https://sqlite.org/releaselog/3_38_0.html)
+- [SQLite 3.42: subsecond support](https://sqlite.org/releaselog/3_42_0.html)
+- [SQLite 3.43: timediff and octet_length](https://sqlite.org/releaselog/3_43_0.html)
+- [SQLite 3.44: concatenation and ordered aggregation](https://sqlite.org/releaselog/3_44_0.html)
+- [SQLite 3.46: ISO weeks and calendar-shift rules](https://sqlite.org/releaselog/3_46_0.html)
+- [SQLite 3.50: Unicode escape helpers](https://sqlite.org/releaselog/3_50_0.html)
+- [Chinook sample database](https://github.com/lerocha/chinook-database)
+- [Quarto Revealjs presentations](https://quarto.org/docs/presentations/revealjs/)
+
+The distributed practice database is a small synthetic dataset, not a copy or extract of the original Chinook data.
+
+# Activity solutions
+
+Worked SQL and interpretation · instructor key
+
+## Solution 1 · NULL and empty strings
+
+```sql
+SELECT 'A' || NULL AS a,
+       'A' || '' AS b,
+       length('') AS c,
+       COALESCE(NULLIF(trim('   '), ''), 'Unknown') AS d;
+```
+
+| a | b | c | d |
+|---|---|---:|---|
+| NULL | A | 0 | Unknown |
+
+An empty string is a known text value with zero characters. NULL represents an absent or unknown value. Concatenation propagates NULL, while concatenating an empty string adds no characters.
+
+## Solution 2 · Clean contact labels
+
+```sql
+WITH cleaned AS (
+    SELECT contact_id,
+           trim(COALESCE(trim(first_name), '') || ' ' ||
+                COALESCE(trim(last_name), '')) AS display_name, -- <1>
+           NULLIF(lower(trim(email)), '') AS email_clean
+    FROM practice_contact
+)
+SELECT contact_id, display_name, email_clean,
+       COALESCE(email_clean, 'No email') AS email_label -- <2>
+FROM cleaned
+ORDER BY contact_id;
+```
+
+1. Handle missing name components before concatenating, then remove outer spaces.
+2. Keep the cleaned nullable field and its display label separate.
+
+## Solution 2 · Expected results
+
+| contact_id | display_name | email_clean | email_label |
+|---:|---|---|---|
+| 1 | Ana Rivera | ana@example.edu | ana@example.edu |
+| 2 | Jamal Lee | jamal@music.org | jamal@music.org |
+| 3 | Mei Chen | NULL | No email |
+| 4 | Luis García | luis@music.org | luis@music.org |
+| 5 | Zoë Martin | zoe.example.edu | zoe.example.edu |
+| 6 | Noah | NULL | No email |
+
+Cleaning the fifth email does not repair its missing `@`. Preserve the original name spelling rather than assuming case conversion is appropriate for names.
+
+## Solution 3 · Domain extraction and counting
+
+```sql
+WITH cleaned AS (
+    SELECT NULLIF(lower(trim(email)), '') AS e
+    FROM practice_contact
+), domains AS (
+    SELECT substr(e, instr(e, '@') + 1) AS domain
+    FROM cleaned
+    WHERE instr(e, '@') > 1                         -- <1>
+      AND instr(e, '@') < length(e)                 -- <2>
+      AND length(e) - length(replace(e, '@', '')) = 1 -- <3>
+)
+SELECT domain, COUNT(*) AS contacts
+FROM domains
+GROUP BY domain
+ORDER BY contacts DESC, domain;
+```
+
+1. Require a nonempty left part.
+2. Require a nonempty right part.
+3. Require exactly one `@`.
+
+## Solution 3 · Result and limitations
+
+| domain | contacts |
+|---|---:|
+| music.org | 2 |
+| example.edu | 1 |
+
+Contacts 3 and 6 have missing cleaned email values. Contact 5 lacks `@`.
+
+The checks still accept values such as `a@b` or an address containing a space. A production policy can require additional checks without silently inventing corrections.
+
+## Solution 4 · Four independent searches
+
+```sql
+SELECT TrackId, Name FROM Track
+WHERE Name LIKE '%love%' ORDER BY TrackId;
+
+SELECT TrackId, Name FROM Track
+WHERE Name LIKE '%!%%' ESCAPE '!' ORDER BY TrackId;
+
+SELECT TrackId, Name FROM Track
+WHERE Name LIKE '%!_%' ESCAPE '!' ORDER BY TrackId;
+
+SELECT TrackId, Name FROM Track
+WHERE Name GLOB '*[0-9]*' ORDER BY TrackId;
+```
+
+Expected IDs: **1, 2** / **3** / **4** / **3, 5**.
+
+`GLOB '*love*'` does not match `Love Song` because `GLOB` is case sensitive.
+
+## Solution 5 · Customer directory
+
+```sql
+SELECT Country, COUNT(*) AS customer_count,
+       group_concat(FirstName || ' ' || LastName, ', ') AS names
+FROM Customer
+GROUP BY Country
+ORDER BY Country;
+```
+
+The country counts are Canada **2**, France **1**, Mexico **1**, USA **4**.
+
+Name order inside each string is unspecified in this portable version.
+
+For SQLite 3.44+, replace the aggregate with:
+`group_concat(FirstName || ' ' || LastName, ', ' ORDER BY LastName, FirstName, CustomerId)`.
+
+## Solution 6 · Representation and type
+
+```sql
+SELECT date('2024-01-01 00:00:00') AS day,
+       julianday('2024-01-01 00:00:00') AS julian,
+       unixepoch('2024-01-01 00:00:00') AS seconds,
+       datetime(1704067200, 'unixepoch') AS round_trip;
+
+SELECT typeof(unixepoch('2024-01-01')) AS epoch_type,
+       typeof(strftime('%s', '2024-01-01')) AS formatted_type;
+```
+
+Expected: `2024-01-01`, `2460310.5`, `1704067200`, and `2024-01-01 00:00:00`.
+
+The types are **integer** and **text**. `strftime()` produces formatted text even when the output consists entirely of digits.
+
+## Solution 7 · February invoices
+
+```sql
+SELECT InvoiceId, InvoiceDate,
+       date(InvoiceDate, '+14 days') AS due_date, -- <1>
+       date(InvoiceDate, 'start of month',
+            '+1 month', '-1 day') AS invoice_month_end -- <2>
+FROM Invoice
+WHERE InvoiceDate >= '2024-02-01 00:00:00'
+  AND InvoiceDate <  '2024-03-01 00:00:00'
+ORDER BY InvoiceDate, InvoiceId;
+```
+
+1. Shift by 14 days and return a date-only result.
+2. Move from month start to next month start, then back one day.
+
+IDs **4, 5, 6** have due dates **February 15, February 24, March 14**. Each month end is **February 29**.
+
+## Solution 8 · Normalize and classify
+
+```sql
+WITH parsed AS (
+    SELECT *, datetime(start_text) AS start_utc,
+              datetime(end_text) AS end_utc
+    FROM practice_event
+), classified AS (
+    SELECT *,
+           CASE
+             WHEN start_text IS NULL OR end_text IS NULL
+               THEN 'missing endpoint'
+             WHEN start_utc IS NULL OR end_utc IS NULL
+               THEN 'unparseable'
+             WHEN end_utc < start_utc THEN 'end before start'
+             ELSE 'valid'
+           END AS status
+    FROM parsed
+)
+SELECT * FROM classified ORDER BY event_id;
+```
+
+Classify missing inputs before parse failures. This check alone is not strict validation of every calendar input.
+
+## Solution 8 · Full duration query
+
+```sql
+WITH parsed AS (
+    SELECT *, unixepoch(start_text) AS s, unixepoch(end_text) AS e
+    FROM practice_event
+), classified AS (
+    SELECT *, CASE
+      WHEN start_text IS NULL OR end_text IS NULL THEN 'missing endpoint'
+      WHEN s IS NULL OR e IS NULL THEN 'unparseable'
+      WHEN e < s THEN 'end before start'
+      ELSE 'valid' END AS status
+    FROM parsed
+)
+SELECT event_id, label, status,
+       CASE WHEN status = 'valid' THEN (e - s) / 60.0 END
+           AS duration_minutes
+FROM classified
+ORDER BY event_id;
+```
+
+Numeric endpoints preserve elapsed-time ordering across explicit offsets.
+
+## Solution 8 · Expected classification
+
+| event_id | status | duration_minutes |
+|---:|---|---:|
+| 1 | valid | 90.0 |
+| 2 | valid | 75.0 |
+| 3 | missing endpoint | NULL |
+| 4 | unparseable | NULL |
+| 5 | end before start | NULL |
+| 6 | valid | 60.0 |
+
+Do not replace invalid or unknown durations with zero. Zero would claim that no time elapsed.
+
+## Solution 9 · Monthly report
+
+```sql
+SELECT strftime('%Y-%m', InvoiceDate) AS invoice_month,
+       COUNT(*) AS invoice_count,
+       ROUND(SUM(Total), 2) AS revenue,
+       ROUND(AVG(Total), 2) AS average_invoice
+FROM Invoice
+WHERE InvoiceDate >= '2024-01-01 00:00:00'
+  AND InvoiceDate <  '2025-01-01 00:00:00'
+GROUP BY strftime('%Y-%m', InvoiceDate)
+ORDER BY invoice_month;
+```
+
+| Month | Count | Revenue | Average invoice |
+|---|---:|---:|---:|
+| 2024-01 | 3 | 30.00 | 10.00 |
+| 2024-02 | 3 | 40.00 | 13.33 |
+| 2024-03 | 3 | 40.00 | 13.33 |
+| 2024-05 | 2 | 20.00 | 10.00 |
+| 2024-06 | 1 | 25.00 | 25.00 |
+
+## Solution 10 · Source date and UTC date
+
+```sql
+SELECT event_id, start_text,
+       substr(start_text, 1, 10) AS source_written_date,
+       datetime(start_text) AS utc_timestamp,
+       date(start_text) AS utc_date
+FROM practice_event
+WHERE event_id = 6;
+```
+
+The source date is **2024-03-01**. UTC is **2024-03-02 07:30:00**, with date **2024-03-02**.
+
+Subtracting an offset of −08:00 advances the timestamp by eight hours to UTC. `substr()` only copies characters.
+
+An impossible date can normalize to another date, so parsing and validation are separate checks.
+
+## Solution 11A · Purchase gaps in hours
+
+```sql
+WITH purchases AS (
+    SELECT CustomerId, InvoiceId, InvoiceDate,
+           LAG(InvoiceDate) OVER (
+               PARTITION BY CustomerId
+               ORDER BY InvoiceDate, InvoiceId
+           ) AS previous_purchase
+    FROM Invoice
+)
+SELECT CustomerId, InvoiceId, InvoiceDate, previous_purchase,
+       ROUND((unixepoch(InvoiceDate)
+              - unixepoch(previous_purchase)) / 3600.0, 2)
+           AS elapsed_hours
+FROM purchases
+ORDER BY CustomerId, InvoiceDate, InvoiceId;
+```
+
+All 12 invoices remain. The seven customers with purchases each have one NULL first gap.
+
+## Solution 11B · A complete six-month report
+
+```sql
+WITH RECURSIVE months(m) AS (
+    VALUES ('2024-01-01')
+    UNION ALL
+    SELECT date(m, '+1 month') FROM months
+    WHERE m < '2024-06-01'
+)
+SELECT m AS month_start, COUNT(i.InvoiceId) AS invoice_count,
+       ROUND(COALESCE(SUM(i.Total), 0), 2) AS revenue
+FROM months
+LEFT JOIN Invoice AS i
+  ON i.InvoiceDate >= m || ' 00:00:00'
+ AND i.InvoiceDate < datetime(m, '+1 month')
+GROUP BY m
+ORDER BY m;
+```
+
+Revenue from January through June: **30, 40, 40, 0, 20, 25**.
+
+April has zero recorded revenue in the complete classroom dataset. A missing source feed would require a different interpretation.
+
+## Solution 12 · Snapshot metrics, part 1
+
+```sql
+WITH metrics AS (
+    SELECT c.CustomerId,
+           trim(c.FirstName) || ' ' || trim(c.LastName) AS customer,
+           lower(trim(c.Email)) AS email,
+           COUNT(i.InvoiceId) AS invoice_count,
+           ROUND(COALESCE(SUM(i.Total), 0), 2) AS total_spent,
+           MAX(i.InvoiceDate) AS last_purchase
+    FROM Customer AS c
+    LEFT JOIN Invoice AS i
+      ON i.CustomerId = c.CustomerId
+     AND i.InvoiceDate < '2024-07-01 00:00:00' -- <1>
+    GROUP BY c.CustomerId, c.FirstName, c.LastName, c.Email
+)
+SELECT * FROM metrics ORDER BY CustomerId;
+```
+
+1. Keep the snapshot restriction in `ON` so customers without qualifying purchases remain in the result.
+
+## Solution 12 · Complete query {.smaller}
+
+```sql
+WITH metrics AS (
+  SELECT c.CustomerId, c.FirstName || ' ' || c.LastName AS customer,
+         lower(trim(c.Email)) AS email, COUNT(i.InvoiceId) AS n,
+         ROUND(COALESCE(SUM(i.Total), 0), 2) AS spent,
+         MAX(i.InvoiceDate) AS last_purchase
+  FROM Customer c LEFT JOIN Invoice i
+    ON i.CustomerId = c.CustomerId AND i.InvoiceDate < '2024-07-01 00:00:00'
+  GROUP BY c.CustomerId, c.FirstName, c.LastName, c.Email
+), recency AS (
+  SELECT *, CAST(julianday('2024-07-01')
+            - julianday(date(last_purchase)) AS INTEGER) AS days_since
+  FROM metrics
+)
+SELECT CustomerId, customer,
+       CASE WHEN instr(email, '@') > 1
+            THEN substr(email, instr(email, '@') + 1) END AS domain,
+       n AS invoice_count, spent AS total_spent, last_purchase, days_since,
+       CASE WHEN n = 0 THEN 'Never purchased'
+            WHEN days_since BETWEEN 0 AND 30 THEN 'Recent'
+            ELSE 'Earlier' END AS segment
+FROM recency ORDER BY total_spent DESC, CustomerId;
+```
+
+::: {.notes}
+This supplied Customer data has well-formed email values. For dirty data, reuse the stronger structural checks from Activity 3. Keep unknown recency as NULL. The first CTE is the natural place to parameterize the snapshot date in an application.
+:::
+
+## Solution 12 · Expected snapshot
+
+| Customer | Invoices | Spending | Days since purchase | Segment |
+|---|---:|---:|---:|---|
+| Ana Rivera | 4 | 47.00 | 92 | Earlier |
+| Jamal Lee | 3 | 36.00 | 31 | Earlier |
+| Aisha Khan | 1 | 25.00 | 30 | Recent |
+| Mei Chen | 1 | 20.00 | 151 | Earlier |
+| Zoë Martin | 1 | 11.00 | 108 | Earlier |
+| Luis García | 1 | 9.00 | 122 | Earlier |
+| Noah Smith | 1 | 7.00 | 61 | Earlier |
+| Omar Ali | 0 | 0.00 | NULL | Never purchased |
+
+The eight rows retain the entire customer population. The spending total is **155.00**.
+
+## Exit ticket · Instructor discussion key
+
+1. `COALESCE()` replaces NULL, so convert a blank with `NULLIF(trim(email), '')` first.
+2. `date()` can normalize an offset timestamp to a different UTC day. Text extraction does not perform that conversion.
+3. `[start, next_start)` includes all instants in the period without guessing its last representable timestamp.
+4. Numeric subtraction answers elapsed-time questions. `timediff()` expresses calendar shifts whose units have variable lengths.
+5. A missing month can indicate absent source data. Assign zero only when completeness and the metric's meaning justify it.
