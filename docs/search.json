@@ -2034,7 +2034,7 @@
     "href": "lectures/9a.html#files-and-classroom-setup",
     "title": "Advanced SQL",
     "section": "Files and classroom setup",
-    "text": "Files and classroom setup\n\nOpen classroom_music.sqlite in your SQLite application.\nUse its SQL editor to run each example or activity.\nKeep the database open throughout the lesson.\n\nThe included database is synthetic classroom data. Customer, Invoice, Track, and Employee use selected Chinook table and column names.\nclassroom_setup.sql can rebuild it in a new, empty database. Do not run that script against an existing Chinook database.\n\nThe full Chinook database is optional. Examples using its shared columns transfer to it, but dates, counts, and totals differ. practice_contact and practice_event are classroom-only tables. The supplied database is already initialized."
+    "text": "Files and classroom setup\nMusic SQLite Database\n\nThe full Chinook database is optional. Examples using its shared columns transfer to it, but dates, counts, and totals differ. practice_contact and practice_event are classroom-only tables. The supplied database is already initialized."
   },
   {
     "objectID": "lectures/9a.html#the-music-store-tables",
@@ -2049,13 +2049,6 @@
     "title": "Advanced SQL",
     "section": "Tables for deliberately messy data",
     "text": "Tables for deliberately messy data\n\n\n\n\n\n\n\n\nTable\nColumns\nPurpose\n\n\n\n\npractice_contact\ncontact_id, first_name, last_name, email, phone\nSpaces, blanks, NULLs, mixed case, malformed email\n\n\npractice_event\nevent_id, label, start_text, end_text\nOffsets, missing endpoints, invalid input, reversed intervals\n\n\n\nA timestamp without an offset in these exercises is assumed UTC.\nKeep the raw values. Derive cleaned columns with SELECT so you can compare before and after."
-  },
-  {
-    "objectID": "lectures/9a.html#the-sqlite-version-matters",
-    "href": "lectures/9a.html#the-sqlite-version-matters",
-    "title": "Advanced SQL",
-    "section": "The SQLite version matters",
-    "text": "The SQLite version matters\nSELECT sqlite_version() AS sqlite_version;\n\n\n\nFeature\nMinimum SQLite version\n\n\n\n\nsubstring() alias\n3.34.0\n\n\nunixepoch() and format()\n3.38.0\n\n\nsubsec modifier\n3.42.0\n\n\ntimediff(), octet_length()\n3.43.0\n\n\nconcat(), concat_ws(), ordered aggregate syntax\n3.44.0\n\n\nISO week formats %G/%V, floor/ceiling modifiers\n3.46.0\n\n\nunistr(), unistr_quote()\n3.50.0\n\n\n\n3.46+ recommended. Newer optional features are labeled. Core activity solutions use 3.38+.\n\nThe engine bundled with a GUI or extension can differ from a separately installed SQLite command. Version checks must run inside the application students use. unistr examples are optional."
   },
   {
     "objectID": "lectures/9a.html#text-literals-and-identifiers",
@@ -2625,20 +2618,6 @@
     "text": "Additional strftime() formats\n\n\n\n\n\n\n\n\nCodes\nMeaning\nAdded by\n\n\n\n\n%e, %k, %l\nDay / 24-hour / 12-hour values without zero padding\n3.44\n\n\n%F, %R, %T\nDate / hour:minute / hour:minute:second\n3.44\n\n\n%I, %p, %P\n12-hour clock and AM/PM labels\n3.44\n\n\n%u\nWeekday 1–7, Monday = 1\n3.44\n\n\n%G, %g, %V\nISO week-year (4/2 digits) and ISO week\n3.46\n\n\n%U\nSunday-based week number, 00–53\n3.46\n\n\n\nKeep formatting separate from analytical keys when a display label would sort poorly, such as MM/DD/YYYY."
   },
   {
-    "objectID": "lectures/9a.html#official-references-sqlite-behavior",
-    "href": "lectures/9a.html#official-references-sqlite-behavior",
-    "title": "Advanced SQL",
-    "section": "Official references · SQLite behavior",
-    "text": "Official references · SQLite behavior\n\nBuilt-in scalar functions\nDate and time functions, inputs, and modifiers\nSQL expressions, LIKE, GLOB, and NULL\nStorage classes, affinity, and collations\nAggregate functions\nFormatting with printf\nExpression indexes\n\nExamples and classroom datasets in this lecture are original. Use the documentation alongside sqlite_version() to check your engine’s capabilities."
-  },
-  {
-    "objectID": "lectures/9a.html#official-references-versions-and-teaching-files",
-    "href": "lectures/9a.html#official-references-versions-and-teaching-files",
-    "title": "Advanced SQL",
-    "section": "Official references · versions and teaching files",
-    "text": "Official references · versions and teaching files\n\nSQLite 3.38: unixepoch and format\nSQLite 3.42: subsecond support\nSQLite 3.43: timediff and octet_length\nSQLite 3.44: concatenation and ordered aggregation\nSQLite 3.46: ISO weeks and calendar-shift rules\nSQLite 3.50: Unicode escape helpers\nChinook sample database\nQuarto Revealjs presentations\n\nThe distributed practice database is a small synthetic dataset, not a copy or extract of the original Chinook data."
-  },
-  {
     "objectID": "lectures/9a.html#solution-1-null-and-empty-strings",
     "href": "lectures/9a.html#solution-1-null-and-empty-strings",
     "title": "Advanced SQL",
@@ -2770,13 +2749,6 @@
     "title": "Advanced SQL",
     "section": "Solution 12 · Expected snapshot",
     "text": "Solution 12 · Expected snapshot\n\n\n\nCustomer\nInvoices\nSpending\nDays since purchase\nSegment\n\n\n\n\nAna Rivera\n4\n47.00\n92\nEarlier\n\n\nJamal Lee\n3\n36.00\n31\nEarlier\n\n\nAisha Khan\n1\n25.00\n30\nRecent\n\n\nMei Chen\n1\n20.00\n151\nEarlier\n\n\nZoë Martin\n1\n11.00\n108\nEarlier\n\n\nLuis García\n1\n9.00\n122\nEarlier\n\n\nNoah Smith\n1\n7.00\n61\nEarlier\n\n\nOmar Ali\n0\n0.00\nNULL\nNever purchased\n\n\n\nThe eight rows retain the entire customer population. The spending total is 155.00."
-  },
-  {
-    "objectID": "lectures/9a.html#exit-ticket-instructor-discussion-key",
-    "href": "lectures/9a.html#exit-ticket-instructor-discussion-key",
-    "title": "Advanced SQL",
-    "section": "Exit ticket · Instructor discussion key",
-    "text": "Exit ticket · Instructor discussion key\n\nCOALESCE() replaces NULL, so convert a blank with NULLIF(trim(email), '') first.\ndate() can normalize an offset timestamp to a different UTC day. Text extraction does not perform that conversion.\n[start, next_start) includes all instants in the period without guessing its last representable timestamp.\nNumeric subtraction answers elapsed-time questions. timediff() expresses calendar shifts whose units have variable lengths.\nA missing month can indicate absent source data. Assign zero only when completeness and the metric’s meaning justify it."
   },
   {
     "objectID": "posts/10.html",

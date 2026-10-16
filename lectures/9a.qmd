@@ -28,13 +28,8 @@ order: 10
 
 ## Files and classroom setup
 
-1. Open **`classroom_music.sqlite`** in your SQLite application.
-2. Use its SQL editor to run each example or activity.
-3. Keep the database open throughout the lesson.
+[Music SQLite Database]() 
 
-The included database is **synthetic classroom data**. `Customer`, `Invoice`, `Track`, and `Employee` use selected Chinook table and column names.
-
-`classroom_setup.sql` can rebuild it in a **new, empty** database. Do not run that script against an existing Chinook database.
 
 ::: {.notes}
 The full Chinook database is optional. Examples using its shared columns transfer to it, but dates, counts, and totals differ. practice_contact and practice_event are classroom-only tables. The supplied database is already initialized.
@@ -64,29 +59,8 @@ A timestamp without an offset in these exercises is **assumed UTC**.
 
 Keep the raw values. Derive cleaned columns with `SELECT` so you can compare before and after.
 
-## The SQLite version matters
 
-```sql
-SELECT sqlite_version() AS sqlite_version;
-```
-
-| Feature | Minimum SQLite version |
-|---|---:|
-| `substring()` alias | 3.34.0 |
-| `unixepoch()` and `format()` | 3.38.0 |
-| `subsec` modifier | 3.42.0 |
-| `timediff()`, `octet_length()` | 3.43.0 |
-| `concat()`, `concat_ws()`, ordered aggregate syntax | 3.44.0 |
-| ISO week formats `%G/%V`, `floor`/`ceiling` modifiers | 3.46.0 |
-| `unistr()`, `unistr_quote()` | 3.50.0 |
-
-**3.46+ recommended.** Newer optional features are labeled. Core activity solutions use 3.38+.
-
-::: {.notes}
-The engine bundled with a GUI or extension can differ from a separately installed SQLite command. Version checks must run inside the application students use. unistr examples are optional.
-:::
-
-# 1 · Strings
+# Strings
 
 Text values, cleaning, extraction, and search
 
@@ -492,7 +466,7 @@ Keep identifiers as text when leading zeros are meaningful.
 
 Use a CTE to name intermediate results. Do not assume a new alias is available to another expression in the same `SELECT` list.
 
-# 2 · Dates and times
+# Dates and times
 
 Storage, parsing, formatting, arithmetic, and intervals
 
@@ -870,7 +844,7 @@ Calculate `duration_minutes` **only for valid rows**.
 
 **Check:** events 1, 2, and 6 are valid, with 90, 75, and 60 minutes.
 
-# 3 · Time zones, quality, and analysis
+# Time zones, quality, and analysis
 
 From individual timestamps to defensible summaries
 
@@ -1354,30 +1328,6 @@ Place a numeric interpretation modifier immediately after its numeric input. App
 
 Keep formatting separate from analytical keys when a display label would sort poorly, such as `MM/DD/YYYY`.
 
-## Official references · SQLite behavior
-
-- [Built-in scalar functions](https://sqlite.org/lang_corefunc.html)
-- [Date and time functions, inputs, and modifiers](https://sqlite.org/lang_datefunc.html)
-- [SQL expressions, LIKE, GLOB, and NULL](https://sqlite.org/lang_expr.html)
-- [Storage classes, affinity, and collations](https://sqlite.org/datatype3.html)
-- [Aggregate functions](https://sqlite.org/lang_aggfunc.html)
-- [Formatting with printf](https://sqlite.org/printf.html)
-- [Expression indexes](https://sqlite.org/expridx.html)
-
-Examples and classroom datasets in this lecture are original. Use the documentation alongside `sqlite_version()` to check your engine's capabilities.
-
-## Official references · versions and teaching files
-
-- [SQLite 3.38: unixepoch and format](https://sqlite.org/releaselog/3_38_0.html)
-- [SQLite 3.42: subsecond support](https://sqlite.org/releaselog/3_42_0.html)
-- [SQLite 3.43: timediff and octet_length](https://sqlite.org/releaselog/3_43_0.html)
-- [SQLite 3.44: concatenation and ordered aggregation](https://sqlite.org/releaselog/3_44_0.html)
-- [SQLite 3.46: ISO weeks and calendar-shift rules](https://sqlite.org/releaselog/3_46_0.html)
-- [SQLite 3.50: Unicode escape helpers](https://sqlite.org/releaselog/3_50_0.html)
-- [Chinook sample database](https://github.com/lerocha/chinook-database)
-- [Quarto Revealjs presentations](https://quarto.org/docs/presentations/revealjs/)
-
-The distributed practice database is a small synthetic dataset, not a copy or extract of the original Chinook data.
 
 # Activity solutions
 
@@ -1743,11 +1693,3 @@ This supplied Customer data has well-formed email values. For dirty data, reuse 
 | Omar Ali | 0 | 0.00 | NULL | Never purchased |
 
 The eight rows retain the entire customer population. The spending total is **155.00**.
-
-## Exit ticket · Instructor discussion key
-
-1. `COALESCE()` replaces NULL, so convert a blank with `NULLIF(trim(email), '')` first.
-2. `date()` can normalize an offset timestamp to a different UTC day. Text extraction does not perform that conversion.
-3. `[start, next_start)` includes all instants in the period without guessing its last representable timestamp.
-4. Numeric subtraction answers elapsed-time questions. `timediff()` expresses calendar shifts whose units have variable lengths.
-5. A missing month can indicate absent source data. Assign zero only when completeness and the metric's meaning justify it.
