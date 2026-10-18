@@ -130,17 +130,11 @@ SELECT lower('DATA 300') AS lower_case,
 ## How long is a string?
 
 ```sql
-
-SELECT length('café') AS code_points,
-       length(CAST('café' AS BLOB)) AS utf8_bytes; -- <1>
+SELECT length('café') AS code_points;
 ```
 
-1. In the supplied UTF-8 database, the results are **4** and **5**.
 
 - `length(TEXT)` counts Unicode code points before the first NUL character.
-- `length(BLOB)` counts bytes.
-- A visible symbol can contain multiple code points.
-- `octet_length()` counts text bytes directly in SQLite 3.43+.
 
 
 ## Extracting with substr()
@@ -156,7 +150,7 @@ SELECT substr('SQLite', 1, 3) AS first_three, -- <1>
 2. Omit the length to continue to the end: `ite`.
 3. A negative start counts from the right: `ite`.
 
-`substring()` is an alias in SQLite 3.34+. Prefer positive lengths for clear classroom code.
+`substring()` is an alias in SQLite 3.34+.
 
 ## Finding a delimiter with instr()
 
@@ -174,34 +168,23 @@ SELECT instr('ana@example.edu', '@') AS at_position,
 ```sql
 SELECT trim('  Ana  ') AS both_ends,
        ltrim('  Ana  ') AS left_only,
-       rtrim('  Ana  ') AS right_only,
-       trim('xyAnayx', 'xy') AS character_set;
+       rtrim('  Ana  ') AS right_only;
 ```
 
-`character_set` is `Ana`: the second argument is a **set of characters**, not a word or substring to remove.
+
 
 ## Activity 
 
-`practice_contact*`
+Table: `practice_contact`
 
 Return one row per contact with:
 
 1. `contact_id`
 2. `display_name`: trim both names, join with one space, and avoid a trailing space when the last name is NULL.
 3. `email_clean`: lowercase and trim the email
+  1. Remove rows with missing emails.
 
-Sort by `contact_id`. **Check:** contact 6 should display `Noah` and `No email`.
-
-Discuss: does lowercasing a name always preserve the person's preferred spelling?
-
-## LIKE patterns
-
-| Pattern | Meaning |
-|---|---|
-| `'Love%'` | Starts with Love |
-| `'%Love%'` | Contains Love |
-| `'%Live'` | Ends with Live |
-| `'A_'` | A followed by exactly one character |
+## LIKE pattern
 
 ```sql
 
@@ -212,6 +195,16 @@ ORDER BY TrackId;
 ```
 
 Default `LIKE` ignores ASCII letter case, but does not fully fold non-ASCII case.
+
+
+## LIKE patterns
+
+| Pattern | Meaning |
+|---|---|
+| `'Love%'` | Starts with Love |
+| `'%Love%'` | Contains Love |
+| `'%Love'` | Ends with Love |
+
 
 ## Searching for literal % and _
 
@@ -228,32 +221,11 @@ ORDER BY TrackId;
 2. `!_` means a literal underscore.
 
 
-## Activity · Pattern detective {.activity}
+## Activity 
 
 
-Write separate queries for tracks whose names:
+Write separate queries for tracks whose names contain `love` fromt the `Track` table. Display the `TrackID` and `Name`, the length of the name in a new column, and the duration of the track in minutes from `Milliseconds`. Order by descending `Milliseconds` and `TrackID`. 
 
-1. Contain `love`, ignoring ASCII case using default `LIKE`.
-2. Contain a literal `%`.
-3. Contain a literal `_`.
-
-
-
-## Formatting values for display
-
-```sql
-SELECT InvoiceId,
-       printf('INV-%04d', InvoiceId) AS invoice_label, -- <1>
-       printf('$%.2f', Total) AS total_label           -- <2>
-FROM Invoice
-ORDER BY InvoiceId
-LIMIT 3;
-```
-
-1. `%04d` formats an integer with at least four digits, padding with zeros.
-2. `%.2f` formats a number with two decimal places.
-
-The labels are **text**. Keep `Total` numeric for sums and numeric sorting. `format()` is an alias in SQLite 3.38+.
 
 ## Combining rows with group_concat()
 
@@ -271,27 +243,11 @@ Without an explicit input order, the order inside the string is not guaranteed.
 
 `group_concat(DISTINCT Country)` removes duplicates with the default comma separator. Deduplicate in a CTE when you also need a custom separator.
 
-## Ordered text aggregation · SQLite 3.44+
 
-```sql
-SELECT Country,
-       group_concat(FirstName, ', '
-                    ORDER BY FirstName, CustomerId) AS customers -- <1>
-FROM Customer
-GROUP BY Country
-ORDER BY Country;
-```
-
-1. This `ORDER BY` controls the order **inside each joined string**.
-
-The outer `ORDER BY` controls the order of the result rows.
-
-`string_agg(value, separator)` is an alias for the two-argument form of `group_concat()` in SQLite 3.44+.
-
-## Activity · A customer directory {.activity}
+## Activity
 
 
-For each country, return:
+For each country from the table `Customer`, return:
 
 1. The country.
 2. The number of customers.
@@ -299,7 +255,7 @@ For each country, return:
 
 Sort the countries alphabetically. On SQLite 3.44+, also order names by last name, first name, and customer ID inside the list.
 
-**Check:** USA has four customers. The full result contains four countries.
+
 
 
 # Dates and times
@@ -333,11 +289,12 @@ SELECT datetime('2024-03-01 09:30:00') AS spaced,
        datetime('2024-03-01T09:30:00-08:00') AS offset_text;
 ```
 
-The first two give `2024-03-01 09:30:00`. The third gives `2024-03-01 17:30:00`.
+- The first two give `2024-03-01 09:30:00`. 
+
+- The third gives `2024-03-01 17:30:00`.
 
 Use supported, zero-padded year-month-day forms. SQLite does not parse every ISO 8601 variant or arbitrary locale format such as `03/01/2024`.
 
-Document the meaning of timestamps that have no offset.
 
 ## Reformatting a documented import layout
 
@@ -352,7 +309,6 @@ FROM imported;
 
 This produces **2024-03-25** only because the source contract specifies `MM/DD/YYYY` with fixed widths.
 
-`03/04/2024` is ambiguous without that contract. Reshaping the string does not validate the resulting date. Apply the date-only round-trip check later in the lecture.
 
 ## The date/time function family
 
@@ -398,7 +354,7 @@ SELECT CURRENT_DATE AS today_utc,
 - The current-time keywords take no parentheses.
 - `'now'` uses UTC and depends on when the query runs.
 - Repeated `'now'` calls within the same SQLite step use the same instant.
-- A fixed reference date makes classroom outputs reproducible.
+
 
 
 ## Unix seconds: explicit conversions
@@ -411,13 +367,12 @@ SELECT unixepoch('2024-01-01 00:00:00') AS seconds, -- <1>
 1. Convert a timestamp to integer Unix seconds: `1704067200`.
 2. Interpret the number as Unix seconds to reconstruct the timestamp.
 
-## Activity 6 · One instant, three representations {.activity}
+## Activity
 
 Use `2024-01-01 00:00:00`.
 
 1. Return its date, Julian day number, and Unix seconds.
 2. Convert the Unix seconds back with `datetime()`.
-3. Use `typeof()` to inspect the result of `unixepoch()` and `strftime('%s', ...)`.
 
 ## strftime(): formatting and extraction
 
@@ -432,7 +387,7 @@ ORDER BY InvoiceId;
 
 1. A sortable year-month grouping key.
 2. Weekday code, with Sunday = `0` and Saturday = `6`.
-3. Convert the text component to a number when numeric operations need it.
+3. CAST: Convert the text component to a number when numeric operations need it.
 
 `%m` means **month**. `%M` means **minute**.
 
@@ -474,20 +429,16 @@ SELECT date('2024-02-28', '+1 day') AS next_day,
        date('2024-03-15', 'start of month') AS month_start;
 ```
 
-Results: `2024-02-29`, `2024-03-01 11:00:00`, and `2024-03-01`.
-
 Useful modifiers include signed days, hours, minutes, seconds, months, and years, plus `start of day`, `start of month`, and `start of year`.
 
-Modifiers apply **from left to right**.
+Multiple modifiers can be added per function. Modifiers apply **from left to right**.
 
-## Finding a weekday
+## Finding the next weekday
 
 ```sql
 SELECT date('2024-03-01', 'weekday 1') AS monday,
-       date('2024-03-04', 'weekday 1') AS already_monday;
+       date('2024-03-14', 'weekday 1') AS already_monday;
 ```
-
-Both results are `2024-03-04`.
 
 For the portable `weekday N` pattern, use `0` = Sunday through `6` = Saturday. It advances to that weekday or stays on the date if it already matches.
 
@@ -508,17 +459,14 @@ ORDER BY InvoiceDate, InvoiceId;
 
 This includes every February timestamp, including leap day. It avoids guessing the final second or fractional second of the month.
 
-## Activity · February billing {.activity}
+## Activity 
 
 
-1. Return all invoices in February 2024 using a half-open range.
+1. Return all invoices in March 2024 using a half-open range.
 2. Add `due_date`, exactly **14 calendar days** after the invoice date.
 3. Add `invoice_month_end`, the final date of the invoice's month.
 4. Sort by timestamp, then invoice ID.
 
-**Check:** invoice IDs `4`, `5`, and `6` are included. Invoice `7` is excluded.
-
-Explain why `BETWEEN '2024-02-01' AND '2024-02-29'` fails to include every February timestamp.
 
 ## Elapsed time in days and seconds
 
@@ -534,242 +482,88 @@ SELECT julianday('2024-02-29 01:00:00')
 
 Subtract **end minus start**. Divide seconds by `60.0`, `3600.0`, or `86400.0` to preserve fractional units.
 
+## Activity
 
-# Additional class activities
+Using the `Invoice` table, find the time elapse from a customers first `InvoiceDate` to the last `InvoiceDate` customer 1 and 2.
 
-## Working together {.activity}
+# Activity Solutions
 
-Work in pairs: one person writes SQL while the other checks the output. Switch roles after each activity.
-
-- Use the supplied music database and the classroom practice tables.
-- Keep the original data unchanged; use `SELECT` and CTEs.
-- Submit each query, a few output rows, and your discussion response.
-- Suggested total time: **50 minutes**, including discussion.
-
-These five activities extend the earlier exercises. Solutions follow the complete activity set.
-
-## Class activity A · Email domain audit {.activity}
-
-**10 minutes · Table:** `practice_contact`
-
-1. Create `email_clean` by trimming and lowercasing `email`; treat blank strings as NULL.
-2. Classify each email as `missing`, `review`, or `usable`. For this exercise, usable means exactly one `@`, with at least one character on either side and no ordinary spaces.
-3. Return `contact_id`, raw `email`, `email_clean`, the status, and `email_domain`. Extract the domain only for usable values; otherwise return NULL.
-4. Sort by `contact_id`.
-
-**Check:** `' Ana@Example.edu '` becomes `ana@example.edu`, with domain `example.edu`. Both `'ana.example.edu'` and `'a@@b'` need review.
-
-**Discuss:** Why does passing these checks not prove that an address exists?
-
-## Class activity B · A track-name report {.activity}
-
-**8 minutes · Table:** `Track`
-
-1. Find tracks whose names contain `love` using default `LIKE`.
-2. Return `TrackId`, `Name`, the first 12 characters as `name_preview`, and the name's character count as `name_length`.
-3. Return duration in minutes as a numeric value rounded to two decimal places, and a separate display label such as `3.50 min` using `printf()`.
-4. Sort by the original duration, longest first, then by `TrackId`.
-
-**Check:** A duration of 210000 milliseconds is `3.5` numeric minutes and displays as `3.50 min`.
-
-**Discuss:** Why should sorting use the numeric duration instead of the formatted label? Does default `LIKE` handle every language's case rules?
-
-## Class activity C · Monthly sales summary {.activity}
-
-**10 minutes · Table:** `Invoice`
-
-1. Include invoices from calendar year 2024 using a half-open timestamp range.
-2. Return one row per month with invoices: `year_month`, `invoice_count`, `monthly_revenue`, and `average_invoice`.
-3. Round revenue and average invoice value to two decimal places. Keep both results numeric.
-4. Sort months chronologically.
-
-**Check:** Summing the monthly invoice counts should equal the number of invoices passing the same 2024 filter.
-
-**Discuss:** Why group by `%Y-%m` instead of `%m` when analyzing several years? Does an absent month mean zero sales or simply no rows in this query?
-
-## Class activity D · Billing and reminder dates {.activity}
-
-**10 minutes · Table:** `Invoice`
-
-For every invoice, return `InvoiceId`, `InvoiceDate`, and:
-
-1. `due_date`: 14 calendar days after the invoice date.
-2. `month_end`: the last date of the invoice's month.
-3. `reminder_date`: the first Monday on or after the due date.
-
-Sort by `InvoiceDate`, then `InvoiceId`. Use date modifiers; do not hard-code month lengths.
-
-**Check:** For `2024-02-15 09:00:00`, the three dates are `2024-02-29`, `2024-02-29`, and `2024-03-04`.
-
-**Discuss:** What happens if the due date is already Monday? Why is this not a complete business-day scheduling rule?
-
-## Class activity E · Event duration audit {.activity}
-
-**12 minutes · Table:** `practice_event`
-
-1. Keep `event_id`, `label`, `start_text`, and `end_text` in the output.
-2. Convert endpoints to Unix seconds. Assume offset-free timestamps are UTC.
-3. Assign a status, in this priority order: `missing endpoint` for NULL/blank input; `unparseable endpoint` if a conversion returns NULL; `reversed interval` if the end precedes the start; otherwise `ok`.
-4. Return `duration_minutes`, rounded to two decimals, only for `ok` rows. Sort by `event_id`.
-
-**Check:** `2024-03-01T09:00:00-08:00` to `2024-03-01T18:30:00Z` is **90 minutes**.
-
-**Discuss:** Why compare normalized instants instead of raw timestamp text? This is a parsing audit, not a complete calendar-date validator.
-
-# Solutions to additional activities
-
-## Solution A · Clean and classify
+## Solution A 
 
 ```sql
-WITH cleaned AS (
-    SELECT contact_id, email,
-           NULLIF(lower(trim(email)), '') AS email_clean -- <1>
-    FROM practice_contact
-), classified AS (
-    SELECT *,
-           CASE
-             WHEN email_clean IS NULL THEN 'missing'
-             WHEN instr(email_clean, '@') <= 1
-               OR instr(email_clean, '@') = length(email_clean)
-               OR instr(substr(email_clean,
-                        instr(email_clean, '@') + 1), '@') > 0
-               OR instr(email_clean, ' ') > 0
-               THEN 'review' -- <2>
-             ELSE 'usable'
-           END AS email_status
-    FROM cleaned
-)
-SELECT contact_id, email, email_clean, email_status,
-       CASE WHEN email_status = 'usable'
-            THEN substr(email_clean, instr(email_clean, '@') + 1)
-       END AS email_domain -- <3>
-FROM classified
+SELECT contact_id, 
+	trim(first_name) || ' ' || trim(last_name) as display_name,
+	trim(lower(email)) as email_clean
+FROM practice_contact
+WHERE display_name is not null
 ORDER BY contact_id;
 ```
 
-1. Normalize case and outer spaces, then convert an empty result to NULL.
-2. Flag missing/misplaced/repeated `@` symbols and ordinary internal spaces.
-3. A `CASE` without `ELSE` returns NULL when its condition is not met.
-
-## Solution A · Discussion
-
-These are simplified classroom rules. They do not check mailbox existence or every valid email syntax. `trim()` here removes ordinary outer spaces, not every kind of whitespace. Default `lower()` handles ASCII case conversion.
-
-## Solution B · Track-name report
+## Solution B
 
 ```sql
 SELECT TrackId, Name,
-       substr(Name, 1, 12) AS name_preview, -- <1>
+       substr(Name, 1, 12) AS name_preview,
        length(Name) AS name_length,
-       round(Milliseconds / 60000.0, 2) AS duration_minutes,
-       printf('%.2f min', Milliseconds / 60000.0)
-           AS duration_label -- <2>
+       round(Milliseconds / 60000.0, 2) AS duration_minutes
 FROM Track
 WHERE Name LIKE '%love%'
-ORDER BY Milliseconds DESC, TrackId; -- <3>
+ORDER BY Milliseconds DESC, TrackId;
 ```
 
-1. `substr()` starts at position 1; short names remain shorter than 12 characters.
-2. The decimal divisor preserves fractional minutes. `printf()` produces a text label.
-3. Numeric sorting avoids text ordering such as `10.00 min` before `2.00 min`.
-
-Default `LIKE` ignores ASCII case but does not provide complete Unicode case folding. This query assumes non-NULL numeric track durations.
-
-## Solution C · Monthly sales summary
+## Solution C 
 
 ```sql
-SELECT strftime('%Y-%m', InvoiceDate) AS year_month, -- <1>
-       COUNT(*) AS invoice_count,
-       round(SUM(Total), 2) AS monthly_revenue,
-       round(AVG(Total), 2) AS average_invoice
-FROM Invoice
-WHERE InvoiceDate >= '2024-01-01 00:00:00'
-  AND InvoiceDate <  '2025-01-01 00:00:00' -- <2>
-GROUP BY strftime('%Y-%m', InvoiceDate)
-ORDER BY year_month;
+With cc as (
+	select *,
+		 FirstName || ' ' || LastName as full_name,
+		 count(*) over (PARTITION BY Country) as number_of_customers
+	from Customer
+	)
+SELECT Country, number_of_customers,
+       group_concat(full_name, ', ') AS customers
+FROM cc
+GROUP BY Country
+ORDER BY Country;
+
+
 ```
-
-1. A zero-padded year-month key distinguishes years and sorts chronologically.
-2. Include the first instant of 2024 and exclude the first instant of 2025, using the lecture's fixed UTC text convention.
-
-## Solution C · Check and discussion
-
-```sql
-SELECT COUNT(*) AS invoices_in_2024
-FROM Invoice
-WHERE InvoiceDate >= '2024-01-01 00:00:00'
-  AND InvoiceDate <  '2025-01-01 00:00:00';
-```
-
-Compare this count with the sum of `invoice_count` in the monthly result.
-
-Grouping by `%m` alone combines the same month across different years. A missing month has no qualifying rows; this query does not generate a zero-valued row. A calendar table would be needed to explicitly display all months and distinguish missing data from confirmed zero activity.
 
 ## Solution D · Billing and reminder dates
 
 ```sql
-WITH billing AS (
-    SELECT InvoiceId, InvoiceDate,
-           date(InvoiceDate, '+14 days') AS due_date,
-           date(InvoiceDate, 'start of month',
-                '+1 month', '-1 day') AS month_end -- <1>
-    FROM Invoice
-)
-SELECT InvoiceId, InvoiceDate, due_date, month_end,
-       date(due_date, 'weekday 1') AS reminder_date -- <2>
-FROM billing
+WITH new(raw_date) AS (VALUES ('2024-01-01 00:00:00'))
+SELECT raw_date,
+		date(raw_date) as real_date,
+		julianday(raw_date) as julian,
+		unixepoch(raw_date) as unix
+FROM new;
+```
+
+
+## Solution E
+
+```sql
+SELECT InvoiceId, InvoiceDate, Total,
+	date(InvoiceDate, '+14 day') as due_date,
+	date(InvoiceDate, 'start of month', '+1 month', '-1 day') as invoice_month_end,
+	time(InvoiceDate) as timestamp
+FROM Invoice
+WHERE InvoiceDate >= '2024-03-01 00:00:00'
+  AND InvoiceDate <  '2024-04-01 00:00:00'
 ORDER BY InvoiceDate, InvoiceId;
 ```
 
-1. Start at the first of the current month, advance to the next month, then step back one day. Modifier order matters.
-2. Monday is weekday 1. A Monday due date stays unchanged.
-
-The rule does not account for holidays or company-specific closures; those need a business calendar.
-
-## Solution E · Normalize and classify
+## Solution F
 
 ```sql
-WITH parsed AS (
-    SELECT *,
-           unixepoch(trim(start_text)) AS start_seconds,
-           unixepoch(trim(end_text)) AS end_seconds -- <1>
-    FROM practice_event
-), checked AS (
-    SELECT *,
-           CASE
-             WHEN NULLIF(trim(start_text), '') IS NULL
-               OR NULLIF(trim(end_text), '') IS NULL
-               THEN 'missing endpoint'
-             WHEN start_seconds IS NULL OR end_seconds IS NULL
-               THEN 'unparseable endpoint'
-             WHEN end_seconds < start_seconds
-               THEN 'reversed interval'
-             ELSE 'ok'
-           END AS interval_status -- <2>
-    FROM parsed
-)
-SELECT event_id, label, start_text, end_text, interval_status,
-       CASE WHEN interval_status = 'ok'
-            THEN round((end_seconds - start_seconds) / 60.0, 2)
-       END AS duration_minutes -- <3>
-FROM checked
-ORDER BY event_id;
+SELECT CustomerId,
+       MIN(InvoiceDate) AS first_invoice_date,
+       MAX(InvoiceDate) AS last_invoice_date,
+       julianday(MAX(InvoiceDate))
+           - julianday(MIN(InvoiceDate)) AS elapsed_days
+FROM Invoice
+WHERE CustomerId IN (1, 2)
+GROUP BY CustomerId
+ORDER BY CustomerId;
 ```
-
-1. Convert supported timestamp inputs, including explicit offsets, to comparable instants.
-2. Evaluate missing and unparseable values before checking interval order.
-3. Subtract end minus start and divide by a real number; flagged intervals remain NULL.
-
-## Solution E · Check and discussion
-
-```sql
-SELECT (unixepoch('2024-03-01T18:30:00Z')
-      - unixepoch('2024-03-01T09:00:00-08:00')) / 60.0
-       AS duration_minutes;
-```
-
-Expected result: **90.0**. The start is 17:00 UTC and the end is 18:30 UTC.
-
-Raw strings with different offsets need not sort in instant order. Conversion normalizes the offsets before subtraction. A zero-length interval is `ok` under these rules.
-
-A successful parse does not establish that every source calendar date was valid. This exercise uses whole-second precision; handling fractional seconds requires an explicit precision policy.

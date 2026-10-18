@@ -313,10 +313,7 @@
 <p>Dates and times</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>Additional class activities</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Solutions to additional activities</p>
+<p>Activity Solutions</p>
 </div></li>
 </ul>
 </div>
@@ -399,20 +396,9 @@
 </section>
 <section id="how-long-is-a-string" class="slide level2">
 <h2>How long is a string?</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-6"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-label="1"></a></span>
-<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-label="2"></a><span class="kw">SELECT</span> <span class="fu">length</span>(<span class="st">'café'</span>) <span class="kw">AS</span> code_points,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-label="3"></a>       <span class="fu">length</span>(<span class="fu">CAST</span>(<span class="st">'café'</span> <span class="kw">AS</span> <span class="dt">BLOB</span>)) <span class="kw">AS</span> utf8_bytes;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="1">In the supplied UTF-8 database, the results are <strong>4</strong> and <strong>5</strong>.</span>
-</dd>
-</dl>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="fu">length</span>(<span class="st">'café'</span>) <span class="kw">AS</span> code_points;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><code>length(TEXT)</code> counts Unicode code points before the first NUL character.</li>
-<li><code>length(BLOB)</code> counts bytes.</li>
-<li>A visible symbol can contain multiple code points.</li>
-<li><code>octet_length()</code> counts text bytes directly in SQLite 3.43+.</li>
 </ul>
 </section>
 <section id="extracting-with-substr" class="slide level2">
@@ -435,34 +421,40 @@
 <span data-code-cell="annotated-cell-7" data-code-lines="4" data-code-annotation="3">A negative start counts from the right: <code>ite</code>.</span>
 </dd>
 </dl>
-<p><code>substring()</code> is an alias in SQLite 3.34+. Prefer positive lengths for clear classroom code.</p>
+<p><code>substring()</code> is an alias in SQLite 3.34+.</p>
 </section>
 <section id="finding-a-delimiter-with-instr" class="slide level2">
 <h2>Finding a delimiter with instr()</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-label="1"></a></span>
-<span id="cb4-2"><a aria-label="2"></a><span class="kw">SELECT</span> <span class="fu">instr</span>(<span class="st">'ana@example.edu'</span>, <span class="st">'@'</span>) <span class="kw">AS</span> at_position,</span>
-<span id="cb4-3"><a aria-label="3"></a>       <span class="fu">instr</span>(<span class="st">'ana.example.edu'</span>, <span class="st">'@'</span>) <span class="kw">AS</span> missing_at;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-label="1"></a></span>
+<span id="cb5-2"><a aria-label="2"></a><span class="kw">SELECT</span> <span class="fu">instr</span>(<span class="st">'ana@example.edu'</span>, <span class="st">'@'</span>) <span class="kw">AS</span> at_position,</span>
+<span id="cb5-3"><a aria-label="3"></a>       <span class="fu">instr</span>(<span class="st">'ana.example.edu'</span>, <span class="st">'@'</span>) <span class="kw">AS</span> missing_at;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>instr(text, search)</code> returns the position of the <strong>first</strong> match. It returns 0 when there is no match, and NULL if an argument is NULL.</p>
 </section>
 <section id="trim-ltrim-and-rtrim" class="slide level2">
 <h2>trim(), ltrim(), and rtrim()</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="fu">trim</span>(<span class="st">'  Ana  '</span>) <span class="kw">AS</span> both_ends,</span>
-<span id="cb5-2"><a aria-label="2"></a>       <span class="fu">ltrim</span>(<span class="st">'  Ana  '</span>) <span class="kw">AS</span> left_only,</span>
-<span id="cb5-3"><a aria-label="3"></a>       <span class="fu">rtrim</span>(<span class="st">'  Ana  '</span>) <span class="kw">AS</span> right_only,</span>
-<span id="cb5-4"><a aria-label="4"></a>       <span class="fu">trim</span>(<span class="st">'xyAnayx'</span>, <span class="st">'xy'</span>) <span class="kw">AS</span> character_set;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>character_set</code> is <code>Ana</code>: the second argument is a <strong>set of characters</strong>, not a word or substring to remove.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="fu">trim</span>(<span class="st">'  Ana  '</span>) <span class="kw">AS</span> both_ends,</span>
+<span id="cb6-2"><a aria-label="2"></a>       <span class="fu">ltrim</span>(<span class="st">'  Ana  '</span>) <span class="kw">AS</span> left_only,</span>
+<span id="cb6-3"><a aria-label="3"></a>       <span class="fu">rtrim</span>(<span class="st">'  Ana  '</span>) <span class="kw">AS</span> right_only;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="activity" class="slide level2 scrollable">
 <h2>Activity</h2>
-<p><code>practice_contact*</code></p>
+<p>Table: <code>practice_contact</code></p>
 <p>Return one row per contact with:</p>
 <ol type="1">
 <li><code>contact_id</code></li>
 <li><code>display_name</code>: trim both names, join with one space, and avoid a trailing space when the last name is NULL.</li>
 <li><code>email_clean</code>: lowercase and trim the email</li>
+<li>Remove rows with missing emails.</li>
 </ol>
-<p>Sort by <code>contact_id</code>. <strong>Check:</strong> contact 6 should display <code>Noah</code> and <code>No email</code>.</p>
-<p>Discuss: does lowercasing a name always preserve the person’s preferred spelling?</p>
+</section>
+<section id="like-pattern" class="slide level2">
+<h2>LIKE pattern</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-label="1"></a></span>
+<span id="cb7-2"><a aria-label="2"></a><span class="kw">SELECT</span> TrackId, Name</span>
+<span id="cb7-3"><a aria-label="3"></a><span class="kw">FROM</span> Track</span>
+<span id="cb7-4"><a aria-label="4"></a><span class="kw">WHERE</span> Name <span class="kw">LIKE</span> <span class="st">'%love%'</span></span>
+<span id="cb7-5"><a aria-label="5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TrackId;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Default <code>LIKE</code> ignores ASCII letter case, but does not fully fold non-ASCII case.</p>
 </section>
 <section id="like-patterns" class="slide level2">
 <h2>LIKE patterns</h2>
@@ -483,21 +475,11 @@
 <td>Contains Love</td>
 </tr>
 <tr class="odd">
-<td><code>'%Live'</code></td>
-<td>Ends with Live</td>
-</tr>
-<tr class="even">
-<td><code>'A_'</code></td>
-<td>A followed by exactly one character</td>
+<td><code>'%Love'</code></td>
+<td>Ends with Love</td>
 </tr>
 </tbody>
 </table>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-label="1"></a></span>
-<span id="cb6-2"><a aria-label="2"></a><span class="kw">SELECT</span> TrackId, Name</span>
-<span id="cb6-3"><a aria-label="3"></a><span class="kw">FROM</span> Track</span>
-<span id="cb6-4"><a aria-label="4"></a><span class="kw">WHERE</span> Name <span class="kw">LIKE</span> <span class="st">'%love%'</span></span>
-<span id="cb6-5"><a aria-label="5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TrackId;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Default <code>LIKE</code> ignores ASCII letter case, but does not fully fold non-ASCII case.</p>
 </section>
 <section id="searching-for-literal-and-_" class="slide level2">
 <h2>Searching for literal % and _</h2>
@@ -518,78 +500,35 @@
 </dd>
 </dl>
 </section>
-<section id="activity-pattern-detective" class="slide level2 activity scrollable">
-<h2>Activity · Pattern detective</h2>
-<p>Write separate queries for tracks whose names:</p>
-<ol type="1">
-<li>Contain <code>love</code>, ignoring ASCII case using default <code>LIKE</code>.</li>
-<li>Contain a literal <code>%</code>.</li>
-<li>Contain a literal <code>_</code>.</li>
-</ol>
-</section>
-<section id="formatting-values-for-display" class="slide level2">
-<h2>Formatting values for display</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-label="1"></a><span class="kw">SELECT</span> InvoiceId,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-2" class="code-annotation-target"><a href="#annotated-cell-12-2" aria-label="2"></a>       printf(<span class="st">'INV-%04d'</span>, InvoiceId) <span class="kw">AS</span> invoice_label,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2">2</button><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3" aria-label="3"></a>       printf(<span class="st">'$%.2f'</span>, Total) <span class="kw">AS</span> total_label</span>
-<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4" aria-label="4"></a><span class="kw">FROM</span> Invoice</span>
-<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5" aria-label="5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceId</span>
-<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6" aria-label="6"></a><span class="kw">LIMIT</span> <span class="dv">3</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-12" data-code-lines="2" data-code-annotation="1"><code>%04d</code> formats an integer with at least four digits, padding with zeros.</span>
-</dd>
-<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-12" data-code-lines="3" data-code-annotation="2"><code>%.2f</code> formats a number with two decimal places.</span>
-</dd>
-</dl>
-<p>The labels are <strong>text</strong>. Keep <code>Total</code> numeric for sums and numeric sorting. <code>format()</code> is an alias in SQLite 3.38+.</p>
+<section id="activity-1" class="slide level2">
+<h2>Activity</h2>
+<p>Write separate queries for tracks whose names contain <code>love</code> fromt the <code>Track</code> table. Display the <code>TrackID</code> and <code>Name</code>, the length of the name in a new column, and the duration of the track in minutes from <code>Milliseconds</code>. Order by descending <code>Milliseconds</code> and <code>TrackID</code>.</p>
 </section>
 <section id="combining-rows-with-group_concat" class="slide level2">
 <h2>Combining rows with group_concat()</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-13"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-label="1"></a><span class="kw">SELECT</span> Country,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2" aria-label="2"></a>       group_concat(FirstName, <span class="st">', '</span>) <span class="kw">AS</span> customers</span>
-<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3" aria-label="3"></a><span class="kw">FROM</span> Customer</span>
-<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4" aria-label="4"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Country</span>
-<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5" aria-label="5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Country;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-label="1"></a><span class="kw">SELECT</span> Country,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-2" class="code-annotation-target"><a href="#annotated-cell-12-2" aria-label="2"></a>       group_concat(FirstName, <span class="st">', '</span>) <span class="kw">AS</span> customers</span>
+<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3" aria-label="3"></a><span class="kw">FROM</span> Customer</span>
+<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4" aria-label="4"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Country</span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5" aria-label="5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Country;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-lines="2" data-code-annotation="1">Join the non-NULL values from multiple rows into one string per group.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="2" data-code-annotation="1">Join the non-NULL values from multiple rows into one string per group.</span>
 </dd>
 </dl>
 <p>Without an explicit input order, the order inside the string is not guaranteed.</p>
 <p><code>group_concat(DISTINCT Country)</code> removes duplicates with the default comma separator. Deduplicate in a CTE when you also need a custom separator.</p>
 </section>
-<section id="ordered-text-aggregation-sqlite-3.44" class="slide level2">
-<h2>Ordered text aggregation · SQLite 3.44+</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-14"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1" aria-label="1"></a><span class="kw">SELECT</span> Country,</span>
-<span id="annotated-cell-14-2"><a href="#annotated-cell-14-2" aria-label="2"></a>       group_concat(FirstName, <span class="st">', '</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-3" class="code-annotation-target"><a href="#annotated-cell-14-3" aria-label="3"></a>                    <span class="kw">ORDER</span> <span class="kw">BY</span> FirstName, CustomerId) <span class="kw">AS</span> customers</span>
-<span id="annotated-cell-14-4"><a href="#annotated-cell-14-4" aria-label="4"></a><span class="kw">FROM</span> Customer</span>
-<span id="annotated-cell-14-5"><a href="#annotated-cell-14-5" aria-label="5"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Country</span>
-<span id="annotated-cell-14-6"><a href="#annotated-cell-14-6" aria-label="6"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Country;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-14" data-code-lines="3" data-code-annotation="1">This <code>ORDER BY</code> controls the order <strong>inside each joined string</strong>.</span>
-</dd>
-</dl>
-<p>The outer <code>ORDER BY</code> controls the order of the result rows.</p>
-<p><code>string_agg(value, separator)</code> is an alias for the two-argument form of <code>group_concat()</code> in SQLite 3.44+.</p>
-</section>
-<section id="activity-a-customer-directory" class="slide level2 activity scrollable">
-<h2>Activity · A customer directory</h2>
-<p>For each country, return:</p>
+<section id="activity-2" class="slide level2 scrollable">
+<h2>Activity</h2>
+<p>For each country from the table <code>Customer</code>, return:</p>
 <ol type="1">
 <li>The country.</li>
 <li>The number of customers.</li>
 <li>A comma-separated list of customers’ full names.</li>
 </ol>
 <p>Sort the countries alphabetically. On SQLite 3.44+, also order names by last name, first name, and customer ID inside the list.</p>
-<p><strong>Check:</strong> USA has four customers. The full result contains four countries.</p>
 </section></section>
 <section>
 <section id="dates-and-times" class="title-slide slide level1 agenda-slide center">
@@ -603,10 +542,7 @@
 <p>Dates and times</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>Additional class activities</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Solutions to additional activities</p>
+<p>Activity Solutions</p>
 </div></li>
 </ul>
 </div>
@@ -688,23 +624,24 @@
 </section>
 <section id="supported-input-conventions" class="slide level2">
 <h2>Supported input conventions</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-label="1"></a><span class="kw">SELECT</span> datetime(<span class="st">'2024-03-01 09:30:00'</span>) <span class="kw">AS</span> spaced,</span>
-<span id="cb7-2"><a aria-label="2"></a>       datetime(<span class="st">'2024-03-01T09:30:00Z'</span>) <span class="kw">AS</span> utc_text,</span>
-<span id="cb7-3"><a aria-label="3"></a>       datetime(<span class="st">'2024-03-01T09:30:00-08:00'</span>) <span class="kw">AS</span> offset_text;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The first two give <code>2024-03-01 09:30:00</code>. The third gives <code>2024-03-01 17:30:00</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-label="1"></a><span class="kw">SELECT</span> datetime(<span class="st">'2024-03-01 09:30:00'</span>) <span class="kw">AS</span> spaced,</span>
+<span id="cb8-2"><a aria-label="2"></a>       datetime(<span class="st">'2024-03-01T09:30:00Z'</span>) <span class="kw">AS</span> utc_text,</span>
+<span id="cb8-3"><a aria-label="3"></a>       datetime(<span class="st">'2024-03-01T09:30:00-08:00'</span>) <span class="kw">AS</span> offset_text;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><p>The first two give <code>2024-03-01 09:30:00</code>.</p></li>
+<li><p>The third gives <code>2024-03-01 17:30:00</code>.</p></li>
+</ul>
 <p>Use supported, zero-padded year-month-day forms. SQLite does not parse every ISO 8601 variant or arbitrary locale format such as <code>03/01/2024</code>.</p>
-<p>Document the meaning of timestamps that have no offset.</p>
 </section>
 <section id="reformatting-a-documented-import-layout" class="slide level2">
 <h2>Reformatting a documented import layout</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-label="1"></a><span class="kw">WITH</span> imported(raw_date) <span class="kw">AS</span> (<span class="kw">VALUES</span> (<span class="st">'03/25/2024'</span>))</span>
-<span id="cb8-2"><a aria-label="2"></a><span class="kw">SELECT</span> raw_date,</span>
-<span id="cb8-3"><a aria-label="3"></a>       <span class="fu">substr</span>(raw_date, <span class="dv">7</span>, <span class="dv">4</span>) <span class="op">||</span> <span class="st">'-'</span> <span class="op">||</span></span>
-<span id="cb8-4"><a aria-label="4"></a>       <span class="fu">substr</span>(raw_date, <span class="dv">1</span>, <span class="dv">2</span>) <span class="op">||</span> <span class="st">'-'</span> <span class="op">||</span></span>
-<span id="cb8-5"><a aria-label="5"></a>       <span class="fu">substr</span>(raw_date, <span class="dv">4</span>, <span class="dv">2</span>) <span class="kw">AS</span> candidate_iso_date</span>
-<span id="cb8-6"><a aria-label="6"></a><span class="kw">FROM</span> imported;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a aria-label="1"></a><span class="kw">WITH</span> imported(raw_date) <span class="kw">AS</span> (<span class="kw">VALUES</span> (<span class="st">'03/25/2024'</span>))</span>
+<span id="cb9-2"><a aria-label="2"></a><span class="kw">SELECT</span> raw_date,</span>
+<span id="cb9-3"><a aria-label="3"></a>       <span class="fu">substr</span>(raw_date, <span class="dv">7</span>, <span class="dv">4</span>) <span class="op">||</span> <span class="st">'-'</span> <span class="op">||</span></span>
+<span id="cb9-4"><a aria-label="4"></a>       <span class="fu">substr</span>(raw_date, <span class="dv">1</span>, <span class="dv">2</span>) <span class="op">||</span> <span class="st">'-'</span> <span class="op">||</span></span>
+<span id="cb9-5"><a aria-label="5"></a>       <span class="fu">substr</span>(raw_date, <span class="dv">4</span>, <span class="dv">2</span>) <span class="kw">AS</span> candidate_iso_date</span>
+<span id="cb9-6"><a aria-label="6"></a><span class="kw">FROM</span> imported;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This produces <strong>2024-03-25</strong> only because the source contract specifies <code>MM/DD/YYYY</code> with fixed widths.</p>
-<p><code>03/04/2024</code> is ambiguous without that contract. Reshaping the string does not validate the resulting date. Apply the date-only round-trip check later in the lecture.</p>
 </section>
 <section id="the-datetime-function-family" class="slide level2">
 <h2>The date/time function family</h2>
@@ -758,83 +695,81 @@
 </section>
 <section id="extracting-a-date-and-a-time" class="slide level2">
 <h2>Extracting a date and a time</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-17"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-17-1"><a href="#annotated-cell-17-1" aria-label="1"></a></span>
-<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2" aria-label="2"></a><span class="kw">SELECT</span> InvoiceId,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-3" class="code-annotation-target"><a href="#annotated-cell-17-3" aria-label="3"></a>       <span class="dt">date</span>(InvoiceDate) <span class="kw">AS</span> invoice_day,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2">2</button><span id="annotated-cell-17-4" class="code-annotation-target"><a href="#annotated-cell-17-4" aria-label="4"></a>       <span class="dt">time</span>(InvoiceDate) <span class="kw">AS</span> invoice_time</span>
-<span id="annotated-cell-17-5"><a href="#annotated-cell-17-5" aria-label="5"></a><span class="kw">FROM</span> Invoice</span>
-<span id="annotated-cell-17-6"><a href="#annotated-cell-17-6" aria-label="6"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceId</span>
-<span id="annotated-cell-17-7"><a href="#annotated-cell-17-7" aria-label="7"></a><span class="kw">LIMIT</span> <span class="dv">3</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-15"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1" aria-label="1"></a></span>
+<span id="annotated-cell-15-2"><a href="#annotated-cell-15-2" aria-label="2"></a><span class="kw">SELECT</span> InvoiceId,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-3" class="code-annotation-target"><a href="#annotated-cell-15-3" aria-label="3"></a>       <span class="dt">date</span>(InvoiceDate) <span class="kw">AS</span> invoice_day,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="2">2</button><span id="annotated-cell-15-4" class="code-annotation-target"><a href="#annotated-cell-15-4" aria-label="4"></a>       <span class="dt">time</span>(InvoiceDate) <span class="kw">AS</span> invoice_time</span>
+<span id="annotated-cell-15-5"><a href="#annotated-cell-15-5" aria-label="5"></a><span class="kw">FROM</span> Invoice</span>
+<span id="annotated-cell-15-6"><a href="#annotated-cell-15-6" aria-label="6"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceId</span>
+<span id="annotated-cell-15-7"><a href="#annotated-cell-15-7" aria-label="7"></a><span class="kw">LIMIT</span> <span class="dv">3</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-17" data-code-lines="3" data-code-annotation="1">Produce a normalized <code>YYYY-MM-DD</code> date.</span>
+<span data-code-cell="annotated-cell-15" data-code-lines="3" data-code-annotation="1">Produce a normalized <code>YYYY-MM-DD</code> date.</span>
 </dd>
-<dt data-target-cell="annotated-cell-17" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-17" data-code-lines="4" data-code-annotation="2">Produce an <code>HH:MM:SS</code> time of day.</span>
+<span data-code-cell="annotated-cell-15" data-code-lines="4" data-code-annotation="2">Produce an <code>HH:MM:SS</code> time of day.</span>
 </dd>
 </dl>
 <p>These expressions return derived values. They do not change <code>InvoiceDate</code>.</p>
 </section>
 <section id="the-current-moment" class="slide level2">
 <h2>The current moment</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a aria-label="1"></a></span>
-<span id="cb9-2"><a aria-label="2"></a><span class="kw">SELECT</span> <span class="fu">CURRENT_DATE</span> <span class="kw">AS</span> today_utc,</span>
-<span id="cb9-3"><a aria-label="3"></a>       CURRENT_TIME <span class="kw">AS</span> time_utc,</span>
-<span id="cb9-4"><a aria-label="4"></a>       <span class="fu">CURRENT_TIMESTAMP</span> <span class="kw">AS</span> timestamp_utc,</span>
-<span id="cb9-5"><a aria-label="5"></a>       datetime(<span class="st">'now'</span>) <span class="kw">AS</span> also_utc;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a aria-label="1"></a></span>
+<span id="cb10-2"><a aria-label="2"></a><span class="kw">SELECT</span> <span class="fu">CURRENT_DATE</span> <span class="kw">AS</span> today_utc,</span>
+<span id="cb10-3"><a aria-label="3"></a>       CURRENT_TIME <span class="kw">AS</span> time_utc,</span>
+<span id="cb10-4"><a aria-label="4"></a>       <span class="fu">CURRENT_TIMESTAMP</span> <span class="kw">AS</span> timestamp_utc,</span>
+<span id="cb10-5"><a aria-label="5"></a>       datetime(<span class="st">'now'</span>) <span class="kw">AS</span> also_utc;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>The current-time keywords take no parentheses.</li>
 <li><code>'now'</code> uses UTC and depends on when the query runs.</li>
 <li>Repeated <code>'now'</code> calls within the same SQLite step use the same instant.</li>
-<li>A fixed reference date makes classroom outputs reproducible.</li>
 </ul>
 </section>
 <section id="unix-seconds-explicit-conversions" class="slide level2">
 <h2>Unix seconds: explicit conversions</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-19"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="1">1</button><span id="annotated-cell-19-1" class="code-annotation-target"><a href="#annotated-cell-19-1" aria-label="1"></a><span class="kw">SELECT</span> unixepoch(<span class="st">'2024-01-01 00:00:00'</span>) <span class="kw">AS</span> seconds,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="2">2</button><span id="annotated-cell-19-2" class="code-annotation-target"><a href="#annotated-cell-19-2" aria-label="2"></a>       datetime(<span class="dv">1704067200</span>, <span class="st">'unixepoch'</span>) <span class="kw">AS</span> <span class="dt">timestamp</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-17"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1" aria-label="1"></a><span class="kw">SELECT</span> unixepoch(<span class="st">'2024-01-01 00:00:00'</span>) <span class="kw">AS</span> seconds,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2">2</button><span id="annotated-cell-17-2" class="code-annotation-target"><a href="#annotated-cell-17-2" aria-label="2"></a>       datetime(<span class="dv">1704067200</span>, <span class="st">'unixepoch'</span>) <span class="kw">AS</span> <span class="dt">timestamp</span>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-19" data-code-lines="1" data-code-annotation="1">Convert a timestamp to integer Unix seconds: <code>1704067200</code>.</span>
+<span data-code-cell="annotated-cell-17" data-code-lines="1" data-code-annotation="1">Convert a timestamp to integer Unix seconds: <code>1704067200</code>.</span>
 </dd>
-<dt data-target-cell="annotated-cell-19" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-19" data-code-lines="2" data-code-annotation="2">Interpret the number as Unix seconds to reconstruct the timestamp.</span>
+<span data-code-cell="annotated-cell-17" data-code-lines="2" data-code-annotation="2">Interpret the number as Unix seconds to reconstruct the timestamp.</span>
 </dd>
 </dl>
 </section>
-<section id="activity-6-one-instant-three-representations" class="slide level2 activity scrollable">
-<h2>Activity 6 · One instant, three representations</h2>
+<section id="activity-3" class="slide level2 scrollable">
+<h2>Activity</h2>
 <p>Use <code>2024-01-01 00:00:00</code>.</p>
 <ol type="1">
 <li>Return its date, Julian day number, and Unix seconds.</li>
 <li>Convert the Unix seconds back with <code>datetime()</code>.</li>
-<li>Use <code>typeof()</code> to inspect the result of <code>unixepoch()</code> and <code>strftime('%s', ...)</code>.</li>
 </ol>
 </section>
 <section id="strftime-formatting-and-extraction" class="slide level2">
 <h2>strftime(): formatting and extraction</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-20"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-20-1"><a href="#annotated-cell-20-1" aria-label="1"></a><span class="kw">SELECT</span> InvoiceId,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1">1</button><span id="annotated-cell-20-2" class="code-annotation-target"><a href="#annotated-cell-20-2" aria-label="2"></a>       strftime(<span class="st">'%Y-%m'</span>, InvoiceDate) <span class="kw">AS</span> year_month,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="2">2</button><span id="annotated-cell-20-3" class="code-annotation-target"><a href="#annotated-cell-20-3" aria-label="3"></a>       strftime(<span class="st">'%w'</span>, InvoiceDate) <span class="kw">AS</span> weekday_code,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="3">3</button><span id="annotated-cell-20-4" class="code-annotation-target"><a href="#annotated-cell-20-4" aria-label="4"></a>       <span class="fu">CAST</span>(strftime(<span class="st">'%H'</span>, InvoiceDate) <span class="kw">AS</span> <span class="dt">INTEGER</span>) <span class="kw">AS</span> <span class="kw">hour</span></span>
-<span id="annotated-cell-20-5"><a href="#annotated-cell-20-5" aria-label="5"></a><span class="kw">FROM</span> Invoice</span>
-<span id="annotated-cell-20-6"><a href="#annotated-cell-20-6" aria-label="6"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceId;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-18"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-18-1"><a href="#annotated-cell-18-1" aria-label="1"></a><span class="kw">SELECT</span> InvoiceId,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1">1</button><span id="annotated-cell-18-2" class="code-annotation-target"><a href="#annotated-cell-18-2" aria-label="2"></a>       strftime(<span class="st">'%Y-%m'</span>, InvoiceDate) <span class="kw">AS</span> year_month,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="2">2</button><span id="annotated-cell-18-3" class="code-annotation-target"><a href="#annotated-cell-18-3" aria-label="3"></a>       strftime(<span class="st">'%w'</span>, InvoiceDate) <span class="kw">AS</span> weekday_code,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="3">3</button><span id="annotated-cell-18-4" class="code-annotation-target"><a href="#annotated-cell-18-4" aria-label="4"></a>       <span class="fu">CAST</span>(strftime(<span class="st">'%H'</span>, InvoiceDate) <span class="kw">AS</span> <span class="dt">INTEGER</span>) <span class="kw">AS</span> <span class="kw">hour</span></span>
+<span id="annotated-cell-18-5"><a href="#annotated-cell-18-5" aria-label="5"></a><span class="kw">FROM</span> Invoice</span>
+<span id="annotated-cell-18-6"><a href="#annotated-cell-18-6" aria-label="6"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceId;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-20" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-20" data-code-lines="2" data-code-annotation="1">A sortable year-month grouping key.</span>
+<span data-code-cell="annotated-cell-18" data-code-lines="2" data-code-annotation="1">A sortable year-month grouping key.</span>
 </dd>
-<dt data-target-cell="annotated-cell-20" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-20" data-code-lines="3" data-code-annotation="2">Weekday code, with Sunday = <code>0</code> and Saturday = <code>6</code>.</span>
+<span data-code-cell="annotated-cell-18" data-code-lines="3" data-code-annotation="2">Weekday code, with Sunday = <code>0</code> and Saturday = <code>6</code>.</span>
 </dd>
-<dt data-target-cell="annotated-cell-20" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-20" data-code-lines="4" data-code-annotation="3">Convert the text component to a number when numeric operations need it.</span>
+<span data-code-cell="annotated-cell-18" data-code-lines="4" data-code-annotation="3">CAST: Convert the text component to a number when numeric operations need it.</span>
 </dd>
 </dl>
 <p><code>%m</code> means <strong>month</strong>. <code>%M</code> means <strong>minute</strong>.</p>
@@ -896,8 +831,8 @@
 </section>
 <section id="iso-weeks-can-belong-to-a-different-year-3.46" class="slide level2">
 <h2>ISO weeks can belong to a different year · 3.46+</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a aria-label="1"></a><span class="kw">SELECT</span> strftime(<span class="st">'%Y'</span>, <span class="st">'2021-01-01'</span>) <span class="kw">AS</span> calendar_year,</span>
-<span id="cb10-2"><a aria-label="2"></a>       strftime(<span class="st">'%G-W%V'</span>, <span class="st">'2021-01-01'</span>) <span class="kw">AS</span> iso_week;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a aria-label="1"></a><span class="kw">SELECT</span> strftime(<span class="st">'%Y'</span>, <span class="st">'2021-01-01'</span>) <span class="kw">AS</span> calendar_year,</span>
+<span id="cb11-2"><a aria-label="2"></a>       strftime(<span class="st">'%G-W%V'</span>, <span class="st">'2021-01-01'</span>) <span class="kw">AS</span> iso_week;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -917,72 +852,72 @@
 </section>
 <section id="modifiers-transform-a-time-value" class="slide level2">
 <h2>Modifiers transform a time value</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="dt">date</span>(<span class="st">'2024-02-28'</span>, <span class="st">'+1 day'</span>) <span class="kw">AS</span> <span class="fu">next_day</span>,</span>
-<span id="cb11-2"><a aria-label="2"></a>       datetime(<span class="st">'2024-03-01 09:30:00'</span>, <span class="st">'+90 minutes'</span>) <span class="kw">AS</span> later,</span>
-<span id="cb11-3"><a aria-label="3"></a>       <span class="dt">date</span>(<span class="st">'2024-03-15'</span>, <span class="st">'start of month'</span>) <span class="kw">AS</span> month_start;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Results: <code>2024-02-29</code>, <code>2024-03-01 11:00:00</code>, and <code>2024-03-01</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="dt">date</span>(<span class="st">'2024-02-28'</span>, <span class="st">'+1 day'</span>) <span class="kw">AS</span> <span class="fu">next_day</span>,</span>
+<span id="cb12-2"><a aria-label="2"></a>       datetime(<span class="st">'2024-03-01 09:30:00'</span>, <span class="st">'+90 minutes'</span>) <span class="kw">AS</span> later,</span>
+<span id="cb12-3"><a aria-label="3"></a>       <span class="dt">date</span>(<span class="st">'2024-03-15'</span>, <span class="st">'start of month'</span>) <span class="kw">AS</span> month_start;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Useful modifiers include signed days, hours, minutes, seconds, months, and years, plus <code>start of day</code>, <code>start of month</code>, and <code>start of year</code>.</p>
-<p>Modifiers apply <strong>from left to right</strong>.</p>
+<p>Multiple modifiers can be added per function. Modifiers apply <strong>from left to right</strong>.</p>
 </section>
-<section id="finding-a-weekday" class="slide level2">
-<h2>Finding a weekday</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="dt">date</span>(<span class="st">'2024-03-01'</span>, <span class="st">'weekday 1'</span>) <span class="kw">AS</span> monday,</span>
-<span id="cb12-2"><a aria-label="2"></a>       <span class="dt">date</span>(<span class="st">'2024-03-04'</span>, <span class="st">'weekday 1'</span>) <span class="kw">AS</span> already_monday;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Both results are <code>2024-03-04</code>.</p>
+<section id="finding-the-next-weekday" class="slide level2">
+<h2>Finding the next weekday</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="dt">date</span>(<span class="st">'2024-03-01'</span>, <span class="st">'weekday 1'</span>) <span class="kw">AS</span> monday,</span>
+<span id="cb13-2"><a aria-label="2"></a>       <span class="dt">date</span>(<span class="st">'2024-03-14'</span>, <span class="st">'weekday 1'</span>) <span class="kw">AS</span> already_monday;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>For the portable <code>weekday N</code> pattern, use <code>0</code> = Sunday through <code>6</code> = Saturday. It advances to that weekday or stays on the date if it already matches.</p>
 <p>It does not automatically skip holidays. Business-day schedules need a calendar table with explicit holiday rules.</p>
 </section>
 <section id="half-open-date-ranges" class="slide level2">
 <h2>Half-open date ranges</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-24"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-24-1"><a href="#annotated-cell-24-1" aria-label="1"></a><span class="kw">SELECT</span> InvoiceId, InvoiceDate, Total</span>
-<span id="annotated-cell-24-2"><a href="#annotated-cell-24-2" aria-label="2"></a><span class="kw">FROM</span> Invoice</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1">1</button><span id="annotated-cell-24-3" class="code-annotation-target"><a href="#annotated-cell-24-3" aria-label="3"></a><span class="kw">WHERE</span> InvoiceDate <span class="op">&gt;=</span> <span class="st">'2024-02-01 00:00:00'</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="2">2</button><span id="annotated-cell-24-4" class="code-annotation-target"><a href="#annotated-cell-24-4" aria-label="4"></a>  <span class="kw">AND</span> InvoiceDate <span class="op">&lt;</span>  <span class="st">'2024-03-01 00:00:00'</span></span>
-<span id="annotated-cell-24-5"><a href="#annotated-cell-24-5" aria-label="5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceDate, InvoiceId;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-22"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-22-1"><a href="#annotated-cell-22-1" aria-label="1"></a><span class="kw">SELECT</span> InvoiceId, InvoiceDate, Total</span>
+<span id="annotated-cell-22-2"><a href="#annotated-cell-22-2" aria-label="2"></a><span class="kw">FROM</span> Invoice</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="1">1</button><span id="annotated-cell-22-3" class="code-annotation-target"><a href="#annotated-cell-22-3" aria-label="3"></a><span class="kw">WHERE</span> InvoiceDate <span class="op">&gt;=</span> <span class="st">'2024-02-01 00:00:00'</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="2">2</button><span id="annotated-cell-22-4" class="code-annotation-target"><a href="#annotated-cell-22-4" aria-label="4"></a>  <span class="kw">AND</span> InvoiceDate <span class="op">&lt;</span>  <span class="st">'2024-03-01 00:00:00'</span></span>
+<span id="annotated-cell-22-5"><a href="#annotated-cell-22-5" aria-label="5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceDate, InvoiceId;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-24" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-22" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-24" data-code-lines="3" data-code-annotation="1">Include the lower boundary.</span>
+<span data-code-cell="annotated-cell-22" data-code-lines="3" data-code-annotation="1">Include the lower boundary.</span>
 </dd>
-<dt data-target-cell="annotated-cell-24" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-22" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-24" data-code-lines="4" data-code-annotation="2">Exclude the next period’s lower boundary.</span>
+<span data-code-cell="annotated-cell-22" data-code-lines="4" data-code-annotation="2">Exclude the next period’s lower boundary.</span>
 </dd>
 </dl>
 <p>This includes every February timestamp, including leap day. It avoids guessing the final second or fractional second of the month.</p>
 </section>
-<section id="activity-february-billing" class="slide level2 activity scrollable">
-<h2>Activity · February billing</h2>
+<section id="activity-4" class="slide level2 scrollable">
+<h2>Activity</h2>
 <ol type="1">
-<li>Return all invoices in February 2024 using a half-open range.</li>
+<li>Return all invoices in March 2024 using a half-open range.</li>
 <li>Add <code>due_date</code>, exactly <strong>14 calendar days</strong> after the invoice date.</li>
 <li>Add <code>invoice_month_end</code>, the final date of the invoice’s month.</li>
 <li>Sort by timestamp, then invoice ID.</li>
 </ol>
-<p><strong>Check:</strong> invoice IDs <code>4</code>, <code>5</code>, and <code>6</code> are included. Invoice <code>7</code> is excluded.</p>
-<p>Explain why <code>BETWEEN '2024-02-01' AND '2024-02-29'</code> fails to include every February timestamp.</p>
 </section>
 <section id="elapsed-time-in-days-and-seconds" class="slide level2">
 <h2>Elapsed time in days and seconds</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-25"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-25-1"><a href="#annotated-cell-25-1" aria-label="1"></a><span class="kw">SELECT</span> julianday(<span class="st">'2024-02-29 01:00:00'</span>)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-25" data-target-annotation="1">1</button><span id="annotated-cell-25-2" class="code-annotation-target"><a href="#annotated-cell-25-2" aria-label="2"></a>       <span class="op">-</span> julianday(<span class="st">'2024-02-28 23:30:00'</span>) <span class="kw">AS</span> days,</span>
-<span id="annotated-cell-25-3"><a href="#annotated-cell-25-3" aria-label="3"></a>       unixepoch(<span class="st">'2024-02-29 01:00:00'</span>)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-25" data-target-annotation="2">2</button><span id="annotated-cell-25-4" class="code-annotation-target"><a href="#annotated-cell-25-4" aria-label="4"></a>       <span class="op">-</span> unixepoch(<span class="st">'2024-02-28 23:30:00'</span>) <span class="kw">AS</span> seconds;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-23"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-23-1"><a href="#annotated-cell-23-1" aria-label="1"></a><span class="kw">SELECT</span> julianday(<span class="st">'2024-02-29 01:00:00'</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1">1</button><span id="annotated-cell-23-2" class="code-annotation-target"><a href="#annotated-cell-23-2" aria-label="2"></a>       <span class="op">-</span> julianday(<span class="st">'2024-02-28 23:30:00'</span>) <span class="kw">AS</span> days,</span>
+<span id="annotated-cell-23-3"><a href="#annotated-cell-23-3" aria-label="3"></a>       unixepoch(<span class="st">'2024-02-29 01:00:00'</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2">2</button><span id="annotated-cell-23-4" class="code-annotation-target"><a href="#annotated-cell-23-4" aria-label="4"></a>       <span class="op">-</span> unixepoch(<span class="st">'2024-02-28 23:30:00'</span>) <span class="kw">AS</span> seconds;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-25" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-25" data-code-lines="2" data-code-annotation="1">The elapsed interval is <code>0.0625</code> days.</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="2" data-code-annotation="1">The elapsed interval is <code>0.0625</code> days.</span>
 </dd>
-<dt data-target-cell="annotated-cell-25" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-25" data-code-lines="4" data-code-annotation="2">The same interval is <code>5400</code> seconds, or 90 minutes.</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="4" data-code-annotation="2">The same interval is <code>5400</code> seconds, or 90 minutes.</span>
 </dd>
 </dl>
 <p>Subtract <strong>end minus start</strong>. Divide seconds by <code>60.0</code>, <code>3600.0</code>, or <code>86400.0</code> to preserve fractional units.</p>
+</section>
+<section id="activity-5" class="slide level2">
+<h2>Activity</h2>
+<p>Using the <code>Invoice</code> table, find the time elapse from a customers first <code>InvoiceDate</code> to the last <code>InvoiceDate</code> customer 1 and 2.</p>
 </section></section>
 <section>
-<section id="additional-class-activities" class="title-slide slide level1 agenda-slide center">
-<h1>Additional class activities</h1>
+<section id="activity-solutions" class="title-slide slide level1 agenda-slide center">
+<h1>Activity Solutions</h1>
 <div class="agenda">
 <ul>
 <li><div class="agenda-inactive agenda-pre-active">
@@ -992,284 +927,76 @@
 <p>Dates and times</p>
 </div></li>
 <li><div class="agenda-active">
-<p>Additional class activities</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Solutions to additional activities</p>
+<p>Activity Solutions</p>
 </div></li>
 </ul>
 </div>
 </section>
-<section id="working-together" class="slide level2 activity">
-<h2>Working together</h2>
-<p>Work in pairs: one person writes SQL while the other checks the output. Switch roles after each activity.</p>
-<ul>
-<li>Use the supplied music database and the classroom practice tables.</li>
-<li>Keep the original data unchanged; use <code>SELECT</code> and CTEs.</li>
-<li>Submit each query, a few output rows, and your discussion response.</li>
-<li>Suggested total time: <strong>50 minutes</strong>, including discussion.</li>
-</ul>
-<p>These five activities extend the earlier exercises. Solutions follow the complete activity set.</p>
+<section id="solution-a" class="slide level2">
+<h2>Solution A</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a aria-label="1"></a><span class="kw">SELECT</span> contact_id, </span>
+<span id="cb14-2"><a aria-label="2"></a>    <span class="fu">trim</span>(first_name) <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> <span class="fu">trim</span>(last_name) <span class="kw">as</span> display_name,</span>
+<span id="cb14-3"><a aria-label="3"></a>    <span class="fu">trim</span>(<span class="fu">lower</span>(email)) <span class="kw">as</span> email_clean</span>
+<span id="cb14-4"><a aria-label="4"></a><span class="kw">FROM</span> practice_contact</span>
+<span id="cb14-5"><a aria-label="5"></a><span class="kw">WHERE</span> display_name <span class="kw">is</span> <span class="kw">not</span> <span class="kw">null</span></span>
+<span id="cb14-6"><a aria-label="6"></a><span class="kw">ORDER</span> <span class="kw">BY</span> contact_id;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="class-activity-a-email-domain-audit" class="slide level2 activity scrollable">
-<h2>Class activity A · Email domain audit</h2>
-<p><strong>10 minutes · Table:</strong> <code>practice_contact</code></p>
-<ol type="1">
-<li>Create <code>email_clean</code> by trimming and lowercasing <code>email</code>; treat blank strings as NULL.</li>
-<li>Classify each email as <code>missing</code>, <code>review</code>, or <code>usable</code>. For this exercise, usable means exactly one <code>@</code>, with at least one character on either side and no ordinary spaces.</li>
-<li>Return <code>contact_id</code>, raw <code>email</code>, <code>email_clean</code>, the status, and <code>email_domain</code>. Extract the domain only for usable values; otherwise return NULL.</li>
-<li>Sort by <code>contact_id</code>.</li>
-</ol>
-<p><strong>Check:</strong> <code>' Ana@Example.edu '</code> becomes <code>ana@example.edu</code>, with domain <code>example.edu</code>. Both <code>'ana.example.edu'</code> and <code>'a@@b'</code> need review.</p>
-<p><strong>Discuss:</strong> Why does passing these checks not prove that an address exists?</p>
+<section id="solution-b" class="slide level2">
+<h2>Solution B</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a aria-label="1"></a><span class="kw">SELECT</span> TrackId, Name,</span>
+<span id="cb15-2"><a aria-label="2"></a>       <span class="fu">substr</span>(Name, <span class="dv">1</span>, <span class="dv">12</span>) <span class="kw">AS</span> name_preview,</span>
+<span id="cb15-3"><a aria-label="3"></a>       <span class="fu">length</span>(Name) <span class="kw">AS</span> name_length,</span>
+<span id="cb15-4"><a aria-label="4"></a>       <span class="fu">round</span>(Milliseconds <span class="op">/</span> <span class="fl">60000.0</span>, <span class="dv">2</span>) <span class="kw">AS</span> duration_minutes</span>
+<span id="cb15-5"><a aria-label="5"></a><span class="kw">FROM</span> Track</span>
+<span id="cb15-6"><a aria-label="6"></a><span class="kw">WHERE</span> Name <span class="kw">LIKE</span> <span class="st">'%love%'</span></span>
+<span id="cb15-7"><a aria-label="7"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Milliseconds <span class="kw">DESC</span>, TrackId;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="class-activity-b-a-track-name-report" class="slide level2 activity scrollable">
-<h2>Class activity B · A track-name report</h2>
-<p><strong>8 minutes · Table:</strong> <code>Track</code></p>
-<ol type="1">
-<li>Find tracks whose names contain <code>love</code> using default <code>LIKE</code>.</li>
-<li>Return <code>TrackId</code>, <code>Name</code>, the first 12 characters as <code>name_preview</code>, and the name’s character count as <code>name_length</code>.</li>
-<li>Return duration in minutes as a numeric value rounded to two decimal places, and a separate display label such as <code>3.50 min</code> using <code>printf()</code>.</li>
-<li>Sort by the original duration, longest first, then by <code>TrackId</code>.</li>
-</ol>
-<p><strong>Check:</strong> A duration of 210000 milliseconds is <code>3.5</code> numeric minutes and displays as <code>3.50 min</code>.</p>
-<p><strong>Discuss:</strong> Why should sorting use the numeric duration instead of the formatted label? Does default <code>LIKE</code> handle every language’s case rules?</p>
-</section>
-<section id="class-activity-c-monthly-sales-summary" class="slide level2 activity scrollable">
-<h2>Class activity C · Monthly sales summary</h2>
-<p><strong>10 minutes · Table:</strong> <code>Invoice</code></p>
-<ol type="1">
-<li>Include invoices from calendar year 2024 using a half-open timestamp range.</li>
-<li>Return one row per month with invoices: <code>year_month</code>, <code>invoice_count</code>, <code>monthly_revenue</code>, and <code>average_invoice</code>.</li>
-<li>Round revenue and average invoice value to two decimal places. Keep both results numeric.</li>
-<li>Sort months chronologically.</li>
-</ol>
-<p><strong>Check:</strong> Summing the monthly invoice counts should equal the number of invoices passing the same 2024 filter.</p>
-<p><strong>Discuss:</strong> Why group by <code>%Y-%m</code> instead of <code>%m</code> when analyzing several years? Does an absent month mean zero sales or simply no rows in this query?</p>
-</section>
-<section id="class-activity-d-billing-and-reminder-dates" class="slide level2 activity scrollable">
-<h2>Class activity D · Billing and reminder dates</h2>
-<p><strong>10 minutes · Table:</strong> <code>Invoice</code></p>
-<p>For every invoice, return <code>InvoiceId</code>, <code>InvoiceDate</code>, and:</p>
-<ol type="1">
-<li><code>due_date</code>: 14 calendar days after the invoice date.</li>
-<li><code>month_end</code>: the last date of the invoice’s month.</li>
-<li><code>reminder_date</code>: the first Monday on or after the due date.</li>
-</ol>
-<p>Sort by <code>InvoiceDate</code>, then <code>InvoiceId</code>. Use date modifiers; do not hard-code month lengths.</p>
-<p><strong>Check:</strong> For <code>2024-02-15 09:00:00</code>, the three dates are <code>2024-02-29</code>, <code>2024-02-29</code>, and <code>2024-03-04</code>.</p>
-<p><strong>Discuss:</strong> What happens if the due date is already Monday? Why is this not a complete business-day scheduling rule?</p>
-</section>
-<section id="class-activity-e-event-duration-audit" class="slide level2 activity scrollable">
-<h2>Class activity E · Event duration audit</h2>
-<p><strong>12 minutes · Table:</strong> <code>practice_event</code></p>
-<ol type="1">
-<li>Keep <code>event_id</code>, <code>label</code>, <code>start_text</code>, and <code>end_text</code> in the output.</li>
-<li>Convert endpoints to Unix seconds. Assume offset-free timestamps are UTC.</li>
-<li>Assign a status, in this priority order: <code>missing endpoint</code> for NULL/blank input; <code>unparseable endpoint</code> if a conversion returns NULL; <code>reversed interval</code> if the end precedes the start; otherwise <code>ok</code>.</li>
-<li>Return <code>duration_minutes</code>, rounded to two decimals, only for <code>ok</code> rows. Sort by <code>event_id</code>.</li>
-</ol>
-<p><strong>Check:</strong> <code>2024-03-01T09:00:00-08:00</code> to <code>2024-03-01T18:30:00Z</code> is <strong>90 minutes</strong>.</p>
-<p><strong>Discuss:</strong> Why compare normalized instants instead of raw timestamp text? This is a parsing audit, not a complete calendar-date validator.</p>
-</section></section>
-<section>
-<section id="solutions-to-additional-activities" class="title-slide slide level1 agenda-slide center">
-<h1>Solutions to additional activities</h1>
-<div class="agenda">
-<ul>
-<li><div class="agenda-inactive agenda-pre-active">
-<p>Strings</p>
-</div></li>
-<li><div class="agenda-inactive agenda-pre-active">
-<p>Dates and times</p>
-</div></li>
-<li><div class="agenda-inactive agenda-pre-active">
-<p>Additional class activities</p>
-</div></li>
-<li><div class="agenda-active">
-<p>Solutions to additional activities</p>
-</div></li>
-</ul>
-</div>
-</section>
-<section id="solution-a-clean-and-classify" class="slide level2">
-<h2>Solution A · Clean and classify</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-26"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-26-1"><a href="#annotated-cell-26-1" aria-label="1"></a><span class="kw">WITH</span> cleaned <span class="kw">AS</span> (</span>
-<span id="annotated-cell-26-2"><a href="#annotated-cell-26-2" aria-label="2"></a>    <span class="kw">SELECT</span> contact_id, email,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-26" data-target-annotation="1">1</button><span id="annotated-cell-26-3" class="code-annotation-target"><a href="#annotated-cell-26-3" aria-label="3"></a>           <span class="fu">NULLIF</span>(<span class="fu">lower</span>(<span class="fu">trim</span>(email)), <span class="st">''</span>) <span class="kw">AS</span> email_clean</span>
-<span id="annotated-cell-26-4"><a href="#annotated-cell-26-4" aria-label="4"></a>    <span class="kw">FROM</span> practice_contact</span>
-<span id="annotated-cell-26-5"><a href="#annotated-cell-26-5" aria-label="5"></a>), classified <span class="kw">AS</span> (</span>
-<span id="annotated-cell-26-6"><a href="#annotated-cell-26-6" aria-label="6"></a>    <span class="kw">SELECT</span> <span class="op">*</span>,</span>
-<span id="annotated-cell-26-7"><a href="#annotated-cell-26-7" aria-label="7"></a>           <span class="cf">CASE</span></span>
-<span id="annotated-cell-26-8"><a href="#annotated-cell-26-8" aria-label="8"></a>             <span class="cf">WHEN</span> email_clean <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">'missing'</span></span>
-<span id="annotated-cell-26-9"><a href="#annotated-cell-26-9" aria-label="9"></a>             <span class="cf">WHEN</span> <span class="fu">instr</span>(email_clean, <span class="st">'@'</span>) <span class="op">&lt;=</span> <span class="dv">1</span></span>
-<span id="annotated-cell-26-10"><a href="#annotated-cell-26-10" aria-label="10"></a>               <span class="kw">OR</span> <span class="fu">instr</span>(email_clean, <span class="st">'@'</span>) <span class="op">=</span> <span class="fu">length</span>(email_clean)</span>
-<span id="annotated-cell-26-11"><a href="#annotated-cell-26-11" aria-label="11"></a>               <span class="kw">OR</span> <span class="fu">instr</span>(<span class="fu">substr</span>(email_clean,</span>
-<span id="annotated-cell-26-12"><a href="#annotated-cell-26-12" aria-label="12"></a>                        <span class="fu">instr</span>(email_clean, <span class="st">'@'</span>) <span class="op">+</span> <span class="dv">1</span>), <span class="st">'@'</span>) <span class="op">&gt;</span> <span class="dv">0</span></span>
-<span id="annotated-cell-26-13"><a href="#annotated-cell-26-13" aria-label="13"></a>               <span class="kw">OR</span> <span class="fu">instr</span>(email_clean, <span class="st">' '</span>) <span class="op">&gt;</span> <span class="dv">0</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-26" data-target-annotation="2">2</button><span id="annotated-cell-26-14" class="code-annotation-target"><a href="#annotated-cell-26-14" aria-label="14"></a>               <span class="cf">THEN</span> <span class="st">'review'</span></span>
-<span id="annotated-cell-26-15"><a href="#annotated-cell-26-15" aria-label="15"></a>             <span class="cf">ELSE</span> <span class="st">'usable'</span></span>
-<span id="annotated-cell-26-16"><a href="#annotated-cell-26-16" aria-label="16"></a>           <span class="cf">END</span> <span class="kw">AS</span> email_status</span>
-<span id="annotated-cell-26-17"><a href="#annotated-cell-26-17" aria-label="17"></a>    <span class="kw">FROM</span> cleaned</span>
-<span id="annotated-cell-26-18"><a href="#annotated-cell-26-18" aria-label="18"></a>)</span>
-<span id="annotated-cell-26-19"><a href="#annotated-cell-26-19" aria-label="19"></a><span class="kw">SELECT</span> contact_id, email, email_clean, email_status,</span>
-<span id="annotated-cell-26-20"><a href="#annotated-cell-26-20" aria-label="20"></a>       <span class="cf">CASE</span> <span class="cf">WHEN</span> email_status <span class="op">=</span> <span class="st">'usable'</span></span>
-<span id="annotated-cell-26-21"><a href="#annotated-cell-26-21" aria-label="21"></a>            <span class="cf">THEN</span> <span class="fu">substr</span>(email_clean, <span class="fu">instr</span>(email_clean, <span class="st">'@'</span>) <span class="op">+</span> <span class="dv">1</span>)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-26" data-target-annotation="3">3</button><span id="annotated-cell-26-22" class="code-annotation-target"><a href="#annotated-cell-26-22" aria-label="22"></a>       <span class="cf">END</span> <span class="kw">AS</span> email_domain</span>
-<span id="annotated-cell-26-23"><a href="#annotated-cell-26-23" aria-label="23"></a><span class="kw">FROM</span> classified</span>
-<span id="annotated-cell-26-24"><a href="#annotated-cell-26-24" aria-label="24"></a><span class="kw">ORDER</span> <span class="kw">BY</span> contact_id;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-26" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-26" data-code-lines="3" data-code-annotation="1">Normalize case and outer spaces, then convert an empty result to NULL.</span>
-</dd>
-<dt data-target-cell="annotated-cell-26" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-26" data-code-lines="14" data-code-annotation="2">Flag missing/misplaced/repeated <code>@</code> symbols and ordinary internal spaces.</span>
-</dd>
-<dt data-target-cell="annotated-cell-26" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-26" data-code-lines="22" data-code-annotation="3">A <code>CASE</code> without <code>ELSE</code> returns NULL when its condition is not met.</span>
-</dd>
-</dl>
-</section>
-<section id="solution-a-discussion" class="slide level2">
-<h2>Solution A · Discussion</h2>
-<p>These are simplified classroom rules. They do not check mailbox existence or every valid email syntax. <code>trim()</code> here removes ordinary outer spaces, not every kind of whitespace. Default <code>lower()</code> handles ASCII case conversion.</p>
-</section>
-<section id="solution-b-track-name-report" class="slide level2">
-<h2>Solution B · Track-name report</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-27"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-27-1"><a href="#annotated-cell-27-1" aria-label="1"></a><span class="kw">SELECT</span> TrackId, Name,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="1">1</button><span id="annotated-cell-27-2" class="code-annotation-target"><a href="#annotated-cell-27-2" aria-label="2"></a>       <span class="fu">substr</span>(Name, <span class="dv">1</span>, <span class="dv">12</span>) <span class="kw">AS</span> name_preview,</span>
-<span id="annotated-cell-27-3"><a href="#annotated-cell-27-3" aria-label="3"></a>       <span class="fu">length</span>(Name) <span class="kw">AS</span> name_length,</span>
-<span id="annotated-cell-27-4"><a href="#annotated-cell-27-4" aria-label="4"></a>       <span class="fu">round</span>(Milliseconds <span class="op">/</span> <span class="fl">60000.0</span>, <span class="dv">2</span>) <span class="kw">AS</span> duration_minutes,</span>
-<span id="annotated-cell-27-5"><a href="#annotated-cell-27-5" aria-label="5"></a>       printf(<span class="st">'%.2f min'</span>, Milliseconds <span class="op">/</span> <span class="fl">60000.0</span>)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="2">2</button><span id="annotated-cell-27-6" class="code-annotation-target"><a href="#annotated-cell-27-6" aria-label="6"></a>           <span class="kw">AS</span> duration_label</span>
-<span id="annotated-cell-27-7"><a href="#annotated-cell-27-7" aria-label="7"></a><span class="kw">FROM</span> Track</span>
-<span id="annotated-cell-27-8"><a href="#annotated-cell-27-8" aria-label="8"></a><span class="kw">WHERE</span> Name <span class="kw">LIKE</span> <span class="st">'%love%'</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="3">3</button><span id="annotated-cell-27-9" class="code-annotation-target"><a href="#annotated-cell-27-9" aria-label="9"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Milliseconds <span class="kw">DESC</span>, TrackId;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-27" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="2" data-code-annotation="1"><code>substr()</code> starts at position 1; short names remain shorter than 12 characters.</span>
-</dd>
-<dt data-target-cell="annotated-cell-27" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="6" data-code-annotation="2">The decimal divisor preserves fractional minutes. <code>printf()</code> produces a text label.</span>
-</dd>
-<dt data-target-cell="annotated-cell-27" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="9" data-code-annotation="3">Numeric sorting avoids text ordering such as <code>10.00 min</code> before <code>2.00 min</code>.</span>
-</dd>
-</dl>
-<p>Default <code>LIKE</code> ignores ASCII case but does not provide complete Unicode case folding. This query assumes non-NULL numeric track durations.</p>
-</section>
-<section id="solution-c-monthly-sales-summary" class="slide level2">
-<h2>Solution C · Monthly sales summary</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-28"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><button class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="1">1</button><span id="annotated-cell-28-1" class="code-annotation-target"><a href="#annotated-cell-28-1" aria-label="1"></a><span class="kw">SELECT</span> strftime(<span class="st">'%Y-%m'</span>, InvoiceDate) <span class="kw">AS</span> year_month,</span>
-<span id="annotated-cell-28-2"><a href="#annotated-cell-28-2" aria-label="2"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> invoice_count,</span>
-<span id="annotated-cell-28-3"><a href="#annotated-cell-28-3" aria-label="3"></a>       <span class="fu">round</span>(<span class="fu">SUM</span>(Total), <span class="dv">2</span>) <span class="kw">AS</span> monthly_revenue,</span>
-<span id="annotated-cell-28-4"><a href="#annotated-cell-28-4" aria-label="4"></a>       <span class="fu">round</span>(<span class="fu">AVG</span>(Total), <span class="dv">2</span>) <span class="kw">AS</span> average_invoice</span>
-<span id="annotated-cell-28-5"><a href="#annotated-cell-28-5" aria-label="5"></a><span class="kw">FROM</span> Invoice</span>
-<span id="annotated-cell-28-6"><a href="#annotated-cell-28-6" aria-label="6"></a><span class="kw">WHERE</span> InvoiceDate <span class="op">&gt;=</span> <span class="st">'2024-01-01 00:00:00'</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="2">2</button><span id="annotated-cell-28-7" class="code-annotation-target"><a href="#annotated-cell-28-7" aria-label="7"></a>  <span class="kw">AND</span> InvoiceDate <span class="op">&lt;</span>  <span class="st">'2025-01-01 00:00:00'</span></span>
-<span id="annotated-cell-28-8"><a href="#annotated-cell-28-8" aria-label="8"></a><span class="kw">GROUP</span> <span class="kw">BY</span> strftime(<span class="st">'%Y-%m'</span>, InvoiceDate)</span>
-<span id="annotated-cell-28-9"><a href="#annotated-cell-28-9" aria-label="9"></a><span class="kw">ORDER</span> <span class="kw">BY</span> year_month;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-28" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-28" data-code-lines="1" data-code-annotation="1">A zero-padded year-month key distinguishes years and sorts chronologically.</span>
-</dd>
-<dt data-target-cell="annotated-cell-28" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-28" data-code-lines="7" data-code-annotation="2">Include the first instant of 2024 and exclude the first instant of 2025, using the lecture’s fixed UTC text convention.</span>
-</dd>
-</dl>
-</section>
-<section id="solution-c-check-and-discussion" class="slide level2">
-<h2>Solution C · Check and discussion</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a aria-label="1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> invoices_in_2024</span>
-<span id="cb13-2"><a aria-label="2"></a><span class="kw">FROM</span> Invoice</span>
-<span id="cb13-3"><a aria-label="3"></a><span class="kw">WHERE</span> InvoiceDate <span class="op">&gt;=</span> <span class="st">'2024-01-01 00:00:00'</span></span>
-<span id="cb13-4"><a aria-label="4"></a>  <span class="kw">AND</span> InvoiceDate <span class="op">&lt;</span>  <span class="st">'2025-01-01 00:00:00'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Compare this count with the sum of <code>invoice_count</code> in the monthly result.</p>
-<p>Grouping by <code>%m</code> alone combines the same month across different years. A missing month has no qualifying rows; this query does not generate a zero-valued row. A calendar table would be needed to explicitly display all months and distinguish missing data from confirmed zero activity.</p>
+<section id="solution-c" class="slide level2">
+<h2>Solution C</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a aria-label="1"></a><span class="kw">With</span> cc <span class="kw">as</span> (</span>
+<span id="cb16-2"><a aria-label="2"></a>    <span class="kw">select</span> <span class="op">*</span>,</span>
+<span id="cb16-3"><a aria-label="3"></a>         FirstName <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> LastName <span class="kw">as</span> full_name,</span>
+<span id="cb16-4"><a aria-label="4"></a>         <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">over</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> Country) <span class="kw">as</span> number_of_customers</span>
+<span id="cb16-5"><a aria-label="5"></a>    <span class="kw">from</span> Customer</span>
+<span id="cb16-6"><a aria-label="6"></a>    )</span>
+<span id="cb16-7"><a aria-label="7"></a><span class="kw">SELECT</span> Country, number_of_customers,</span>
+<span id="cb16-8"><a aria-label="8"></a>       group_concat(full_name, <span class="st">', '</span>) <span class="kw">AS</span> customers</span>
+<span id="cb16-9"><a aria-label="9"></a><span class="kw">FROM</span> cc</span>
+<span id="cb16-10"><a aria-label="10"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Country</span>
+<span id="cb16-11"><a aria-label="11"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Country;</span>
+<span id="cb16-12"><a aria-label="12"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="solution-d-billing-and-reminder-dates" class="slide level2">
 <h2>Solution D · Billing and reminder dates</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-30"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-30-1"><a href="#annotated-cell-30-1" aria-label="1"></a><span class="kw">WITH</span> billing <span class="kw">AS</span> (</span>
-<span id="annotated-cell-30-2"><a href="#annotated-cell-30-2" aria-label="2"></a>    <span class="kw">SELECT</span> InvoiceId, InvoiceDate,</span>
-<span id="annotated-cell-30-3"><a href="#annotated-cell-30-3" aria-label="3"></a>           <span class="dt">date</span>(InvoiceDate, <span class="st">'+14 days'</span>) <span class="kw">AS</span> due_date,</span>
-<span id="annotated-cell-30-4"><a href="#annotated-cell-30-4" aria-label="4"></a>           <span class="dt">date</span>(InvoiceDate, <span class="st">'start of month'</span>,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-30" data-target-annotation="1">1</button><span id="annotated-cell-30-5" class="code-annotation-target"><a href="#annotated-cell-30-5" aria-label="5"></a>                <span class="st">'+1 month'</span>, <span class="st">'-1 day'</span>) <span class="kw">AS</span> month_end</span>
-<span id="annotated-cell-30-6"><a href="#annotated-cell-30-6" aria-label="6"></a>    <span class="kw">FROM</span> Invoice</span>
-<span id="annotated-cell-30-7"><a href="#annotated-cell-30-7" aria-label="7"></a>)</span>
-<span id="annotated-cell-30-8"><a href="#annotated-cell-30-8" aria-label="8"></a><span class="kw">SELECT</span> InvoiceId, InvoiceDate, due_date, month_end,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-30" data-target-annotation="2">2</button><span id="annotated-cell-30-9" class="code-annotation-target"><a href="#annotated-cell-30-9" aria-label="9"></a>       <span class="dt">date</span>(due_date, <span class="st">'weekday 1'</span>) <span class="kw">AS</span> reminder_date</span>
-<span id="annotated-cell-30-10"><a href="#annotated-cell-30-10" aria-label="10"></a><span class="kw">FROM</span> billing</span>
-<span id="annotated-cell-30-11"><a href="#annotated-cell-30-11" aria-label="11"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceDate, InvoiceId;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-30" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-30" data-code-lines="5" data-code-annotation="1">Start at the first of the current month, advance to the next month, then step back one day. Modifier order matters.</span>
-</dd>
-<dt data-target-cell="annotated-cell-30" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-30" data-code-lines="9" data-code-annotation="2">Monday is weekday 1. A Monday due date stays unchanged.</span>
-</dd>
-</dl>
-<p>The rule does not account for holidays or company-specific closures; those need a business calendar.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a aria-label="1"></a><span class="kw">WITH</span> <span class="kw">new</span>(raw_date) <span class="kw">AS</span> (<span class="kw">VALUES</span> (<span class="st">'2024-01-01 00:00:00'</span>))</span>
+<span id="cb17-2"><a aria-label="2"></a><span class="kw">SELECT</span> raw_date,</span>
+<span id="cb17-3"><a aria-label="3"></a>        <span class="dt">date</span>(raw_date) <span class="kw">as</span> real_date,</span>
+<span id="cb17-4"><a aria-label="4"></a>        julianday(raw_date) <span class="kw">as</span> julian,</span>
+<span id="cb17-5"><a aria-label="5"></a>        unixepoch(raw_date) <span class="kw">as</span> unix</span>
+<span id="cb17-6"><a aria-label="6"></a><span class="kw">FROM</span> <span class="kw">new</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="solution-e-normalize-and-classify" class="slide level2">
-<h2>Solution E · Normalize and classify</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-31"><pre class="sourceCode numberSource sql code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode sql"><span id="annotated-cell-31-1"><a href="#annotated-cell-31-1" aria-label="1"></a><span class="kw">WITH</span> parsed <span class="kw">AS</span> (</span>
-<span id="annotated-cell-31-2"><a href="#annotated-cell-31-2" aria-label="2"></a>    <span class="kw">SELECT</span> <span class="op">*</span>,</span>
-<span id="annotated-cell-31-3"><a href="#annotated-cell-31-3" aria-label="3"></a>           unixepoch(<span class="fu">trim</span>(start_text)) <span class="kw">AS</span> start_seconds,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="1">1</button><span id="annotated-cell-31-4" class="code-annotation-target"><a href="#annotated-cell-31-4" aria-label="4"></a>           unixepoch(<span class="fu">trim</span>(end_text)) <span class="kw">AS</span> end_seconds</span>
-<span id="annotated-cell-31-5"><a href="#annotated-cell-31-5" aria-label="5"></a>    <span class="kw">FROM</span> practice_event</span>
-<span id="annotated-cell-31-6"><a href="#annotated-cell-31-6" aria-label="6"></a>), checked <span class="kw">AS</span> (</span>
-<span id="annotated-cell-31-7"><a href="#annotated-cell-31-7" aria-label="7"></a>    <span class="kw">SELECT</span> <span class="op">*</span>,</span>
-<span id="annotated-cell-31-8"><a href="#annotated-cell-31-8" aria-label="8"></a>           <span class="cf">CASE</span></span>
-<span id="annotated-cell-31-9"><a href="#annotated-cell-31-9" aria-label="9"></a>             <span class="cf">WHEN</span> <span class="fu">NULLIF</span>(<span class="fu">trim</span>(start_text), <span class="st">''</span>) <span class="kw">IS</span> <span class="kw">NULL</span></span>
-<span id="annotated-cell-31-10"><a href="#annotated-cell-31-10" aria-label="10"></a>               <span class="kw">OR</span> <span class="fu">NULLIF</span>(<span class="fu">trim</span>(end_text), <span class="st">''</span>) <span class="kw">IS</span> <span class="kw">NULL</span></span>
-<span id="annotated-cell-31-11"><a href="#annotated-cell-31-11" aria-label="11"></a>               <span class="cf">THEN</span> <span class="st">'missing endpoint'</span></span>
-<span id="annotated-cell-31-12"><a href="#annotated-cell-31-12" aria-label="12"></a>             <span class="cf">WHEN</span> start_seconds <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> end_seconds <span class="kw">IS</span> <span class="kw">NULL</span></span>
-<span id="annotated-cell-31-13"><a href="#annotated-cell-31-13" aria-label="13"></a>               <span class="cf">THEN</span> <span class="st">'unparseable endpoint'</span></span>
-<span id="annotated-cell-31-14"><a href="#annotated-cell-31-14" aria-label="14"></a>             <span class="cf">WHEN</span> end_seconds <span class="op">&lt;</span> start_seconds</span>
-<span id="annotated-cell-31-15"><a href="#annotated-cell-31-15" aria-label="15"></a>               <span class="cf">THEN</span> <span class="st">'reversed interval'</span></span>
-<span id="annotated-cell-31-16"><a href="#annotated-cell-31-16" aria-label="16"></a>             <span class="cf">ELSE</span> <span class="st">'ok'</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="2">2</button><span id="annotated-cell-31-17" class="code-annotation-target"><a href="#annotated-cell-31-17" aria-label="17"></a>           <span class="cf">END</span> <span class="kw">AS</span> interval_status</span>
-<span id="annotated-cell-31-18"><a href="#annotated-cell-31-18" aria-label="18"></a>    <span class="kw">FROM</span> parsed</span>
-<span id="annotated-cell-31-19"><a href="#annotated-cell-31-19" aria-label="19"></a>)</span>
-<span id="annotated-cell-31-20"><a href="#annotated-cell-31-20" aria-label="20"></a><span class="kw">SELECT</span> event_id, <span class="kw">label</span>, start_text, end_text, interval_status,</span>
-<span id="annotated-cell-31-21"><a href="#annotated-cell-31-21" aria-label="21"></a>       <span class="cf">CASE</span> <span class="cf">WHEN</span> interval_status <span class="op">=</span> <span class="st">'ok'</span></span>
-<span id="annotated-cell-31-22"><a href="#annotated-cell-31-22" aria-label="22"></a>            <span class="cf">THEN</span> <span class="fu">round</span>((end_seconds <span class="op">-</span> start_seconds) <span class="op">/</span> <span class="fl">60.0</span>, <span class="dv">2</span>)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="3">3</button><span id="annotated-cell-31-23" class="code-annotation-target"><a href="#annotated-cell-31-23" aria-label="23"></a>       <span class="cf">END</span> <span class="kw">AS</span> duration_minutes</span>
-<span id="annotated-cell-31-24"><a href="#annotated-cell-31-24" aria-label="24"></a><span class="kw">FROM</span> checked</span>
-<span id="annotated-cell-31-25"><a href="#annotated-cell-31-25" aria-label="25"></a><span class="kw">ORDER</span> <span class="kw">BY</span> event_id;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-31" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-31" data-code-lines="4" data-code-annotation="1">Convert supported timestamp inputs, including explicit offsets, to comparable instants.</span>
-</dd>
-<dt data-target-cell="annotated-cell-31" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-31" data-code-lines="17" data-code-annotation="2">Evaluate missing and unparseable values before checking interval order.</span>
-</dd>
-<dt data-target-cell="annotated-cell-31" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-31" data-code-lines="23" data-code-annotation="3">Subtract end minus start and divide by a real number; flagged intervals remain NULL.</span>
-</dd>
-</dl>
+<section id="solution-e" class="slide level2">
+<h2>Solution E</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a aria-label="1"></a><span class="kw">SELECT</span> InvoiceId, InvoiceDate, Total,</span>
+<span id="cb18-2"><a aria-label="2"></a>    <span class="dt">date</span>(InvoiceDate, <span class="st">'+14 day'</span>) <span class="kw">as</span> due_date,</span>
+<span id="cb18-3"><a aria-label="3"></a>    <span class="dt">date</span>(InvoiceDate, <span class="st">'start of month'</span>, <span class="st">'+1 month'</span>, <span class="st">'-1 day'</span>) <span class="kw">as</span> invoice_month_end,</span>
+<span id="cb18-4"><a aria-label="4"></a>    <span class="dt">time</span>(InvoiceDate) <span class="kw">as</span> <span class="dt">timestamp</span></span>
+<span id="cb18-5"><a aria-label="5"></a><span class="kw">FROM</span> Invoice</span>
+<span id="cb18-6"><a aria-label="6"></a><span class="kw">WHERE</span> InvoiceDate <span class="op">&gt;=</span> <span class="st">'2024-03-01 00:00:00'</span></span>
+<span id="cb18-7"><a aria-label="7"></a>  <span class="kw">AND</span> InvoiceDate <span class="op">&lt;</span>  <span class="st">'2024-04-01 00:00:00'</span></span>
+<span id="cb18-8"><a aria-label="8"></a><span class="kw">ORDER</span> <span class="kw">BY</span> InvoiceDate, InvoiceId;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="solution-e-check-and-discussion" class="slide level2">
-<h2>Solution E · Check and discussion</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a aria-label="1"></a><span class="kw">SELECT</span> (unixepoch(<span class="st">'2024-03-01T18:30:00Z'</span>)</span>
-<span id="cb14-2"><a aria-label="2"></a>      <span class="op">-</span> unixepoch(<span class="st">'2024-03-01T09:00:00-08:00'</span>)) <span class="op">/</span> <span class="fl">60.0</span></span>
-<span id="cb14-3"><a aria-label="3"></a>       <span class="kw">AS</span> duration_minutes;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Expected result: <strong>90.0</strong>. The start is 17:00 UTC and the end is 18:30 UTC.</p>
-<p>Raw strings with different offsets need not sort in instant order. Conversion normalizes the offsets before subtraction. A zero-length interval is <code>ok</code> under these rules.</p>
-<p>A successful parse does not establish that every source calendar date was valid. This exercise uses whole-second precision; handling fractional seconds requires an explicit precision policy.</p>
+<section id="solution-f" class="slide level2">
+<h2>Solution F</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb19-1"><a aria-label="1"></a><span class="kw">SELECT</span> CustomerId,</span>
+<span id="cb19-2"><a aria-label="2"></a>       <span class="fu">MIN</span>(InvoiceDate) <span class="kw">AS</span> first_invoice_date,</span>
+<span id="cb19-3"><a aria-label="3"></a>       <span class="fu">MAX</span>(InvoiceDate) <span class="kw">AS</span> last_invoice_date,</span>
+<span id="cb19-4"><a aria-label="4"></a>       julianday(<span class="fu">MAX</span>(InvoiceDate))</span>
+<span id="cb19-5"><a aria-label="5"></a>           <span class="op">-</span> julianday(<span class="fu">MIN</span>(InvoiceDate)) <span class="kw">AS</span> elapsed_days</span>
+<span id="cb19-6"><a aria-label="6"></a><span class="kw">FROM</span> Invoice</span>
+<span id="cb19-7"><a aria-label="7"></a><span class="kw">WHERE</span> CustomerId <span class="kw">IN</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb19-8"><a aria-label="8"></a><span class="kw">GROUP</span> <span class="kw">BY</span> CustomerId</span>
+<span id="cb19-9"><a aria-label="9"></a><span class="kw">ORDER</span> <span class="kw">BY</span> CustomerId;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section></section>
