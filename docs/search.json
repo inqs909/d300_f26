@@ -2289,172 +2289,102 @@
     "text": "Elapsed time in days and seconds\nSELECT julianday('2024-02-29 01:00:00')\n1       - julianday('2024-02-28 23:30:00') AS days,\n       unixepoch('2024-02-29 01:00:00')\n2       - unixepoch('2024-02-28 23:30:00') AS seconds;\n\n1\n\nThe elapsed interval is 0.0625 days.\n\n2\n\nThe same interval is 5400 seconds, or 90 minutes.\n\n\nSubtract end minus start. Divide seconds by 60.0, 3600.0, or 86400.0 to preserve fractional units."
   },
   {
-    "objectID": "lectures/9a.html#string-function-glossary-cleaning-and-extraction",
-    "href": "lectures/9a.html#string-function-glossary-cleaning-and-extraction",
+    "objectID": "lectures/9a.html#working-together",
+    "href": "lectures/9a.html#working-together",
     "title": "Advanced SQL",
-    "section": "String function glossary · cleaning and extraction",
-    "text": "String function glossary · cleaning and extraction\n\n\n\nExpression\nPurpose\n\n\n\n\na || b\nConcatenate, propagating NULL\n\n\nlower(x), upper(x)\nConvert ASCII letter case\n\n\nlength(x)\nText code-point length or BLOB byte length\n\n\nsubstr(x, start, n)\nExtract part of a string\n\n\ninstr(x, part)\nFirst match position, or 0\n\n\ntrim(x[, chars])\nRemove end characters on both sides\n\n\nltrim(), rtrim()\nRemove end characters on one side\n\n\nreplace(x, old, new)\nReplace exact occurrences\n\n\nnullif(x, y)\nNULL if values are equal\n\n\ncoalesce(x, ...), ifnull(x, y)\nSubstitute for NULL"
+    "section": "Working together",
+    "text": "Working together\nWork in pairs: one person writes SQL while the other checks the output. Switch roles after each activity.\n\nUse the supplied music database and the classroom practice tables.\nKeep the original data unchanged; use SELECT and CTEs.\nSubmit each query, a few output rows, and your discussion response.\nSuggested total time: 50 minutes, including discussion.\n\nThese five activities extend the earlier exercises. Solutions follow the complete activity set."
   },
   {
-    "objectID": "lectures/9a.html#string-function-glossary-display-and-comparison",
-    "href": "lectures/9a.html#string-function-glossary-display-and-comparison",
+    "objectID": "lectures/9a.html#class-activity-a-email-domain-audit",
+    "href": "lectures/9a.html#class-activity-a-email-domain-audit",
     "title": "Advanced SQL",
-    "section": "String function glossary · display and comparison",
-    "text": "String function glossary · display and comparison\n\n\n\n\n\n\n\nExpression\nPurpose\n\n\n\n\nprintf(pattern, ...), format()\nProduce formatted display text\n\n\nLIKE ... ESCAPE ...\nSQL pattern matching\n\n\nGLOB\nCase-sensitive shell-style patterns\n\n\nCOLLATE\nChoose comparison/sorting rules\n\n\ngroup_concat(value[, sep])\nJoin non-NULL values across rows\n\n\nconcat(), concat_ws()\nJoin values with NULL-skipping behavior, 3.44+\n\n\nCAST(x AS TEXT/INTEGER/REAL)\nExplicit conversion\n\n\ntypeof(x)\nInspect the storage class\n\n\nquote(x)\nProduce an SQL literal representation"
+    "section": "Class activity A · Email domain audit",
+    "text": "Class activity A · Email domain audit\n10 minutes · Table: practice_contact\n\nCreate email_clean by trimming and lowercasing email; treat blank strings as NULL.\nClassify each email as missing, review, or usable. For this exercise, usable means exactly one @, with at least one character on either side and no ordinary spaces.\nReturn contact_id, raw email, email_clean, the status, and email_domain. Extract the domain only for usable values; otherwise return NULL.\nSort by contact_id.\n\nCheck: ' Ana@Example.edu ' becomes ana@example.edu, with domain example.edu. Both 'ana.example.edu' and 'a@@b' need review.\nDiscuss: Why does passing these checks not prove that an address exists?"
   },
   {
-    "objectID": "lectures/9a.html#common-functions-from-other-sql-dialects",
-    "href": "lectures/9a.html#common-functions-from-other-sql-dialects",
+    "objectID": "lectures/9a.html#class-activity-b-a-track-name-report",
+    "href": "lectures/9a.html#class-activity-b-a-track-name-report",
     "title": "Advanced SQL",
-    "section": "Common functions from other SQL dialects",
-    "text": "Common functions from other SQL dialects\n\n\n\n\n\n\n\nYou may have seen elsewhere\nSQLite approach\n\n\n\n\nLEFT(text, n)\nsubstr(text, 1, n)\n\n\nRIGHT(text, n)\nsubstr(text, -n) for positive n\n\n\nLEN(text)\nlength(text)\n\n\nCHARINDEX(part, text)\ninstr(text, part)\n\n\nDATEADD(...)\ndate() / datetime() with modifiers\n\n\nDATEDIFF(...)\nDefine the unit, then subtract numeric time values\n\n\nEXTRACT(...) / DATE_PART(...)\nstrftime() plus a cast when needed\n\n\nDATE_TRUNC('month', ...)\ndate(value, 'start of month')\n\n\nSPLIT_PART, REGEXP_REPLACE, LPAD, RPAD\nNo direct standard built-in equivalents\n\n\n\nChoose an explicit recipe, extension, or application operation for unsupported functions."
+    "section": "Class activity B · A track-name report",
+    "text": "Class activity B · A track-name report\n8 minutes · Table: Track\n\nFind tracks whose names contain love using default LIKE.\nReturn TrackId, Name, the first 12 characters as name_preview, and the name’s character count as name_length.\nReturn duration in minutes as a numeric value rounded to two decimal places, and a separate display label such as 3.50 min using printf().\nSort by the original duration, longest first, then by TrackId.\n\nCheck: A duration of 210000 milliseconds is 3.5 numeric minutes and displays as 3.50 min.\nDiscuss: Why should sorting use the numeric duration instead of the formatted label? Does default LIKE handle every language’s case rules?"
   },
   {
-    "objectID": "lectures/9a.html#datetime-function-glossary",
-    "href": "lectures/9a.html#datetime-function-glossary",
+    "objectID": "lectures/9a.html#class-activity-c-monthly-sales-summary",
+    "href": "lectures/9a.html#class-activity-c-monthly-sales-summary",
     "title": "Advanced SQL",
-    "section": "Date/time function glossary",
-    "text": "Date/time function glossary\n\n\n\n\n\n\n\nExpression\nTypical output\n\n\n\n\ndate(value, ...)\nYYYY-MM-DD text\n\n\ntime(value, ...)\nHH:MM:SS text\n\n\ndatetime(value, ...)\nYYYY-MM-DD HH:MM:SS text\n\n\njulianday(value, ...)\nNumeric fractional day count\n\n\nunixepoch(value, ...)\nNumeric seconds since the Unix epoch\n\n\nstrftime(pattern, value, ...)\nFormatted text\n\n\ntimediff(A, B)\nCalendar shift from B to A, 3.43+\n\n\nCURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP\nCurrent UTC values\n\n\n\nUse the date/time functions within their documented supported ranges. They are not a leap-second or high-precision scientific time system."
+    "section": "Class activity C · Monthly sales summary",
+    "text": "Class activity C · Monthly sales summary\n10 minutes · Table: Invoice\n\nInclude invoices from calendar year 2024 using a half-open timestamp range.\nReturn one row per month with invoices: year_month, invoice_count, monthly_revenue, and average_invoice.\nRound revenue and average invoice value to two decimal places. Keep both results numeric.\nSort months chronologically.\n\nCheck: Summing the monthly invoice counts should equal the number of invoices passing the same 2024 filter.\nDiscuss: Why group by %Y-%m instead of %m when analyzing several years? Does an absent month mean zero sales or simply no rows in this query?"
   },
   {
-    "objectID": "lectures/9a.html#additional-strftime-formats",
-    "href": "lectures/9a.html#additional-strftime-formats",
+    "objectID": "lectures/9a.html#class-activity-d-billing-and-reminder-dates",
+    "href": "lectures/9a.html#class-activity-d-billing-and-reminder-dates",
     "title": "Advanced SQL",
-    "section": "Additional strftime() formats",
-    "text": "Additional strftime() formats\n\n\n\n\n\n\n\n\nCodes\nMeaning\nAdded by\n\n\n\n\n%e, %k, %l\nDay / 24-hour / 12-hour values without zero padding\n3.44\n\n\n%F, %R, %T\nDate / hour:minute / hour:minute:second\n3.44\n\n\n%I, %p, %P\n12-hour clock and AM/PM labels\n3.44\n\n\n%u\nWeekday 1–7, Monday = 1\n3.44\n\n\n%G, %g, %V\nISO week-year (4/2 digits) and ISO week\n3.46\n\n\n%U\nSunday-based week number, 00–53\n3.46\n\n\n\nKeep formatting separate from analytical keys when a display label would sort poorly, such as MM/DD/YYYY."
+    "section": "Class activity D · Billing and reminder dates",
+    "text": "Class activity D · Billing and reminder dates\n10 minutes · Table: Invoice\nFor every invoice, return InvoiceId, InvoiceDate, and:\n\ndue_date: 14 calendar days after the invoice date.\nmonth_end: the last date of the invoice’s month.\nreminder_date: the first Monday on or after the due date.\n\nSort by InvoiceDate, then InvoiceId. Use date modifiers; do not hard-code month lengths.\nCheck: For 2024-02-15 09:00:00, the three dates are 2024-02-29, 2024-02-29, and 2024-03-04.\nDiscuss: What happens if the due date is already Monday? Why is this not a complete business-day scheduling rule?"
   },
   {
-    "objectID": "lectures/9a.html#solution-1-null-and-empty-strings",
-    "href": "lectures/9a.html#solution-1-null-and-empty-strings",
+    "objectID": "lectures/9a.html#class-activity-e-event-duration-audit",
+    "href": "lectures/9a.html#class-activity-e-event-duration-audit",
     "title": "Advanced SQL",
-    "section": "Solution 1 · NULL and empty strings",
-    "text": "Solution 1 · NULL and empty strings\nSELECT 'A' || NULL AS a,\n       'A' || '' AS b,\n       length('') AS c,\n       COALESCE(NULLIF(trim('   '), ''), 'Unknown') AS d;\n\n\n\na\nb\nc\nd\n\n\n\n\nNULL\nA\n0\nUnknown\n\n\n\nAn empty string is a known text value with zero characters. NULL represents an absent or unknown value. Concatenation propagates NULL, while concatenating an empty string adds no characters."
+    "section": "Class activity E · Event duration audit",
+    "text": "Class activity E · Event duration audit\n12 minutes · Table: practice_event\n\nKeep event_id, label, start_text, and end_text in the output.\nConvert endpoints to Unix seconds. Assume offset-free timestamps are UTC.\nAssign a status, in this priority order: missing endpoint for NULL/blank input; unparseable endpoint if a conversion returns NULL; reversed interval if the end precedes the start; otherwise ok.\nReturn duration_minutes, rounded to two decimals, only for ok rows. Sort by event_id.\n\nCheck: 2024-03-01T09:00:00-08:00 to 2024-03-01T18:30:00Z is 90 minutes.\nDiscuss: Why compare normalized instants instead of raw timestamp text? This is a parsing audit, not a complete calendar-date validator."
   },
   {
-    "objectID": "lectures/9a.html#solution-2-clean-contact-labels",
-    "href": "lectures/9a.html#solution-2-clean-contact-labels",
+    "objectID": "lectures/9a.html#solution-a-clean-and-classify",
+    "href": "lectures/9a.html#solution-a-clean-and-classify",
     "title": "Advanced SQL",
-    "section": "Solution 2 · Clean contact labels",
-    "text": "Solution 2 · Clean contact labels\nWITH cleaned AS (\n    SELECT contact_id,\n           trim(COALESCE(trim(first_name), '') || ' ' ||\n1                COALESCE(trim(last_name), '')) AS display_name,\n           NULLIF(lower(trim(email)), '') AS email_clean\n    FROM practice_contact\n)\nSELECT contact_id, display_name, email_clean,\n2       COALESCE(email_clean, 'No email') AS email_label\nFROM cleaned\nORDER BY contact_id;\n\n1\n\nHandle missing name components before concatenating, then remove outer spaces.\n\n2\n\nKeep the cleaned nullable field and its display label separate."
+    "section": "Solution A · Clean and classify",
+    "text": "Solution A · Clean and classify\nWITH cleaned AS (\n    SELECT contact_id, email,\n1           NULLIF(lower(trim(email)), '') AS email_clean\n    FROM practice_contact\n), classified AS (\n    SELECT *,\n           CASE\n             WHEN email_clean IS NULL THEN 'missing'\n             WHEN instr(email_clean, '@') &lt;= 1\n               OR instr(email_clean, '@') = length(email_clean)\n               OR instr(substr(email_clean,\n                        instr(email_clean, '@') + 1), '@') &gt; 0\n               OR instr(email_clean, ' ') &gt; 0\n2               THEN 'review'\n             ELSE 'usable'\n           END AS email_status\n    FROM cleaned\n)\nSELECT contact_id, email, email_clean, email_status,\n       CASE WHEN email_status = 'usable'\n            THEN substr(email_clean, instr(email_clean, '@') + 1)\n3       END AS email_domain\nFROM classified\nORDER BY contact_id;\n\n1\n\nNormalize case and outer spaces, then convert an empty result to NULL.\n\n2\n\nFlag missing/misplaced/repeated @ symbols and ordinary internal spaces.\n\n3\n\nA CASE without ELSE returns NULL when its condition is not met."
   },
   {
-    "objectID": "lectures/9a.html#solution-2-expected-results",
-    "href": "lectures/9a.html#solution-2-expected-results",
+    "objectID": "lectures/9a.html#solution-a-discussion",
+    "href": "lectures/9a.html#solution-a-discussion",
     "title": "Advanced SQL",
-    "section": "Solution 2 · Expected results",
-    "text": "Solution 2 · Expected results\n\n\n\ncontact_id\ndisplay_name\nemail_clean\nemail_label\n\n\n\n\n1\nAna Rivera\nana@example.edu\nana@example.edu\n\n\n2\nJamal Lee\njamal@music.org\njamal@music.org\n\n\n3\nMei Chen\nNULL\nNo email\n\n\n4\nLuis García\nluis@music.org\nluis@music.org\n\n\n5\nZoë Martin\nzoe.example.edu\nzoe.example.edu\n\n\n6\nNoah\nNULL\nNo email\n\n\n\nCleaning the fifth email does not repair its missing @. Preserve the original name spelling rather than assuming case conversion is appropriate for names."
+    "section": "Solution A · Discussion",
+    "text": "Solution A · Discussion\nThese are simplified classroom rules. They do not check mailbox existence or every valid email syntax. trim() here removes ordinary outer spaces, not every kind of whitespace. Default lower() handles ASCII case conversion."
   },
   {
-    "objectID": "lectures/9a.html#solution-3-domain-extraction-and-counting",
-    "href": "lectures/9a.html#solution-3-domain-extraction-and-counting",
+    "objectID": "lectures/9a.html#solution-b-track-name-report",
+    "href": "lectures/9a.html#solution-b-track-name-report",
     "title": "Advanced SQL",
-    "section": "Solution 3 · Domain extraction and counting",
-    "text": "Solution 3 · Domain extraction and counting\nWITH cleaned AS (\n    SELECT NULLIF(lower(trim(email)), '') AS e\n    FROM practice_contact\n), domains AS (\n    SELECT substr(e, instr(e, '@') + 1) AS domain\n    FROM cleaned\n1    WHERE instr(e, '@') &gt; 1\n2      AND instr(e, '@') &lt; length(e)\n3      AND length(e) - length(replace(e, '@', '')) = 1\n)\nSELECT domain, COUNT(*) AS contacts\nFROM domains\nGROUP BY domain\nORDER BY contacts DESC, domain;\n\n1\n\nRequire a nonempty left part.\n\n2\n\nRequire a nonempty right part.\n\n3\n\nRequire exactly one @."
+    "section": "Solution B · Track-name report",
+    "text": "Solution B · Track-name report\nSELECT TrackId, Name,\n1       substr(Name, 1, 12) AS name_preview,\n       length(Name) AS name_length,\n       round(Milliseconds / 60000.0, 2) AS duration_minutes,\n       printf('%.2f min', Milliseconds / 60000.0)\n2           AS duration_label\nFROM Track\nWHERE Name LIKE '%love%'\n3ORDER BY Milliseconds DESC, TrackId;\n\n1\n\nsubstr() starts at position 1; short names remain shorter than 12 characters.\n\n2\n\nThe decimal divisor preserves fractional minutes. printf() produces a text label.\n\n3\n\nNumeric sorting avoids text ordering such as 10.00 min before 2.00 min.\n\n\nDefault LIKE ignores ASCII case but does not provide complete Unicode case folding. This query assumes non-NULL numeric track durations."
   },
   {
-    "objectID": "lectures/9a.html#solution-3-result-and-limitations",
-    "href": "lectures/9a.html#solution-3-result-and-limitations",
+    "objectID": "lectures/9a.html#solution-c-monthly-sales-summary",
+    "href": "lectures/9a.html#solution-c-monthly-sales-summary",
     "title": "Advanced SQL",
-    "section": "Solution 3 · Result and limitations",
-    "text": "Solution 3 · Result and limitations\n\n\n\ndomain\ncontacts\n\n\n\n\nmusic.org\n2\n\n\nexample.edu\n1\n\n\n\nContacts 3 and 6 have missing cleaned email values. Contact 5 lacks @.\nThe checks still accept values such as a@b or an address containing a space. A production policy can require additional checks without silently inventing corrections."
+    "section": "Solution C · Monthly sales summary",
+    "text": "Solution C · Monthly sales summary\n1SELECT strftime('%Y-%m', InvoiceDate) AS year_month,\n       COUNT(*) AS invoice_count,\n       round(SUM(Total), 2) AS monthly_revenue,\n       round(AVG(Total), 2) AS average_invoice\nFROM Invoice\nWHERE InvoiceDate &gt;= '2024-01-01 00:00:00'\n2  AND InvoiceDate &lt;  '2025-01-01 00:00:00'\nGROUP BY strftime('%Y-%m', InvoiceDate)\nORDER BY year_month;\n\n1\n\nA zero-padded year-month key distinguishes years and sorts chronologically.\n\n2\n\nInclude the first instant of 2024 and exclude the first instant of 2025, using the lecture’s fixed UTC text convention."
   },
   {
-    "objectID": "lectures/9a.html#solution-4-four-independent-searches",
-    "href": "lectures/9a.html#solution-4-four-independent-searches",
+    "objectID": "lectures/9a.html#solution-c-check-and-discussion",
+    "href": "lectures/9a.html#solution-c-check-and-discussion",
     "title": "Advanced SQL",
-    "section": "Solution 4 · Four independent searches",
-    "text": "Solution 4 · Four independent searches\nSELECT TrackId, Name FROM Track\nWHERE Name LIKE '%love%' ORDER BY TrackId;\n\nSELECT TrackId, Name FROM Track\nWHERE Name LIKE '%!%%' ESCAPE '!' ORDER BY TrackId;\n\nSELECT TrackId, Name FROM Track\nWHERE Name LIKE '%!_%' ESCAPE '!' ORDER BY TrackId;\n\nSELECT TrackId, Name FROM Track\nWHERE Name GLOB '*[0-9]*' ORDER BY TrackId;\nExpected IDs: 1, 2 / 3 / 4 / 3, 5.\nGLOB '*love*' does not match Love Song because GLOB is case sensitive."
+    "section": "Solution C · Check and discussion",
+    "text": "Solution C · Check and discussion\nSELECT COUNT(*) AS invoices_in_2024\nFROM Invoice\nWHERE InvoiceDate &gt;= '2024-01-01 00:00:00'\n  AND InvoiceDate &lt;  '2025-01-01 00:00:00';\nCompare this count with the sum of invoice_count in the monthly result.\nGrouping by %m alone combines the same month across different years. A missing month has no qualifying rows; this query does not generate a zero-valued row. A calendar table would be needed to explicitly display all months and distinguish missing data from confirmed zero activity."
   },
   {
-    "objectID": "lectures/9a.html#solution-5-customer-directory",
-    "href": "lectures/9a.html#solution-5-customer-directory",
+    "objectID": "lectures/9a.html#solution-d-billing-and-reminder-dates",
+    "href": "lectures/9a.html#solution-d-billing-and-reminder-dates",
     "title": "Advanced SQL",
-    "section": "Solution 5 · Customer directory",
-    "text": "Solution 5 · Customer directory\nSELECT Country, COUNT(*) AS customer_count,\n       group_concat(FirstName || ' ' || LastName, ', ') AS names\nFROM Customer\nGROUP BY Country\nORDER BY Country;\nThe country counts are Canada 2, France 1, Mexico 1, USA 4.\nName order inside each string is unspecified in this portable version.\nFor SQLite 3.44+, replace the aggregate with: group_concat(FirstName || ' ' || LastName, ', ' ORDER BY LastName, FirstName, CustomerId)."
+    "section": "Solution D · Billing and reminder dates",
+    "text": "Solution D · Billing and reminder dates\nWITH billing AS (\n    SELECT InvoiceId, InvoiceDate,\n           date(InvoiceDate, '+14 days') AS due_date,\n           date(InvoiceDate, 'start of month',\n1                '+1 month', '-1 day') AS month_end\n    FROM Invoice\n)\nSELECT InvoiceId, InvoiceDate, due_date, month_end,\n2       date(due_date, 'weekday 1') AS reminder_date\nFROM billing\nORDER BY InvoiceDate, InvoiceId;\n\n1\n\nStart at the first of the current month, advance to the next month, then step back one day. Modifier order matters.\n\n2\n\nMonday is weekday 1. A Monday due date stays unchanged.\n\n\nThe rule does not account for holidays or company-specific closures; those need a business calendar."
   },
   {
-    "objectID": "lectures/9a.html#solution-6-representation-and-type",
-    "href": "lectures/9a.html#solution-6-representation-and-type",
+    "objectID": "lectures/9a.html#solution-e-normalize-and-classify",
+    "href": "lectures/9a.html#solution-e-normalize-and-classify",
     "title": "Advanced SQL",
-    "section": "Solution 6 · Representation and type",
-    "text": "Solution 6 · Representation and type\nSELECT date('2024-01-01 00:00:00') AS day,\n       julianday('2024-01-01 00:00:00') AS julian,\n       unixepoch('2024-01-01 00:00:00') AS seconds,\n       datetime(1704067200, 'unixepoch') AS round_trip;\n\nSELECT typeof(unixepoch('2024-01-01')) AS epoch_type,\n       typeof(strftime('%s', '2024-01-01')) AS formatted_type;\nExpected: 2024-01-01, 2460310.5, 1704067200, and 2024-01-01 00:00:00.\nThe types are integer and text. strftime() produces formatted text even when the output consists entirely of digits."
+    "section": "Solution E · Normalize and classify",
+    "text": "Solution E · Normalize and classify\nWITH parsed AS (\n    SELECT *,\n           unixepoch(trim(start_text)) AS start_seconds,\n1           unixepoch(trim(end_text)) AS end_seconds\n    FROM practice_event\n), checked AS (\n    SELECT *,\n           CASE\n             WHEN NULLIF(trim(start_text), '') IS NULL\n               OR NULLIF(trim(end_text), '') IS NULL\n               THEN 'missing endpoint'\n             WHEN start_seconds IS NULL OR end_seconds IS NULL\n               THEN 'unparseable endpoint'\n             WHEN end_seconds &lt; start_seconds\n               THEN 'reversed interval'\n             ELSE 'ok'\n2           END AS interval_status\n    FROM parsed\n)\nSELECT event_id, label, start_text, end_text, interval_status,\n       CASE WHEN interval_status = 'ok'\n            THEN round((end_seconds - start_seconds) / 60.0, 2)\n3       END AS duration_minutes\nFROM checked\nORDER BY event_id;\n\n1\n\nConvert supported timestamp inputs, including explicit offsets, to comparable instants.\n\n2\n\nEvaluate missing and unparseable values before checking interval order.\n\n3\n\nSubtract end minus start and divide by a real number; flagged intervals remain NULL."
   },
   {
-    "objectID": "lectures/9a.html#solution-7-february-invoices",
-    "href": "lectures/9a.html#solution-7-february-invoices",
+    "objectID": "lectures/9a.html#solution-e-check-and-discussion",
+    "href": "lectures/9a.html#solution-e-check-and-discussion",
     "title": "Advanced SQL",
-    "section": "Solution 7 · February invoices",
-    "text": "Solution 7 · February invoices\nSELECT InvoiceId, InvoiceDate,\n1       date(InvoiceDate, '+14 days') AS due_date,\n       date(InvoiceDate, 'start of month',\n2            '+1 month', '-1 day') AS invoice_month_end\nFROM Invoice\nWHERE InvoiceDate &gt;= '2024-02-01 00:00:00'\n  AND InvoiceDate &lt;  '2024-03-01 00:00:00'\nORDER BY InvoiceDate, InvoiceId;\n\n1\n\nShift by 14 days and return a date-only result.\n\n2\n\nMove from month start to next month start, then back one day.\n\n\nIDs 4, 5, 6 have due dates February 15, February 24, March 14. Each month end is February 29."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-8-normalize-and-classify",
-    "href": "lectures/9a.html#solution-8-normalize-and-classify",
-    "title": "Advanced SQL",
-    "section": "Solution 8 · Normalize and classify",
-    "text": "Solution 8 · Normalize and classify\nWITH parsed AS (\n    SELECT *, datetime(start_text) AS start_utc,\n              datetime(end_text) AS end_utc\n    FROM practice_event\n), classified AS (\n    SELECT *,\n           CASE\n             WHEN start_text IS NULL OR end_text IS NULL\n               THEN 'missing endpoint'\n             WHEN start_utc IS NULL OR end_utc IS NULL\n               THEN 'unparseable'\n             WHEN end_utc &lt; start_utc THEN 'end before start'\n             ELSE 'valid'\n           END AS status\n    FROM parsed\n)\nSELECT * FROM classified ORDER BY event_id;\nClassify missing inputs before parse failures. This check alone is not strict validation of every calendar input."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-8-full-duration-query",
-    "href": "lectures/9a.html#solution-8-full-duration-query",
-    "title": "Advanced SQL",
-    "section": "Solution 8 · Full duration query",
-    "text": "Solution 8 · Full duration query\nWITH parsed AS (\n    SELECT *, unixepoch(start_text) AS s, unixepoch(end_text) AS e\n    FROM practice_event\n), classified AS (\n    SELECT *, CASE\n      WHEN start_text IS NULL OR end_text IS NULL THEN 'missing endpoint'\n      WHEN s IS NULL OR e IS NULL THEN 'unparseable'\n      WHEN e &lt; s THEN 'end before start'\n      ELSE 'valid' END AS status\n    FROM parsed\n)\nSELECT event_id, label, status,\n       CASE WHEN status = 'valid' THEN (e - s) / 60.0 END\n           AS duration_minutes\nFROM classified\nORDER BY event_id;\nNumeric endpoints preserve elapsed-time ordering across explicit offsets."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-8-expected-classification",
-    "href": "lectures/9a.html#solution-8-expected-classification",
-    "title": "Advanced SQL",
-    "section": "Solution 8 · Expected classification",
-    "text": "Solution 8 · Expected classification\n\n\n\nevent_id\nstatus\nduration_minutes\n\n\n\n\n1\nvalid\n90.0\n\n\n2\nvalid\n75.0\n\n\n3\nmissing endpoint\nNULL\n\n\n4\nunparseable\nNULL\n\n\n5\nend before start\nNULL\n\n\n6\nvalid\n60.0\n\n\n\nDo not replace invalid or unknown durations with zero. Zero would claim that no time elapsed."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-9-monthly-report",
-    "href": "lectures/9a.html#solution-9-monthly-report",
-    "title": "Advanced SQL",
-    "section": "Solution 9 · Monthly report",
-    "text": "Solution 9 · Monthly report\nSELECT strftime('%Y-%m', InvoiceDate) AS invoice_month,\n       COUNT(*) AS invoice_count,\n       ROUND(SUM(Total), 2) AS revenue,\n       ROUND(AVG(Total), 2) AS average_invoice\nFROM Invoice\nWHERE InvoiceDate &gt;= '2024-01-01 00:00:00'\n  AND InvoiceDate &lt;  '2025-01-01 00:00:00'\nGROUP BY strftime('%Y-%m', InvoiceDate)\nORDER BY invoice_month;\n\n\n\nMonth\nCount\nRevenue\nAverage invoice\n\n\n\n\n2024-01\n3\n30.00\n10.00\n\n\n2024-02\n3\n40.00\n13.33\n\n\n2024-03\n3\n40.00\n13.33\n\n\n2024-05\n2\n20.00\n10.00\n\n\n2024-06\n1\n25.00\n25.00"
-  },
-  {
-    "objectID": "lectures/9a.html#solution-10-source-date-and-utc-date",
-    "href": "lectures/9a.html#solution-10-source-date-and-utc-date",
-    "title": "Advanced SQL",
-    "section": "Solution 10 · Source date and UTC date",
-    "text": "Solution 10 · Source date and UTC date\nSELECT event_id, start_text,\n       substr(start_text, 1, 10) AS source_written_date,\n       datetime(start_text) AS utc_timestamp,\n       date(start_text) AS utc_date\nFROM practice_event\nWHERE event_id = 6;\nThe source date is 2024-03-01. UTC is 2024-03-02 07:30:00, with date 2024-03-02.\nSubtracting an offset of −08:00 advances the timestamp by eight hours to UTC. substr() only copies characters.\nAn impossible date can normalize to another date, so parsing and validation are separate checks."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-11a-purchase-gaps-in-hours",
-    "href": "lectures/9a.html#solution-11a-purchase-gaps-in-hours",
-    "title": "Advanced SQL",
-    "section": "Solution 11A · Purchase gaps in hours",
-    "text": "Solution 11A · Purchase gaps in hours\nWITH purchases AS (\n    SELECT CustomerId, InvoiceId, InvoiceDate,\n           LAG(InvoiceDate) OVER (\n               PARTITION BY CustomerId\n               ORDER BY InvoiceDate, InvoiceId\n           ) AS previous_purchase\n    FROM Invoice\n)\nSELECT CustomerId, InvoiceId, InvoiceDate, previous_purchase,\n       ROUND((unixepoch(InvoiceDate)\n              - unixepoch(previous_purchase)) / 3600.0, 2)\n           AS elapsed_hours\nFROM purchases\nORDER BY CustomerId, InvoiceDate, InvoiceId;\nAll 12 invoices remain. The seven customers with purchases each have one NULL first gap."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-11b-a-complete-six-month-report",
-    "href": "lectures/9a.html#solution-11b-a-complete-six-month-report",
-    "title": "Advanced SQL",
-    "section": "Solution 11B · A complete six-month report",
-    "text": "Solution 11B · A complete six-month report\nWITH RECURSIVE months(m) AS (\n    VALUES ('2024-01-01')\n    UNION ALL\n    SELECT date(m, '+1 month') FROM months\n    WHERE m &lt; '2024-06-01'\n)\nSELECT m AS month_start, COUNT(i.InvoiceId) AS invoice_count,\n       ROUND(COALESCE(SUM(i.Total), 0), 2) AS revenue\nFROM months\nLEFT JOIN Invoice AS i\n  ON i.InvoiceDate &gt;= m || ' 00:00:00'\n AND i.InvoiceDate &lt; datetime(m, '+1 month')\nGROUP BY m\nORDER BY m;\nRevenue from January through June: 30, 40, 40, 0, 20, 25.\nApril has zero recorded revenue in the complete classroom dataset. A missing source feed would require a different interpretation."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-12-snapshot-metrics-part-1",
-    "href": "lectures/9a.html#solution-12-snapshot-metrics-part-1",
-    "title": "Advanced SQL",
-    "section": "Solution 12 · Snapshot metrics, part 1",
-    "text": "Solution 12 · Snapshot metrics, part 1\nWITH metrics AS (\n    SELECT c.CustomerId,\n           trim(c.FirstName) || ' ' || trim(c.LastName) AS customer,\n           lower(trim(c.Email)) AS email,\n           COUNT(i.InvoiceId) AS invoice_count,\n           ROUND(COALESCE(SUM(i.Total), 0), 2) AS total_spent,\n           MAX(i.InvoiceDate) AS last_purchase\n    FROM Customer AS c\n    LEFT JOIN Invoice AS i\n      ON i.CustomerId = c.CustomerId\n1     AND i.InvoiceDate &lt; '2024-07-01 00:00:00'\n    GROUP BY c.CustomerId, c.FirstName, c.LastName, c.Email\n)\nSELECT * FROM metrics ORDER BY CustomerId;\n\n1\n\nKeep the snapshot restriction in ON so customers without qualifying purchases remain in the result."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-12-complete-query",
-    "href": "lectures/9a.html#solution-12-complete-query",
-    "title": "Advanced SQL",
-    "section": "Solution 12 · Complete query",
-    "text": "Solution 12 · Complete query\nWITH metrics AS (\n  SELECT c.CustomerId, c.FirstName || ' ' || c.LastName AS customer,\n         lower(trim(c.Email)) AS email, COUNT(i.InvoiceId) AS n,\n         ROUND(COALESCE(SUM(i.Total), 0), 2) AS spent,\n         MAX(i.InvoiceDate) AS last_purchase\n  FROM Customer c LEFT JOIN Invoice i\n    ON i.CustomerId = c.CustomerId AND i.InvoiceDate &lt; '2024-07-01 00:00:00'\n  GROUP BY c.CustomerId, c.FirstName, c.LastName, c.Email\n), recency AS (\n  SELECT *, CAST(julianday('2024-07-01')\n            - julianday(date(last_purchase)) AS INTEGER) AS days_since\n  FROM metrics\n)\nSELECT CustomerId, customer,\n       CASE WHEN instr(email, '@') &gt; 1\n            THEN substr(email, instr(email, '@') + 1) END AS domain,\n       n AS invoice_count, spent AS total_spent, last_purchase, days_since,\n       CASE WHEN n = 0 THEN 'Never purchased'\n            WHEN days_since BETWEEN 0 AND 30 THEN 'Recent'\n            ELSE 'Earlier' END AS segment\nFROM recency ORDER BY total_spent DESC, CustomerId;\n\nThis supplied Customer data has well-formed email values. For dirty data, reuse the stronger structural checks from Activity 3. Keep unknown recency as NULL. The first CTE is the natural place to parameterize the snapshot date in an application."
-  },
-  {
-    "objectID": "lectures/9a.html#solution-12-expected-snapshot",
-    "href": "lectures/9a.html#solution-12-expected-snapshot",
-    "title": "Advanced SQL",
-    "section": "Solution 12 · Expected snapshot",
-    "text": "Solution 12 · Expected snapshot\n\n\n\nCustomer\nInvoices\nSpending\nDays since purchase\nSegment\n\n\n\n\nAna Rivera\n4\n47.00\n92\nEarlier\n\n\nJamal Lee\n3\n36.00\n31\nEarlier\n\n\nAisha Khan\n1\n25.00\n30\nRecent\n\n\nMei Chen\n1\n20.00\n151\nEarlier\n\n\nZoë Martin\n1\n11.00\n108\nEarlier\n\n\nLuis García\n1\n9.00\n122\nEarlier\n\n\nNoah Smith\n1\n7.00\n61\nEarlier\n\n\nOmar Ali\n0\n0.00\nNULL\nNever purchased\n\n\n\nThe eight rows retain the entire customer population. The spending total is 155.00."
+    "section": "Solution E · Check and discussion",
+    "text": "Solution E · Check and discussion\nSELECT (unixepoch('2024-03-01T18:30:00Z')\n      - unixepoch('2024-03-01T09:00:00-08:00')) / 60.0\n       AS duration_minutes;\nExpected result: 90.0. The start is 17:00 UTC and the end is 18:30 UTC.\nRaw strings with different offsets need not sort in instant order. Conversion normalizes the offsets before subtraction. A zero-length interval is ok under these rules.\nA successful parse does not establish that every source calendar date was valid. This exercise uses whole-second precision; handling fractional seconds requires an explicit precision policy."
   },
   {
     "objectID": "posts/10.html",

@@ -10,7 +10,7 @@ editor: source
 
 | Lecture | Slides                   |
 |---------|--------------------------|
-| 1       | [Slides](../lectures/8a) |
+| 1       | [Slides](../lectures/9a) |
 
 ## Videos 
 
