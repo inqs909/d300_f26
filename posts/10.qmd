@@ -1,6 +1,6 @@
 ---
 title: "Week 10: Pivot Tables"
-date: 10-19-26
+date: 10-27-26
 description: This week we will cover Pivot Tables.
 editor: source
 ---
