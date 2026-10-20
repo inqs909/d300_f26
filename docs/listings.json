@@ -1,18 +1,18 @@
 [
   {
-    "listing": "/lectures.html",
+    "listing": "/index.html",
     "items": [
-      "/lectures/1a.html",
-      "/lectures/1b.html",
-      "/lectures/2a.html",
-      "/lectures/2b.html",
-      "/lectures/3a.html",
-      "/lectures/4a.html",
-      "/lectures/5a.html",
-      "/lectures/6a.html",
-      "/lectures/7a.html",
-      "/lectures/8a.html",
-      "/lectures/9a.html"
+      "/posts/11.html",
+      "/posts/10.html",
+      "/posts/9.html",
+      "/posts/8.html",
+      "/posts/7.html",
+      "/posts/6.html",
+      "/posts/5.html",
+      "/posts/4.html",
+      "/posts/3.html",
+      "/posts/2.html",
+      "/posts/1.html"
     ]
   },
   {
@@ -26,18 +26,19 @@
     ]
   },
   {
-    "listing": "/index.html",
+    "listing": "/lectures.html",
     "items": [
-      "/posts/10.html",
-      "/posts/9.html",
-      "/posts/8.html",
-      "/posts/7.html",
-      "/posts/6.html",
-      "/posts/5.html",
-      "/posts/4.html",
-      "/posts/3.html",
-      "/posts/2.html",
-      "/posts/1.html"
+      "/lectures/1a.html",
+      "/lectures/1b.html",
+      "/lectures/2a.html",
+      "/lectures/2b.html",
+      "/lectures/3a.html",
+      "/lectures/4a.html",
+      "/lectures/5a.html",
+      "/lectures/6a.html",
+      "/lectures/7a.html",
+      "/lectures/8a.html",
+      "/lectures/9a.html"
     ]
   }
 ]

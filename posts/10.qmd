@@ -1,7 +1,7 @@
 ---
-title: "Week 10: Pivot Tables"
+title: "Week 10: Case When"
 date: 10-27-26
-description: This week we will cover Pivot Tables.
+description: This week we will cover Case When.
 editor: source
 ---
 
@@ -10,6 +10,6 @@ editor: source
 
 | Lecture | Slides                   |
 |---------|--------------------------|
-| 1       | [Slides](../lectures/8a) |
+| 1       | [Slides]() |
 
 

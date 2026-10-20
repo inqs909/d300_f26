@@ -1,0 +1,15 @@
+---
+title: "Week 11: Pivot Tables"
+date: 11-01-26
+description: This week we will cover Pivot Tables.
+editor: source
+---
+
+
+## Resources
+
+| Lecture | Slides                   |
+|---------|--------------------------|
+| 1       | [Slides]() |
+
+
