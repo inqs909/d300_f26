@@ -27,7 +27,6 @@ Using `customer`, return these columns for customers:
 
 Sort by `customer_id`. Return all matching customers.
 
-**Hint:** Combine `trim()`, `lower()`, `upper()`, and `||`. Use both `IS NOT NULL` and a comparison with `''` to express the email requirements explicitly. Standard Sakila customer names are present; you do not need to invent missing names.
 
 ## Exercise 2
 

@@ -1362,7 +1362,7 @@
     "href": "a/7.html#exercise-1",
     "title": "ICA 7",
     "section": "Exercise 1",
-    "text": "Exercise 1\nGive me a consistent customer directory that I can use for correspondence.\nUsing customer, return these columns for customers:\n\n\n\n\n\n\n\nOutput column\nRequirement\n\n\n\n\ncustomer_id\nOriginal identifier\n\n\ncustomer_name\nTrim each name and join first and last names with one space\n\n\nemail_clean\nTrim the email and convert it to lowercase\n\n\nmailing_label\nTrimmed uppercase last name, a comma and space, then trimmed uppercase first name\n\n\n\nSort by customer_id. Return all matching customers.\nHint: Combine trim(), lower(), upper(), and ||. Use both IS NOT NULL and a comparison with '' to express the email requirements explicitly. Standard Sakila customer names are present; you do not need to invent missing names."
+    "text": "Exercise 1\nGive me a consistent customer directory that I can use for correspondence.\nUsing customer, return these columns for customers:\n\n\n\n\n\n\n\nOutput column\nRequirement\n\n\n\n\ncustomer_id\nOriginal identifier\n\n\ncustomer_name\nTrim each name and join first and last names with one space\n\n\nemail_clean\nTrim the email and convert it to lowercase\n\n\nmailing_label\nTrimmed uppercase last name, a comma and space, then trimmed uppercase first name\n\n\n\nSort by customer_id. Return all matching customers."
   },
   {
     "objectID": "a/7.html#exercise-2",
