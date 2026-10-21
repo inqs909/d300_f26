@@ -237,9 +237,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Find films whose plot descriptions mention the word database, and create a short catalog preview.</p>
 <p>Using <code>film</code>:</p>
 <ol type="1">
-<li>Keep films whose <code>description</code> contains <code>detective</code> anywhere. Apply <code>lower()</code> to the description before matching.</li>
+<li>Keep films whose <code>description</code> contains <code>database</code> anywhere. Apply <code>lower()</code> to the description before matching.</li>
 <li>Return <code>film_id</code>, the original <code>title</code>, <code>title_length</code> (the number of characters in the title), and <code>description_preview</code>.</li>
-<li>Sort by <code>title_length</code> descending, then <code>film_id</code> ascending. Return at most 10 rows.</li>
+<li>Sort by <code>title_length</code> descending, then <code>film_id</code> ascending.</li>
 </ol>
 <p><strong>Hint:</strong> Use <code>LIKE</code>, <code>length()</code>, and <code>substr()</code>. String positions begin at 1.</p>
 </section>

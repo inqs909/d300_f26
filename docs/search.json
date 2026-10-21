@@ -1376,7 +1376,7 @@
     "href": "a/7.html#exercise-3",
     "title": "ICA 7",
     "section": "Exercise 3",
-    "text": "Exercise 3\nFind films whose plot descriptions mention the word database, and create a short catalog preview.\nUsing film:\n\nKeep films whose description contains detective anywhere. Apply lower() to the description before matching.\nReturn film_id, the original title, title_length (the number of characters in the title), and description_preview.\nSort by title_length descending, then film_id ascending. Return at most 10 rows.\n\nHint: Use LIKE, length(), and substr(). String positions begin at 1."
+    "text": "Exercise 3\nFind films whose plot descriptions mention the word database, and create a short catalog preview.\nUsing film:\n\nKeep films whose description contains database anywhere. Apply lower() to the description before matching.\nReturn film_id, the original title, title_length (the number of characters in the title), and description_preview.\nSort by title_length descending, then film_id ascending.\n\nHint: Use LIKE, length(), and substr(). String positions begin at 1."
   },
   {
     "objectID": "a/7.html#exercise-4",

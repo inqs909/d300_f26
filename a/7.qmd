@@ -47,9 +47,9 @@ Find films whose plot descriptions mention the word database, and create a short
 
 Using `film`:
 
-1. Keep films whose `description` contains `detective` anywhere. Apply `lower()` to the description before matching.
+1. Keep films whose `description` contains `database` anywhere. Apply `lower()` to the description before matching.
 2. Return `film_id`, the original `title`, `title_length` (the number of characters in the title), and `description_preview`.
-3. Sort by `title_length` descending, then `film_id` ascending. Return at most 10 rows.
+3. Sort by `title_length` descending, then `film_id` ascending. 
 
 **Hint:** Use `LIKE`, `length()`, and `substr()`. String positions begin at 1.
 
