@@ -1,0 +1,63 @@
+## 1
+select customer_id,
+	trim(first_name) || ' ' || trim(last_name) as customer_name,
+	lower(trim(email)) as email_clean,
+	upper(trim(last_name)) || ', ' || upper(trim(first_name)) as mailing_label
+from customer;
+
+
+
+## 2
+
+with m1 as (
+select *
+from customer as c
+join address as a on c.address_id = a.address_id
+),
+m2 as (
+select *
+from m1
+join city c on m1.city_id = c.city_id
+),
+m3 as (
+select *
+from m2
+join country c on m2.country_id = c.country_id
+)
+select customer_id,
+	trim(first_name) || ' ' || trim(last_name) as customer_name,
+	trim(address) || ', ' || trim(city) || ', ' || trim(country) || ', ' || postal_code
+from m3;
+
+## 3
+
+select film_id,
+	trim(lower(description)) as description_preview,
+	title,
+	length(title) as title_length
+from film
+where description_preview like '%database%';
+
+
+## 4
+
+with aa as (
+select customer_id,
+	lower(trim(email)) as email_clean,
+	length(trim(email)) as len_email,
+	instr(trim(email), '@') as at_location
+from customer
+)
+SELECT customer_id
+	email_clean,
+	substr(email_clean, 1, at_location - 1) as user_name,
+	substr(email_clean, at_location+1) as domain
+from aa;
+
+## 5
+
+select rental_id, customer_id, rental_date, return_date,
+	round(julianday(return_date) - julianday(rental_date), 2) as elapsed_days
+from rental
+order by elapsed_days desc, rental_id;
+	

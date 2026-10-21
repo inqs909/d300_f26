@@ -1,0 +1,81 @@
+---
+title: "ICA 7"
+format: html
+editor: source
+order: 7
+draft: false
+---
+
+## Files and setup
+
+1. Download [`sakila_master.db`](https://github.com/bradleygrant/sakila-sqlite3?utm_source=chatgpt.com.)
+2. Open the database in DB Browser for SQLite
+
+
+## Exercise 1 
+
+Give me a consistent customer directory that I can use for correspondence.
+
+Using `customer`, return these columns for customers:
+
+| Output column | Requirement |
+|---|---|
+| `customer_id` | Original identifier |
+| `customer_name` | Trim each name and join first and last names with one space |
+| `email_clean` | Trim the email and convert it to lowercase |
+| `mailing_label` | Trimmed uppercase last name, a comma and space, then trimmed uppercase first name |
+
+Sort by `customer_id`. Return all matching customers.
+
+**Hint:** Combine `trim()`, `lower()`, `upper()`, and `||`. Use both `IS NOT NULL` and a comparison with `''` to express the email requirements explicitly. Standard Sakila customer names are present; you do not need to invent missing names.
+
+## Exercise 2
+
+Give me a table that contains each customers address:
+
+| Output column | Requirement |
+|---|---|
+| `customer_id` | Original identifier |
+| `customer_name` | Trim each name and join first and last names with one space |
+| `mailing_address` | Trim the address and incoporate the `address`, `city`, `country` and `postal_code`. |
+
+Eliminate any rows having a null mailing address. Use tables `customer`, `address`, `city`, and `country`.
+
+
+## Exercise 3 
+
+Find films whose plot descriptions mention the word database, and create a short catalog preview.
+
+Using `film`:
+
+1. Keep films whose `description` contains `detective` anywhere. Apply `lower()` to the description before matching.
+2. Return `film_id`, the original `title`, `title_length` (the number of characters in the title), and `description_preview`.
+3. Sort by `title_length` descending, then `film_id` ascending. Return at most 10 rows.
+
+**Hint:** Use `LIKE`, `length()`, and `substr()`. String positions begin at 1.
+
+## Exercise 4
+
+Separate each customer's email into its username and domain.
+
+Using `customer`, first lowercase and trim the email. Return:
+
+| Output column | Requirement |
+|---|---|
+| `customer_id` | Original identifier |
+| `email_clean` | Cleaned email |
+| `email_username` | Everything before the first `@` |
+| `email_domain` | Everything after the first `@` |
+
+
+## Exercise 5
+
+Which completed rentals lasted the longest?
+
+Using all dates in `rental`:
+
+1. Keep only rows with a non-`NULL` `return_date`.
+2. Return `rental_id`, `customer_id`, `rental_date`, `return_date`, and `elapsed_days`.
+3. Calculate elapsed days as return timestamp minus rental timestamp, preserving fractional days. Display `elapsed_days` rounded to two decimal places.
+4. Sort by the unrounded duration descending, then `rental_id` ascending. Return the 10 longest completed rentals.
+
