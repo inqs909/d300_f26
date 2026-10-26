@@ -484,7 +484,7 @@ Keep business rules visible. Test small examples before running a large report.
 
 
 
-## Activity solutions 
+# Activity solutions 
 
 ## Solution 1
 

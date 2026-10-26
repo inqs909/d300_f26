@@ -1533,13 +1533,6 @@
     "text": "A checklist for CASE queries\nBefore trusting a report, ask:\n\nDo the conditions represent the intended categories?\nAre cutoff values included in the right group?\nIf conditions overlap, is the first match the intended one?\nWhat happens to NULL, empty strings, and unmatched values?\nDoes an aggregate need zeros or missing values for nonmatches?\nIs the percentage denominator the population you intended?\n\nKeep business rules visible. Test small examples before running a large report."
   },
   {
-    "objectID": "lectures/10a.html#activity-solutions",
-    "href": "lectures/10a.html#activity-solutions",
-    "title": "CASE WHEN in SQLite",
-    "section": "Activity solutions",
-    "text": "Activity solutions"
-  },
-  {
     "objectID": "lectures/10a.html#solution-1",
     "href": "lectures/10a.html#solution-1",
     "title": "CASE WHEN in SQLite",
