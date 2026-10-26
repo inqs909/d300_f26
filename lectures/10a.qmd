@@ -37,6 +37,8 @@ Suppose the store wants every invoice labeled using these rules:
 | At least 10 | Large |
 
 
+# Case-When
+
 ## A CASE expression returns a value
 
 `CASE` chooses a result according to conditions you supply.
