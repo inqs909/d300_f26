@@ -10,6 +10,13 @@ editor: source
 
 | Lecture | Slides                   |
 |---------|--------------------------|
-| 1       | [Slides]() |
+| 1       | [Slides](../lectures/10a) |
 
 
+## References and use
+
+- [SQLite: CASE expressions and comparisons](https://sqlite.org/lang_expr.html#the_case_expression)
+- [SQLite: aggregate functions](https://sqlite.org/lang_aggfunc.html)
+- [SQLite: date and time functions](https://sqlite.org/lang_datefunc.html)
+- [SQLite: SELECT, grouping, and joins](https://sqlite.org/lang_select.html)
+- [Chinook database and downloads](https://github.com/lerocha/chinook-database)

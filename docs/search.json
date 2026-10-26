@@ -119,6 +119,13 @@
     "text": "Lecture\nSlides\n\n\n\n\n1\nSlides"
   },
   {
+    "objectID": "posts/10.html#references-and-use",
+    "href": "posts/10.html#references-and-use",
+    "title": "Week 10: Case When",
+    "section": "References and use",
+    "text": "References and use\n\nSQLite: CASE expressions and comparisons\nSQLite: aggregate functions\nSQLite: date and time functions\nSQLite: SELECT, grouping, and joins\nChinook database and downloads"
+  },
+  {
     "objectID": "lectures/9a.html#download-music-database",
     "href": "lectures/9a.html#download-music-database",
     "title": "Advanced SQL",
@@ -1337,6 +1344,230 @@
     "text": "Environmental Costs\n\n‘I can’t drink the water’ - life next to a US data centre"
   },
   {
+    "objectID": "lectures/10a.html#motivation",
+    "href": "lectures/10a.html#motivation",
+    "title": "CASE WHEN in SQLite",
+    "section": "Motivation",
+    "text": "Motivation\nSuppose the store wants every invoice labeled using these rules:\n\n\n\nInvoice total\nLabel\n\n\n\n\nLess than 5\nSmall\n\n\nAt least 5 and less than 10\nMedium\n\n\nAt least 10\nLarge"
+  },
+  {
+    "objectID": "lectures/10a.html#a-case-expression-returns-a-value",
+    "href": "lectures/10a.html#a-case-expression-returns-a-value",
+    "title": "CASE WHEN in SQLite",
+    "section": "A CASE expression returns a value",
+    "text": "A CASE expression returns a value\nCASE chooses a result according to conditions you supply.\nSELECT InvoiceId, Total,\n       CASE WHEN Total &gt;= 10 THEN 'Large'\n            ELSE 'Other'\n       END AS invoice_size\nFROM Invoice\nORDER BY InvoiceId;"
+  },
+  {
+    "objectID": "lectures/10a.html#case-conditions-in-each-when",
+    "href": "lectures/10a.html#case-conditions-in-each-when",
+    "title": "CASE WHEN in SQLite",
+    "section": "CASE: conditions in each WHEN",
+    "text": "CASE: conditions in each WHEN\nCASE\n    WHEN condition_1 THEN result_1\n    WHEN condition_2 THEN result_2\n    ELSE default_result\nEND AS column_alias\nSQLite checks conditions from top to bottom and returns the result for the first true condition. If none is true, it uses ELSE. With no ELSE, the unmatched result is NULL. The END statement closes the expression\n\nThe syntax box is a template. Replace the placeholder names with actual expressions. Syntax and evaluation rules: https://sqlite.org/lang_expr.html#the_case_expression"
+  },
+  {
+    "objectID": "lectures/10a.html#worked-example-invoice-sizes",
+    "href": "lectures/10a.html#worked-example-invoice-sizes",
+    "title": "CASE WHEN in SQLite",
+    "section": "Worked example: invoice sizes",
+    "text": "Worked example: invoice sizes\nSELECT InvoiceId, Total,\n       CASE\n1           WHEN Total &lt; 5 THEN 'Small'\n2           WHEN Total &lt; 10 THEN 'Medium'\n3           ELSE 'Large'\n4       END AS invoice_size\nFROM Invoice\nORDER BY InvoiceId\nLIMIT 12;\n\n1\n\nAn invoice below 5 receives Small.\n\n2\n\nReaching this branch means the first condition was false. For nonmissing totals, this branch covers 5 up to, but excluding, 10.\n\n3\n\nRemaining nonmissing totals are at least 10.\n\n4\n\nEnds the case statemtn and names the column as invoice_size."
+  },
+  {
+    "objectID": "lectures/10a.html#simple-case-compare-one-expression-to-values",
+    "href": "lectures/10a.html#simple-case-compare-one-expression-to-values",
+    "title": "CASE WHEN in SQLite",
+    "section": "Simple CASE: compare one expression to values",
+    "text": "Simple CASE: compare one expression to values\nSELECT CustomerId, Country,\n       CASE Country\n           WHEN 'USA' THEN 'US market'\n           WHEN 'Canada' THEN 'Canadian market'\n           ELSE 'Other market'\n       END AS market\nFROM Customer\nORDER BY CustomerId;\n\n\n\n\n\n\n\nForm\nGood fit\n\n\n\n\nCASE Country WHEN 'USA' ...\nEquality comparisons against one expression\n\n\nCASE WHEN Total &lt; 5 ...\nRanges, multiple columns, or other conditions\n\n\n\nUse searched CASE for comparisons such as &lt;, &gt;=, IN, or IS NULL."
+  },
+  {
+    "objectID": "lectures/10a.html#boundaries-should-leave-no-gaps",
+    "href": "lectures/10a.html#boundaries-should-leave-no-gaps",
+    "title": "CASE WHEN in SQLite",
+    "section": "Boundaries should leave no gaps",
+    "text": "Boundaries should leave no gaps\nFor nonmissing totals, our categories are:\n\n\n\nLabel\nCondition\n\n\n\n\nSmall\nTotal &lt; 5\n\n\nMedium\nTotal &gt;= 5 AND Total &lt; 10\n\n\nLarge\nTotal &gt;= 10\n\n\n\nBETWEEN 5 AND 10 includes both 5 and 10. It would include the lower boundary of the Large category."
+  },
+  {
+    "objectID": "lectures/10a.html#branch-order-can-change-your-answer",
+    "href": "lectures/10a.html#branch-order-can-change-your-answer",
+    "title": "CASE WHEN in SQLite",
+    "section": "Branch order can change your answer",
+    "text": "Branch order can change your answer\nWITH examples(Total) AS (VALUES (12.00))\nSELECT Total,\n       CASE WHEN Total &gt;= 5 THEN 'Medium'\n            WHEN Total &gt;= 10 THEN 'Large'\n            ELSE 'Small'\n       END AS incorrect_label,\n       CASE WHEN Total &gt;= 10 THEN 'Large'\n            WHEN Total &gt;= 5 THEN 'Medium'\n            ELSE 'Small'\n       END AS correct_label\nFROM examples;"
+  },
+  {
+    "objectID": "lectures/10a.html#testing-category-boundaries",
+    "href": "lectures/10a.html#testing-category-boundaries",
+    "title": "CASE WHEN in SQLite",
+    "section": "Testing category boundaries",
+    "text": "Testing category boundaries\nUse a tiny VALUES table to test rules independently of the full database.\nWITH test_values(Total) AS (\n    VALUES (4.99), (5.00), (5.01), (9.99), (10.00), (10.01)\n)\nSELECT Total,\n       CASE WHEN Total &lt; 5 THEN 'Small'\n            WHEN Total &lt; 10 THEN 'Medium'\n            ELSE 'Large'\n       END AS invoice_size\nFROM test_values\nORDER BY Total;"
+  },
+  {
+    "objectID": "lectures/10a.html#activity-1",
+    "href": "lectures/10a.html#activity-1",
+    "title": "CASE WHEN in SQLite",
+    "section": "Activity 1",
+    "text": "Activity 1\nUsing Track, return TrackId, Name, minutes, and length_category.\n\n\n\nDuration\nlength_category\n\n\n\n\nLess than 3 minutes\nShort\n\n\nAt least 3 but less than 5 minutes\nMedium\n\n\nAt least 5 minutes\nLong\n\n\n\n\nCalculate minutes as Milliseconds / 60000.0 and display two decimal places.\nClassify using the original milliseconds, before rounding.\nSort by Milliseconds descending, then TrackId ascending. Show 15 rows.\n\n\nClassification thresholds are 180000 and 300000 milliseconds. Use 60000.0 for real division. A track just below 3 minutes could round to 3.00 minutes while still correctly classified Short. Ask students why classification should precede display rounding."
+  },
+  {
+    "objectID": "lectures/10a.html#conditions-can-involve-several-columns",
+    "href": "lectures/10a.html#conditions-can-involve-several-columns",
+    "title": "CASE WHEN in SQLite",
+    "section": "Conditions can involve several columns",
+    "text": "Conditions can involve several columns\nSELECT InvoiceId, BillingCountry, Total,\n       CASE\n           WHEN BillingCountry = 'USA' AND Total &gt;= 10\n               THEN 'US large invoice'\n           WHEN BillingCountry = 'USA'\n               THEN 'US other invoice'\n           WHEN BillingCountry IN ('Canada', 'Brazil')\n               THEN 'Selected international market'\n           ELSE 'Other market'\n       END AS segment\nFROM Invoice\nORDER BY InvoiceId;\nPlace the more specific US rule first. Use parentheses to make combinations of AND and OR clear."
+  },
+  {
+    "objectID": "lectures/10a.html#null-needs-an-explicit-condition",
+    "href": "lectures/10a.html#null-needs-an-explicit-condition",
+    "title": "CASE WHEN in SQLite",
+    "section": "NULL needs an explicit condition",
+    "text": "NULL needs an explicit condition\nWITH examples(Total) AS (VALUES (NULL), (4.99), (12.00))\nSELECT Total,\n       CASE\n           WHEN Total IS NULL THEN 'Unknown'\n           WHEN Total &lt; 5 THEN 'Small'\n           WHEN Total &lt; 10 THEN 'Medium'\n           ELSE 'Large'\n       END AS invoice_size\nFROM examples;\n\nA comparison such as NULL &lt; 5 produces an unknown result.\nAn unknown condition does not select a WHEN branch.\nUse IS NULL to detect missing data.\nIn simple CASE, WHEN NULL also does not match a missing base value."
+  },
+  {
+    "objectID": "lectures/10a.html#missing-text-and-blank-text",
+    "href": "lectures/10a.html#missing-text-and-blank-text",
+    "title": "CASE WHEN in SQLite",
+    "section": "Missing text and blank text",
+    "text": "Missing text and blank text\nNULL, '', and '   ' need different checks.\nSELECT CustomerId, Company,\n       CASE\n           WHEN Company IS NULL THEN 'Missing'\n           WHEN trim(Company) = '' THEN 'Blank'\n           ELSE 'Present'\n       END AS company_status\nFROM Customer\nORDER BY CustomerId;\ntrim() removes ordinary spaces from both ends by default. A blank string is still a non-NULL value."
+  },
+  {
+    "objectID": "lectures/10a.html#activity-2",
+    "href": "lectures/10a.html#activity-2",
+    "title": "CASE WHEN in SQLite",
+    "section": "Activity 2",
+    "text": "Activity 2\nUsing Customer, return CustomerId, FirstName, LastName, and two new columns (obtained from Company):\n\n\n\n\n\n\n\nNew column\nRules\n\n\n\n\ncompany_status\nMissing for NULL, Blank for only spaces or an empty string, otherwise Present\n\n\ncompany_display\nNot provided for missing or blank values, otherwise the trimmed company name\n\n\n\nSort by CustomerId."
+  },
+  {
+    "objectID": "lectures/10a.html#result-types-and-explicit-defaults",
+    "href": "lectures/10a.html#result-types-and-explicit-defaults",
+    "title": "CASE WHEN in SQLite",
+    "section": "Result types and explicit defaults",
+    "text": "Result types and explicit defaults\nChoose results that serve the same purpose in every branch.\nSELECT TrackId, UnitPrice,\n       CASE WHEN UnitPrice &gt;= 1.00 THEN 1\n            ELSE 0\n       END AS premium_price_flag\nFROM Track\nORDER BY TrackId\nLIMIT 10;\n\nA numeric flag works well for later calculations.\nText labels work well for categories and display.\nOmit ELSE deliberately when you want unmatched rows to contribute NULL, as in some conditional aggregates."
+  },
+  {
+    "objectID": "lectures/10a.html#custom-sorting-with-case",
+    "href": "lectures/10a.html#custom-sorting-with-case",
+    "title": "CASE WHEN in SQLite",
+    "section": "Custom sorting with CASE",
+    "text": "Custom sorting with CASE\nSuppose a report should list USA first, Canada second, and other countries alphabetically.\nSELECT CustomerId, FirstName, LastName, Country\nFROM Customer\nORDER BY CASE Country\n             WHEN 'USA' THEN 1\n             WHEN 'Canada' THEN 2\n             ELSE 3\n         END,\n         Country, LastName, FirstName, CustomerId;\nThe numeric sort key does not need to appear in the output. Later sort terms resolve ties and make the order reproducible."
+  },
+  {
+    "objectID": "lectures/10a.html#reusing-a-category-with-a-cte",
+    "href": "lectures/10a.html#reusing-a-category-with-a-cte",
+    "title": "CASE WHEN in SQLite",
+    "section": "Reusing a category with a CTE",
+    "text": "Reusing a category with a CTE\nWITH labeled AS (\n    SELECT InvoiceId, Total,\n           CASE WHEN Total &lt; 5 THEN 'Small'\n                WHEN Total &lt; 10 THEN 'Medium'\n                ELSE 'Large'\n           END AS invoice_size\n    FROM Invoice\n)\nSELECT InvoiceId, Total, invoice_size\nFROM labeled\nWHERE invoice_size = 'Large'\nORDER BY Total DESC, InvoiceId;\nThe CTE names an intermediate result. Its new column is available to the outer query. This also avoids referring to a new alias elsewhere in the same SELECT list."
+  },
+  {
+    "objectID": "lectures/10a.html#grouping-by-a-derived-category",
+    "href": "lectures/10a.html#grouping-by-a-derived-category",
+    "title": "CASE WHEN in SQLite",
+    "section": "Grouping by a derived category",
+    "text": "Grouping by a derived category\nWITH markets AS (\n    SELECT CASE Country\n               WHEN 'USA' THEN 'USA'\n               WHEN 'Canada' THEN 'Canada'\n               ELSE 'Other'\n           END AS market\n    FROM Customer\n)\nSELECT market, COUNT(*) AS customer_count\nFROM markets\nGROUP BY market\nORDER BY customer_count DESC, market;"
+  },
+  {
+    "objectID": "lectures/10a.html#activity-3",
+    "href": "lectures/10a.html#activity-3",
+    "title": "CASE WHEN in SQLite",
+    "section": "Activity 3",
+    "text": "Activity 3\nUsing Invoice:\n\nCreate a CTE with Total and invoice_size: Small below 5, Medium from 5 up to 10, and Large at least 10.\nReturn one row per observed category (invoice_size) with invoice_count and revenue (sum of Total).\nRound revenue to two decimal places after summing.\nSort Large, Medium, Small, using a CASE sort key."
+  },
+  {
+    "objectID": "lectures/10a.html#conditional-counting-with-sum",
+    "href": "lectures/10a.html#conditional-counting-with-sum",
+    "title": "CASE WHEN in SQLite",
+    "section": "Conditional counting with SUM",
+    "text": "Conditional counting with SUM\nSELECT BillingCountry,\n       COUNT(*) AS invoice_count,\n       SUM(CASE WHEN Total &gt;= 10 THEN 1\n                ELSE 0 END) AS large_invoice_count\nFROM Invoice\nGROUP BY BillingCountry\nORDER BY BillingCountry;\nEach qualifying invoice contributes 1. Each other invoice contributes 0. SUM adds these values within each country."
+  },
+  {
+    "objectID": "lectures/10a.html#the-count-trap",
+    "href": "lectures/10a.html#the-count-trap",
+    "title": "CASE WHEN in SQLite",
+    "section": "The COUNT trap",
+    "text": "The COUNT trap\nWITH examples(Total) AS (VALUES (2.00), (12.00), (15.00))\nSELECT\n    COUNT(CASE WHEN Total &gt;= 10 THEN 1 ELSE 0 END) AS wrong_count,\n    COUNT(CASE WHEN Total &gt;= 10 THEN 1 END) AS correct_count,\n    SUM(CASE WHEN Total &gt;= 10 THEN 1 ELSE 0 END) AS correct_sum\nFROM examples;\nCOUNT(expression) counts nonmissing values, including 0. Without ELSE, nonqualifying rows yield NULL and are excluded by COUNT."
+  },
+  {
+    "objectID": "lectures/10a.html#conditional-averages-the-denominator-matters",
+    "href": "lectures/10a.html#conditional-averages-the-denominator-matters",
+    "title": "CASE WHEN in SQLite",
+    "section": "Conditional averages: the denominator matters",
+    "text": "Conditional averages: the denominator matters\nWITH examples(Total) AS (VALUES (2.00), (12.00), (18.00))\nSELECT\n    AVG(CASE WHEN Total &gt;= 10 THEN Total END) AS qualifying_mean,\n    AVG(CASE WHEN Total &gt;= 10 THEN Total ELSE 0 END) AS zero_filled_mean\nFROM examples;\nAVG ignores NULL. For an average among qualifying invoices, omit ELSE. If none qualify, that conditional average is NULL."
+  },
+  {
+    "objectID": "lectures/10a.html#percentages-from-conditional-counts",
+    "href": "lectures/10a.html#percentages-from-conditional-counts",
+    "title": "CASE WHEN in SQLite",
+    "section": "Percentages from conditional counts",
+    "text": "Percentages from conditional counts\nSELECT BillingCountry,\n       COUNT(*) AS invoice_count,\n       ROUND(\n           100.0 * SUM(CASE WHEN Total &gt;= 10 THEN 1 ELSE 0 END)\n           / COUNT(*), 1\n       ) AS pct_large\nFROM Invoice\nGROUP BY BillingCountry\nORDER BY pct_large DESC, BillingCountry;\n\nThe denominator is all invoices in that country.\n100.0 forces real arithmetic rather than integer division.\nEvery group here contains at least one invoice, so COUNT(*) is positive.\n\n\nIf working with a domain table and LEFT JOIN, count actual invoice IDs and consider NULLIF(COUNT(i.InvoiceId), 0) for a percentage with an invoice denominator. This differs from counting the placeholder row produced for a customer with no invoices."
+  },
+  {
+    "objectID": "lectures/10a.html#extension-categories-from-dates",
+    "href": "lectures/10a.html#extension-categories-from-dates",
+    "title": "CASE WHEN in SQLite",
+    "section": "Extension: categories from dates",
+    "text": "Extension: categories from dates\nSELECT InvoiceId, InvoiceDate,\n       strftime('%Y', InvoiceDate) AS invoice_year,\n       CASE\n           WHEN CAST(strftime('%m', InvoiceDate) AS INTEGER)\n                    BETWEEN 1 AND 3 THEN 'Q1'\n           WHEN CAST(strftime('%m', InvoiceDate) AS INTEGER)\n                    BETWEEN 4 AND 6 THEN 'Q2'\n           WHEN CAST(strftime('%m', InvoiceDate) AS INTEGER)\n                    BETWEEN 7 AND 9 THEN 'Q3'\n           WHEN CAST(strftime('%m', InvoiceDate) AS INTEGER)\n                    BETWEEN 10 AND 12 THEN 'Q4'\n           ELSE 'Unknown'\n       END AS quarter\nFROM Invoice\nORDER BY InvoiceDate, InvoiceId;\nstrftime('%m', ...) returns text. CAST makes the numeric comparison explicit. Keep year in a quarterly report so different years remain distinct.\n\nOptional extension. The Unknown label covers dates for which the month expression is NULL. An unparseable date should not silently become Q4. Date documentation: https://sqlite.org/lang_datefunc.html"
+  },
+  {
+    "objectID": "lectures/10a.html#classifying-a-summary",
+    "href": "lectures/10a.html#classifying-a-summary",
+    "title": "CASE WHEN in SQLite",
+    "section": "Classifying a summary",
+    "text": "Classifying a summary\nWITH spending AS (\n    SELECT CustomerId, SUM(Total) AS total_spent\n    FROM Invoice\n    GROUP BY CustomerId\n)\nSELECT CustomerId, ROUND(total_spent, 2) AS total_spent,\n       CASE WHEN total_spent &gt;= 45 THEN 'Gold'\n            WHEN total_spent &gt;= 35 THEN 'Silver'\n            ELSE 'Bronze'\n       END AS spending_tier\nFROM spending\nORDER BY total_spent DESC, CustomerId;\nHere we aggregate first, then classify each customer summary. Only customers with invoices appear in this query."
+  },
+  {
+    "objectID": "lectures/10a.html#keeping-customers-with-no-invoices",
+    "href": "lectures/10a.html#keeping-customers-with-no-invoices",
+    "title": "CASE WHEN in SQLite",
+    "section": "Keeping customers with no invoices",
+    "text": "Keeping customers with no invoices\nSELECT c.CustomerId, c.FirstName, c.LastName,\n       COUNT(i.InvoiceId) AS invoice_count,\n       COALESCE(SUM(i.Total), 0) AS total_spent\nFROM Customer AS c\nLEFT JOIN Invoice AS i\n    ON i.CustomerId = c.CustomerId\nGROUP BY c.CustomerId, c.FirstName, c.LastName\nORDER BY c.CustomerId;\n\nLEFT JOIN preserves every customer.\nCOUNT(i.InvoiceId) counts actual invoices. COUNT(*) would also count the placeholder row for a customer with no match.\nCOALESCE(..., 0) replaces the missing sum with zero for a customer with no invoices.\n\n\nThe standard Chinook sample may have invoices for every customer. The query should still handle a new customer who has none. All selected nonaggregate columns appear in GROUP BY to keep grouping explicit."
+  },
+  {
+    "objectID": "lectures/10a.html#activity-4",
+    "href": "lectures/10a.html#activity-4",
+    "title": "CASE WHEN in SQLite",
+    "section": "Activity 4",
+    "text": "Activity 4\nPreserve every customer. Return CustomerId, FirstName, LastName, invoice_count, total_spent rounded to two decimals, large_invoice_count (count Total &gt;= 10), and customer_tier.\n\n\n\nRule, in priority order\ncustomer_tier\n\n\n\n\nNo invoices\nNo purchases\n\n\nTotal spent at least 45\nGold\n\n\nTotal spent at least 35 but less than 45\nSilver\n\n\nRemaining customers\nBronze\n\n\n\nTable to use: Customer, Invoice"
+  },
+  {
+    "objectID": "lectures/10a.html#a-checklist-for-case-queries",
+    "href": "lectures/10a.html#a-checklist-for-case-queries",
+    "title": "CASE WHEN in SQLite",
+    "section": "A checklist for CASE queries",
+    "text": "A checklist for CASE queries\nBefore trusting a report, ask:\n\nDo the conditions represent the intended categories?\nAre cutoff values included in the right group?\nIf conditions overlap, is the first match the intended one?\nWhat happens to NULL, empty strings, and unmatched values?\nDoes an aggregate need zeros or missing values for nonmatches?\nIs the percentage denominator the population you intended?\n\nKeep business rules visible. Test small examples before running a large report."
+  },
+  {
+    "objectID": "lectures/10a.html#activity-solutions",
+    "href": "lectures/10a.html#activity-solutions",
+    "title": "CASE WHEN in SQLite",
+    "section": "Activity solutions",
+    "text": "Activity solutions"
+  },
+  {
+    "objectID": "lectures/10a.html#solution-1",
+    "href": "lectures/10a.html#solution-1",
+    "title": "CASE WHEN in SQLite",
+    "section": "Solution 1",
+    "text": "Solution 1\nWITH aa AS (\n    SELECT *,\n        round(Milliseconds / 60000.0) as Minutes\n    FROM Track\n)\nSELECT TrackId, Name, Minutes,\n    CASE \n     WHEN Minutes &lt; 3 THEN 'Short'\n         WHEN 3 Minutes &lt; 5 THEN 'Medium'\n         ELSE 'Long'\n    END as Length_category\nFROM aa\nORDER BY Milliseconds DESC, TrackId ASC;"
+  },
+  {
+    "objectID": "lectures/10a.html#solution-2",
+    "href": "lectures/10a.html#solution-2",
+    "title": "CASE WHEN in SQLite",
+    "section": "Solution 2",
+    "text": "Solution 2\nWITH aa as (\n    SELECT *,\n        CASE \n            WHEN Company IS NULL THEN 'Blank'\n            WHEN trim(Company) = '' THEN 'Blank'\n            ELSE 'Present'\n        END AS Company_Status\n    FROM Customer\n)\nSELECT CustomerId, FirstName, LastName,\n    CASE \n        WHEN Company_Status = 'Present' THEN trim(Company)\n        ELSE 'Not Provided'\n    END AS Company_Display\nFROM aa\nORDER BY CustomerId;`"
+  },
+  {
+    "objectID": "lectures/10a.html#solution-3",
+    "href": "lectures/10a.html#solution-3",
+    "title": "CASE WHEN in SQLite",
+    "section": "Solution 3",
+    "text": "Solution 3\nWITH aa AS (\n    SELECT Total,\n           CASE WHEN Total &lt; 5 THEN 'Small'\n                WHEN Total &lt; 10 THEN 'Medium'\n                ELSE 'Large' END AS Invoice_Size\n    FROM Invoice\n)\nSELECT Invoice_Size, COUNT(*) AS Invoice_Count,\n       ROUND(SUM(Total), 2) AS Revenue\nFROM aa\nGROUP BY Invoice_Size\nORDER BY \n    CASE Invoice_Size\n        WHEN 'Large' THEN 1\n        WHEN 'Medium' THEN 2\n        ELSE 3\n    END;"
+  },
+  {
+    "objectID": "lectures/10a.html#solution-4",
+    "href": "lectures/10a.html#solution-4",
+    "title": "CASE WHEN in SQLite",
+    "section": "Solution 4",
+    "text": "Solution 4\nWITH customer_summary AS (\n    SELECT c.CustomerId, c.FirstName, c.LastName,\n           COUNT(i.InvoiceId) AS invoice_count,\n           COALESCE(SUM(i.Total), 0) AS total_spent,\n           SUM(CASE WHEN i.Total &gt;= 10\n                    THEN 1 ELSE 0 END) AS large_invoice_count\n    FROM Customer AS c\n    LEFT JOIN Invoice AS i ON i.CustomerId = c.CustomerId\n    GROUP BY c.CustomerId, c.FirstName, c.LastName\n), tiered AS (\n    SELECT *, CASE WHEN invoice_count = 0 THEN 'No purchases'\n                   WHEN total_spent &gt;= 45 THEN 'Gold'\n                   WHEN total_spent &gt;= 35 THEN 'Silver'\n                   ELSE 'Bronze' END AS customer_tier\n    FROM customer_summary\n)\nSELECT CustomerId, FirstName, LastName, invoice_count,\n       ROUND(total_spent, 2) AS total_spent,\n       large_invoice_count, customer_tier\nFROM tiered AS t;"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome to Introduction to Data Management!",
@@ -1614,7 +1845,7 @@
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "Data 300\n\n\nIntro to Data Management\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\nSQLite and SQLTools\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\nSQLite and DB Browser for SQLite\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\n\n\n\n\n\nSQL Basics\n\n\n\n\n\n\n\n\n\n\n\n\n\nSQL: Joins, Subqueries, and Views\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\nCommon Table Expressions\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\nWindow Functions\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\nDate/Time and String Functions\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Data 300\n\n\nIntro to Data Management\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\nSQLite and SQLTools\n\n\n\n\n\n\n\n\n\n\nComputational Setup\n\n\nSQLite and DB Browser for SQLite\n\n\n\n\n\n\n\n\n\n\nData Systems\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Modeling\n\n\n\n\n\n\n\n\n\n\n\n\n\nDatabase Building\n\n\n\n\n\n\n\n\n\n\n\n\n\nSQL Basics\n\n\n\n\n\n\n\n\n\n\n\n\n\nSQL: Joins, Subqueries, and Views\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\nCommon Table Expressions\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\nWindow Functions\n\n\n\n\n\n\n\n\n\n\nAdvanced SQL\n\n\nDate/Time and String Functions\n\n\n\n\n\n\n\n\n\n\nCASE WHEN in SQLite\n\n\nConditional logic\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures/1b.html#sql-and-relational-databases",
