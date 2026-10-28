@@ -1,0 +1,69 @@
+---
+title: "ICA 7"
+format: html
+editor: source
+order: 7
+draft: false
+---
+
+## Files
+
+Use the `Northwind` database to complete the assignment.
+
+
+## Question 1: Inventory action report 
+
+The inventory team needs an action label for every product. Use `Products` and a searched `CASE` expression to apply these rules **in the stated priority order**:
+
+| Priority | Condition | `inventory_action` |
+|---|---|---|
+| 1 | The product is discontinued | `Discontinued` |
+| 2 | `UnitsInStock` equals 0 | `Out of stock` |
+| 3 | `UnitsInStock` is greater than 0 and less than or equal to `ReorderLevel` | `Reorder` |
+| 4 | All remaining products | `Stock sufficient` |
+
+**Requirements**
+
+1. Return `ProductID`, `ProductName`, `UnitsInStock`, `ReorderLevel`, `Discontinued`, and `inventory_action` for every product.
+2. Sort by `inventory_action` in the following order: Out of stock, Reorder, Stock sufficient, Discontinued. Within each action, sort by `ProductID` ascending.
+
+
+## Question 2
+
+The marketing team wants readable customer labels. Use `Customers` to create the following three columns.
+
+| New column | Rules |
+|---|---|
+| `market` | `USA` → `US market`; `Canada` → `Canadian market`; all other values, including `NULL`, → `Other market` |
+| `region_status` | `NULL` → `Missing`; an empty string or a string containing only ordinary spaces → `Blank`; otherwise → `Present` |
+| `region_display` | Missing or blank region → `Not provided`; otherwise → the trimmed region |
+
+**Requirements**
+
+1. Return `CustomerID`, `CompanyName`, `Country`, `Region`, `market`, `region_status`, and `region_display` for every customer.
+2. Sort US market customers first, Canadian market customers second, and Other market customers last. Within each market, sort by `CompanyName` ascending. 
+
+## Question 3
+
+The shipping team considers an order **high freight** when `Freight >= 100`. Using `Orders`, create one summary row for each observed `ShipCountry`, including a group for missing countries if one exists.
+
+**Required output**
+
+| Column | Definition |
+|---|---|
+| `ShipCountry` | Destination country |
+| `order_count` | Number of all orders in the country |
+| `high_freight_count` | Number of orders with `Freight >= 100` |
+| `pct_high_freight` | High-freight orders as a percentage of **all orders** in the country; round to one decimal place |
+| `avg_high_freight` | Mean freight among only high-freight orders; round to two decimal places; keep `NULL` if none qualify |
+| `shipping_profile` | Category assigned from the country's high-freight percentage, using the rules below |
+
+| Unrounded high-freight percentage | `shipping_profile` |
+|---|---|
+| At least 80% | `High share` |
+| At least 75% but less than 80% | `Moderate share` |
+| Less than 75% | `Low share` |
+
+**Requirements**
+
+1. Sort by **High share, Moderate share, Low share** using a `CASE` sort key, then by the unrounded percentage descending, then `ShipCountry` ascending.

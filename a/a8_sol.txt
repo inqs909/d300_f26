@@ -1,0 +1,63 @@
+## 1
+WITH aa as (
+	SELECT ProductID, ProductName, UnitsInStock, ReorderLevel, Discontinued,
+		CASE 
+			WHEN Discontinued = 1 THEN 'Discontinued'
+			WHEN UnitsInStock = 0 THEN 'Out of Stock'
+			WHEN UnitsInStock > 0 AND UnitsInStock < ReorderLevel THEN 'Reorder'
+			ELSE 'Stock Sufficient'
+		END AS inventory_action
+	FROM Products
+)
+SELECT *
+FROM aa
+ORDER BY CASE 
+			WHEN inventory_action = 'Out of Stock' THEN 1
+			WHEN inventory_action = 'Reorder' THEN 2
+			WHEN inventory_action = 'Stock Sufficient' THEN 3
+			ELSE 4
+		  END, ProductID;
+## 2
+
+SELECT CustomerID, CompanyName, Country, Region,
+	CASE 
+		WHEN Country = "USA" THEN "US Market"
+		WHEN Country = "Canada" THEN "Canadian Market"
+		ELSE 'Other Market'
+	END AS Market,
+	CASE 
+		WHEN trim(Region) = '' THEN 'Blank'
+		WHEN Region IS NULL THEN 'Missing'
+		ELSE 'Present'
+	END AS Region_Status,
+	CASE 
+	WHEN Region IS NULL OR trim(Region) = '' THEN 'Not Provided'
+		ELSE trim(Region)
+	END AS Region_Display
+FROM Customers
+ORDER BY CASE Market
+			WHEN 'US Market' THEN 1
+			WHEN 'Canadian Market' THEN 2
+			ELSE 3
+		 END, CompanyName ASC;
+## 3
+WITH aa AS (
+SELECT ShipCountry,
+	COUNT(*) as Order_count,
+	SUM(CASE WHEN Freight >= 100 THEN 1 ELSE 0 END) AS High_Freight_Count,
+	100 * round(AVG(CASE WHEN Freight >= 100 THEN 1 ELSE 0 END), 2) AS Pct_high_freight,
+	round(AVG(CASE WHEN Freight >= 100 THEN Freight ELSE NULL END), 2) AS Avg_high_freight
+FROM Orders
+GROUP BY ShipCountry
+)
+SELECT *,
+	CASE 
+		WHEN Pct_high_freight >= 80 THEN 'High Share'
+		WHEN Pct_high_freight < 75 THEN 'Low Share'
+		ELSE 'Moderate Share'
+	END AS Shipping_profile
+FROM aa
+ORDER BY CASE Shipping_profile
+			WHEN 'High Share' THEN 1
+			WHEN 'Moderate Share' THEN 2
+			ELSE 3 END, ShipCountry;

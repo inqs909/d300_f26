@@ -1568,81 +1568,158 @@
     "text": "Week 11: Pivot Tables\n\n\nThis week we will cover Pivot Tables.\n\n\n\n\n\nNov 1, 2026\n\n\n\n\n\n\n\nWeek 10: Case When\n\n\nThis week we will cover Case When.\n\n\n\n\n\nOct 27, 2026\n\n\n\n\n\n\n\nWeek 9: Dates, Times and Strings\n\n\nThis week we will cover Dates and Strings.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\nWeek 8: Window Functions\n\n\nThis week we will cover Window Functions.\n\n\n\n\n\nOct 10, 2026\n\n\n\n\n\n\n\nWeek 7: CTE\n\n\nThis week we will cover CTE.\n\n\n\n\n\nOct 4, 2026\n\n\n\n\n\n\n\nWeek 6: Joins\n\n\nThis week we will cover sql basics of joins.\n\n\n\n\n\nSep 27, 2026\n\n\n\n\n\n\n\nWeek 5: SQL Basics\n\n\nThis week we will cover sql basics.\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\nWeek 4: Databases\n\n\nThis week we will build databases.\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\n\n\nWeek 3\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\nWeek 2\n\n\nThis week we will install DB Browser and work on Data Systems.\n\n\n\n\n\nAug 31, 2026\n\n\n\n\n\n\n\nWeek 1\n\n\nThis week is designed to be an introduction week. We will briefly discuss topics related to the course. Then we will look at installing Positron and SQLite.\n\n\n\n\n\nAug 26, 2026\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "a/7.html",
-    "href": "a/7.html",
+    "objectID": "a/8.html",
+    "href": "a/8.html",
     "title": "ICA 7",
+    "section": "",
+    "text": "Use the Northwind database to complete the assignment."
+  },
+  {
+    "objectID": "a/8.html#files",
+    "href": "a/8.html#files",
+    "title": "ICA 7",
+    "section": "",
+    "text": "Use the Northwind database to complete the assignment."
+  },
+  {
+    "objectID": "a/8.html#question-1-inventory-action-report",
+    "href": "a/8.html#question-1-inventory-action-report",
+    "title": "ICA 7",
+    "section": "Question 1: Inventory action report",
+    "text": "Question 1: Inventory action report\nThe inventory team needs an action label for every product. Use Products and a searched CASE expression to apply these rules in the stated priority order:\n\n\n\n\n\n\n\n\nPriority\nCondition\ninventory_action\n\n\n\n\n1\nThe product is discontinued\nDiscontinued\n\n\n2\nUnitsInStock equals 0\nOut of stock\n\n\n3\nUnitsInStock is greater than 0 and less than or equal to ReorderLevel\nReorder\n\n\n4\nAll remaining products\nStock sufficient\n\n\n\nRequirements\n\nReturn ProductID, ProductName, UnitsInStock, ReorderLevel, Discontinued, and inventory_action for every product.\nSort by inventory_action in the following order: Out of stock, Reorder, Stock sufficient, Discontinued. Within each action, sort by ProductID ascending."
+  },
+  {
+    "objectID": "a/8.html#question-2",
+    "href": "a/8.html#question-2",
+    "title": "ICA 7",
+    "section": "Question 2",
+    "text": "Question 2\nThe marketing team wants readable customer labels. Use Customers to create the following three columns.\n\n\n\n\n\n\n\nNew column\nRules\n\n\n\n\nmarket\nUSA → US market; Canada → Canadian market; all other values, including NULL, → Other market\n\n\nregion_status\nNULL → Missing; an empty string or a string containing only ordinary spaces → Blank; otherwise → Present\n\n\nregion_display\nMissing or blank region → Not provided; otherwise → the trimmed region\n\n\n\nRequirements\n\nReturn CustomerID, CompanyName, Country, Region, market, region_status, and region_display for every customer.\nSort US market customers first, Canadian market customers second, and Other market customers last. Within each market, sort by CompanyName ascending."
+  },
+  {
+    "objectID": "a/8.html#question-3",
+    "href": "a/8.html#question-3",
+    "title": "ICA 7",
+    "section": "Question 3",
+    "text": "Question 3\nThe shipping team considers an order high freight when Freight &gt;= 100. Using Orders, create one summary row for each observed ShipCountry, including a group for missing countries if one exists.\nRequired output\n\n\n\n\n\n\n\nColumn\nDefinition\n\n\n\n\nShipCountry\nDestination country\n\n\norder_count\nNumber of all orders in the country\n\n\nhigh_freight_count\nNumber of orders with Freight &gt;= 100\n\n\npct_high_freight\nHigh-freight orders as a percentage of all orders in the country; round to one decimal place\n\n\navg_high_freight\nMean freight among only high-freight orders; round to two decimal places; keep NULL if none qualify\n\n\nshipping_profile\nCategory assigned from the country’s high-freight percentage, using the rules below\n\n\n\n\n\n\nUnrounded high-freight percentage\nshipping_profile\n\n\n\n\nAt least 80%\nHigh share\n\n\nAt least 75% but less than 80%\nModerate share\n\n\nLess than 75%\nLow share\n\n\n\nRequirements\n\nSort by High share, Moderate share, Low share using a CASE sort key, then by the unrounded percentage descending, then ShipCountry ascending."
+  },
+  {
+    "objectID": "a/6.html",
+    "href": "a/6.html",
+    "title": "ICA 6",
+    "section": "",
+    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
+  },
+  {
+    "objectID": "a/6.html#database-setup-and-reference",
+    "href": "a/6.html#database-setup-and-reference",
+    "title": "ICA 6",
+    "section": "",
+    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
+  },
+  {
+    "objectID": "a/6.html#tables-and-columns-used",
+    "href": "a/6.html#tables-and-columns-used",
+    "title": "ICA 6",
+    "section": "Tables and columns used",
+    "text": "Tables and columns used\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nRelevant columns\n\n\n\n\nProducts\nOne product\nProductID: identifier; ProductName: name; CategoryID: category; UnitPrice: catalog price\n\n\nCategories\nOne product category\nCategoryID: identifier; CategoryName: category label\n\n\nOrders\nOne customer order\nOrderID: identifier; CustomerID: customer code; OrderDate: order date/time; Freight: order shipping charge\n\n\n\"Order Details\"\nOne product line within an order\nOrderID, ProductID: identify the line; UnitPrice: price on that order; Quantity: units ordered; Discount: fractional discount\n\n\n\nRelationships:\nProducts.CategoryID joins to Categories.CategoryID\nOrders.OrderID joins to \"Order Details\".OrderID.\nRevenue definition: For this assignment, revenue is merchandise sales after discounts, excluding freight and taxes:\nUnitPrice * Quantity * (1 - Discount)\nA discount of 0.10 means 10%. Retain precision during calculations and round monetary output to two decimal places."
+  },
+  {
+    "objectID": "a/6.html#problem-1-compare-products-within-categories",
+    "href": "a/6.html#problem-1-compare-products-within-categories",
+    "title": "ICA 6",
+    "section": "Problem 1: Compare products within categories",
+    "text": "Problem 1: Compare products within categories\nHow does each product’s catalog price compare with the average price in its category?\n\nJoin Products to Categories and retain one row per eligible product.\nReturn ProductID, ProductName, CategoryID, CategoryName, and UnitPrice.\nAdd category_avg_price using a window average partitioned by category.\nAdd price_difference: product price minus its category’s average price. Round both calculated columns to two decimals.\nOrder results by CategoryID, then ProductID."
+  },
+  {
+    "objectID": "a/6.html#problem-2-rank-products-and-investigate-ties",
+    "href": "a/6.html#problem-2-rank-products-and-investigate-ties",
+    "title": "ICA 6",
+    "section": "Problem 2: Rank products and investigate ties",
+    "text": "Problem 2: Rank products and investigate ties\nWhich products are the most expensive within each category?\n\nPart A: Compare rankings\nReturn ProductID, ProductName, CategoryID, and UnitPrice, plus:\n\nprice_row_number: ROW_NUMBER() ordered by price descending, then ProductID ascending, within category.\nprice_rank: RANK() ordered by price descending within category.\nprice_dense_rank: DENSE_RANK() ordered by price descending within category.\n\nOrder by CategoryID, descending UnitPrice, then ProductID.\n\n\nPart B: Select leading price levels\nPut the ranked result in a CTE. Return products in the two highest distinct price levels per category, keeping every tie. Display the three ranking columns too."
+  },
+  {
+    "objectID": "a/6.html#problem-3-compare-orders-with-lag",
+    "href": "a/6.html#problem-3-compare-orders-with-lag",
+    "title": "ICA 6",
+    "section": "Problem 3: Compare orders with LAG",
+    "text": "Problem 3: Compare orders with LAG\nHow does each order’s freight charge compare with the preceding eligible order from the same customer?\n\nUse all eligible orders, excluding missing freight charges.\nReturn CustomerID, OrderID, OrderDate, and Freight.\nAdd previous_freight using LAG(Freight) within each customer, ordered by OrderDate, OrderID.\nAdd freight_change: current freight minus previous freight, rounded to two decimals. Use a CTE to reuse previous_freight.\nOrder by CustomerID, OrderDate, then OrderID."
+  },
+  {
+    "objectID": "a/6.html#problem-4-find-the-next-order-with-lead",
+    "href": "a/6.html#problem-4-find-the-next-order-with-lead",
+    "title": "ICA 6",
+    "section": "Problem 4: Find the next order with LEAD",
+    "text": "Problem 4: Find the next order with LEAD\nHow long does each customer wait until their next order?\n\nReturn CustomerID, OrderID, and OrderDate for all eligible orders.\nAdd next_order_date from the next order for the same customer, ordered by OrderDate, OrderID.\nIn an outer query, calculate days_until_next, rounded to two decimals.\nKeep each customer’s final order. Order by CustomerID, OrderDate, then OrderID.\n\nSQLite date helper: JULIANDAY(later_date) - JULIANDAY(earlier_date) gives elapsed days, potentially including fractions."
+  },
+  {
+    "objectID": "a/6.html#probelm-5-track-revenue-through-time",
+    "href": "a/6.html#probelm-5-track-revenue-through-time",
+    "title": "ICA 6",
+    "section": "Probelm 5: Track revenue through time",
+    "text": "Probelm 5: Track revenue through time\nHow are cumulative sales and recent daily sales changing?\nUse UnitPrice from \"Order Details\" for historical sales, rather than the catalog price in Products. Use this supplied CTE to obtain one row per observed order date. Replace the final SELECT with your window calculations.\nWITH daily_sales AS (\n    SELECT DATE(o.OrderDate) AS order_day,\n           SUM(d.UnitPrice * d.Quantity * (1.0 - d.Discount))\n               AS daily_revenue\n    FROM Orders AS o\n    JOIN \"Order Details\" AS d ON o.OrderID = d.OrderID\n    WHERE o.OrderDate IS NOT NULL\n    GROUP BY DATE(o.OrderDate)\n)\n\nReturn order_day and daily_revenue.\nAdd running_revenue using SUM() from the first daily row through the current row. Write the frame explicitly.\nAdd moving_avg_3_rows using AVG() over the current row and up to two preceding rows.\nRound all three monetary columns to two decimals. Display dates ascending."
+  },
+  {
+    "objectID": "a/4.html",
+    "href": "a/4.html",
+    "title": "ICA 4",
     "section": "",
     "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
   },
   {
-    "objectID": "a/7.html#files-and-setup",
-    "href": "a/7.html#files-and-setup",
-    "title": "ICA 7",
+    "objectID": "a/4.html#files-and-setup",
+    "href": "a/4.html#files-and-setup",
+    "title": "ICA 4",
     "section": "",
     "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
   },
   {
-    "objectID": "a/7.html#exercise-1",
-    "href": "a/7.html#exercise-1",
-    "title": "ICA 7",
-    "section": "Exercise 1",
-    "text": "Exercise 1\nGive me a consistent customer directory that I can use for correspondence.\nUsing customer, return these columns for customers:\n\n\n\n\n\n\n\nOutput column\nRequirement\n\n\n\n\ncustomer_id\nOriginal identifier\n\n\ncustomer_name\nTrim each name and join first and last names with one space\n\n\nemail_clean\nTrim the email and convert it to lowercase\n\n\nmailing_label\nTrimmed uppercase last name, a comma and space, then trimmed uppercase first name\n\n\n\nSort by customer_id. Return all matching customers."
+    "objectID": "a/4.html#selected-sakila-relationships",
+    "href": "a/4.html#selected-sakila-relationships",
+    "title": "ICA 4",
+    "section": "Selected Sakila relationships",
+    "text": "Selected Sakila relationships\n\n\n\n\n\n\n\n\nParent table\nChild table\nJoin condition\n\n\n\n\nlanguage\nfilm\nlanguage.language_id = film.language_id\n\n\nfilm\ninventory\nfilm.film_id = inventory.film_id\n\n\ncustomer\nrental\ncustomer.customer_id = rental.customer_id\n\n\ninventory\nrental\ninventory.inventory_id = rental.inventory_id\n\n\nrental\npayment\nrental.rental_id = payment.rental_id\n\n\nactor\nfilm_actor\nactor.actor_id = film_actor.actor_id\n\n\nfilm\nfilm_actor\nfilm.film_id = film_actor.film_id\n\n\nfilm\nfilm_category\nfilm.film_id = film_category.film_id\n\n\ncategory\nfilm_category\ncategory.category_id = film_category.category_id\n\n\naddress\ncustomer\naddress.address_id = customer.address_id\n\n\ncity\naddress\ncity.city_id = address.city_id\n\n\ncountry\ncity\ncountry.country_id = city.country_id"
   },
   {
-    "objectID": "a/7.html#exercise-2",
-    "href": "a/7.html#exercise-2",
-    "title": "ICA 7",
-    "section": "Exercise 2",
-    "text": "Exercise 2\nGive me a table that contains each customers address:\n\n\n\n\n\n\n\nOutput column\nRequirement\n\n\n\n\ncustomer_id\nOriginal identifier\n\n\ncustomer_name\nTrim each name and join first and last names with one space\n\n\nmailing_address\nTrim the address and incoporate the address, city, country and postal_code.\n\n\n\nEliminate any rows having a null mailing address. Use tables customer, address, city, and country."
+    "objectID": "a/4.html#part-a-inner-joins",
+    "href": "a/4.html#part-a-inner-joins",
+    "title": "ICA 4",
+    "section": "Part A: Inner Joins",
+    "text": "Part A: Inner Joins\n\nQuestion 1: Films and languages\nDisplay each film’s title and the name of its language. Sort the results alphabetically by film title.\nUse the film and language tables.\n\n\nQuestion 2: Customers and addresses\nDisplay each customer’s first name, last name, email address, street address, and postal code.\nUse the customer and address tables.\n\n\nQuestion 3: Films and categories\nDisplay each film title and its category name. Sort the results first by category name and then by film title.\nUse the film, film_category, and category tables.\n\n\nQuestion 4: Films and actors\nDisplay every film title along with the first and last name of each actor appearing in the film. Sort the results by film title and actor last name.\nUse the film, film_actor, and actor tables."
   },
   {
-    "objectID": "a/7.html#exercise-3",
-    "href": "a/7.html#exercise-3",
-    "title": "ICA 7",
-    "section": "Exercise 3",
-    "text": "Exercise 3\nFind films whose plot descriptions mention the word database, and create a short catalog preview.\nUsing film:\n\nKeep films whose description contains database anywhere. Apply lower() to the description before matching.\nReturn film_id, the original title, title_length (the number of characters in the title), and description.\nSort by title_length descending, then film_id ascending."
+    "objectID": "a/4.html#part-b-left-joins",
+    "href": "a/4.html#part-b-left-joins",
+    "title": "ICA 4",
+    "section": "Part B: Left Joins",
+    "text": "Part B: Left Joins\n\nQuestion 5: Films and inventory records\nDisplay every film title and its inventory ID. Include films that do not have an inventory record.\nUse the film and inventory tables.\n\n\nQuestion 6: Number of inventory copies\nDisplay every film’s ID, title, and number of inventory copies. Include films with zero inventory copies. Sort the films from the largest number of copies to the smallest.\nUse the film and inventory tables.\n\n\nQuestion 7: Films without inventory\nModify the previous query to display only films that have no inventory records.\nHint: After the left join, test a column from inventory for NULL."
   },
   {
-    "objectID": "a/7.html#exercise-4",
-    "href": "a/7.html#exercise-4",
-    "title": "ICA 7",
-    "section": "Exercise 4",
-    "text": "Exercise 4\nSeparate each customer’s email into its username and domain.\nUsing customer, first lowercase and trim the email. Return:\n\n\n\nOutput column\nRequirement\n\n\n\n\ncustomer_id\nOriginal identifier\n\n\nemail_clean\nCleaned email\n\n\nemail_username\nEverything before the first @\n\n\nemail_domain\nEverything after the first @"
+    "objectID": "a/4.html#part-c-right-joins",
+    "href": "a/4.html#part-c-right-joins",
+    "title": "ICA 4",
+    "section": "Part C: Right Joins",
+    "text": "Part C: Right Joins\n\nQuestion 8: Preserve all films\nBegin with inventory and use a RIGHT JOIN to display every film and any corresponding inventory records. Films without inventory must remain in the result.\nDisplay the film ID, film title, inventory ID, and store ID.\nUse film and inventory tables."
   },
   {
-    "objectID": "a/7.html#exercise-5",
-    "href": "a/7.html#exercise-5",
-    "title": "ICA 7",
-    "section": "Exercise 5",
-    "text": "Exercise 5\nWhich completed rentals lasted the longest?\nUsing all dates in rental:\n\nKeep only rows with a non-NULL return_date.\nReturn rental_id, customer_id, rental_date, return_date, and elapsed_days.\nCalculate elapsed days as return timestamp minus rental timestamp, preserving fractional days. Display elapsed_days rounded to two decimal places.\nSort by the unrounded duration descending, then rental_id ascending. Return the 10 longest completed rentals."
+    "objectID": "a/4.html#part-4-full-join",
+    "href": "a/4.html#part-4-full-join",
+    "title": "ICA 4",
+    "section": "Part 4: Full Join",
+    "text": "Part 4: Full Join\n\nQuestion 9: Retain all languages and films\nUse a FULL OUTER JOIN to display all languages and all films, regardless of whether a matching language-film relationship exists.\nDisplay the language ID, language name, film ID, and film title.\nUse language and film tables.\n\n\nQuestion 10: Find unmatched languages or films\nModify the query from Question 9 to retain only unmatched records: languages without films or films without a matching language."
   },
   {
-    "objectID": "a/5.html",
-    "href": "a/5.html",
-    "title": "ICA 5",
+    "objectID": "a/4.html#part-5-multi-table-join",
+    "href": "a/4.html#part-5-multi-table-join",
+    "title": "ICA 4",
+    "section": "Part 5: Multi-table Join",
+    "text": "Part 5: Multi-table Join\n\nQuestion 11: Customer rental history\nDisplay the customer’s first and last name, film title, rental date, and return date for every rental.\nUse the customer, rental, inventory, and film tables."
+  },
+  {
+    "objectID": "a/2.html",
+    "href": "a/2.html",
+    "title": "Creating a Database",
     "section": "",
-    "text": "Use the SQLite database linked from the Northwind-SQLite3 repository. The names below match that repository’s documented schema. Other Northwind versions may use different table names.\n\n\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nKey\n\n\n\n\nCustomers\nOne customer organization\nCustomerID\n\n\nOrders\nOne order placed by a customer\nOrderID\n\n\n\"Order Details\"\nOne product line within an order\nThe combination of OrderID and ProductID\n\n\nEmployees\nOne employee\nEmployeeID\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable\nColumn\nMeaning in this assignment\n\n\n\n\nCustomers\nCustomerID\nCustomer identifier\n\n\nCustomers\nCompanyName\nCustomer organization’s name\n\n\nCustomers\nCountry\nCustomer’s country\n\n\nOrders\nOrderID\nOrder identifier\n\n\nOrders\nCustomerID\nCustomer who placed the order\n\n\nOrders\nEmployeeID\nEmployee associated with the order\n\n\n\"Order Details\"\nOrderID\nOrder containing the line item\n\n\n\"Order Details\"\nProductID\nProduct on the line item\n\n\n\"Order Details\"\nUnitPrice\nSelling price per unit on that order line\n\n\n\"Order Details\"\nQuantity\nNumber of units ordered\n\n\n\"Order Details\"\nDiscount\nFraction of the line price discounted; for example, 0.10 means 10%\n\n\nEmployees\nEmployeeID\nEmployee identifier\n\n\nEmployees\nFirstName\nEmployee’s first name\n\n\nEmployees\nLastName\nEmployee’s last name\n\n\nEmployees\nReportsTo\nEmployeeID of the employee’s direct manager; NULL identifies an employee with no listed manager\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStarting column\nRelated column\nRelationship\n\n\n\n\nOrders.CustomerID\nCustomers.CustomerID\nMany orders can belong to one customer\n\n\n\"Order Details\".OrderID\nOrders.OrderID\nMany line items can belong to one order\n\n\nOrders.EmployeeID\nEmployees.EmployeeID\nMany orders can be associated with one employee\n\n\nEmployees.ReportsTo\nEmployees.EmployeeID\nMany employees can report to one manager\n\n\n\nThe last relationship is a self-reference: both columns belong to Employees."
-  },
-  {
-    "objectID": "a/5.html#tables-and-variables-used",
-    "href": "a/5.html#tables-and-variables-used",
-    "title": "ICA 5",
-    "section": "",
-    "text": "Use the SQLite database linked from the Northwind-SQLite3 repository. The names below match that repository’s documented schema. Other Northwind versions may use different table names.\n\n\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nKey\n\n\n\n\nCustomers\nOne customer organization\nCustomerID\n\n\nOrders\nOne order placed by a customer\nOrderID\n\n\n\"Order Details\"\nOne product line within an order\nThe combination of OrderID and ProductID\n\n\nEmployees\nOne employee\nEmployeeID\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable\nColumn\nMeaning in this assignment\n\n\n\n\nCustomers\nCustomerID\nCustomer identifier\n\n\nCustomers\nCompanyName\nCustomer organization’s name\n\n\nCustomers\nCountry\nCustomer’s country\n\n\nOrders\nOrderID\nOrder identifier\n\n\nOrders\nCustomerID\nCustomer who placed the order\n\n\nOrders\nEmployeeID\nEmployee associated with the order\n\n\n\"Order Details\"\nOrderID\nOrder containing the line item\n\n\n\"Order Details\"\nProductID\nProduct on the line item\n\n\n\"Order Details\"\nUnitPrice\nSelling price per unit on that order line\n\n\n\"Order Details\"\nQuantity\nNumber of units ordered\n\n\n\"Order Details\"\nDiscount\nFraction of the line price discounted; for example, 0.10 means 10%\n\n\nEmployees\nEmployeeID\nEmployee identifier\n\n\nEmployees\nFirstName\nEmployee’s first name\n\n\nEmployees\nLastName\nEmployee’s last name\n\n\nEmployees\nReportsTo\nEmployeeID of the employee’s direct manager; NULL identifies an employee with no listed manager\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStarting column\nRelated column\nRelationship\n\n\n\n\nOrders.CustomerID\nCustomers.CustomerID\nMany orders can belong to one customer\n\n\n\"Order Details\".OrderID\nOrders.OrderID\nMany line items can belong to one order\n\n\nOrders.EmployeeID\nEmployees.EmployeeID\nMany orders can be associated with one employee\n\n\nEmployees.ReportsTo\nEmployees.EmployeeID\nMany employees can report to one manager\n\n\n\nThe last relationship is a self-reference: both columns belong to Employees."
-  },
-  {
-    "objectID": "a/5.html#part-a-ordinary-ctes",
-    "href": "a/5.html#part-a-ordinary-ctes",
-    "title": "ICA 5",
-    "section": "Part A: Ordinary CTEs",
-    "text": "Part A: Ordinary CTEs\n\nQuestion 1: Customers with many orders\nCreate a CTE that counts orders (order_count) for each CustomerID in Orders.\nUse the CTE in an outer query to:\n\nJoin to Customers to obtain the company name and country.\nKeep customers with at least 10 orders.\nReturn CustomerID, CompanyName, Country, and order_count.\nSort by order_count descending, then CustomerID ascending.\n\n\n\nQuestion 2: Orders above the average order value\nCreate a CTE that calculates order_total for each OrderID from \"Order Details\".\nUse it to:\n\nCalculate the average of the order totals, using a second CTE or a scalar subquery that reads the first CTE.\nReturn only orders whose totals are strictly greater than that average.\nReturn OrderID, order_total, and average_order_total.\nSort by the unrounded order total descending, then OrderID ascending."
-  },
-  {
-    "objectID": "a/5.html#part-b-recursive-ctes",
-    "href": "a/5.html#part-b-recursive-ctes",
-    "title": "ICA 5",
-    "section": "Part B: Recursive CTEs",
-    "text": "Part B: Recursive CTEs\n\nQuestion 3: Build the organization hierarchy\nCreate a recursive CTE named employee_hierarchy.\n\nAnchor: select employees whose ReportsTo IS NULL; assign depth 0.\nRecursive member: find employees reporting to an employee already in the CTE; increase depth by 1.\nReturn EmployeeID, employee_name, ReportsTo, and depth.\nSort by depth ascending, then EmployeeID ascending.\n\nCheck: If every employee connects to a root, every employee should appear exactly once.\n\n\nQuestion 4: Find a manager’s entire team\nUse your initial inspection query to choose an employee who has at least one direct report. State the chosen employee’s name and ID in your response.\nCreate a recursive CTE named manager_team that:\n\nStarts with the chosen manager at depth 0.\nFinds all direct and indirect reports.\nBuilds a management_path beginning with the chosen manager’s name and appending each employee’s name.\n\nIn the final output, exclude the starting manager. Return EmployeeID, employee_name, depth, and management_path. Sort by depth ascending, then EmployeeID ascending."
+    "text": "Using the unnormalized data set below, create a 3NF database. At the end, submit the SQL code to create the database on canvas. Due 9/20/26.\n\n\n\n\n\n\n\n\n\n\n\ncharacter_id\ncharacter_name\ntitle\nhouse\nregion\nbattles\n\n\n\n\nC101\nJon Snow\nKing in the North\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC102\nSansa Stark\nLady of Winterfell\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC103\nArya Stark\nAssassin\nH01, House Stark\nR01, The North\nB03, Battle of Winterfell, Winterfell, Victory\n\n\nC104\nTyrion Lannister\nHand of the Queen\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B04, Battle of King’s Landing, King’s Landing, Defeat\n\n\nC105\nJaime Lannister\nKnight\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC106\nDaenerys Targaryen\nQueen\nH03, House Targaryen\nR03, Crownlands\nB03, Battle of Winterfell, Winterfell, Victory; B04, Battle of King’s Landing, King’s Landing, Victory\n\n\nC107\nBrienne of Tarth\nKnight\nH04, House Tarth\nR04, Stormlands\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory"
   },
   {
     "objectID": "a/3.html",
@@ -1708,130 +1785,88 @@
     "text": "Part F\n\nWrite one query that uses SELECT, WHERE, GROUP BY, HAVING, and ORDER BY.\n\nYour query must:\n\nuse only records from 2000 through 2009, inclusive;\nexclude records with missing precipitation;\ngroup the remaining records by year and month;\ncalculate total precipitation and name it total_precipitation;\nkeep only year-month groups whose total precipitation is greater than 5; and\nsort from the greatest total precipitation to the least."
   },
   {
-    "objectID": "a/2.html",
-    "href": "a/2.html",
-    "title": "Creating a Database",
+    "objectID": "a/5.html",
+    "href": "a/5.html",
+    "title": "ICA 5",
     "section": "",
-    "text": "Using the unnormalized data set below, create a 3NF database. At the end, submit the SQL code to create the database on canvas. Due 9/20/26.\n\n\n\n\n\n\n\n\n\n\n\ncharacter_id\ncharacter_name\ntitle\nhouse\nregion\nbattles\n\n\n\n\nC101\nJon Snow\nKing in the North\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC102\nSansa Stark\nLady of Winterfell\nH01, House Stark\nR01, The North\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC103\nArya Stark\nAssassin\nH01, House Stark\nR01, The North\nB03, Battle of Winterfell, Winterfell, Victory\n\n\nC104\nTyrion Lannister\nHand of the Queen\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B04, Battle of King’s Landing, King’s Landing, Defeat\n\n\nC105\nJaime Lannister\nKnight\nH02, House Lannister\nR02, The Westerlands\nB02, Battle of Blackwater, King’s Landing, Victory; B03, Battle of Winterfell, Winterfell, Victory\n\n\nC106\nDaenerys Targaryen\nQueen\nH03, House Targaryen\nR03, Crownlands\nB03, Battle of Winterfell, Winterfell, Victory; B04, Battle of King’s Landing, King’s Landing, Victory\n\n\nC107\nBrienne of Tarth\nKnight\nH04, House Tarth\nR04, Stormlands\nB01, Battle of the Bastards, Winterfell, Victory; B03, Battle of Winterfell, Winterfell, Victory"
+    "text": "Use the SQLite database linked from the Northwind-SQLite3 repository. The names below match that repository’s documented schema. Other Northwind versions may use different table names.\n\n\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nKey\n\n\n\n\nCustomers\nOne customer organization\nCustomerID\n\n\nOrders\nOne order placed by a customer\nOrderID\n\n\n\"Order Details\"\nOne product line within an order\nThe combination of OrderID and ProductID\n\n\nEmployees\nOne employee\nEmployeeID\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable\nColumn\nMeaning in this assignment\n\n\n\n\nCustomers\nCustomerID\nCustomer identifier\n\n\nCustomers\nCompanyName\nCustomer organization’s name\n\n\nCustomers\nCountry\nCustomer’s country\n\n\nOrders\nOrderID\nOrder identifier\n\n\nOrders\nCustomerID\nCustomer who placed the order\n\n\nOrders\nEmployeeID\nEmployee associated with the order\n\n\n\"Order Details\"\nOrderID\nOrder containing the line item\n\n\n\"Order Details\"\nProductID\nProduct on the line item\n\n\n\"Order Details\"\nUnitPrice\nSelling price per unit on that order line\n\n\n\"Order Details\"\nQuantity\nNumber of units ordered\n\n\n\"Order Details\"\nDiscount\nFraction of the line price discounted; for example, 0.10 means 10%\n\n\nEmployees\nEmployeeID\nEmployee identifier\n\n\nEmployees\nFirstName\nEmployee’s first name\n\n\nEmployees\nLastName\nEmployee’s last name\n\n\nEmployees\nReportsTo\nEmployeeID of the employee’s direct manager; NULL identifies an employee with no listed manager\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStarting column\nRelated column\nRelationship\n\n\n\n\nOrders.CustomerID\nCustomers.CustomerID\nMany orders can belong to one customer\n\n\n\"Order Details\".OrderID\nOrders.OrderID\nMany line items can belong to one order\n\n\nOrders.EmployeeID\nEmployees.EmployeeID\nMany orders can be associated with one employee\n\n\nEmployees.ReportsTo\nEmployees.EmployeeID\nMany employees can report to one manager\n\n\n\nThe last relationship is a self-reference: both columns belong to Employees."
   },
   {
-    "objectID": "a/4.html",
-    "href": "a/4.html",
-    "title": "ICA 4",
+    "objectID": "a/5.html#tables-and-variables-used",
+    "href": "a/5.html#tables-and-variables-used",
+    "title": "ICA 5",
+    "section": "",
+    "text": "Use the SQLite database linked from the Northwind-SQLite3 repository. The names below match that repository’s documented schema. Other Northwind versions may use different table names.\n\n\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nKey\n\n\n\n\nCustomers\nOne customer organization\nCustomerID\n\n\nOrders\nOne order placed by a customer\nOrderID\n\n\n\"Order Details\"\nOne product line within an order\nThe combination of OrderID and ProductID\n\n\nEmployees\nOne employee\nEmployeeID\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable\nColumn\nMeaning in this assignment\n\n\n\n\nCustomers\nCustomerID\nCustomer identifier\n\n\nCustomers\nCompanyName\nCustomer organization’s name\n\n\nCustomers\nCountry\nCustomer’s country\n\n\nOrders\nOrderID\nOrder identifier\n\n\nOrders\nCustomerID\nCustomer who placed the order\n\n\nOrders\nEmployeeID\nEmployee associated with the order\n\n\n\"Order Details\"\nOrderID\nOrder containing the line item\n\n\n\"Order Details\"\nProductID\nProduct on the line item\n\n\n\"Order Details\"\nUnitPrice\nSelling price per unit on that order line\n\n\n\"Order Details\"\nQuantity\nNumber of units ordered\n\n\n\"Order Details\"\nDiscount\nFraction of the line price discounted; for example, 0.10 means 10%\n\n\nEmployees\nEmployeeID\nEmployee identifier\n\n\nEmployees\nFirstName\nEmployee’s first name\n\n\nEmployees\nLastName\nEmployee’s last name\n\n\nEmployees\nReportsTo\nEmployeeID of the employee’s direct manager; NULL identifies an employee with no listed manager\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStarting column\nRelated column\nRelationship\n\n\n\n\nOrders.CustomerID\nCustomers.CustomerID\nMany orders can belong to one customer\n\n\n\"Order Details\".OrderID\nOrders.OrderID\nMany line items can belong to one order\n\n\nOrders.EmployeeID\nEmployees.EmployeeID\nMany orders can be associated with one employee\n\n\nEmployees.ReportsTo\nEmployees.EmployeeID\nMany employees can report to one manager\n\n\n\nThe last relationship is a self-reference: both columns belong to Employees."
+  },
+  {
+    "objectID": "a/5.html#part-a-ordinary-ctes",
+    "href": "a/5.html#part-a-ordinary-ctes",
+    "title": "ICA 5",
+    "section": "Part A: Ordinary CTEs",
+    "text": "Part A: Ordinary CTEs\n\nQuestion 1: Customers with many orders\nCreate a CTE that counts orders (order_count) for each CustomerID in Orders.\nUse the CTE in an outer query to:\n\nJoin to Customers to obtain the company name and country.\nKeep customers with at least 10 orders.\nReturn CustomerID, CompanyName, Country, and order_count.\nSort by order_count descending, then CustomerID ascending.\n\n\n\nQuestion 2: Orders above the average order value\nCreate a CTE that calculates order_total for each OrderID from \"Order Details\".\nUse it to:\n\nCalculate the average of the order totals, using a second CTE or a scalar subquery that reads the first CTE.\nReturn only orders whose totals are strictly greater than that average.\nReturn OrderID, order_total, and average_order_total.\nSort by the unrounded order total descending, then OrderID ascending."
+  },
+  {
+    "objectID": "a/5.html#part-b-recursive-ctes",
+    "href": "a/5.html#part-b-recursive-ctes",
+    "title": "ICA 5",
+    "section": "Part B: Recursive CTEs",
+    "text": "Part B: Recursive CTEs\n\nQuestion 3: Build the organization hierarchy\nCreate a recursive CTE named employee_hierarchy.\n\nAnchor: select employees whose ReportsTo IS NULL; assign depth 0.\nRecursive member: find employees reporting to an employee already in the CTE; increase depth by 1.\nReturn EmployeeID, employee_name, ReportsTo, and depth.\nSort by depth ascending, then EmployeeID ascending.\n\nCheck: If every employee connects to a root, every employee should appear exactly once.\n\n\nQuestion 4: Find a manager’s entire team\nUse your initial inspection query to choose an employee who has at least one direct report. State the chosen employee’s name and ID in your response.\nCreate a recursive CTE named manager_team that:\n\nStarts with the chosen manager at depth 0.\nFinds all direct and indirect reports.\nBuilds a management_path beginning with the chosen manager’s name and appending each employee’s name.\n\nIn the final output, exclude the starting manager. Return EmployeeID, employee_name, depth, and management_path. Sort by depth ascending, then EmployeeID ascending."
+  },
+  {
+    "objectID": "a/7.html",
+    "href": "a/7.html",
+    "title": "ICA 7",
     "section": "",
     "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
   },
   {
-    "objectID": "a/4.html#files-and-setup",
-    "href": "a/4.html#files-and-setup",
-    "title": "ICA 4",
+    "objectID": "a/7.html#files-and-setup",
+    "href": "a/7.html#files-and-setup",
+    "title": "ICA 7",
     "section": "",
     "text": "Download sakila_master.db\nOpen the database in DB Browser for SQLite"
   },
   {
-    "objectID": "a/4.html#selected-sakila-relationships",
-    "href": "a/4.html#selected-sakila-relationships",
-    "title": "ICA 4",
-    "section": "Selected Sakila relationships",
-    "text": "Selected Sakila relationships\n\n\n\n\n\n\n\n\nParent table\nChild table\nJoin condition\n\n\n\n\nlanguage\nfilm\nlanguage.language_id = film.language_id\n\n\nfilm\ninventory\nfilm.film_id = inventory.film_id\n\n\ncustomer\nrental\ncustomer.customer_id = rental.customer_id\n\n\ninventory\nrental\ninventory.inventory_id = rental.inventory_id\n\n\nrental\npayment\nrental.rental_id = payment.rental_id\n\n\nactor\nfilm_actor\nactor.actor_id = film_actor.actor_id\n\n\nfilm\nfilm_actor\nfilm.film_id = film_actor.film_id\n\n\nfilm\nfilm_category\nfilm.film_id = film_category.film_id\n\n\ncategory\nfilm_category\ncategory.category_id = film_category.category_id\n\n\naddress\ncustomer\naddress.address_id = customer.address_id\n\n\ncity\naddress\ncity.city_id = address.city_id\n\n\ncountry\ncity\ncountry.country_id = city.country_id"
+    "objectID": "a/7.html#exercise-1",
+    "href": "a/7.html#exercise-1",
+    "title": "ICA 7",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nGive me a consistent customer directory that I can use for correspondence.\nUsing customer, return these columns for customers:\n\n\n\n\n\n\n\nOutput column\nRequirement\n\n\n\n\ncustomer_id\nOriginal identifier\n\n\ncustomer_name\nTrim each name and join first and last names with one space\n\n\nemail_clean\nTrim the email and convert it to lowercase\n\n\nmailing_label\nTrimmed uppercase last name, a comma and space, then trimmed uppercase first name\n\n\n\nSort by customer_id. Return all matching customers."
   },
   {
-    "objectID": "a/4.html#part-a-inner-joins",
-    "href": "a/4.html#part-a-inner-joins",
-    "title": "ICA 4",
-    "section": "Part A: Inner Joins",
-    "text": "Part A: Inner Joins\n\nQuestion 1: Films and languages\nDisplay each film’s title and the name of its language. Sort the results alphabetically by film title.\nUse the film and language tables.\n\n\nQuestion 2: Customers and addresses\nDisplay each customer’s first name, last name, email address, street address, and postal code.\nUse the customer and address tables.\n\n\nQuestion 3: Films and categories\nDisplay each film title and its category name. Sort the results first by category name and then by film title.\nUse the film, film_category, and category tables.\n\n\nQuestion 4: Films and actors\nDisplay every film title along with the first and last name of each actor appearing in the film. Sort the results by film title and actor last name.\nUse the film, film_actor, and actor tables."
+    "objectID": "a/7.html#exercise-2",
+    "href": "a/7.html#exercise-2",
+    "title": "ICA 7",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nGive me a table that contains each customers address:\n\n\n\n\n\n\n\nOutput column\nRequirement\n\n\n\n\ncustomer_id\nOriginal identifier\n\n\ncustomer_name\nTrim each name and join first and last names with one space\n\n\nmailing_address\nTrim the address and incoporate the address, city, country and postal_code.\n\n\n\nEliminate any rows having a null mailing address. Use tables customer, address, city, and country."
   },
   {
-    "objectID": "a/4.html#part-b-left-joins",
-    "href": "a/4.html#part-b-left-joins",
-    "title": "ICA 4",
-    "section": "Part B: Left Joins",
-    "text": "Part B: Left Joins\n\nQuestion 5: Films and inventory records\nDisplay every film title and its inventory ID. Include films that do not have an inventory record.\nUse the film and inventory tables.\n\n\nQuestion 6: Number of inventory copies\nDisplay every film’s ID, title, and number of inventory copies. Include films with zero inventory copies. Sort the films from the largest number of copies to the smallest.\nUse the film and inventory tables.\n\n\nQuestion 7: Films without inventory\nModify the previous query to display only films that have no inventory records.\nHint: After the left join, test a column from inventory for NULL."
+    "objectID": "a/7.html#exercise-3",
+    "href": "a/7.html#exercise-3",
+    "title": "ICA 7",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nFind films whose plot descriptions mention the word database, and create a short catalog preview.\nUsing film:\n\nKeep films whose description contains database anywhere. Apply lower() to the description before matching.\nReturn film_id, the original title, title_length (the number of characters in the title), and description.\nSort by title_length descending, then film_id ascending."
   },
   {
-    "objectID": "a/4.html#part-c-right-joins",
-    "href": "a/4.html#part-c-right-joins",
-    "title": "ICA 4",
-    "section": "Part C: Right Joins",
-    "text": "Part C: Right Joins\n\nQuestion 8: Preserve all films\nBegin with inventory and use a RIGHT JOIN to display every film and any corresponding inventory records. Films without inventory must remain in the result.\nDisplay the film ID, film title, inventory ID, and store ID.\nUse film and inventory tables."
+    "objectID": "a/7.html#exercise-4",
+    "href": "a/7.html#exercise-4",
+    "title": "ICA 7",
+    "section": "Exercise 4",
+    "text": "Exercise 4\nSeparate each customer’s email into its username and domain.\nUsing customer, first lowercase and trim the email. Return:\n\n\n\nOutput column\nRequirement\n\n\n\n\ncustomer_id\nOriginal identifier\n\n\nemail_clean\nCleaned email\n\n\nemail_username\nEverything before the first @\n\n\nemail_domain\nEverything after the first @"
   },
   {
-    "objectID": "a/4.html#part-4-full-join",
-    "href": "a/4.html#part-4-full-join",
-    "title": "ICA 4",
-    "section": "Part 4: Full Join",
-    "text": "Part 4: Full Join\n\nQuestion 9: Retain all languages and films\nUse a FULL OUTER JOIN to display all languages and all films, regardless of whether a matching language-film relationship exists.\nDisplay the language ID, language name, film ID, and film title.\nUse language and film tables.\n\n\nQuestion 10: Find unmatched languages or films\nModify the query from Question 9 to retain only unmatched records: languages without films or films without a matching language."
-  },
-  {
-    "objectID": "a/4.html#part-5-multi-table-join",
-    "href": "a/4.html#part-5-multi-table-join",
-    "title": "ICA 4",
-    "section": "Part 5: Multi-table Join",
-    "text": "Part 5: Multi-table Join\n\nQuestion 11: Customer rental history\nDisplay the customer’s first and last name, film title, rental date, and return date for every rental.\nUse the customer, rental, inventory, and film tables."
-  },
-  {
-    "objectID": "a/6.html",
-    "href": "a/6.html",
-    "title": "ICA 6",
-    "section": "",
-    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
-  },
-  {
-    "objectID": "a/6.html#database-setup-and-reference",
-    "href": "a/6.html#database-setup-and-reference",
-    "title": "ICA 6",
-    "section": "",
-    "text": "Download northwind.db using the Download here link in the Northwind SQLite repository."
-  },
-  {
-    "objectID": "a/6.html#tables-and-columns-used",
-    "href": "a/6.html#tables-and-columns-used",
-    "title": "ICA 6",
-    "section": "Tables and columns used",
-    "text": "Tables and columns used\n\n\n\n\n\n\n\n\nTable\nWhat one row represents\nRelevant columns\n\n\n\n\nProducts\nOne product\nProductID: identifier; ProductName: name; CategoryID: category; UnitPrice: catalog price\n\n\nCategories\nOne product category\nCategoryID: identifier; CategoryName: category label\n\n\nOrders\nOne customer order\nOrderID: identifier; CustomerID: customer code; OrderDate: order date/time; Freight: order shipping charge\n\n\n\"Order Details\"\nOne product line within an order\nOrderID, ProductID: identify the line; UnitPrice: price on that order; Quantity: units ordered; Discount: fractional discount\n\n\n\nRelationships:\nProducts.CategoryID joins to Categories.CategoryID\nOrders.OrderID joins to \"Order Details\".OrderID.\nRevenue definition: For this assignment, revenue is merchandise sales after discounts, excluding freight and taxes:\nUnitPrice * Quantity * (1 - Discount)\nA discount of 0.10 means 10%. Retain precision during calculations and round monetary output to two decimal places."
-  },
-  {
-    "objectID": "a/6.html#problem-1-compare-products-within-categories",
-    "href": "a/6.html#problem-1-compare-products-within-categories",
-    "title": "ICA 6",
-    "section": "Problem 1: Compare products within categories",
-    "text": "Problem 1: Compare products within categories\nHow does each product’s catalog price compare with the average price in its category?\n\nJoin Products to Categories and retain one row per eligible product.\nReturn ProductID, ProductName, CategoryID, CategoryName, and UnitPrice.\nAdd category_avg_price using a window average partitioned by category.\nAdd price_difference: product price minus its category’s average price. Round both calculated columns to two decimals.\nOrder results by CategoryID, then ProductID."
-  },
-  {
-    "objectID": "a/6.html#problem-2-rank-products-and-investigate-ties",
-    "href": "a/6.html#problem-2-rank-products-and-investigate-ties",
-    "title": "ICA 6",
-    "section": "Problem 2: Rank products and investigate ties",
-    "text": "Problem 2: Rank products and investigate ties\nWhich products are the most expensive within each category?\n\nPart A: Compare rankings\nReturn ProductID, ProductName, CategoryID, and UnitPrice, plus:\n\nprice_row_number: ROW_NUMBER() ordered by price descending, then ProductID ascending, within category.\nprice_rank: RANK() ordered by price descending within category.\nprice_dense_rank: DENSE_RANK() ordered by price descending within category.\n\nOrder by CategoryID, descending UnitPrice, then ProductID.\n\n\nPart B: Select leading price levels\nPut the ranked result in a CTE. Return products in the two highest distinct price levels per category, keeping every tie. Display the three ranking columns too."
-  },
-  {
-    "objectID": "a/6.html#problem-3-compare-orders-with-lag",
-    "href": "a/6.html#problem-3-compare-orders-with-lag",
-    "title": "ICA 6",
-    "section": "Problem 3: Compare orders with LAG",
-    "text": "Problem 3: Compare orders with LAG\nHow does each order’s freight charge compare with the preceding eligible order from the same customer?\n\nUse all eligible orders, excluding missing freight charges.\nReturn CustomerID, OrderID, OrderDate, and Freight.\nAdd previous_freight using LAG(Freight) within each customer, ordered by OrderDate, OrderID.\nAdd freight_change: current freight minus previous freight, rounded to two decimals. Use a CTE to reuse previous_freight.\nOrder by CustomerID, OrderDate, then OrderID."
-  },
-  {
-    "objectID": "a/6.html#problem-4-find-the-next-order-with-lead",
-    "href": "a/6.html#problem-4-find-the-next-order-with-lead",
-    "title": "ICA 6",
-    "section": "Problem 4: Find the next order with LEAD",
-    "text": "Problem 4: Find the next order with LEAD\nHow long does each customer wait until their next order?\n\nReturn CustomerID, OrderID, and OrderDate for all eligible orders.\nAdd next_order_date from the next order for the same customer, ordered by OrderDate, OrderID.\nIn an outer query, calculate days_until_next, rounded to two decimals.\nKeep each customer’s final order. Order by CustomerID, OrderDate, then OrderID.\n\nSQLite date helper: JULIANDAY(later_date) - JULIANDAY(earlier_date) gives elapsed days, potentially including fractions."
-  },
-  {
-    "objectID": "a/6.html#probelm-5-track-revenue-through-time",
-    "href": "a/6.html#probelm-5-track-revenue-through-time",
-    "title": "ICA 6",
-    "section": "Probelm 5: Track revenue through time",
-    "text": "Probelm 5: Track revenue through time\nHow are cumulative sales and recent daily sales changing?\nUse UnitPrice from \"Order Details\" for historical sales, rather than the catalog price in Products. Use this supplied CTE to obtain one row per observed order date. Replace the final SELECT with your window calculations.\nWITH daily_sales AS (\n    SELECT DATE(o.OrderDate) AS order_day,\n           SUM(d.UnitPrice * d.Quantity * (1.0 - d.Discount))\n               AS daily_revenue\n    FROM Orders AS o\n    JOIN \"Order Details\" AS d ON o.OrderID = d.OrderID\n    WHERE o.OrderDate IS NOT NULL\n    GROUP BY DATE(o.OrderDate)\n)\n\nReturn order_day and daily_revenue.\nAdd running_revenue using SUM() from the first daily row through the current row. Write the frame explicitly.\nAdd moving_avg_3_rows using AVG() over the current row and up to two preceding rows.\nRound all three monetary columns to two decimals. Display dates ascending."
+    "objectID": "a/7.html#exercise-5",
+    "href": "a/7.html#exercise-5",
+    "title": "ICA 7",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nWhich completed rentals lasted the longest?\nUsing all dates in rental:\n\nKeep only rows with a non-NULL return_date.\nReturn rental_id, customer_id, rental_date, return_date, and elapsed_days.\nCalculate elapsed days as return timestamp minus rental timestamp, preserving fractional days. Display elapsed_days rounded to two decimal places.\nSort by the unrounded duration descending, then rental_id ascending. Return the 10 longest completed rentals."
   },
   {
     "objectID": "assignments.html",
     "href": "assignments.html",
     "title": "Assignments",
     "section": "",
-    "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\n\n\nICA 4\n\n\n\n\n\n\n\n\n\n\nICA 5\n\n\n\n\n\n\n\n\n\n\nICA 6\n\n\n\n\n\n\n\n\n\n\nICA 7\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\n\n\nICA 4\n\n\n\n\n\n\n\n\n\n\nICA 5\n\n\n\n\n\n\n\n\n\n\nICA 6\n\n\n\n\n\n\n\n\n\n\nICA 7\n\n\n\n\n\n\n\n\n\n\nICA 7\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures.html",
