@@ -1570,35 +1570,35 @@
   {
     "objectID": "a/8.html",
     "href": "a/8.html",
-    "title": "ICA 7",
+    "title": "ICA 8",
     "section": "",
     "text": "Use the Northwind database to complete the assignment."
   },
   {
     "objectID": "a/8.html#files",
     "href": "a/8.html#files",
-    "title": "ICA 7",
+    "title": "ICA 8",
     "section": "",
     "text": "Use the Northwind database to complete the assignment."
   },
   {
     "objectID": "a/8.html#question-1-inventory-action-report",
     "href": "a/8.html#question-1-inventory-action-report",
-    "title": "ICA 7",
+    "title": "ICA 8",
     "section": "Question 1: Inventory action report",
     "text": "Question 1: Inventory action report\nThe inventory team needs an action label for every product. Use Products and a searched CASE expression to apply these rules in the stated priority order:\n\n\n\n\n\n\n\n\nPriority\nCondition\ninventory_action\n\n\n\n\n1\nThe product is discontinued\nDiscontinued\n\n\n2\nUnitsInStock equals 0\nOut of stock\n\n\n3\nUnitsInStock is greater than 0 and less than or equal to ReorderLevel\nReorder\n\n\n4\nAll remaining products\nStock sufficient\n\n\n\nRequirements\n\nReturn ProductID, ProductName, UnitsInStock, ReorderLevel, Discontinued, and inventory_action for every product.\nSort by inventory_action in the following order: Out of stock, Reorder, Stock sufficient, Discontinued. Within each action, sort by ProductID ascending."
   },
   {
     "objectID": "a/8.html#question-2",
     "href": "a/8.html#question-2",
-    "title": "ICA 7",
+    "title": "ICA 8",
     "section": "Question 2",
     "text": "Question 2\nThe marketing team wants readable customer labels. Use Customers to create the following three columns.\n\n\n\n\n\n\n\nNew column\nRules\n\n\n\n\nmarket\nUSA → US market; Canada → Canadian market; all other values, including NULL, → Other market\n\n\nregion_status\nNULL → Missing; an empty string or a string containing only ordinary spaces → Blank; otherwise → Present\n\n\nregion_display\nMissing or blank region → Not provided; otherwise → the trimmed region\n\n\n\nRequirements\n\nReturn CustomerID, CompanyName, Country, Region, market, region_status, and region_display for every customer.\nSort US market customers first, Canadian market customers second, and Other market customers last. Within each market, sort by CompanyName ascending."
   },
   {
     "objectID": "a/8.html#question-3",
     "href": "a/8.html#question-3",
-    "title": "ICA 7",
+    "title": "ICA 8",
     "section": "Question 3",
     "text": "Question 3\nThe shipping team considers an order high freight when Freight &gt;= 100. Using Orders, create one summary row for each observed ShipCountry, including a group for missing countries if one exists.\nRequired output\n\n\n\n\n\n\n\nColumn\nDefinition\n\n\n\n\nShipCountry\nDestination country\n\n\norder_count\nNumber of all orders in the country\n\n\nhigh_freight_count\nNumber of orders with Freight &gt;= 100\n\n\npct_high_freight\nHigh-freight orders as a percentage of all orders in the country; round to one decimal place\n\n\navg_high_freight\nMean freight among only high-freight orders; round to two decimal places; keep NULL if none qualify\n\n\nshipping_profile\nCategory assigned from the country’s high-freight percentage, using the rules below\n\n\n\n\n\n\nUnrounded high-freight percentage\nshipping_profile\n\n\n\n\nAt least 80%\nHigh share\n\n\nAt least 75% but less than 80%\nModerate share\n\n\nLess than 75%\nLow share\n\n\n\nRequirements\n\nSort by High share, Moderate share, Low share using a CASE sort key, then by the unrounded percentage descending, then ShipCountry ascending."
   },
@@ -1866,7 +1866,7 @@
     "href": "assignments.html",
     "title": "Assignments",
     "section": "",
-    "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\n\n\nICA 4\n\n\n\n\n\n\n\n\n\n\nICA 5\n\n\n\n\n\n\n\n\n\n\nICA 6\n\n\n\n\n\n\n\n\n\n\nICA 7\n\n\n\n\n\n\n\n\n\n\nICA 7\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Creating a Database\n\n\n\n\n\n\n\n\n\n\nICA 3\n\n\n\n\n\n\n\n\n\n\nICA 4\n\n\n\n\n\n\n\n\n\n\nICA 5\n\n\n\n\n\n\n\n\n\n\nICA 6\n\n\n\n\n\n\n\n\n\n\nICA 7\n\n\n\n\n\n\n\n\n\n\nICA 8\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "lectures.html",
