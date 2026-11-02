@@ -186,7 +186,7 @@ The `SUM` combines the results into one value.
 
 ::: {.fragment}
 
-The `CASE WHEN` will either `0` numerical data or `NULL` the categorical data that will not combine into one value.
+The `COUNT` may be used if you are interested in counting data points.
 
 :::
 
@@ -389,9 +389,6 @@ Unpivot `UnitsInStock`, `UnitsOnOrder`, and `ReorderLevel`.
 
 1. Return `ProductID`, `ProductName`, `measure`, and `value`.
 2. Label the measures `In stock`, `On order`, and `Reorder level`.
-3. Keep every product and preserve zeros and NULLs.
-4. Predict the row count as a multiple of the product count.
-5. Return a second result containing only positive `On order` values.
 
 
 <!-- ## What a round trip can recover

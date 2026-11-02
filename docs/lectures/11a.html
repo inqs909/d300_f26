@@ -511,7 +511,7 @@ LIMIT 10; -- <3>
 <h2>PIVOT: SUM</h2>
 <p>The <code>SUM</code> combines the results into one value.</p>
 <div class="fragment">
-<p>The <code>CASE WHEN</code> will either <code>0</code> numerical data or <code>NULL</code> the categorical data that will not combine into one value.</p>
+<p>The <code>COUNT</code> may be used if you are interested in counting data points.</p>
 </div>
 </section>
 <section id="chinook-the-pivot" class="slide level2">
@@ -824,9 +824,6 @@ ORDER BY ProductID;
 <ol type="1">
 <li>Return <code>ProductID</code>, <code>ProductName</code>, <code>measure</code>, and <code>value</code>.</li>
 <li>Label the measures <code>In stock</code>, <code>On order</code>, and <code>Reorder level</code>.</li>
-<li>Keep every product and preserve zeros and NULLs.</li>
-<li>Predict the row count as a multiple of the product count.</li>
-<li>Return a second result containing only positive <code>On order</code> values.</li>
 </ol>
 <!-- ## What a round trip can recover
 
