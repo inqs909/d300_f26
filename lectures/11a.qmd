@@ -227,13 +227,11 @@ GROUP BY BillingCountry, sales_year -- <3>
 
 ## Activity: Chinook invoice counts
 
-Build a pivot with one row per invoice year.
+Build a pivot with one row per invoice year per country.
 
 1. Create columns `Apr_invoices`, `May_invoices`, and `Jun_invoices`.
 2. Count invoices, rather than summing `Total`.
-3. Add `Q2_invoices`, covering April through June.
-4. Sort by year and check that the three month columns add to `Q2_invoices`.
-5. Explain why grouping only by month would answer a different question.
+
 
 # WIDE TO LONG
 
@@ -326,7 +324,7 @@ Preserve `ProductID`. Different products can share a name.
 Source: https://sqlite.org/lang_select.html, compound SELECT statements.
 :::
 
-## Northwind: a reusable long inventory view
+<!-- ## Northwind: a reusable long inventory view
 
 **Database: Northwind**
 
@@ -340,7 +338,7 @@ UNION ALL
 SELECT ProductID, ProductName,
        'On order' AS inventory_status, UnitsOnOrder AS units
 FROM Products; -- <2>
-```
+``` -->
 
 
 <!-- ## Northwind: filtering the long result
@@ -474,40 +472,32 @@ Use the order-line price. `Products.UnitPrice` describes the catalog price and m
 # Activity solutions
 
 
-
 ## Solution 1: Chinook invoice counts
 
 **Database: Chinook**
 
 ```sql
-SELECT strftime('%Y', InvoiceDate) AS sales_year, -- <1>
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '04'
-                THEN 1 ELSE 0 END) AS Apr_invoices,
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '05'
-                THEN 1 ELSE 0 END) AS May_invoices,
-       SUM(CASE WHEN strftime('%m', InvoiceDate) = '06'
-                THEN 1 ELSE 0 END) AS Jun_invoices, -- <2>
-       SUM(CASE WHEN strftime('%m', InvoiceDate)
-                     IN ('04', '05', '06')
-                THEN 1 ELSE 0 END) AS Q2_invoices -- <3>
+SELECT BillingCountry,
+       strftime('%Y', InvoiceDate) AS sales_year, 
+       COUNT(CASE WHEN strftime('%m', InvoiceDate) = '04'
+             THEN 1 ELSE NULL END) AS Mar, 
+       COUNT(CASE WHEN strftime('%m', InvoiceDate) = '05'
+             THEN 1 ELSE NULL END) AS May,
+       COUNT(CASE WHEN strftime('%m', InvoiceDate) = '06'
+             THEN 1 ELSE NULL END) AS Jun
 FROM Invoice
-GROUP BY sales_year
-ORDER BY sales_year;
+GROUP BY BillingCountry, sales_year 
+ORDER BY BillingCountry, sales_year;
 ```
 
-1. One result row represents one invoice year.
-2. Each matching invoice contributes one to its month.
-3. The Q2 condition covers exactly the three displayed months.
 
 ## Solution 2: a three-measure unpivot
 
 **Database: Northwind**
 
 ```sql
-DROP VIEW IF EXISTS temp.lecture_product_measures;
-CREATE TEMP VIEW lecture_product_measures AS
 SELECT ProductID, ProductName,
-       'In stock' AS measure, UnitsInStock AS value -- <1>
+       'In stock' AS measure, UnitsInStock AS value
 FROM Products
 UNION ALL
 SELECT ProductID, ProductName,
@@ -515,7 +505,8 @@ SELECT ProductID, ProductName,
 FROM Products
 UNION ALL
 SELECT ProductID, ProductName,
-       'Reorder level', ReorderLevel -- <2>
-FROM Products;
+       'Reorder level', ReorderLevel
+FROM Products
+ORDER BY ProductName, measure;
 ```
 
