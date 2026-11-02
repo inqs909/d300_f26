@@ -10,6 +10,5 @@ editor: source
 
 | Lecture | Slides                   |
 |---------|--------------------------|
-| 1       | [Slides]() |
-
+| 1       | [Slides](../lectures/11a) |
 
