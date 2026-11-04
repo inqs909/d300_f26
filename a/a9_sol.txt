@@ -1,0 +1,22 @@
+## 1
+with aa as (
+	select *
+	from film
+	left join film_category on film.film_id = film_category.film_id
+),
+bb as (
+	select *
+	from aa
+	left join category on aa.category_id = category.category_id
+)
+SELECT  name as category_name,
+	count(case when rating = 'G' then 1 else NULL end) as g_count,
+	count(case when rating = 'PG' then 1 else NULL end) as pg_count,
+	count(case when rating = 'PG-13' then 1 else NULL end) as pg13_count,
+	count(case when rating = 'R' then 1 else NULL end) as r_count,
+	count(case when rating = 'NC-17' then 1 else NULL end) as nc17_count,
+	count(*) as total_films
+
+from bb
+GROUP by name
+order by name;
