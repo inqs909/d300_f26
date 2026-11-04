@@ -1593,21 +1593,21 @@
     "href": "a/9.html#question-2",
     "title": "ICA 9",
     "section": "Question 2",
-    "text": "Question 2\nThe stores want a side-by-side comparison of monthly rental activity.\nWrite a query using rental and inventory that meets these requirements:\n\nCreate rental_month in YYYY-MM format.\nReturn one row for each year-month that contains rentals. Use all dates in the database; you do not need to generate months without rentals.\nCreate store_1_rentals and store_2_rentals, counting transactions at each store.\nAdd total_rentals for the two stores combined.\nDisplay 0 when a store has no rentals in a represented month.\nSort chronologically by rental_month.\n\nRequired output columns, in order\n\n\n\nrental_month\nstore_1_rentals\nstore_2_rentals\ntotal_rentals\n\n\n\n\n\nCount rental transactions, including rentals whose return_date is NULL. Repeated rentals of the same inventory item are separate transactions."
+    "text": "Question 2\nThe stores want a side-by-side comparison of monthly rental activity.\nWrite a query using rental that meets these requirements:\n\nReturn one row for each month that contains rentals. Use all dates in the database; you do not need to generate months without rentals.\nCreate store_1_rentals and store_2_rentals, counting transactions for each store.\n\nUse staff_id to indicate which store.\n\nAdd total_rentals for the two store combined.\nDisplay 0 when a store has no rentals in a represented month.\nSort chronologically by rental month."
   },
   {
     "objectID": "a/9.html#question-3",
     "href": "a/9.html#question-3",
     "title": "ICA 9",
     "section": "Question 3",
-    "text": "Question 3\nAn analyst needs the Question 1 summary in long format.\nUse the completed pivot query from Question 1 as a view named category_rating_counts.\n\nReturn one row per category and rating.\nUse the original rating labels: G, PG, PG-13, R, and NC-17.\nName the count column film_count.\nKeep rows where film_count is 0.\nExclude total_films from the unpivot operation.\nSort alphabetically by category_name, then alphabetically by rating."
+    "text": "Question 3\nAn analyst needs the Question 1 summary in long format.\nUse the completed pivot query from Question 1 as a view.\n\nReturn one row per category and rating.\nUse the original rating labels: G, PG, PG-13, R, and NC-17.\nName the count column film_count.\nKeep rows where film_count is 0.\nExclude total_films from the unpivot operation.\nSort alphabetically by category_name, then alphabetically by rating."
   },
   {
     "objectID": "a/9.html#question-4",
     "href": "a/9.html#question-4",
     "title": "ICA 9",
     "section": "Question 4",
-    "text": "Question 4\nThe reporting system needs one row per month and store.\nUse the completed pivot query from Question 2 as a CTE or view named monthly_store_rentals. Unpivot the two store-count columns using UNION ALL.\n\nReturn rental_month, an integer store_id (1 or 2), and rental_count.\nKeep rows where rental_count is 0.\nExclude total_rentals from the unpivot operation.\nSort by rental_month, then store_id.\n\nRequired output columns, in order\n\n\n\nrental_month\nstore_id\nrental_count"
+    "text": "Question 4\nThe reporting system needs one row per month and store.\nUse the completed pivot query from Question 2 as view. Unpivot the two store-count columns using UNION ALL.\n\nReturn rental_month, an integer store_id (1 or 2), and rental_count.\nKeep rows where rental_count is 0.\nExclude total_rentals from the unpivot operation.\nSort by rental_month, then store_id."
   },
   {
     "objectID": "a/7.html",

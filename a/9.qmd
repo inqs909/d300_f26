@@ -29,28 +29,21 @@ You will need to use the `film`, `category`, and `film_category` tables.
 
 The stores want a side-by-side comparison of monthly rental activity.
 
-Write a query using `rental` and `inventory` that meets these requirements:
+Write a query using `rental` that meets these requirements:
 
-1. Create `rental_month` in `YYYY-MM` format.
-2. Return one row for each year-month that contains rentals. Use all dates in the database; you do not need to generate months without rentals.
-3. Create `store_1_rentals` and `store_2_rentals`, counting transactions at each store.
-4. Add `total_rentals` for the two stores combined.
-5. Display 0 when a store has no rentals in a represented month.
-6. Sort chronologically by `rental_month`.
-
-**Required output columns, in order**
-
-| rental_month | store_1_rentals | store_2_rentals | total_rentals |
-|---|---|---|---|
-
-Count rental transactions, including rentals whose `return_date` is `NULL`. Repeated rentals of the same inventory item are separate transactions.
+1. Return one row for each month that contains rentals. Use all dates in the database; you do not need to generate months without rentals.
+2. Create `store_1_rentals` and `store_2_rentals`, counting transactions for each store.
+    1. Use `staff_id` to indicate which store.
+3. Add `total_rentals` for the two store combined.
+4. Display 0 when a store has no rentals in a represented month.
+5. Sort chronologically by rental month.
 
 
 ## Question 3
 
 An analyst needs the Question 1 summary in long format.
 
-Use the completed pivot query from Question 1 as a view named `category_rating_counts`. 
+Use the completed pivot query from Question 1 as a view. 
 
 1. Return one row per category and rating.
 2. Use the original rating labels: `G`, `PG`, `PG-13`, `R`, and `NC-17`.
@@ -64,15 +57,11 @@ Use the completed pivot query from Question 1 as a view named `category_rating_c
 
 The reporting system needs one row per month and store.
 
-Use the completed pivot query from Question 2 as a CTE or view named `monthly_store_rentals`. Unpivot the two store-count columns using `UNION ALL`.
+Use the completed pivot query from Question 2 as view. Unpivot the two store-count columns using `UNION ALL`.
 
 1. Return `rental_month`, an integer `store_id` (1 or 2), and `rental_count`.
 2. Keep rows where `rental_count` is 0.
 3. Exclude `total_rentals` from the unpivot operation.
 4. Sort by `rental_month`, then `store_id`.
 
-**Required output columns, in order**
-
-| rental_month | store_id | rental_count |
-|---|---|---|
 

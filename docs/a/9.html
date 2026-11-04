@@ -176,34 +176,22 @@ ul.task-list li input[type="checkbox"] {
 <section id="question-2" class="level2">
 <h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
 <p>The stores want a side-by-side comparison of monthly rental activity.</p>
-<p>Write a query using <code>rental</code> and <code>inventory</code> that meets these requirements:</p>
+<p>Write a query using <code>rental</code> that meets these requirements:</p>
 <ol type="1">
-<li>Create <code>rental_month</code> in <code>YYYY-MM</code> format.</li>
-<li>Return one row for each year-month that contains rentals. Use all dates in the database; you do not need to generate months without rentals.</li>
-<li>Create <code>store_1_rentals</code> and <code>store_2_rentals</code>, counting transactions at each store.</li>
-<li>Add <code>total_rentals</code> for the two stores combined.</li>
+<li>Return one row for each month that contains rentals. Use all dates in the database; you do not need to generate months without rentals.</li>
+<li>Create <code>store_1_rentals</code> and <code>store_2_rentals</code>, counting transactions for each store.
+<ol type="1">
+<li>Use <code>staff_id</code> to indicate which store.</li>
+</ol></li>
+<li>Add <code>total_rentals</code> for the two store combined.</li>
 <li>Display 0 when a store has no rentals in a represented month.</li>
-<li>Sort chronologically by <code>rental_month</code>.</li>
+<li>Sort chronologically by rental month.</li>
 </ol>
-<p><strong>Required output columns, in order</strong></p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>rental_month</th>
-<th>store_1_rentals</th>
-<th>store_2_rentals</th>
-<th>total_rentals</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-<p>Count rental transactions, including rentals whose <code>return_date</code> is <code>NULL</code>. Repeated rentals of the same inventory item are separate transactions.</p>
 </section>
 <section id="question-3" class="level2">
 <h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
 <p>An analyst needs the Question 1 summary in long format.</p>
-<p>Use the completed pivot query from Question 1 as a view named <code>category_rating_counts</code>.</p>
+<p>Use the completed pivot query from Question 1 as a view.</p>
 <ol type="1">
 <li>Return one row per category and rating.</li>
 <li>Use the original rating labels: <code>G</code>, <code>PG</code>, <code>PG-13</code>, <code>R</code>, and <code>NC-17</code>.</li>
@@ -216,25 +204,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="question-4" class="level2">
 <h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
 <p>The reporting system needs one row per month and store.</p>
-<p>Use the completed pivot query from Question 2 as a CTE or view named <code>monthly_store_rentals</code>. Unpivot the two store-count columns using <code>UNION ALL</code>.</p>
+<p>Use the completed pivot query from Question 2 as view. Unpivot the two store-count columns using <code>UNION ALL</code>.</p>
 <ol type="1">
 <li>Return <code>rental_month</code>, an integer <code>store_id</code> (1 or 2), and <code>rental_count</code>.</li>
 <li>Keep rows where <code>rental_count</code> is 0.</li>
 <li>Exclude <code>total_rentals</code> from the unpivot operation.</li>
 <li>Sort by <code>rental_month</code>, then <code>store_id</code>.</li>
 </ol>
-<p><strong>Required output columns, in order</strong></p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>rental_month</th>
-<th>store_id</th>
-<th>rental_count</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
 
 
 </section>

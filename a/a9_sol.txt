@@ -20,3 +20,50 @@ SELECT  name as category_name,
 from bb
 GROUP by name
 order by name;
+
+## 2
+
+select 
+	strftime('%m', rental_date) as rental_month,
+	count(case when staff_id = 1 then 1 else NULL end) as store_1_rentals,
+	count(case when staff_id = 2 then 1 else NULL end) as store_2_rentals,
+	count(case when staff_id = 1 then 1 else 0 end) as total_rentals
+from rental
+group by  rental_month
+order by rental_month;
+
+## 3
+
+
+
+SELECT category_name, 
+       'G' AS rating, g_count AS total_count
+FROM p1
+UNION ALL
+SELECT category_name, 
+       'PG' AS rating, pg_count AS total_count
+FROM p1
+UNION ALL
+SELECT category_name, 
+       'PG-13' AS rating, pg13_count AS total_count
+FROM p1
+UNION ALL
+SELECT category_name, 
+       'R' AS rating, r_count AS total_count
+FROM p1
+UNION ALL
+SELECT category_name, 
+       'NC-17' AS rating, nc17_count AS total_count
+FROM p1
+ORDER BY category_name;
+
+## 4
+
+SELECT rental_month, 
+       'Store 1' AS Store, store_1_rentals AS rentals
+FROM p2
+UNION ALL
+SELECT rental_month, 
+       'Store 2' AS Store, store_2_rentals AS rentals
+FROM p2
+ORDER BY store, rental_month;
