@@ -1,0 +1,539 @@
+---
+title: "NoSQL Databases"
+format:
+  revealjs:
+    scrollable: true
+    navigation-mode: vertical
+    theme: [default, styles.scss]
+    controls-layout: edges
+    controls-tutorial: true
+    code-annotations: select
+    progress: true
+    slide-number: c/t
+    incremental: false 
+    
+revealjs-plugins:
+  - pointer
+  
+filters: 
+  - code-fullscreen
+  - reveal-auto-agenda
+
+editor: source
+
+order: 12
+draft: true
+---
+
+## Four common NoSQL Types
+
+**NoSQL** is an umbrella term for database models beyond the relational model.
+
+
+## NoSQL Types
+
+| Family | Main structure | Representative systems |
+|---|---|---|
+| Key-value | Key associated with a value | Redis, Memcached |
+| Document | Documents with fields and nesting | MongoDB, CouchDB |
+| Wide-column | Keyed rows, columns, and partitions | Cassandra, HBase |
+| Graph | Entities connected by relationships | Neo4j, Amazon Neptune |
+
+
+
+
+
+
+::: {.notes}
+NoSQL is often expanded informally as “not only SQL.” It is not a single language, implementation, or guarantee. We cover four common families, not every specialized database category.
+
+Use the standard name wide-column for the user's “column-wide” category. Redis has structures beyond simple strings. Cassandra exposes typed tables through CQL. Neptune also supports graph models different from Neo4j's property graphs. Product examples illustrate categories rather than asserting exclusive membership. No product installation or paid account is needed for the lecture.
+
+Sources: [Redis strings](https://redis.io/docs/latest/develop/data-types/strings/) · [MongoDB data modeling](https://www.mongodb.com/docs/manual/data-modeling/) · [Cassandra modeling](https://cassandra.apache.org/doc/stable/cassandra/developing/data-modeling/intro.html) · [Neo4j graph concepts](https://neo4j.com/docs/getting-started/appendix/graphdb-concepts/)
+:::
+
+# Key-Value
+
+## Key-Value
+
+The main purpose of Key-value databases is to store and retrieve data efficiently using a known identifier, called a key.
+
+
+## Key-value: lookup by identifier
+
+A **key-value store** associates a unique key with a value.
+
+| Key | Value |
+|---|---|
+| `session:s101` | `{"viewer_id":"u17","movie_id":"m4"}` |
+| `resume:u17:m4` | `1840` |
+| `views:m4` | `92` |
+
+Typical operations: store, retrieve, replace, delete.
+
+The basic access path begins with the **key**.
+
+## Examples
+
+| Application request | Known key | Value retrieved |
+|---|---|---|
+| Check a user's login session | `session:s101` | User ID and login status |
+| Resume a viewer's movie | `resume:u17:m4` | Saved position: 1,840 seconds |
+| Load a customer's shopping cart | `cart:u17` | Selected products and quantities |
+| Display cached movie details | `movie:m4` | Title, runtime, and description |
+| Check a movie's view count | `views:m4` | Total views: 93 |
+
+
+## Key-Value Databases
+
+| System | Main characteristics | Typical uses |
+|---|---|---|
+| **Redis** | In-memory store with persistence options and rich value types | Sessions, caching, counters, leaderboards. |
+| **Amazon DynamoDB** | Fully managed AWS database supporting key-value and document models | Shopping carts, user profiles, large application datasets. |
+
+
+
+## Redis: overview and uses
+
+**Redis** is an in-memory key-value data store that retrieves and updates data using unique keys. It supports strings, lists, sets, hashes, and other data structures.
+
+**Why is it used?**
+
+- **Fast access:** keeps working data in memory.
+- **Caching:** reduces repeated database queries and API requests.
+- **Session management:** stores temporary login and session information.
+
+
+## Redis commands and results
+
+```text
+SET session:s101 '{"viewer_id":"u17"}' EX 1800
+GET session:s101
+SET views:m4 92
+INCR views:m4
+GET views:m4
+DEL session:s101
+```
+
+- `EX 1800`: expire the session after 1,800 seconds.
+- `INCR` produces `93` in this sequence.
+- `DEL` removes the session immediately.
+
+
+
+
+# Document Databases
+
+
+## Document: a record with nested fields
+
+A **document** stores named fields, nested objects, and arrays.
+
+```json
+{
+  "_id": "m4",
+  "title": "Moon Harbor",
+  "genres": ["Drama", "Science Fiction"],
+  "details": {"runtime_min": 118, "year": 2024},
+  "captions": ["en", "es"]
+}
+```
+
+A **collection** groups related documents, such as `movies`.
+
+
+## Document Databases Uses
+
+**Why use this model?**
+
+- Retrieve related movie information together.
+- Allow different movies to have different optional attributes.
+- Search document fields, such as “Drama movies released after 2020.”
+
+
+::: {.fragment}
+
+Document Databases stores meta-information about particular items that can be grouped together, but have different needs.
+
+:::
+
+
+
+## Examples
+
+Document databases fit applications where related information forms a useful record and attributes can vary.
+
+| Application | Example document contents | Why this design fits |
+|---|---|---|
+| **Online store** | Product name, price, images, and nested specifications | A laptop has RAM and storage; a shirt has size and fabric |
+| **User profiles** | Name, contact details, interests, and notification preferences | Related settings can be retrieved together |
+| **Content management** | Article title, body, tags, and publication metadata | Articles can include different optional content |
+| **Movie catalog** | Title, genres, runtime, caption languages, and trailer details | Arrays and nested objects represent related metadata |
+
+
+## Document Databases
+
+| Database | Main characteristics |
+|---|---|
+| **MongoDB** | Stores BSON (Binary JSON) documents with nested fields and arrays. Supports flexible queries, indexes, and aggregation. ([MongoDB Docs][1]) |
+| **Google Cloud Firestore** | Managed document database with real-time updates and offline support for mobile and web applications. ([firebase.google.com][2]) |
+| **Couchbase** | Combines JSON document storage, key-value access, and SQL-like queries. ([Couchbase Docs][3]) |
+
+
+[1]: https://www.mongodb.com/docs/manual/?utm_source=chatgpt.com "What is MongoDB? An Overview of the Database - Database Manual"
+
+[2]: https://firebase.google.com/docs/firestore/index.html?utm_source=chatgpt.com "Firestore  |  Firebase"
+
+[3]: https://docs.couchbase.com/server/current/introduction/intro.html?utm_source=chatgpt.com "Couchbase Server"
+
+## MongoDB: overview and uses
+
+**MongoDB** is a document database that stores records as **BSON documents**, supporting JSON-like structures and additional data types.
+
+**How does it organize data?**
+
+- **Documents:** individual records containing fields, arrays, and nested objects.
+- **Collections:** groups of related documents, such as `movies`.
+- **Flexible schemas:** documents can have different optional attributes.
+
+
+## Movie Details 
+
+A movie page often displays:
+
+- Title and description
+- Release year and runtime
+- Genres
+- Available caption languages
+
+**MongoDB can keep these details together in one movie record.**
+
+::: {.notes}
+A record in MongoDB is called a document. Think of it as a movie’s information sheet. Keeping related details together can make building a movie page straightforward.
+:::
+
+
+## Different movies need different information
+
+Movies do not always have the same details.
+
+| Movie type | Additional information |
+|---|---|
+| Animated movie | Voice actors and animation technique |
+| Documentary | Subjects covered and narrator |
+| Concert movie | Performers and recording venue |
+
+**MongoDB lets each movie record include the information that applies to it.**
+
+
+::: {.notes}
+Explain that flexibility allows optional information. We should still use consistent names and formats for shared details, such as the release year.
+:::
+
+
+## Helping viewers find movies
+
+Viewers often know what they want without knowing a movie’s ID.
+
+MongoDB can search movie details to answer requests such as:
+
+- “Show me dramas released since 2020.”
+- “Find movies with Spanish captions.”
+- “Find movies shorter than 90 minutes.”
+- “Show me recent animated movies.”
+
+
+::: {.notes}
+Connect this to key-value lookups. Retrieving movie m4 uses a known identifier. Finding every movie with Spanish captions searches information inside many records. Appropriate indexes can help frequent searches.
+:::
+
+
+## Updating the catalog as it grows
+
+A streaming service regularly receives new information.
+
+| Change | Update to the movie record |
+|---|---|
+| Spanish captions become available | Add Spanish to the caption list |
+| A trailer becomes available | Add its link |
+| A description changes | Update the description |
+
+**MongoDB can update individual details without replacing the entire movie record.**
+
+::: {.notes}
+Flexibility helps the catalog evolve, but changes still need planning and validation. Separate reviews prevent a movie’s main record from growing every time someone posts a review.
+:::
+
+
+# Wide-Column
+
+## What is a wide-column database?
+
+A **wide-column database** stores information in keyed rows containing related columns.
+
+- A **key** identifies a row or a group of rows.
+- **Columns** hold named pieces of information.
+- The design organizes related information for the application's common requests.
+
+
+::: {.notes}
+Think of a key as a way to locate a useful group of information. Wide-column databases differ in their details. We will look at HBase's column families and Cassandra's partitions separately.
+:::
+
+
+
+## Wide-column Databases Uses
+
+They can fit applications that continually collect many related records.
+
+| Application | Information commonly retrieved together |
+|---|---|
+| Streaming service | One viewer's daily viewing history |
+| Sensor monitoring | One sensor's readings during a time period |
+| Website activity | One user's recent interactions |
+| Device monitoring | One device's daily status events |
+
+
+
+::: {.notes}
+Emphasize the recurring request: one viewer, sensor, user, or device over a defined period. The benefit comes from matching the organization to that request. Large data volume alone does not automatically make a wide-column database the best choice.
+:::
+
+## Common wide-column databases
+
+| Database | Brief overview |
+|---|---|
+| **Apache Cassandra** | Distributed database that groups related rows into partitions. Uses Cassandra Query Language (CQL). |
+| **Apache HBase** | Organizes sparse data into rows and column families. Commonly uses Hadoop’s distributed storage. |
+| **Google Cloud Bigtable** | Fully managed Google Cloud service for large datasets organized by row keys and column families. |
+| **ScyllaDB** | Distributed database supporting Cassandra-compatible CQL, with a focus on high throughput and low latency. |
+
+
+::: {.notes}
+These are representative systems, not a popularity ranking. Cassandra and ScyllaDB emphasize partition and clustering keys. HBase and Bigtable organize sparse data using row keys and column families.
+:::
+
+## Apache Cassandra
+
+**Apache Cassandra** is an open-source, distributed **wide-column database** designed to manage large amounts of data across multiple servers.
+
+
+## Cassanda: Organized Data
+
+
+- **Tables:** contain rows and named columns.
+- **Partition keys:** group related rows and determine their placement.
+- **Clustering columns:** order rows within a partition.
+- **Replication:** keeps copies of data on multiple servers.
+
+## Cassanda: Uses
+
+
+- Handles large volumes of incoming records.
+- Supports growth by distributing data across servers.
+- Fits predictable requests for event histories, logs, and sensor readings.
+
+
+::: {.notes}
+Cassandra uses Cassandra Query Language, or CQL. Its syntax resembles SQL, but its design centers on the queries the application needs. Key choices determine which reads are efficient. Replication and consistency settings affect how the database handles failures and concurrent updates.
+:::
+
+
+## Cassandra: real-world examples
+
+| Organization | Documented use | Why Cassandra fits |
+|---|---|---|
+| [**Netflix**](https://netflixtechblog.com/the-evolution-of-cassandra-data-movement-at-netflix-6e13329c80a1) | Storing viewing histories and supporting services such as recommendations | Handles growing records and frequent updates across a large streaming service |
+| [**Uber**](https://www.uber.com/us/en/blog/single-zone-failure-tolerance/?utm_source=chatgpt.com) | Supporting critical application workloads through an internal database service | Distributes data and replicas across locations to support availability |
+| [**Apple**](https://www.techrepublic.com/article/apples-secret-nosql-sauce-includes-a-hefty-dose-of-cassandra/) | Operating large Cassandra deployments for application data | Handles large datasets and high volumes of reads and writes |
+
+**Shared need:** serve large amounts of frequently accessed data across many servers.
+
+::: {.notes}
+Netflix has described Cassandra-based viewing-history storage and its use in recommendation services. Uber has documented its Cassandra service and work to tolerate the failure of a data-center zone. The Cassandra project's Apple case study describes large-scale deployments.
+
+These companies use multiple database technologies. Cassandra supports particular workloads within their broader systems.
+:::
+
+
+# Graph Databases
+
+## What is a graph database?
+
+A **graph database** stores information about things and how they connect.
+
+| Element | Meaning | Movie example |
+|---|---|---|
+| **Node** | A person, place, object, or other entity | A viewer, movie, or actor |
+| **Relationship** | A connection between nodes | A viewer likes a movie |
+| **Property** | A detail about a node or relationship | Movie title or a viewer’s rating |
+
+
+The database stores these connections explicitly so applications can follow them.
+
+::: {.notes}
+Explain that a graph means a network of connections, not a bar chart or scatterplot. Following connections through the network is called traversal. This example uses the property-graph model.
+:::
+
+---
+
+## Why are graph databases used?
+
+Graph databases are useful when **connections are central to the question**.
+
+| Application | Example question |
+|---|---|
+| **Movie recommendations** | What other movies do viewers with similar interests like? |
+| **Social networks** | Which friends do two people have in common? |
+| **Fraud investigation** | Which accounts share devices or contact details? |
+| **Transportation** | Which routes connect these locations? |
+
+**Benefit:** connected data can be represented naturally, and questions involving several connections can be easier to express.
+
+::: {.notes}
+For recommendations, follow a viewer’s interests to another viewer and then to additional movies. Relational databases can also represent these connections. Graph databases provide a model centered on relationships, while performance depends on the data, indexes, and query design.
+:::
+
+## Common graph database systems
+
+| Database | Brief overview |
+|---|---|
+| **Neo4j** | Stores nodes, relationships, and properties. Uses Cypher to find connection patterns. |
+| **Amazon Neptune** | Fully managed AWS service supporting both property graphs and RDF graphs. |
+| **TigerGraph** | Distributed graph database emphasizing parallel processing and graph analytics. Uses GSQL. |
+| **JanusGraph** | Open-source, distributed graph database for large networks. Uses Gremlin for graph queries. |
+
+
+::: {.notes}
+These are representative graph database systems. Property graphs describe entities and connections with attached properties. RDF graphs represent facts as subject–predicate–object statements. Products differ in their supported models, query languages, and deployment options.
+:::
+
+
+## Neo4j: Overview
+
+**Neo4j** is a graph database that stores entities and the relationships connecting them.
+
+**How does it organize data?**
+
+- **Nodes:** entities, such as viewers, movies, and actors.
+- **Relationships:** connections, such as “likes” or “acted in.”
+- **Properties:** details, such as a movie’s title or release year.
+
+## Neo4j: Use
+
+**Why is it used?**
+
+- Represents connected information naturally.
+- Finds patterns involving several relationships.
+- Supports recommendations, fraud investigation, and knowledge graphs.
+
+**Query language:** Cypher describes the connection patterns to find.
+
+::: {.notes}
+For a movie example, connect viewers to movies they like and actors to movies they appeared in. Following those connections can identify shared interests or movies featuring the same actors. Performance depends on the data, indexes, and query design.
+:::
+
+## Neo4j: Examples
+
+| Organization | Documented application | What the graph connects |
+|---|---|---|
+| [**ICIJ**](htthttps://neo4j.com/blog/cypher-and-gql/icij-neo4j-unravel-panama-papers/) | Investigating the Panama Papers | People, companies, and ownership relationships |
+| [**NASA**](https://neo4j.com/blog/knowledge-graph/graphs-in-government-nasa-knowledge-graph/) | Finding relevant lessons from past projects | Project information, historical lessons, and related knowledge |
+| [**eBay**](https://neo4j.com/customer-stories/ebay/) | Building a conversational shopping assistant | Products, product attributes, and shopper interactions |
+
+
+::: {.notes}
+ICIJ used Neo4j to explore connections during the Panama Papers investigation. NASA described using a knowledge graph to make historical project knowledge easier to find. The eBay example is its historical Google Assistant shopping project, which connected products with information gathered during shopper conversations.
+:::
+
+
+# More Information
+
+## Comparing the models {.compact}
+
+| Model | Natural starting point | Design question | Common extra cost |
+|---|---|---|---|
+| Key-value | Known key | How will we name the item? | Other searches need access paths |
+| Document | Record fields | What belongs in one document? | Duplication and document growth |
+| Wide-column | Partition key | Which rows must be read together? | Tables for additional queries |
+| Graph | Node and relationship pattern | Which connections answer the question? | Traversal expansion |
+
+The best fit depends on the workload and required guarantees.
+
+::: {.notes}
+Use this slide for retrieval practice. Hide one column verbally and ask students to supply it. These are model tendencies rather than an exhaustive list of capabilities or a universal performance ranking.
+
+Ask one student to name a read pattern that fits each family. Then ask what update work or maintenance each design introduces. Encourage answers that mention a known key, a document boundary, a partition key, or a path instead of only repeating product names.
+:::
+
+
+## Choosing a database
+
+1. Identify the most important reads and writes.
+2. Describe growth, concurrency, and acceptable delays.
+3. Specify transaction, consistency, and durability requirements.
+4. Compare query fit with operational effort and cost.
+
+**A relational database remains a strong candidate** for structured facts, integrity constraints, and varied joins or reports.
+
+NoSQL model selection complements existing SQL knowledge.
+
+::: {.notes}
+Ask which system should own subscription payments. A relational design is a sensible baseline when business rules span related records and require integrity checks. Some NoSQL systems also support transactions, so compare actual product guarantees and the full workflow rather than relying on the category name.
+
+Include backup and restore, access control, monitoring, migration, staff expertise, and deployment cost in the operational discussion. Do not choose purely because a dataset is large or because a technology is fashionable. A single relational system can remain appropriate even when the application contains nested or connected data.
+:::
+
+
+## Key terms 
+
+| Term | Meaning |
+|---|---|
+| Access pattern | A recurring read or write request |
+| Document / collection | A structured record / a group of records |
+| Column family | A named group of related columns |
+| Partition key | Values that group and place data |
+| Clustering columns | Values that order rows inside a partition |
+| Denormalization | Storing related or repeated facts for reads |
+| TTL | The lifetime of an expiring entry |
+| Node / relationship / path | Entity / connection / connected sequence |
+
+**Exit question:** Which model would you choose, and what extra work does it create?
+
+::: {.notes}
+Use the definitions as a quick oral check. Ask a student to distinguish a partition key from clustering columns without naming Cassandra. Another should distinguish a column family from a document collection.
+
+If time permits, revisit the original StreamBox request table. Students should now be able to identify the model-specific design element and one cost for every request. Accept answers that propose a relational solution and explain its fit. Assign the exit question to any application domain students know.
+:::
+
+## Further Reading 
+
+::: {.columns}
+::: {.column width="49%"}
+### Key-value and document
+
+- [Redis data types](https://redis.io/docs/latest/develop/data-types/)
+- [Redis SET and expiration](https://redis.io/docs/latest/commands/set/)
+- [MongoDB data modeling](https://www.mongodb.com/docs/manual/data-modeling/)
+- [MongoDB schema validation](https://www.mongodb.com/docs/manual/core/schema-validation/)
+:::
+::: {.column width="49%"}
+### Wide-column and graph
+
+- [HBase data model](https://hbase.apache.org/docs/datamodel/)
+- [Cassandra data modeling](https://cassandra.apache.org/doc/stable/cassandra/developing/data-modeling/intro.html)
+- [Neo4j graph concepts](https://neo4j.com/docs/getting-started/appendix/graphdb-concepts/)
+- [Cypher pattern matching](https://neo4j.com/docs/cypher-manual/current/clauses/match/)
+:::
+:::
+
+Official documentation. Examples and activities use fictional teaching data.
+
+::: {.notes}
+Use these primary sources for follow-up reading and optional demonstrations. Specific commands and modeling claims have additional source links in the notes of the relevant slides. Consult product-specific documentation before applying an example to a different system.
+
+Suggested follow-up assignment: choose one StreamBox access pattern, compare a relational schema with one NoSQL design, and explain the read path, update path, and one failure or consistency concern. No installation is necessary for a conceptual comparison.
+
+Quarto authoring reference: https://quarto.org/docs/presentations/revealjs/presenting.html. The lecture has 40 slides including this reading list, with a notes block for every slide.
+:::
+
