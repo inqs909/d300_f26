@@ -1,0 +1,426 @@
+---
+title: "Databases"
+subtitle: "In R and Python"
+format:
+  revealjs:
+    scrollable: true
+    navigation-mode: vertical
+    theme: [default, styles.scss]
+    controls-layout: edges
+    controls-tutorial: true
+    code-annotations: select
+    progress: true
+    slide-number: c/t
+    incremental: false 
+    
+revealjs-plugins:
+  - pointer
+  
+filters: 
+  - code-fullscreen
+  - reveal-auto-agenda
+
+editor: source
+
+order: 13
+draft: true
+---
+
+## Connecting to Databases
+
+A database can contain many related tables. Usually, we:
+
+1. Open a **connection** to the database.
+2. Ask the database for specific data.
+3. Receive the result as a local data frame.
+4. Close the connection when finished.
+
+A connection alone does **not** copy every table into R or Python.
+
+
+
+## Fictional movie-rental database
+
+Download [movies_rentals.sqlite](https://d300.inqs.info/lectures/data/movie_rentals.sqlite)
+
+| Table | One row represents | Key fields | Rows |
+|---|---|---|---:|
+| `customer` | One customer | `customer_id` | 8 |
+| `film` | One film | `film_id` | 6 |
+| `rental` | One rental of one film | `rental_id`, `customer_id`, `film_id` | 16 |
+
+`rental.customer_id` references `customer.customer_id`.
+
+`rental.film_id` references `film.film_id`.
+
+## Columns Used
+
+| Table | Columns and meaning |
+|---|---|
+| `customer` | `customer_id`, `first_name`, `last_name`, `city` |
+| `film` | `film_id`, `title`, `rating`, `length` in minutes |
+| `rental` | `rental_id`, `customer_id`, `film_id`, `rental_date`, `return_date`, `amount` paid in dollars |
+
+Dates use ISO text: `YYYY-MM-DD`. A missing `return_date` means the film has not been returned.
+
+
+# Databases: R
+
+## R packages
+
+Run installation once in the R console:
+
+```r
+install.packages(
+  c("DBI", "RSQLite", "dplyr", "dbplyr")
+  )
+```
+
+Load packages in each new R session:
+
+```r
+library(DBI)
+```
+
+`DBI` defines the common database interface. `RSQLite` supplies the SQLite driver. We will use `dplyr` and `dbplyr` later.
+
+## R: Connecting the database
+
+```r
+con <- dbConnect( #<1>
+  RSQLite::SQLite(), #<2>
+  "~/Downloads/movie_rentals.sqlite", #<3>
+  flags = RSQLite::SQLITE_RO #<4>
+  )
+```
+
+1. The main function to interface with the database
+2. Specify the type of DBMS being used
+3. Location of the database
+4. Indicates that the database is **Read-Only**
+
+`con` is a connection object. No table has been imported yet.
+
+## R: discovering tables and columns
+
+```r
+dbListTables(con)
+
+dbListFields(con, "film")
+
+dbGetQuery(con, "PRAGMA table_info(film)")
+```
+
+`dbListFields()` lists column names. SQLite's `PRAGMA table_info` also reports declared types and key information.
+
+Inspect an unfamiliar database before writing a query.
+
+## R: importing a complete table
+
+```r
+films <- dbReadTable(con, "film")             # <1>
+head(films)
+str(films)
+nrow(films)
+```
+
+1. Copy every row and column of `film` into an R data frame.
+
+This is convenient for a small table. A large table can exceed the available memory.
+
+## R: importing a SQL query result
+
+```r
+sql <- "
+  SELECT film_id, title, rating, length
+  FROM film
+  WHERE length >= 100
+  ORDER BY length DESC, film_id
+"
+long_films <- dbGetQuery(con, sql)            # <1>
+long_films
+```
+
+1. Execute the SQL and return its result as a data frame.
+
+
+## R: using parameters
+
+```r
+selected_rating <- "PG-13"
+
+rated_films <- dbGetQuery(
+  con,
+  "SELECT title, length FROM film
+   WHERE rating = ? ORDER BY film_id",        # <1>
+  params = list(selected_rating)              # <2>
+)
+```
+
+1. `?` marks a value to supply separately.
+2. RSQLite binds the supplied rating to that placeholder.
+
+
+
+## R: joining tables in the database
+
+```r
+rental_details <- dbGetQuery(con, "
+  SELECT r.rental_id, c.first_name, f.title,
+         r.rental_date, r.amount
+  FROM rental AS r
+  JOIN customer AS c ON r.customer_id = c.customer_id
+  JOIN film AS f ON r.film_id = f.film_id
+  ORDER BY r.rental_id
+")
+head(rental_details)
+```
+
+One SQL query can combine tables without first importing each table separately.
+
+## Closing a Connection
+
+After finishing the SQLite examples and activities:
+
+```r
+dbDisconnect(con)
+```
+
+# Databases: Python
+
+## Python packages
+
+Run installation in a terminal for your chosen Python environment:
+
+```bash
+python -m pip install pandas
+```
+
+In your Python session:
+
+```python
+import sqlite3
+import pandas as pd
+```
+
+`sqlite3` normally come with Python. `pandas` provides data frames and SQL-reading functions.
+
+## Python: the database path
+
+```python
+import sqlite3
+
+conn = sqlite3.connect( # <1>
+    "file:~/Downloads/movie_rentals.sqlite?mode=ro", # <2> 
+    uri=True # <3>
+    )
+```
+
+1. Functions used to connect to a database.
+2. Convert the path to a file URI and request read-only access.
+3. Tell `sqlite3` to interpret the string as a URI.
+
+`con` holds an open connection. This step does not create a pandas DataFrame.
+
+## Python: discovering tables
+
+```python
+tables = pd.read_sql_query(
+  """
+    SELECT name
+    FROM sqlite_schema
+    WHERE type = 'table' AND name NOT LIKE 'sqlite_%'
+    ORDER BY name
+  """, 
+  conn)
+print(tables)
+```
+
+`sqlite_schema` describes objects stored in a SQLite database. This discovery query is specific to SQLite.
+
+
+## Python: importing a complete table
+
+```python
+films = pd.read_sql_query(
+  "SELECT * FROM film", 
+  conn
+)
+print(films.head())
+print(films.shape)
+films.info()
+```
+
+`SELECT *` requests every column. Without a `WHERE` clause, this query returns every row.
+
+`films` is now a local pandas DataFrame with **6 rows and 4 columns**.
+
+## Python: importing selected rows
+
+```python
+sql = 
+  """
+    SELECT film_id, title, rating, length
+    FROM film
+    WHERE length >= 100
+    ORDER BY length DESC, film_id
+  """
+long_films = pd.read_sql_query(sql, conn)
+print(long_films)
+```
+
+The SQL is identical to the R example. Only the code that submits it changes.
+
+## Python: using parameters
+
+```python
+selected_rating = "PG-13"
+rated_films = pd.read_sql_query(
+    """
+      SELECT title, length FROM film
+      WHERE rating = ? ORDER BY film_id 
+    """,  # <1>
+    conn,
+    params=(selected_rating),               # <2>
+)
+```
+
+1. SQLite uses `?` for a positional value placeholder.
+2. Supply a tuple of values. The comma creates a one-element tuple.
+
+Expected titles: **Orbit Nine**, **City of Stars**.
+
+## Python: joining tables
+
+```python
+rental_details = pd.read_sql_query(
+  """
+    SELECT r.rental_id, c.first_name, f.title,
+           r.rental_date, r.amount
+    FROM rental AS r
+    JOIN customer AS c ON r.customer_id = c.customer_id
+    JOIN film AS f ON r.film_id = f.film_id
+    ORDER BY r.rental_id
+  """, 
+  conn, 
+  parse_dates=["rental_date"])
+print(rental_details.head())
+```
+
+`parse_dates` asks pandas to convert the returned date column to a datetime representation.
+
+## Close Connection
+
+```python
+conn.close()
+```
+
+# More Information
+
+## Database work and local work
+
+| Operation | Where it happens |
+|---|---|
+| `WHERE`, `JOIN`, `GROUP BY` in SQL | In the database engine |
+| `dbGetQuery()` / `pd.read_sql_query()` | Submit SQL and transfer returned data |
+| `mean(films$length)` | In the R session |
+| `films["length"].mean()` | In the Python session |
+
+SQLite runs locally in this lecture. With a database server, database work happens on the server and results travel over the connection.
+
+## Smaller results reduce transfer and memory
+
+Suppose `rental` contains 50 million rows and you need monthly totals.
+
+```sql
+SELECT SUBSTR(rental_date, 1, 7) AS month,
+       COUNT(*) AS n_rentals,
+       ROUND(SUM(amount), 2) AS revenue
+FROM rental
+GROUP BY SUBSTR(rental_date, 1, 7)
+ORDER BY month;
+```
+
+::: {.fragment}
+
+Import the summary instead of all 50 million rental records.
+
+The database may still need to scan many records to compute it. The result transferred to R or Python is much smaller.
+
+
+:::
+
+
+## R: lazy database with dbplyr
+
+```r
+library(dplyr)
+library(dbplyr)
+
+film_db <- tbl(con, "film")                   # <1>
+long_query <- film_db |>
+  filter(length >= 100) |>
+  select(title, length) |>
+  arrange(desc(length), title)
+show_query(long_query)                        # <2>
+```
+
+1. Create a reference to a database table.
+2. Display the SQL generated from the `dplyr` operations.
+
+`tbl()` does not import the whole table. Printing a lazy table can run a limited preview query.
+
+## R: collect retrieves the result
+
+```r
+long_films_local <- long_query |> collect()
+class(long_films_local)
+# A local tibble/data frame
+```
+
+Before `collect()`, `long_query` describes database work. `collect()` executes the query and brings its results into R.
+
+Filter, select, and summarize before collecting a large result. Database backends support different translations of R functions.
+
+::: {.notes}
+This is a database-backed dplyr example. It is not a promise that every arbitrary R function can run inside SQL. Use show_query() and backend documentation when a translation fails.
+:::
+
+
+
+
+
+## R and Python reference
+
+| Task | R | Python |
+|---|---|---|
+| Connect to SQLite | `dbConnect(SQLite(), ...)` | `sqlite3.connect(...)` |
+| Discover tables | `dbListTables(con)` | Query `sqlite_schema` |
+| Import a table | `dbReadTable(con, "film")` | `pd.read_sql_query("SELECT * FROM film", con)` |
+| Run SQL and import | `dbGetQuery(con, sql)` | `pd.read_sql_query(sql, con)` |
+| Bind SQLite values | `params = list(value)` | `params=(value,)` |
+| Inspect imported types | `str(result)` | `result.info()` |
+| Close connection | `dbDisconnect(con)` | `con.close()` |
+
+
+## Documentation: SQLite and data import
+
+- [DBI: dbConnect](https://dbi.r-dbi.org/reference/dbConnect.html) and [dbGetQuery](https://dbi.r-dbi.org/reference/dbGetQuery.html)
+- [RSQLite: SQLite connection options](https://rsqlite.r-dbi.org/reference/SQLite.html)
+- [Python: sqlite3](https://docs.python.org/3/library/sqlite3.html)
+- [pandas: read_sql_query](https://pandas.pydata.org/docs/reference/api/pandas.read_sql_query.html)
+- [dbplyr: introduction and collect](https://dbplyr.tidyverse.org/articles/dbplyr.html)
+
+The teaching data are fictional and included with this lecture.
+
+## Documentation: extensions and Quarto
+
+- [RPostgres: connections](https://rpostgres.r-dbi.org/reference/Postgres.html)
+- [RMariaDB: connections](https://rmariadb.r-dbi.org/reference/dbConnect-MariaDBDriver-method.html)
+- [SQLAlchemy: engines, drivers, and connection URLs](https://docs.sqlalchemy.org/en/20/core/engines.html)
+- [SQLAlchemy: PostgreSQL with psycopg](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg)
+- [Quarto: Revealjs presentations](https://quarto.org/docs/presentations/revealjs/)
+
+::: {.notes}
+Instructor preparation: extract the bundle, install the packages for the language you plan to demonstrate, run examples.R or examples.py from the extracted folder, and render the QMD with Quarto. No server credentials are needed for the main SQLite lecture. Server examples are configuration templates and have not been executed against a live server.
+:::
