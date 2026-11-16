@@ -41,7 +41,7 @@ A connection alone does **not** copy every table into R or Python.
 
 ## Fictional movie-rental database
 
-Download [movies_rentals.sqlite](https://d300.inqs.info/lectures/data/movie_rentals.sqlite)
+Download [movies_rentals.sqlite](https://github.com/inqs909/d300_f26/blob/main/lectures/data/movie_rentals.sqlite)
 
 | Table | One row represents | Key fields | Rows |
 |---|---|---|---:|
