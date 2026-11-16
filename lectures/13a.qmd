@@ -61,8 +61,6 @@ Download [movies_rentals.sqlite](https://d300.inqs.info/lectures/data/movie_rent
 | `film` | `film_id`, `title`, `rating`, `length` in minutes |
 | `rental` | `rental_id`, `customer_id`, `film_id`, `rental_date`, `return_date`, `amount` paid in dollars |
 
-Dates use ISO text: `YYYY-MM-DD`. A missing `return_date` means the film has not been returned.
-
 
 # Databases: R
 
@@ -83,6 +81,19 @@ library(DBI)
 ```
 
 `DBI` defines the common database interface. `RSQLite` supplies the SQLite driver. We will use `dplyr` and `dbplyr` later.
+
+
+## R Packages for Connecting to Other DBMS
+
+Use `DBI` for a consistent interface and a **driver package** for your database.
+
+| DBMS | R driver package | Additional requirements |
+|---|---|---|
+| PostgreSQL | `RPostgres` | Database connection details |
+| MySQL / MariaDB | `RMariaDB` | Database connection details |
+| Microsoft SQL Server | `odbc` | SQL Server ODBC driver |
+| Oracle Database | `odbc` | Oracle ODBC driver |
+| IBM Db2 | `odbc` | Db2 ODBC driver |
 
 ## R: Connecting the database
 
@@ -204,6 +215,19 @@ import pandas as pd
 ```
 
 `sqlite3` normally come with Python. `pandas` provides data frames and SQL-reading functions.
+
+## Python Packages for Connecting to Other DBMS
+
+Use a **driver package** to connect Python to your database.
+
+| DBMS | Python driver package | Additional requirements |
+|---|---|---|
+| PostgreSQL | `psycopg` | Database connection details |
+| MySQL / MariaDB | `pymysql` | Database connection details |
+| Microsoft SQL Server | `pyodbc` | SQL Server ODBC driver |
+| Oracle Database | `oracledb` | Database connection details |
+| IBM Db2 | `ibm_db` | Database connection details |
+
 
 ## Python: the database path
 

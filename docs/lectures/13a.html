@@ -293,7 +293,6 @@
 </tr>
 </tbody>
 </table>
-<p>Dates use ISO text: <code>YYYY-MM-DD</code>. A missing <code>return_date</code> means the film has not been returned.</p>
 </section>
 <section>
 <section id="databases-r" class="title-slide slide level1 agenda-slide center">
@@ -321,6 +320,46 @@
 <p>Load packages in each new R session:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">library</span>(DBI)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>DBI</code> defines the common database interface. <code>RSQLite</code> supplies the SQLite driver. We will use <code>dplyr</code> and <code>dbplyr</code> later.</p>
+</section>
+<section id="r-packages-for-connecting-to-other-dbms" class="slide level2">
+<h2>R Packages for Connecting to Other DBMS</h2>
+<p>Use <code>DBI</code> for a consistent interface and a <strong>driver package</strong> for your database.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>DBMS</th>
+<th>R driver package</th>
+<th>Additional requirements</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PostgreSQL</td>
+<td><code>RPostgres</code></td>
+<td>Database connection details</td>
+</tr>
+<tr class="even">
+<td>MySQL / MariaDB</td>
+<td><code>RMariaDB</code></td>
+<td>Database connection details</td>
+</tr>
+<tr class="odd">
+<td>Microsoft SQL Server</td>
+<td><code>odbc</code></td>
+<td>SQL Server ODBC driver</td>
+</tr>
+<tr class="even">
+<td>Oracle Database</td>
+<td><code>odbc</code></td>
+<td>Oracle ODBC driver</td>
+</tr>
+<tr class="odd">
+<td>IBM Db2</td>
+<td><code>odbc</code></td>
+<td>Db2 ODBC driver</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="r-connecting-the-database" class="slide level2">
 <h2>R: Connecting the database</h2>
@@ -454,6 +493,46 @@
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb7-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>sqlite3</code> normally come with Python. <code>pandas</code> provides data frames and SQL-reading functions.</p>
+</section>
+<section id="python-packages-for-connecting-to-other-dbms" class="slide level2">
+<h2>Python Packages for Connecting to Other DBMS</h2>
+<p>Use a <strong>driver package</strong> to connect Python to your database.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>DBMS</th>
+<th>Python driver package</th>
+<th>Additional requirements</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PostgreSQL</td>
+<td><code>psycopg</code></td>
+<td>Database connection details</td>
+</tr>
+<tr class="even">
+<td>MySQL / MariaDB</td>
+<td><code>pymysql</code></td>
+<td>Database connection details</td>
+</tr>
+<tr class="odd">
+<td>Microsoft SQL Server</td>
+<td><code>pyodbc</code></td>
+<td>SQL Server ODBC driver</td>
+</tr>
+<tr class="even">
+<td>Oracle Database</td>
+<td><code>oracledb</code></td>
+<td>Database connection details</td>
+</tr>
+<tr class="odd">
+<td>IBM Db2</td>
+<td><code>ibm_db</code></td>
+<td>Database connection details</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="python-the-database-path" class="slide level2">
 <h2>Python: the database path</h2>
